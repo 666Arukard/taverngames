@@ -9,6 +9,7 @@ import {FarkleUI} from './farkle-ui.mjs';
 import {f,farkleError} from './farkle-text.mjs';
 import {NEW_GAMES} from './tavern-engine.mjs';
 import {TavernSession} from './tavern-session.mjs';
+import {KniffelUI} from './kniffel-ui.mjs';
 import {TavernUI} from './tavern-ui.mjs';
 import {BettingManager,COINS} from './wagers.mjs';
 import {BettingUI} from './wagers-ui.mjs';
@@ -30,11 +31,12 @@ const randomDie=()=>randomSides(6);
 const hasMessage=(flag,value)=>game.messages?.some(m=>(m.getFlag?.(ID,flag)??m.flags?.[ID]?.[flag])===value)??false;
 let ledgerUnavailable=false;
 const clients={},tavernBusy={};
-const sessions=Object.fromEntries(NEW_GAMES.map(scope=>[scope,new TavernSession(scope,{save:next=>save(next,`${scope}State`),random:randomSides,getName:id=>game.users.get(id)?.name??id,announce:data=>ChatMessage.create(data),hasAnnouncement:id=>hasMessage('gameId',id)})]));
+const gameEnabled=scope=>scope!=='kniffel'||game.settings.get(ID,'betaTest')===true;
+const sessions=Object.fromEntries(NEW_GAMES.map(scope=>[scope,new TavernSession(scope,{enabled:()=>gameEnabled(scope),save:next=>save(next,`${scope}State`),random:randomSides,getName:id=>game.users.get(id)?.name??id,announce:data=>ChatMessage.create(data),hasAnnouncement:id=>hasMessage('gameId',id)})]));
 const betting=new BettingManager({isAuthority:authority,save:next=>save(next,'bettingState'),enabled:()=>game.settings.get(ID,'managedBetting')===true,electrum:()=>game.settings.get(ID,'allowElectrum')===true,system:()=>game.system?.id,actor:id=>game.actors?.get(id),character:id=>game.users.get(id)?.character,announce:data=>ChatMessage.create(data),hasMessage:(tx,id)=>game.messages?.some(m=>(m.getFlag?.(ID,'betTx')??m.flags?.[ID]?.betTx)===tx&&(m.getFlag?.(ID,'betActor')??m.flags?.[ID]?.betActor)===id)??false});
 const prizes=new PrizeManager({isAuthority:authority,save:next=>save(next,'prizeState'),system:()=>game.system?.id,actor:id=>game.actors?.get(id),item:uuid=>(globalThis.foundry?.utils?.fromUuid??globalThis.fromUuid)(uuid),announce:data=>ChatMessage.create(data),hasMessage:id=>hasMessage('prizeAward',id)});
 const moneyUI=new BettingUI({request:requestFinance});
-const tavernUIs=Object.fromEntries(NEW_GAMES.map(scope=>[scope,new TavernUI(scope,{request:(action,args)=>requestTavern(scope,action,args),getState:()=>authority()?sessions[scope].state:clients[scope],openBetting:scope=>moneyUI.open(scope)})]));
+const tavernUIs=Object.fromEntries(NEW_GAMES.map(scope=>[scope,new (scope==='kniffel'?KniffelUI:TavernUI)(scope,{request:(action,args)=>requestTavern(scope,action,args),getState:()=>authority()?sessions[scope].state:clients[scope],openBetting:scope=>moneyUI.open(scope)})]));
 const scopeState=scope=>scope==='schocken'?state:scope==='farkle'?farkleSession.state:sessions[scope]?.state;
 async function deliverPrize(current,user){const id=current?.winners?.[0],actorId=betting.state.books[current?.gameId]?.mapping[id]??game.users.get(id)?.character?.id;await prizes.deliver(current,user,actorId);}
 let farkleClient=null,farkleBusy=false;
@@ -103,6 +105,8 @@ async function command(data, local=false) {
   if(!user?.active || (!local && (!tokens.has(user.id) || tokens.get(user.id)!==data?.token))) throw new Error(t("Verbindung noch nicht bereit. GM kann Verbindungen erneuern."));
   const scope=data.game??'schocken';
   if(!['schocken','farkle',...NEW_GAMES].includes(scope))throw new Error('Unknown game.');
+  if(!gameEnabled(scope)&&!(data.action==='abort'&&user.isGM))throw new Error('Beta testing is disabled.');
+  if(scope==='kniffel'&&data.action.startsWith('bet'))throw new Error('Kniffel betting is not available.');
   if(ledgerUnavailable&&['betConfigure','betSettle','awardPrize','waivePrize'].includes(data.action))throw new Error('Resume in the original GM browser before modifying wallets or items.');
   if(data.action.startsWith('bet')){
     if(data.action!=='betRead'&&data.args?.gameId!==scopeState(scope)?.gameId)throw new Error('The game state changed. Please try again.');
@@ -295,7 +299,7 @@ function openModeration() {
 function refreshLauncher() {
   launcher?.remove();launcher=null;
   const showSchocken=game.settings.get(ID,'showLauncher'),showFarkle=game.settings.get(ID,'showFarkleLauncher')===true;
-  const extra=NEW_GAMES.filter(scope=>game.settings.get(ID,`show${scope}Launcher`)===true);
+  const extra=NEW_GAMES.filter(scope=>gameEnabled(scope)&&game.settings.get(ID,`show${scope}Launcher`)===true);
   if(!showSchocken&&!showFarkle&&!extra.length)return;
   launcher=el('div',undefined,'taverngames-launchers');
   if(showSchocken){const start=el('button','⚄ Schocken','schocken-launcher');start.addEventListener('click',()=>open());launcher.append(start);}
@@ -320,7 +324,7 @@ Hooks.once("init",()=>{
   for(const scope of NEW_GAMES){game.settings.register(ID,`${scope}State`,{scope:'world',config:false,restricted:true,type:Object,default:null});game.settings.register(ID,`show${scope}Launcher`,{scope:'world',config:false,restricted:true,type:Boolean,default:false,onChange:()=>{refreshLauncher();tavernUIs[scope].drawModeration();}});}
   for(const setting of ['bettingState','prizeState'])game.settings.register(ID,setting,{scope:'world',config:false,restricted:true,type:Object,default:null});
   for(const [setting,de,en] of [['managedBetting','Verwaltetes Setzen','Managed betting'],['allowElectrum','Elektrum verwenden','Use electrum']])game.settings.register(ID,setting,{name:`Taverngames: ${f(de,en)}`,scope:'world',config:true,restricted:true,type:Boolean,default:false,onChange:()=>{moneyUI.draw();for(const panel of Object.values(tavernUIs))panel.drawModeration();}});
-  game.settings.register(ID,'betaTest',{name:f('Taverngames: Beta-Test','Taverngames: Beta testing'),hint:f('Für künftige experimentelle Spiele. Alle fünf enthaltenen Spiele sind regulär verfügbar.','For future experimental games. All five included games are available normally.'),scope:'world',config:true,restricted:true,type:Boolean,default:false});
+  game.settings.register(ID,'betaTest',{name:f('Taverngames: Beta-Test','Taverngames: Beta testing'),hint:f('Kniffel als experimentelles Spiel freischalten. Die fünf bisherigen Spiele bleiben regulär verfügbar.','Enable experimental Kniffel. The five existing games remain available normally.'),scope:'world',config:true,restricted:true,type:Boolean,default:false,onChange:()=>{refreshLauncher();if(gameEnabled('kniffel'))sessions.kniffel.updateNpcWait();else sessions.kniffel.npcWait=null;if(!gameEnabled('kniffel')){clients.kniffel=null;void tavernUIs.kniffel.close();}ui.taverngames?.render?.({force:true});}});
   if(!registerSidebar(CONFIG,globalThis.foundry,game,{open:()=>open(),guide:openGuide,farkle:()=>farkleUI.open(),farkleGuide:()=>farkleUI.guide(),tavern:scope=>tavernUIs[scope]?.open(),tavernGuide:scope=>tavernUIs[scope]?.guide()}))ui.notifications.warn(t('Taverngames: native Sidebar-Schnittstelle fehlt. Einstieg über den unteren Button bleibt verfügbar.'));
   CONFIG.queries[GRANT]=({token})=>{if(typeof token!=="string"||token.length>100)throw new Error(t("Ungültige Verbindung."));capability=token;return true;};
   CONFIG.queries[QUERY]=data=>enqueue(async()=>{const result=await command(data);if(data.game!=='farkle'&&(panel||moderation))draw();return result;});
@@ -339,7 +343,7 @@ Hooks.once("ready",async()=>{
     if(wasAuthority!==authority()) {wasAuthority=authority();initialized=false;capability=null;void enqueue(initializeAuthority);}
     if((panel||moderation)&&!busy&&primary())void request("read");
     if(farkleUI.isOpen&&!farkleBusy&&primary())void requestFarkle('read');
-    if(primary())for(const scope of NEW_GAMES)if(tavernUIs[scope].isOpen&&!tavernBusy[scope])void requestTavern(scope,'read');
+    if(primary())for(const scope of NEW_GAMES)if(gameEnabled(scope)&&tavernUIs[scope].isOpen&&!tavernBusy[scope])void requestTavern(scope,'read');
   },2500);
   setInterval(()=>{
     if(!authority()||!initialized)return;

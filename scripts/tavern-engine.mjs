@@ -1,8 +1,10 @@
-export const NEW_GAMES=['pig','ship','lottery'];
+import {createKniffel,actKniffel,kniffelNpcAction} from './kniffel-engine.mjs';
+export const NEW_GAMES=['pig','ship','lottery','kniffel'];
 const check=(ok,message)=>{if(!ok)throw new Error(message);};
 const integer=(n,min,max)=>Number.isSafeInteger(n)&&n>=min&&n<=max;
 const cup=game=>game==='pig'?{dice:[],points:0,rolls:0,bust:false,lost:0}:{dice:null,held:Array(5).fill(false),stage:0,rolls:0};
 export function createTavern(game,{npcs={},target=100,stake=2,currency='gp',funding='redistribute',mode='single',roundLimit=3,prize='',prizeUuid='',prizeValue=25,maxTickets=20,perPlayer=2,numbersPerTicket=5}={}){
+  if(game==='kniffel')return createKniffel({npcs});
   check(NEW_GAMES.includes(game),'Unknown game.');check(integer(target,10,1000000),'Invalid target.');
   check(integer(stake,0,1000000),'Invalid stake.');check(integer(maxTickets,1,20)&&integer(perPlayer,1,maxTickets),'Invalid ticket limits.');
   check(integer(numbersPerTicket,1,100),'Numbers per ticket must be between 1 and 100.');
@@ -36,6 +38,7 @@ function shipEnd(s){
   s.order=leaders;s.turn=0;s.tieBreak++;s.tieScores={};s.cup=cup('ship');
 }
 export function actTavern(original,actor,action,args={},random=sides=>1,gm=false){
+  if(original?.game==='kniffel')return actKniffel(original,actor,action,args,random,gm);
   const s=structuredClone(original);check(s?.version===1&&NEW_GAMES.includes(s.game),'No game exists.');
   check(!['finished','aborted'].includes(s.phase),'This game has ended.');
   const roll=sides=>{const n=random(sides);check(integer(n,1,sides),'Invalid random value.');return n;};
@@ -87,6 +90,7 @@ export function actTavern(original,actor,action,args={},random=sides=>1,gm=false
   s.log=s.log.slice(-100);s.revision++;return s;
 }
 export function tavernNpcAction(s,random=sides=>1){
+  if(s?.game==='kniffel')return kniffelNpcAction(s);
   if(!s||s.paused||['finished','aborted','closed'].includes(s.phase))return null;
   if(s.game==='lottery'){
     if(s.tickets.length>=s.maxTickets)return null;

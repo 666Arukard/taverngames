@@ -1,6 +1,6 @@
 # Taverngames – Foundry Extension
 
-**Version 1.2.1**. Alle fünf Spiele sind regulär verfügbar: Schocken, Farkle, Schweinchen, Schiff–Kapitän–Mannschaft und Straßenlotto. Daniels ausdrücklicher Auftrag vom 14. Oktober 2026 gibt die drei bisherigen Beta-Spiele für diese Version frei.
+**Version 1.2.2**. Alle fünf Spiele sind regulär verfügbar: Schocken, Farkle, Schweinchen, Schiff–Kapitän–Mannschaft und Straßenlotto. Daniels ausdrücklicher Auftrag vom 14. Oktober 2026 gibt die drei bisherigen Beta-Spiele für diese Version frei.
 
 ## Installation und Einstieg
 
@@ -8,9 +8,19 @@ Die neue reguläre Updateadresse (nach Veröffentlichung auf GitHub) lautet:
 
 `https://github.com/666Arukard/taverngames/releases/latest/download/module.json`
 
-Alle fünf Spiele sind ohne Beta-Test-Schalter erreichbar. Dieser bleibt für künftige experimentelle Inhalte reserviert und verändert die enthaltenen Spiele nicht. Modul-ID und vorhandene Spielstände bleiben erhalten. Die bisherige Serveradresse bleibt als Übergang für bestehende Installationen bestehen.
+Alle fünf Spiele sind ohne Beta-Test-Schalter erreichbar. Der Beta-Test-Schalter schaltet zusätzlich Kniffel frei; die fünf stabilen Spiele bleiben davon unabhängig. Modul-ID und vorhandene Spielstände bleiben erhalten. Die bisherige Serveradresse bleibt als Übergang für bestehende Installationen bestehen.
 
 Englisch ist Standard; Deutsch kann in denselben Moduleinstellungen gewählt werden. Der Taverngames-Reiter ist nur für SL sichtbar. Start öffnet Spieltisch und separates Moderationsfenster; Anleitung kann der SL in den Chat posten. Spieler verwenden die unteren Spielbuttons, die der SL im jeweiligen Moderationsfenster freigibt, und klicken Beitreten. Die neuen unteren Buttons sind standardmäßig aus.
+
+## Kniffel · Beta
+
+In den Foundry-Moduleinstellungen **Taverngames: Beta-Test** einschalten. Kniffel erscheint dann im nur für SL sichtbaren Reiter. Im Moderationsfenster kann der SL den unteren Kniffel-Button für alle freigeben; Spieler treten darüber freiwillig bei. Ausschalten der Beta entfernt die Kniffel-Fenster und stoppt dessen NPC-Automatik, erhält aber den gespeicherten Spielstand.
+
+Normale Schmidt-Kniffel-Regeln für 2–8 Teilnehmer. Fünf W6, höchstens drei Würfe, Würfel behalten/zurücknehmen, 13 bewusst ausgewählte Wertungsfelder mit Vorschau und Nullbestätigung. Früher Eintrag ist möglich. Oben 35 Bonus ab 63; zusätzliche Kniffel nach belegtem 50er-Feld bringen 50 Zusatzpunkte und den Höchstwert eines freien Feldes. Ein gestrichenes Kniffelfeld verhindert die Sonderwertung. Gleichstände teilen Plätze. NPCs sind automatisch oder manuell steuerbar; Folgepartien übernehmen Teilnehmer und leeren den Bogen. Serien und Einsätze sind für später vorgemerkt. Keine 3D-Würfelintegration.
+
+English: enable **Taverngames: Beta testing** in Module Settings to access experimental Kniffel. The GM enables its bottom launcher in moderation. Standard Schmidt rules, manual score selection with previews, optional early scoring, zero confirmation, named controllable NPCs and fresh next games. Turning beta off preserves the save and stops Kniffel automation. Existing stable games remain available.
+
+Regelquelle / Rule source: [Schmidt Spiele, Kniffel 49203](https://www.schmidtspiele.de/files/Produkte/4/49203%20-%20Kniffel%C2%AE/49203_Kniffel_DE.pdf). Kniffel ist eine Marke von Schmidt Spiele. Noch keine Foundry-Live-Abnahme; 1.3.0 erst nach Daniels Freigabe.
 
 ## Neue Spiele
 

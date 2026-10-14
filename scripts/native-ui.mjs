@@ -42,8 +42,9 @@ export function registerSidebar(config,foundry,game,actions) {
         }
         root.append(row);
       }
-      for(const scope of ['pig','ship','lottery']){
-        const h=document.createElement('h2');h.textContent=`${gameTitle(scope)}`;root.append(h);const row=document.createElement('div');row.className='taverngames-start-row';
+      for(const scope of ['pig','ship','lottery','kniffel']){
+        if(scope==='kniffel'&&game.settings.get('taverngames','betaTest')!==true)continue;
+        const h=document.createElement('h2');h.textContent=`${gameTitle(scope)}${scope==='kniffel'?' · Beta':''}`;root.append(h);const row=document.createElement('div');row.className='taverngames-start-row';
         for(const [title,fn] of [['Start',()=>actions.tavern?.(scope)],['Anleitung',()=>actions.tavernGuide?.(scope)]]){const b=document.createElement('button');b.type='button';b.textContent=t(title);b.addEventListener('click',fn);row.append(b);}root.append(row);
       }
       return root;
