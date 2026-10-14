@@ -25,3 +25,7 @@
 .kniffel-sheet-scroll{overflow:auto;max-width:100%}.kniffel-sheet{border-collapse:collapse;width:100%;font-size:.9em}.kniffel-sheet th,.kniffel-sheet td{padding:6px;border:1px solid #8b7d69;text-align:center;min-width:65px}.kniffel-sheet th:first-child{text-align:left;min-width:130px}.kniffel-sheet button{min-width:58px;color:#241b12;background:#f4e7cc}.kniffel-sheet button:disabled{opacity:.6}.kniffel-sheet tbody tr:last-child{font-weight:bold;background:#e5d1ae}
 
 .taverngames-catalog .taverngames-category{font-size:1.05rem;font-weight:700;margin:16px 0 10px;padding:6px 0;border-bottom:1px solid #8b7d69}
+
+/* Explicit header colors override dark Foundry table themes. */
+.taverngames-surface .kniffel-sheet thead,.taverngames-surface .kniffel-sheet thead tr,.taverngames-surface .kniffel-sheet thead th{background:#e5d1ae;color:#241b12;text-shadow:none}
+.taverngames-catalog-filters{display:grid;gap:8px;padding:8px 0}.taverngames-catalog-filters label{display:grid;gap:4px}.taverngames-catalog-filters input,.taverngames-catalog-filters select{width:100%;color:#241b12;background:#fff9ef}.taverngames-catalog-filters option{color:#241b12;background:#fff9ef}

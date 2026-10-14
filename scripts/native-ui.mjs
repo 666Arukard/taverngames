@@ -1,5 +1,6 @@
 import {t,language} from './i18n.mjs';
 import {gameTitle} from './tavern-text.mjs';
+import {GAME_CATALOG,filterCatalog} from './game-catalog.mjs';
 export function createNativeWindow(foundry,kind,root,onClose) {
   const Base=foundry?.applications?.api?.ApplicationV2;
   if(!Base)throw new Error(t('Foundry ApplicationV2 fehlt. Das native Taverngames-Fenster kann nicht geöffnet werden.'));
@@ -26,29 +27,28 @@ export function registerSidebar(config,foundry,game,actions) {
     async _renderHTML(){
       const root=document.createElement('section');root.className='taverngames-catalog';
       if(!game.user.isGM)return root;
-      const category=document.createElement('h1');category.className='taverngames-category';category.textContent=language()==='de'?'Würfelspiele':'Dice games';root.append(category);
-      const heading=document.createElement('h2');heading.textContent='Schocken';root.append(heading);
-      const row=document.createElement('div');row.className='taverngames-start-row';
-      for(const [title,callback] of [['Start',actions.open],['Anleitung',actions.guide]]){
-        const button=document.createElement('button');button.type='button';button.textContent=t(title);button.disabled=title==='Anleitung'&&!game.user.isGM;if(button.disabled)button.title=t('Die Spielleitung kann die Anleitung im Chat teilen.');
-        button.addEventListener('click',()=>{if(title==='Anleitung'&&!game.user.isGM){globalThis.ui?.notifications?.warn(t('Die Anleitung wird von der Spielleitung im Chat geteilt.'));return;}callback();});row.append(button);
-      }
-      root.append(row);
-      {
-        const heading=document.createElement('h2');heading.textContent='Farkle';root.append(heading);
-        const row=document.createElement('div');row.className='taverngames-start-row';
-        for(const [title,callback] of [['Start',actions.farkle],['Anleitung',actions.farkleGuide]]){
-          const button=document.createElement('button');button.type='button';button.textContent=t(title);button.disabled=title==='Anleitung'&&!game.user.isGM;
-          button.addEventListener('click',()=>{if(title==='Anleitung'&&!game.user.isGM)return;callback?.();});row.append(button);
+      const de=language()==='de',filters=document.createElement('div');filters.className='taverngames-catalog-filters';root.append(filters);
+      const categoryLabel=document.createElement('label');categoryLabel.textContent=de?'Spielekategorie':'Game category';const category=document.createElement('select');category.dataset.catalogCategory='';
+      for(const [value,title] of [['all',de?'Alle Spiele':'All games'],['dice',de?'Würfelspiele':'Dice games'],['chance',de?'Glücksspiele':'Games of chance']]){const option=document.createElement('option');option.value=value;option.textContent=title;category.append(option);}category.value=this.category??'all';categoryLabel.append(category);filters.append(categoryLabel);
+      const searchLabel=document.createElement('label');searchLabel.textContent=de?'Spiele suchen':'Find games';const search=document.createElement('input');search.type='search';search.dataset.catalogSearch='';search.placeholder=de?'Spielname …':'Game name …';search.value=this.search??'';searchLabel.append(search);filters.append(searchLabel);
+      const results=document.createElement('div');results.className='taverngames-catalog-results';root.append(results);
+      const draw=()=>{
+        this.category=category.value;this.search=search.value;results.replaceChildren();
+        const games=filterCatalog(GAME_CATALOG,{category:category.value,query:search.value,beta:game.settings.get('taverngames','betaTest')===true});
+        if(!games.length){const empty=document.createElement('p');empty.textContent=de?'Keine passenden Spiele gefunden.':'No matching games found.';empty.setAttribute('role','status');results.append(empty);return;}
+        for(const type of ['dice','chance']){
+          const entries=games.filter(g=>g.category===type);if(!entries.length)continue;
+          const h=document.createElement('h1');h.className='taverngames-category';h.textContent=type==='dice'?(de?'Würfelspiele':'Dice games'):(de?'Glücksspiele':'Games of chance');results.append(h);
+          for(const entry of entries){
+            const heading=document.createElement('h2');heading.textContent=gameTitle(entry.id);results.append(heading);
+            const row=document.createElement('div');row.className='taverngames-start-row';row.dataset.game=entry.id;
+            const open=entry.id==='schocken'?actions.open:entry.id==='farkle'?actions.farkle:()=>actions.tavern?.(entry.id);
+            const guide=entry.id==='schocken'?actions.guide:entry.id==='farkle'?actions.farkleGuide:()=>actions.tavernGuide?.(entry.id);
+            for(const [title,fn] of [['Start',open],[de?'Anleitung':'Instructions',guide]]){const button=document.createElement('button');button.type='button';button.textContent=title;button.addEventListener('click',()=>{if(game.user.isGM)fn?.();});row.append(button);}results.append(row);
+          }
         }
-        root.append(row);
-      }
-      for(const scope of ['pig','ship','kniffel','lottery']){
-        if(scope==='kniffel'&&game.settings.get('taverngames','betaTest')!==true)continue;
-        if(scope==='lottery'){const category=document.createElement('h1');category.className='taverngames-category';category.textContent=language()==='de'?'Glücksspiele':'Games of chance';root.append(category);}
-        const h=document.createElement('h2');h.textContent=`${gameTitle(scope)}${scope==='kniffel'?' · Beta':''}`;root.append(h);const row=document.createElement('div');row.className='taverngames-start-row';row.dataset.game=scope;
-        for(const [title,fn] of [['Start',()=>actions.tavern?.(scope)],['Anleitung',()=>actions.tavernGuide?.(scope)]]){const b=document.createElement('button');b.type='button';b.textContent=t(title);b.addEventListener('click',fn);row.append(b);}root.append(row);
-      }
+      };
+      category.addEventListener('change',draw);search.addEventListener('input',draw);draw();
       return root;
     }
     _replaceHTML(result,content){content.replaceChildren(result);}

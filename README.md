@@ -1,6 +1,6 @@
 # Taverngames – Foundry Extension
 
-**Version 1.2.3**. Alle fünf Spiele sind regulär verfügbar: Schocken, Farkle, Schweinchen, Schiff–Kapitän–Mannschaft und Straßenlotto. Daniels ausdrücklicher Auftrag vom 14. Oktober 2026 gibt die drei bisherigen Beta-Spiele für diese Version frei.
+**Version 1.3.0**. Alle sechs Spiele sind regulär verfügbar: Schocken, Farkle, Schweinchen, Schiff–Kapitän–Mannschaft, Kniffel und Straßenlotto. Kniffel wurde von Daniel am 14. Oktober 2026 für die stabile Version freigegeben.
 
 ## Installation und Einstieg
 
@@ -8,27 +8,27 @@ Die neue reguläre Updateadresse (nach Veröffentlichung auf GitHub) lautet:
 
 `https://github.com/666Arukard/taverngames/releases/latest/download/module.json`
 
-Alle fünf Spiele sind ohne Beta-Test-Schalter erreichbar. Der Beta-Test-Schalter schaltet zusätzlich Kniffel frei; die fünf stabilen Spiele bleiben davon unabhängig. Modul-ID und vorhandene Spielstände bleiben erhalten. Die bisherige Serveradresse bleibt als Übergang für bestehende Installationen bestehen.
+Alle sechs Spiele sind ohne Beta-Test-Schalter erreichbar. Der Beta-Schalter bleibt für künftige experimentelle Spiele reserviert. Modul-ID und vorhandene Spielstände bleiben erhalten. Die bisherige Serveradresse bleibt als Übergang für bestehende Installationen bestehen.
 
 Englisch ist Standard; Deutsch kann in denselben Moduleinstellungen gewählt werden. Der Taverngames-Reiter ist nur für SL sichtbar. Start öffnet Spieltisch und separates Moderationsfenster; Anleitung kann der SL in den Chat posten. Spieler verwenden die unteren Spielbuttons, die der SL im jeweiligen Moderationsfenster freigibt, und klicken Beitreten. Die neuen unteren Buttons sind standardmäßig aus.
 
 ## Spielgruppen / Game categories
 
-**Würfelspiele / Dice games:** Schocken, Farkle, Schweinchen, Schiff–Kapitän–Mannschaft, Kniffel (Beta).
+**Würfelspiele / Dice games:** Schocken, Farkle, Schweinchen, Schiff–Kapitän–Mannschaft, Kniffel.
 
 **Glücksspiele / Games of chance:** Straßenlotto.
 
 Kniffel-NPCs behalten nun unterschiedliche Zahlen für Straßen und bevorzugen fertige Kombinationen gegenüber dem flexiblen Chance-Feld. Der Bonusfortschritt zeigt nur die Summe der Zahlenfelder Einsen bis Sechsen: 60 ergibt keinen Bonus, ab 63 werden 35 Punkte addiert. Die Berechnung bleibt unverändert.
 
-## Kniffel · Beta
+## Kniffel
 
-In den Foundry-Moduleinstellungen **Taverngames: Beta-Test** einschalten. Kniffel erscheint dann im nur für SL sichtbaren Reiter. Im Moderationsfenster kann der SL den unteren Kniffel-Button für alle freigeben; Spieler treten darüber freiwillig bei. Ausschalten der Beta entfernt die Kniffel-Fenster und stoppt dessen NPC-Automatik, erhält aber den gespeicherten Spielstand.
+Kniffel ist regulär im SL-Reiter erreichbar. Der SL kann den unteren Kniffel-Button in der Moderation freigeben; Spieler treten darüber freiwillig bei. Kategorieauswahl und Suche oben im Reiter filtern gemeinsam nach deutschen oder englischen Spielnamen. Die sechs Spiele bleiben unabhängig vom Beta-Schalter verfügbar.
 
 Normale Schmidt-Kniffel-Regeln für 2–8 Teilnehmer. Fünf W6, höchstens drei Würfe, Würfel behalten/zurücknehmen, 13 bewusst ausgewählte Wertungsfelder mit Vorschau und Nullbestätigung. Früher Eintrag ist möglich. Oben 35 Bonus ab 63; zusätzliche Kniffel nach belegtem 50er-Feld bringen 50 Zusatzpunkte und den Höchstwert eines freien Feldes. Ein gestrichenes Kniffelfeld verhindert die Sonderwertung. Gleichstände teilen Plätze. NPCs sind automatisch oder manuell steuerbar; Folgepartien übernehmen Teilnehmer und leeren den Bogen. Serien und Einsätze sind für später vorgemerkt. Keine 3D-Würfelintegration.
 
-English: enable **Taverngames: Beta testing** in Module Settings to access experimental Kniffel. The GM enables its bottom launcher in moderation. Standard Schmidt rules, manual score selection with previews, optional early scoring, zero confirmation, named controllable NPCs and fresh next games. Turning beta off preserves the save and stops Kniffel automation. Existing stable games remain available.
+English: all six games including Kniffel are available normally. The GM enables the bottom Kniffel launcher in moderation. Category selection and name search can be combined; German and English names are recognized. The score sheet header has explicit contrasting colors for dark table themes. Tags, duration filters, Kniffel series and stakes remain deferred.
 
-Regelquelle / Rule source: [Schmidt Spiele, Kniffel 49203](https://www.schmidtspiele.de/files/Produkte/4/49203%20-%20Kniffel%C2%AE/49203_Kniffel_DE.pdf). Kniffel ist eine Marke von Schmidt Spiele. Noch keine Foundry-Live-Abnahme; 1.3.0 erst nach Daniels Freigabe.
+Regelquelle / Rule source: [Schmidt Spiele, Kniffel 49203](https://www.schmidtspiele.de/files/Produkte/4/49203%20-%20Kniffel%C2%AE/49203_Kniffel_DE.pdf). Kniffel ist eine Marke von Schmidt Spiele. Kniffel von Daniel für 1.3.0 freigegeben; keine eigene Foundry-Live-Abnahme durch Codex behauptet.
 
 ## Neue Spiele
 
@@ -84,7 +84,7 @@ Bei unzureichendem Geld verhindert die Vorprüfung die Buchung. Bei Verbindungsf
 
 ## English
 
-**1.2.0** offers five regular games: Schocken, Farkle, Pig, Ship–Captain–Crew and Street lottery. No beta setting is required; toggling it does not hide or stop these games. Same module ID and regular update source. The GM-only tab has Start and Instructions for each game. Only the GM starts or aborts games, including without joining; moderation provides the start controls. Players join via bottom buttons enabled in moderation. All games support shared abort; unlimited Ship series can finish after the current round.
+**1.3.0** offers six regular games: Schocken, Farkle, Pig, Ship–Captain–Crew, Kniffel and Street lottery. No beta setting is required; toggling it does not hide or stop these games. Same module ID and regular update source. The GM-only tab has Start and Instructions for each game. Only the GM starts or aborts games, including without joining; moderation provides the start controls. Players join via bottom buttons enabled in moderation. All games support shared abort; unlimited Ship series can finish after the current round.
 
 Pig follows Daniel's target-score rules (default 100), with one final turn each. A rolled 1 and lost turn points remain visible until the player or GM presses Continue; automatic NPCs continue after at least five seconds. Pause and manual control stop automation. Click a participant name to see their last 20 recorded rolls of the game. Ship supports single, fixed and unlimited rounds; cargo scores are added, final tie-breaks choose the winner. Players click 6, 5 and 4 in order to set them aside. The third roll stays visible until End turn, including for zero points; automatic NPCs end completed turns after at least five seconds, including earlier decisions to keep cargo. Lottery uses 1–100 globally unique numbers per ticket as configured by the GM (default five), up to 20 tickets and exactly one d100 draw explicitly triggered by the GM in moderation after acceptance closes. Selected world/inventory items are awarded once; missing assignments can be fixed and delivery retried.
 
@@ -97,10 +97,10 @@ The three previously beta games are regular in 1.2.0 at Daniel's explicit reques
 1. Daniel Brune · Website https://dnd.brunecoaching.de · Discord arukard · E-Mail daniel@brunecoaching.de · KI-Unterstützung ChatGPT/Codex.
 2. Philipp D. · Discord **theonlyzaodiac**.
 
-Die danach im Manifest aufgeführten Namen sind als **Regelquellen/Referenzautoren** gekennzeichnet: Schockfreunde, PlayMonster, Awiana, Paul Cossmer/DnDDiary, Bicycle Cards, moses. Verlag, John McLeod/Pagat, TS Spielkarten und dessen genannte Wikipedia-Textquelle. Dies kennzeichnet die Herkunft der Regeln; technische Modulprogrammierung wird ihnen nicht zugeschrieben. Georg Haubner wird als Lektor der PDF-Vorlagen genannt; keine unbestätigte Website ergänzt. Die weiteren Awiana-/PDF-Spiele sowie Die böse Dreizehn, Klippklapp, Blackjack/17+4 und Schwimmen sind ausschließlich gespeicherte Regelreferenzen.
+Die danach im Manifest aufgeführten Namen sind als **Regelquellen/Referenzautoren** gekennzeichnet: Schockfreunde, PlayMonster, Schmidt Spiele, Awiana, Paul Cossmer/DnDDiary, Bicycle Cards, moses. Verlag, John McLeod/Pagat, TS Spielkarten und dessen genannte Wikipedia-Textquelle. Dies kennzeichnet die Herkunft der Regeln; technische Modulprogrammierung wird ihnen nicht zugeschrieben. Georg Haubner wird als Lektor der PDF-Vorlagen genannt; keine unbestätigte Website ergänzt. Die weiteren Awiana-/PDF-Spiele sowie Die böse Dreizehn, Klippklapp, Blackjack/17+4 und Schwimmen sind ausschließlich gespeicherte Regelreferenzen.
 
 ## Prüfung
 
-95 automatisierte Tests, Syntaxprüfung und sechs synthetische Browserprüfungen einschließlich Deutsch/Englisch und getrennter GM-/Spieler-Clients. Details in docs/validation.md; Release in docs/release-1.2.0.md. Foundry 14.369 bleibt auf Grundlage des Nutzer-Praxistests für das Basismodul verified. Freigabe der drei bisherigen Beta-Spiele durch Daniels ausdrücklichen Auftrag. Keine neue eigene Live-Abnahme behauptet. Historische Pakete bleiben unverändert.
+112 automatisierte Tests, Syntaxprüfung und acht synthetische Browserprüfungen einschließlich Deutsch/Englisch und getrennter GM-/Spieler-Clients. Details in docs/validation.md; Release in docs/release-1.3.0.md. Foundry 14.369 bleibt auf Grundlage des Nutzer-Praxistests für das Basismodul verified. Freigabe der drei bisherigen Beta-Spiele durch Daniels ausdrücklichen Auftrag. Keine neue eigene Live-Abnahme behauptet. Historische Pakete bleiben unverändert.
 
 Entwicklung: `node --test module/tests/*.test.mjs`, `node tools/check.mjs`, `node tools/browser-smoke.mjs`, `node tools/farkle-browser-smoke.mjs`, `node tools/farkle-multiplayer-smoke.mjs`, `node tools/tavern-browser-smoke.mjs`, `node tools/tavern-multiplayer-smoke.mjs`, `node tools/version-1.2-browser-smoke.mjs`. Browserprüfungen benötigen Playwright/Chrome. `tools/build-release.ps1` erzeugt konsistente Pakete.

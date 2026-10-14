@@ -12,9 +12,9 @@ export class TavernUI{
   get isOpen(){return this.windows.size>0;}
   name(id){return this.getState()?.npcs[id]??game.users.get(id)?.name??id;}
   window(kind){if(this.windows.has(kind)){this.windows.get(kind).app.bringToFront();return this.windows.get(kind).root;}const root=node('section',undefined,'taverngames-surface'),app=createNativeWindow(foundry,`${this.scope}-${kind}`,root,()=>this.windows.delete(kind));this.windows.set(kind,{root,app});return root;}
-  open(){if(this.scope==='kniffel'&&game.settings.get('taverngames','betaTest')!==true)return;this.window('table');if(game.user.isGM)this.window('moderation');this.draw();void this.request('read');}
+  open(){this.window('table');if(game.user.isGM)this.window('moderation');this.draw();void this.request('read');}
   async close(){await Promise.all([...this.windows.values()].map(({app})=>app.close()));}
-  guide(){if(!game.user.isGM||this.scope==='kniffel'&&game.settings.get('taverngames','betaTest')!==true)return;const root=this.window('guide');root.replaceChildren();const content=node('div',undefined,'schocken-content');content.innerHTML=tavernGuide(this.scope);root.append(content);control(content,f('Anleitung in den Chat posten','Post instructions to chat'),async()=>{try{await ChatMessage.create({content:tavernGuide(this.scope)});}catch(e){ui.notifications.warn(e.message);}});}
+  guide(){if(!game.user.isGM)return;const root=this.window('guide');root.replaceChildren();const content=node('div',undefined,'schocken-content');content.innerHTML=tavernGuide(this.scope);root.append(content);control(content,f('Anleitung in den Chat posten','Post instructions to chat'),async()=>{try{await ChatMessage.create({content:tavernGuide(this.scope)});}catch(e){ui.notifications.warn(e.message);}});}
   draw(){this.drawModeration();this.drawTable();}
   drawModeration(){
     const root=this.windows.get('moderation')?.root;if(!root||!game.user.isGM)return;

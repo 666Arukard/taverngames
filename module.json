@@ -1,10 +1,10 @@
 {
     "id":  "taverngames",
     "title":  "Taverngames – Foundry Extension",
-    "description":  "\u003ch3\u003eDeutsch\u003c/h3\u003e\u003cp\u003eTaverngames bringt Schocken, Farkle, Schweinchen, Schiff–Kapitän–Mannschaft und Straßenlotto mit freiwilligem Beitritt, SL-Moderation und benannten NPCs an deinen Foundry-Tisch. Alle fünf Spiele sind regulär verfügbar. Der Taverngames-Reiter ist nur für SL sichtbar; Spieler verwenden freigegebene untere Spielbuttons.\u003c/p\u003e\u003ch3\u003eEnglish\u003c/h3\u003e\u003cp\u003eTaverngames brings Schocken, Farkle, Pig, Ship–Captain–Crew and Street lottery to Foundry with voluntary participation, GM moderation and named NPCs. All five games are available normally. The Taverngames tab is GM-only; players use enabled bottom game buttons.\u003c/p\u003e\u003ch3\u003e1.2.3 · Versionshinweise / Release notes\u003c/h3\u003e\u003cul\u003e\u003cli\u003eKniffel-NPCs behalten Straßenansätze und nutzen fertige Kombinationen sinnvoller. / Kniffel NPCs retain straight candidates and use completed combinations more sensibly.\u003c/li\u003e\u003cli\u003eBonusgrenze ausdrücklich nur für die oberen Zahlenfelder, mit Fortschritt bis 63. Berechnung unverändert. / Bonus threshold explicitly applies only to upper number fields, with progress toward 63. Calculation unchanged.\u003c/li\u003e\u003cli\u003eSpielgruppen Würfelspiele und Glücksspiele; Kniffel bleibt optional Beta. / Dice games and Games of chance categories; Kniffel remains optional beta.\u003c/li\u003e\u003cli\u003eCo-Autor korrigiert: Philipp D. / Corrected co-author: Philipp D.\u003c/li\u003e\u003c/ul\u003e",
-    "version":  "1.2.3",
+    "description":  "\u003ch3\u003eDeutsch\u003c/h3\u003e\u003cp\u003eTaverngames bringt Schocken, Farkle, Schweinchen, Schiff–Kapitän–Mannschaft, Kniffel und Straßenlotto mit freiwilligem Beitritt, SL-Moderation und benannten NPCs an deinen Foundry-Tisch. Alle sechs Spiele sind regulär verfügbar. Der Reiter ist nur für SL sichtbar; Spieler nutzen freigegebene untere Spielbuttons.\u003c/p\u003e\u003ch3\u003eEnglish\u003c/h3\u003e\u003cp\u003eTaverngames brings Schocken, Farkle, Pig, Ship–Captain–Crew, Kniffel and Street lottery to Foundry with voluntary participation, GM moderation and named NPCs. All six games are available normally. The tab is GM-only; players use enabled bottom game buttons.\u003c/p\u003e\u003ch3\u003e1.3.0 · Versionshinweise / Release notes\u003c/h3\u003e\u003cul\u003e\u003cli\u003eKniffel nach Nutzer-Abnahme regulär verfügbar, ohne Beta-Schalter. / Kniffel is available normally after user acceptance, without the beta switch.\u003c/li\u003e\u003cli\u003eKontrastreiche Kopfzeile des Wertungsbogens auch bei dunklen Tabellenfarben. / Contrasting score sheet header including dark table themes.\u003c/li\u003e\u003cli\u003eKategorieauswahl und kombinierbare Spielsuche in Deutsch/Englisch im Reiter. / Category selection and combined German/English game search in the tab.\u003c/li\u003e\u003cli\u003eGitHub-Updatequelle, bestehende Spielstände und Co-Autor Philipp D. bleiben erhalten. / GitHub update source, existing saves and co-author Philipp D. retained.\u003c/li\u003e\u003c/ul\u003e",
+    "version":  "1.3.0",
     "readme":  "README.md",
-    "changelog":  "https://github.com/666Arukard/taverngames/releases/tag/v1.2.3",
+    "changelog":  "https://github.com/666Arukard/taverngames/releases/tag/v1.3.0",
     "url":  "https://dnd.brunecoaching.de",
     "compatibility":  {
                           "verified":  "14.369"
@@ -68,5 +68,5 @@
                    "styles/table.css"
                ],
     "manifest":  "https://github.com/666Arukard/taverngames/releases/latest/download/module.json",
-    "download":  "https://github.com/666Arukard/taverngames/releases/download/v1.2.3/taverngames-1.2.3.zip"
+    "download":  "https://github.com/666Arukard/taverngames/releases/download/v1.3.0/taverngames-1.3.0.zip"
 }
