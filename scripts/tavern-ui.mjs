@@ -8,7 +8,7 @@ export function selectField(parent,title,entries,value,key){const label=node('la
 function inputField(parent,title,value,key,min=0,max=1000000){const label=node('label',title),input=node('input');input.type='number';input.min=min;input.max=max;input.step=1;input.value=value;input.dataset.draft=key;label.append(input);parent.append(label);return input;}
 export function currencyOptions(){return Object.keys(COINS).filter(c=>c!=='ep'||game.settings.get('taverngames','allowElectrum')===true).map(c=>[c,coinLabel(c)]);}
 export class TavernUI{
-  constructor(scope,{request,getState,openBetting}){Object.assign(this,{scope,request,getState,openBetting});this.windows=new Map();}
+  constructor(scope,{request,getState,openBetting,openOutcome}){Object.assign(this,{scope,request,getState,openBetting,openOutcome});this.windows=new Map();}
   get isOpen(){return this.windows.size>0;}
   name(id){return this.getState()?.npcs[id]??game.users.get(id)?.name??id;}
   window(kind){if(this.windows.has(kind)){this.windows.get(kind).app.bringToFront();return this.windows.get(kind).root;}const root=node('section',undefined,'taverngames-surface'),app=createNativeWindow(foundry,`${this.scope}-${kind}`,root,()=>this.windows.delete(kind));this.windows.set(kind,{root,app});return root;}
@@ -20,7 +20,7 @@ export class TavernUI{
     const root=this.windows.get('moderation')?.root;if(!root||!game.user.isGM)return;
     const drafts=new Map([...root.querySelectorAll('[data-draft]')].map(e=>[e.dataset.draft,e.value])),expanded=root.querySelector('details')?.open??false,focus=document.activeElement?.dataset.draft;
     root.replaceChildren();const c=node('div',undefined,'schocken-content');root.append(c);const s=this.getState();
-    c.append(node('p',`${gameTitle(this.scope)}`,'schocken-help'));control(c,f('Spieltisch öffnen','Open game table'),()=>{this.window('table');this.drawTable();});control(c,f('Anleitung','Instructions'),()=>this.guide());
+    c.append(node('p',`${gameTitle(this.scope)}`,'schocken-help'));if(this.openOutcome)control(c,f('Wetten','Bets'),()=>this.openOutcome(this.scope));control(c,f('Spieltisch öffnen','Open game table'),()=>{this.window('table');this.drawTable();});control(c,f('Anleitung','Instructions'),()=>this.guide());
     control(c,f('Einsätze & Charaktere','Stakes & characters'),()=>this.openBetting(this.scope),!s);
     const label=node('label',undefined,'schocken-choice'),show=node('input');show.type='checkbox';show.dataset.tavernLauncher=this.scope;show.checked=game.settings.get('taverngames',`show${this.scope}Launcher`)===true;
     show.addEventListener('change',()=>void game.settings.set('taverngames',`show${this.scope}Launcher`,show.checked).catch(e=>ui.notifications.warn(e.message)));label.append(show,document.createTextNode(f('Unteren Spielbutton für alle einblenden','Show the bottom game button for everyone')));c.append(label);
@@ -63,7 +63,7 @@ export class TavernUI{
   }
   drawTable(){
     const root=this.windows.get('table')?.root;if(!root)return;root.replaceChildren();const c=node('div',undefined,'schocken-content');root.append(c);c.append(node('h2',`${gameTitle(this.scope)}`));
-    const s=this.getState();if(game.user.isGM)control(c,f('Moderation öffnen','Open moderation'),()=>{this.window('moderation');this.drawModeration();});
+    const s=this.getState();if(this.openOutcome)control(c,f('Wetten','Bets'),()=>this.openOutcome(this.scope));if(game.user.isGM)control(c,f('Moderation öffnen','Open moderation'),()=>{this.window('moderation');this.drawModeration();});
     if(!s){c.append(node('p',f('Der SL öffnet eine Lobby.','The GM opens a lobby.')));return;}
     c.append(node('p',`${f('Grundeinsatz','Base stake')}: ${s.stake} ${coinLabel(s.currency)} · ${f('Buchung erst auf SL-Befehl','Settlement by GM command only')}`));
     for(const id of s.players){

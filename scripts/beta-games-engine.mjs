@@ -51,7 +51,7 @@ export function actBetaGame(original,actor,action,args={},random=()=>1,gm=false)
     check(integer(args.amount,1,total)&&integer(args.face,1,6),'Invalid bid.');check(!s.bid||args.amount>s.bid.amount||args.amount===s.bid.amount&&args.face>s.bid.face,'Bid is too low.');s.bid={id:current,amount:args.amount,face:args.face};nextTurn(s);
    }else if(action==='challenge'){
     check(s.phase==='bidding'&&s.bid,'No bid to challenge.');isTurn();const hits=Object.values(s.hands).flat().filter(n=>n===s.bid.face||n===1).length,loser=hits>=s.bid.amount?current:s.bid.id;
-    s.reveal={hands:structuredClone(s.hands),bid:structuredClone(s.bid),challenger:current,hits,loser};s.counts[loser]--;if(s.counts[loser]===0)s.out.push(loser);
+    s.reveal={hands:structuredClone(s.hands),bid:structuredClone(s.bid),challenger:current,hits,matching:Object.values(s.hands).flat().filter(n=>n===s.bid.face).length,wild:s.bid.face===1?0:Object.values(s.hands).flat().filter(n=>n===1).length,loser};s.counts[loser]--;if(s.counts[loser]===0)s.out.push(loser);
     if(activePlayers(s).length===1)finish(s,'last');else{const index=s.order.indexOf(loser);let starter=loser;if(s.out.includes(loser)){let i=index;do{i=(i+1)%s.order.length;}while(s.out.includes(s.order[i]));starter=s.order[i];}s.turn=s.order.indexOf(starter);s.phase='reveal';}
    }else if(action==='next'){check(s.phase==='reveal','No round to continue.');isTurn();s.round++;newLiarsRound(s,current);}
    else throw new Error('Unknown action.');

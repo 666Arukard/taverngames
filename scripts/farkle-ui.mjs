@@ -4,7 +4,7 @@ import {f,farkleGuide} from './farkle-text.mjs';
 const el=(tag,text,cls)=>{const node=document.createElement(tag);if(text!==undefined)node.textContent=text;if(cls)node.className=cls;return node;};
 const button=(parent,title,action,disabled=false)=>{const node=el('button',title);node.type='button';node.disabled=disabled;node.addEventListener('click',action);parent.append(node);return node;};
 export class FarkleUI{
-  constructor({request,getState,openBetting}){this.request=request;this.getState=getState;this.openBetting=openBetting;this.windows=new Map();}
+  constructor({request,getState,openBetting,openOutcome}){this.request=request;this.getState=getState;this.openBetting=openBetting;this.openOutcome=openOutcome;this.windows=new Map();}
   get isOpen(){return this.windows.size>0;}
   name(id){return this.getState()?.npcs?.[id]??game.users.get(id)?.name??id;}
   window(kind){
@@ -23,7 +23,7 @@ export class FarkleUI{
     const root=this.windows.get('farkle-moderation')?.root;if(!root||!game.user.isGM)return;
     const drafts=new Map([...root.querySelectorAll('[data-draft]')].map(node=>[node.dataset.draft,{value:node.value,checked:node.checked}]));
     const wasOpen=root.querySelector('details')?.open??false,focused=document.activeElement?.dataset?.draft;
-    root.replaceChildren();const content=el('div',undefined,'schocken-content');root.append(content);
+    root.replaceChildren();const content=el('div',undefined,'schocken-content');root.append(content);if(this.openOutcome)button(content,f('Wetten','Bets'),()=>this.openOutcome('farkle'));
     content.append(el('p','Farkle · PlayMonster','schocken-help'));
     button(content,f('Spieltisch öffnen','Open game table'),()=>{this.window('farkle');this.drawTable();});button(content,f('Anleitung','Instructions'),()=>this.guide());
     if(this.openBetting)button(content,f('Einsätze & Charaktere','Stakes & characters'),()=>this.openBetting('farkle'),!this.getState());
@@ -61,7 +61,7 @@ export class FarkleUI{
   }
   drawTable(){
     const root=this.windows.get('farkle')?.root;if(!root)return;root.replaceChildren();const content=el('div',undefined,'schocken-content');root.append(content);
-    content.append(el('h2','Farkle'));
+    content.append(el('h2','Farkle'));if(this.openOutcome)button(content,f('Wetten','Bets'),()=>this.openOutcome('farkle'));
     if(game.user.isGM)button(content,f('Moderation öffnen','Open moderation'),()=>{this.window('farkle-moderation');this.drawModeration();});
     const s=this.getState();if(!s){content.append(el('p',f('Der SL öffnet eine Farkle-Lobby.','The GM opens a Farkle lobby.')));return;}
     const current=s.order[s.turn],mine=current===game.user.id,can=mine||game.user.isGM;
@@ -74,7 +74,7 @@ export class FarkleUI{
       content.append(el('h3','Lobby · Farkle'));button(content,s.players.includes(game.user.id)?f('Lobby verlassen','Leave lobby'):f('Beitreten','Join'),()=>this.request(s.players.includes(game.user.id)?'leave':'join'));
       if(game.user.isGM)button(content,f('Spiel starten','Start game'),()=>this.request('begin'),s.players.length<(s.mode==='target'?1:2));return;
     }
-    const nextGame=()=>{if(game.user.isGM&&s.players.length>=(s.mode==='target'?1:2)){button(content,f('Nächste Partie starten','Start next game'),()=>this.request('restart'));content.append(el('p',f('Gleiche Spieler und Regeln; die Punkte beginnen wieder bei null.','Same players and rules; scores start at zero again.'),'schocken-help'));}};
+    const nextGame=()=>{if(game.user.isGM&&s.players.length>=(s.mode==='target'?1:2)){button(content,f('Nächste Partie vorbereiten','Prepare next game'),()=>this.request('restart',{prepare:true}));content.append(el('p',f('Gleiche Spieler und Regeln; die Punkte beginnen wieder bei null.','Same players and rules; scores start at zero again.'),'schocken-help'));}};
     if(s.phase==='aborted'){content.append(el('h3',f('Spiel durch den GM beendet','Game ended by the GM')));nextGame();return;}
     if(s.phase==='finished'){
       content.append(el('h3',s.draw?f('Unentschieden','Draw'):f('Spiel beendet','Game over')));

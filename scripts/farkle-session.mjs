@@ -28,7 +28,7 @@ export class FarkleSession{
       if(!old||!['finished','aborted'].includes(old.phase))throw new Error('Finish or end the current game first.');
       next=createFarkle({mode:old.mode,target:old.target,roundLimit:old.roundLimit??3,npcs:old.npcs,rules:old.rules});
       next.players=[...old.players];next.scores=Object.fromEntries(next.players.map(id=>[id,0]));next.npcManual=structuredClone(old.npcManual);
-      next=actFarkle(next,user.id,'begin',{},this.diceSource,true);next.gameId=crypto.randomUUID();next.revision=old.revision+1;
+      if(data.args?.prepare!==true)next=actFarkle(next,user.id,'begin',{},this.diceSource,true);next.gameId=crypto.randomUUID();next.revision=old.revision+1;
     }else if(data.action==='undo'){
       if(!user.isGM||!this.history.length||old?.phase==='aborted')throw new Error('No action to undo.');
       // A finished game remains final: do not invalidate an already posted result.

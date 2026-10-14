@@ -6,7 +6,7 @@ const enabled=()=>true;
 export class KniffelUI extends TavernUI{
   drawModeration(){
     const root=this.windows.get('moderation')?.root;if(!root||!game.user.isGM)return;root.replaceChildren();if(!enabled())return;
-    const s=this.getState(),c=node('div',undefined,'schocken-content');root.append(c);c.append(node('h2','Kniffel'));
+    const s=this.getState(),c=node('div',undefined,'schocken-content');root.append(c);if(this.openOutcome)control(c,f('Wetten','Bets'),()=>this.openOutcome(this.scope));c.append(node('h2','Kniffel'));
     control(c,f('Spieltisch öffnen','Open game table'),()=>{this.window('table');this.drawTable();});control(c,f('Anleitung','Instructions'),()=>this.guide());
     const label=node('label',undefined,'schocken-choice'),show=node('input');show.type='checkbox';show.dataset.tavernLauncher='kniffel';show.checked=game.settings.get('taverngames','showkniffelLauncher')===true;
     show.addEventListener('change',()=>void game.settings.set('taverngames','showkniffelLauncher',show.checked).catch(e=>ui.notifications.warn(e.message)));label.append(show,document.createTextNode(f('Unteren Kniffel-Button für alle einblenden','Show the bottom Kniffel button for everyone')));c.append(label);
@@ -25,7 +25,7 @@ export class KniffelUI extends TavernUI{
   }
   drawTable(){
     const root=this.windows.get('table')?.root;if(!root)return;const oldTop=root.querySelector('.schocken-content')?.scrollTop??0,oldLeft=root.querySelector('.kniffel-sheet-scroll')?.scrollLeft??0;root.replaceChildren();if(!enabled())return;
-    const c=node('div',undefined,'schocken-content'),s=this.getState();root.append(c);c.append(node('h2','Kniffel'));
+    const c=node('div',undefined,'schocken-content'),s=this.getState();root.append(c);if(this.openOutcome)control(c,f('Wetten','Bets'),()=>this.openOutcome(this.scope));c.append(node('h2','Kniffel'));
     if(game.user.isGM)control(c,f('Moderation öffnen','Open moderation'),()=>{this.window('moderation');this.drawModeration();});
     if(!s){c.append(node('p',f('Der SL öffnet eine Lobby.','The GM opens a lobby.')));return;}
     if(s.paused)c.append(node('p',f('Spiel pausiert','Game paused')));

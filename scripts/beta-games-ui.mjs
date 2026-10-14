@@ -8,7 +8,7 @@ export class BetaGameUI extends TavernUI{
  guide(){if(enabled())super.guide();}
  drawModeration(){
   const root=this.windows.get('moderation')?.root;if(!root||!game.user.isGM)return;root.replaceChildren();if(!enabled())return;
-  const c=node('div',undefined,'schocken-content'),s=this.getState();root.append(c);c.append(node('h2',`${gameTitle(this.scope)} · Beta`));control(c,f('Spieltisch öffnen','Open game table'),()=>{this.window('table');this.drawTable();});control(c,f('Anleitung','Instructions'),()=>this.guide());
+  const c=node('div',undefined,'schocken-content'),s=this.getState();root.append(c);if(this.openOutcome)control(c,f('Wetten','Bets'),()=>this.openOutcome(this.scope));c.append(node('h2',`${gameTitle(this.scope)} · Beta`));control(c,f('Spieltisch öffnen','Open game table'),()=>{this.window('table');this.drawTable();});control(c,f('Anleitung','Instructions'),()=>this.guide());
   const label=node('label',undefined,'schocken-choice'),show=node('input');show.type='checkbox';show.dataset.tavernLauncher=this.scope;show.checked=game.settings.get('taverngames',`show${this.scope}Launcher`)===true;show.addEventListener('change',()=>void game.settings.set('taverngames',`show${this.scope}Launcher`,show.checked).catch(e=>ui.notifications.warn(e.message)));label.append(show,document.createTextNode(f('Unteren Spielbutton für alle einblenden','Show the bottom game button for everyone')));c.append(label);
   const setup=node('details');setup.open=this.setupOpen??!s;setup.addEventListener('toggle',()=>this.setupOpen=setup.open);setup.append(node('summary',f('Neue Partie & Regeln','New game & rules')));let mode,coins,entry,currency;
   if(this.scope==='hoard'){
@@ -33,7 +33,7 @@ export class BetaGameUI extends TavernUI{
  }
  drawTable(){
   const root=this.windows.get('table')?.root;if(!root)return;const top=root.querySelector('.schocken-content')?.scrollTop??0;root.replaceChildren();if(!enabled())return;
-  const c=node('div',undefined,'schocken-content'),s=this.getState();root.append(c);c.append(node('h2',`${gameTitle(this.scope)} · Beta`));if(game.user.isGM)control(c,f('Moderation öffnen','Open moderation'),()=>{this.window('moderation');this.drawModeration();});
+  const c=node('div',undefined,'schocken-content'),s=this.getState();root.append(c);if(this.openOutcome)control(c,f('Wetten','Bets'),()=>this.openOutcome(this.scope));c.append(node('h2',`${gameTitle(this.scope)} · Beta`));if(game.user.isGM)control(c,f('Moderation öffnen','Open moderation'),()=>{this.window('moderation');this.drawModeration();});
   if(!s){c.append(node('p',f('Der SL öffnet eine Lobby.','The GM opens a lobby.')));return;}
   if(s.paused)c.append(node('p',f('Spiel pausiert','Game paused')));
   const active=s.order[s.turn],can=!s.paused&&(active===game.user.id||game.user.isGM),request=(action,args={})=>this.request(action,{...args,...(s.npcs[active]?{id:active}:{})});
@@ -48,22 +48,22 @@ export class BetaGameUI extends TavernUI{
     c.append(node('h3',`${this.name(active)} · ${f('am Zug','to play')}`));c.append(node('p',s.bid?`${this.name(s.bid.id)}: ${s.bid.amount} × ${s.bid.face}`:f('Noch kein Gebot.','No bid yet.')));
     if(can){const amount=number(c,f('Anzahl Würfel','Dice count'),this.bidAmount??Math.max(1,s.bid?.amount??1),1,Object.values(s.counts).reduce((a,b)=>a+b,0)),face=number(c,f('Augenzahl','Face'),this.bidFace??Math.min(6,(s.bid?.face??1)+1),1,6);amount.addEventListener('input',()=>this.bidAmount=amount.value);face.addEventListener('input',()=>this.bidFace=face.value);control(c,f('Gebot abgeben','Place bid'),()=>{this.bidAmount=null;this.bidFace=null;void request('bid',{amount:Number(amount.value),face:Number(face.value)});});control(c,f('Anzweifeln','Challenge'),()=>request('challenge'),!s.bid);}
    }
-   if(s.reveal){c.append(node('h3',f('Aufgedeckt','Revealed')));for(const [id,dice] of Object.entries(s.reveal.hands))c.append(node('p',`${this.name(id)}: ${dice.join(' · ')}`));c.append(node('p',`${s.reveal.hits} ${f('Treffer','matches')} · ${this.name(s.reveal.loser)} ${f('verliert einen Würfel','loses one die')}`));if(s.phase==='reveal'&&can)control(c,f('Weiter','Continue'),()=>request('next'));}
+   if(s.reveal){c.append(node('h3',f('Aufgedeckt','Revealed')));const bid=s.reveal.bid,all=Object.values(s.reveal.hands).flat(),matching=s.reveal.matching??all.filter(n=>n===bid.face).length,wild=s.reveal.wild??(bid.face===1?0:all.filter(n=>n===1).length);c.append(node('p',`${f('Angezweifeltes Gebot','Challenged bid')}: ${this.name(bid.id)} · ${bid.amount} × ${bid.face}`,'beta-challenged-bid'));c.append(node('p',`${matching} × ${bid.face}${bid.face===1?'':` + ${wild} ${f('Einser-Joker','wild ones')}`} = ${s.reveal.hits} ${f('Treffer','matches')}`,'beta-hit-breakdown'));for(const [id,dice] of Object.entries(s.reveal.hands))c.append(node('p',`${this.name(id)}: ${dice.join(' · ')}`));c.append(node('p',`${s.reveal.hits} ${f('Treffer','matches')} · ${this.name(s.reveal.loser)} ${f('verliert einen Würfel','loses one die')}`));if(s.phase==='reveal'&&can)control(c,f('Weiter','Continue'),()=>request('next'));}
   }else{
    c.append(node('p',f('Nur virtuelle Münzen – keine Charakterbuchungen.','Virtual coins only – no character transactions.'),'schocken-help'));
    const board=node('div',undefined,'hoard-board');s.board.forEach((n,i)=>board.append(node('div',`${i+3}: ${n}`)));c.append(board);
-   if(s.lastRoll)c.append(node('p',`${this.name(s.lastRoll.id)}: ${s.lastRoll.dice.join(' + ')} = ${s.lastRoll.sum}`));
+   if(s.lastRoll){c.append(node('p',`${this.name(s.lastRoll.id)}: ${s.lastRoll.dice.join(' + ')} = ${s.lastRoll.sum}`));const dice=node('div',undefined,'schocken-dice hoard-dice');for(const value of s.lastRoll.dice)dice.append(node('span',String(value),'taverngames-die'));c.append(dice);}
    if(s.phase==='playing'){c.append(node('h3',`${this.name(active)} · ${f('am Zug','to play')}`));if(can)control(c,f('Würfeln','Roll'),()=>request('roll'));}
    if(s.phase==='allocate'){
     c.append(node('p',`${f('Restmünzen frei verteilen, danach ausscheiden','Distribute remaining coins, then leave')}: ${s.pending.amount}`));
     if(can){const inputs=Array.from({length:9},(_,i)=>number(c,String(i+3),0,0,s.pending.amount));control(c,f('Restzahlung bestätigen','Confirm partial payment'),()=>request('allocate',{coins:inputs.map(input=>Number(input.value))}));}
    }
    if(s.phase==='contest'){
-    const contest=s.contest,sides=contest.eligible.length<=6?6:contest.eligible.length<=10?10:20;c.append(node('h3',`${f('Restverteilung','Remainder allocation')} · W${sides}`));c.append(node('p',`${contest.remaining} ${f('Restmünzen; nächste Zahl gewinnt','remainder coins; closest guess wins')}`));
+    const contest=s.contest,sides=contest.eligible.length<=6?6:contest.eligible.length<=10?10:20;c.append(node('h3',`${f('Restverteilung','Remainder allocation')} · ${f('Würfel','Die')}: 1W${sides}`));c.append(node('p',f(`Tippe eine Zahl von 1 bis ${sides}. Erst nach allen Tipps löst der SL den W${sides} aus.`,`Guess a number from 1 to ${sides}. Only after all guesses does the GM roll the d${sides}.`)));c.append(node('p',`${contest.remaining} ${f('Restmünzen; nächste Zahl gewinnt','remainder coins; closest guess wins')}`));
     for(const id of contest.entrants){const submitted=contest.submitted.includes(id);c.append(node('p',`${this.name(id)}: ${submitted?'✓':'…'}`));if(!submitted&&!s.paused&&(id===game.user.id||game.user.isGM&&s.npcs[id])){const guess=number(c,f('Geheimer Zahlentipp','Secret number guess'),1,1,sides);control(c,f('Tipp abgeben','Submit guess'),()=>this.request('guess',{id,value:Number(guess.value)}));}}
     if(game.user.isGM)control(c,f('Restwurf auslösen','Roll for remainder'),()=>this.request('resolveGuess'),s.paused||contest.entrants.some(id=>!contest.submitted.includes(id)));
    }
-   if(s.lastContest)c.append(node('p',`${f('Letzter Restwurf','Last remainder roll')}: ${s.lastContest.value} · ${s.lastContest.closest.map(id=>this.name(id)).join(', ')}`));
+   if(s.lastContest){c.append(node('p',`${f('Letzter Restwurf','Last remainder roll')}: 1W${s.lastContest.sides} = ${s.lastContest.value} · ${s.lastContest.closest.map(id=>this.name(id)).join(', ')}`));for(const [id,guess] of Object.entries(s.lastContest.guesses))c.append(node('p',`${this.name(id)}: ${guess} · ${f('Abstand','Distance')}: ${Math.abs(guess-s.lastContest.value)}`));}
    if(s.payouts&&s.phase==='finished'){c.append(node('h3',f('Virtuelle Auszahlungsvorschau','Virtual payout preview')));for(const id of s.players)c.append(node('p',`${this.name(id)}: ${s.payouts[id]} ${s.hoardMode==='tokens'?f('Kupfer Gegenwert','copper equivalent'):s.currency}`));}
   }
   if(s.phase==='finished')c.append(node('h3',s.reason==='early'?f('Vorzeitig regulär abgeschlossen','Finished early'):`${f('Gewonnen','Winners')}: ${s.winners.map(id=>this.name(id)).join(', ')}`));if(s.phase==='aborted')c.append(node('h3',f('Spiel durch den GM beendet','Game ended by the GM')));

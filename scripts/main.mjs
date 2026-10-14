@@ -1,3 +1,5 @@
+import {OutcomeBets} from './outcome-bets.mjs';
+import {OutcomeUI} from './outcome-ui.mjs';
 import {BETA_GAMES} from './beta-games-engine.mjs';
 import {BetaGameSession} from './beta-games-session.mjs';
 import {BetaGameUI} from './beta-games-ui.mjs';
@@ -24,6 +26,8 @@ let initialized=false, wasAuthority=false, savedExists=false, key=null;
 let lastGM=null,moderation=null,launcher=null;
 const apps=new Map();let guide=null;
 const tokens=new Map(), history=[];
+let connecting=null;
+async function ensureCapability(gm){if(authority()||capability)return;if(!connecting)connecting=gm.query(QUERY,{action:'connect',user:game.user.id},{timeout:8000}).finally(()=>{connecting=null;});await connecting;}
 const announced=new Set();
 const primary=()=>game.users.activeGM;
 const authority=()=>primary()?.id===game.user.id;
@@ -39,12 +43,15 @@ const sessions=Object.fromEntries(NEW_GAMES.map(scope=>[scope,new (BETA_GAMES.in
 const betting=new BettingManager({isAuthority:authority,save:next=>save(next,'bettingState'),enabled:()=>game.settings.get(ID,'managedBetting')===true,electrum:()=>game.settings.get(ID,'allowElectrum')===true,system:()=>game.system?.id,actor:id=>game.actors?.get(id),character:id=>game.users.get(id)?.character,announce:data=>ChatMessage.create(data),hasMessage:(tx,id)=>game.messages?.some(m=>(m.getFlag?.(ID,'betTx')??m.flags?.[ID]?.betTx)===tx&&(m.getFlag?.(ID,'betActor')??m.flags?.[ID]?.betActor)===id)??false});
 const prizes=new PrizeManager({isAuthority:authority,save:next=>save(next,'prizeState'),system:()=>game.system?.id,actor:id=>game.actors?.get(id),item:uuid=>(globalThis.foundry?.utils?.fromUuid??globalThis.fromUuid)(uuid),announce:data=>ChatMessage.create(data),hasMessage:id=>hasMessage('prizeAward',id)});
 const moneyUI=new BettingUI({request:requestFinance});
-const tavernUIs=Object.fromEntries(NEW_GAMES.map(scope=>[scope,new (BETA_GAMES.includes(scope)?BetaGameUI:scope==='kniffel'?KniffelUI:TavernUI)(scope,{request:(action,args)=>requestTavern(scope,action,args),getState:()=>authority()?(sessions[scope].project?sessions[scope].project(game.user):sessions[scope].state):clients[scope],openBetting:scope=>moneyUI.open(scope)})]));
+const outcomes=new OutcomeBets({isAuthority:authority,save:next=>save(next,'outcomeState'),user:id=>game.users.get(id),announce:data=>ChatMessage.create(data),hasAnnouncement:id=>hasMessage('outcomeBet',id)});
+const outcomeUI=new OutcomeUI({request:requestFinance});
+async function settleOutcome(scope){if(!ledgerUnavailable)await outcomes.observe(scope,scopeState(scope));}
+const tavernUIs=Object.fromEntries(NEW_GAMES.map(scope=>[scope,new (BETA_GAMES.includes(scope)?BetaGameUI:scope==='kniffel'?KniffelUI:TavernUI)(scope,{request:(action,args)=>requestTavern(scope,action,args),getState:()=>authority()?(sessions[scope].project?sessions[scope].project(game.user):sessions[scope].state):clients[scope],openOutcome:scope=>outcomeUI.open(scope),openBetting:scope=>moneyUI.open(scope)})]));
 const scopeState=scope=>scope==='schocken'?state:scope==='farkle'?farkleSession.state:sessions[scope]?.state;
 async function deliverPrize(current,user){const id=current?.winners?.[0],actorId=betting.state.books[current?.gameId]?.mapping[id]??game.users.get(id)?.character?.id;await prizes.deliver(current,user,actorId);}
 let farkleClient=null,farkleBusy=false;
 const farkleSession=new FarkleSession({save:next=>save(next,'farkleState'),diceSource:randomDie,getName:id=>game.users.get(id)?.name??id,announce:data=>ChatMessage.create(data),hasAnnouncement:id=>game.messages?.some(message=>message.getFlag?.(ID,'gameId')===id)??false,allowBestSelection:()=>game.settings.get(ID,'allowFarkleBestSelection')===true});
-const farkleUI=new FarkleUI({request:requestFarkle,getState:()=>authority()?farkleSession.state:farkleClient,openBetting:scope=>moneyUI.open(scope)});
+const farkleUI=new FarkleUI({request:requestFarkle,getState:()=>authority()?farkleSession.state:farkleClient,openOutcome:scope=>outcomeUI.open(scope),openBetting:scope=>moneyUI.open(scope)});
 function enqueue(fn) {const result=queue.then(fn);queue=result.catch(()=>{});return result;}
 const base64=bytes=>btoa(String.fromCharCode(...new Uint8Array(bytes)));
 const unbase64=text=>Uint8Array.from(atob(text),c=>c.charCodeAt(0));
@@ -83,10 +90,10 @@ async function initializeAuthority() {
     farkleSession.restore(JSON.parse(new TextDecoder().decode(bytes)));
   }catch{ui.notifications.warn(f('Farkle: Spielstand konnte in diesem GM-Browser nicht wiederhergestellt werden. Im ursprünglichen Browser fortsetzen oder bewusst eine neue Lobby öffnen.','Farkle: this GM browser could not restore the saved game. Continue in the original browser or explicitly open a new lobby.'));}
   ledgerUnavailable=false;
-  for(const [setting,session] of [...NEW_GAMES.map(scope=>[`${scope}State`,sessions[scope]]),['bettingState',betting],['prizeState',prizes]]){
+  for(const [setting,session] of [...NEW_GAMES.map(scope=>[`${scope}State`,sessions[scope]]),['bettingState',betting],['prizeState',prizes],['outcomeState',outcomes]]){
     session.restore(null);const encrypted=game.settings.get(ID,setting);if(!encrypted)continue;
     try{const bytes=await crypto.subtle.decrypt({name:'AES-GCM',iv:unbase64(encrypted.iv)},await storageKey(),unbase64(encrypted.cipher));session.restore(JSON.parse(new TextDecoder().decode(bytes)));}
-    catch{if(['bettingState','prizeState'].includes(setting))ledgerUnavailable=true;ui.notifications.warn(f('Taverngames: Gespeicherte Daten nicht lesbar. Im ursprünglichen GM-Browser fortsetzen.','Taverngames: cannot restore saved data. Continue in the original GM browser.'));}
+    catch{if(['bettingState','prizeState','outcomeState'].includes(setting))ledgerUnavailable=true;ui.notifications.warn(f('Taverngames: Gespeicherte Daten nicht lesbar. Im ursprünglichen GM-Browser fortsetzen.','Taverngames: cannot restore saved data. Continue in the original GM browser.'));}
   }
   initialized=true;
   for(const user of game.users)void grant(user);
@@ -109,6 +116,8 @@ async function command(data, local=false) {
   const scope=data.game??'schocken';
   if(!['schocken','farkle',...NEW_GAMES].includes(scope))throw new Error('Unknown game.');
   if(!gameEnabled(scope)&&!(data.action==='abort'&&user.isGM))throw new Error('Beta testing is disabled.');
+  if(data.action.startsWith('outcome')){if(ledgerUnavailable)throw new Error('Resume in the original GM browser before modifying wallets or items.');await settleOutcome(scope);return outcomes.handle(scope,scopeState(scope),data,user);}
+  await settleOutcome(scope);outcomes.guard(scope,scopeState(scope),data.action);
   if(BETA_GAMES.includes(scope)&&data.action.startsWith('bet'))throw new Error('Automatic currency transactions are not available.');
   if(scope==='kniffel'&&data.action.startsWith('bet'))throw new Error('Kniffel betting is not available.');
   if(ledgerUnavailable&&['betConfigure','betSettle','awardPrize','waivePrize'].includes(data.action))throw new Error('Resume in the original GM browser before modifying wallets or items.');
@@ -126,12 +135,12 @@ async function command(data, local=false) {
     if(data.action==='lobby'&&data.args?.currency==='ep'&&!game.settings.get(ID,'allowElectrum'))throw new Error('Electrum is disabled.');
     if(scope==='lottery'&&data.action==='begin'&&sessions.lottery.state?.prizeUuid){if(!user.isGM)throw new Error('GM only.');const item=await (globalThis.foundry?.utils?.fromUuid??globalThis.fromUuid)(sessions.lottery.state.prizeUuid);if(item?.documentName!=='Item'||!Number.isSafeInteger(item.system?.quantity)||item.system.quantity<1)throw new Error('The prize item is missing or out of stock.');}
     const previous=sessions[scope].state,result=await sessions[scope].handle(data,user);
-    if(data.action!=='read')tavernUIs[scope].draw();
+    await settleOutcome(scope);if(data.action!=='read')tavernUIs[scope].draw();
     if(scope==='lottery'&&result?.phase==='finished'&&previous?.phase!=='finished')try{await deliverPrize(result,game.user);}catch(e){ui.notifications.warn(tavernError(e.message));}
     return result;
   }
   if(data.game==='farkle'){
-    const result=await farkleSession.handle(data,user);if(data.action!=='read')farkleUI.draw();return result;
+    const result=await farkleSession.handle(data,user);await settleOutcome(scope);if(data.action!=='read')farkleUI.draw();return result;
   }
   if(data.game!==undefined&&data.game!=='schocken')throw new Error('Unknown game.');
   if(data.action==="read") return view(state,user.id,user.isGM);
@@ -152,7 +161,7 @@ async function command(data, local=false) {
   // Persist first; a failed save must never advance the in-memory table.
   await save(next);
   if(data.action==="undo")history.pop();else if(state&&!['pause','labels','npcControl','abort'].includes(data.action)) {history.push(structuredClone(state));if(history.length>30)history.shift();}
-  const previous=state;state=next;await announceFinished(previous,next);return view(state,user.id,user.isGM);
+  const previous=state;state=next;await announceFinished(previous,next);await settleOutcome('schocken');return view(state,user.id,user.isGM);
 }
 async function request(action,args={}) {
   if(busy){if(action!=='read')ui.notifications.info(t('Bitte die laufende Aktion kurz abwarten.'));return;}
@@ -160,7 +169,7 @@ async function request(action,args={}) {
   try {
     const data={action,args,revision:state?.revision??-1,user:game.user.id,token:capability};
     const gm=primary();if(!gm)throw new Error(t("Für Schocken muss ein GM verbunden sein."));
-    if(!authority()&&!capability){await gm.query(QUERY,{action:"connect",user:game.user.id},{timeout:8000});data.token=capability;}
+    await ensureCapability(gm);data.token=capability;
     const previous=state?.revision;
     const result=authority()?await enqueue(()=>command(data,true)):await gm.query(QUERY,data,{timeout:8000});
     if(!authority())state=result;
@@ -172,7 +181,7 @@ async function requestTavern(scope,action,args={}){
   if(tavernBusy[scope])return;tavernBusy[scope]=true;
   try{
     const gm=primary();if(!gm)throw new Error('A GM must be connected.');
-    if(!authority()&&!capability)await gm.query(QUERY,{action:'connect',user:game.user.id},{timeout:8000});
+    await ensureCapability(gm);
     const old=authority()?sessions[scope].state:clients[scope],data={game:scope,action,args,user:game.user.id,token:capability,revision:old?.revision??-1};
     const result=authority()?await enqueue(()=>command(data,true)):await gm.query(QUERY,data,{timeout:15000});
     if(!authority())clients[scope]=result;if(action!=='read'||old?.revision!==result?.revision)tavernUIs[scope].draw();
@@ -180,15 +189,15 @@ async function requestTavern(scope,action,args={}){
 }
 async function requestFinance(scope,action,args={}){
   const gm=primary();if(!gm)throw new Error(tavernError('A GM must be connected.'));
-  if(!authority()&&!capability)await gm.query(QUERY,{action:'connect',user:game.user.id},{timeout:8000});
-  const data={game:scope,action,args,user:game.user.id,token:capability};
+  await ensureCapability(gm);
+  const data={game:scope,action,args,revision:args.revision,user:game.user.id,token:capability};
   try{return authority()?await enqueue(()=>command(data,true)):await gm.query(QUERY,data,{timeout:30000});}catch(e){throw new Error(tavernError(e.message));}
 }
 async function requestFarkle(action,args={}){
   if(farkleBusy)return;farkleBusy=true;
   try{
     const gm=primary();if(!gm)throw new Error(f('Für Farkle muss ein GM verbunden sein.','A GM must be connected to play Farkle.'));
-    if(!authority()&&!capability)await gm.query(QUERY,{action:'connect',user:game.user.id},{timeout:8000});
+    await ensureCapability(gm);
     const previous=(authority()?farkleSession.state:farkleClient)?.revision;
     const data={game:'farkle',action,args,user:game.user.id,token:capability,revision:previous??-1};
     const result=authority()?await enqueue(()=>command(data,true)):await gm.query(QUERY,data,{timeout:8000});
@@ -207,7 +216,7 @@ function drawModeration() {
   moderation.replaceChildren();
   const content=el('div',undefined,'schocken-content');moderation.append(content);
   content.append(el('p',`Schocken ${game.modules.get(ID)?.version??''} · ${checkFoundry(game.release,game.version).message}`,'schocken-help'));
-  button(content,'Spieltisch öffnen',()=>open(false));button(content,'Anleitung',openGuide);button(content,f('Einsätze & Charaktere','Stakes & characters'),()=>moneyUI.open('schocken'),!state);
+  button(content,'Spieltisch öffnen',()=>open(false));button(content,'Anleitung',openGuide);button(content,f('Einsätze & Charaktere','Stakes & characters'),()=>moneyUI.open('schocken'),!state);button(content,f('Wetten','Bets'),()=>outcomeUI.open('schocken'));
   const showLabel=el('label',undefined,'schocken-choice'),show=el('input');show.type='checkbox';show.checked=game.settings.get(ID,'showLauncher');show.addEventListener('change',async()=>{try{await game.settings.set(ID,'showLauncher',show.checked);}catch(e){ui.notifications.warn(t(e.message));drawModeration();}});showLabel.append(show,document.createTextNode(t('Unteren Schocken-Button für alle einblenden')));content.append(showLabel);
   if(game.user.isGM) {
     const setup=el("details");setup.dataset.section='setup';setup.append(el("summary","Spieler, NPCs & neues Spiel"));
@@ -252,6 +261,7 @@ function draw() {
   if(!panel)return;
   panel.replaceChildren();
   const content=el('div',undefined,'schocken-content');panel.append(content);
+  button(content,f('Wetten','Bets'),()=>outcomeUI.open('schocken'));
   if(game.user.isGM)button(content,'Moderation öffnen',openModeration);
   if(!primary())content.append(el('p','Spiel pausiert: kein GM verbunden. Der gespeicherte Stand bleibt erhalten.'));
   if(!state){content.append(el("p","Der SL öffnet eine Lobby. Danach kannst du freiwillig beitreten."));return;}
@@ -327,7 +337,7 @@ Hooks.once("init",()=>{
   game.settings.register(ID,'showFarkleLauncher',{scope:'world',config:false,restricted:true,type:Boolean,default:false,onChange:()=>{refreshLauncher();farkleUI.drawModeration();}});
   game.settings.register(ID,'allowFarkleBestSelection',{scope:'world',config:false,restricted:true,type:Boolean,default:false,onChange:()=>farkleUI.draw()});
   for(const scope of NEW_GAMES){game.settings.register(ID,`${scope}State`,{scope:'world',config:false,restricted:true,type:Object,default:null});game.settings.register(ID,`show${scope}Launcher`,{scope:'world',config:false,restricted:true,type:Boolean,default:false,onChange:()=>{refreshLauncher();tavernUIs[scope].drawModeration();}});}
-  for(const setting of ['bettingState','prizeState'])game.settings.register(ID,setting,{scope:'world',config:false,restricted:true,type:Object,default:null});
+  for(const setting of ['bettingState','prizeState','outcomeState'])game.settings.register(ID,setting,{scope:'world',config:false,restricted:true,type:Object,default:null});
   for(const [setting,de,en] of [['managedBetting','Verwaltetes Setzen','Managed betting'],['allowElectrum','Elektrum verwenden','Use electrum']])game.settings.register(ID,setting,{name:`Taverngames: ${f(de,en)}`,scope:'world',config:true,restricted:true,type:Boolean,default:false,onChange:()=>{moneyUI.draw();for(const panel of Object.values(tavernUIs))panel.drawModeration();}});
   game.settings.register(ID,'betaTest',{name:f('Taverngames: Beta-Test','Taverngames: Beta testing'),hint:f('Lügenwürfel und Drachenhort als Beta freischalten. Die sechs bisherigen Spiele bleiben regulär verfügbar.','Enable beta Liar’s Dice and Dragon’s Hoard. The six existing games remain available normally.'),scope:'world',config:true,restricted:true,type:Boolean,default:false,onChange:()=>{refreshLauncher();for(const scope of BETA_GAMES){sessions[scope].updateNpcWait();if(!gameEnabled(scope)){clients[scope]=null;void tavernUIs[scope].close();}}ui.taverngames?.render?.({force:true});}});
   if(!registerSidebar(CONFIG,globalThis.foundry,game,{open:()=>open(),guide:openGuide,farkle:()=>farkleUI.open(),farkleGuide:()=>farkleUI.guide(),tavern:scope=>tavernUIs[scope]?.open(),tavernGuide:scope=>tavernUIs[scope]?.guide()}))ui.notifications.warn(t('Taverngames: native Sidebar-Schnittstelle fehlt. Einstieg über den unteren Button bleibt verfügbar.'));
@@ -339,14 +349,15 @@ Hooks.once("ready",async()=>{
   if(game.modules.get('schocken')?.active){ui.notifications.warn(t('Bitte zuerst das alte Modul Schocken deaktivieren. Taverngames startet nicht parallel.'));return;}
   if(!globalThis.foundry?.applications?.api?.ApplicationV2){ui.notifications.warn(t('Taverngames: Die native ApplicationV2-Schnittstelle fehlt in dieser Foundry-Version.'));return;}
   if(!compatibility.target)ui.notifications.warn(compatibility.message);
-  wasAuthority=authority();await initializeAuthority();
-  game.modules.get(ID).api={open,openModeration,openGuide,openFarkle:()=>farkleUI.open(),openGame:scope=>tavernUIs[scope]?.open()};
+  wasAuthority=authority();lastGM=primary()?.id;await initializeAuthority();
+  game.modules.get(ID).api={open,openModeration,openGuide,openFarkle:()=>farkleUI.open(),openGame:scope=>tavernUIs[scope]?.open(),openBets:scope=>outcomeUI.open(scope)};
   refreshLauncher();
 
   setInterval(()=>{
     if(lastGM!==primary()?.id){lastGM=primary()?.id;capability=null;}
     if(wasAuthority!==authority()) {wasAuthority=authority();initialized=false;capability=null;void enqueue(initializeAuthority);}
     if((panel||moderation)&&!busy&&primary())void request("read");
+    if(outcomeUI.root&&!outcomeUI.busy&&primary()&&gameEnabled(outcomeUI.scope))void outcomeUI.send('outcomeRead');
     if(farkleUI.isOpen&&!farkleBusy&&primary())void requestFarkle('read');
     if(primary())for(const scope of NEW_GAMES)if(gameEnabled(scope)&&tavernUIs[scope].isOpen&&!tavernBusy[scope])void requestTavern(scope,'read');
   },2500);
@@ -356,16 +367,16 @@ Hooks.once("ready",async()=>{
       if(!authority())return;
       const move=state&&npcAction(state);if(!move)return;
       const next=act(state,move.id,move.action,move.args,randomDie);
-      await save(next);history.push(structuredClone(state));if(history.length>30)history.shift();const previous=state;state=next;await announceFinished(previous,next);if(panel||moderation)draw();
+      await save(next);history.push(structuredClone(state));if(history.length>30)history.shift();const previous=state;state=next;await announceFinished(previous,next);await settleOutcome('schocken');if(panel||moderation)draw();
     }).catch(e=>ui.notifications.warn(`Schocken-NPC: ${t(e.message)}`));
   },1400);
   setInterval(()=>{
     if(!authority()||!initialized)return;
-    void enqueue(async()=>{if(!authority())return;if(await farkleSession.npcStep())farkleUI.draw();}).catch(error=>ui.notifications.warn(`Farkle-NPC: ${farkleError(error.message)}`));
+    void enqueue(async()=>{if(!authority())return;if(await farkleSession.npcStep()){await settleOutcome('farkle');farkleUI.draw();}}).catch(error=>ui.notifications.warn(`Farkle-NPC: ${farkleError(error.message)}`));
   },1400);
   setInterval(()=>{
     if(!authority()||!initialized)return;
-    void enqueue(async()=>{if(!authority())return;for(const scope of NEW_GAMES)if(await sessions[scope].npcStep())tavernUIs[scope].draw();}).catch(e=>ui.notifications.warn(tavernError(e.message)));
+    void enqueue(async()=>{if(!authority())return;for(const scope of NEW_GAMES)if(await sessions[scope].npcStep()){await settleOutcome(scope);tavernUIs[scope].draw();}}).catch(e=>ui.notifications.warn(tavernError(e.message)));
   },1400);
 });
 Hooks.on("userConnected",(user,connected)=>{if(connected)void grant(user);if(panel||moderation)draw();});
