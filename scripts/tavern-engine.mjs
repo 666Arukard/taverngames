@@ -1,9 +1,11 @@
+import {BETA_GAMES,createBetaGame,actBetaGame,betaNpcAction} from './beta-games-engine.mjs';
 import {createKniffel,actKniffel,kniffelNpcAction} from './kniffel-engine.mjs';
-export const NEW_GAMES=['pig','ship','lottery','kniffel'];
+export const NEW_GAMES=['pig','ship','lottery','kniffel','liars','hoard'];
 const check=(ok,message)=>{if(!ok)throw new Error(message);};
 const integer=(n,min,max)=>Number.isSafeInteger(n)&&n>=min&&n<=max;
 const cup=game=>game==='pig'?{dice:[],points:0,rolls:0,bust:false,lost:0}:{dice:null,held:Array(5).fill(false),stage:0,rolls:0};
-export function createTavern(game,{npcs={},target=100,stake=2,currency='gp',funding='redistribute',mode='single',roundLimit=3,prize='',prizeUuid='',prizeValue=25,maxTickets=20,perPlayer=2,numbersPerTicket=5}={}){
+export function createTavern(game,{npcs={},target=100,stake=2,currency='gp',funding='redistribute',mode='single',roundLimit=3,prize='',prizeUuid='',prizeValue=25,maxTickets=20,perPlayer=2,numbersPerTicket=5,hoardMode='tokens',initialCoins=30,entryAmount=2}={}){
+  if(BETA_GAMES.includes(game))return createBetaGame(game,{npcs,hoardMode,initialCoins,entryAmount,currency});
   if(game==='kniffel')return createKniffel({npcs});
   check(NEW_GAMES.includes(game),'Unknown game.');check(integer(target,10,1000000),'Invalid target.');
   check(integer(stake,0,1000000),'Invalid stake.');check(integer(maxTickets,1,20)&&integer(perPlayer,1,maxTickets),'Invalid ticket limits.');
@@ -38,6 +40,7 @@ function shipEnd(s){
   s.order=leaders;s.turn=0;s.tieBreak++;s.tieScores={};s.cup=cup('ship');
 }
 export function actTavern(original,actor,action,args={},random=sides=>1,gm=false){
+  if(BETA_GAMES.includes(original?.game))return actBetaGame(original,actor,action,args,random,gm);
   if(original?.game==='kniffel')return actKniffel(original,actor,action,args,random,gm);
   const s=structuredClone(original);check(s?.version===1&&NEW_GAMES.includes(s.game),'No game exists.');
   check(!['finished','aborted'].includes(s.phase),'This game has ended.');
@@ -90,6 +93,7 @@ export function actTavern(original,actor,action,args={},random=sides=>1,gm=false
   s.log=s.log.slice(-100);s.revision++;return s;
 }
 export function tavernNpcAction(s,random=sides=>1){
+  if(BETA_GAMES.includes(s?.game))return betaNpcAction(s,random);
   if(s?.game==='kniffel')return kniffelNpcAction(s);
   if(!s||s.paused||['finished','aborted','closed'].includes(s.phase))return null;
   if(s.game==='lottery'){

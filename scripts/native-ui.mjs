@@ -1,6 +1,6 @@
 import {t,language} from './i18n.mjs';
 import {gameTitle} from './tavern-text.mjs';
-import {GAME_CATALOG,filterCatalog} from './game-catalog.mjs';
+import {GAME_CATALOG,filterCatalog,toggleFavorite} from './game-catalog.mjs';
 export function createNativeWindow(foundry,kind,root,onClose) {
   const Base=foundry?.applications?.api?.ApplicationV2;
   if(!Base)throw new Error(t('Foundry ApplicationV2 fehlt. Das native Taverngames-Fenster kann nicht geöffnet werden.'));
@@ -28,19 +28,22 @@ export function registerSidebar(config,foundry,game,actions) {
       const root=document.createElement('section');root.className='taverngames-catalog';
       if(!game.user.isGM)return root;
       const de=language()==='de',filters=document.createElement('div');filters.className='taverngames-catalog-filters';root.append(filters);
-      const categoryLabel=document.createElement('label');categoryLabel.textContent=de?'Spielekategorie':'Game category';const category=document.createElement('select');category.dataset.catalogCategory='';
-      for(const [value,title] of [['all',de?'Alle Spiele':'All games'],['dice',de?'Würfelspiele':'Dice games'],['chance',de?'Glücksspiele':'Games of chance']]){const option=document.createElement('option');option.value=value;option.textContent=title;category.append(option);}category.value=this.category??'all';categoryLabel.append(category);filters.append(categoryLabel);
+      const category=document.createElement('div');category.className='taverngames-category-buttons';category.setAttribute('role','group');category.setAttribute('aria-label',de?'Spielekategorie':'Game category');filters.append(category);
+      const categories=[['all','fa-solid fa-layer-group',de?'Alle Spiele':'All games'],['dice','fa-solid fa-dice',de?'Würfelspiele':'Dice games'],['chance','fa-solid fa-coins',de?'Glücksspiele':'Games of chance']];
+      for(const [value,icon,title] of categories){const button=document.createElement('button');button.type='button';button.dataset.catalogCategory=value;button.title=title;button.setAttribute('aria-label',title);const symbol=document.createElement('i');symbol.className=icon;symbol.setAttribute('aria-hidden','true');button.append(symbol,document.createTextNode(value==='all'?(de?'Alle':'All'):value==='dice'?(de?'Würfel':'Dice'):(de?'Glück':'Chance')));button.addEventListener('click',()=>{this.category=value;draw();});category.append(button);}
       const searchLabel=document.createElement('label');searchLabel.textContent=de?'Spiele suchen':'Find games';const search=document.createElement('input');search.type='search';search.dataset.catalogSearch='';search.placeholder=de?'Spielname …':'Game name …';search.value=this.search??'';searchLabel.append(search);filters.append(searchLabel);
+      const tags=document.createElement('div');tags.className='taverngames-tags';const tagLabel=document.createElement('span');tagLabel.textContent=de?'Tags':'Tags';tags.append(tagLabel);const favoriteButton=document.createElement('button');favoriteButton.type='button';favoriteButton.dataset.catalogFavorites='';favoriteButton.textContent=de?'★ Favoriten':'★ Favorites';favoriteButton.addEventListener('click',()=>{this.favoriteOnly=!this.favoriteOnly;draw();});tags.append(favoriteButton);filters.append(tags);
+      const reset=document.createElement('button');reset.type='button';reset.dataset.catalogReset='';reset.textContent=de?'Auswahl zurücksetzen':'Reset selection';reset.addEventListener('click',()=>{this.category='all';this.favoriteOnly=false;search.value='';draw();});filters.append(reset);
       const results=document.createElement('div');results.className='taverngames-catalog-results';root.append(results);
       const draw=()=>{
-        this.category=category.value;this.search=search.value;results.replaceChildren();
-        const games=filterCatalog(GAME_CATALOG,{category:category.value,query:search.value,beta:game.settings.get('taverngames','betaTest')===true});
+        this.category??='all';this.search=search.value;results.replaceChildren();for(const button of category.querySelectorAll('button'))button.setAttribute('aria-pressed',String(button.dataset.catalogCategory===this.category));favoriteButton.setAttribute('aria-pressed',String(!!this.favoriteOnly));const favorites=game.settings.get('taverngames','favorites')??[];
+        const games=filterCatalog(GAME_CATALOG,{category:this.category,query:search.value,beta:game.settings.get('taverngames','betaTest')===true}).filter(entry=>!this.favoriteOnly||favorites.includes(entry.id));
         if(!games.length){const empty=document.createElement('p');empty.textContent=de?'Keine passenden Spiele gefunden.':'No matching games found.';empty.setAttribute('role','status');results.append(empty);return;}
         for(const type of ['dice','chance']){
-          const entries=games.filter(g=>g.category===type);if(!entries.length)continue;
+          const entries=games.filter(g=>g.category===type).sort((a,b)=>gameTitle(a.id).localeCompare(gameTitle(b.id),de?'de':'en'));if(!entries.length)continue;
           const h=document.createElement('h1');h.className='taverngames-category';h.textContent=type==='dice'?(de?'Würfelspiele':'Dice games'):(de?'Glücksspiele':'Games of chance');results.append(h);
           for(const entry of entries){
-            const heading=document.createElement('h2');heading.textContent=gameTitle(entry.id);results.append(heading);
+            const titleRow=document.createElement('div');titleRow.className='taverngames-game-title';const heading=document.createElement('h2');heading.textContent=gameTitle(entry.id)+(entry.beta?' · Beta':'');titleRow.append(heading);const star=document.createElement('button');star.type='button';star.className='taverngames-favorite-star';star.dataset.favoriteGame=entry.id;star.textContent='★';star.classList.toggle('is-favorite',favorites.includes(entry.id));star.setAttribute('aria-pressed',String(favorites.includes(entry.id)));star.title=star.getAttribute('aria-pressed')==='true'?(de?'Favorit entfernen':'Remove favorite'):(de?'Als Favorit markieren':'Mark favorite');star.setAttribute('aria-label',`${gameTitle(entry.id)} · ${star.title}`);star.addEventListener('click',async()=>{try{await game.settings.set('taverngames','favorites',toggleFavorite(game.settings.get('taverngames','favorites'),entry.id));draw();}catch(error){globalThis.ui?.notifications?.warn(error.message==='At most five favorites.'?(de?'Höchstens fünf Favoriten möglich.':'At most five favorites.'):error.message);}});titleRow.append(star);results.append(titleRow);
             const row=document.createElement('div');row.className='taverngames-start-row';row.dataset.game=entry.id;
             const open=entry.id==='schocken'?actions.open:entry.id==='farkle'?actions.farkle:()=>actions.tavern?.(entry.id);
             const guide=entry.id==='schocken'?actions.guide:entry.id==='farkle'?actions.farkleGuide:()=>actions.tavernGuide?.(entry.id);
@@ -48,7 +51,7 @@ export function registerSidebar(config,foundry,game,actions) {
           }
         }
       };
-      category.addEventListener('change',draw);search.addEventListener('input',draw);draw();
+      search.addEventListener('input',draw);draw();
       return root;
     }
     _replaceHTML(result,content){content.replaceChildren(result);}

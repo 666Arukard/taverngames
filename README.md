@@ -1,6 +1,6 @@
 # Taverngames – Foundry Extension
 
-**Version 1.3.0**. Alle sechs Spiele sind regulär verfügbar: Schocken, Farkle, Schweinchen, Schiff–Kapitän–Mannschaft, Kniffel und Straßenlotto. Kniffel wurde von Daniel am 14. Oktober 2026 für die stabile Version freigegeben.
+**Version 1.3.1**. Alle sechs Spiele sind regulär verfügbar: Schocken, Farkle, Schweinchen, Schiff–Kapitän–Mannschaft, Kniffel und Straßenlotto. Kniffel wurde von Daniel am 14. Oktober 2026 für die stabile Version freigegeben.
 
 ## Installation und Einstieg
 
@@ -8,9 +8,25 @@ Die neue reguläre Updateadresse (nach Veröffentlichung auf GitHub) lautet:
 
 `https://github.com/666Arukard/taverngames/releases/latest/download/module.json`
 
-Alle sechs Spiele sind ohne Beta-Test-Schalter erreichbar. Der Beta-Schalter bleibt für künftige experimentelle Spiele reserviert. Modul-ID und vorhandene Spielstände bleiben erhalten. Die bisherige Serveradresse bleibt als Übergang für bestehende Installationen bestehen.
+Alle sechs Spiele sind ohne Beta-Test-Schalter erreichbar. Der Beta-Schalter schaltet zusätzlich Lügenwürfel und Drachenhort frei. Modul-ID und vorhandene Spielstände bleiben erhalten. Die bisherige Serveradresse bleibt als Übergang für bestehende Installationen bestehen.
 
 Englisch ist Standard; Deutsch kann in denselben Moduleinstellungen gewählt werden. Der Taverngames-Reiter ist nur für SL sichtbar. Start öffnet Spieltisch und separates Moderationsfenster; Anleitung kann der SL in den Chat posten. Spieler verwenden die unteren Spielbuttons, die der SL im jeweiligen Moderationsfenster freigibt, und klicken Beitreten. Die neuen unteren Buttons sind standardmäßig aus.
+
+## Lügenwürfel und Drachenhort · Beta
+
+In den Foundry-Moduleinstellungen **Taverngames: Beta-Test** aktivieren. Beide Spiele erscheinen zusätzlich im SL-Reiter; untere Spielerbuttons werden jeweils in der Moderation freigegeben. Abschalten der Beta verbirgt ihre Fenster/Launcher und stoppt deren NPC-Automatik, ohne gespeicherte Partien zu löschen.
+
+Lügenwürfel: fünf geheime W6 je Person, Mindestgebote über alle Becher, Einsen als Joker, Anzweifeln kostet dem Verlierer einen Würfel. Genau erfüllte Gebote sind gültig. Der Verlierer beginnt die neue Runde, bei Ausscheiden der nächste Aktive. Letzter Teilnehmer mit Würfeln gewinnt. Spieler erhalten nur eigene Becher; SL sehen zusätzlich manuell übernommene NPC-Becher. NPCs verwenden keine fremden geheimen Würfel.
+
+Drachenhort: neun Felder 3–11, zwei W6. Normale Felder kosten eine Münze oder zahlen ab bereits drei Münzen alles aus. Eine2 kostet neun, eine12 sammelt alles ein. Nicht bedienbare Zahlung: Rest frei verteilen, dann ausscheiden. Letzter Aktiver bekommt das Brett. Eintritt/Spielmünzen (Standard2 Gold/30 Münzen) oder virtuelle Zocker-Bestände, vorzeitiges SL-Ende mit gleichmäßiger Restverteilung nur an Aktive und anteiliger Gegenwert-Vorschau. Unteilbare Reste per geheimem Tipp, anschließendem SL-Wurf und Gleichstands-Wiederholung. Beide Modi bleiben rein intern: keine Charakter-Geldbestände lesen oder verändern. Eintritt und Auszahlungen sind nur virtuelle Vorschauen.
+
+English: enable **Beta testing** for Liar’s Dice and Dragon’s Hoard. Both have separate saves, optional bottom launchers, named controllable NPCs and source-attributed instructions. Liar’s Dice keeps cups private and resolves exact bids correctly. Dragon’s Hoard supports virtual token/gambler modes, partial payments, elimination, early ending and remainder guesses. Neither beta game reads or changes character wallets. Existing six regular games remain available.
+
+Rule source / Regelquelle: [TZawalich, tavern-games-current](https://github.com/TZawalich/tavern-games-current). Independent implementation; no upstream code, images or server bundled.
+
+## Katalog und Bedienung
+
+Kategorie-Symbole, Namenssuche und Favoriten-Tag wirken gemeinsam. Spiele sind je Kategorie alphabetisch nach sichtbarem Namen sortiert. SL können bis zu fünf Favoriten über rechtsbündige Sterne markieren (golden/ grau). Die Markierungen werden lokal im jeweiligen Foundry-Client gespeichert. Auswahl zurücksetzen löscht nur Filter, keine Markierungen. Kniffel bewahrt beim Würfeln anderer die Scrollposition; erst der eigene Zugbeginn springt nach oben. Summen-/Bonuszeilen trennen die hellen Zahlen- und Sonderwurffelder.
 
 ## Spielgruppen / Game categories
 
@@ -84,7 +100,7 @@ Bei unzureichendem Geld verhindert die Vorprüfung die Buchung. Bei Verbindungsf
 
 ## English
 
-**1.3.0** offers six regular games: Schocken, Farkle, Pig, Ship–Captain–Crew, Kniffel and Street lottery. No beta setting is required; toggling it does not hide or stop these games. Same module ID and regular update source. The GM-only tab has Start and Instructions for each game. Only the GM starts or aborts games, including without joining; moderation provides the start controls. Players join via bottom buttons enabled in moderation. All games support shared abort; unlimited Ship series can finish after the current round.
+**1.3.1** offers six regular games: Schocken, Farkle, Pig, Ship–Captain–Crew, Kniffel and Street lottery. No beta setting is required; toggling it does not hide or stop these games. Same module ID and regular update source. The GM-only tab has Start and Instructions for each game. Only the GM starts or aborts games, including without joining; moderation provides the start controls. Players join via bottom buttons enabled in moderation. All games support shared abort; unlimited Ship series can finish after the current round.
 
 Pig follows Daniel's target-score rules (default 100), with one final turn each. A rolled 1 and lost turn points remain visible until the player or GM presses Continue; automatic NPCs continue after at least five seconds. Pause and manual control stop automation. Click a participant name to see their last 20 recorded rolls of the game. Ship supports single, fixed and unlimited rounds; cargo scores are added, final tie-breaks choose the winner. Players click 6, 5 and 4 in order to set them aside. The third roll stays visible until End turn, including for zero points; automatic NPCs end completed turns after at least five seconds, including earlier decisions to keep cargo. Lottery uses 1–100 globally unique numbers per ticket as configured by the GM (default five), up to 20 tickets and exactly one d100 draw explicitly triggered by the GM in moderation after acceptance closes. Selected world/inventory items are awarded once; missing assignments can be fixed and delivery retried.
 
@@ -101,6 +117,6 @@ Die danach im Manifest aufgeführten Namen sind als **Regelquellen/Referenzautor
 
 ## Prüfung
 
-112 automatisierte Tests, Syntaxprüfung und acht synthetische Browserprüfungen einschließlich Deutsch/Englisch und getrennter GM-/Spieler-Clients. Details in docs/validation.md; Release in docs/release-1.3.0.md. Foundry 14.369 bleibt auf Grundlage des Nutzer-Praxistests für das Basismodul verified. Freigabe der drei bisherigen Beta-Spiele durch Daniels ausdrücklichen Auftrag. Keine neue eigene Live-Abnahme behauptet. Historische Pakete bleiben unverändert.
+125 automatisierte Tests, Syntaxprüfung und neun synthetische Browserprüfungen einschließlich Deutsch/Englisch und getrennter GM-/Spieler-Clients. Details in docs/validation.md; Release in docs/release-1.3.1.md. Foundry 14.369 bleibt auf Grundlage des Nutzer-Praxistests für das Basismodul verified. Freigabe der drei bisherigen Beta-Spiele durch Daniels ausdrücklichen Auftrag. Keine neue eigene Live-Abnahme behauptet. Historische Pakete bleiben unverändert.
 
 Entwicklung: `node --test module/tests/*.test.mjs`, `node tools/check.mjs`, `node tools/browser-smoke.mjs`, `node tools/farkle-browser-smoke.mjs`, `node tools/farkle-multiplayer-smoke.mjs`, `node tools/tavern-browser-smoke.mjs`, `node tools/tavern-multiplayer-smoke.mjs`, `node tools/version-1.2-browser-smoke.mjs`. Browserprüfungen benötigen Playwright/Chrome. `tools/build-release.ps1` erzeugt konsistente Pakete.

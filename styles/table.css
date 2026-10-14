@@ -29,3 +29,13 @@
 /* Explicit header colors override dark Foundry table themes. */
 .taverngames-surface .kniffel-sheet thead,.taverngames-surface .kniffel-sheet thead tr,.taverngames-surface .kniffel-sheet thead th{background:#e5d1ae;color:#241b12;text-shadow:none}
 .taverngames-catalog-filters{display:grid;gap:8px;padding:8px 0}.taverngames-catalog-filters label{display:grid;gap:4px}.taverngames-catalog-filters input,.taverngames-catalog-filters select{width:100%;color:#241b12;background:#fff9ef}.taverngames-catalog-filters option{color:#241b12;background:#fff9ef}
+
+.hoard-board{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}.hoard-board>div{background:#e5d1ae;color:#241b12;border:1px solid #94754c;padding:12px;text-align:center}.beta-private-cup{background:#ece5cf;color:#241b12;padding:8px}
+
+.taverngames-category-buttons,.taverngames-tags{display:flex;gap:4px;flex-wrap:wrap;align-items:center}.taverngames-category-buttons button{flex:1;min-width:64px;font-size:.8em}.taverngames-category-buttons i{display:block;font-size:1.3em}.taverngames-category-buttons [aria-pressed="true"],.taverngames-tags [aria-pressed="true"]{outline:2px solid #bb8c35}
+.taverngames-game-title{display:flex;align-items:center;gap:8px}.taverngames-game-title h2{flex:1}.taverngames-catalog .taverngames-favorite-star{flex:0 0 32px;width:32px;padding:2px;background:transparent;border:0;color:#777;font-size:24px}.taverngames-catalog .taverngames-favorite-star.is-favorite{color:#b78925}
+.taverngames-catalog button:hover,.taverngames-catalog button:focus-visible,.taverngames-surface button:hover,.taverngames-surface button:focus-visible{outline:2px solid #bb8c35;outline-offset:0;color:#241b12;text-shadow:none;background:#f4e7cc}.taverngames-catalog .taverngames-favorite-star:hover{color:#777}.taverngames-catalog .taverngames-favorite-star.is-favorite:hover{color:#b78925}
+
+.taverngames-surface .kniffel-sheet .kniffel-summary th,.taverngames-surface .kniffel-sheet .kniffel-summary td{background:#493b2b;color:#fff6e6;border-color:#8b7659}.taverngames-surface .kniffel-sheet [data-kniffel-total="total"] th,.taverngames-surface .kniffel-sheet [data-kniffel-total="total"] td{background:#2d2419;color:#ffe0a0;border-top:3px solid #bb8c35}
+
+.taverngames-category-buttons{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}.taverngames-category-buttons button{width:100%;min-width:0;white-space:normal;overflow-wrap:anywhere;padding:5px 2px}

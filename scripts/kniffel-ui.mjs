@@ -24,7 +24,7 @@ export class KniffelUI extends TavernUI{
     }else control(row,f('Nächste Partie vorbereiten','Prepare next game'),()=>this.request('restart'));
   }
   drawTable(){
-    const root=this.windows.get('table')?.root;if(!root)return;root.replaceChildren();if(!enabled())return;
+    const root=this.windows.get('table')?.root;if(!root)return;const oldTop=root.querySelector('.schocken-content')?.scrollTop??0,oldLeft=root.querySelector('.kniffel-sheet-scroll')?.scrollLeft??0;root.replaceChildren();if(!enabled())return;
     const c=node('div',undefined,'schocken-content'),s=this.getState();root.append(c);c.append(node('h2','Kniffel'));
     if(game.user.isGM)control(c,f('Moderation öffnen','Open moderation'),()=>{this.window('moderation');this.drawModeration();});
     if(!s){c.append(node('p',f('Der SL öffnet eine Lobby.','The GM opens a lobby.')));return;}
@@ -34,6 +34,7 @@ export class KniffelUI extends TavernUI{
       const joined=s.players.includes(game.user.id);control(c,joined?f('Lobby verlassen','Leave lobby'):f('Beitreten','Join'),()=>this.request(joined?'leave':'join'),s.paused||!joined&&s.players.length>=8);
       if(game.user.isGM)control(c,f('Spiel starten','Start game'),()=>this.request('begin'),s.paused||s.players.length<2);
     }
+    const turnKey=`${s.gameId}:${s.round}:${s.phase==='playing'?s.order[s.turn]:''}`,ownStart=s.phase==='playing'&&s.order[s.turn]===game.user.id&&turnKey!==this.previousTurnKey;this.previousTurnKey=turnKey;
     const active=s.phase==='playing'?s.order[s.turn]:null,can=!!active&&!s.paused&&!!game.users.activeGM&&(active===game.user.id||game.user.isGM);
     if(active){
       c.append(node('h3',`${this.name(active)} · ${f('am Zug','to play')}`));c.append(node('p',`${f('Runde','Round')} ${s.round}/13 · ${s.cup.rolls}/3 ${f('Würfe','rolls')}`));
@@ -48,10 +49,12 @@ export class KniffelUI extends TavernUI{
     if(s.players.length){
       const scroll=node('div',undefined,'kniffel-sheet-scroll'),table=node('table',undefined,'kniffel-sheet');table.setAttribute('aria-label',f('Kniffel-Wertungsbogen','Kniffel score sheet'));scroll.append(table);c.append(scroll);
       const head=node('tr');head.append(node('th',f('Wertungsfeld','Score field')));for(const id of s.players)head.append(node('th',`${id===active?'▶ ':''}${this.name(id)}${s.npcs[id]?' (NPC)':''}`));const thead=node('thead');thead.append(head);table.append(thead);const body=node('tbody');table.append(body);
-      for(const field of KNIFFEL_FIELDS){const row=node('tr');row.append(node('th',kniffelField(field)));for(const id of s.players){const cell=node('td'),value=s.sheets[id][field];if(value!==null)cell.append(node('span',String(value)));else if(id===active&&s.cup.dice){const preview=kniffelValue(s.cup.dice,field,s.sheets[id]),b=control(cell,`${preview.points}${preview.extra?' (+50)':''}`,()=>{if(preview.points===0&&!confirm(f('Dieses Feld mit null Punkten streichen?','Cross out this field with zero points?')))return;void this.request('score',{field,confirmZero:preview.points===0});},!can);b.dataset.kniffelField=field;b.title=`${kniffelField(field)} · ${f('Eintragen','Score')}`;}else cell.textContent='–';row.append(cell);}body.append(row);}
-      for(const [key,title] of [['upper',f('Summe Zahlenfelder (oben)','Number fields total (upper)')],['bonus',f('Bonus: 35 ab 63 oben','Bonus: 35 at 63 upper')],['extra',f('Zusatzkniffel','Extra Kniffels')],['total',f('Gesamt','Total')]]){const row=node('tr');row.dataset.kniffelTotal=key;row.append(node('th',title));for(const id of s.players){const totals=kniffelTotal(s.sheets[id],s.extras[id]);row.append(node('td',key==='upper'?`${totals.upper} / 63`:String(totals[key])));}body.append(row);}
+      const addTotal=(key,title)=>{const row=node('tr');row.dataset.kniffelTotal=key;row.classList.add('kniffel-summary');row.append(node('th',title));for(const id of s.players){const totals=kniffelTotal(s.sheets[id],s.extras[id]),value=key==='lower'?KNIFFEL_FIELDS.slice(6).reduce((sum,field)=>sum+(s.sheets[id][field]??0),0):totals[key];row.append(node('td',key==='upper'?`${totals.upper} / 63`:String(value)));}body.append(row);};
+      for(const field of KNIFFEL_FIELDS){const row=node('tr');row.append(node('th',kniffelField(field)));for(const id of s.players){const cell=node('td'),value=s.sheets[id][field];if(value!==null)cell.append(node('span',String(value)));else if(id===active&&s.cup.dice){const preview=kniffelValue(s.cup.dice,field,s.sheets[id]),b=control(cell,`${preview.points}${preview.extra?' (+50)':''}`,()=>{if(preview.points===0&&!confirm(f('Dieses Feld mit null Punkten streichen?','Cross out this field with zero points?')))return;void this.request('score',{field,confirmZero:preview.points===0});},!can);b.dataset.kniffelField=field;b.title=`${kniffelField(field)} · ${f('Eintragen','Score')}`;}else cell.textContent='–';row.append(cell);}body.append(row);if(field==='sixes'){addTotal('upper',f('Summe Zahlenfelder (oben)','Number fields total (upper)'));addTotal('bonus',f('Bonus: 35 ab 63 oben','Bonus: 35 at 63 upper'));}}
+      addTotal('lower',f('Summe Sonderwürfe','Special combinations total'));addTotal('extra',f('Zusatzkniffel','Extra Kniffels'));addTotal('total',f('Gesamt','Total'));
       c.append(node('p',f('Der 35-Punkte-Bonus zählt ausschließlich Einsen bis Sechsen. Straßen, Pasche, Full House, Kniffel und Chance zählen nicht zur 63-Punkte-Grenze.','The 35-point bonus uses only Ones through Sixes. Straights, matching combinations, Full House, Kniffel and Chance do not count toward the 63-point threshold.'),'schocken-help'));
     }
     if(['finished','aborted'].includes(s.phase)&&game.user.isGM)control(c,f('Nächste Partie vorbereiten','Prepare next game'),()=>this.request('restart'));
+    c.scrollTop=ownStart?0:oldTop;const sheetScroll=root.querySelector('.kniffel-sheet-scroll');if(sheetScroll)sheetScroll.scrollLeft=oldLeft;
   }
 }
