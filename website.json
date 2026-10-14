@@ -2,17 +2,16 @@
   "schemaVersion": 1,
   "blocks": {
     "patchnotes": {
-      "title": "Patchnotes Version 1.3.2",
+      "title": "Patchnotes Version 1.3.3",
       "paragraphs": [
-        "Neu sind Ausgangswetten mit eigenen internen Goldständen: Der gesamte Topf wird gleichmäßig unter den richtigen Wettern verteilt. Dabei wird kein Charaktergeld verändert.",
-        "Lügenwürfel und Drachenhort bleiben optionale Beta-Spiele, die über den standardmäßig ausgeschalteten Beta-Test-Schalter aktiviert werden. Die sechs bisherigen Spiele bleiben regulär verfügbar."
+        "Dieses Korrekturupdate behebt die Sichtbarkeit des Taverngames-Reiters: Die Spieleliste wird beim Wechsel zu anderen Foundry-Reitern wieder ausgeblendet. Scrollen und die ausgekoppelte Ansicht bleiben erhalten.",
+        "Lügenwürfel und Drachenhort bleiben optionale Beta-Spiele hinter dem standardmäßig ausgeschalteten Beta-Test-Schalter. Die sechs bisherigen Spiele bleiben regulär verfügbar; Ausgangswetten verwenden weiterhin ausschließlich interne Goldstände."
       ],
       "items": [
-        "Wettfenster in allen Moderationsfenstern und an allen acht Spieltischen, mit SL-Publikumsauswahl und NPC-Wetten.",
-        "Annahmeschluss vor Spielstart, automatische virtuelle Auszahlung oder Erstattung und öffentliche Chat-Auswertung.",
-        "Die Spieleliste ist wieder scrollbar; Würfel- und Glücksspielkategorien verwenden Symbole.",
-        "Drachenhort zeigt zwei Würfel und erklärt Resttipps, Tippbereich und verwendeten Würfeltyp.",
-        "Lügenwürfel erklärt das angezweifelte Gebot und die Treffer einschließlich Einser-Joker."
+        "Die Spieleliste erscheint nicht mehr in anderen Sidebar-Reitern.",
+        "Foundry steuert die Sichtbarkeit des aktiven und inaktiven Taverngames-Reiters wieder selbst.",
+        "Die begrenzte Scrollansicht und die Erreichbarkeit des letzten Spiels bleiben erhalten.",
+        "Deutsch, Englisch und die ausgekoppelte Ansicht wurden synthetisch geprüft; keine eigene Foundry-Liveprüfung."
       ]
     },
     "games": {
