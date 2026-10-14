@@ -1,6 +1,6 @@
 # Taverngames – Foundry Extension
 
-**Version 1.2.2**. Alle fünf Spiele sind regulär verfügbar: Schocken, Farkle, Schweinchen, Schiff–Kapitän–Mannschaft und Straßenlotto. Daniels ausdrücklicher Auftrag vom 14. Oktober 2026 gibt die drei bisherigen Beta-Spiele für diese Version frei.
+**Version 1.2.3**. Alle fünf Spiele sind regulär verfügbar: Schocken, Farkle, Schweinchen, Schiff–Kapitän–Mannschaft und Straßenlotto. Daniels ausdrücklicher Auftrag vom 14. Oktober 2026 gibt die drei bisherigen Beta-Spiele für diese Version frei.
 
 ## Installation und Einstieg
 
@@ -11,6 +11,14 @@ Die neue reguläre Updateadresse (nach Veröffentlichung auf GitHub) lautet:
 Alle fünf Spiele sind ohne Beta-Test-Schalter erreichbar. Der Beta-Test-Schalter schaltet zusätzlich Kniffel frei; die fünf stabilen Spiele bleiben davon unabhängig. Modul-ID und vorhandene Spielstände bleiben erhalten. Die bisherige Serveradresse bleibt als Übergang für bestehende Installationen bestehen.
 
 Englisch ist Standard; Deutsch kann in denselben Moduleinstellungen gewählt werden. Der Taverngames-Reiter ist nur für SL sichtbar. Start öffnet Spieltisch und separates Moderationsfenster; Anleitung kann der SL in den Chat posten. Spieler verwenden die unteren Spielbuttons, die der SL im jeweiligen Moderationsfenster freigibt, und klicken Beitreten. Die neuen unteren Buttons sind standardmäßig aus.
+
+## Spielgruppen / Game categories
+
+**Würfelspiele / Dice games:** Schocken, Farkle, Schweinchen, Schiff–Kapitän–Mannschaft, Kniffel (Beta).
+
+**Glücksspiele / Games of chance:** Straßenlotto.
+
+Kniffel-NPCs behalten nun unterschiedliche Zahlen für Straßen und bevorzugen fertige Kombinationen gegenüber dem flexiblen Chance-Feld. Der Bonusfortschritt zeigt nur die Summe der Zahlenfelder Einsen bis Sechsen: 60 ergibt keinen Bonus, ab 63 werden 35 Punkte addiert. Die Berechnung bleibt unverändert.
 
 ## Kniffel · Beta
 
@@ -87,7 +95,7 @@ The three previously beta games are regular in 1.2.0 at Daniel's explicit reques
 ## Autoren und Regelquellen
 
 1. Daniel Brune · Website https://dnd.brunecoaching.de · Discord arukard · E-Mail daniel@brunecoaching.de · KI-Unterstützung ChatGPT/Codex.
-2. Phillip D. · Discord **theonlyzaodiac**.
+2. Philipp D. · Discord **theonlyzaodiac**.
 
 Die danach im Manifest aufgeführten Namen sind als **Regelquellen/Referenzautoren** gekennzeichnet: Schockfreunde, PlayMonster, Awiana, Paul Cossmer/DnDDiary, Bicycle Cards, moses. Verlag, John McLeod/Pagat, TS Spielkarten und dessen genannte Wikipedia-Textquelle. Dies kennzeichnet die Herkunft der Regeln; technische Modulprogrammierung wird ihnen nicht zugeschrieben. Georg Haubner wird als Lektor der PDF-Vorlagen genannt; keine unbestätigte Website ergänzt. Die weiteren Awiana-/PDF-Spiele sowie Die böse Dreizehn, Klippklapp, Blackjack/17+4 und Schwimmen sind ausschließlich gespeicherte Regelreferenzen.
 

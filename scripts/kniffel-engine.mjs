@@ -58,11 +58,25 @@ export function actKniffel(original,actor,action,args={},random=()=>1,gm=false){
 export function kniffelNpcAction(s){
   if(!s||s.paused||s.phase!=='playing')return null;const id=s.order[s.turn];if(!s.npcs[id]||s.npcManual[id])return null;
   const c=s.cup,sheet=s.sheets[id];if(!c.dice)return {id,action:'roll'};
-  const choices=KNIFFEL_FIELDS.filter(k=>sheet[k]===null).map(field=>({field,...kniffelValue(c.dice,field,sheet)})).sort((a,b)=>b.points+b.extra-a.points-a.extra);
-  const best=choices[0];if(c.rolls===3||best.extra||best.field==='kniffel'&&best.points===50||best.field==='largeStraight'&&best.points===40)return {id,action:'score',args:{field:best.field,confirmZero:true}};
+  // Preserve scarce combinations rather than spending them on Chance or
+  // discarding a straight while chasing repeated faces.
+  const priority=choice=>choice.points+choice.extra+(choice.points>0?({fullHouse:8,smallStraight:8,largeStraight:8,kniffel:12,chance:-8}[choice.field]??0):0);
+  const choices=KNIFFEL_FIELDS.filter(k=>sheet[k]===null).map(field=>({field,...kniffelValue(c.dice,field,sheet)})).sort((a,b)=>priority(b)-priority(a));
+  const best=choices[0],score=()=>({id,action:'score',args:{field:best.field,confirmZero:true}});
+  if(c.rolls===3||best.extra||best.field==='kniffel'&&best.points===50||best.field==='largeStraight'&&best.points===40||best.field==='fullHouse'&&best.points===25)return score();
   const counts=Array.from({length:6},(_,i)=>c.dice.filter(n=>n===i+1).length),face=counts.reduce((best,n,i)=>n>=counts[best]?i:best,0)+1;
-  const desired=c.dice.map(n=>n===face),index=c.held.findIndex((held,i)=>held!==desired[i]);
+  let desired=c.dice.map(n=>n===face);
+  if(sheet.largeStraight===null||sheet.smallStraight===null){
+    const size=sheet.largeStraight===null?5:4,candidates=Array.from({length:7-size},(_,start)=>Array.from({length:size},(_,j)=>start+j+1));
+    candidates.sort((a,b)=>b.filter(n=>counts[n-1]>0).length-a.filter(n=>counts[n-1]>0).length);
+    const target=candidates[0],progress=target.filter(n=>counts[n-1]>0).length;
+    if(progress>=3&&Math.max(...counts)<3){
+      const seen=new Set();desired=c.dice.map(n=>{if(!target.includes(n)||seen.has(n))return false;seen.add(n);return true;});
+    }
+  }
+  if(best.field==='smallStraight'&&best.points===30&&sheet.largeStraight!==null)return score();
+  const index=c.held.findIndex((held,i)=>held!==desired[i]);
   if(index>=0)return {id,action:desired[index]?'hold':'return',args:{index}};
-  if(c.held.every(Boolean))return {id,action:'score',args:{field:best.field,confirmZero:true}};
+  if(c.held.every(Boolean))return score();
   return {id,action:'roll'};
 }

@@ -26,6 +26,7 @@ export function registerSidebar(config,foundry,game,actions) {
     async _renderHTML(){
       const root=document.createElement('section');root.className='taverngames-catalog';
       if(!game.user.isGM)return root;
+      const category=document.createElement('h1');category.className='taverngames-category';category.textContent=language()==='de'?'Würfelspiele':'Dice games';root.append(category);
       const heading=document.createElement('h2');heading.textContent='Schocken';root.append(heading);
       const row=document.createElement('div');row.className='taverngames-start-row';
       for(const [title,callback] of [['Start',actions.open],['Anleitung',actions.guide]]){
@@ -42,9 +43,10 @@ export function registerSidebar(config,foundry,game,actions) {
         }
         root.append(row);
       }
-      for(const scope of ['pig','ship','lottery','kniffel']){
+      for(const scope of ['pig','ship','kniffel','lottery']){
         if(scope==='kniffel'&&game.settings.get('taverngames','betaTest')!==true)continue;
-        const h=document.createElement('h2');h.textContent=`${gameTitle(scope)}${scope==='kniffel'?' · Beta':''}`;root.append(h);const row=document.createElement('div');row.className='taverngames-start-row';
+        if(scope==='lottery'){const category=document.createElement('h1');category.className='taverngames-category';category.textContent=language()==='de'?'Glücksspiele':'Games of chance';root.append(category);}
+        const h=document.createElement('h2');h.textContent=`${gameTitle(scope)}${scope==='kniffel'?' · Beta':''}`;root.append(h);const row=document.createElement('div');row.className='taverngames-start-row';row.dataset.game=scope;
         for(const [title,fn] of [['Start',()=>actions.tavern?.(scope)],['Anleitung',()=>actions.tavernGuide?.(scope)]]){const b=document.createElement('button');b.type='button';b.textContent=t(title);b.addEventListener('click',fn);row.append(b);}root.append(row);
       }
       return root;
