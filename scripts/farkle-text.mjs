@@ -1,0 +1,35 @@
+import {language} from './i18n.mjs';
+export const f=(de,en)=>language()==='de'?de:en;
+const DE={
+ 'Invalid optional rules.':'Ungültige optionale Regeln.','Invalid dice.':'Ungültige Würfel.','Invalid game mode.':'Ungültiger Spielmodus.',
+ 'Target must be between 500 and 1,000,000.':'Das Ziel muss zwischen 500 und 1.000.000 liegen.',
+ 'Round count must be between 1 and 100.':'Die Rundenanzahl muss zwischen 1 und 100 liegen.',
+ 'Finish or end the current game first.':'Die laufende Partie muss zuerst beendet werden.',
+ 'Invalid NPCs.':'Ungültige NPCs.','Invalid NPC.':'Ungültiger NPC.','No Farkle game exists.':'Keine Farkle-Partie vorhanden.',
+ 'This game has ended.':'Dieses Spiel ist beendet.','GM only.':'Nur GM.','Invalid NPC control.':'Ungültige NPC-Steuerung.',
+ 'You can only join in the lobby.':'Beitritt ist nur in der Lobby möglich.','Invalid participant.':'Ungültiger Teilnehmer.',
+ 'You have already joined.':'Du bist bereits dabei.','The table is full.':'Der Tisch ist voll.','You have not joined.':'Du bist nicht dabei.',
+ 'Only the GM can start the lobby.':'Nur GM kann die Lobby starten.','Not enough participants.':'Nicht genügend Teilnehmer.',
+ 'The game is not running.':'Das Spiel läuft gerade nicht.','It is not your turn.':'Du bist nicht am Zug.',
+ 'Choose a scoring combination from this roll.':'Wähle eine gültige Wertung aus diesem Wurf.',
+ 'Only dice from the latest roll may be selected.':'Nur Würfel des aktuellen Wurfs können ausgewählt werden.',
+ 'Invalid random value.':'Ungültige Zufallszahl.','Roll first.':'Zuerst würfeln.',
+ 'You need at least 500 points to enter the scoreboard.':'Zum ersten Eintragen brauchst du mindestens 500 Zugpunkte.',
+ 'Unknown action.':'Unbekannte Aktion.','The game state changed. Please try again.':'Spielstand geändert. Bitte erneut versuchen.',
+ 'No action to undo.':'Kein Schritt zum Zurücknehmen.','Invalid Farkle save.':'Ungültiger Farkle-Spielstand.',
+ 'Best selection is not enabled for players.':'Beste Auswahl ist für Spieler nicht freigegeben.'
+};
+export const farkleError=text=>language()==='de'?(DE[text]??text):text;
+export function farkleGuide(options={}){
+  const title=f('Farkle – Kurzanleitung','Farkle – Quick rules');
+  const rules=f('Sechs Würfel. Nach jedem Wurf mindestens eine punktbringende Auswahl herauslegen. Nur Würfel desselben Wurfs bilden eine Kombination; bereits gewertete Würfel dürfen nicht ergänzt werden. Danach Punkte sichern oder die übrigen Würfel erneut werfen. Ohne Wertung entsteht ein Farkle: alle ungesicherten Zugpunkte verfallen. Sind alle sechs gewertet, darfst du mit sechs Würfeln weiterwürfeln.',
+    'Six dice. After each roll, set aside a scoring selection. Combinations must come from the same roll; previously scored dice cannot be extended. Bank your points or roll the remaining dice. No scoring dice means a Farkle: all unbanked turn points are lost. Score all six dice to roll all six again.');
+  const modes=f('Kurzspiel: Jeder hat einen Zug, keine Einstiegshürde. Feste Runden: Jeder hat pro Runde einen Zug; die gesicherten Punkte aller Runden werden addiert. Die Rundenzahl ist einstellbar, zum Beispiel drei. Auch hier keine Einstiegshürde. Höchster Gesamtstand gewinnt, niedrigster verliert; Gleichstände teilen Plätze. Zielpunktzahl: zum ersten Eintragen mindestens 500 Zugpunkte; Standardziel 10.000. Nach Zielerreichung haben alle anderen genau einen letzten Zug. Solo ist im Zielmodus möglich.',
+    'Quick game: one turn each, no entry minimum. Fixed rounds: one turn per player per round; banked points from every round are added together. Choose the number of rounds, for example three. No entry minimum. Highest total wins, lowest loses; ties share places. Target score: at least 500 points to enter; default target 10,000. Once the target is reached, everyone else gets exactly one final turn. Solo play is available in target mode.');
+  const rows=[['1','100'],['5','50'],[f('Drei Einsen','Three ones'),options.onesBonus?'1,000':'300'],[f('Drilling 2–6','Triple 2–6'),f('Augenzahl × 100','Face value × 100')],[f(options.onesBonus?'Vier / fünf / sechs gleiche außer Einsen':'Vier / fünf / sechs gleiche',options.onesBonus?'Four / five / six of a kind except ones':'Four / five / six of a kind'),'1,000 / 2,000 / 3,000'],[f('Straße 1–6','Straight 1–6'),'1,500'],[f('Drei verschiedene Paare','Three distinct pairs'),'1,500'],[f('Vier gleiche + anderes Paar','Four of a kind + another pair'),'1,500'],[f('Zwei verschiedene Drillinge','Two distinct triples'),'2,500']];
+  if(options.onesBonus)rows.push([f('Vier / fünf / sechs Einsen','Four / five / six ones'),'2,000 / 3,000 / 4,000']);
+  if(options.smallStraight)rows.push([f('Kleine Straße: 1–5 oder 2–6','Small straight: 1–5 or 2–6'),'750']);
+  const house=f('Optionale Hausregeln (jeweils standardmäßig aus): Kleine Straße aus fünf verschiedenen aufeinanderfolgenden Würfeln gibt 750 Punkte. Einsen-Bonus ersetzt die Wertung für drei bis sechs Einsen durch 1000/2000/3000/4000. Bei gesicherter Zielpunktzahl sofort beenden beendet nur im Zielmodus die Partie ohne Schlussrunde. Kombinationen müssen weiterhin aus einem Wurf stammen.','Optional house rules (each off by default): five distinct consecutive dice score a 750-point small straight. Ones bonus replaces three to six ones with 1000/2000/3000/4000 points. End immediately when the target is banked ends target mode without a final round. Combinations must still come from one roll.');
+  const active=Object.entries(options).filter(([,v])=>v===true).map(([k])=>({smallStraight:f('Kleine Straße','Small straight'),onesBonus:f('Einsen-Bonus','Ones bonus'),immediateTarget:f('Sofortiges Zielende','Immediate target end')})[k]).filter(Boolean).join(', ')||f('Keine','None');
+  return `<h2>${title}</h2><p>${rules}</p><p>${modes}</p><p>${house}</p><p>${f('Aktiv in dieser Partie','Active in this game')}: ${active}</p><p>${f('Die Hilfe „Beste Auswahl“ ist für Spieler standardmäßig aus. Der SL kann sie im Farkle-Moderationspanel freigeben. Ohne Hilfe wählst du punktbringende Würfel durch Anklicken selbst aus.','The Best selection helper is off for players by default. The GM can enable it in Farkle moderation. Without the helper, select scoring dice yourself by clicking them.')}</p><table><thead><tr><th>${f('Wertung','Combination')}</th><th>${f('Punkte','Points')}</th></tr></thead><tbody>${rows.map(([name,points])=>`<tr><td>${name}</td><td>${points}</td></tr>`).join('')}</tbody></table><p>${f('Wertung gemäß PlayMonster; Kurzspiel und feste Runden sind Taverngames-Hausvarianten. Kleine Straße nur mit aktivierter Hausregel. Startwurf entscheidet im Zielmodus (Gleichstand: frühere Position in der Startreihenfolge); im Kurzspiel Beitrittsreihenfolge.','PlayMonster scoring; quick and fixed-round modes are Taverngames house variants. Partial straight only with the house rule enabled. A starting die decides in target mode (ties: earlier position in the starting order); joining order in quick mode.')}</p><p><a href="https://playmonster.com/wp-content/uploads/2018/06/Farkle-Rules.pdf" target="_blank" rel="noopener noreferrer">PlayMonster Farkle Rules</a></p>`;
+}

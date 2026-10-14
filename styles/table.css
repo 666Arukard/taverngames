@@ -1,0 +1,23 @@
+.schocken-launcher,.farkle-launcher {width:auto;background:#30251e;color:#fff;border:1px solid #c6a96c;padding:8px 18px;border-radius:20px}
+.taverngames-launchers {position:fixed;bottom:12px;left:50%;transform:translateX(-50%);z-index:80;display:flex;gap:8px;max-width:calc(100vw - 24px);flex-wrap:wrap;justify-content:center}
+.taverngames-surface {display:flex;flex-direction:column;width:100%;height:100%;min-height:0;background:#faf3e4;color:#2e231b;font:15px/1.45 system-ui}
+.taverngames-surface header {display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:#30251e;color:#fff}
+.taverngames-surface h2 {margin:0;color:inherit;border:0}.taverngames-surface header button {width:32px;color:white;background:transparent}
+.schocken-content {padding:16px;overflow:auto}.taverngames-surface h3 {color:#563c22;border:0}.taverngames-surface button {cursor:pointer;width:auto;min-height:36px;border:1px solid #96764c;border-radius:6px;padding:5px 10px;background:#fff9ef;color:#30251e;font:inherit}
+.taverngames-surface button:disabled {opacity:.5;cursor:default}.schocken-choice {display:flex;align-items:center;gap:10px;margin:6px 0}.schocken-choice input {flex:0 0 auto;width:18px;height:18px}
+.schocken-dice,.schocken-actions {display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}.schocken-dice button {width:48px;height:48px;font-size:25px;font-weight:700;opacity:1}.schocken-dice .held {background:#d8c593;border:2px solid #6e552d}
+.schocken-player {padding:7px 10px;border-bottom:1px solid #d8c8ae}.schocken-meta {font-weight:600}.taverngames-surface details {padding:8px 0;border-bottom:1px solid #d8c8ae}.taverngames-surface summary {cursor:pointer;font-weight:600}.schocken-help {font-size:12px;color:#66513c}
+.schocken-label {display:grid;grid-template-columns:1fr 1fr;gap:8px;align-items:center;margin:6px 0}.taverngames-surface input[type=text],.taverngames-surface textarea {width:100%;background:#fff9ef;color:#30251e;border:1px solid #96764c;border-radius:5px;padding:6px;font:inherit}.taverngames-surface textarea {display:block;resize:vertical;margin:6px 0}
+.schocken-moderation {width:min(360px,calc(100vw - 32px))}.taverngames-surface header {cursor:move;touch-action:none;user-select:none;flex-shrink:0}.taverngames-surface header:focus-visible {outline:2px solid #e9c783;outline-offset:-3px}.taverngames-surface header button {cursor:pointer}.schocken-content {min-height:0}.schocken-npc {display:flex;gap:8px;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid #d8c8ae}
+
+.taverngames-icon{display:inline-block;flex:0 0 auto;box-sizing:border-box;width:32px;height:32px;vertical-align:middle;border:1px solid #74767b;border-radius:3px;background:#45474d url('../assets/tavern-dice.svg') center/24px 24px no-repeat;box-shadow:inset 0 1px 0 #ffffff18}
+.taverngames-catalog{box-sizing:border-box;padding:12px;max-height:100%;min-height:0;overflow-y:auto}.taverngames-start-row{display:flex;gap:8px}.taverngames-start-row button{flex:1}
+.taverngames-window{max-width:calc(100vw - 16px);max-height:calc(100dvh - 16px)}
+.taverngames-window .window-content{padding:0;overflow:hidden}.taverngames-surface .schocken-content{flex:1;min-height:0}
+.taverngames-surface p,.taverngames-surface li,.schocken-player{overflow-wrap:anywhere}
+.taverngames-surface .schocken-dice .farkle-selected{background:#c2e0bd;border:2px solid #386b36;box-shadow:0 0 0 1px #386b36}
+.taverngames-surface select,.taverngames-surface input[type=number]{display:block;width:100%;margin:6px 0 10px;background:#fff9ef;color:#30251e;border:1px solid #96764c;border-radius:5px;padding:6px;font:inherit}
+.taverngames-surface select{color-scheme:light}
+.taverngames-surface select option,.taverngames-surface select optgroup{background-color:#fff9ef!important;color:#30251e!important}
+.taverngames-catalog h2:not(:first-child){margin-top:24px}
+.taverngames-number-grid{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:4px;margin:12px 0}.taverngames-number-grid button{padding:2px;min-width:0}.taverngames-number-grid .farkle-selected{background:#c2e0bd;border:2px solid #386b36}.taverngames-die{display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;border:1px solid #96764c;border-radius:6px;background:#fff9ef;font-size:25px;font-weight:bold}.taverngames-die.held{background:#d8c593;border:2px solid #6e552d}.taverngames-surface table{width:100%;border-collapse:collapse}.taverngames-surface td,.taverngames-surface th{padding:5px;border-bottom:1px solid #d8c8ae;text-align:left}
