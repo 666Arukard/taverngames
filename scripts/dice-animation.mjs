@@ -8,14 +8,15 @@ export class DiceEvents {
  clear(){this.events=[];}
 }
 export class DiceAnimator {
- constructor({game,enabled,warn=()=>{}}){Object.assign(this,{game,enabled,warn});this.cursor=0;this.pending=Promise.resolve();this.warned=false;this.stats={received:0,attempted:0,confirmed:0,skipped:0,errors:0,status:'idle'};}
+ constructor({game,enabled,warn=()=>{}}){Object.assign(this,{enabled,warn});this.getGame=typeof game==='function'?game:()=>game;this.cursor=0;this.pending=Promise.resolve();this.warned=false;this.stats={received:0,attempted:0,confirmed:0,skipped:0,errors:0,status:'idle'};}
+ get game(){return this.getGame();}
  consume(batch){if(!batch)return;const after=batch.cursor<this.cursor?0:this.cursor;this.cursor=batch.cursor;for(const event of (batch.events??[]).filter(e=>e.id>after)){this.stats.received++;this.pending=this.pending.then(()=>this.play(event)).catch(()=>{});}}
  async play(event,{test=false}={}){
   if(!test&&!this.enabled()){this.stats.status='disabled';return 'disabled';}
   this.stats.attempted++;this.stats.status='checking';
-  const dsn=this.game.dice3d;
-  if(!this.game.modules.get('dice-so-nice')?.active||typeof dsn?.show!=='function'){this.stats.status='unavailable';this.stats.errors++;if(!this.warned){this.warned=true;this.warn();}return 'unavailable';}
   try{
+  const game=this.game,dsn=game.dice3d;
+  if(!game.modules?.get('dice-so-nice')?.active||typeof dsn?.show!=='function'){this.stats.status='unavailable';this.stats.errors++;if(!this.warned){this.warned=true;this.warn();}return 'unavailable';}
    const dice=[];
    for(const {sides,value} of event.dice){
     if(![6,10,20,100].includes(sides)||!Number.isInteger(value)||value<1||value>sides)return;

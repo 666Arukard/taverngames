@@ -2,17 +2,15 @@
   "schemaVersion": 1,
   "blocks": {
     "patchnotes": {
-      "title": "Patchnotes Version 1.4.2",
+      "title": "Patchnotes Version 1.4.3",
       "paragraphs": [
-        "Fenster und Scrollbereiche wurden korrigiert. Ein separater SL-Würfeltest unterstützt die Fehlersuche bei Dice So Nice. Die echte 3D-Anzeige ist weiterhin nicht live bestätigt.",
-        "Acht stabile Spiele; Chō-Han und Dice So Nice bleiben Beta."
+        "Korrektur der Dice-So-Nice-Beta anhand des Diagnoseberichts: Die Anbindung verwendet nun das aktuelle Foundry-Spielobjekt. Die echte Anzeige muss weiterhin im Praxistest bestätigt werden."
       ],
       "items": [
-        "Chō-Han: vier Varianten A–D mit sichtbaren Wettseiten.",
-        "Interne Bankdeckung und Gesamtauszahlung für A/C; Gemeinschaftstopf mit Übertrag und Erstattung bei D.",
-        "Variante B bleibt Standard mit 5 % Provision vom Gesamttopf und proportionaler Kürzung.",
-        "SL-Test mit zwei festen Würfeln und kopierbarer Diagnose ohne geheime Würfelwerte.",
-        "An Bildschirmhöhe angepasste Fenster und erreichbare untere Bedienelemente."
+        "Aktuelles Spielobjekt beim Animationsaufruf statt veralteter Referenz vom Laden.",
+        "API-Prüfung und Diagnosetest fangen Ausnahmen ab und zeigen einen Fehlerstatus.",
+        "Der 3D-Schalter benötigt keinen Welt-Neustart.",
+        "Acht Spiele stabil; Chō-Han und die 3D-Anbindung bleiben Beta."
       ]
     },
     "games": {

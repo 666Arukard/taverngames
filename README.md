@@ -1,6 +1,6 @@
 # Taverngames – Foundry Extension
 
-**Version 1.4.2**. Alle acht Spiele sind regulär verfügbar: Schocken, Farkle, Schweinchen, Schiff–Kapitän–Mannschaft, Kniffel, Straßenlotto, Lügenwürfel und Drachenhort. Kniffel wurde von Daniel am 14. Oktober 2026 für die stabile Version freigegeben.
+**Version 1.4.3**. Alle acht Spiele sind regulär verfügbar: Schocken, Farkle, Schweinchen, Schiff–Kapitän–Mannschaft, Kniffel, Straßenlotto, Lügenwürfel und Drachenhort. Kniffel wurde von Daniel am 14. Oktober 2026 für die stabile Version freigegeben.
 
 ## Installation und Einstieg
 
@@ -175,3 +175,8 @@ Fenster öffnen mit einer an die verfügbare Bildschirmhöhe angepassten Höhe. 
 Als SL: Spieleinstellungen → Moduleinstellungen → Taverngames → **3D-Würfel prüfen** → **Test & Diagnose öffnen** → **3D-Testwürfel anzeigen**. Zwei feste Würfel (3 und 5) werden nur lokal an Dice So Nice übergeben; der Test verändert keine Partie und ist unabhängig vom 3D-Schalter. Danach optional im Spiel würfeln und **Diagnose aktualisieren**. Der kopierbare Bericht enthält Versionen, Erfassungs- und Animationszähler, keine Würfelwerte oder Spielernamen. Die Bestätigung durch Dice So Nice ist kein eigener Sichtnachweis. Bei weiterhin fehlenden Würfeln den Bericht zur Fehlersuche verwenden.
 
 English: Version 1.4.2 adjusts initial window height and scrolling, adds a GM-only local dice test and diagnostics in module settings, and expands Cho-Han beta to variants A–D using internal balances. Dice So Nice remains optional and beta; an actual Foundry/DSN live test is still pending.
+
+
+## Korrektur 1.4.3
+
+Die DSN-Anbindung liest das aktuelle Foundry-Spielobjekt erst beim Animationsaufruf. API-Zugriffe liegen jetzt vollständig in der Fehlerbehandlung; der Diagnosetest zeigt auch unerwartete Ausnahmen als Fehler. Der 3D-Schalter wird laufend ausgewertet und benötigt keinen Welt-Neustart. Nach der Installation dieses Updates die Welt einmal vollständig neu laden, damit die neuen Skripte aktiv sind. Eine echte 3D-Anzeige muss weiterhin im Praxistest bestätigt werden.
