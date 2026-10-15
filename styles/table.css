@@ -41,7 +41,7 @@
 .taverngames-category-buttons{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}.taverngames-category-buttons button{width:100%;min-width:0;white-space:normal;overflow-wrap:anywhere;padding:5px 2px}
 
 /* Bound the sidebar catalog to the available tab height in native and pop-out panels. */
-.taverngames-sidebar{flex-direction:column;min-height:0;height:100%;overflow:hidden;box-sizing:border-box}.taverngames-sidebar>.window-content{display:flex;flex-direction:column;flex:1;min-height:0;overflow:hidden}.taverngames-sidebar .taverngames-catalog{flex:1 1 0;min-height:0;height:100%;max-height:100%;overflow-y:auto;overflow-x:hidden;overscroll-behavior-y:contain}
+.taverngames-sidebar{flex-direction:column;min-height:0;overflow:hidden;box-sizing:border-box}.taverngames-sidebar>.window-content{display:flex;flex-direction:column;flex:1;min-height:0;overflow:hidden}.taverngames-sidebar .taverngames-catalog{flex:1 1 0;min-height:0;max-height:100%;overflow-y:auto;overflow-x:hidden;overscroll-behavior-y:contain}
 
 .taverngames-sidebar{flex:1 1 0;max-height:calc(100dvh - 64px)}
 

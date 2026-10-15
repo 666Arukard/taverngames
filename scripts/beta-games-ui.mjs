@@ -1,14 +1,14 @@
 import {TavernUI,node,control,selectField} from './tavern-ui.mjs';
 import {f} from './farkle-text.mjs';
 import {gameTitle} from './tavern-text.mjs';
-const enabled=()=>game.settings.get('taverngames','betaTest')===true;
+const enabled=()=>true;
 function number(parent,label,value,min=0,max=100000){const l=node('label',label),input=node('input');input.type='number';input.min=min;input.max=max;input.step=1;input.value=value;l.append(input);parent.append(l);return input;}
 export class BetaGameUI extends TavernUI{
  open(){if(enabled())super.open();}
  guide(){if(enabled())super.guide();}
  drawModeration(){
   const root=this.windows.get('moderation')?.root;if(!root||!game.user.isGM)return;root.replaceChildren();if(!enabled())return;
-  const c=node('div',undefined,'schocken-content'),s=this.getState();root.append(c);if(this.openOutcome)control(c,f('Wetten','Bets'),()=>this.openOutcome(this.scope));c.append(node('h2',`${gameTitle(this.scope)} · Beta`));control(c,f('Spieltisch öffnen','Open game table'),()=>{this.window('table');this.drawTable();});control(c,f('Anleitung','Instructions'),()=>this.guide());
+  const c=node('div',undefined,'schocken-content'),s=this.getState();root.append(c);if(this.openOutcome)control(c,f('Wetten','Bets'),()=>this.openOutcome(this.scope));c.append(node('h2',`${gameTitle(this.scope)}`));control(c,f('Spieltisch öffnen','Open game table'),()=>{this.window('table');this.drawTable();});control(c,f('Anleitung','Instructions'),()=>this.guide());
   const label=node('label',undefined,'schocken-choice'),show=node('input');show.type='checkbox';show.dataset.tavernLauncher=this.scope;show.checked=game.settings.get('taverngames',`show${this.scope}Launcher`)===true;show.addEventListener('change',()=>void game.settings.set('taverngames',`show${this.scope}Launcher`,show.checked).catch(e=>ui.notifications.warn(e.message)));label.append(show,document.createTextNode(f('Unteren Spielbutton für alle einblenden','Show the bottom game button for everyone')));c.append(label);
   const setup=node('details');setup.open=this.setupOpen??!s;setup.addEventListener('toggle',()=>this.setupOpen=setup.open);setup.append(node('summary',f('Neue Partie & Regeln','New game & rules')));let mode,coins,entry,currency;
   if(this.scope==='hoard'){
@@ -33,7 +33,7 @@ export class BetaGameUI extends TavernUI{
  }
  drawTable(){
   const root=this.windows.get('table')?.root;if(!root)return;const top=root.querySelector('.schocken-content')?.scrollTop??0;root.replaceChildren();if(!enabled())return;
-  const c=node('div',undefined,'schocken-content'),s=this.getState();root.append(c);if(this.openOutcome)control(c,f('Wetten','Bets'),()=>this.openOutcome(this.scope));c.append(node('h2',`${gameTitle(this.scope)} · Beta`));if(game.user.isGM)control(c,f('Moderation öffnen','Open moderation'),()=>{this.window('moderation');this.drawModeration();});
+  const c=node('div',undefined,'schocken-content'),s=this.getState();root.append(c);if(this.openOutcome)control(c,f('Wetten','Bets'),()=>this.openOutcome(this.scope));c.append(node('h2',`${gameTitle(this.scope)}`));if(game.user.isGM)control(c,f('Moderation öffnen','Open moderation'),()=>{this.window('moderation');this.drawModeration();});
   if(!s){c.append(node('p',f('Der SL öffnet eine Lobby.','The GM opens a lobby.')));return;}
   if(s.paused)c.append(node('p',f('Spiel pausiert','Game paused')));
   const active=s.order[s.turn],can=!s.paused&&(active===game.user.id||game.user.isGM),request=(action,args={})=>this.request(action,{...args,...(s.npcs[active]?{id:active}:{})});

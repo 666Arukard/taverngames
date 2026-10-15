@@ -1,6 +1,6 @@
 # Taverngames – Foundry Extension
 
-**Version 1.3.4**. Alle sechs Spiele sind regulär verfügbar: Schocken, Farkle, Schweinchen, Schiff–Kapitän–Mannschaft, Kniffel und Straßenlotto. Kniffel wurde von Daniel am 14. Oktober 2026 für die stabile Version freigegeben.
+**Version 1.4.0**. Alle acht Spiele sind regulär verfügbar: Schocken, Farkle, Schweinchen, Schiff–Kapitän–Mannschaft, Kniffel, Straßenlotto, Lügenwürfel und Drachenhort. Kniffel wurde von Daniel am 14. Oktober 2026 für die stabile Version freigegeben.
 
 ## Installation und Einstieg
 
@@ -8,19 +8,19 @@ Die neue reguläre Updateadresse (nach Veröffentlichung auf GitHub) lautet:
 
 `https://github.com/666Arukard/taverngames/releases/latest/download/module.json`
 
-Alle sechs Spiele sind ohne Beta-Test-Schalter erreichbar. Der Beta-Schalter schaltet zusätzlich Lügenwürfel und Drachenhort frei. Modul-ID und vorhandene Spielstände bleiben erhalten. Die bisherige Serveradresse bleibt als Übergang für bestehende Installationen bestehen.
+Alle acht Spiele sind ohne Beta-Test-Schalter erreichbar. Die optionale Dice-So-Nice-Beta besitzt einen eigenen Schalter. Modul-ID und vorhandene Spielstände bleiben erhalten. Die bisherige Serveradresse bleibt als Übergang für bestehende Installationen bestehen.
 
 Englisch ist Standard; Deutsch kann in denselben Moduleinstellungen gewählt werden. Der Taverngames-Reiter ist nur für SL sichtbar. Start öffnet Spieltisch und separates Moderationsfenster; Anleitung kann der SL in den Chat posten. Spieler verwenden die unteren Spielbuttons, die der SL im jeweiligen Moderationsfenster freigibt, und klicken Beitreten. Die neuen unteren Buttons sind standardmäßig aus.
 
-## Lügenwürfel und Drachenhort · Beta
+## Lügenwürfel und Drachenhort · stabil
 
-In den Foundry-Moduleinstellungen **Taverngames: Beta-Test** aktivieren. Beide Spiele erscheinen zusätzlich im SL-Reiter; untere Spielerbuttons werden jeweils in der Moderation freigegeben. Abschalten der Beta verbirgt ihre Fenster/Launcher und stoppt deren NPC-Automatik, ohne gespeicherte Partien zu löschen.
+Beide Spiele sind ab1.4.0 regulär im SL-Reiter verfügbar. Untere Spielerbuttons werden jeweils in der Moderation freigegeben. Der Beta-Test-Schalter beeinflusst diese Spiele nicht.
 
 Lügenwürfel: fünf geheime W6 je Person, Mindestgebote über alle Becher, Einsen als Joker, Anzweifeln kostet dem Verlierer einen Würfel. Genau erfüllte Gebote sind gültig. Der Verlierer beginnt die neue Runde, bei Ausscheiden der nächste Aktive. Letzter Teilnehmer mit Würfeln gewinnt. Spieler erhalten nur eigene Becher; SL sehen zusätzlich manuell übernommene NPC-Becher. NPCs verwenden keine fremden geheimen Würfel.
 
 Drachenhort: neun Felder 3–11, zwei W6. Normale Felder kosten eine Münze oder zahlen ab bereits drei Münzen alles aus. Eine2 kostet neun, eine12 sammelt alles ein. Nicht bedienbare Zahlung: Rest frei verteilen, dann ausscheiden. Letzter Aktiver bekommt das Brett. Eintritt/Spielmünzen (Standard2 Gold/30 Münzen) oder virtuelle Zocker-Bestände, vorzeitiges SL-Ende mit gleichmäßiger Restverteilung nur an Aktive und anteiliger Gegenwert-Vorschau. Unteilbare Reste per geheimem Tipp, anschließendem SL-Wurf und Gleichstands-Wiederholung. Beide Modi bleiben rein intern: keine Charakter-Geldbestände lesen oder verändern. Eintritt und Auszahlungen sind nur virtuelle Vorschauen.
 
-English: enable **Beta testing** for Liar’s Dice and Dragon’s Hoard. Both have separate saves, optional bottom launchers, named controllable NPCs and source-attributed instructions. Liar’s Dice keeps cups private and resolves exact bids correctly. Dragon’s Hoard supports virtual token/gambler modes, partial payments, elimination, early ending and remainder guesses. Neither beta game reads or changes character wallets. Existing six regular games remain available.
+English: Liar’s Dice and Dragon’s Hoard are stable and do not require beta testing. Both have separate saves, optional bottom launchers, named controllable NPCs and source-attributed instructions. Liar’s Dice keeps cups private and resolves exact bids correctly. Dragon’s Hoard supports virtual token/gambler modes, partial payments, elimination, early ending and remainder guesses. Neither game reads or changes character wallets. All eight games are available normally.
 
 Rule source / Regelquelle: [TZawalich, tavern-games-current](https://github.com/TZawalich/tavern-games-current). Independent implementation; no upstream code, images or server bundled.
 
@@ -142,3 +142,14 @@ Entwicklung: `node --test module/tests/*.test.mjs`, `node tools/check.mjs`, `nod
 Schweinchen bietet in der SL-Moderation unter Neue Partie & Regeln die standardmäßig ausgeschaltete Option „Bei gesicherter Zielpunktzahl sofort beenden“. Sie gilt ab der neu vorbereiteten Lobby und bleibt bei Folgepartien erhalten. Ohne diese Option wird die Schlussrunde gespielt; alte Spielstände bleiben unverändert. Die Spieleüberschriften sind etwas kleiner, zwischen den Einträgen liegt mehr Abstand.
 
 Pig offers an optional immediate finish when the target is banked (GM moderation, New game & rules). Off by default, preserved for follow-up games. Existing saves retain the final round. Catalog headings are slightly smaller, with more space between games.
+
+
+## Aktueller Stand 1.4.0 – ersetzt frühere Beta-Statusangaben
+
+Alle acht Spiele sind regulär verfügbar. Lügenwürfel und Drachenhort benötigen keinen Beta-Spieleschalter mehr. Bestehende Spielstände und Modul-ID bleiben erhalten. Drachenhort führt weiterhin nur virtuelle Münzen; stabile Freigabe erweitert die Geldbuchungen nicht.
+
+In Foundry unter Einstellungen → Moduleinstellungen → Taverngames kann der SL „3D-Würfel mit Dice So Nice (Beta)“ aktivieren. Standardmäßig aus, unabhängig von „Beta-Test“. Dice So Nice muss separat installiert und aktiviert sein. Dice Tray ist nicht erforderlich. Ohne DSN oder bei einer fehlenden API bleibt das Spiel mit normaler Darstellung bedienbar. Die Beta zeigt Wurfanimationen auf dem Foundry-Tisch, keine eigene eingebettete3D-Fläche und keine dauerhaft interaktiven Würfel. Die Ergebnisanzeige wartet nicht auf den Abschluss der Animation.
+
+Nur tatsächlich neu geworfene Würfel werden animiert; keine zweite Zufallsziehung. Private Lügenwürfel nur für ihren Besitzer bzw. manuell übernommene NPCs; beim Anzweifeln werden aufgedeckte Hände öffentlich animiert. Schocken animiert nicht verdeckte eigene Würfe nur lokal beim Besitzer; der verdeckte dritte Wurf bleibt auch in der Animation verborgen. Explizites Aufdecken kann öffentlich animiert werden. Animationen werden über den authentifizierten GM-Kanal abgefragt und mit synchronize=false lokal angezeigt. Ereignisse sind flüchtig, maximal15Sekunden verfügbar; nach Browserneustart können jüngste Ereignisse erneut sichtbar sein, ohne neue Wertung. Keine Chatwürfe und kein Fremdcode/Assets aus DSN eingebettet.
+
+English: All eight games are stable. The independent world setting “3D dice with Dice So Nice (Beta)” is off by default. Install and enable Dice So Nice separately; Dice Tray is not required. Optional local animations use the authoritative game results, with no additional random rolls. Hidden results are delivered only to authorized recipients. Persistent interactive dice are deferred. No live Foundry/DSN acceptance is claimed; this is a beta API integration.

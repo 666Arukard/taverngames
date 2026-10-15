@@ -6,8 +6,8 @@ export const GAME_CATALOG=Object.freeze([
  {id:'pig',category:'dice',names:['Schweinchen','Pig']},
  {id:'ship',category:'dice',names:['Schiff, Kapitän und Mannschaft','Ship, Captain and Crew']},
  {id:'kniffel',category:'dice',names:['Kniffel']},
- {id:'liars',category:'dice',names:['Lügenwürfel','Liar’s Dice','Liars Dice'],beta:true},
- {id:'hoard',category:'chance',names:['Drachenhort','Dragon’s Hoard','Dragons Hoard'],beta:true},
+ {id:'liars',category:'dice',names:['Lügenwürfel','Liar’s Dice','Liars Dice']},
+ {id:'hoard',category:'chance',names:['Drachenhort','Dragon’s Hoard','Dragons Hoard']},
  {id:'lottery',category:'chance',names:['Straßenlotto','Street lottery']}
 ]);
 const normalize=value=>String(value??'').toLocaleLowerCase().replace(/ß/g,'ss').normalize('NFD').replace(/\p{M}/gu,'').replace(/[^\p{L}\p{N}]+/gu,' ').trim();

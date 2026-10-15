@@ -2,34 +2,35 @@
   "schemaVersion": 1,
   "blocks": {
     "patchnotes": {
-      "title": "Patchnotes Version 1.3.4",
+      "title": "Patchnotes Version 1.4.0",
       "paragraphs": [
-        "Schweinchen kann optional direkt beim Sichern der Zielpunktzahl enden. Die neue SL-Regel ist standardmäßig ausgeschaltet.",
-        "Lügenwürfel und Drachenhort bleiben Beta. Eine über die Moduleinstellungen schaltbare Dice-So-Nice-Beta ist der nächste geplante Entwicklungsschritt."
+        "Lügenwürfel und Drachenhort sind jetzt stabil und ohne Beta-Test-Schalter verfügbar.",
+        "Neu: separat einschaltbare Dice-So-Nice-Wurfanimationen als Beta. Die Funktion ist standardmäßig ausgeschaltet."
       ],
       "items": [
-        "Schweinchen: Sofortende in der Moderation vor dem Öffnen einer neuen Lobby auswählen; Folgepartien übernehmen die Auswahl.",
-        "Ohne Sofortende bleibt die Schlussrunde erhalten, auch bei älteren Spielständen.",
-        "Etwas kleinere Spielüberschriften und mehr Abstand nach den Spielbuttons.",
-        "Die Korrektur der Reiter-Sichtbarkeit aus 1.3.3 ist enthalten."
+        "Alle acht Spiele regulär verfügbar; bestehende Spielstände bleiben erhalten.",
+        "3D-Würfel zeigen dieselben Ergebnisse wie die Spielwertung und respektieren verdeckte Würfe.",
+        "Dice So Nice separat installieren und aktivieren; Dice Tray wird nicht benötigt.",
+        "Keine dauerhaft interaktiven 3D-Würfel in dieser ersten Beta.",
+        "Überflüssige Höhenvorgaben im Katalog entfernt."
       ]
     },
     "games": {
       "title": "Aktuelle Spiele",
       "paragraphs": [],
       "items": [
+        "Drachenhort",
         "Farkle",
         "Kniffel",
+        "Lügenwürfel",
         "Schiff–Kapitän–Mannschaft",
         "Schocken",
         "Schweinchen",
-        "Straßenlotto",
-        "Drachenhort (Beta)",
-        "Lügenwürfel (Beta)"
+        "Straßenlotto"
       ]
     },
     "plans": {
-      "title": "Geplante Spiele",
+      "title": "geplante Spiele",
       "paragraphs": [
         "Für diese Spiele und Wettbewerbe liegen Regelreferenzen vor. Die Auswahl ist Planung und keine Zusage zur Umsetzung; einzelne Regelfragen sind noch offen."
       ],
@@ -46,6 +47,7 @@
         "Elfenlauf",
         "Escalero",
         "Gerade oder Ungerade",
+        "Gerade oder Ungerade / Chō-Han (Vermittlervariante)",
         "Gewichteheben",
         "Hütchenspiel",
         "Karaoke",
@@ -71,19 +73,108 @@
         "Yahtzee"
       ]
     },
+    "plans2": {
+      "title": "geplante Funktionen",
+      "paragraphs": [
+        "Größere Erweiterungen werden schrittweise geprüft. Die folgende Liste beschreibt Überlegungen und noch keine fertigen Funktionen."
+      ],
+      "items": [
+        "Erweiterte Tags und zusätzliche Filter, etwa nach Spieldauer und Einsätzen.",
+        "Dice-So-Nice-Beta nach Praxistests ausbauen und später stabil freigeben; dauerhaft liegende und interaktive 3D-Würfel bleiben eine spätere Erweiterung.",
+        "Grafische Kartendarstellung als Grundlage späterer Kartenspiele.",
+        "Eigene große Erweiterung für gezielte SL-Manipulationen; noch nicht umgesetzt.",
+        "Kniffel-Serien und Kniffel-Einsatzverwaltung.",
+        "Optionale echte Charaktergeld-Abrechnung für Drachenhort und Ausgangswetten, bisher nur virtuelle Guthaben.",
+        "Beschleunigte NPC-Wettpartien."
+      ]
+    },
+    "functions": {
+      "title": "aktuelle Funktionen",
+      "paragraphs": [
+        "Taverngames bietet acht reguläre Spiele mit gemeinsamer Spielleitung und getrennten Spielständen. Die 3D-Animation ist eine separat schaltbare Beta."
+      ],
+      "items": [
+        "Spielkategorien und kombinierte Suche nach deutschen oder englischen Spielnamen.",
+        "Alphabetische Spielelisten, bis zu fünf lokale SL-Favoriten und Zurücksetzen der Filter.",
+        "Nur für die Spielleitung sichtbarer Reiter; Spieler treten über freigegebene Spielbuttons freiwillig bei.",
+        "Separate Spiel- und Moderationsfenster, benannte NPCs mit automatischer oder manueller Steuerung, Pause und Spielabbruch.",
+        "Verschlüsselte Spielstände und Wiederaufnahme; der ursprüngliche GM-Browser wird für die vorhandenen Schlüssel benötigt.",
+        "Ausgangswetten mit Publikumsauswahl, NPC-Wettern, Annahmeschluss, internen Goldkonten, gleichmäßiger Topfverteilung, Erstattungen und Chat-Nachweisen.",
+        "Optionale Charaktergeld-Abrechnung der unterstützten D&D-5e/5.5e-Spiele auf ausdrücklichen SL-Befehl; Elektrum separat schaltbar, Vorschau und Wiederholschutz.",
+        "Straßenlotto mit konfigurierbaren Tippscheinen und einmaliger Übergabe eines von der Spielleitung ausgewählten Gegenstandspreises.",
+        "Drachenhort mit virtuellen Münzen, internen Beständen, Restverteilung und Auszahlungsvorschau ohne Charakterbuchungen.",
+        "Optionale Dice-So-Nice-Wurfanimationen als Beta: separat schaltbar, dieselben Ergebnisse wie die Spielwertung und geschützte verdeckte Würfe.",
+        "Deutsche und englische Anleitungen, Quellenangaben sowie Ergebnis- und Regelhinweise im Chat.",
+        "Konfigurierbare Hausvarianten, frische Folgepartien und Schweinchen-Wurfhistorie."
+      ]
+    },
     "settings": {
       "title": "Einstellungen in Foundry",
       "paragraphs": [
         "Installiere oder aktualisiere Taverngames über den Manifest-Link und aktiviere das Modul in deiner Spielwelt. Öffne als Spielleitung die Foundry-Einstellungen und dort die Moduleinstellungen für Taverngames.",
-        "Wähle für die Moduloberfläche Englisch oder Deutsch. Schocken, Farkle, Schweinchen, Schiff–Kapitän–Mannschaft, Kniffel und Straßenlotto sind regulär verfügbar.",
-        "Lass Beta-Test ausgeschaltet, wenn du nur die regulären Spiele verwenden möchtest. Zum Ausprobieren von Lügenwürfel und Drachenhort aktiviere Beta-Test; diese beiden Spiele sind noch nicht für den stabilen Spielbetrieb abgenommen.",
+        "Wähle für die Moduloberfläche Englisch oder Deutsch. Alle acht Spiele sind regulär verfügbar: Drachenhort, Farkle, Kniffel, Lügenwürfel, Schiff–Kapitän–Mannschaft, Schocken, Schweinchen und Straßenlotto.",
         "Öffne den nur für die Spielleitung sichtbaren Taverngames-Reiter. Wähle ein Spiel und öffne die Moderation. Gib dort den unteren Spielbutton frei, damit Spieler den Tisch öffnen und freiwillig beitreten können. Stelle Teilnehmer, NPC-Steuerung und die gewünschten Spielregeln vor dem Start ein.",
         "Verwaltetes Setzen und Elektrum verwenden sind standardmäßig ausgeschaltet. Aktiviere verwaltetes Setzen nur für bewusst gewünschte Charaktergeld-Abrechnungen der unterstützten D&D-5e/5.5e-Spiele. Prüfe Charakterzuordnung, Einsatz, Währung und Vorschau; die Geldabrechnung wird nach regulärem Spielende ausdrücklich durch die Spielleitung ausgelöst.",
         "Die neuen Ausgangswetten verwenden davon getrennte interne Goldstände. Bereite zuerst die Lobby vor und öffne Wetten. Lege als Spielleitung Publikum und Wettmarkt fest, passe bei Bedarf interne Guthaben an und erlaube Spieler- oder NPC-Wetten. Schließe die Annahme, bevor du das Spiel separat startest. Gewinne werden automatisch gleichmäßig verteilt; bei Abbruch oder keinem richtigen Tipp werden Einsätze erstattet.",
         "Drachenhort verwendet ebenfalls nur virtuelle Münzen und Vorschauen. Weder Drachenhort noch Ausgangswetten verändern Charaktergeld. Sichere deine Welt vor Updates und neuen Tests.",
-        "Schweinchen: Öffne in der Moderation Neue Partie & Regeln. Wähle bei Bedarf Bei gesicherter Zielpunktzahl sofort beenden und öffne anschließend die Lobby. Standardmäßig spielen alle anderen nach Zielerreichung noch einen letzten Zug."
+        "Schweinchen: Öffne in der Moderation Neue Partie & Regeln. Wähle bei Bedarf Bei gesicherter Zielpunktzahl sofort beenden und öffne anschließend die Lobby. Standardmäßig spielen alle anderen nach Zielerreichung noch einen letzten Zug.",
+        "Alle acht Spiele sind stabil. Der allgemeine Beta-Test-Schalter wird für diese Spiele nicht mehr benötigt.",
+        "Für optionale 3D-Wurfanimationen installiere und aktiviere Dice So Nice. Aktiviere anschließend in den Taverngames-Moduleinstellungen 3D-Würfel mit Dice So Nice (Beta). Standardmäßig aus; unabhängig vom Beta-Spieleschalter.",
+        "Die 3D-Beta zeigt normale Wurfanimationen auf dem Foundry-Tisch. Dauerhaft liegende und interaktive 3D-Würfel folgen später."
       ],
       "items": []
+    },
+    "sources": {
+      "title": "Regelquellen",
+      "paragraphs": [
+        "Hier findet ihr alle genutzten Regelquellen. Quellen für noch nicht umgesetzte Spiele sind ausdrücklich als geplante Regelreferenzen gekennzeichnet."
+      ],
+      "items": [
+        "Schockfreunde (Regelquelle Schocken) – https://schockfreunde.de/schockregeln",
+        "PlayMonster (Regelquelle Farkle) – https://playmonster.com/wp-content/uploads/2018/06/Farkle-Rules.pdf",
+        "Awiana (geplante Regelvorlagen) – https://awiana.fandom.com/de/wiki/Liste_an_Kneipen_spielen",
+        "Paul Cossmer / DnDDiary (PDF-Regelvorlagen) – https://keeponrolling.de/",
+        "Bicycle Cards (Regelquelle Schiff und Blackjack) – https://bicyclecards.com/how-to-play/ship-captain-and-crew",
+        "moses. Verlag (Regelreferenzen 17+4 und Schwimmen) – https://www.moses-verlag.de/media/20/99/c5/1599117493/81716_Karten-und_Wuerfelspiele_fuer_unterwegs_Regeln_deutsch_web.pdf",
+        "John McLeod / Pagat (Regelreferenz Schwimmen) – https://www.pagat.com/commerce/schwimmen.html",
+        "TS Spielkarten (ergänzende Regelreferenz Schwimmen) – https://ts-spielkarten.de/spielregeln-kartenspiele/schwimmen-spielregeln/",
+        "Schmidt Spiele (Regelquelle Kniffel) – https://www.schmidtspiele.de/files/Produkte/4/49203%20-%20Kniffel%C2%AE/49203_Kniffel_DE.pdf",
+        "TZawalich (Regelquelle Lügenwürfel und Drachenhort) – https://github.com/TZawalich/tavern-games-current",
+        "Awiana – Aalstechen (geplante Regelreferenz): https://awiana.fandom.com/de/wiki/Aalstechen",
+        "Awiana – Elfenlauf (geplante Regelreferenz): https://awiana.fandom.com/de/wiki/Elfenlauf",
+        "Awiana – Koboldpoker (geplante Regelreferenz): https://awiana.fandom.com/de/wiki/Koboldpoker",
+        "Awiana – Piratenzunge (geplante Regelreferenz): https://awiana.fandom.com/de/wiki/Piratenzunge",
+        "Awiana – Schlangenfangen (geplante Regelreferenz): https://awiana.fandom.com/de/wiki/Schlangenfangen",
+        "Bicycle Cards (ergänzende/geplante Regelreferenz) – https://bicyclecards.com/how-to-play/blackjack",
+        "Hasbro Classic 00950 (ergänzende/geplante Regelreferenz) – https://instructions.hasbro.com/api/download/00950_en-ca_yahtzee-classic.pdf",
+        "Hasbro 40958 (ergänzende/geplante Regelreferenz) – https://www.hasbro.com/common/instruct/40958.pdf",
+        "Dice-Play – Chō-Han (geplante Regelreferenz): https://www.dice-play.com/Games/ChoHanBakuchi.htm",
+        "Netexl – Chō-Han (geplante Regelreferenz): https://www.netexl.com/howtoplay/cho-han/",
+        "Wikipedia – Chō-Han (geplante Regelreferenz): https://en.wikipedia.org/wiki/Ch%C5%8D-han",
+        "Wizard of Odds – Chō-Han (geplante Regelreferenz): https://wizardofodds.com/games/cho-han/",
+        "D&D Beyond – Basic Rules 2024, allgemeine Regel- und Währungsreferenz: https://www.dndbeyond.com/sources/dnd/br-2024/playing-the-game",
+        "D&D Beyond – Charaktererschaffung, Währungsreferenz: https://www.dndbeyond.com/sources/dnd/br-2024/creating-a-character",
+        "Paul Cossmer – Tavernen und Glücksspiele, bereitgestellte PDF-Regelvorlagen für geplante Spiele; Lektorat: Georg Haubner. Kontext DnDDiary: https://keeponrolling.de/"
+      ]
+    },
+    "sources1": {
+      "title": "Hausvarianten",
+      "paragraphs": [
+        "Alle angewandeten Hausregeln von uns. Die folgenden Varianten und Ergänzungen werden in Taverngames nach den gemeinsamen Vorgaben von Daniel und Philipp angeboten; optionale Regeln sind entsprechend gekennzeichnet. Die Zusammenstellung behauptet keine Erfindung der zugrunde liegenden Standardspiele."
+      ],
+      "items": [
+        "Farkle, optional: kleine Straße aus fünf verschiedenen aufeinanderfolgenden Zahlen in einem Wurf zählt 750 Punkte.",
+        "Farkle, optional: drei/vier/fünf/sechs Einsen in einem Wurf zählen 1000/2000/3000/4000 Punkte.",
+        "Farkle, optional: sofortiges Ende beim Sichern der Zielpunktzahl statt einer Schlussrunde.",
+        "Farkle: Kurzspiel mit genau einem Zug je Teilnehmer oder feste Rundenzahl mit Gesamtpunkten; im Zielmodus bevorzugt ein gleicher Startwurf die frühere Position.",
+        "Schweinchen, optional: sofortiges Ende beim Sichern der Zielpunktzahl; ohne diese Option bleibt die Schlussrunde.",
+        "Schweinchen: volle nominale Prämie je gleichplatziertem Teilnehmer; Finanzierung wahlweise durch Tavernenbank oder sichtbare Neuverteilung des vorhandenen Topfes.",
+        "Schiff–Kapitän–Mannschaft: Einzelspiel sowie feste oder unbegrenzte Serien mit addierten Punkten und regulärem Abschluss nach der laufenden Runde.",
+        "Straßenlotto: durch die Spielleitung wählbare Zahlenzahl je Tippschein, Standard fünf und einstellbar von 1 bis 100; ausgewählter Gegenstand statt pauschalem Goldgewinn.",
+        "Kniffel: nach gestrichenem Kniffelfeld kein Zusatzkniffel-Bonus und keine Joker-Sonderwertung; diese Festlegung klärt die offene Stelle der Regelreferenz.",
+        "Ausgangswetten: der gesamte Topf wird gleichmäßig über alle richtigen Wetter verteilt, unabhängig von ihrer individuellen Einsatzhöhe.",
+        "Drachenhort: vorzeitiger regulärer Abschluss mit gleichmäßiger Hortverteilung und geheimen Resttipps; Gleichstände werden nur unter den gleich nahen Tipps wiederholt."
+      ]
     }
   }
 }
