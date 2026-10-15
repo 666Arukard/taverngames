@@ -4,10 +4,11 @@ export const NEW_GAMES=['pig','ship','lottery','kniffel','liars','hoard'];
 const check=(ok,message)=>{if(!ok)throw new Error(message);};
 const integer=(n,min,max)=>Number.isSafeInteger(n)&&n>=min&&n<=max;
 const cup=game=>game==='pig'?{dice:[],points:0,rolls:0,bust:false,lost:0}:{dice:null,held:Array(5).fill(false),stage:0,rolls:0};
-export function createTavern(game,{npcs={},target=100,stake=2,currency='gp',funding='redistribute',mode='single',roundLimit=3,prize='',prizeUuid='',prizeValue=25,maxTickets=20,perPlayer=2,numbersPerTicket=5,hoardMode='tokens',initialCoins=30,entryAmount=2}={}){
+export function createTavern(game,{npcs={},target=100,immediateTarget=false,stake=2,currency='gp',funding='redistribute',mode='single',roundLimit=3,prize='',prizeUuid='',prizeValue=25,maxTickets=20,perPlayer=2,numbersPerTicket=5,hoardMode='tokens',initialCoins=30,entryAmount=2}={}){
   if(BETA_GAMES.includes(game))return createBetaGame(game,{npcs,hoardMode,initialCoins,entryAmount,currency});
   if(game==='kniffel')return createKniffel({npcs});
   check(NEW_GAMES.includes(game),'Unknown game.');check(integer(target,10,1000000),'Invalid target.');
+  check(typeof immediateTarget==='boolean','Invalid rule option.');
   check(integer(stake,0,1000000),'Invalid stake.');check(integer(maxTickets,1,20)&&integer(perPlayer,1,maxTickets),'Invalid ticket limits.');
   check(integer(numbersPerTicket,1,100),'Numbers per ticket must be between 1 and 100.');
   check(['cp','sp','ep','gp','pp'].includes(currency)&&['bank','redistribute'].includes(funding),'Invalid currency or funding.');
@@ -17,12 +18,13 @@ export function createTavern(game,{npcs={},target=100,stake=2,currency='gp',fund
   check(npcs&&typeof npcs==='object'&&!Array.isArray(npcs)&&Object.keys(npcs).length<=20,'Invalid NPCs.');
   for(const [id,name] of Object.entries(npcs))check(id.startsWith('npc-')&&typeof name==='string'&&name.trim()&&name.length<=60,'Invalid NPCs.');
   const players=Object.keys(npcs);
-  return {version:1,game,phase:'lobby',revision:0,paused:false,npcs:structuredClone(npcs),npcManual:{},players,scores:Object.fromEntries(players.map(id=>[id,0])),order:[],turn:0,round:1,cup:null,target,stake,currency,funding,mode,roundLimit,stopAfterRound:false,prize:prize.trim(),prizeUuid,prizeValue,maxTickets,perPlayer,numbersPerTicket,tickets:[],finalRemaining:null,tieBreak:0,tieScores:{},log:[],rollHistory:[]};
+  return {version:1,game,phase:'lobby',revision:0,paused:false,npcs:structuredClone(npcs),npcManual:{},players,scores:Object.fromEntries(players.map(id=>[id,0])),order:[],turn:0,round:1,cup:null,target,immediateTarget,stake,currency,funding,mode,roundLimit,stopAfterRound:false,prize:prize.trim(),prizeUuid,prizeValue,maxTickets,perPlayer,numbersPerTicket,tickets:[],finalRemaining:null,tieBreak:0,tieScores:{},log:[],rollHistory:[]};
 }
 function finish(s,winners,losers){s.phase='finished';s.cup=null;s.winners=winners;s.losers=losers;s.draw=winners.length>1;}
 function pigEnd(s,bust){
   const id=s.order[s.turn],amount=bust?0:s.cup.points;s.scores[id]+=amount;
   s.log.push({id,type:bust?'bust':'bank',amount,total:s.scores[id],...(bust?{lost:s.cup.lost??0}:{})});
+  if(!bust&&s.immediateTarget===true&&s.scores[id]>=s.target){const low=Math.min(...Object.values(s.scores));finish(s,[id],s.players.filter(p=>s.scores[p]===low&&s.scores[p]<s.scores[id]));return;}
   if(s.finalRemaining===null&&s.scores[id]>=s.target)s.finalRemaining=s.order.length-1;
   else if(s.finalRemaining!==null)s.finalRemaining--;
   if(s.finalRemaining===0){const scores=Object.values(s.scores),high=Math.max(...scores),low=Math.min(...scores);finish(s,s.players.filter(id=>s.scores[id]===high),s.players.filter(id=>s.scores[id]===low&&low<high));return;}

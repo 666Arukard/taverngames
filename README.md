@@ -1,6 +1,6 @@
 # Taverngames – Foundry Extension
 
-**Version 1.3.2**. Alle sechs Spiele sind regulär verfügbar: Schocken, Farkle, Schweinchen, Schiff–Kapitän–Mannschaft, Kniffel und Straßenlotto. Kniffel wurde von Daniel am 14. Oktober 2026 für die stabile Version freigegeben.
+**Version 1.3.4**. Alle sechs Spiele sind regulär verfügbar: Schocken, Farkle, Schweinchen, Schiff–Kapitän–Mannschaft, Kniffel und Straßenlotto. Kniffel wurde von Daniel am 14. Oktober 2026 für die stabile Version freigegeben.
 
 ## Installation und Einstieg
 
@@ -135,3 +135,10 @@ Die danach im Manifest aufgeführten Namen sind als **Regelquellen/Referenzautor
 136 automatisierte Tests, Syntaxprüfung und elf synthetische Browserprüfungen einschließlich Deutsch/Englisch und getrennter GM-/Spieler-Clients. Details in docs/validation.md; Release in docs/release-1.3.2.md. Foundry 14.369 bleibt auf Grundlage des Nutzer-Praxistests für das Basismodul verified. Freigabe der drei bisherigen Beta-Spiele durch Daniels ausdrücklichen Auftrag. Keine neue eigene Live-Abnahme behauptet. Historische Pakete bleiben unverändert.
 
 Entwicklung: `node --test module/tests/*.test.mjs`, `node tools/check.mjs`, `node tools/browser-smoke.mjs`, `node tools/farkle-browser-smoke.mjs`, `node tools/farkle-multiplayer-smoke.mjs`, `node tools/tavern-browser-smoke.mjs`, `node tools/tavern-multiplayer-smoke.mjs`, `node tools/version-1.2-browser-smoke.mjs`. Browserprüfungen benötigen Playwright/Chrome. `tools/build-release.ps1` erzeugt konsistente Pakete.
+
+
+## Version 1.3.4
+
+Schweinchen bietet in der SL-Moderation unter Neue Partie & Regeln die standardmäßig ausgeschaltete Option „Bei gesicherter Zielpunktzahl sofort beenden“. Sie gilt ab der neu vorbereiteten Lobby und bleibt bei Folgepartien erhalten. Ohne diese Option wird die Schlussrunde gespielt; alte Spielstände bleiben unverändert. Die Spieleüberschriften sind etwas kleiner, zwischen den Einträgen liegt mehr Abstand.
+
+Pig offers an optional immediate finish when the target is banked (GM moderation, New game & rules). Off by default, preserved for follow-up games. Existing saves retain the final round. Catalog headings are slightly smaller, with more space between games.

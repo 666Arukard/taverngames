@@ -2,16 +2,16 @@
   "schemaVersion": 1,
   "blocks": {
     "patchnotes": {
-      "title": "Patchnotes Version 1.3.3",
+      "title": "Patchnotes Version 1.3.4",
       "paragraphs": [
-        "Dieses Korrekturupdate behebt die Sichtbarkeit des Taverngames-Reiters: Die Spieleliste wird beim Wechsel zu anderen Foundry-Reitern wieder ausgeblendet. Scrollen und die ausgekoppelte Ansicht bleiben erhalten.",
-        "Lügenwürfel und Drachenhort bleiben optionale Beta-Spiele hinter dem standardmäßig ausgeschalteten Beta-Test-Schalter. Die sechs bisherigen Spiele bleiben regulär verfügbar; Ausgangswetten verwenden weiterhin ausschließlich interne Goldstände."
+        "Schweinchen kann optional direkt beim Sichern der Zielpunktzahl enden. Die neue SL-Regel ist standardmäßig ausgeschaltet.",
+        "Lügenwürfel und Drachenhort bleiben Beta. Eine über die Moduleinstellungen schaltbare Dice-So-Nice-Beta ist der nächste geplante Entwicklungsschritt."
       ],
       "items": [
-        "Die Spieleliste erscheint nicht mehr in anderen Sidebar-Reitern.",
-        "Foundry steuert die Sichtbarkeit des aktiven und inaktiven Taverngames-Reiters wieder selbst.",
-        "Die begrenzte Scrollansicht und die Erreichbarkeit des letzten Spiels bleiben erhalten.",
-        "Deutsch, Englisch und die ausgekoppelte Ansicht wurden synthetisch geprüft; keine eigene Foundry-Liveprüfung."
+        "Schweinchen: Sofortende in der Moderation vor dem Öffnen einer neuen Lobby auswählen; Folgepartien übernehmen die Auswahl.",
+        "Ohne Sofortende bleibt die Schlussrunde erhalten, auch bei älteren Spielständen.",
+        "Etwas kleinere Spielüberschriften und mehr Abstand nach den Spielbuttons.",
+        "Die Korrektur der Reiter-Sichtbarkeit aus 1.3.3 ist enthalten."
       ]
     },
     "games": {
@@ -42,20 +42,29 @@
         "Das Spiel der edlen Dame",
         "Der Glückstag",
         "Die böse Dreizehn",
+        "Durak",
         "Elfenlauf",
+        "Escalero",
         "Gerade oder Ungerade",
         "Gewichteheben",
         "Hütchenspiel",
         "Karaoke",
+        "Kartendomino / Fan Tan",
         "Klippklapp",
         "Kneipenquiz",
         "Koboldpoker",
+        "König und Bettler / Präsident",
+        "Mau-Mau",
+        "Meiern / Mäxchen",
+        "Offenes Würfelpoker",
         "Pfeilwurf",
         "Piratenzunge",
         "Roulette (PDF-Variante)",
         "Schach (abstrakter Wettbewerb)",
         "Schlangenfangen",
+        "Schummeln (Kartenspiel)",
         "Schwimmen / Knack",
+        "Sechsundsechzig",
         "Spiel der Könige",
         "Wettessen",
         "Wetttrinken",
@@ -71,7 +80,8 @@
         "Öffne den nur für die Spielleitung sichtbaren Taverngames-Reiter. Wähle ein Spiel und öffne die Moderation. Gib dort den unteren Spielbutton frei, damit Spieler den Tisch öffnen und freiwillig beitreten können. Stelle Teilnehmer, NPC-Steuerung und die gewünschten Spielregeln vor dem Start ein.",
         "Verwaltetes Setzen und Elektrum verwenden sind standardmäßig ausgeschaltet. Aktiviere verwaltetes Setzen nur für bewusst gewünschte Charaktergeld-Abrechnungen der unterstützten D&D-5e/5.5e-Spiele. Prüfe Charakterzuordnung, Einsatz, Währung und Vorschau; die Geldabrechnung wird nach regulärem Spielende ausdrücklich durch die Spielleitung ausgelöst.",
         "Die neuen Ausgangswetten verwenden davon getrennte interne Goldstände. Bereite zuerst die Lobby vor und öffne Wetten. Lege als Spielleitung Publikum und Wettmarkt fest, passe bei Bedarf interne Guthaben an und erlaube Spieler- oder NPC-Wetten. Schließe die Annahme, bevor du das Spiel separat startest. Gewinne werden automatisch gleichmäßig verteilt; bei Abbruch oder keinem richtigen Tipp werden Einsätze erstattet.",
-        "Drachenhort verwendet ebenfalls nur virtuelle Münzen und Vorschauen. Weder Drachenhort noch Ausgangswetten verändern Charaktergeld. Sichere deine Welt vor Updates und neuen Tests."
+        "Drachenhort verwendet ebenfalls nur virtuelle Münzen und Vorschauen. Weder Drachenhort noch Ausgangswetten verändern Charaktergeld. Sichere deine Welt vor Updates und neuen Tests.",
+        "Schweinchen: Öffne in der Moderation Neue Partie & Regeln. Wähle bei Bedarf Bei gesicherter Zielpunktzahl sofort beenden und öffne anschließend die Lobby. Standardmäßig spielen alle anderen nach Zielerreichung noch einen letzten Zug."
       ],
       "items": []
     }

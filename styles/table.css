@@ -44,3 +44,7 @@
 .taverngames-sidebar{flex-direction:column;min-height:0;height:100%;overflow:hidden;box-sizing:border-box}.taverngames-sidebar>.window-content{display:flex;flex-direction:column;flex:1;min-height:0;overflow:hidden}.taverngames-sidebar .taverngames-catalog{flex:1 1 0;min-height:0;height:100%;max-height:100%;overflow-y:auto;overflow-x:hidden;overscroll-behavior-y:contain}
 
 .taverngames-sidebar{flex:1 1 0;max-height:calc(100dvh - 64px)}
+
+/* Keep each game heading close to its actions, and separate adjacent games. */
+.taverngames-catalog .taverngames-game-title h2{font-size:1.35em;line-height:1.25;margin:0 0 8px}
+.taverngames-catalog .taverngames-start-row+.taverngames-game-title{margin-top:20px}
