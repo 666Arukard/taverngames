@@ -48,3 +48,11 @@
 /* Keep each game heading close to its actions, and separate adjacent games. */
 .taverngames-catalog .taverngames-game-title h2{font-size:1.35em;line-height:1.25;margin:0 0 8px}
 .taverngames-catalog .taverngames-start-row+.taverngames-game-title{margin-top:20px}
+
+/* Let the native frame own its height; scroll the content inside it. */
+.taverngames-window .window-content{display:flex;flex-direction:column;min-height:0;min-width:0}
+.taverngames-window .taverngames-surface{flex:1 1 0;min-height:0;height:auto;overflow:hidden}
+.taverngames-window .taverngames-surface>.schocken-content{flex:1 1 auto;min-height:0;overflow:auto}
+.taverngames-sidebar{max-height:none}
+
+.chohan-sides{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:12px 0}.chohan-sides>section{border:1px solid #b99c65;border-radius:6px;padding:8px;overflow-wrap:anywhere}.chohan-sides h3{margin:0 0 8px}

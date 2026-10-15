@@ -1,6 +1,6 @@
 # Taverngames – Foundry Extension
 
-**Version 1.4.1**. Alle acht Spiele sind regulär verfügbar: Schocken, Farkle, Schweinchen, Schiff–Kapitän–Mannschaft, Kniffel, Straßenlotto, Lügenwürfel und Drachenhort. Kniffel wurde von Daniel am 14. Oktober 2026 für die stabile Version freigegeben.
+**Version 1.4.2**. Alle acht Spiele sind regulär verfügbar: Schocken, Farkle, Schweinchen, Schiff–Kapitän–Mannschaft, Kniffel, Straßenlotto, Lügenwürfel und Drachenhort. Kniffel wurde von Daniel am 14. Oktober 2026 für die stabile Version freigegeben.
 
 ## Installation und Einstieg
 
@@ -164,3 +164,14 @@ Für Chō-Han den allgemeinen Beta-Test-Schalter aktivieren. Alle acht bisherige
 Nur interne Testguthaben, Start100Gold pro Teilnehmer. Einsätze in ganzen Einheiten der gewählten Währung; Gegenwetten, Rückgaben und Provision kupfergenau. Elektrum nur mit allgemeiner Freigabe. Folgepartien behalten Guthaben. Provisionsbasis Gesamttopf/lediglich Gewinn sowie proportionale Kürzung/Abgabereihenfolge auswählbar. Vorläufiger Standard5Prozent vom Gesamttopf, proportionale Kürzung; noch offene Nutzerpräferenz. Reste nach größtem Bruchteil, bei Gleichstand Abgabereihenfolge. Abbruch erstattet alle noch reservierten Beträge, ohne Gewinn. Nach Auszahlung kein Undo.
 
 English: DSN beta now uses direct fixed-result notation, checked against6.4.4 source. Live renderer acceptance remains pending. Cho-Han beta is enabled with Beta testing; eight existing games remain stable. Intermediary variantB only, internal balances, matched bets, configurable commission and excess handling, hidden roll/reveal, copper-precision settlement, NPCs and follow-up rounds. No character transactions or cheating.
+
+
+## Neu in 1.4.2
+
+Fenster öffnen mit einer an die verfügbare Bildschirmhöhe angepassten Höhe. Der Inhalt bleibt nach unten scrollbar. Chō-Han bietet als Beta vier Varianten: A mit festem Einsatz und doppelter Gesamtauszahlung, B mit ausgeglichenen Gegenwetten, C mit Händlerbank und einstellbarer Gesamtauszahlung (Standard 1,90-fach), D mit Gemeinschaftstopf und Übertrag, wenn niemand richtig liegt. Bank und Guthaben bleiben interne Teststände. Variante B bleibt voreingestellt: 5 % vom angenommenen Gesamttopf und proportionale Kürzung der stärkeren Wettseite.
+
+### 3D-Würfel prüfen
+
+Als SL: Spieleinstellungen → Moduleinstellungen → Taverngames → **3D-Würfel prüfen** → **Test & Diagnose öffnen** → **3D-Testwürfel anzeigen**. Zwei feste Würfel (3 und 5) werden nur lokal an Dice So Nice übergeben; der Test verändert keine Partie und ist unabhängig vom 3D-Schalter. Danach optional im Spiel würfeln und **Diagnose aktualisieren**. Der kopierbare Bericht enthält Versionen, Erfassungs- und Animationszähler, keine Würfelwerte oder Spielernamen. Die Bestätigung durch Dice So Nice ist kein eigener Sichtnachweis. Bei weiterhin fehlenden Würfeln den Bericht zur Fehlersuche verwenden.
+
+English: Version 1.4.2 adjusts initial window height and scrolling, adds a GM-only local dice test and diagnostics in module settings, and expands Cho-Han beta to variants A–D using internal balances. Dice So Nice remains optional and beta; an actual Foundry/DSN live test is still pending.

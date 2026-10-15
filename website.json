@@ -2,21 +2,21 @@
   "schemaVersion": 1,
   "blocks": {
     "patchnotes": {
-      "title": "Patchnotes Version 1.4.1",
+      "title": "Patchnotes Version 1.4.2",
       "paragraphs": [
-        "Die Dice-So-Nice-Beta verwendet jetzt direkte feste Würfeldaten. Die Schnittstelle wurde gegen6.4.4 geprüft; der echte Praxistest steht noch aus.",
-        "Chō-Han ist als Beta verfügbar. Die acht bisherigen Spiele bleiben stabil."
+        "Fenster und Scrollbereiche wurden korrigiert. Ein separater SL-Würfeltest unterstützt die Fehlersuche bei Dice So Nice. Die echte 3D-Anzeige ist weiterhin nicht live bestätigt.",
+        "Acht stabile Spiele; Chō-Han und Dice So Nice bleiben Beta."
       ],
       "items": [
-        "Direkte Animationsdaten und sofortiger Abruf nach manuellen Würfen; keine zusätzliche Zufallsziehung.",
-        "Dice So Nice als empfohlenes, optionales Modul.",
-        "Chō-Han: VermittlervarianteB, interne Testmünzen, ausgeglichene Gegenwetten, Provision und Überschussrückgabe.",
-        "Verdeckter Händlerwurf, bewusstes Aufdecken, kupfergenaue Abrechnung und Chat-Ergebnis.",
-        "NPCs, individueller manueller Zugriff, Folgepartie und Abbruch mit Erstattung."
+        "Chō-Han: vier Varianten A–D mit sichtbaren Wettseiten.",
+        "Interne Bankdeckung und Gesamtauszahlung für A/C; Gemeinschaftstopf mit Übertrag und Erstattung bei D.",
+        "Variante B bleibt Standard mit 5 % Provision vom Gesamttopf und proportionaler Kürzung.",
+        "SL-Test mit zwei festen Würfeln und kopierbarer Diagnose ohne geheime Würfelwerte.",
+        "An Bildschirmhöhe angepasste Fenster und erreichbare untere Bedienelemente."
       ]
     },
     "games": {
-      "title": "Aktuelle Spiele",
+      "title": "aktuelle Spiele",
       "paragraphs": [],
       "items": [
         "Drachenhort",
@@ -106,7 +106,8 @@
         "Optionale Dice-So-Nice-Wurfanimationen als Beta: separat schaltbar, dieselben Ergebnisse wie die Spielwertung und geschützte verdeckte Würfe.",
         "Deutsche und englische Anleitungen, Quellenangaben sowie Ergebnis- und Regelhinweise im Chat.",
         "Konfigurierbare Hausvarianten, frische Folgepartien und Schweinchen-Wurfhistorie.",
-        "Chō-Han-Beta: interne gedeckte Gegenwetten, wählbare Provision und Überschussrückgabe; kein Charaktergeld."
+        "Chō-Han-Beta: interne gedeckte Gegenwetten, wählbare Provision und Überschussrückgabe; kein Charaktergeld.",
+        "Chō-Han-Beta mit Varianten A–D, interner Bank und Topfübertrag; nur virtuelle Guthaben."
       ]
     },
     "settings": {
@@ -123,7 +124,8 @@
         "Für optionale 3D-Wurfanimationen installiere und aktiviere Dice So Nice. Aktiviere anschließend in den Taverngames-Moduleinstellungen 3D-Würfel mit Dice So Nice (Beta). Standardmäßig aus; unabhängig vom Beta-Spieleschalter.",
         "Die 3D-Beta zeigt normale Wurfanimationen auf dem Foundry-Tisch. Dauerhaft liegende und interaktive 3D-Würfel folgen später.",
         "Chō-Han: allgemeinen Beta-Test aktivieren und im SL-Reiter unter Glücksspiele starten. Provision, Einsatzgrenzen und Münzart in der Moderation wählen, Lobby öffnen, Beitrittsbutton freigeben. Nach den Wetten Annahme schließen, verdeckt würfeln und aufdecken.",
-        "Die3D-Animationsbeta hat einen separaten Schalter. Dice So Nice6.4.4 ist als API-Referenz geprüft, der echte Praxistest steht noch aus."
+        "Die3D-Animationsbeta hat einen separaten Schalter. Dice So Nice6.4.4 ist als API-Referenz geprüft, der echte Praxistest steht noch aus.",
+        "SL-Diagnose: Moduleinstellungen → Taverngames → 3D-Würfel prüfen → Test & Diagnose öffnen. Der lokale Test funktioniert unabhängig vom 3D-Schalter. Nach einem Spielwurf Diagnose aktualisieren."
       ],
       "items": []
     },

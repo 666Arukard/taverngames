@@ -1,17 +1,20 @@
 // Optional presentation only: never generates random results or broadcasts DSN data.
 export class DiceEvents {
- constructor(){this.events=[];this.serial=0;}
+ constructor(){this.events=[];this.serial=0;this.captured={};}
+ record(scope,action,count){if(count)this.captured[scope]={action,count,time:Date.now()};}
+ diagnostics(){return {lastCaptures:structuredClone(this.captured),buffered:this.events.length,sequence:this.serial};}
  add(scope,actor,dice,{privateTo=null,now=Date.now()}={}){if(!dice.length)return;this.events.push({id:++this.serial,scope,actor,dice:structuredClone(dice),privateTo,time:now});this.events=this.events.filter(e=>now-e.time<15000).slice(-128);}
  read(user,after=0,now=Date.now()){return {cursor:this.serial,events:this.events.filter(e=>e.id>after&&now-e.time<15000&&(!e.privateTo||e.privateTo.includes(user.id))).map(({privateTo,time,...event})=>event)};}
  clear(){this.events=[];}
 }
 export class DiceAnimator {
- constructor({game,enabled,warn=()=>{}}){Object.assign(this,{game,enabled,warn});this.cursor=0;this.pending=Promise.resolve();this.warned=false;}
- consume(batch){if(!batch)return;const after=batch.cursor<this.cursor?0:this.cursor;this.cursor=batch.cursor;for(const event of (batch.events??[]).filter(e=>e.id>after))this.pending=this.pending.then(()=>this.play(event)).catch(()=>{});}
- async play(event){
-  if(!this.enabled())return;
+ constructor({game,enabled,warn=()=>{}}){Object.assign(this,{game,enabled,warn});this.cursor=0;this.pending=Promise.resolve();this.warned=false;this.stats={received:0,attempted:0,confirmed:0,skipped:0,errors:0,status:'idle'};}
+ consume(batch){if(!batch)return;const after=batch.cursor<this.cursor?0:this.cursor;this.cursor=batch.cursor;for(const event of (batch.events??[]).filter(e=>e.id>after)){this.stats.received++;this.pending=this.pending.then(()=>this.play(event)).catch(()=>{});}}
+ async play(event,{test=false}={}){
+  if(!test&&!this.enabled()){this.stats.status='disabled';return 'disabled';}
+  this.stats.attempted++;this.stats.status='checking';
   const dsn=this.game.dice3d;
-  if(!this.game.modules.get('dice-so-nice')?.active||typeof dsn?.show!=='function'){if(!this.warned){this.warned=true;this.warn();}return;}
+  if(!this.game.modules.get('dice-so-nice')?.active||typeof dsn?.show!=='function'){this.stats.status='unavailable';this.stats.errors++;if(!this.warned){this.warned=true;this.warn();}return 'unavailable';}
   try{
    const dice=[];
    for(const {sides,value} of event.dice){
@@ -25,8 +28,10 @@ export class DiceAnimator {
    if(!dice.length)return;
    // Direct DSN notation avoids reconstructing an evaluated Roll/AST on Foundry 14.
    // No evaluation, no chat and no DSN socket synchronization, including for private cups.
-   const shown=await dsn.show({throws:[{dice}]},this.game.users.get(event.actor)??this.game.user,false,null,false);
-   if(shown===false)console.debug('Taverngames: Dice So Nice skipped an animation; check DSN visibility and animation settings.');
-  }catch(error){console.error('Taverngames: Dice So Nice animation failed.',error);if(!this.warned){this.warned=true;this.warn();}}
+   this.stats.status='sent';const timeout=Symbol('timeout');let timer;const shown=await Promise.race([Promise.resolve(dsn.show({throws:[{dice}]},this.game.users.get(event.actor)??this.game.user,false,null,false)),new Promise(resolve=>{timer=setTimeout(()=>resolve(timeout),8000);})]).finally(()=>clearTimeout(timer));
+   if(shown===timeout){this.stats.status='timeout';this.stats.errors++;return 'timeout';}
+   this.stats.status=shown===false?'skipped':shown===true?'confirmed':'submitted';if(shown===false)this.stats.skipped++;else if(shown===true)this.stats.confirmed++;
+   if(shown===false)console.debug('Taverngames: Dice So Nice skipped an animation; check DSN visibility and animation settings.');return this.stats.status;
+  }catch(error){this.stats.status='error';this.stats.errors++;console.error('Taverngames: Dice So Nice animation failed.',error);if(!this.warned){this.warned=true;this.warn();}return 'error';}
  }
 }

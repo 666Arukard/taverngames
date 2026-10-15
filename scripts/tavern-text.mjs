@@ -14,7 +14,7 @@ const ERRORS={
  'A GM must be connected.':'Eine Spielleitung muss verbunden sein.','The game is not running.':'Das Spiel läuft gerade nicht.',
  'The game state changed. Please try again.':'Spielstand geändert. Bitte erneut versuchen.','It is not your turn.':'Du bist nicht am Zug.',
  'Finish or end the current game first.':'Die laufende Partie zuerst beenden.','This game has ended.':'Dieses Spiel ist beendet.',
- 'Both sides need a bet.':'Beide Seiten benötigen einen Gegeneinsatz.','Invalid rule option.':'Ungültige Regeloption.','Invalid target.':'Ungültige Zielpunktzahl.','Invalid stake.':'Ungültiger Grundeinsatz.','Invalid round mode.':'Ungültiger Rundenmodus.',
+ 'Place a bet first.':'Zuerst eine Wette platzieren.','The bank cannot cover these bets.':'Die Bank kann diese Wetten nicht decken.','Resolve or refund the carried pot first.':'Den übertragenen Topf zuerst ausspielen oder erstatten.','Both sides need a bet.':'Beide Seiten benötigen einen Gegeneinsatz.','Invalid rule option.':'Ungültige Regeloption.','Invalid target.':'Ungültige Zielpunktzahl.','Invalid stake.':'Ungültiger Grundeinsatz.','Invalid round mode.':'Ungültiger Rundenmodus.',
  'Invalid currency or funding.':'Ungültige Währung oder Finanzierungsart.','Invalid ticket limits.':'Ungültige Tippscheinlimits.',
  'Invalid prize.':'Ungültiger Hauptgewinn.','Invalid NPCs.':'Ungültige NPCs.','Invalid participant.':'Ungültiger Teilnehmer.',
  'Ticket acceptance is closed.':'Die Tippannahme ist geschlossen.','Ticket limit reached.':'Das Tippscheinlimit ist erreicht.',
