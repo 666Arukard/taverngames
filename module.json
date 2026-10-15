@@ -1,10 +1,10 @@
 {
     "id":  "taverngames",
     "title":  "Taverngames – Foundry Extension",
-    "description":  "\u003ch3\u003eDeutsch\u003c/h3\u003e\u003cp\u003eTaverngames bringt Schocken, Farkle, Schweinchen, Schiff–Kapitän–Mannschaft, Kniffel, Straßenlotto, Lügenwürfel und Drachenhort mit SL-Moderation, freiwilligem Beitritt und benannten NPCs an deinen Foundry-Tisch. Alle acht Spiele sind stabil. Der Reiter ist nur für SL sichtbar.\u003c/p\u003e\u003ch3\u003eEnglish\u003c/h3\u003e\u003cp\u003eTaverngames brings eight stable games to Foundry: Schocken, Farkle, Pig, Ship–Captain–Crew, Kniffel, Street lottery, Liar’s Dice and Dragon’s Hoard, with GM moderation, voluntary participation and named NPCs. The tab is GM-only.\u003c/p\u003e\u003ch3\u003e1.4.0 · Versionshinweise / Release notes\u003c/h3\u003e\u003cul\u003e\u003cli\u003eLügenwürfel und Drachenhort sind regulär verfügbar, ohne Beta-Schalter. / Liar’s Dice and Dragon’s Hoard are available normally, without beta testing.\u003c/li\u003e\u003cli\u003eOptionale Dice-So-Nice-Wurfanimationen (Beta) mit eigenem Schalter in den Moduleinstellungen, standardmäßig aus. Wertung und Animation verwenden dieselben Ergebnisse. / Optional Dice So Nice roll animations (beta), separately switchable in module settings, off by default. Scoring and animation use the same results.\u003c/li\u003e\u003cli\u003eVerdeckte Würfe werden nur an berechtigte Empfänger übermittelt. Keine dauerhaft interaktiven 3D-Würfel. / Hidden rolls are delivered only to authorized recipients. No persistent interactive 3D dice.\u003c/li\u003e\u003cli\u003eÜberflüssige Höhenvorgaben im Spielekatalog entfernt. / Removed redundant catalog height constraints.\u003c/li\u003e\u003c/ul\u003e",
-    "version":  "1.4.0",
+    "description":  "\u003ch3\u003eDeutsch\u003c/h3\u003e\u003cp\u003eTaverngames bringt Schocken, Farkle, Schweinchen, Schiff–Kapitän–Mannschaft, Kniffel, Straßenlotto, Lügenwürfel und Drachenhort mit SL-Moderation, freiwilligem Beitritt und benannten NPCs an deinen Foundry-Tisch. Alle acht Spiele sind stabil. Der Reiter ist nur für SL sichtbar.\u003c/p\u003e\u003ch3\u003eEnglish\u003c/h3\u003e\u003cp\u003eTaverngames brings eight stable games to Foundry: Schocken, Farkle, Pig, Ship–Captain–Crew, Kniffel, Street lottery, Liar’s Dice and Dragon’s Hoard, with GM moderation, voluntary participation and named NPCs. The tab is GM-only.\u003c/p\u003e\u003ch3\u003e1.4.1 · Versionshinweise / Release notes\u003c/h3\u003e\u003cul\u003e\u003cli\u003eDice-So-Nice-Beta: direkte feste Würfeldaten statt rekonstruierter Roll-Daten; Animationsabruf unmittelbar nach manuellen Würfen. Schnittstelle gegen6.4.4 geprüft, echter Praxistest noch ausstehend. / Dice So Nice beta: direct fixed dice data instead of reconstructed Roll data, immediate polling after manual rolls. API checked against6.4.4; live test pending.\u003c/li\u003e\u003cli\u003eDice So Nice als optional empfohlenes Modul eingetragen. / Dice So Nice listed as an optional recommended module.\u003c/li\u003e\u003cli\u003eChō-Han (Beta): VermittlervarianteB, interne Testmünzen, ausgeglichene Gegenwetten, konfigurierbare Provision und Überschussrückgabe, verdeckter Wurf, Aufdecken und Chat-Auswertung. / Cho-Han (beta): intermediary variantB, internal test coins, matched stakes, configurable commission and excess refunds, concealed roll, reveal and chat results.\u003c/li\u003e\u003cli\u003eAcht bisherige Spiele bleiben stabil. / Eight existing games remain stable.\u003c/li\u003e\u003c/ul\u003e",
+    "version":  "1.4.1",
     "readme":  "README.md",
-    "changelog":  "https://github.com/666Arukard/taverngames/releases/tag/v1.4.0",
+    "changelog":  "https://github.com/666Arukard/taverngames/releases/tag/v1.4.1",
     "url":  "https://dnd.brunecoaching.de",
     "compatibility":  {
                           "verified":  "14.369"
@@ -72,5 +72,13 @@
                    "styles/table.css"
                ],
     "manifest":  "https://github.com/666Arukard/taverngames/releases/latest/download/module.json",
-    "download":  "https://github.com/666Arukard/taverngames/releases/download/v1.4.0/taverngames-1.4.0.zip"
+    "download":  "https://github.com/666Arukard/taverngames/releases/download/v1.4.1/taverngames-1.4.1.zip",
+    "relationships":  {
+                          "recommends":  [
+                                             {
+                                                 "id":  "dice-so-nice",
+                                                 "type":  "module"
+                                             }
+                                         ]
+                      }
 }

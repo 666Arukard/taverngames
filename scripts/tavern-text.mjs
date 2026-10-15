@@ -2,7 +2,7 @@ import {betaGuide} from './beta-games-text.mjs';
 import {kniffelGuide} from './kniffel-text.mjs';
 import {f} from './farkle-text.mjs';
 export const escapeHTML=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-export const gameTitle=game=>({liars:f('Lügenwürfel','Liar’s Dice'),hoard:f('Drachenhort','Dragon’s Hoard'),kniffel:'Kniffel',schocken:'Schocken',farkle:'Farkle',pig:f('Schweinchen','Pig'),ship:f('Schiff, Kapitän und Mannschaft','Ship, Captain and Crew'),lottery:f('Straßenlotto','Street lottery')})[game]??game;
+export const gameTitle=game=>({chohan:'Chō-Han',liars:f('Lügenwürfel','Liar’s Dice'),hoard:f('Drachenhort','Dragon’s Hoard'),kniffel:'Kniffel',schocken:'Schocken',farkle:'Farkle',pig:f('Schweinchen','Pig'),ship:f('Schiff, Kapitän und Mannschaft','Ship, Captain and Crew'),lottery:f('Straßenlotto','Street lottery')})[game]??game;
 const ERRORS={
  'Outcome settlement is final.':'Eine ausgewertete Wette kann nicht zurückgenommen werden.',
  'Close betting before starting the game.':'Vor dem Spielstart die Wettannahme schließen.','Finish or refund the outcome bets first.':'Zuerst die Ausgangswetten abschließen oder zurückzahlen.','Participants are locked while outcome bets exist.':'Bei vorhandenen Wetten ist die Teilnehmerliste gesperrt.','Open a lobby first.':'Zuerst eine Lobby öffnen.','Open betting before the game starts.':'Wetten vor dem Spielstart öffnen.','Open betting first.':'Zuerst die Wettannahme öffnen.','The betting state changed. Please try again.':'Wettstand geändert. Bitte erneut versuchen.','Configure before placing bets.':'Die Wettoptionen vor der ersten Wette festlegen.','Invalid betting options.':'Ungültige Wettoptionen.','Invalid virtual balance.':'Ungültiges internes Guthaben.','Betting is closed.':'Die Wettannahme ist geschlossen.','You may not bet in this game.':'Du darfst bei dieser Partie nicht wetten.','One outcome bet per bettor.':'Pro Wetter ist eine Wette möglich.','Invalid outcome bet.':'Ungültige Ausgangswette.','Not enough virtual gold.':'Nicht genügend internes Gold.','No outcome bet to withdraw.':'Keine Wette zum Zurücknehmen.','Cancel bets before starting.':'Wetten vor dem Start stornieren.',
@@ -14,7 +14,7 @@ const ERRORS={
  'A GM must be connected.':'Eine Spielleitung muss verbunden sein.','The game is not running.':'Das Spiel läuft gerade nicht.',
  'The game state changed. Please try again.':'Spielstand geändert. Bitte erneut versuchen.','It is not your turn.':'Du bist nicht am Zug.',
  'Finish or end the current game first.':'Die laufende Partie zuerst beenden.','This game has ended.':'Dieses Spiel ist beendet.',
- 'Invalid target.':'Ungültige Zielpunktzahl.','Invalid stake.':'Ungültiger Grundeinsatz.','Invalid round mode.':'Ungültiger Rundenmodus.',
+ 'Both sides need a bet.':'Beide Seiten benötigen einen Gegeneinsatz.','Invalid rule option.':'Ungültige Regeloption.','Invalid target.':'Ungültige Zielpunktzahl.','Invalid stake.':'Ungültiger Grundeinsatz.','Invalid round mode.':'Ungültiger Rundenmodus.',
  'Invalid currency or funding.':'Ungültige Währung oder Finanzierungsart.','Invalid ticket limits.':'Ungültige Tippscheinlimits.',
  'Invalid prize.':'Ungültiger Hauptgewinn.','Invalid NPCs.':'Ungültige NPCs.','Invalid participant.':'Ungültiger Teilnehmer.',
  'Ticket acceptance is closed.':'Die Tippannahme ist geschlossen.','Ticket limit reached.':'Das Tippscheinlimit ist erreicht.',

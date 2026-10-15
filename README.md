@@ -1,6 +1,6 @@
 # Taverngames – Foundry Extension
 
-**Version 1.4.0**. Alle acht Spiele sind regulär verfügbar: Schocken, Farkle, Schweinchen, Schiff–Kapitän–Mannschaft, Kniffel, Straßenlotto, Lügenwürfel und Drachenhort. Kniffel wurde von Daniel am 14. Oktober 2026 für die stabile Version freigegeben.
+**Version 1.4.1**. Alle acht Spiele sind regulär verfügbar: Schocken, Farkle, Schweinchen, Schiff–Kapitän–Mannschaft, Kniffel, Straßenlotto, Lügenwürfel und Drachenhort. Kniffel wurde von Daniel am 14. Oktober 2026 für die stabile Version freigegeben.
 
 ## Installation und Einstieg
 
@@ -153,3 +153,14 @@ In Foundry unter Einstellungen → Moduleinstellungen → Taverngames kann der S
 Nur tatsächlich neu geworfene Würfel werden animiert; keine zweite Zufallsziehung. Private Lügenwürfel nur für ihren Besitzer bzw. manuell übernommene NPCs; beim Anzweifeln werden aufgedeckte Hände öffentlich animiert. Schocken animiert nicht verdeckte eigene Würfe nur lokal beim Besitzer; der verdeckte dritte Wurf bleibt auch in der Animation verborgen. Explizites Aufdecken kann öffentlich animiert werden. Animationen werden über den authentifizierten GM-Kanal abgefragt und mit synchronize=false lokal angezeigt. Ereignisse sind flüchtig, maximal15Sekunden verfügbar; nach Browserneustart können jüngste Ereignisse erneut sichtbar sein, ohne neue Wertung. Keine Chatwürfe und kein Fremdcode/Assets aus DSN eingebettet.
 
 English: All eight games are stable. The independent world setting “3D dice with Dice So Nice (Beta)” is off by default. Install and enable Dice So Nice separately; Dice Tray is not required. Optional local animations use the authoritative game results, with no additional random rolls. Hidden results are delivered only to authorized recipients. Persistent interactive dice are deferred. No live Foundry/DSN acceptance is claimed; this is a beta API integration.
+
+
+## Version1.4.1: Dice So Nice und Chō-Han
+
+Dice-So-Nice-Beta nutzt jetzt show mit festen Würfeldaten, statt ein ausgewertetes Roll-Objekt zu rekonstruieren. Die Schnittstelle ist gegen DSN6.4.4-Quellstand geprüft; ein echter Renderer-Test steht weiterhin aus. Nach manuellen Farkle-/Kniffelwürfen wird die Animation sofort abgefragt. DSN bleibt optional empfohlen, eigener3D-Beta-Schalter standardmäßig aus. Frühere Hinweise zur Roll-Rekonstruktion beschreiben den1.4.0-Stand und sind damit ersetzt.
+
+Für Chō-Han den allgemeinen Beta-Test-Schalter aktivieren. Alle acht bisherigen Spiele bleiben stabil. Chō-Han erscheint unter Glücksspiele. In der Moderation: Münzart, Einsatzgrenzen, Provision und Kürzungsverfahren wählen, NPCs benennen, Lobby öffnen und unteren Beitrittsbutton freigeben. Start öffnet die Wettannahme. SL schließt die Annahme, würfelt verdeckt und deckt bewusst auf. Ohne Gegenwetten wird nicht gewürfelt. VariantenA/C/D und Betrug noch nicht umgesetzt.
+
+Nur interne Testguthaben, Start100Gold pro Teilnehmer. Einsätze in ganzen Einheiten der gewählten Währung; Gegenwetten, Rückgaben und Provision kupfergenau. Elektrum nur mit allgemeiner Freigabe. Folgepartien behalten Guthaben. Provisionsbasis Gesamttopf/lediglich Gewinn sowie proportionale Kürzung/Abgabereihenfolge auswählbar. Vorläufiger Standard5Prozent vom Gesamttopf, proportionale Kürzung; noch offene Nutzerpräferenz. Reste nach größtem Bruchteil, bei Gleichstand Abgabereihenfolge. Abbruch erstattet alle noch reservierten Beträge, ohne Gewinn. Nach Auszahlung kein Undo.
+
+English: DSN beta now uses direct fixed-result notation, checked against6.4.4 source. Live renderer acceptance remains pending. Cho-Han beta is enabled with Beta testing; eight existing games remain stable. Intermediary variantB only, internal balances, matched bets, configurable commission and excess handling, hidden roll/reveal, copper-precision settlement, NPCs and follow-up rounds. No character transactions or cheating.

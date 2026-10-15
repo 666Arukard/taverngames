@@ -2,17 +2,17 @@
   "schemaVersion": 1,
   "blocks": {
     "patchnotes": {
-      "title": "Patchnotes Version 1.4.0",
+      "title": "Patchnotes Version 1.4.1",
       "paragraphs": [
-        "Lügenwürfel und Drachenhort sind jetzt stabil und ohne Beta-Test-Schalter verfügbar.",
-        "Neu: separat einschaltbare Dice-So-Nice-Wurfanimationen als Beta. Die Funktion ist standardmäßig ausgeschaltet."
+        "Die Dice-So-Nice-Beta verwendet jetzt direkte feste Würfeldaten. Die Schnittstelle wurde gegen6.4.4 geprüft; der echte Praxistest steht noch aus.",
+        "Chō-Han ist als Beta verfügbar. Die acht bisherigen Spiele bleiben stabil."
       ],
       "items": [
-        "Alle acht Spiele regulär verfügbar; bestehende Spielstände bleiben erhalten.",
-        "3D-Würfel zeigen dieselben Ergebnisse wie die Spielwertung und respektieren verdeckte Würfe.",
-        "Dice So Nice separat installieren und aktivieren; Dice Tray wird nicht benötigt.",
-        "Keine dauerhaft interaktiven 3D-Würfel in dieser ersten Beta.",
-        "Überflüssige Höhenvorgaben im Katalog entfernt."
+        "Direkte Animationsdaten und sofortiger Abruf nach manuellen Würfen; keine zusätzliche Zufallsziehung.",
+        "Dice So Nice als empfohlenes, optionales Modul.",
+        "Chō-Han: VermittlervarianteB, interne Testmünzen, ausgeglichene Gegenwetten, Provision und Überschussrückgabe.",
+        "Verdeckter Händlerwurf, bewusstes Aufdecken, kupfergenaue Abrechnung und Chat-Ergebnis.",
+        "NPCs, individueller manueller Zugriff, Folgepartie und Abbruch mit Erstattung."
       ]
     },
     "games": {
@@ -26,7 +26,8 @@
         "Schiff–Kapitän–Mannschaft",
         "Schocken",
         "Schweinchen",
-        "Straßenlotto"
+        "Straßenlotto",
+        "Chō-Han (Beta)"
       ]
     },
     "plans": {
@@ -47,7 +48,6 @@
         "Elfenlauf",
         "Escalero",
         "Gerade oder Ungerade",
-        "Gerade oder Ungerade / Chō-Han (Vermittlervariante)",
         "Gewichteheben",
         "Hütchenspiel",
         "Karaoke",
@@ -91,7 +91,7 @@
     "functions": {
       "title": "aktuelle Funktionen",
       "paragraphs": [
-        "Taverngames bietet acht reguläre Spiele mit gemeinsamer Spielleitung und getrennten Spielständen. Die 3D-Animation ist eine separat schaltbare Beta."
+        "Acht stabile Spiele und Chō-Han als zusätzliches Beta-Spiel. Die optionale3D-Animation ist weiterhin separat schaltbare Beta."
       ],
       "items": [
         "Spielkategorien und kombinierte Suche nach deutschen oder englischen Spielnamen.",
@@ -105,7 +105,8 @@
         "Drachenhort mit virtuellen Münzen, internen Beständen, Restverteilung und Auszahlungsvorschau ohne Charakterbuchungen.",
         "Optionale Dice-So-Nice-Wurfanimationen als Beta: separat schaltbar, dieselben Ergebnisse wie die Spielwertung und geschützte verdeckte Würfe.",
         "Deutsche und englische Anleitungen, Quellenangaben sowie Ergebnis- und Regelhinweise im Chat.",
-        "Konfigurierbare Hausvarianten, frische Folgepartien und Schweinchen-Wurfhistorie."
+        "Konfigurierbare Hausvarianten, frische Folgepartien und Schweinchen-Wurfhistorie.",
+        "Chō-Han-Beta: interne gedeckte Gegenwetten, wählbare Provision und Überschussrückgabe; kein Charaktergeld."
       ]
     },
     "settings": {
@@ -120,7 +121,9 @@
         "Schweinchen: Öffne in der Moderation Neue Partie & Regeln. Wähle bei Bedarf Bei gesicherter Zielpunktzahl sofort beenden und öffne anschließend die Lobby. Standardmäßig spielen alle anderen nach Zielerreichung noch einen letzten Zug.",
         "Alle acht Spiele sind stabil. Der allgemeine Beta-Test-Schalter wird für diese Spiele nicht mehr benötigt.",
         "Für optionale 3D-Wurfanimationen installiere und aktiviere Dice So Nice. Aktiviere anschließend in den Taverngames-Moduleinstellungen 3D-Würfel mit Dice So Nice (Beta). Standardmäßig aus; unabhängig vom Beta-Spieleschalter.",
-        "Die 3D-Beta zeigt normale Wurfanimationen auf dem Foundry-Tisch. Dauerhaft liegende und interaktive 3D-Würfel folgen später."
+        "Die 3D-Beta zeigt normale Wurfanimationen auf dem Foundry-Tisch. Dauerhaft liegende und interaktive 3D-Würfel folgen später.",
+        "Chō-Han: allgemeinen Beta-Test aktivieren und im SL-Reiter unter Glücksspiele starten. Provision, Einsatzgrenzen und Münzart in der Moderation wählen, Lobby öffnen, Beitrittsbutton freigeben. Nach den Wetten Annahme schließen, verdeckt würfeln und aufdecken.",
+        "Die3D-Animationsbeta hat einen separaten Schalter. Dice So Nice6.4.4 ist als API-Referenz geprüft, der echte Praxistest steht noch aus."
       ],
       "items": []
     },
@@ -154,7 +157,8 @@
         "Wizard of Odds – Chō-Han (geplante Regelreferenz): https://wizardofodds.com/games/cho-han/",
         "D&D Beyond – Basic Rules 2024, allgemeine Regel- und Währungsreferenz: https://www.dndbeyond.com/sources/dnd/br-2024/playing-the-game",
         "D&D Beyond – Charaktererschaffung, Währungsreferenz: https://www.dndbeyond.com/sources/dnd/br-2024/creating-a-character",
-        "Paul Cossmer – Tavernen und Glücksspiele, bereitgestellte PDF-Regelvorlagen für geplante Spiele; Lektorat: Georg Haubner. Kontext DnDDiary: https://keeponrolling.de/"
+        "Paul Cossmer – Tavernen und Glücksspiele, bereitgestellte PDF-Regelvorlagen für geplante Spiele; Lektorat: Georg Haubner. Kontext DnDDiary: https://keeponrolling.de/",
+        "Chō-Han: Daniels bereitgestellte Regelsammlung, VermittlervarianteB. Traditionelle Grundlage: https://www.dice-play.com/Games/ChoHanBakuchi.htm und https://www.netexl.com/howtoplay/cho-han/"
       ]
     },
     "sources1": {
@@ -173,7 +177,8 @@
         "Straßenlotto: durch die Spielleitung wählbare Zahlenzahl je Tippschein, Standard fünf und einstellbar von 1 bis 100; ausgewählter Gegenstand statt pauschalem Goldgewinn.",
         "Kniffel: nach gestrichenem Kniffelfeld kein Zusatzkniffel-Bonus und keine Joker-Sonderwertung; diese Festlegung klärt die offene Stelle der Regelreferenz.",
         "Ausgangswetten: der gesamte Topf wird gleichmäßig über alle richtigen Wetter verteilt, unabhängig von ihrer individuellen Einsatzhöhe.",
-        "Drachenhort: vorzeitiger regulärer Abschluss mit gleichmäßiger Hortverteilung und geheimen Resttipps; Gleichstände werden nur unter den gleich nahen Tipps wiederholt."
+        "Drachenhort: vorzeitiger regulärer Abschluss mit gleichmäßiger Hortverteilung und geheimen Resttipps; Gleichstände werden nur unter den gleich nahen Tipps wiederholt.",
+        "Chō-Han-Beta: interne Testguthaben, größter-Bruchteil-Rundung und Folgepartien als Modulergänzungen. Provisionsbasis und Kürzung auswählbar; keine Betrugsregeln umgesetzt."
       ]
     }
   }

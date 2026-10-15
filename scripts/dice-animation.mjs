@@ -8,13 +8,25 @@ export class DiceEvents {
 export class DiceAnimator {
  constructor({game,enabled,warn=()=>{}}){Object.assign(this,{game,enabled,warn});this.cursor=0;this.pending=Promise.resolve();this.warned=false;}
  consume(batch){if(!batch)return;const after=batch.cursor<this.cursor?0:this.cursor;this.cursor=batch.cursor;for(const event of (batch.events??[]).filter(e=>e.id>after))this.pending=this.pending.then(()=>this.play(event)).catch(()=>{});}
- async play(event){if(!this.enabled())return;const dsn=this.game.dice3d,Roll=globalThis.foundry?.dice?.Roll??globalThis.Roll;
-  if(!this.game.modules.get('dice-so-nice')?.active||typeof dsn?.showForRoll!=='function'||typeof Roll?.fromData!=='function'){if(!this.warned){this.warned=true;this.warn();}return;}
-  try{const groups=new Map();for(const {sides,value} of event.dice){if(![6,10,20,100].includes(sides)||!Number.isInteger(value)||value<1||value>sides)return;if(!groups.has(sides))groups.set(sides,[]);groups.get(sides).push(value);}
-   const terms=[...groups].flatMap(([faces,values],i)=>[...(i?[{class:'OperatorTerm',operator:'+',options:{},evaluated:true}]:[]),{class:'Die',number:values.length,faces,modifiers:[],options:{},results:values.map(result=>({result,active:true})),evaluated:true}]);
-   const roll=Roll.fromData({class:'Roll',formula:[...groups].map(([faces,v])=>`${v.length}d${faces}`).join('+'),terms,total:event.dice.reduce((n,d)=>n+d.value,0),options:{},evaluated:true});
-   // Each client receives only authorized results and animates locally; synchronize must remain false.
-   await dsn.showForRoll(roll,this.game.users.get(event.actor)??this.game.user,false,null,false);
-  }catch{if(!this.warned){this.warned=true;this.warn();}}
+ async play(event){
+  if(!this.enabled())return;
+  const dsn=this.game.dice3d;
+  if(!this.game.modules.get('dice-so-nice')?.active||typeof dsn?.show!=='function'){if(!this.warned){this.warned=true;this.warn();}return;}
+  try{
+   const dice=[];
+   for(const {sides,value} of event.dice){
+    if(![6,10,20,100].includes(sides)||!Number.isInteger(value)||value<1||value>sides)return;
+    const entry=(type,result,label)=>({type,result,resultLabel:String(label),vectors:[],options:{owner:this.game.users.get(event.actor)?.id??this.game.user.id},fvttResult:{result:value,active:true},resultIndex:dice.length});
+    if(sides===100){
+     const tens=Math.floor(value/10)%10,ones=value%10;
+     dice.push({...entry('d100',tens,tens*10),compositeResult:value,compositeType:'d100'}, {...entry('d10',ones,ones),compositeResult:value,compositeType:'d100'});
+    }else dice.push(entry(`d${sides}`,value,value));
+   }
+   if(!dice.length)return;
+   // Direct DSN notation avoids reconstructing an evaluated Roll/AST on Foundry 14.
+   // No evaluation, no chat and no DSN socket synchronization, including for private cups.
+   const shown=await dsn.show({throws:[{dice}]},this.game.users.get(event.actor)??this.game.user,false,null,false);
+   if(shown===false)console.debug('Taverngames: Dice So Nice skipped an animation; check DSN visibility and animation settings.');
+  }catch(error){console.error('Taverngames: Dice So Nice animation failed.',error);if(!this.warned){this.warned=true;this.warn();}}
  }
 }
