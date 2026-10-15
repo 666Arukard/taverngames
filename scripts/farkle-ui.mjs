@@ -83,14 +83,17 @@ export class FarkleUI{
     content.append(el('h3',`${this.name(current)} · ${f('am Zug','to play')}`));
     if(!game.users.activeGM||s.paused)content.append(el('p',f('Spiel pausiert','Game paused')));
     if(s.finalRemaining!==null)content.append(el('p',`${f('Schlussrunde – verbleibende Züge','Final round – remaining turns')}: ${s.finalRemaining}`));
+    if(s.animationPending){content.append(el('p',f('Die 3D-Würfel rollen …','The 3D dice are rolling …'),'schocken-help'));return;}
     const c=s.cup,score=selectionScore(s),total=c.points+(score??0);
     content.append(el('p',`${f('Zugpunkte','Turn points')}: ${total} · ${f('Auswahl','Selection')}: ${score??0}`,'schocken-meta'));
     if(c.dice){
       const row=el('div',undefined,'schocken-dice');
-      c.dice.forEach((value,index)=>{const die=button(row,String(value),()=>this.request('toggle',{index}),!can||s.paused||!game.users.activeGM||c.held[index]);if(c.held[index])die.classList.add('held');if(c.selected.includes(index))die.classList.add('farkle-selected');die.title=c.held[index]?f('Bereits gewertet – nicht ergänzbar','Already scored – cannot be extended'):f('Für diesen Wurf auswählen','Select for this roll');});content.append(row);
+      c.dice.forEach((value,index)=>{const die=button(row,String(value),()=>this.request('toggle',{index}),!can||s.paused||s.animationWaiting||!game.users.activeGM||c.held[index]);if(c.held[index])die.classList.add('held');if(c.selected.includes(index))die.classList.add('farkle-selected');die.title=c.held[index]?f('Bereits gewertet – nicht ergänzbar','Already scored – cannot be extended'):f('Für diesen Wurf auswählen','Select for this roll');});content.append(row);
       if(c.selected.length&&score===null)content.append(el('p',f('Die Auswahl ist keine gültige Kombination. Wertlose Würfel abwählen.','The selection is not a valid combination. Deselect non-scoring dice.')));
     }
-    if(can&&!s.paused&&game.users.activeGM){
+    if(s.animationBust)content.append(el('h3',f('Fehlwurf – Zug beendet','Farkle – turn ended')));
+    if(s.animationWaiting)content.append(el('p',f('Würfelanimation wird abgeschlossen …','Finishing dice animation …')));
+    if(can&&!s.paused&&!s.animationWaiting&&game.users.activeGM){
       const controls=el('div',undefined,'schocken-actions'),valid=score!==null&&score>0;
       if(c.dice&&(game.user.isGM||game.settings.get('taverngames','allowFarkleBestSelection')===true)){const best=button(controls,f('Beste Auswahl','Best selection'),()=>this.request('best'));if(game.user.isGM&&!game.settings.get('taverngames','allowFarkleBestSelection'))best.title=f('Für die Spielleitung auch ohne Spielerfreigabe verfügbar.','Available to the GM even when player access is off.');}
       button(controls,f('Würfeln','Roll'),()=>this.request('roll'),c.dice!==null&&!valid);

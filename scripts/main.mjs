@@ -1,3 +1,4 @@
+import {FarkleAnimationGate,FarklePersistentDice} from './farkle-dice.mjs';
 import {diceMenu} from './dice-diagnostics.mjs';
 import {ChoSession} from './chohan.mjs';
 import {ChoUI} from './chohan-ui.mjs';
@@ -47,10 +48,46 @@ let ledgerUnavailable=false;
 const clients={},tavernBusy={};
 const gameEnabled=scope=>scope!=='chohan'||game.settings.get(ID,'betaTest')===true;
 const diceEvents=new DiceEvents();
-const diceAnimator=new DiceAnimator({game:()=>game,enabled:()=>game.settings.get(ID,'diceSoNiceBeta')===true,warn:()=>ui.notifications.warn(f('Taverngames: Dice-So-Nice-Animation nicht verfügbar. Die normale Würfeldarstellung bleibt aktiv.','Taverngames: Dice So Nice animation unavailable. Standard dice display remains active.'))});
+const farkleGate=new FarkleAnimationGate();
+let farklePreparing=null;const farklePhases=new Map();
+const farklePersistent=new FarklePersistentDice({game:()=>game,warn:()=>ui.notifications.warn(f('Taverngames: Liegende 3D-Würfel benötigen die geprüfte Dice-So-Nice-Schnittstelle 6.4.4.','Taverngames: held 3D dice require the checked Dice So Nice 6.4.4 API.'))});
+const diceAnimator=new DiceAnimator({game:()=>game,present:presentDice,enabled:()=>game.settings.get(ID,'diceSoNiceBeta')===true,warn:()=>ui.notifications.warn(f('Taverngames: Dice-So-Nice-Animation nicht verfügbar. Die normale Würfeldarstellung bleibt aktiv.','Taverngames: Dice So Nice animation unavailable. Standard dice display remains active.'))});
 let dicePolling=false;
 async function pollDice(){if(dicePolling||!primary()||game.settings.get(ID,'diceSoNiceBeta')!==true)return;dicePolling=true;try{diceAnimator.consume(await requestFinance('schocken','diceRead',{after:diceAnimator.cursor}));}catch{diceAnimator.stats.status='connection-error';diceAnimator.stats.errors++;}finally{dicePolling=false;}}
-async function diceAction(scope,actor,action,fn){const values=[];capturedDice=values;try{const result=await fn();diceEvents.record(scope,action,values.length);if(game.settings.get(ID,'diceSoNiceBeta')===true){const current=scopeState(scope);if(['roll','draw','resolveGuess'].includes(action)){let privateTo=null;if(scope==='liars')privateTo=[actor,...(current?.npcs?.[actor]&&current?.npcManual?.[actor]?[game.user.id]:[])];if(scope==='schocken')privateTo=current?.cup?.concealed?[]:[actor];if(scope==='chohan')privateTo=[];diceEvents.add(scope,actor,values,{privateTo});}if(scope==='chohan'&&action==='reveal'&&current?.phase==='finished')diceEvents.add(scope,actor,current.dice.map(value=>({sides:6,value})));if(scope==='liars'&&action==='challenge'&&current?.reveal)for(const [id,hand]of Object.entries(current.reveal.hands))diceEvents.add(scope,id,hand.map(value=>({sides:6,value})));if(scope==='schocken'&&action==='reveal'){const cup=current?.cup;const result=current?.results?.find(r=>r.id===actor);const dice=cup?.revealed?cup.dice:result&&!result.hidden?result.dice:[];diceEvents.add(scope,actor,(dice??[]).filter(Number.isInteger).map(value=>({sides:6,value})));}}return result;}finally{capturedDice=null;}}
+function farkleProjected(){const raw=authority()?farkleSession.state:farkleClient;if(farklePreparing)return {...farklePreparing,animationPending:true};const a=authority()?farkleGate.project(raw):raw?.animation;if(!a||Date.now()>=a.until||!game.settings.get(ID,'diceSoNiceBeta')||raw?.phase==='aborted')return raw;const phase=farklePhases.get(a.id);if(phase==='done')return {...raw,animationWaiting:true};return {...structuredClone(phase==='bust'?a.preview:a.before),animationPending:phase!=='bust',animationBust:phase==='bust',animationWaiting:true};}
+const waitDice=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+async function safeFarkleSync(state){let timer;try{await Promise.race([farklePersistent.sync(state),new Promise((_,reject)=>{timer=setTimeout(()=>reject(Error('Held dice API timeout')),1000);})]);}catch(error){console.warn('Taverngames: held 3D dice failed',error);}finally{clearTimeout(timer);}}
+async function presentDice(event,play){
+ if(!event.farkle)return play();const data=event.farkle;
+ if(!game.settings.get(ID,'diceSoNiceBeta')){await safeFarkleSync(null);return;}
+ if(!authority()&&data.state&&data.state.revision>=(farkleClient?.revision??-1))farkleClient={...data.state,animation:data.animation??null};
+ if(data.animation){
+  const a=data.animation,live=authority()?farkleSession.state:farkleClient;if(live?.gameId!==a.gameId||live?.phase==='aborted'||Date.now()>=a.until){await requestFinance('farkle','farkleAnimationAck',{id:a.id}).catch(()=>{});return;}farklePhases.set(a.id,'rolling');farkleUI.draw();
+  await safeFarkleSync(a.preview);const started=Date.now();const result=await play();
+  if(result==='confirmed')farklePersistent.capture(a.preview,a.indices,event.id);
+  await waitDice(Math.max(0,2000-(Date.now()-started)));
+  const current=authority()?farkleSession.state:farkleClient;
+  if(current?.gameId===a.gameId&&current.phase!=='aborted'&&game.settings.get(ID,'diceSoNiceBeta')&&a.bust){farklePhases.set(a.id,'bust');farkleUI.draw();await waitDice(2000);}
+  farklePhases.set(a.id,'done');if(farklePhases.size>40)farklePhases.delete(farklePhases.keys().next().value);
+  await safeFarkleSync(game.settings.get(ID,'diceSoNiceBeta')?(authority()?farkleSession.state:farkleClient):null);
+  await requestFinance('farkle','farkleAnimationAck',{id:a.id}).catch(()=>{});farkleUI.draw();
+ }else{await safeFarkleSync(data.state);farkleUI.draw();}
+}
+async function diceAction(scope,actor,action,fn){
+ if(scope!=='farkle')return diceActionBase(scope,actor,action,fn);
+ const before=structuredClone(farkleSession.state),values=[];capturedDice=values;
+ const enabled=game.settings.get(ID,'diceSoNiceBeta')===true&&game.modules?.get('dice-so-nice')?.active===true;
+ if(action==='roll'&&enabled)farklePreparing=before;
+ try{const result=await fn();diceEvents.record(scope,action,values.length);
+  const after=farkleSession.state;
+  if(enabled&&after?.revision!==before?.revision){
+   if(action==='roll'&&values.length){const animation=farkleGate.open(before,after,values,game.users.filter(u=>u.active).map(u=>u.id));diceEvents.add(scope,actor,values,{farkle:{animation,state:after}});}
+   else{if(['abort','lobby','restart','undo'].includes(action))farkleGate.clear();diceEvents.add(scope,actor,[],{farkle:{state:after}});}
+  }
+  return result;
+ }finally{capturedDice=null;farklePreparing=null;if(action!=='read'&&action!=='diceRead'&&action!=='diceDiagnostics'&&action!=='farkleAnimationAck')farkleUI.draw();}
+}
+async function diceActionBase(scope,actor,action,fn){const values=[];capturedDice=values;try{const result=await fn();diceEvents.record(scope,action,values.length);if(game.settings.get(ID,'diceSoNiceBeta')===true){const current=scopeState(scope);if(['roll','draw','resolveGuess'].includes(action)){let privateTo=null;if(scope==='liars')privateTo=[actor,...(current?.npcs?.[actor]&&current?.npcManual?.[actor]?[game.user.id]:[])];if(scope==='schocken')privateTo=current?.cup?.concealed?[]:[actor];if(scope==='chohan')privateTo=[];diceEvents.add(scope,actor,values,{privateTo});}if(scope==='liars'&&action==='challenge'&&current?.reveal)for(const [id,hand]of Object.entries(current.reveal.hands))diceEvents.add(scope,id,hand.map(value=>({sides:6,value})));if(scope==='schocken'&&action==='reveal'){const cup=current?.cup;const result=current?.results?.find(r=>r.id===actor);const dice=cup?.revealed?cup.dice:result&&!result.hidden?result.dice:[];diceEvents.add(scope,actor,(dice??[]).filter(Number.isInteger).map(value=>({sides:6,value})));}}return result;}finally{capturedDice=null;}}
 const sessions=Object.fromEntries(NEW_GAMES.map(scope=>[scope,new (scope==='chohan'?ChoSession:BETA_GAMES.includes(scope)?BetaGameSession:TavernSession)(scope,{enabled:()=>gameEnabled(scope),save:next=>save(next,`${scope}State`),random:randomSides,getName:id=>game.users.get(id)?.name??id,announce:data=>ChatMessage.create(data),hasAnnouncement:id=>hasMessage('gameId',id)})]));
 const betting=new BettingManager({isAuthority:authority,save:next=>save(next,'bettingState'),enabled:()=>game.settings.get(ID,'managedBetting')===true,electrum:()=>game.settings.get(ID,'allowElectrum')===true,system:()=>game.system?.id,actor:id=>game.actors?.get(id),character:id=>game.users.get(id)?.character,announce:data=>ChatMessage.create(data),hasMessage:(tx,id)=>game.messages?.some(m=>(m.getFlag?.(ID,'betTx')??m.flags?.[ID]?.betTx)===tx&&(m.getFlag?.(ID,'betActor')??m.flags?.[ID]?.betActor)===id)??false});
 const prizes=new PrizeManager({isAuthority:authority,save:next=>save(next,'prizeState'),system:()=>game.system?.id,actor:id=>game.actors?.get(id),item:uuid=>(globalThis.foundry?.utils?.fromUuid??globalThis.fromUuid)(uuid),announce:data=>ChatMessage.create(data),hasMessage:id=>hasMessage('prizeAward',id)});
@@ -63,7 +100,7 @@ const scopeState=scope=>scope==='schocken'?state:scope==='farkle'?farkleSession.
 async function deliverPrize(current,user){const id=current?.winners?.[0],actorId=betting.state.books[current?.gameId]?.mapping[id]??game.users.get(id)?.character?.id;await prizes.deliver(current,user,actorId);}
 let farkleClient=null,farkleBusy=false;
 const farkleSession=new FarkleSession({save:next=>save(next,'farkleState'),diceSource:randomDie,getName:id=>game.users.get(id)?.name??id,announce:data=>ChatMessage.create(data),hasAnnouncement:id=>game.messages?.some(message=>message.getFlag?.(ID,'gameId')===id)??false,allowBestSelection:()=>game.settings.get(ID,'allowFarkleBestSelection')===true});
-const farkleUI=new FarkleUI({request:requestFarkle,getState:()=>authority()?farkleSession.state:farkleClient,openOutcome:scope=>outcomeUI.open(scope),openBetting:scope=>moneyUI.open(scope)});
+const farkleUI=new FarkleUI({request:requestFarkle,getState:farkleProjected,openOutcome:scope=>outcomeUI.open(scope),openBetting:scope=>moneyUI.open(scope)});
 function enqueue(fn) {const result=queue.then(fn);queue=result.catch(()=>{});return result;}
 const base64=bytes=>btoa(String.fromCharCode(...new Uint8Array(bytes)));
 const unbase64=text=>Uint8Array.from(atob(text),c=>c.charCodeAt(0));
@@ -115,7 +152,8 @@ async function grant(user) {
   const token=crypto.randomUUID()+crypto.randomUUID();tokens.set(user.id,token);
   try {await user.query(GRANT,{token},{timeout:5000});}catch {tokens.delete(user.id);}
 }
-async function command(data,local=false){const scope=data?.game??'schocken',before=scopeState(scope),user=local?game.user:game.users.get(data?.user),actor=scope==='liars'?(user?.isGM&&before?.npcs?.[data?.args?.id]?data.args.id:user?.id):(before?.order?.[before.turn]??data?.user);return diceAction(scope,actor,data?.action,()=>commandCore(data,local));}
+async function command(data,local=false){const scope=data?.game??'schocken',before=scopeState(scope),user=local?game.user:game.users.get(data?.user),actor=scope==='liars'?(user?.isGM&&before?.npcs?.[data?.args?.id]?data.args.id:user?.id):(before?.order?.[before.turn]??data?.user);const result=await diceAction(scope,actor,data?.action,()=>commandCore(data,local));return scope==='farkle'&&result?.game==='farkle'?{...result,animation:game.settings.get(ID,'diceSoNiceBeta')?farkleGate.project(farkleSession.state):null}:result;}
+
 async function commandCore(data, local=false) {
   if(game.modules?.get('schocken')?.active)throw new Error(t('Altes Modul Schocken zuerst deaktivieren.'));
   const compatibility=checkFoundry(game.release,game.version);if(!compatibility.supported)throw new Error(compatibility.message);
@@ -126,6 +164,8 @@ async function commandCore(data, local=false) {
   if(data?.action==="connect") {const target=game.users.get(data.user);if(target)await grant(target);return null;}
   const user=local?game.user:game.users.get(data?.user);
   if(!user?.active || (!local && (!tokens.has(user.id) || tokens.get(user.id)!==data?.token))) throw new Error(t("Verbindung noch nicht bereit. GM kann Verbindungen erneuern."));
+  if(data.action==='farkleAnimationAck'){farkleGate.ack(data.args?.id,user.id);return null;}
+  if(data.game==='farkle'&&game.settings.get(ID,'diceSoNiceBeta')&&farkleGate.active(farkleSession.state)&&!['read','abort','pause','npcControl'].includes(data.action)){throw Error(f('Bitte das Ende der Würfelanimation abwarten.','Please wait for the dice animation to finish.'));}
   if(data.action==='diceDiagnostics'){if(!user.isGM)throw Error('GM only.');return diceEvents.diagnostics();}
   if(data.action==='diceRead'){const batch=diceEvents.read(user,Number.isSafeInteger(data.args?.after)?data.args.after:0);return game.settings.get(ID,'diceSoNiceBeta')===true?batch:{cursor:batch.cursor,events:[]};}
   const scope=data.game??'schocken';
@@ -213,10 +253,10 @@ async function requestFarkle(action,args={}){
   try{
     const gm=primary();if(!gm)throw new Error(f('Für Farkle muss ein GM verbunden sein.','A GM must be connected to play Farkle.'));
     await ensureCapability(gm);
-    const previous=(authority()?farkleSession.state:farkleClient)?.revision;
+    const previous=(authority()?farkleSession.state:farkleClient)?.revision,previousAnimation=farkleClient?.animation?.id;
     const data={game:'farkle',action,args,user:game.user.id,token:capability,revision:previous??-1};
     const result=authority()?await enqueue(()=>command(data,true)):await gm.query(QUERY,data,{timeout:8000});
-    if(action!=='read')void pollDice();if(!authority())farkleClient=result;if(action!=='read'||previous!==result?.revision)farkleUI.draw();
+    if(action!=='read')void pollDice();if(!authority())farkleClient=result;if(action!=='read'||previous!==result?.revision||result?.animation||previousAnimation)farkleUI.draw();if(!result?.animation&&game.settings.get(ID,'diceSoNiceBeta'))void farklePersistent.sync(result).catch(()=>{});
   }catch(error){ui.notifications.warn(`Farkle: ${farkleError(t(error.message))}`);}finally{farkleBusy=false;}
 }
 function dice(parent,values,held=[],interactive=false) {
@@ -355,8 +395,8 @@ Hooks.once("init",()=>{
   for(const setting of ['bettingState','prizeState','outcomeState'])game.settings.register(ID,setting,{scope:'world',config:false,restricted:true,type:Object,default:null});
   for(const [setting,de,en] of [['managedBetting','Verwaltetes Setzen','Managed betting'],['allowElectrum','Elektrum verwenden','Use electrum']])game.settings.register(ID,setting,{name:`Taverngames: ${f(de,en)}`,scope:'world',config:true,restricted:true,type:Boolean,default:false,onChange:()=>{moneyUI.draw();for(const panel of Object.values(tavernUIs))panel.drawModeration();}});
   game.settings.register(ID,'betaTest',{name:f('Taverngames: Beta-Test','Taverngames: Beta testing'),hint:f('Chō-Han als Beta freischalten. Die acht bisherigen Spiele bleiben stabil.','Enable beta Cho-Han. The eight existing games remain stable.'),scope:'world',config:true,restricted:true,type:Boolean,default:false,onChange:()=>{refreshLauncher();sessions.chohan.updateNpcWait();if(!gameEnabled('chohan')){clients.chohan=null;void tavernUIs.chohan.close();}ui.taverngames?.render?.({force:true});}});
-  game.settings.register(ID,'diceSoNiceBeta',{name:f('Taverngames: 3D-Würfel mit Dice So Nice (Beta)','Taverngames: 3D dice with Dice So Nice (Beta)'),hint:f('Optionale Wurfanimationen. Dice So Nice muss installiert und aktiv sein. Keine dauerhaft interaktiven Würfel.','Optional roll animations. Dice So Nice must be installed and active. No persistent interactive dice.'),scope:'world',config:true,restricted:true,type:Boolean,default:false,onChange:()=>{diceEvents.clear();diceAnimator.warned=false;}});
-  if(game.settings.registerMenu)game.settings.registerMenu(ID,'diceDiagnostics',{name:f('Taverngames: 3D-Würfel prüfen','Taverngames: check3D dice'),label:f('Test & Diagnose öffnen','Open test & diagnostics'),hint:f('Lokaler3D-Test und Diagnose ohne geheime Würfelwerte.','Local3D test and diagnostics without secret dice values.'),icon:'fas fa-dice',restricted:true,type:diceMenu(foundry,{test:()=>diceAnimator.play({actor:game.user.id,dice:[{sides:6,value:3},{sides:6,value:5}]},{test:true}),diagnostics:async()=>({codeVersion:'1.4.3',moduleVersion:game.modules.get(ID)?.version??game.modules.get(ID)?.manifest?.version,dsnVersion:game.modules.get('dice-so-nice')?.version,dsnActive:game.modules.get('dice-so-nice')?.active===true,animationEnabled:game.settings.get(ID,'diceSoNiceBeta')===true,local:structuredClone(diceAnimator.stats),authority:await requestFinance('schocken','diceDiagnostics')})})});
+  game.settings.register(ID,'diceSoNiceBeta',{name:f('Taverngames: 3D-Würfel mit Dice So Nice (Beta)','Taverngames: 3D dice with Dice So Nice (Beta)'),hint:f('Optionale Wurfanimationen. Dice So Nice muss installiert und aktiv sein. Keine dauerhaft interaktiven Würfel.','Optional roll animations. Dice So Nice must be installed and active. No persistent interactive dice.'),scope:'world',config:true,restricted:true,type:Boolean,default:false,onChange:()=>{diceEvents.clear();diceAnimator.warned=false;farkleGate.clear();void farklePersistent.clear();farkleUI.draw();}});
+  if(game.settings.registerMenu)game.settings.registerMenu(ID,'diceDiagnostics',{name:f('Taverngames: 3D-Würfel prüfen','Taverngames: check3D dice'),label:f('Test & Diagnose öffnen','Open test & diagnostics'),hint:f('Lokaler3D-Test und Diagnose ohne geheime Würfelwerte.','Local3D test and diagnostics without secret dice values.'),icon:'fas fa-dice',restricted:true,type:diceMenu(foundry,{test:()=>diceAnimator.play({actor:game.user.id,dice:[{sides:6,value:3},{sides:6,value:5}]},{test:true}),diagnostics:async()=>({codeVersion:'1.4.6',moduleVersion:game.modules.get(ID)?.version??game.modules.get(ID)?.manifest?.version,dsnVersion:game.modules.get('dice-so-nice')?.version,dsnActive:game.modules.get('dice-so-nice')?.active===true,animationEnabled:game.settings.get(ID,'diceSoNiceBeta')===true,local:{...structuredClone(diceAnimator.stats),farkleHeldDice:farklePersistent.meshes.size},authority:await requestFinance('schocken','diceDiagnostics')})})});
   if(!registerSidebar(CONFIG,globalThis.foundry,game,{open:()=>open(),guide:openGuide,farkle:()=>farkleUI.open(),farkleGuide:()=>farkleUI.guide(),tavern:scope=>tavernUIs[scope]?.open(),tavernGuide:scope=>tavernUIs[scope]?.guide()}))ui.notifications.warn(t('Taverngames: native Sidebar-Schnittstelle fehlt. Einstieg über den unteren Button bleibt verfügbar.'));
   CONFIG.queries[GRANT]=({token})=>{if(typeof token!=="string"||token.length>100)throw new Error(t("Ungültige Verbindung."));capability=token;return true;};
   CONFIG.queries[QUERY]=data=>enqueue(async()=>{const result=await command(data);if(data.game!=='farkle'&&(panel||moderation))draw();return result;});
@@ -390,7 +430,7 @@ Hooks.once("ready",async()=>{
   },1400);
   setInterval(()=>{
     if(!authority()||!initialized)return;
-    void enqueue(async()=>{if(!authority())return;const move=farkleSession.state&&farkleNpcAction(farkleSession.state);await diceAction('farkle',move?.id,move?.action,async()=>{if(await farkleSession.npcStep()){await settleOutcome('farkle');farkleUI.draw();}});}).catch(error=>ui.notifications.warn(`Farkle-NPC: ${farkleError(error.message)}`));
+    void enqueue(async()=>{if(!authority()||(game.settings.get(ID,'diceSoNiceBeta')&&farkleGate.active(farkleSession.state)))return;const move=farkleSession.state&&farkleNpcAction(farkleSession.state);await diceAction('farkle',move?.id,move?.action,async()=>{if(await farkleSession.npcStep()){await settleOutcome('farkle');farkleUI.draw();}});}).catch(error=>ui.notifications.warn(`Farkle-NPC: ${farkleError(error.message)}`));
   },1400);
   setInterval(()=>{
     if(!authority()||!initialized)return;

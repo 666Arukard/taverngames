@@ -3,14 +3,14 @@ export class DiceEvents {
  constructor(){this.events=[];this.serial=0;this.captured={};}
  record(scope,action,count){if(count)this.captured[scope]={action,count,time:Date.now()};}
  diagnostics(){return {lastCaptures:structuredClone(this.captured),buffered:this.events.length,sequence:this.serial};}
- add(scope,actor,dice,{privateTo=null,now=Date.now()}={}){if(!dice.length)return;this.events.push({id:++this.serial,scope,actor,dice:structuredClone(dice),privateTo,time:now});this.events=this.events.filter(e=>now-e.time<15000).slice(-128);}
+ add(scope,actor,dice,{privateTo=null,now=Date.now(),farkle=null}={}){if(!dice.length&&!farkle)return;this.events.push({id:++this.serial,scope,actor,dice:structuredClone(dice),...(farkle?{farkle:structuredClone(farkle)}:{}),privateTo,time:now});this.events=this.events.filter(e=>now-e.time<15000).slice(-128);}
  read(user,after=0,now=Date.now()){return {cursor:this.serial,events:this.events.filter(e=>e.id>after&&now-e.time<15000&&(!e.privateTo||e.privateTo.includes(user.id))).map(({privateTo,time,...event})=>event)};}
  clear(){this.events=[];}
 }
 export class DiceAnimator {
- constructor({game,enabled,warn=()=>{}}){Object.assign(this,{enabled,warn});this.getGame=typeof game==='function'?game:()=>game;this.cursor=0;this.pending=Promise.resolve();this.warned=false;this.stats={received:0,attempted:0,confirmed:0,skipped:0,errors:0,status:'idle'};}
+ constructor({game,enabled,warn=()=>{},present=(_event,play)=>play()}){Object.assign(this,{enabled,warn,present});this.getGame=typeof game==='function'?game:()=>game;this.cursor=0;this.pending=Promise.resolve();this.warned=false;this.stats={received:0,attempted:0,confirmed:0,skipped:0,errors:0,status:'idle'};}
  get game(){return this.getGame();}
- consume(batch){if(!batch)return;const after=batch.cursor<this.cursor?0:this.cursor;this.cursor=batch.cursor;for(const event of (batch.events??[]).filter(e=>e.id>after)){this.stats.received++;this.pending=this.pending.then(()=>this.play(event)).catch(()=>{});}}
+ consume(batch){if(!batch)return;const after=batch.cursor<this.cursor?0:this.cursor;this.cursor=batch.cursor;for(const event of (batch.events??[]).filter(e=>e.id>after)){this.stats.received++;this.pending=this.pending.then(()=>this.present(event,()=>this.play(event))).catch(()=>{});}}
  async play(event,{test=false}={}){
   if(!test&&!this.enabled()){this.stats.status='disabled';return 'disabled';}
   this.stats.attempted++;this.stats.status='checking';
@@ -20,7 +20,7 @@ export class DiceAnimator {
    const dice=[];
    for(const {sides,value} of event.dice){
     if(![6,10,20,100].includes(sides)||!Number.isInteger(value)||value<1||value>sides)return;
-    const entry=(type,result,label)=>({type,result,resultLabel:String(label),vectors:[],options:{owner:this.game.users.get(event.actor)?.id??this.game.user.id},fvttResult:{result:value,active:true},resultIndex:dice.length});
+    const entry=(type,result,label)=>({type,result,resultLabel:String(label),vectors:[],options:{owner:this.game.users.get(event.actor)?.id??this.game.user.id,...(event.id?{taverngamesEvent:event.id}:{})},fvttResult:{result:value,active:true},resultIndex:dice.length});
     if(sides===100){
      const tens=Math.floor(value/10)%10,ones=value%10;
      dice.push({...entry('d100',tens,tens*10),compositeResult:value,compositeType:'d100'}, {...entry('d10',ones,ones),compositeResult:value,compositeType:'d100'});

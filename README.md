@@ -1,6 +1,6 @@
 # Taverngames – Foundry Extension
 
-**Version 1.4.3**. Alle acht Spiele sind regulär verfügbar: Schocken, Farkle, Schweinchen, Schiff–Kapitän–Mannschaft, Kniffel, Straßenlotto, Lügenwürfel und Drachenhort. Kniffel wurde von Daniel am 14. Oktober 2026 für die stabile Version freigegeben.
+**Version 1.4.6**. Alle acht Spiele sind regulär verfügbar: Schocken, Farkle, Schweinchen, Schiff–Kapitän–Mannschaft, Kniffel, Straßenlotto, Lügenwürfel und Drachenhort. Kniffel wurde von Daniel am 14. Oktober 2026 für die stabile Version freigegeben.
 
 ## Installation und Einstieg
 
@@ -180,3 +180,14 @@ English: Version 1.4.2 adjusts initial window height and scrolling, adds a GM-on
 ## Korrektur 1.4.3
 
 Die DSN-Anbindung liest das aktuelle Foundry-Spielobjekt erst beim Animationsaufruf. API-Zugriffe liegen jetzt vollständig in der Fehlerbehandlung; der Diagnosetest zeigt auch unerwartete Ausnahmen als Fehler. Der 3D-Schalter wird laufend ausgewertet und benötigt keinen Welt-Neustart. Nach der Installation dieses Updates die Welt einmal vollständig neu laden, damit die neuen Skripte aktiv sind. Eine echte 3D-Anzeige muss weiterhin im Praxistest bestätigt werden.
+
+
+## Farkle: liegende 3D-Würfel (Beta, 1.4.6)
+
+Bei aktivierter Dice-So-Nice-Beta werden herausgelegte Farkle-Würfel als echte 3D-Objekte in einer Reihe auf der normalen Würfelfläche angezeigt. Auswahl und Abwahl erfolgen weiter im Taverngames-Fenster. Herausgelegte Würfel sind gegen freie Würfe gesperrt. Nur übrige Würfel werden animiert. Bei sechs gewerteten Würfeln wird für den nächsten vollständigen Wurf freigegeben; beim Zugende/Abbruch werden zugehörige Stücke entfernt. Andere persistente Würfel bleiben erhalten.
+
+Die Würfelauswahl erscheint frühestens nach zwei Sekunden und nach Abschluss der Animation. Ein Fehlwurf bleibt anschließend noch zwei Sekunden sichtbar, bevor die Anzeige weiterwechselt. Die maßgebliche SL-Instanz sperrt Folgeaktionen bis zur Rückmeldung der verbundenen Clients. Eine ausgebliebene Rückmeldung blockiert höchstens 15 Sekunden. Abbruch/Pause und NPC-Steuerung bleiben möglich. Ohne eingeschaltete 3D-Beta erfolgt die Darstellung wie bisher direkt.
+
+Diese tiefere Anbindung wurde gegen den offiziellen DSN-Quellstand 6.4.4 entwickelt. Sie verwendet zusätzlich zur öffentlichen show-API interne APIs für persistente Meshes und Physikkörper; der echte Praxistest dieser neuen Funktion steht noch aus. Keine dauerhaft gespeicherten oder in Charakterbögen angelegten Spielwürfel. Nach einer Welt-Neuladung werden bereits gehaltene Würfel zunächst weiterhin nur im Spielfenster angezeigt; neue Animationen liefern wieder 3D-Stücke. Weitere Spiele und eine im Taverngames-Fenster eingebettete 3D-Fläche folgen später.
+
+English: Farkle beta now keeps selected dice as locked 3D pieces on the normal DSN surface. Selection remains in Taverngames. Results wait at least two seconds and for animation completion; a failed hand stays visible briefly. A server-side gate prevents subsequent actions until connected clients finish, with a 15-second fallback. Existing Cho-Han cup behavior is preserved. The deeper persistent-dice adapter still needs live testing.

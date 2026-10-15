@@ -1,10 +1,10 @@
 {
     "id":  "taverngames",
     "title":  "Taverngames – Foundry Extension",
-    "description":  "\u003ch3\u003eDeutsch\u003c/h3\u003e\u003cp\u003eTaverngames bringt Schocken, Farkle, Schweinchen, Schiff–Kapitän–Mannschaft, Kniffel, Straßenlotto, Lügenwürfel und Drachenhort mit SL-Moderation, freiwilligem Beitritt und benannten NPCs an deinen Foundry-Tisch. Alle acht Spiele sind stabil. Der Reiter ist nur für SL sichtbar.\u003c/p\u003e\u003ch3\u003eEnglish\u003c/h3\u003e\u003cp\u003eTaverngames brings eight stable games to Foundry: Schocken, Farkle, Pig, Ship–Captain–Crew, Kniffel, Street lottery, Liar’s Dice and Dragon’s Hoard, with GM moderation, voluntary participation and named NPCs. The tab is GM-only.\u003c/p\u003e\u003ch3\u003e1.4.3 · Versionshinweise / Release notes\u003c/h3\u003e\u003cul\u003e\u003cli\u003eDice-So-Nice-Beta: aktuelles Foundry-Spielobjekt erst beim Animationsaufruf lesen. / Dice So Nice beta: resolve the current Foundry game object when animating.\u003c/li\u003e\u003cli\u003eAPI-Prüfung vollständig in Fehlerbehandlung; Testanzeige bleibt bei Ausnahmen nicht mehr auf „Animation wird angefragt“ stehen. / API checks are now covered by error handling; test exceptions no longer leave the status stuck.\u003c/li\u003e\u003cli\u003eKeine Neuladung für den 3D-Schalter nötig. Acht Spiele stabil, Chō-Han und 3D-Anbindung weiterhin Beta. / No reload needed for the 3D switch. Eight stable games; Cho-Han and 3D integration remain beta.\u003c/li\u003e\u003c/ul\u003e",
-    "version":  "1.4.3",
+    "description":  "\u003ch3\u003eDeutsch\u003c/h3\u003e\u003cp\u003eTaverngames bringt Schocken, Farkle, Schweinchen, Schiff–Kapitän–Mannschaft, Kniffel, Straßenlotto, Lügenwürfel und Drachenhort mit SL-Moderation, freiwilligem Beitritt und benannten NPCs an deinen Foundry-Tisch. Alle acht Spiele sind stabil. Der Reiter ist nur für SL sichtbar.\u003c/p\u003e\u003ch3\u003eEnglish\u003c/h3\u003e\u003cp\u003eTaverngames brings eight stable games to Foundry: Schocken, Farkle, Pig, Ship–Captain–Crew, Kniffel, Street lottery, Liar’s Dice and Dragon’s Hoard, with GM moderation, voluntary participation and named NPCs. The tab is GM-only.\u003c/p\u003e\u003ch3\u003e1.4.6 · Versionshinweise / Release notes\u003c/h3\u003e\u003cul\u003e\u003cli\u003eFarkle mit Dice So Nice: herausgelegte Würfel bleiben als gesperrte 3D-Objekte auf der Würfelfläche liegen. Nur die übrigen Würfel werden neu geworfen. / Farkle with Dice So Nice: held dice remain as locked 3D pieces; only remaining dice are rerolled.\u003c/li\u003e\u003cli\u003eAuswahl erst nach mindestens zwei Sekunden und Animationsabschluss. Fehlwürfe bleiben danach kurz sichtbar. Mehrspieler-Animationssperre mit begrenzter Wartezeit. / Selection waits at least two seconds and for animation completion. Failed rolls remain briefly visible. Multiplayer animation gate with bounded waiting.\u003c/li\u003e\u003cli\u003eChō-Han-Becheranzeige aus 1.4.5 erhalten. Acht Spiele stabil; 3D-Erweiterung und Chō-Han weiterhin Beta. / Preserves the Cho-Han cup display from 1.4.5. Eight stable games; 3D extension and Cho-Han remain beta.\u003c/li\u003e\u003c/ul\u003e",
+    "version":  "1.4.6",
     "readme":  "README.md",
-    "changelog":  "https://github.com/666Arukard/taverngames/releases/tag/v1.4.3",
+    "changelog":  "https://github.com/666Arukard/taverngames/releases/tag/v1.4.6",
     "url":  "https://dnd.brunecoaching.de",
     "compatibility":  {
                           "verified":  "14.369"
@@ -72,7 +72,7 @@
                    "styles/table.css"
                ],
     "manifest":  "https://github.com/666Arukard/taverngames/releases/latest/download/module.json",
-    "download":  "https://github.com/666Arukard/taverngames/releases/download/v1.4.3/taverngames-1.4.3.zip",
+    "download":  "https://github.com/666Arukard/taverngames/releases/download/v1.4.6/taverngames-1.4.6.zip",
     "relationships":  {
                           "recommends":  [
                                              {
