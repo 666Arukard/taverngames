@@ -1,3 +1,4 @@
+import {registerSchockenBlank,schockenAppearance} from './schocken-presentation.mjs';
 // Optional presentation only: never generates random results or broadcasts DSN data.
 export class DiceEvents {
  constructor(){this.events=[];this.serial=0;this.captured={};}
@@ -18,9 +19,10 @@ export class DiceAnimator {
   const game=this.game,dsn=game.dice3d;
   if(!game.modules?.get('dice-so-nice')?.active||typeof dsn?.show!=='function'){this.stats.status='unavailable';this.stats.errors++;if(!this.warned){this.warned=true;this.warn();}return 'unavailable';}
    const dice=[];
-   for(const {sides,value} of event.dice){
+   for(const {sides,value,blank} of event.dice){
     if(![6,10,20,100].includes(sides)||!Number.isInteger(value)||value<1||value>sides)return;
-    const entry=(type,result,label)=>({type,result,resultLabel:String(label),vectors:[],options:{owner:this.game.users.get(event.actor)?.id??this.game.user.id,...(event.id?{taverngamesEvent:event.id}:{})},fvttResult:{result:value,active:true},resultIndex:dice.length});
+    if(blank&&(event.scope!=='schocken'||!registerSchockenBlank(dsn)))throw Error('Schocken hidden dice preset unavailable');
+    const entry=(type,result,label)=>({type,result,resultLabel:blank?'':String(label),vectors:[],options:{owner:this.game.users.get(event.actor)?.id??this.game.user.id,...(event.id?{taverngamesEvent:event.id}:{}),...(blank?{colorset:'custom',appearance:schockenAppearance(true)}:{})},fvttResult:{result:value,active:true},resultIndex:dice.length});
     if(sides===100){
      const tens=Math.floor(value/10)%10,ones=value%10;
      dice.push({...entry('d100',tens,tens*10),compositeResult:value,compositeType:'d100'}, {...entry('d10',ones,ones),compositeResult:value,compositeType:'d100'});

@@ -1,9 +1,17 @@
 # Taverngames – Foundry Extension
 
-**Version 1.4.12**. Alle acht Spiele sind regulär verfügbar: Schocken, Farkle, Schweinchen, Schiff–Kapitän–Mannschaft, Kniffel, Straßenlotto, Lügenwürfel und Drachenhort. Kniffel wurde von Daniel am 14. Oktober 2026 für die stabile Version freigegeben.
+**Version 1.4.13**. Alle acht Spiele sind regulär verfügbar: Schocken, Farkle, Schweinchen, Schiff–Kapitän–Mannschaft, Kniffel, Straßenlotto, Lügenwürfel und Drachenhort. Kniffel wurde von Daniel am 14. Oktober 2026 für die stabile Version freigegeben.
 
 
-## Aktuell in 1.4.12
+## Aktuell in 1.4.13
+
+Schocken: Mitspieler sehen verdeckte 3D-Würfelwürfe ohne Augenzahlen mit dem normalen Dice-So-Nice-Ton. Herauslegen und Aufdecken zeigen die gespeicherten Werte an derselben Position ohne erneuten Wurf.
+
+Der verdeckte dritte Wurf wird auch für den Würfelnden mit neutralen Würfeln dargestellt. Herausgelegte Stücke bleiben liegen. Zurücknehmen verbirgt die Zahl wieder für Mitspieler. Sechsendrehen verändert die ruhende Anzeige ohne Wurfanimation. Die Mitspieler erhalten weiterhin keine geheimen Ergebnisse. Die schwarzen neutralen Würfel besitzen goldene Kanten; sichtbare Zahlen werden beim Aufdecken dargestellt. Ton und Lautstärke folgen den DSN-Einstellungen; keine zusätzliche Audiodatei. Die Fensterkorrektur aus 1.4.12 wurde von Daniel bestätigt. 3D bleibt Beta und braucht den echten Mehrspielertest.
+
+English: Schocken: other players see hidden 3D throws without face labels, using normal Dice So Nice sound. Holding and revealing display stored values at the same resting position without another throw. Hidden third throws are neutral for their owner too. Sound respects DSN settings. No secret outcomes are sent to observers. 3D remains beta.
+
+## Vorheriger Stand 1.4.12
 
 Schocken: unnötige SL-Fensteraktualisierungen durch fremde Würfelabfragen entfernt. Unveränderte Inhalte bleiben bestehen; NPC-Eingaben behalten Text, Fokus und Cursorposition. Scrollposition im Spielfenster bleibt erhalten.
 

@@ -2,15 +2,16 @@
   "schemaVersion": 1,
   "blocks": {
     "patchnotes": {
-      "title": "Patchnotes Version 1.4.12",
+      "title": "Patchnotes Version 1.4.13",
       "paragraphs": [
-        "Schocken: unnötige SL-Fensteraktualisierungen durch fremde Würfelabfragen entfernt. Unveränderte Inhalte bleiben bestehen; NPC-Eingaben behalten Text, Fokus und Cursorposition. Scrollposition im Spielfenster bleibt erhalten.",
-        "3D und Chō-Han bleiben Beta. Keine neue Live-Abnahme."
+        "Schocken: Mitspieler sehen verdeckte 3D-Würfelwürfe ohne Augenzahlen mit dem normalen Dice-So-Nice-Ton. Herauslegen und Aufdecken zeigen die gespeicherten Werte an derselben Position ohne erneuten Wurf.",
+        "Die Schocken-Fensterkorrektur ist durch Daniel bestätigt. 3D und Chō-Han bleiben Beta."
       ],
       "items": [
-        "Keine SL-Neuaufbauten durch reine Spieler-/Würfelabfragen.",
-        "NPC-Textfelder behalten Eingaben, Fokus und markierten Text auch bei echten Spielstandsänderungen.",
-        "Unveränderte Spielfenster behalten ihre Buttons und Scrollposition."
+        "Mitspieler erhalten neutrale Wurfanimationen ohne geheime Zahlen; DSN übernimmt den Würfelsound nach eigenen Einstellungen.",
+        "Herauslegen, Zurücknehmen, Aufdecken und Sechsendrehen ändern die ruhende Anzeige ohne zusätzliche Wurfanimation.",
+        "Verdeckter dritter Wurf auch für den Würfelnden neutral; herausgelegte Würfel bleiben sichtbar.",
+        "Keine Änderung an Regeln, Spielständen oder globalen DSN-Einstellungen."
       ]
     },
     "games": {
@@ -117,7 +118,7 @@
         "Farkle, Kniffel und Schiff: alle gelandeten 3D-Stücke bleiben bis zum nächsten Wurf oder Zugende sichtbar; keine zusätzliche feste Auswahlpause.",
         "Farkle: zügigere Animationsrückmeldung und erklärender Hinweis bei laufender Gegenanimation.",
         "Farkle-Moderation: beständige Partieeingaben und Spielmodus-Auswahl während Live-Aktualisierungen.",
-        "Schocken: lokale liegende 3D-Würfel, private normale Würfe, öffentliche herausgelegte Würfel, Zurücknehmen, Sechsen drehen und Aufdecken als DSN-Beta."
+        "Schocken: liegende 3D-Würfel, neutrale verdeckte Würfe für Mitspieler, Herauslegen und Aufdecken ohne erneuten Wurf als DSN-Beta."
       ]
     },
     "settings": {
@@ -142,7 +143,7 @@
         "Bei den drei Spielen bleiben alle gelandeten Würfel während der Auswahl liegen. Halten und Zurücknehmen erfolgt im Taverngames-Fenster. Nur freie Würfel werden beim nächsten Wurf ersetzt. Die allgemeinen Dice-So-Nice-Einstellungen müssen dafür nicht geändert werden. Nach Modulaktualisierung die Welt neu laden.",
         "Bei Farkle erklärt ein Wartehinweis die noch laufende Animation anderer Clients. Würfeln und Sichern werden erst nach den erforderlichen Abschlussmeldungen freigegeben. Nach Installation von 1.4.9 die Welt neu laden.",
         "Nach Installation von 1.4.10 die Welt neu laden. Die Farkle-Spielmodus-Auswahl bleibt bei Aktualisierungen erhalten; die Eingaben werden beim Öffnen einer Lobby übernommen.",
-        "Schocken: bestehenden Dice-So-Nice-Beta-Schalter aktivieren und nach Installation von 1.4.11 die Welt neu laden. Zurücknehmen wird weiterhin im Schocken-Moderationsfenster erlaubt. Der verdeckte dritte Wurf zeigt nur herausgelegte Zahlen; freie Würfel bleiben Fragezeichen bis zum Aufdecken. Keine leeren 3D-Würfel in dieser Version."
+        "Schocken: bestehenden Dice-So-Nice-Beta-Schalter aktivieren und nach Installation von 1.4.13 die Welt neu laden. Zurücknehmen wird weiterhin im Moderationsfenster erlaubt. Verdeckte Würfel werden als neutrale 3D-Stücke dargestellt, die Zahlen im Spielfenster bleiben bis zum Aufdecken Fragezeichen. Ton und Lautstärke werden in Dice So Nice eingestellt."
       ],
       "items": []
     },
@@ -207,5 +208,5 @@
       ]
     }
   },
-  "version": "1.4.12"
+  "version": "1.4.13"
 }

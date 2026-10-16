@@ -18,6 +18,7 @@ export class FarkleAnimationGate {
 export class FarklePersistentDice {
  constructor({game,warn=()=>{},scope='farkle'}){this.scope=scope;this.game=game;this.warn=warn;this.poses=new Map();this.meshes=new Map();this.turn=null;this.warned=false;this.serial=Promise.resolve();}
  enqueue(fn){const result=this.serial.then(fn);this.serial=result.catch(()=>{});return result;}
+ spawnOptions(_pose){return {};}
  capture(state,indices,eventId){
   const box=this.game().dice3d?.box,engine=box?.throwEngine;
   const meshes=[...(engine?.diceList??[]),...(engine?.deadDiceList??[])].filter(m=>m.notation?.type==='d6'&&!m.userData?.persistent&&(eventId===undefined||m.options?.taverngamesEvent===eventId));
@@ -38,7 +39,7 @@ export class FarklePersistentDice {
   if(!desired.size)return;
   if(typeof dsn?.persistent?.spawn!=='function'||typeof dsn?.persistent?.remove!=='function'||typeof box?.physicsWorker?.exec!=='function'){if(!this.warned){this.warned=true;this.warn();}return;}
   for(const index of desired){const existing=this.meshes.get(index);if(existing&&Array.isArray(box?.persistentDiceList)&&!box.persistentDiceList.includes(existing.mesh))this.meshes.delete(index);if(this.meshes.has(index))continue;const pose=this.poses.get(index);if(!pose||pose.value!==state.cup.dice[index])continue;
-   const enabled=box.persistentDiceEnabled;let task;try{box.persistentDiceEnabled=true;task=dsn.persistent.spawn('d6',pose.position??{x:0.18+index*0.11,y:this.scope==='kniffel'?0.70:this.scope==='ship'?0.58:0.82},{ownerUserId:state.order[state.turn],guest:{pendingId:'taverngames-'+this.scope,reservedForUserId:'taverngames-locked'}},false);}finally{box.persistentDiceEnabled=enabled;}
+   const enabled=box.persistentDiceEnabled;let task;try{box.persistentDiceEnabled=true;task=dsn.persistent.spawn('d6',pose.position??{x:0.18+index*0.11,y:this.scope==='kniffel'?0.70:this.scope==='ship'?0.58:0.82},{ownerUserId:state.order[state.turn],guest:{pendingId:'taverngames-'+this.scope,reservedForUserId:'taverngames-locked'},...this.spawnOptions(pose)},false);}finally{box.persistentDiceEnabled=enabled;}
    const mesh=await task;
    if(!mesh)continue;
    // These are inert display pieces. Native grab checks lockedBy even for the GM.
