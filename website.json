@@ -2,16 +2,16 @@
   "schemaVersion": 1,
   "blocks": {
     "patchnotes": {
-      "title": "Patchnotes Version 1.4.13",
+      "title": "Patchnotes Version 1.4.14",
       "paragraphs": [
-        "Schocken: Mitspieler sehen verdeckte 3D-Würfelwürfe ohne Augenzahlen mit dem normalen Dice-So-Nice-Ton. Herauslegen und Aufdecken zeigen die gespeicherten Werte an derselben Position ohne erneuten Wurf.",
-        "Die Schocken-Fensterkorrektur ist durch Daniel bestätigt. 3D und Chō-Han bleiben Beta."
+        "Schweinchen: Der letzte 3D-Würfel bleibt bis zum nächsten Wurf oder Zugende liegen. Eine Eins bleibt bis Weiter sichtbar. Automatische NPCs warten nach Abschluss der Animationen fünf Sekunden.",
+        "Schocken-3D aus 1.4.13 durch Daniel getestet. Die 3D-Anbindung bleibt Beta."
       ],
       "items": [
-        "Mitspieler erhalten neutrale Wurfanimationen ohne geheime Zahlen; DSN übernimmt den Würfelsound nach eigenen Einstellungen.",
-        "Herauslegen, Zurücknehmen, Aufdecken und Sechsendrehen ändern die ruhende Anzeige ohne zusätzliche Wurfanimation.",
-        "Verdeckter dritter Wurf auch für den Würfelnden neutral; herausgelegte Würfel bleiben sichtbar.",
-        "Keine Änderung an Regeln, Spielständen oder globalen DSN-Einstellungen."
+        "Ein einzelner liegender Schweinchen-Würfel; nur dieser wird beim nächsten Wurf ersetzt.",
+        "Eine Eins bleibt für Menschen bis Weiter sichtbar. NPCs warten fünf Sekunden nach Animationsabschluss.",
+        "Neue Würfe, Punkte sichern und Weiter sind während laufender Gegenanimationen gesperrt.",
+        "Bereinigung bei Zugwechsel, Abbruch und deaktivierter 3D-Beta; bisherige Regeln und Historie bleiben erhalten."
       ]
     },
     "games": {
@@ -77,7 +77,7 @@
       ]
     },
     "plans2": {
-      "title": "geplante Funktionen (7)",
+      "title": "geplante Funktionen (8)",
       "paragraphs": [
         "Größere Erweiterungen werden schrittweise geprüft. Die folgende Liste beschreibt Überlegungen und noch keine fertigen Funktionen.",
         "Karteneinbindung auf Daniels Wunsch zurückgestellt. Als späterer erster Schritt vorgeschlagen: einfache Vorder-/Rückseiten und eine Kartenhand mit Sichtbarkeitsprüfung zwischen zwei Spielern, zunächst ohne Animationen. Noch keine Umsetzungsfreigabe."
@@ -89,11 +89,12 @@
         "Eigene große Erweiterung für gezielte SL-Manipulationen; noch nicht umgesetzt.",
         "Kniffel-Serien und Kniffel-Einsatzverwaltung.",
         "Optionale echte Charaktergeld-Abrechnung für Drachenhort und Ausgangswetten, bisher nur virtuelle Guthaben.",
-        "Beschleunigte NPC-Wettpartien."
+        "Beschleunigte NPC-Wettpartien.",
+        "Nach den 3D-Spieltests: optionaler kompakter, halbtransparenter Bedienmodus mit anklickbaren 3D-Würfeln, Strg-Auswahl und Behalten/Wurf. Noch nicht umgesetzt."
       ]
     },
     "functions": {
-      "title": "aktuelle Funktionen (21)",
+      "title": "aktuelle Funktionen (22)",
       "paragraphs": [
         "Acht stabile Spiele und Chō-Han als zusätzliches Beta-Spiel. Die optionale3D-Animation ist weiterhin separat schaltbare Beta."
       ],
@@ -118,7 +119,8 @@
         "Farkle, Kniffel und Schiff: alle gelandeten 3D-Stücke bleiben bis zum nächsten Wurf oder Zugende sichtbar; keine zusätzliche feste Auswahlpause.",
         "Farkle: zügigere Animationsrückmeldung und erklärender Hinweis bei laufender Gegenanimation.",
         "Farkle-Moderation: beständige Partieeingaben und Spielmodus-Auswahl während Live-Aktualisierungen.",
-        "Schocken: liegende 3D-Würfel, neutrale verdeckte Würfe für Mitspieler, Herauslegen und Aufdecken ohne erneuten Wurf als DSN-Beta."
+        "Schocken: liegende 3D-Würfel, neutrale verdeckte Würfe für Mitspieler, Herauslegen und Aufdecken ohne erneuten Wurf als DSN-Beta.",
+        "Schweinchen: ein liegender 3D-Würfel, sichtbare Eins bis Weiter, Animationsschutz und fünf Sekunden NPC-Wartezeit nach Animationsende als DSN-Beta."
       ]
     },
     "settings": {
@@ -143,7 +145,8 @@
         "Bei den drei Spielen bleiben alle gelandeten Würfel während der Auswahl liegen. Halten und Zurücknehmen erfolgt im Taverngames-Fenster. Nur freie Würfel werden beim nächsten Wurf ersetzt. Die allgemeinen Dice-So-Nice-Einstellungen müssen dafür nicht geändert werden. Nach Modulaktualisierung die Welt neu laden.",
         "Bei Farkle erklärt ein Wartehinweis die noch laufende Animation anderer Clients. Würfeln und Sichern werden erst nach den erforderlichen Abschlussmeldungen freigegeben. Nach Installation von 1.4.9 die Welt neu laden.",
         "Nach Installation von 1.4.10 die Welt neu laden. Die Farkle-Spielmodus-Auswahl bleibt bei Aktualisierungen erhalten; die Eingaben werden beim Öffnen einer Lobby übernommen.",
-        "Schocken: bestehenden Dice-So-Nice-Beta-Schalter aktivieren und nach Installation von 1.4.13 die Welt neu laden. Zurücknehmen wird weiterhin im Moderationsfenster erlaubt. Verdeckte Würfel werden als neutrale 3D-Stücke dargestellt, die Zahlen im Spielfenster bleiben bis zum Aufdecken Fragezeichen. Ton und Lautstärke werden in Dice So Nice eingestellt."
+        "Schocken: bestehenden Dice-So-Nice-Beta-Schalter aktivieren und nach Installation von 1.4.13 die Welt neu laden. Zurücknehmen wird weiterhin im Moderationsfenster erlaubt. Verdeckte Würfel werden als neutrale 3D-Stücke dargestellt, die Zahlen im Spielfenster bleiben bis zum Aufdecken Fragezeichen. Ton und Lautstärke werden in Dice So Nice eingestellt.",
+        "Schweinchen: nach Installation von 1.4.14 die Welt neu laden und den vorhandenen Dice-So-Nice-Beta-Schalter verwenden. Würfelsounds folgen DSN. Bei einer Eins Weiter anklicken; automatische NPCs warten selbstständig fünf Sekunden nach der Animation."
       ],
       "items": []
     },
@@ -208,5 +211,5 @@
       ]
     }
   },
-  "version": "1.4.13"
+  "version": "1.4.14"
 }

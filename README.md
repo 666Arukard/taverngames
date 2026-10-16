@@ -1,9 +1,17 @@
 # Taverngames – Foundry Extension
 
-**Version 1.4.13**. Alle acht Spiele sind regulär verfügbar: Schocken, Farkle, Schweinchen, Schiff–Kapitän–Mannschaft, Kniffel, Straßenlotto, Lügenwürfel und Drachenhort. Kniffel wurde von Daniel am 14. Oktober 2026 für die stabile Version freigegeben.
+**Version 1.4.14**. Alle acht Spiele sind regulär verfügbar: Schocken, Farkle, Schweinchen, Schiff–Kapitän–Mannschaft, Kniffel, Straßenlotto, Lügenwürfel und Drachenhort. Kniffel wurde von Daniel am 14. Oktober 2026 für die stabile Version freigegeben.
 
 
-## Aktuell in 1.4.13
+## Aktuell in 1.4.14
+
+Schweinchen: Der letzte 3D-Würfel bleibt bis zum nächsten Wurf oder Zugende liegen. Eine Eins bleibt bis Weiter sichtbar. Automatische NPCs warten nach Abschluss der Animationen fünf Sekunden.
+
+Es liegt immer nur der letzte Schweinchen-Würfel, nicht die gesamte Wurfhistorie. Diese bleibt wie bisher im Spielfenster erhalten. Neue Würfe, Punkte sichern und Weiter warten auf die erforderlichen Animationsrückmeldungen. Bei Sichern, Weiter, Abbruch oder ausgeschalteter 3D-Beta werden nur die eigenen Schweinchen-Stücke entfernt. Ohne DSN bleibt der bisherige Ablauf erhalten. 3D bleibt Beta.
+
+English: Pig: the last 3D die remains until the next roll or turn end. A one stays visible until Continue. Automatic NPCs wait five seconds after the animations finish. The roll history remains in the game window. Rerolls, banking and Continue wait for animation acknowledgements. No score, rules or save-format changes. 3D remains beta.
+
+## Vorheriger Stand 1.4.13
 
 Schocken: Mitspieler sehen verdeckte 3D-Würfelwürfe ohne Augenzahlen mit dem normalen Dice-So-Nice-Ton. Herauslegen und Aufdecken zeigen die gespeicherten Werte an derselben Position ohne erneuten Wurf.
 

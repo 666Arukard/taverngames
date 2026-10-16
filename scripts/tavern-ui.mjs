@@ -51,7 +51,7 @@ export class TavernUI{
       const row=node('div',undefined,'schocken-actions');
       if(s.phase==='lobby')control(row,this.scope==='lottery'?f('Annahme schließen','Close acceptance'):f('Spiel starten','Start game'),()=>this.request('begin'),s.paused||(this.scope==='lottery'?!s.tickets.length:s.players.length<2));
       if(this.scope==='lottery'&&s.phase==='closed')control(row,f('W100 ziehen','Draw d100'),()=>this.request('draw'),s.paused);
-      if(s.phase==='playing'&&this.scope==='pig'&&s.cup.bust)control(row,f('Weiter','Continue'),()=>this.request('next'),s.paused);
+      if(s.phase==='playing'&&this.scope==='pig'&&s.cup.bust)control(row,f('Weiter','Continue'),()=>this.request('next'),s.paused||s.animationWaiting||s.animationNextWaiting);
       if(s.phase==='playing'&&this.scope==='ship'&&s.cup.rolls===3)control(row,f('Zug abschließen','End turn'),()=>this.request('bank'),s.paused);
       control(row,s.paused?f('Fortsetzen','Resume'):f('Pause','Pause'),()=>this.request('pause'));
       if(this.scope!=='lottery')control(row,f('Rückgängig','Undo'),()=>this.request('undo'));
@@ -127,7 +127,7 @@ export class TavernUI{
       });c.append(dice);
       if(enabled){
         const row=node('div',undefined,'schocken-actions');
-        if(this.scope==='pig'&&s.cup.bust)control(row,f('Weiter','Continue'),()=>this.request('next'));
+        if(this.scope==='pig'&&s.cup.bust)control(row,f('Weiter','Continue'),()=>this.request('next'),s.animationNextWaiting);
         else{
           control(row,f('Würfeln','Roll'),()=>this.request('roll'),s.animationNextWaiting||this.scope==='ship'&&s.cup.rolls>=3);
           control(row,this.scope==='pig'?f('Punkte sichern','Bank points'):s.cup.rolls===3?f('Zug abschließen','End turn'):f('Ladung behalten','Keep cargo'),()=>this.request('bank'),s.animationNextWaiting||(this.scope==='pig'?s.cup.points<=0:s.cup.stage!==3&&s.cup.rolls<3));

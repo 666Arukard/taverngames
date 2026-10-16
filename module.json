@@ -1,10 +1,10 @@
 {
     "id":  "taverngames",
     "title":  "Taverngames – Foundry Extension",
-    "description":  "\u003ch3\u003eDeutsch\u003c/h3\u003e\u003cp\u003eTaverngames bringt Schocken, Farkle, Schweinchen, Schiff–Kapitän–Mannschaft, Kniffel, Straßenlotto, Lügenwürfel und Drachenhort mit SL-Moderation, freiwilligem Beitritt und benannten NPCs an deinen Foundry-Tisch. Alle acht Spiele sind stabil. Der Reiter ist nur für SL sichtbar.\u003c/p\u003e\u003ch3\u003eEnglish\u003c/h3\u003e\u003cp\u003eTaverngames brings eight stable games to Foundry: Schocken, Farkle, Pig, Ship–Captain–Crew, Kniffel, Street lottery, Liar’s Dice and Dragon’s Hoard, with GM moderation, voluntary participation and named NPCs. The tab is GM-only.\u003c/p\u003e\u003ch3\u003e1.4.13 · Versionshinweise / Release notes\u003c/h3\u003e\u003cp\u003eSchocken: Mitspieler sehen verdeckte 3D-Würfelwürfe ohne Augenzahlen mit dem normalen Dice-So-Nice-Ton. Herauslegen und Aufdecken zeigen die gespeicherten Werte an derselben Position ohne erneuten Wurf.\u003c/p\u003e\u003cp\u003eSchocken: other players see hidden 3D throws without face labels, using normal Dice So Nice sound. Holding and revealing display stored values at the same resting position without another throw.\u003c/p\u003e\u003cp\u003e3D und Chō-Han bleiben Beta. / 3D and Cho-Han remain beta.\u003c/p\u003e\u003cp\u003eChō-Han-Regelvorlagen: bereitgestellte Regelsammlung von Daniel sowie Dice-Play und NetExl. / Cho-Han rule references: collection supplied by Daniel, Dice-Play and NetExl.\u003c/p\u003e",
-    "version":  "1.4.13",
+    "description":  "\u003ch3\u003eDeutsch\u003c/h3\u003e\u003cp\u003eTaverngames bringt Schocken, Farkle, Schweinchen, Schiff–Kapitän–Mannschaft, Kniffel, Straßenlotto, Lügenwürfel und Drachenhort mit SL-Moderation, freiwilligem Beitritt und benannten NPCs an deinen Foundry-Tisch. Alle acht Spiele sind stabil. Der Reiter ist nur für SL sichtbar.\u003c/p\u003e\u003ch3\u003eEnglish\u003c/h3\u003e\u003cp\u003eTaverngames brings eight stable games to Foundry: Schocken, Farkle, Pig, Ship–Captain–Crew, Kniffel, Street lottery, Liar’s Dice and Dragon’s Hoard, with GM moderation, voluntary participation and named NPCs. The tab is GM-only.\u003c/p\u003e\u003ch3\u003e1.4.14 · Versionshinweise / Release notes\u003c/h3\u003e\u003cp\u003eSchweinchen: Der letzte 3D-Würfel bleibt bis zum nächsten Wurf oder Zugende liegen. Eine Eins bleibt bis Weiter sichtbar. Automatische NPCs warten nach Abschluss der Animationen fünf Sekunden.\u003c/p\u003e\u003cp\u003ePig: the last 3D die remains until the next roll or turn end. A one stays visible until Continue. Automatic NPCs wait five seconds after the animations finish.\u003c/p\u003e\u003cp\u003eFolgeaktionen warten auf die Würfelanimationen der Mitspieler. / Subsequent actions wait for other players’ dice animations.\u003c/p\u003e\u003cp\u003e3D und Chō-Han bleiben Beta. / 3D and Cho-Han remain beta.\u003c/p\u003e\u003cp\u003eChō-Han-Regelvorlagen: bereitgestellte Regelsammlung von Daniel sowie Dice-Play und NetExl. / Cho-Han rule references: collection supplied by Daniel, Dice-Play and NetExl.\u003c/p\u003e",
+    "version":  "1.4.14",
     "readme":  "README.md",
-    "changelog":  "https://github.com/666Arukard/taverngames/releases/tag/v1.4.13",
+    "changelog":  "https://github.com/666Arukard/taverngames/releases/tag/v1.4.14",
     "url":  "https://dnd.brunecoaching.de",
     "compatibility":  {
                           "verified":  "14.369"
@@ -80,7 +80,7 @@
                    "styles/table.css"
                ],
     "manifest":  "https://github.com/666Arukard/taverngames/releases/latest/download/module.json",
-    "download":  "https://github.com/666Arukard/taverngames/releases/download/v1.4.13/taverngames-1.4.13.zip",
+    "download":  "https://github.com/666Arukard/taverngames/releases/download/v1.4.14/taverngames-1.4.14.zip",
     "relationships":  {
                           "recommends":  [
                                              {
