@@ -1,9 +1,25 @@
 # Taverngames – Foundry Extension
 
-**Version 1.4.10**. Alle acht Spiele sind regulär verfügbar: Schocken, Farkle, Schweinchen, Schiff–Kapitän–Mannschaft, Kniffel, Straßenlotto, Lügenwürfel und Drachenhort. Kniffel wurde von Daniel am 14. Oktober 2026 für die stabile Version freigegeben.
+**Version 1.4.12**. Alle acht Spiele sind regulär verfügbar: Schocken, Farkle, Schweinchen, Schiff–Kapitän–Mannschaft, Kniffel, Straßenlotto, Lügenwürfel und Drachenhort. Kniffel wurde von Daniel am 14. Oktober 2026 für die stabile Version freigegeben.
 
 
-## Aktuell in 1.4.10
+## Aktuell in 1.4.12
+
+Schocken: unnötige SL-Fensteraktualisierungen durch fremde Würfelabfragen entfernt. Unveränderte Inhalte bleiben bestehen; NPC-Eingaben behalten Text, Fokus und Cursorposition. Scrollposition im Spielfenster bleibt erhalten.
+
+English: Schocken: removed unnecessary GM window rebuilds triggered by remote dice polling. Unchanged content remains intact; NPC drafts retain text, focus and selection. Table scroll position is preserved.
+
+## Vorheriger Stand 1.4.11
+
+Schocken verwendet bei aktivierter Dice-So-Nice-Beta lokale liegende 3D-Würfel. Normale freie Würfel sieht der Würfelnde; herausgelegte Würfel werden für alle sichtbar. Halten ersetzt die bereits sichtbaren eigenen Stücke nicht. Zurücknehmen ist nur bei erlaubter Tischoption möglich; für andere Spieler wird dieser Würfel wieder verborgen. Beim nächsten Wurf werden nur freie Stücke ersetzt. Sechsen drehen und Aufdecken zeigen die feststehenden Werte mit einer Darstellungsanimation, ohne erneut Zufallszahlen zu ermitteln.
+
+Der verdeckte dritte Wurf wird auch dem Würfelnden nicht mit seinen echten Zahlen animiert. Bereits herausgelegte Zahlen bleiben sichtbar, freie verdeckte Würfel bleiben Fragezeichen im Spielfenster. Leere 3D-Würfel sind noch nicht enthalten. Die vorhandenen GM-Rechte der 2D-Ansicht bleiben unverändert. Nach Zugende, Abbruch und Partiewechsel werden nur die eigenen Schocken-Stücke entfernt. Bei Rückgängig wird die 3D-Darstellung zurückgesetzt; historische Würfel werden nicht rekonstruiert. Ein nach Zugende aufgedecktes altes Ergebnis steht weiterhin im Ergebnisblock und wird nicht als neuer aktiver 3D-Zug aufgebaut.
+
+Schocken-Folgeaktionen und automatische NPC-Züge warten auf die erforderlichen Animationsrückmeldungen; Pause, Abbruch und NPC-Umschalten bleiben erreichbar. Die bisherige 15-Sekunden-Ausfallsicherung bleibt bestehen. Ohne DSN bleibt die normale Oberfläche nutzbar. Keine Änderung an DSN-Präferenzen, fremden Würfeln oder Spielwertungen. Die Erweiterung bleibt Beta und benötigt deinen Praxistest mit Foundry 14.369 und DSN 6.4.4. Die Dropdown-Korrektur aus 1.4.10 wurde von Daniel bestätigt. Kartenentwicklung bleibt zurückgestellt.
+
+English: Schocken gains local resting 3D dice in the optional Dice So Nice beta. Ordinary free dice are private to their player; held dice are visible to everyone. Returning is available only when enabled by the GM. Only free pieces are replaced on a reroll. Turning sixes and revealing display fixed outcomes without another random evaluation. Hidden third-roll numbers are never sent through the 3D presentation channel; unknown dice remain question marks in the game window, not blank 3D pieces. Existing GM privileges in the 2D view are unchanged. Turn completion and abort clear local Schocken pieces; undo resets the presentation. Late reveals remain in the result block. Animation acknowledgements guard subsequent actions. This beta needs a live test; no stable V2 release is claimed.
+
+## Bisheriger Stand 1.4.10
 
 Farkle: Das Spielmodus-Dropdown und die übrigen Partieeingaben bleiben während laufender Aktualisierungen als dieselben Bedienelemente bestehen. Dadurch schließt sich eine geöffnete Auswahl nicht mehr durch den Neuaufbau des Moderationsfensters. Nur der Live-Bereich mit Spielstatus, NPC-Steuerung und Protokoll wird neu aufgebaut; globale Häkchen werden weiterhin aktualisiert. Entwürfe, Fokus und Scrollposition bleiben erhalten. Die Würfelkorrekturen aus 1.4.9 bleiben bestehen. Die 3D-Anbindung bleibt Beta. Neue Dropdown-Korrektur synthetisch geprüft; Praxistest in Foundry noch erforderlich.
 

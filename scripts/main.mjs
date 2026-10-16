@@ -1,3 +1,4 @@
+import {SchockenAnimationGate,schockenDiceState,schockenDiceEvent} from './schocken-dice.mjs';
 import {withScroll} from './scroll-state.mjs';
 import {HELD_GAMES,HeldAnimationGate,heldState} from './held-dice.mjs';
 import {FarkleAnimationGate,FarklePersistentDice} from './farkle-dice.mjs';
@@ -50,13 +51,46 @@ let ledgerUnavailable=false;
 const clients={},tavernBusy={};
 const gameEnabled=scope=>scope!=='chohan'||game.settings.get(ID,'betaTest')===true;
 const diceEvents=new DiceEvents();
+const schockenGate=new SchockenAnimationGate(),schockenPhases=new Map();let schockenVisual=null,schockenLatest=null;
+const schockenPersistent=new FarklePersistentDice({game:()=>game,scope:'schocken'});
+function schockenLock(){if(!game.settings.get(ID,'diceSoNiceBeta'))return null;const a=authority()?schockenGate.project(state):Object.hasOwn(state??{},'schockenAnimation')?state.schockenAnimation:schockenVisual?.animation;return a&&Date.now()<a.until&&a.gameId===state?.gameId?a:null;}
+async function syncSchocken(next,indices=null){let timer;try{await Promise.race([indices?schockenPersistent.beginRoll(next,indices):schockenPersistent.sync(next),new Promise((_,reject)=>{timer=setTimeout(()=>reject(Error('Schocken dice API timeout')),1000);})]);}catch(error){console.warn('Taverngames: Schocken 3D',error);}finally{clearTimeout(timer);}}
+function emitSchocken(before,after,action){for(const user of game.users.filter(u=>u.active)){const e=schockenDiceEvent(before,after,user,action,schockenGate.project(after));diceEvents.add('schocken',e.actor,e.dice,{privateTo:[user.id],schocken:e.schocken});}}
+async function schockenAction(actor,action,fn){
+ if(['read','diceRead','diceDiagnostics','schockenAnimationAck','connect'].includes(action))return fn();
+ const before=structuredClone(state),values=[];capturedDice=values;
+ try{const result=await fn();diceEvents.record('schocken',action,values.length);
+  if(state?.revision!==before?.revision&&game.settings.get(ID,'diceSoNiceBeta')&&game.modules?.get('dice-so-nice')?.active){
+   if(['roll','hold','return','six','reveal'].includes(action))schockenGate.open(state,game.users.filter(u=>u.active).map(u=>u.id));
+   else if(['finish','abort','undo','start','lobby','begin','nextHalf'].includes(action))schockenGate.clear();
+   emitSchocken(before,state,action);
+  }return result;
+ }finally{capturedDice=null;if(panel||moderation)draw();}
+}
+async function presentSchocken(event,play){
+ const data=event.schocken,next=data.state,a=data.animation;
+ if(!game.settings.get(ID,'diceSoNiceBeta'))return syncSchocken(null);
+ const knownAtStart=state?.revision>=next?.revision?schockenDiceState(state,game.user):next,newest=(schockenLatest?.revision??-1)>=(knownAtStart?.revision??-1)?schockenLatest:knownAtStart;
+ if(a&&(Date.now()>=a.until||newest?.revision>next?.revision&&(newest.gameId!==next.gameId||newest.turnNumber!==next.turnNumber||newest.phase!=='playing'))){await syncSchocken(null);await requestFinance('schocken','schockenAnimationAck',{id:a.id}).catch(()=>{});return;}
+ if(next?.revision<(schockenVisual?.state?.revision??-1)){if(a&&['roll','hold','return','six','reveal'].includes(data.action))await requestFinance('schocken','schockenAnimationAck',{id:a.id}).catch(()=>{});return;}
+ schockenVisual=data;if(!authority()&&next?.phase==='aborted'&&state?.gameId===next.gameId&&state.revision<=next.revision)state={...state,phase:'aborted',revision:next.revision,cup:null,results:[],lastResults:[],paused:true,schockenAnimation:null};if(!authority()&&state?.gameId===next?.gameId&&state.revision<=next.revision)state={...state,schockenAnimation:a};
+ if(data.action==='undo'){await schockenPersistent.clear();draw();return;}
+ const animate=a&&['roll','hold','return','six','reveal'].includes(data.action)&&schockenPhases.get(a.id)!=='done';
+ if(animate){schockenPhases.set(a.id,'rolling');draw();await syncSchocken(next,data.indices);const result=event.dice.length?await play():null;
+  if(result==='confirmed'&&game.settings.get(ID,'diceSoNiceBeta'))schockenPersistent.capture(next,data.indices.filter(i=>Number.isInteger(next.cup?.dice[i])),event.id);
+  const known=state?.gameId===next?.gameId&&state.revision>=next.revision?schockenDiceState(state,game.user):next,live=(schockenLatest?.revision??-1)>=(known?.revision??-1)?schockenLatest:known;await syncSchocken(game.settings.get(ID,'diceSoNiceBeta')&&live?.gameId===next?.gameId&&live.turnNumber===next?.turnNumber&&live.phase==='playing'?next:null);
+  const ack=await requestFinance('schocken','schockenAnimationAck',{id:a.id}).catch(()=>null);if(!authority()&&state?.schockenAnimation?.id===a.id&&ack)state={...state,schockenAnimation:ack.animation};
+  schockenPhases.set(a.id,'done');if(schockenPhases.size>80)schockenPhases.delete(schockenPhases.keys().next().value);
+ }else await syncSchocken(next);
+ draw();
+}
 const farkleGate=new FarkleAnimationGate();
 const heldGates=Object.fromEntries(HELD_GAMES.map(scope=>[scope,new HeldAnimationGate()])),heldPreparing={},heldPhases=new Map(),heldRenderers=Object.fromEntries(HELD_GAMES.map(scope=>[scope,new FarklePersistentDice({game:()=>game,scope})]));
 let farklePreparing=null;const farklePhases=new Map();
 const farklePersistent=new FarklePersistentDice({game:()=>game,warn:()=>ui.notifications.warn(f('Taverngames: Liegende 3D-Würfel benötigen die geprüfte Dice-So-Nice-Schnittstelle 6.4.4.','Taverngames: held 3D dice require the checked Dice So Nice 6.4.4 API.'))});
 const diceAnimator=new DiceAnimator({game:()=>game,present:presentDice,enabled:()=>game.settings.get(ID,'diceSoNiceBeta')===true,warn:()=>ui.notifications.warn(f('Taverngames: Dice-So-Nice-Animation nicht verfügbar. Die normale Würfeldarstellung bleibt aktiv.','Taverngames: Dice So Nice animation unavailable. Standard dice display remains active.'))});
 let dicePolling=false;
-async function pollDice(){if(dicePolling||!primary()||game.settings.get(ID,'diceSoNiceBeta')!==true)return;dicePolling=true;try{diceAnimator.consume(await requestFinance('schocken','diceRead',{after:diceAnimator.cursor}));}catch{diceAnimator.stats.status='connection-error';diceAnimator.stats.errors++;}finally{dicePolling=false;}}
+async function pollDice(){if(dicePolling||!primary()||game.settings.get(ID,'diceSoNiceBeta')!==true)return;dicePolling=true;try{const batch=await requestFinance('schocken','diceRead',{after:diceAnimator.cursor});for(const event of batch?.events??[]){const next=event.schocken?.state;if(next&&next.revision>=(schockenLatest?.revision??-1))schockenLatest=next;}diceAnimator.consume(batch);}catch{diceAnimator.stats.status='connection-error';diceAnimator.stats.errors++;}finally{dicePolling=false;}}
 function farkleProjected(){const raw=authority()?farkleSession.state:farkleClient;if(farklePreparing)return {...farklePreparing,animationPending:true};const a=authority()?farkleGate.project(raw):raw?.animation;if(!a||Date.now()>=a.until||!game.settings.get(ID,'diceSoNiceBeta')||raw?.phase==='aborted')return raw;const phase=farklePhases.get(a.id);if(phase==='done')return {...raw,animationWaiting:false,animationNextWaiting:true};return {...structuredClone(phase==='bust'?a.preview:a.before),animationPending:phase!=='bust',animationBust:phase==='bust',animationWaiting:true};}
 const waitDice=ms=>new Promise(resolve=>setTimeout(resolve,ms));
 async function safeFarkleSync(state,indices=null){let timer;try{await Promise.race([indices?farklePersistent.beginRoll(state,indices):farklePersistent.sync(state),new Promise((_,reject)=>{timer=setTimeout(()=>reject(Error('Held dice API timeout')),1000);})]);}catch(error){console.warn('Taverngames: held 3D dice failed',error);}finally{clearTimeout(timer);}}
@@ -69,6 +103,7 @@ async function presentHeld(event,play){const {scope,animation:a,state:next}=even
 async function heldAction(scope,actor,action,fn){const before=structuredClone(sessions[scope].state),values=[];capturedDice=values;const enabled=game.settings.get(ID,'diceSoNiceBeta')&&game.modules?.get('dice-so-nice')?.active;if(action==='roll'&&enabled)heldPreparing[scope]=before;
  try{const result=await fn();diceEvents.record(scope,action,values.length);const after=sessions[scope].state;if(enabled&&after?.revision!==before?.revision){if(action==='roll'&&values.length){const animation=heldGates[scope].open(before,after,values,game.users.filter(u=>u.active).map(u=>u.id));diceEvents.add(scope,actor,values,{held:{scope,animation,state:after}});}else{if(['abort','lobby','restart','undo'].includes(action))heldGates[scope].clear();diceEvents.add(scope,actor,[],{held:{scope,state:after,lock:heldGates[scope].project(after)}});}}return result;}finally{capturedDice=null;delete heldPreparing[scope];if(!['read','heldAnimationAck'].includes(action))tavernUIs[scope].draw();}}
 async function presentDice(event,play){
+ if(event.schocken)return presentSchocken(event,play);
  if(event.held)return presentHeld(event,play);
  if(!event.farkle)return play();const data=event.farkle;
  if(!game.settings.get(ID,'diceSoNiceBeta')){await safeFarkleSync(null);return;}
@@ -87,6 +122,7 @@ async function presentDice(event,play){
  }else{await safeFarkleSync(data.state);farkleUI.draw();}
 }
 async function diceAction(scope,actor,action,fn){
+ if(scope==='schocken')return schockenAction(actor,action,fn);
  if(HELD_GAMES.includes(scope))return heldAction(scope,actor,action,fn);
  if(scope!=='farkle')return diceActionBase(scope,actor,action,fn);
  const before=structuredClone(farkleSession.state),values=[];capturedDice=values;
@@ -166,7 +202,7 @@ async function grant(user) {
   const token=crypto.randomUUID()+crypto.randomUUID();tokens.set(user.id,token);
   try {await user.query(GRANT,{token},{timeout:5000});}catch {tokens.delete(user.id);}
 }
-async function command(data,local=false){const scope=data?.game??'schocken',before=scopeState(scope),user=local?game.user:game.users.get(data?.user),actor=scope==='liars'?(user?.isGM&&before?.npcs?.[data?.args?.id]?data.args.id:user?.id):(before?.order?.[before.turn]??data?.user);const result=await diceAction(scope,actor,data?.action,()=>commandCore(data,local));return HELD_GAMES.includes(scope)&&result?.game===scope?{...result,animation:game.settings.get(ID,'diceSoNiceBeta')?heldGates[scope].project(sessions[scope].state):null}:scope==='farkle'&&result?.game==='farkle'?{...result,animation:game.settings.get(ID,'diceSoNiceBeta')?farkleGate.project(farkleSession.state):null}:result;}
+async function command(data,local=false){const scope=data?.game??'schocken',before=scopeState(scope),user=local?game.user:game.users.get(data?.user),actor=scope==='liars'?(user?.isGM&&before?.npcs?.[data?.args?.id]?data.args.id:user?.id):(before?.order?.[before.turn]??data?.user);const result=await diceAction(scope,actor,data?.action,()=>commandCore(data,local));return scope==='schocken'&&result?.version===1&&Array.isArray(result.order)?{...result,schockenAnimation:game.settings.get(ID,'diceSoNiceBeta')?schockenGate.project(state):null}:HELD_GAMES.includes(scope)&&result?.game===scope?{...result,animation:game.settings.get(ID,'diceSoNiceBeta')?heldGates[scope].project(sessions[scope].state):null}:scope==='farkle'&&result?.game==='farkle'?{...result,animation:game.settings.get(ID,'diceSoNiceBeta')?farkleGate.project(farkleSession.state):null}:result;}
 
 async function commandCore(data, local=false) {
   if(game.modules?.get('schocken')?.active)throw new Error(t('Altes Modul Schocken zuerst deaktivieren.'));
@@ -178,6 +214,12 @@ async function commandCore(data, local=false) {
   if(data?.action==="connect") {const target=game.users.get(data.user);if(target)await grant(target);return null;}
   const user=local?game.user:game.users.get(data?.user);
   if(!user?.active || (!local && (!tokens.has(user.id) || tokens.get(user.id)!==data?.token))) throw new Error(t("Verbindung noch nicht bereit. GM kann Verbindungen erneuern."));
+  if(data.action==='schockenAnimationAck'){
+   if((data.game??'schocken')!=='schocken')throw Error('Unknown game.');
+   const current=schockenGate.active(state);if(current?.id===data.args?.id&&current.pending.has(user.id)){schockenGate.ack(current.id,user.id);if(!schockenGate.active(state)){emitSchocken(state,state,'sync');draw();}}
+   return {animation:schockenGate.project(state)};
+  }
+  if((data.game??'schocken')==='schocken'&&game.settings.get(ID,'diceSoNiceBeta')&&schockenGate.active(state)&&!['read','diceRead','diceDiagnostics','connect','abort','pause','npcControl'].includes(data.action))throw Error(f('Bitte das Ende der Würfelanimation abwarten.','Please wait for the dice animation to finish.'));
   if(data.action==='heldAnimationAck'){if(!HELD_GAMES.includes(data.game))throw Error('Unknown game.');const current=heldGates[data.game].active(sessions[data.game].state);if(current?.id!==data.args?.id||!current?.pending.has(user.id))return {animation:heldGates[data.game].project(sessions[data.game].state)};heldGates[data.game].ack(data.args?.id,user.id);const animation=heldGates[data.game].project(sessions[data.game].state);diceEvents.add(data.game,user.id,[],{held:{scope:data.game,state:sessions[data.game].state,lock:animation}});return {animation};}
   if(HELD_GAMES.includes(data.game)&&game.settings.get(ID,'diceSoNiceBeta')&&heldGates[data.game].active(sessions[data.game].state)&&!['read','abort','pause','npcControl'].includes(data.action)&&!(['hold','return'].includes(data.action)&&!heldGates[data.game].current.pending.has(user.id)))throw Error(f('Bitte das Ende der Würfelanimation abwarten.','Please wait for the dice animation to finish.'));
   if(data.action==='farkleAnimationAck'){const current=farkleGate.active(farkleSession.state);if(current?.id!==data.args?.id||!current?.pending.has(user.id))return {animation:farkleGate.project(farkleSession.state)};farkleGate.ack(data.args?.id,user.id);const animation=farkleGate.project(farkleSession.state);diceEvents.add('farkle',user.id,[],{farkle:{state:farkleSession.state,lock:animation}});farkleUI.draw();return {animation};}
@@ -241,10 +283,12 @@ async function request(action,args={}) {
     const data={action,args,revision:state?.revision??-1,user:game.user.id,token:capability};
     const gm=primary();if(!gm)throw new Error(t("Für Schocken muss ein GM verbunden sein."));
     await ensureCapability(gm);data.token=capability;
-    const previous=state?.revision;
+    const previous=state?.revision,previousAnimation=schockenLock()?.id;
     const result=authority()?await enqueue(()=>command(data,true)):await gm.query(QUERY,data,{timeout:8000});
     if(!authority())state=result;
-    if(action!=="read"||previous!==state?.revision)draw();
+    if(action!=="read")void pollDice();
+    if(!result?.schockenAnimation&&(state?.revision??-1)>=(schockenVisual?.state?.revision??-1)){schockenVisual={state:schockenDiceState(state,game.user),animation:null};if(game.settings.get(ID,'diceSoNiceBeta'))void syncSchocken(schockenVisual.state);}
+    if(action!=="read"||previous!==state?.revision||previousAnimation||result?.schockenAnimation)draw();
   }catch(e){ui.notifications.warn(`Schocken: ${t(e.message)}`);}finally{busy=false;}
 }
 function button(parent,text,fn,disabled=false) {const b=el("button",text);b.type="button";b.disabled=disabled;b.addEventListener("click",fn);parent.append(b);return b;}
@@ -279,12 +323,20 @@ function dice(parent,values,held=[],interactive=false) {
   const row=el("div",undefined,"schocken-dice");
   values.forEach((n,i)=>{const b=button(row,n===null?"?":String(n),()=>request(held[i]?"return":"hold",{index:i}),!interactive||(held[i]&&!state?.rules?.allowReturn));b.title=t(held[i]?(state?.rules?.allowReturn?"Wieder hereinnehmen":"Herausgelegt"):"Zum Herauslegen anklicken");if(held[i])b.classList.add("held");});parent.append(row);
 }
-function drawModeration(){return withScroll(moderation,drawModerationContent);}
+const schockenDrawKeys=new WeakMap();
+function drawSchockenSurface(root,key,render){
+  if(!root||schockenDrawKeys.get(root)===key)return;
+  withScroll(root,render);schockenDrawKeys.set(root,key);
+}
+function schockenPresence(){return game.users.map(u=>[u.id,u.name,u.active,u.isGM]);}
+function drawModeration(){return drawSchockenSurface(moderation,JSON.stringify([state,schockenPresence(),primary()?.id,game.settings.get(ID,'showLauncher')]),drawModerationContent);}
 function drawModerationContent() {
   if(!moderation||!game.user.isGM)return;
   const drafts=new Map([...moderation.querySelectorAll('[data-draft]')].map(n=>[n.dataset.draft,{value:n.value,checked:n.checked}]));
   const openDetails=new Set([...moderation.querySelectorAll('details[data-section][open]')].map(n=>n.dataset.section));
   const focused=document.activeElement?.dataset?.draft;
+  const existingSetup=moderation.querySelector('details[data-section="setup"]');
+  const active=document.activeElement,selection=active?.dataset?.draft?{start:active.selectionStart,end:active.selectionEnd,direction:active.selectionDirection}:null;
   moderation.replaceChildren();
   const content=el('div',undefined,'schocken-content');moderation.append(content);
   content.append(el('p',`Schocken ${game.modules.get(ID)?.version??''} · ${checkFoundry(game.release,game.version).message}`,'schocken-help'));
@@ -305,12 +357,12 @@ function drawModerationContent() {
       if(state)void request('labels',{labels:{...DEFAULT_LABELS}});
     });
     for(const [set,title] of [['standard','Standardset'],['tavern','Tavernenset']])button(naming,title,()=>{for(const input of naming.querySelectorAll('input'))input.value=labelName(NAME_SETS[set][input.dataset.kind]);if(state)void request('labels',{labels:NAME_SETS[set]});});
-    if(state)button(naming,'Wurfnamen übernehmen',()=>request('labels',{labels:readLabels()}));setup.append(naming);
+    button(naming,'Wurfnamen übernehmen',()=>{if(state)void request('labels',{labels:readLabels()});});setup.append(naming);
     button(setup,"Lobby öffnen",()=>{if((state||savedExists) && !confirm(t("Gespeichertes Schockenspiel durch ein neues ersetzen?")))return;request("lobby",{npcs:npcInput.value.split('\n').map(n=>n.trim()).filter(Boolean),labels:readLabels(),loading:loadInput.checked,allowReturn:returnInput.checked,hiddenThird:hiddenInput.checked});});
-    button(setup,"Verbindungen erneuern",async()=>{await Promise.allSettled(game.users.map(grant));ui.notifications.info(t("Schocken-Verbindungen erneuert."));},!authority());content.append(setup);
+    button(setup,"Verbindungen erneuern",async()=>{await Promise.allSettled(game.users.map(grant));ui.notifications.info(t("Schocken-Verbindungen erneuert."));},!authority());content.append(existingSetup??setup);
   }
-  for(const n of moderation.querySelectorAll('[data-draft]')){const old=drafts.get(n.dataset.draft);if(old){n.value=old.value;n.checked=old.checked;}if(n.dataset.draft===focused)n.focus();}
   for(const n of moderation.querySelectorAll('details[data-section]'))n.open=openDetails.has(n.dataset.section);
+  for(const n of moderation.querySelectorAll('[data-draft]')){const old=drafts.get(n.dataset.draft);if(old){n.value=old.value;n.checked=old.checked;}if(n.dataset.draft===focused){n.focus({preventScroll:true});if(selection&&typeof selection.start==='number')n.setSelectionRange(selection.start,selection.end,selection.direction);}}
 
   if(!state)return;
   const s=state;
@@ -330,6 +382,10 @@ function createWindow(kind) {
 }
 function draw() {
   drawModeration();
+  const animation=schockenLock();
+  return drawSchockenSurface(panel,JSON.stringify([view(state,game.user.id,game.user.isGM),schockenPresence(),primary()?.id,animation?.id??null,animation?schockenPhases.get(animation.id)??'rolling':null]),drawTableContent);
+}
+function drawTableContent() {
   if(!panel)return;
   panel.replaceChildren();
   const content=el('div',undefined,'schocken-content');panel.append(content);
@@ -352,18 +408,20 @@ function draw() {
   else {
     content.append(el("h3",tr`${name(current)} ist am Zug`));
     content.append(el("p",tr`${s.loading?t("Laden · "):""}${s.cup?.rolls??0} / ${s.limit} Würfe${s.npcManual?.[current]?t(" · NPC wartet auf GM"):""}${game.user.isGM&&!mine?t(" · GM übernimmt bei Bedarf"):""}`));
-    if(s.cup)dice(content,s.cup.dice,s.cup.held,can&&!s.paused&&s.cup.rolls<s.limit);
+    const animation=schockenLock(),waiting=!!animation,rolling=waiting&&schockenPhases.get(animation.id)!=='done';
+    if(waiting)content.append(el('p',f(rolling?'Die 3D-Würfel rollen …':'Noch auf die Würfelanimation der Mitspieler warten …',rolling?'The 3D dice are rolling …':'Waiting for the other players’ dice animation …'),'schocken-help'));
+    if(s.cup)dice(content,rolling?s.cup.dice.map((v,i)=>s.cup.held[i]?v:null):s.cup.dice,s.cup.held,can&&!s.paused&&!waiting&&s.cup.rolls<s.limit);
     if(can&&!s.paused) {
       const controls=el("div",undefined,"schocken-actions");
-      button(controls,"Würfeln",()=>request("roll"),s.cup?.rolls>=s.limit);
-      if(s.cup?.concealed)button(controls,'Aufdecken',()=>request('reveal',{current:game.user.isGM&&!mine}));
-      button(controls,"Sechsen drehen",()=>request("six"),!canTurnSix(s));
-      button(controls,"Offen beenden",()=>request("finish"),!s.cup||s.cup.mustRoll||s.cup.concealed);
-      button(controls,"Verdeckt beenden",()=>request("finish",{hidden:true}),!s.cup||s.cup.mustRoll);content.append(controls);
+      button(controls,"Würfeln",()=>request("roll"),waiting||s.cup?.rolls>=s.limit);
+      if(s.cup?.concealed)button(controls,'Aufdecken',()=>request('reveal',{current:game.user.isGM&&!mine}),waiting);
+      button(controls,"Sechsen drehen",()=>request("six"),waiting||!canTurnSix(s));
+      button(controls,"Offen beenden",()=>request("finish"),waiting||!s.cup||s.cup.mustRoll||s.cup.concealed);
+      button(controls,"Verdeckt beenden",()=>request("finish",{hidden:true}),waiting||!s.cup||s.cup.mustRoll);content.append(controls);
     }
     if(s.pot===0&&s.players.includes(game.user.id)&&!s.order.includes(game.user.id)&&(s.half!==3||s.losers.includes(game.user.id)))button(content,"Einkaufen / wieder mitspielen",()=>request("buy"));
   }
-  if(s.phase==='playing'&&s.results.some(r=>r.id===game.user.id&&r.hidden))button(content,'Eigenen Wurf aufdecken',()=>request('reveal'));
+  if(s.phase==='playing'&&s.results.some(r=>r.id===game.user.id&&r.hidden))button(content,'Eigenen Wurf aufdecken',()=>request('reveal'),!!schockenLock());
   for(const [title,results] of [["Dieser Durchgang",s.results],["Letzter abgeschlossener Durchgang",s.lastResults]]) {
     if(!results?.length)continue;const section=el("details");section.open=true;section.append(el("summary",title));
     for(const r of results) {section.append(el("p",tr`${name(r.id)} · ${r.rolls} Wurf/Würfe · ${r.value?valueName(r.value,translatedNames(s.labels)):t("verdeckt")}`));dice(section,r.dice,r.held);}content.append(section);
@@ -412,11 +470,11 @@ Hooks.once("init",()=>{
   for(const setting of ['bettingState','prizeState','outcomeState'])game.settings.register(ID,setting,{scope:'world',config:false,restricted:true,type:Object,default:null});
   for(const [setting,de,en] of [['managedBetting','Verwaltetes Setzen','Managed betting'],['allowElectrum','Elektrum verwenden','Use electrum']])game.settings.register(ID,setting,{name:`Taverngames: ${f(de,en)}`,scope:'world',config:true,restricted:true,type:Boolean,default:false,onChange:()=>{moneyUI.draw();for(const panel of Object.values(tavernUIs))panel.drawModeration();}});
   game.settings.register(ID,'betaTest',{name:f('Taverngames: Beta-Test','Taverngames: Beta testing'),hint:f('Chō-Han als Beta freischalten. Die acht bisherigen Spiele bleiben stabil.','Enable beta Cho-Han. The eight existing games remain stable.'),scope:'world',config:true,restricted:true,type:Boolean,default:false,onChange:()=>{refreshLauncher();sessions.chohan.updateNpcWait();if(!gameEnabled('chohan')){clients.chohan=null;void tavernUIs.chohan.close();}ui.taverngames?.render?.({force:true});}});
-  game.settings.register(ID,'diceSoNiceBeta',{name:f('Taverngames: 3D-Würfel mit Dice So Nice (Beta)','Taverngames: 3D dice with Dice So Nice (Beta)'),hint:f('Optionale Wurfanimationen. Dice So Nice muss installiert und aktiv sein. Keine dauerhaft interaktiven Würfel.','Optional roll animations. Dice So Nice must be installed and active. No persistent interactive dice.'),scope:'world',config:true,restricted:true,type:Boolean,default:false,onChange:()=>{diceEvents.clear();diceAnimator.warned=false;farkleGate.clear();void farklePersistent.clear();farkleUI.draw();for(const scope of HELD_GAMES){heldGates[scope].clear();void heldRenderers[scope].clear();tavernUIs[scope].draw();}}});
-  if(game.settings.registerMenu)game.settings.registerMenu(ID,'diceDiagnostics',{name:f('Taverngames: 3D-Würfel prüfen','Taverngames: check3D dice'),label:f('Test & Diagnose öffnen','Open test & diagnostics'),hint:f('Lokaler3D-Test und Diagnose ohne geheime Würfelwerte.','Local3D test and diagnostics without secret dice values.'),icon:'fas fa-dice',restricted:true,type:diceMenu(foundry,{test:()=>diceAnimator.play({actor:game.user.id,dice:[{sides:6,value:3},{sides:6,value:5}]},{test:true}),diagnostics:async()=>({codeVersion:'1.4.10',moduleVersion:game.modules.get(ID)?.version??game.modules.get(ID)?.manifest?.version,dsnVersion:game.modules.get('dice-so-nice')?.version,dsnActive:game.modules.get('dice-so-nice')?.active===true,animationEnabled:game.settings.get(ID,'diceSoNiceBeta')===true,local:{...structuredClone(diceAnimator.stats),restingDice:{farkle:farklePersistent.meshes.size,kniffel:heldRenderers.kniffel.meshes.size,ship:heldRenderers.ship.meshes.size}},authority:await requestFinance('schocken','diceDiagnostics')})})});
+  game.settings.register(ID,'diceSoNiceBeta',{name:f('Taverngames: 3D-Würfel mit Dice So Nice (Beta)','Taverngames: 3D dice with Dice So Nice (Beta)'),hint:f('Optionale Wurfanimationen. Dice So Nice muss installiert und aktiv sein. Keine dauerhaft interaktiven Würfel.','Optional roll animations. Dice So Nice must be installed and active. No persistent interactive dice.'),scope:'world',config:true,restricted:true,type:Boolean,default:false,onChange:()=>{diceEvents.clear();schockenGate.clear();schockenVisual=null;schockenLatest=null;void schockenPersistent.clear();draw();diceAnimator.warned=false;farkleGate.clear();void farklePersistent.clear();farkleUI.draw();for(const scope of HELD_GAMES){heldGates[scope].clear();void heldRenderers[scope].clear();tavernUIs[scope].draw();}}});
+  if(game.settings.registerMenu)game.settings.registerMenu(ID,'diceDiagnostics',{name:f('Taverngames: 3D-Würfel prüfen','Taverngames: check3D dice'),label:f('Test & Diagnose öffnen','Open test & diagnostics'),hint:f('Lokaler3D-Test und Diagnose ohne geheime Würfelwerte.','Local3D test and diagnostics without secret dice values.'),icon:'fas fa-dice',restricted:true,type:diceMenu(foundry,{test:()=>diceAnimator.play({actor:game.user.id,dice:[{sides:6,value:3},{sides:6,value:5}]},{test:true}),diagnostics:async()=>({codeVersion:'1.4.12',moduleVersion:game.modules.get(ID)?.version??game.modules.get(ID)?.manifest?.version,dsnVersion:game.modules.get('dice-so-nice')?.version,dsnActive:game.modules.get('dice-so-nice')?.active===true,animationEnabled:game.settings.get(ID,'diceSoNiceBeta')===true,local:{...structuredClone(diceAnimator.stats),restingDice:{schocken:schockenPersistent.meshes.size,farkle:farklePersistent.meshes.size,kniffel:heldRenderers.kniffel.meshes.size,ship:heldRenderers.ship.meshes.size}},authority:await requestFinance('schocken','diceDiagnostics')})})});
   if(!registerSidebar(CONFIG,globalThis.foundry,game,{open:()=>open(),guide:openGuide,farkle:()=>farkleUI.open(),farkleGuide:()=>farkleUI.guide(),tavern:scope=>tavernUIs[scope]?.open(),tavernGuide:scope=>tavernUIs[scope]?.guide()}))ui.notifications.warn(t('Taverngames: native Sidebar-Schnittstelle fehlt. Einstieg über den unteren Button bleibt verfügbar.'));
   CONFIG.queries[GRANT]=({token})=>{if(typeof token!=="string"||token.length>100)throw new Error(t("Ungültige Verbindung."));capability=token;return true;};
-  CONFIG.queries[QUERY]=data=>enqueue(async()=>{const result=await command(data);if(data.game!=='farkle'&&(panel||moderation))draw();return result;});
+  CONFIG.queries[QUERY]=data=>enqueue(()=>command(data));
 });
 Hooks.once("ready",async()=>{
   const compatibility=checkFoundry(game.release,game.version);
@@ -429,7 +487,7 @@ Hooks.once("ready",async()=>{
 
   setInterval(()=>void pollDice(),750);
   // Only the open, active Farkle table needs fast animation completion updates.
-  setInterval(()=>{if(farkleUI.isOpen&&(authority()?farkleSession.state:farkleClient)?.phase==='playing')void pollDice();},150);
+  setInterval(()=>{if((panel||moderation)&&state?.phase==='playing'||farkleUI.isOpen&&(authority()?farkleSession.state:farkleClient)?.phase==='playing')void pollDice();},150);
   setInterval(()=>{
     if(lastGM!==primary()?.id){lastGM=primary()?.id;capability=null;}
     if(wasAuthority!==authority()) {wasAuthority=authority();initialized=false;capability=null;void enqueue(initializeAuthority);}
@@ -442,6 +500,7 @@ Hooks.once("ready",async()=>{
     if(!authority()||!initialized)return;
     void enqueue(async()=>{
       if(!authority())return;
+      if(game.settings.get(ID,'diceSoNiceBeta')&&schockenGate.active(state))return;
       const move=state&&npcAction(state);if(!move)return;
       await diceAction('schocken',move.id,move.action,async()=>{const next=act(state,move.id,move.action,move.args,randomDie);
       await save(next);history.push(structuredClone(state));if(history.length>30)history.shift();const previous=state;state=next;await announceFinished(previous,next);await settleOutcome('schocken');if(panel||moderation)draw();});
