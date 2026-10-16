@@ -2,16 +2,15 @@
   "schemaVersion": 1,
   "blocks": {
     "patchnotes": {
-      "title": "Patchnotes Version 1.4.8",
+      "title": "Patchnotes Version 1.4.10",
       "paragraphs": [
-        "Die Dice-So-Nice-Beta lässt bei Farkle, Kniffel und Schiff alle ausgerollten Würfel während der Auswahl liegen. Auswahl ohne zusätzliche feste Wartezeit; die neue Darstellung benötigt einen Praxistest."
+        "Farkle: Die Spielmodus-Auswahl bleibt bei laufenden Aktualisierungen geöffnet. 3D-Anbindung und Chō-Han bleiben Beta."
       ],
       "items": [
-        "Auswahl direkt nach abgeschlossenem Ausrollen, ohne feste Zwei-Sekunden-Pause.",
-        "Halten und Zurücknehmen ersetzt keine 3D-Stücke; erst der nächste Wurf ersetzt die freien Würfel.",
-        "Herausgelegte Stücke bleiben beim Weiterwürfeln liegen; Bereinigung am Zugende und bei Abbruch.",
-        "Die lokale Auswahl wartet nicht auf langsamere Clients. Folgeaktionen bleiben bis zu deren Rückmeldung gesperrt.",
-        "Chō-Han-Regelquellen in der Modulübersicht ergänzt: Daniels Sammlung, Dice-Play und NetExl."
+        "Partieeingaben bleiben bestehen; nur Live-Status, NPC-Steuerung und Protokoll werden neu aufgebaut.",
+        "Entwürfe, Fokus und Scrollposition bleiben erhalten.",
+        "Würfelkorrekturen aus 1.4.9 bleiben enthalten; übrige Funktionen von Daniel als funktionierend gemeldet.",
+        "Karteneinbindung zurückgestellt, keine neue Kartenfunktion."
       ]
     },
     "games": {
@@ -30,7 +29,7 @@
       ]
     },
     "plans": {
-      "title": "geplante Spiele (35)",
+      "title": "geplante Spiele (39)",
       "paragraphs": [
         "Für diese Spiele und Wettbewerbe liegen Regelreferenzen vor. Die Auswahl ist Planung und keine Zusage zur Umsetzung; einzelne Regelfragen sind noch offen."
       ],
@@ -38,14 +37,17 @@
         "17+4",
         "Aalstechen",
         "Armdrücken",
+        "Binokel",
         "Blackjack",
         "Bogenschießen",
         "Das Spiel der edlen Dame",
         "Der Glückstag",
         "Die böse Dreizehn",
+        "Doppelkopf",
         "Durak",
         "Elfenlauf",
         "Escalero",
+        "Gaigel",
         "Gerade oder Ungerade",
         "Gewichteheben",
         "Hütchenspiel",
@@ -66,6 +68,7 @@
         "Schummeln (Kartenspiel)",
         "Schwimmen / Knack",
         "Sechsundsechzig",
+        "Skat",
         "Spiel der Könige",
         "Wettessen",
         "Wetttrinken",
@@ -75,11 +78,12 @@
     "plans2": {
       "title": "geplante Funktionen (7)",
       "paragraphs": [
-        "Größere Erweiterungen werden schrittweise geprüft. Die folgende Liste beschreibt Überlegungen und noch keine fertigen Funktionen."
+        "Größere Erweiterungen werden schrittweise geprüft. Die folgende Liste beschreibt Überlegungen und noch keine fertigen Funktionen.",
+        "Karteneinbindung auf Daniels Wunsch zurückgestellt. Als späterer erster Schritt vorgeschlagen: einfache Vorder-/Rückseiten und eine Kartenhand mit Sichtbarkeitsprüfung zwischen zwei Spielern, zunächst ohne Animationen. Noch keine Umsetzungsfreigabe."
       ],
       "items": [
         "Erweiterte Tags und zusätzliche Filter, etwa nach Spieldauer und Einsätzen.",
-        "Dice-So-Nice-Beta nach Praxistests ausbauen und später stabil freigeben; dauerhaft liegende und interaktive 3D-Würfel bleiben eine spätere Erweiterung.",
+        "Dice-So-Nice-Beta nach Praxistests ausbauen und später stabil freigeben; direkt im Spielfenster interaktive 3D-Würfel bleiben eine spätere Erweiterung.",
         "Grafische Kartendarstellung als Grundlage späterer Kartenspiele.",
         "Eigene große Erweiterung für gezielte SL-Manipulationen; noch nicht umgesetzt.",
         "Kniffel-Serien und Kniffel-Einsatzverwaltung.",
@@ -88,7 +92,7 @@
       ]
     },
     "functions": {
-      "title": "aktuelle Funktionen (18)",
+      "title": "aktuelle Funktionen (20)",
       "paragraphs": [
         "Acht stabile Spiele und Chō-Han als zusätzliches Beta-Spiel. Die optionale3D-Animation ist weiterhin separat schaltbare Beta."
       ],
@@ -110,7 +114,9 @@
         "Chō-Han: wertunabhängige Becheranimation beim verdeckten Wurf und direktes Aufdecken desselben gespeicherten Ergebnisses.",
         "Farkle: liegende 3D-Würfel, Auswahl nach Ausrollen und sichtbarer Fehlwurf als Teil der separat schaltbaren Dice-So-Nice-Beta.",
         "Kniffel und Schiff: während der Auswahl liegende 3D-Würfel, Animationsabstimmung und begrenzte Mehrspielersperre als Dice-So-Nice-Beta.",
-        "Farkle, Kniffel und Schiff: alle gelandeten 3D-Stücke bleiben bis zum nächsten Wurf oder Zugende sichtbar; keine zusätzliche feste Auswahlpause."
+        "Farkle, Kniffel und Schiff: alle gelandeten 3D-Stücke bleiben bis zum nächsten Wurf oder Zugende sichtbar; keine zusätzliche feste Auswahlpause.",
+        "Farkle: zügigere Animationsrückmeldung und erklärender Hinweis bei laufender Gegenanimation.",
+        "Farkle-Moderation: beständige Partieeingaben und Spielmodus-Auswahl während Live-Aktualisierungen."
       ]
     },
     "settings": {
@@ -125,19 +131,21 @@
         "Schweinchen: Öffne in der Moderation Neue Partie & Regeln. Wähle bei Bedarf Bei gesicherter Zielpunktzahl sofort beenden und öffne anschließend die Lobby. Standardmäßig spielen alle anderen nach Zielerreichung noch einen letzten Zug.",
         "Alle acht Spiele sind stabil. Der allgemeine Beta-Test-Schalter wird für diese Spiele nicht mehr benötigt.",
         "Für optionale 3D-Wurfanimationen installiere und aktiviere Dice So Nice. Aktiviere anschließend in den Taverngames-Moduleinstellungen 3D-Würfel mit Dice So Nice (Beta). Standardmäßig aus; unabhängig vom Beta-Spieleschalter.",
-        "Die 3D-Beta zeigt normale Wurfanimationen auf dem Foundry-Tisch. Dauerhaft liegende und interaktive 3D-Würfel folgen später.",
+        "Die 3D-Beta zeigt normale Wurfanimationen auf dem Foundry-Tisch. Bei Farkle, Kniffel und Schiff bleiben gelandete Würfel während der Auswahl als gesperrte Stücke liegen. Direkte 3D-Auswahl im Spielfenster ist noch geplant.",
         "Chō-Han: allgemeinen Beta-Test aktivieren und im SL-Reiter unter Glücksspiele starten. Provision, Einsatzgrenzen und Münzart in der Moderation wählen, Lobby öffnen, Beitrittsbutton freigeben. Nach den Wetten Annahme schließen, verdeckt würfeln und aufdecken.",
-        "Die3D-Animationsbeta hat einen separaten Schalter. Dice So Nice6.4.4 ist als API-Referenz geprüft, der echte Praxistest steht noch aus.",
+        "Die3D-Animationsbeta hat einen separaten Schalter. Dice So Nice6.4.4 ist als API-Referenz geprüft, Daniel hat die Grundanimation und die Darstellung von Kniffel/Schiff aus 1.4.8 im Praxistest bestätigt; die neue Farkle-Korrektur benötigt noch seinen Test.",
         "SL-Diagnose: Moduleinstellungen → Taverngames → 3D-Würfel prüfen → Test & Diagnose öffnen. Der lokale Test funktioniert unabhängig vom 3D-Schalter. Nach einem Spielwurf Diagnose aktualisieren.",
         "Chō-Han: Annahme schließen, dann Verdeckt würfeln. Der Becher bewegt sich, während die echten Werte bereits feststehen. Aufdecken & auswerten zeigt diese Werte direkt. Dafür ist Dice So Nice nicht erforderlich; Chō-Han verwendet beim Aufdecken keine zweite 3D-Wurfanimation.",
-        "Farkle-3D: Dice-So-Nice-Beta einschalten. Herausgelegte Würfel werden im Spielfenster ausgewählt und bleiben als gesperrte 3D-Stücke auf der normalen DSN-Fläche liegen. DSN 6.4.4 ist der geprüfte API-Quellstand; die neue Darstellung benötigt einen Live-Test.",
+        "Farkle-3D: Dice-So-Nice-Beta einschalten. Herausgelegte Würfel werden im Spielfenster ausgewählt und bleiben als gesperrte 3D-Stücke auf der normalen DSN-Fläche liegen. DSN 6.4.4 ist der geprüfte API-Quellstand; die Darstellung wurde von Daniel getestet; die Korrektur aus 1.4.9 benötigt noch einen Praxistest.",
         "Die optionale Dice-So-Nice-Beta gilt nun auch für Kniffel und Schiff. Auswahl weiterhin im Taverngames-Fenster; bei Kniffel erneut anklicken, um einen gehaltenen Würfel zurückzunehmen. Nach Installation Welt neu laden.",
-        "Bei den drei Spielen bleiben alle gelandeten Würfel während der Auswahl liegen. Halten und Zurücknehmen erfolgt im Taverngames-Fenster. Nur freie Würfel werden beim nächsten Wurf ersetzt. Die allgemeinen Dice-So-Nice-Einstellungen müssen dafür nicht geändert werden. Nach Modulaktualisierung die Welt neu laden."
+        "Bei den drei Spielen bleiben alle gelandeten Würfel während der Auswahl liegen. Halten und Zurücknehmen erfolgt im Taverngames-Fenster. Nur freie Würfel werden beim nächsten Wurf ersetzt. Die allgemeinen Dice-So-Nice-Einstellungen müssen dafür nicht geändert werden. Nach Modulaktualisierung die Welt neu laden.",
+        "Bei Farkle erklärt ein Wartehinweis die noch laufende Animation anderer Clients. Würfeln und Sichern werden erst nach den erforderlichen Abschlussmeldungen freigegeben. Nach Installation von 1.4.9 die Welt neu laden.",
+        "Nach Installation von 1.4.10 die Welt neu laden. Die Farkle-Spielmodus-Auswahl bleibt bei Aktualisierungen erhalten; die Eingaben werden beim Öffnen einer Lobby übernommen."
       ],
       "items": []
     },
     "sources": {
-      "title": "Regelquellen (26)",
+      "title": "Regelquellen (32)",
       "paragraphs": [
         "Hier findet ihr alle genutzten Regelquellen. Quellen für noch nicht umgesetzte Spiele sind ausdrücklich als geplante Regelreferenzen gekennzeichnet."
       ],
@@ -167,7 +175,13 @@
         "D&D Beyond – Basic Rules 2024, allgemeine Regel- und Währungsreferenz: https://www.dndbeyond.com/sources/dnd/br-2024/playing-the-game",
         "D&D Beyond – Charaktererschaffung, Währungsreferenz: https://www.dndbeyond.com/sources/dnd/br-2024/creating-a-character",
         "Paul Cossmer – Tavernen und Glücksspiele, bereitgestellte PDF-Regelvorlagen für geplante Spiele; Lektorat: Georg Haubner. Kontext DnDDiary: https://keeponrolling.de/",
-        "Chō-Han: Daniels bereitgestellte Regelsammlung, VermittlervarianteB. Traditionelle Grundlage: https://www.dice-play.com/Games/ChoHanBakuchi.htm und https://www.netexl.com/howtoplay/cho-han/"
+        "Chō-Han: Daniels bereitgestellte Regelsammlung, VermittlervarianteB. Traditionelle Grundlage: https://www.dice-play.com/Games/ChoHanBakuchi.htm und https://www.netexl.com/howtoplay/cho-han/",
+        "DSkV / ISPA – Internationale Skatordnung, November 2022 (geplante Regelreferenz) – https://dskv.de/app/uploads/sites/43/2022/11/ISkO-2022.pdf",
+        "Deutscher Doppelkopf-Verband – TSR, 21.02.2026 (geplante Regelreferenz) – https://doko-verband.de/shared-files/11534/?Turnierspielregeln-Stand-2026-02-21.pdf=",
+        "ASS Altenburger – Binokel, Zweierfassung (geplante Regelreferenz) – https://www.spielkarten.com/wp-content/uploads/2019/07/0_Binokel.pdf",
+        "Pagat – Binokel, regionale Dreierfassung (geplante Regelreferenz) – https://www.pagat.com/de/marriage/binokel.html",
+        "Stayandplay – Gaigel-Kurzanleitung (geplante Regelreferenz) – https://stayandplay.cards/wp-content/uploads/2020/03/DE-Gaigel-1.pdf",
+        "Pagat – Gaigel, regionale Partnerschaftsfassung (geplante Regelreferenz) – https://www.pagat.com/marriage/gaigel.html"
       ]
     },
     "sources1": {

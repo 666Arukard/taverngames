@@ -22,12 +22,18 @@ export class FarkleUI{
   draw(){this.drawModeration();this.drawTable();}
   drawModeration(){
     const root=this.windows.get('farkle-moderation')?.root;if(!root||!game.user.isGM)return;
-    const drafts=new Map([...root.querySelectorAll('[data-draft]')].map(node=>[node.dataset.draft,{value:node.value,checked:node.checked}]));
-    const wasOpen=root.querySelector('details')?.open??false,focused=document.activeElement?.dataset?.draft;
+    // Keep the setup controls attached: replacing a focused native select closes its popup.
+    const existing=root.querySelector('[data-farkle-live]');
+    if(existing){
+      root.querySelector('[data-farkle-launcher]').checked=game.settings.get('taverngames','showFarkleLauncher')===true;
+      root.querySelector('[data-farkle-best-selection]').checked=game.settings.get('taverngames','allowFarkleBestSelection')===true;
+      const betting=root.querySelector('[data-farkle-betting]');if(betting)betting.disabled=!this.getState();
+      this.drawModerationStatus(existing);return;
+    }
     root.replaceChildren();const content=el('div',undefined,'schocken-content');root.append(content);if(this.openOutcome)button(content,f('Wetten','Bets'),()=>this.openOutcome('farkle'));
     content.append(el('p','Farkle · PlayMonster','schocken-help'));
     button(content,f('Spieltisch öffnen','Open game table'),()=>{this.window('farkle');this.drawTable();});button(content,f('Anleitung','Instructions'),()=>this.guide());
-    if(this.openBetting)button(content,f('Einsätze & Charaktere','Stakes & characters'),()=>this.openBetting('farkle'),!this.getState());
+    if(this.openBetting)button(content,f('Einsätze & Charaktere','Stakes & characters'),()=>this.openBetting('farkle'),!this.getState()).dataset.farkleBetting='';
     const showLabel=el('label',undefined,'schocken-choice'),show=el('input');show.type='checkbox';show.dataset.farkleLauncher='true';show.checked=game.settings.get('taverngames','showFarkleLauncher')===true;
     show.addEventListener('change',async()=>{if(!game.user.isGM)return;try{await game.settings.set('taverngames','showFarkleLauncher',show.checked);}catch(error){ui.notifications.warn(error.message);this.drawModeration();}});
     showLabel.append(show,document.createTextNode(f('Unteren Farkle-Button für alle einblenden','Show the bottom Farkle button for everyone')));content.append(showLabel);
@@ -35,7 +41,7 @@ export class FarkleUI{
     best.addEventListener('change',async()=>{if(!game.user.isGM)return;try{await game.settings.set('taverngames','allowFarkleBestSelection',best.checked);}catch(error){ui.notifications.warn(error.message);this.drawModeration();}});
     bestLabel.append(best,document.createTextNode(f('Beste Auswahl für Spieler freigeben','Allow best selection for players')));content.append(bestLabel);
     content.append(el('p',f('Standardmäßig aus. Spieler wählen ihre Würfel selbst; der SL kann die Hilfe weiterhin verwenden.','Off by default. Players select their own dice; the GM can still use the helper.'),'schocken-help'));
-    const setup=el('details');setup.open=wasOpen;setup.append(el('summary',f('Neue Partie & Regeln','New game & rules')));
+    const setup=el('details');setup.append(el('summary',f('Neue Partie & Regeln','New game & rules')));
     const label=el('label',f('Spielmodus','Game mode')),mode=el('select');mode.dataset.draft='mode';
     for(const [value,text] of [['quick',f('Kurzspiel – ein Zug pro Spieler','Quick game – one turn each')],['rounds',f('Feste Runden – Gesamtpunkte','Fixed rounds – total points')],['target',f('Zielpunktzahl – mehrere Runden / Solo','Target score – multiple rounds / solo')]]){const option=el('option',text);option.value=value;mode.append(option);}mode.value=this.getState()?.mode??'quick';label.append(mode);setup.append(label);
     const targetLabel=el('label',f('Zielpunktzahl (nur Zielmodus)','Target score (target mode only)')),target=el('input');target.type='number';target.min='500';target.max='1000000';target.step='50';target.dataset.draft='target';target.value=String(this.getState()?.target??10000);targetLabel.append(target);setup.append(targetLabel);
@@ -47,8 +53,11 @@ export class FarkleUI{
     const npcLabel=el('label',f('NPCs – ein Name pro Zeile','NPCs – one name per line')),npcs=el('textarea');npcs.rows=3;npcs.dataset.draft='npcs';npcs.value=Object.values(this.getState()?.npcs??{}).join('\n');npcLabel.append(npcs);setup.append(npcLabel);
     setup.append(el('p',f('PlayMonster-Wertung. Kurzspiel und feste Runden ohne Einstiegshürde; Zielmodus mit 500 Punkten zum ersten Eintragen. Pro fester Runde hat jeder einen Zug; Punkte werden addiert. Solo nur im Zielmodus.','PlayMonster scoring. No entry minimum in quick or fixed-round mode; 500 points to enter in target mode. One turn each per fixed round; scores are added together. Solo play in target mode only.')));
     button(setup,f('Lobby öffnen','Open lobby'),()=>{if(confirm(f('Neue Farkle-Lobby öffnen? Eine gespeicherte Farkle-Partie wird ersetzt.','Open a new Farkle lobby? This replaces any saved Farkle game.')))void this.request('lobby',{mode:mode.value,target:mode.value==='target'?Number(target.value):10000,roundLimit:mode.value==='rounds'?Number(rounds.value):3,rules:Object.fromEntries(Object.entries(optional).map(([key,input])=>[key,input.checked])),npcs:npcs.value.split('\n').map(name=>name.trim()).filter(Boolean)});});content.append(setup);
-    for(const node of root.querySelectorAll('[data-draft]')){if(drafts.has(node.dataset.draft)){const draft=drafts.get(node.dataset.draft);node.value=draft.value;if(node.type==='checkbox')node.checked=draft.checked;}if(node.dataset.draft===focused)node.focus();}
     const updateMode=()=>{target.disabled=mode.value!=='target';rounds.disabled=mode.value!=='rounds';optional.immediateTarget.disabled=mode.value!=='target';};updateMode();mode.addEventListener('change',updateMode);
+    const live=el('div');live.dataset.farkleLive='';content.append(live);this.drawModerationStatus(live);
+  }
+  drawModerationStatus(content){
+    const wasOpen=content.querySelector('details')?.open??false;content.replaceChildren();
     const s=this.getState();if(!s)return;
     if(!['finished','aborted'].includes(s.phase)){
       const actions=el('div',undefined,'schocken-actions');if(s.phase==='lobby')button(actions,f('Spiel starten','Start game'),()=>this.request('begin'),s.paused||s.players.length<(s.mode==='target'?1:2));button(actions,s.paused?f('Fortsetzen','Resume'):f('Pause','Pause'),()=>this.request('pause'));button(actions,f('Rückgängig','Undo'),()=>this.request('undo'));button(actions,f('Spiel beenden','End game'),()=>{if(confirm(f('Farkle für alle beenden?','End Farkle for everyone?')))void this.request('abort');});content.append(actions);
@@ -57,7 +66,7 @@ export class FarkleUI{
       const row=el('div',undefined,'schocken-npc');row.append(el('span',`${this.name(id)} · ${s.npcManual[id]?f('GM steuert','Controlled by GM'):f('Automatisch','Automatic')}`));
       button(row,s.npcManual[id]?f('Automatik einschalten','Enable automatic play'):f('Selbst steuern','Control manually'),()=>this.request('npcControl',{id,manual:!s.npcManual[id]}),['finished','aborted'].includes(s.phase));content.append(row);
     }
-    const log=el('details');log.append(el('summary',f('Moderationsprotokoll','Moderation log')));
+    const log=el('details');log.open=wasOpen;log.append(el('summary',f('Moderationsprotokoll','Moderation log')));
     for(const line of s.log)log.append(el('p',line.type==='bust'?`${this.name(line.id)}: Farkle (${line.lost} ${f('verloren','lost')})`:`${this.name(line.id)}: +${line.amount} · ${f('Gesamt','Total')}: ${line.total}`));content.append(log);
   }
   drawTable(){
@@ -94,6 +103,7 @@ export class FarkleUI{
     }
     if(s.animationBust)content.append(el('h3',f('Fehlwurf – Zug beendet','Farkle – turn ended')));
     if(s.animationWaiting)content.append(el('p',f('Würfelanimation wird abgeschlossen …','Finishing dice animation …')));
+    if(s.animationNextWaiting)content.append(el('p',f('Noch auf die Würfelanimation der Mitspieler warten …','Waiting for the other players’ dice animation …'),'schocken-help'));
     if(can&&!s.paused&&!s.animationWaiting&&game.users.activeGM){
       const controls=el('div',undefined,'schocken-actions'),valid=score!==null&&score>0;
       if(c.dice&&(game.user.isGM||game.settings.get('taverngames','allowFarkleBestSelection')===true)){const best=button(controls,f('Beste Auswahl','Best selection'),()=>this.request('best'));if(game.user.isGM&&!game.settings.get('taverngames','allowFarkleBestSelection'))best.title=f('Für die Spielleitung auch ohne Spielerfreigabe verfügbar.','Available to the GM even when player access is off.');}
