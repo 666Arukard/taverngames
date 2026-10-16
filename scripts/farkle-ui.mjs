@@ -1,10 +1,11 @@
+import {keepModerationScroll} from './scroll-state.mjs';
 import {createNativeWindow} from './native-ui.mjs';
 import {selectionScore} from './farkle-engine.mjs';
 import {f,farkleGuide} from './farkle-text.mjs';
 const el=(tag,text,cls)=>{const node=document.createElement(tag);if(text!==undefined)node.textContent=text;if(cls)node.className=cls;return node;};
 const button=(parent,title,action,disabled=false)=>{const node=el('button',title);node.type='button';node.disabled=disabled;node.addEventListener('click',action);parent.append(node);return node;};
 export class FarkleUI{
-  constructor({request,getState,openBetting,openOutcome}){this.request=request;this.getState=getState;this.openBetting=openBetting;this.openOutcome=openOutcome;this.windows=new Map();}
+  constructor({request,getState,openBetting,openOutcome}){this.request=request;this.getState=getState;this.openBetting=openBetting;this.openOutcome=openOutcome;this.windows=new Map();keepModerationScroll(this,'farkle-moderation');}
   get isOpen(){return this.windows.size>0;}
   name(id){return this.getState()?.npcs?.[id]??game.users.get(id)?.name??id;}
   window(kind){
@@ -96,8 +97,8 @@ export class FarkleUI{
     if(can&&!s.paused&&!s.animationWaiting&&game.users.activeGM){
       const controls=el('div',undefined,'schocken-actions'),valid=score!==null&&score>0;
       if(c.dice&&(game.user.isGM||game.settings.get('taverngames','allowFarkleBestSelection')===true)){const best=button(controls,f('Beste Auswahl','Best selection'),()=>this.request('best'));if(game.user.isGM&&!game.settings.get('taverngames','allowFarkleBestSelection'))best.title=f('Für die Spielleitung auch ohne Spielerfreigabe verfügbar.','Available to the GM even when player access is off.');}
-      button(controls,f('Würfeln','Roll'),()=>this.request('roll'),c.dice!==null&&!valid);
-      button(controls,f('Punkte sichern','Bank points'),()=>this.request('bank'),!valid||(s.scores[current]===0&&total<s.entry));content.append(controls);
+      button(controls,f('Würfeln','Roll'),()=>this.request('roll'),s.animationNextWaiting||c.dice!==null&&!valid);
+      button(controls,f('Punkte sichern','Bank points'),()=>this.request('bank'),s.animationNextWaiting||!valid||(s.scores[current]===0&&total<s.entry));content.append(controls);
     }
     const last=s.log.at(-1);if(last)content.append(el('p',last.type==='bust'?`${this.name(last.id)}: Farkle · ${last.lost} ${f('Zugpunkte verloren','turn points lost')}`:`${this.name(last.id)}: ${last.amount} ${f('Punkte gesichert','points banked')}`));
     content.append(el('p',f('Würfel des aktuellen Wurfs auswählen. Kombinationen können nicht über mehrere Würfe gebaut werden. Sechs gewertete Würfel erlauben sechs frische Würfel.','Select dice from the current roll. Combinations cannot be built across rolls. Score all six dice to roll six fresh dice.'),'schocken-help'));

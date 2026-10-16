@@ -1,3 +1,4 @@
+import {keepModerationScroll} from './scroll-state.mjs';
 import {createNativeWindow} from './native-ui.mjs';
 import {f} from './farkle-text.mjs';
 import {gameTitle,tavernGuide} from './tavern-text.mjs';
@@ -8,7 +9,7 @@ export function selectField(parent,title,entries,value,key){const label=node('la
 function inputField(parent,title,value,key,min=0,max=1000000){const label=node('label',title),input=node('input');input.type='number';input.min=min;input.max=max;input.step=1;input.value=value;input.dataset.draft=key;label.append(input);parent.append(label);return input;}
 export function currencyOptions(){return Object.keys(COINS).filter(c=>c!=='ep'||game.settings.get('taverngames','allowElectrum')===true).map(c=>[c,coinLabel(c)]);}
 export class TavernUI{
-  constructor(scope,{request,getState,openBetting,openOutcome}){Object.assign(this,{scope,request,getState,openBetting,openOutcome});this.windows=new Map();}
+  constructor(scope,{request,getState,openBetting,openOutcome}){Object.assign(this,{scope,request,getState,openBetting,openOutcome});this.windows=new Map();keepModerationScroll(this,'moderation');}
   get isOpen(){return this.windows.size>0;}
   name(id){return this.getState()?.npcs[id]??game.users.get(id)?.name??id;}
   window(kind){if(this.windows.has(kind)){this.windows.get(kind).app.bringToFront();return this.windows.get(kind).root;}const root=node('section',undefined,'taverngames-surface'),app=createNativeWindow(foundry,`${this.scope}-${kind}`,root,()=>this.windows.delete(kind));this.windows.set(kind,{root,app});return root;}
@@ -104,7 +105,7 @@ export class TavernUI{
         }
       }
     }else if(s.phase==='playing'){
-      const id=s.order[s.turn],can=id===game.user.id||game.user.isGM,enabled=can&&!s.paused&&!!game.users.activeGM;
+      const id=s.order[s.turn],can=id===game.user.id||game.user.isGM,enabled=can&&!s.paused&&!s.animationWaiting&&!!game.users.activeGM;
       c.append(node('h3',`${this.name(id)} · ${f('am Zug','to play')}`));
       if(s.npcs[id]&&!s.npcManual[id]&&(this.scope==='pig'&&s.cup.bust||this.scope==='ship'&&(s.cup.rolls===3||s.cup.stage===3&&s.cup.dice.filter((_n,i)=>!s.cup.held[i]).reduce((a,b)=>a+b,0)>=8)))c.append(node('p',f('Der NPC schließt seinen Zug nach fünf Sekunden automatisch ab.','The NPC ends its turn automatically after five seconds.'),'schocken-help'));
       if(this.scope==='pig'){
@@ -117,9 +118,10 @@ export class TavernUI{
         c.append(node('p',s.cup.stage<3?f(`Als Nächstes ${['Schiff (6)','Kapitän (5)','Mannschaft (4)'][s.cup.stage]} anklicken und herauslegen.`,`Click and set aside ${['ship (6)','captain (5)','crew (4)'][s.cup.stage]} next.`):f(`Ladung: ${s.cup.dice.filter((_n,i)=>!s.cup.held[i]).reduce((a,b)=>a+b,0)} Punkte. Beide Ladungswürfel werden gemeinsam neu gewürfelt.`,`Cargo: ${s.cup.dice.filter((_n,i)=>!s.cup.held[i]).reduce((a,b)=>a+b,0)} points. Both cargo dice are rerolled together.`)));
         if(s.cup.rolls===3)c.append(node('p',f('Letzter Wurf: Besatzung markieren und den Zug ausdrücklich abschließen. Ohne vollständige Besatzung zählt er null Punkte.','Final roll: mark the crew and explicitly end the turn. Without a complete crew the turn scores zero.'),'taverngames-turn-result'));
       }
+      if(s.animationPending)c.append(node('p',f('Die 3D-Würfel rollen …','The 3D dice are rolling …')));
       const dice=node('div',undefined,'schocken-dice');(s.cup.dice??[]).forEach((n,i)=>{
         if(this.scope==='pig'){dice.append(node('span',String(n),'taverngames-die'));return;}
-        const die=control(dice,String(n),()=>this.request('hold',{index:i}),!enabled||s.cup.held[i]||s.cup.stage===3||n!==6-s.cup.stage);
+        const die=control(dice,String(s.animationPending&&!s.cup.held[i]?'?':n),()=>this.request('hold',{index:i}),!enabled||s.cup.held[i]||s.cup.stage===3||n!==6-s.cup.stage);
         die.classList.add('taverngames-die');die.dataset.shipDie=String(i);die.classList.toggle('held',s.cup.held[i]);die.setAttribute('aria-pressed',String(s.cup.held[i]));
         die.title=s.cup.held[i]?f('Herausgelegt','Set aside'):f('Passenden Würfel für Schiff, Kapitän oder Mannschaft herauslegen','Set aside the required ship, captain or crew die');
       });c.append(dice);
@@ -127,8 +129,8 @@ export class TavernUI{
         const row=node('div',undefined,'schocken-actions');
         if(this.scope==='pig'&&s.cup.bust)control(row,f('Weiter','Continue'),()=>this.request('next'));
         else{
-          control(row,f('Würfeln','Roll'),()=>this.request('roll'),this.scope==='ship'&&s.cup.rolls>=3);
-          control(row,this.scope==='pig'?f('Punkte sichern','Bank points'):s.cup.rolls===3?f('Zug abschließen','End turn'):f('Ladung behalten','Keep cargo'),()=>this.request('bank'),this.scope==='pig'?s.cup.points<=0:s.cup.stage!==3&&s.cup.rolls<3);
+          control(row,f('Würfeln','Roll'),()=>this.request('roll'),s.animationNextWaiting||this.scope==='ship'&&s.cup.rolls>=3);
+          control(row,this.scope==='pig'?f('Punkte sichern','Bank points'):s.cup.rolls===3?f('Zug abschließen','End turn'):f('Ladung behalten','Keep cargo'),()=>this.request('bank'),s.animationNextWaiting||(this.scope==='pig'?s.cup.points<=0:s.cup.stage!==3&&s.cup.rolls<3));
         }
         c.append(row);
       }

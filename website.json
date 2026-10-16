@@ -2,20 +2,20 @@
   "schemaVersion": 1,
   "blocks": {
     "patchnotes": {
-      "title": "Patchnotes Version 1.4.6",
+      "title": "Patchnotes Version 1.4.8",
       "paragraphs": [
-        "Farkle erweitert die Dice-So-Nice-Beta um liegende 3D-Würfel und abgestimmte Anzeigezeiten. Die neue persistente Darstellung benötigt noch einen Praxistest. Acht Spiele bleiben stabil; Chō-Han und 3D bleiben Beta."
+        "Die Dice-So-Nice-Beta lässt bei Farkle, Kniffel und Schiff alle ausgerollten Würfel während der Auswahl liegen. Auswahl ohne zusätzliche feste Wartezeit; die neue Darstellung benötigt einen Praxistest."
       ],
       "items": [
-        "Herausgelegte Würfel bleiben als gesperrte 3D-Objekte auf der normalen Würfelfläche liegen.",
-        "Nur übrige Würfel werden neu animiert; eigene Stücke werden beim Zugende oder Abbruch entfernt.",
-        "Auswahl frühestens nach zwei Sekunden und nach Animationsende; Fehlwürfe bleiben anschließend kurz sichtbar.",
-        "Serverseitige Mehrspielersperre mit Rückmeldungen und maximal 15 Sekunden Wartezeit.",
-        "Chō-Han-Becheranzeige und verdeckte Daten aus 1.4.5 bleiben erhalten."
+        "Auswahl direkt nach abgeschlossenem Ausrollen, ohne feste Zwei-Sekunden-Pause.",
+        "Halten und Zurücknehmen ersetzt keine 3D-Stücke; erst der nächste Wurf ersetzt die freien Würfel.",
+        "Herausgelegte Stücke bleiben beim Weiterwürfeln liegen; Bereinigung am Zugende und bei Abbruch.",
+        "Die lokale Auswahl wartet nicht auf langsamere Clients. Folgeaktionen bleiben bis zu deren Rückmeldung gesperrt.",
+        "Chō-Han-Regelquellen in der Modulübersicht ergänzt: Daniels Sammlung, Dice-Play und NetExl."
       ]
     },
     "games": {
-      "title": "aktuelle Spiele",
+      "title": "aktuelle Spiele (9)",
       "paragraphs": [],
       "items": [
         "Drachenhort",
@@ -30,7 +30,7 @@
       ]
     },
     "plans": {
-      "title": "geplante Spiele",
+      "title": "geplante Spiele (35)",
       "paragraphs": [
         "Für diese Spiele und Wettbewerbe liegen Regelreferenzen vor. Die Auswahl ist Planung und keine Zusage zur Umsetzung; einzelne Regelfragen sind noch offen."
       ],
@@ -73,7 +73,7 @@
       ]
     },
     "plans2": {
-      "title": "geplante Funktionen",
+      "title": "geplante Funktionen (7)",
       "paragraphs": [
         "Größere Erweiterungen werden schrittweise geprüft. Die folgende Liste beschreibt Überlegungen und noch keine fertigen Funktionen."
       ],
@@ -88,7 +88,7 @@
       ]
     },
     "functions": {
-      "title": "aktuelle Funktionen",
+      "title": "aktuelle Funktionen (18)",
       "paragraphs": [
         "Acht stabile Spiele und Chō-Han als zusätzliches Beta-Spiel. Die optionale3D-Animation ist weiterhin separat schaltbare Beta."
       ],
@@ -108,7 +108,9 @@
         "Chō-Han-Beta: interne gedeckte Gegenwetten, wählbare Provision und Überschussrückgabe; kein Charaktergeld.",
         "Chō-Han-Beta mit Varianten A–D, interner Bank und Topfübertrag; nur virtuelle Guthaben.",
         "Chō-Han: wertunabhängige Becheranimation beim verdeckten Wurf und direktes Aufdecken desselben gespeicherten Ergebnisses.",
-        "Farkle: liegende 3D-Würfel, verzögerte Auswahl und sichtbarer Fehlwurf als Teil der separat schaltbaren Dice-So-Nice-Beta."
+        "Farkle: liegende 3D-Würfel, Auswahl nach Ausrollen und sichtbarer Fehlwurf als Teil der separat schaltbaren Dice-So-Nice-Beta.",
+        "Kniffel und Schiff: während der Auswahl liegende 3D-Würfel, Animationsabstimmung und begrenzte Mehrspielersperre als Dice-So-Nice-Beta.",
+        "Farkle, Kniffel und Schiff: alle gelandeten 3D-Stücke bleiben bis zum nächsten Wurf oder Zugende sichtbar; keine zusätzliche feste Auswahlpause."
       ]
     },
     "settings": {
@@ -128,12 +130,14 @@
         "Die3D-Animationsbeta hat einen separaten Schalter. Dice So Nice6.4.4 ist als API-Referenz geprüft, der echte Praxistest steht noch aus.",
         "SL-Diagnose: Moduleinstellungen → Taverngames → 3D-Würfel prüfen → Test & Diagnose öffnen. Der lokale Test funktioniert unabhängig vom 3D-Schalter. Nach einem Spielwurf Diagnose aktualisieren.",
         "Chō-Han: Annahme schließen, dann Verdeckt würfeln. Der Becher bewegt sich, während die echten Werte bereits feststehen. Aufdecken & auswerten zeigt diese Werte direkt. Dafür ist Dice So Nice nicht erforderlich; Chō-Han verwendet beim Aufdecken keine zweite 3D-Wurfanimation.",
-        "Farkle-3D: Dice-So-Nice-Beta einschalten. Herausgelegte Würfel werden im Spielfenster ausgewählt und bleiben als gesperrte 3D-Stücke auf der normalen DSN-Fläche liegen. DSN 6.4.4 ist der geprüfte API-Quellstand; die neue Darstellung benötigt einen Live-Test."
+        "Farkle-3D: Dice-So-Nice-Beta einschalten. Herausgelegte Würfel werden im Spielfenster ausgewählt und bleiben als gesperrte 3D-Stücke auf der normalen DSN-Fläche liegen. DSN 6.4.4 ist der geprüfte API-Quellstand; die neue Darstellung benötigt einen Live-Test.",
+        "Die optionale Dice-So-Nice-Beta gilt nun auch für Kniffel und Schiff. Auswahl weiterhin im Taverngames-Fenster; bei Kniffel erneut anklicken, um einen gehaltenen Würfel zurückzunehmen. Nach Installation Welt neu laden.",
+        "Bei den drei Spielen bleiben alle gelandeten Würfel während der Auswahl liegen. Halten und Zurücknehmen erfolgt im Taverngames-Fenster. Nur freie Würfel werden beim nächsten Wurf ersetzt. Die allgemeinen Dice-So-Nice-Einstellungen müssen dafür nicht geändert werden. Nach Modulaktualisierung die Welt neu laden."
       ],
       "items": []
     },
     "sources": {
-      "title": "Regelquellen",
+      "title": "Regelquellen (26)",
       "paragraphs": [
         "Hier findet ihr alle genutzten Regelquellen. Quellen für noch nicht umgesetzte Spiele sind ausdrücklich als geplante Regelreferenzen gekennzeichnet."
       ],
@@ -156,8 +160,8 @@
         "Bicycle Cards (ergänzende/geplante Regelreferenz) – https://bicyclecards.com/how-to-play/blackjack",
         "Hasbro Classic 00950 (ergänzende/geplante Regelreferenz) – https://instructions.hasbro.com/api/download/00950_en-ca_yahtzee-classic.pdf",
         "Hasbro 40958 (ergänzende/geplante Regelreferenz) – https://www.hasbro.com/common/instruct/40958.pdf",
-        "Dice-Play – Chō-Han (geplante Regelreferenz): https://www.dice-play.com/Games/ChoHanBakuchi.htm",
-        "Netexl – Chō-Han (geplante Regelreferenz): https://www.netexl.com/howtoplay/cho-han/",
+        "Dice-Play – Chō-Han (verwendete ergänzende Regelreferenz): https://www.dice-play.com/Games/ChoHanBakuchi.htm",
+        "NetExl – Chō-Han (verwendete ergänzende Regelreferenz): https://www.netexl.com/howtoplay/cho-han/",
         "Wikipedia – Chō-Han (geplante Regelreferenz): https://en.wikipedia.org/wiki/Ch%C5%8D-han",
         "Wizard of Odds – Chō-Han (geplante Regelreferenz): https://wizardofodds.com/games/cho-han/",
         "D&D Beyond – Basic Rules 2024, allgemeine Regel- und Währungsreferenz: https://www.dndbeyond.com/sources/dnd/br-2024/playing-the-game",

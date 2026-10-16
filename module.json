@@ -1,17 +1,17 @@
 {
     "id":  "taverngames",
     "title":  "Taverngames – Foundry Extension",
-    "description":  "\u003ch3\u003eDeutsch\u003c/h3\u003e\u003cp\u003eTaverngames bringt Schocken, Farkle, Schweinchen, Schiff–Kapitän–Mannschaft, Kniffel, Straßenlotto, Lügenwürfel und Drachenhort mit SL-Moderation, freiwilligem Beitritt und benannten NPCs an deinen Foundry-Tisch. Alle acht Spiele sind stabil. Der Reiter ist nur für SL sichtbar.\u003c/p\u003e\u003ch3\u003eEnglish\u003c/h3\u003e\u003cp\u003eTaverngames brings eight stable games to Foundry: Schocken, Farkle, Pig, Ship–Captain–Crew, Kniffel, Street lottery, Liar’s Dice and Dragon’s Hoard, with GM moderation, voluntary participation and named NPCs. The tab is GM-only.\u003c/p\u003e\u003ch3\u003e1.4.6 · Versionshinweise / Release notes\u003c/h3\u003e\u003cul\u003e\u003cli\u003eFarkle mit Dice So Nice: herausgelegte Würfel bleiben als gesperrte 3D-Objekte auf der Würfelfläche liegen. Nur die übrigen Würfel werden neu geworfen. / Farkle with Dice So Nice: held dice remain as locked 3D pieces; only remaining dice are rerolled.\u003c/li\u003e\u003cli\u003eAuswahl erst nach mindestens zwei Sekunden und Animationsabschluss. Fehlwürfe bleiben danach kurz sichtbar. Mehrspieler-Animationssperre mit begrenzter Wartezeit. / Selection waits at least two seconds and for animation completion. Failed rolls remain briefly visible. Multiplayer animation gate with bounded waiting.\u003c/li\u003e\u003cli\u003eChō-Han-Becheranzeige aus 1.4.5 erhalten. Acht Spiele stabil; 3D-Erweiterung und Chō-Han weiterhin Beta. / Preserves the Cho-Han cup display from 1.4.5. Eight stable games; 3D extension and Cho-Han remain beta.\u003c/li\u003e\u003c/ul\u003e",
-    "version":  "1.4.6",
+    "description":  "\u003ch3\u003eDeutsch\u003c/h3\u003e\u003cp\u003eTaverngames bringt Schocken, Farkle, Schweinchen, Schiff–Kapitän–Mannschaft, Kniffel, Straßenlotto, Lügenwürfel und Drachenhort mit SL-Moderation, freiwilligem Beitritt und benannten NPCs an deinen Foundry-Tisch. Alle acht Spiele sind stabil. Der Reiter ist nur für SL sichtbar.\u003c/p\u003e\u003ch3\u003eEnglish\u003c/h3\u003e\u003cp\u003eTaverngames brings eight stable games to Foundry: Schocken, Farkle, Pig, Ship–Captain–Crew, Kniffel, Street lottery, Liar’s Dice and Dragon’s Hoard, with GM moderation, voluntary participation and named NPCs. The tab is GM-only.\u003c/p\u003e\u003ch3\u003e1.4.8 · Versionshinweise / Release notes\u003c/h3\u003e\u003cul\u003e\u003cli\u003eFarkle, Kniffel und Schiff: Auswahl nach dem Ausrollen ohne zusätzliche feste Wartezeit. Alle gelandeten Würfel bleiben während der Auswahl sichtbar. / Farkle, Kniffel and Ship: select after landing without an extra fixed delay. All settled dice remain visible during selection.\u003c/li\u003e\u003cli\u003eBeim nächsten Wurf werden nur freie Würfel ersetzt; herausgelegte bleiben liegen. Langsamere Clients sperren Folgeaktionen, nicht die fertige lokale Auswahl. / The next throw replaces only free dice; held dice remain. Slower clients block subsequent actions, not completed local selection.\u003c/li\u003e\u003cli\u003eChō-Han-Quellen ergänzt: Daniels bereitgestellte Sammlung, Dice-Play und NetExl. / Cho-Han sources credited: Daniel’s supplied collection, Dice-Play and NetExl.\u003c/li\u003e\u003cli\u003e3D-Anbindung und Chō-Han weiterhin Beta. / 3D integration and Cho-Han remain beta.\u003c/li\u003e\u003c/ul\u003e",
+    "version":  "1.4.8",
     "readme":  "README.md",
-    "changelog":  "https://github.com/666Arukard/taverngames/releases/tag/v1.4.6",
+    "changelog":  "https://github.com/666Arukard/taverngames/releases/tag/v1.4.8",
     "url":  "https://dnd.brunecoaching.de",
     "compatibility":  {
                           "verified":  "14.369"
                       },
     "authors":  [
                     {
-                        "name":  "Daniel Brune (mit KI-Unterstützung durch ChatGPT/Codex)",
+                        "name":  "Daniel Brune (Modulautor und Chō-Han-Regelsammlung; mit KI-Unterstützung durch ChatGPT/Codex)",
                         "url":  "https://dnd.brunecoaching.de",
                         "discord":  "arukard",
                         "email":  "daniel@brunecoaching.de"
@@ -63,6 +63,14 @@
                     {
                         "name":  "TZawalich (Regelquelle Lügenwürfel und Drachenhort)",
                         "url":  "https://github.com/TZawalich/tavern-games-current"
+                    },
+                    {
+                        "name":  "Dice-Play (ergänzende Regelreferenz Chō-Han)",
+                        "url":  "https://www.dice-play.com/Games/ChoHanBakuchi.htm"
+                    },
+                    {
+                        "name":  "NetExl (ergänzende Regelreferenz Chō-Han)",
+                        "url":  "https://www.netexl.com/howtoplay/cho-han/"
                     }
                 ],
     "esmodules":  [
@@ -72,7 +80,7 @@
                    "styles/table.css"
                ],
     "manifest":  "https://github.com/666Arukard/taverngames/releases/latest/download/module.json",
-    "download":  "https://github.com/666Arukard/taverngames/releases/download/v1.4.6/taverngames-1.4.6.zip",
+    "download":  "https://github.com/666Arukard/taverngames/releases/download/v1.4.8/taverngames-1.4.8.zip",
     "relationships":  {
                           "recommends":  [
                                              {
