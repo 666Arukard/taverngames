@@ -1,9 +1,53 @@
 # Taverngames – Foundry Extension
 
-**Version 1.4.14**. Alle acht Spiele sind regulär verfügbar: Schocken, Farkle, Schweinchen, Schiff–Kapitän–Mannschaft, Kniffel, Straßenlotto, Lügenwürfel und Drachenhort. Kniffel wurde von Daniel am 14. Oktober 2026 für die stabile Version freigegeben.
+**Version 1.5.0**. Alle acht Spiele sind regulär verfügbar: Schocken, Farkle, Schweinchen, Schiff–Kapitän–Mannschaft, Kniffel, Straßenlotto, Lügenwürfel und Drachenhort. Kniffel wurde von Daniel am 14. Oktober 2026 für die stabile Version freigegeben.
 
 
-## Aktuell in 1.4.14
+## Aktuell in 1.5.0
+
+Chō-Han ist jetzt regulär ohne Spiele-Beta-Schalter verfügbar. Straßenlotto erhält eine optionale private SL-Einsicht vor dem Aufdecken, standardmäßig ausgeschaltet. Alle neun Spiele sind stabil; die allgemeine 3D-Anbindung bleibt separat schaltbare Beta.
+
+Straßenlotto: Im Moderationsfenster „SL: verdeckte Würfel einsehen“ einschalten. Der SL erhält auch ohne eigenen Tippschein eine eigene Würfelansicht; nur mit aktivierter Einsicht sind dort vorzeitig Zahlen sichtbar. Spieler sehen weiterhin blanke Würfel bis zum ausdrücklichen Aufdecken. Mit deaktiviertem DSN zeigt nur das SL-Moderationsfenster die gespeicherte Zahl. Umschalten würfelt nicht erneut und löst keine Auswertung aus.
+
+Chō-Han ist von Daniel abgenommen und verlässt den Spiele-Beta-Schalter. Anleitungen und Beitrittsbuttons sind regulär erreichbar. Der bisherige Beta-Spieleschalter bleibt für spätere Testspiele erhalten und verändert keines der neun stabilen Spiele. Die allgemeine DSN-Anbindung bleibt Beta bis zu ihrem vollständigen Abschluss, insbesondere Lügenwürfel. Empfehlung: erst diesen 3D-Schritt testen, danach 2.0.0 stabil; eigene Spielnamen und Karten bleiben spätere Vorhaben.
+
+English: Cho-Han is now available without the game beta setting. Street lottery gains optional private GM inspection before reveal, disabled by default. All nine games are stable; the general 3D integration remains a separate optional beta. The GM can inspect the stored lottery result without joining. Players still wait for explicit reveal. No second roll, new payout or automatic reveal.
+
+## Vorheriger Stand 1.4.18
+
+Straßenlotto bleibt nach dem Ziehen geheim, bis der SL Aufdecken klickt. Bei Straßenlotto und Chō-Han steht nach der Auswertung Spiel beenden neben Nächste Partie vorbereiten und entfernt die ruhenden Würfel für alle.
+
+Der neue SL-Abschlussbutton entfernt die 3D-Stücke für alle Teilnehmer. Das ausgewertete Ergebnis bleibt lesbar, Auszahlungen und Gegenstandsübergaben werden nicht wiederholt oder rückgängig gemacht. Eine neue Partie kann weiterhin separat vorbereitet werden. Offene Chō-Han-Überträge bleiben erhalten; Erstattung ist ein gesonderter SL-Befehl. Daniel hat Chō-Han aus 1.4.16 im Praxistest bestätigt. Die neue Lotto-Freigabe und Abschlussbuttons sind synthetisch geprüft und benötigen noch den Foundry-Test.
+
+English: Street lottery stays secret after drawing until the GM clicks Reveal. After resolution, Street lottery and Cho-Han offer End game beside Prepare next game to remove the resting dice for everyone. Ending a resolved table keeps results, balances and any carry-over. No extra settlement occurs.
+
+## Vorheriger Zwischenstand 1.4.17
+
+Straßenlotto: W100 ziehen bleibt verdeckt. Erst Aufdecken durch den SL zeigt die gespeicherte Zahl auf den liegenden 3D-Würfeln und wertet die Partie aus. Kein erneuter Wurf.
+
+Der SL schließt die Annahme, klickt W100 ziehen und lässt die Animation ausrollen. Die Zahl bleibt auch anschließend geheim. Erst Aufdecken im Moderationsfenster zeigt sie allen. Dabei werden die bestehenden blanken Zehner-/Einerwürfel am gleichen Platz aufgedeckt; es gibt keine zweite Zufallsauswertung oder Wurfanimation. Chat, Ausgangswetten und die vorhandene Preisübergabe folgen erst dann. Ohne DSN gilt derselbe manuelle Ablauf. Abbruch vor dem Aufdecken wertet nicht aus. Chō-Han unverändert aus 1.4.16; 3D bleibt Beta.
+
+English: Street lottery: drawing d100 stays concealed. Only GM Reveal shows the stored number on the resting 3D dice and resolves the game. No second roll. Announcements and existing settlement/prize actions happen only after the GM click. The same manual reveal applies without DSN.
+
+## Vorheriger Stand 1.4.16
+
+Straßenlotto und Chō-Han erhalten verdeckte 3D-Würfel. Straßenlotto zeigt jedem Tippscheinbesitzer eine eigene blanke Darstellung der gemeinsamen Ziehung. Chō-Han deckt die gespeicherten Werte ohne zweiten Wurf auf; die optionale SL-Einsicht bleibt privat.
+
+Der W100 besteht aus zwei blanken Würfeln. Zuschauer ohne Tippschein erhalten keine Darstellung; der SL sieht eine eigene Darstellung, wenn er einen eigenen oder einen NPC-Tippschein verwaltet. Ergebnisse erscheinen weiterhin im Spielfenster. Abschlusschat, interne Ausgangswetten und die bestehende Preisübergabe warten auf Animationsabschluss. Eine noch laufende Ziehung kann der SL abbrechen, bevor diese Folgen freigegeben werden.
+
+Chō-Han: Im Moderationsfenster schaltet „SL: verdeckte Würfel einsehen“ die private Einsicht ein und aus. Ohne Häkchen bleiben auch für den SL beide Würfel blank. Aufdecken zeigt die bereits gespeicherten Werte auf den ruhenden Würfeln. Ein deaktiviertes oder fehlendes DSN lässt den bisherigen 2D-Ablauf nutzbar. Alle bisherigen Regeln und Quellen bleiben erhalten. Drachenhort wurde von Daniel bestätigt; diese neuen Darstellungen warten auf den Praxistest. 3D und Chō-Han bleiben Beta.
+
+English: Street lottery and Cho-Han gain concealed 3D dice. Each lottery ticket owner sees a personal blank representation of the shared draw. Cho-Han reveals the stored values without rolling again; optional GM inspection stays private. Lottery announcements and existing prize delivery wait for completion. GM inspection defaults to off. The normal 2D flow remains available without DSN. These additions have synthetic tests only; no live Foundry approval is claimed.
+
+## Vorheriger Stand 1.4.15
+
+Drachenhort: Zwei liegende 3D-Würfel und animierte Restwürfe. Ergebnisse und Münzverteilung erscheinen nach der lokalen Animation; nächste Aktionen warten auf die nötigen Animationsrückmeldungen.
+
+Die beiden Würfel bleiben bis zum nächsten Wurf sichtbar. Restwürfe zeigen einen W6, W10 oder W20 gemäß vorhandener Teilnehmerregel; bei Gleichstand wird wie bisher erneut getippt. Zahlentipps gelangen nicht in den gemeinsamen Animationskanal. Die Abschlussnachricht und virtuelle Wettabrechnung warten auf die erforderlichen Animationsabschlüsse. Reguläres Ende, neue Partie, Abbruch und abgeschaltete 3D-Beta räumen eigene Stücke auf. Ohne DSN bleibt der bisherige Ablauf erhalten. Keine neue Zufallsauswertung und keine Geldbuchung. Schweinchen-3D wurde durch Daniel bestätigt; Drachenhort-3D bleibt bis zum Praxistest Beta.
+
+English: Dragon’s Hoard: two resting 3D dice and animated remainder rolls. Results and coin distribution appear after the local animation; subsequent actions wait for required animation acknowledgements. Remainder rolls show the existing d6/d10/d20 choice. Private guesses are excluded from shared animation data. Final announcements wait for completion. No character currency transactions. 3D remains beta.
+
+## Vorheriger Stand 1.4.14
 
 Schweinchen: Der letzte 3D-Würfel bleibt bis zum nächsten Wurf oder Zugende liegen. Eine Eins bleibt bis Weiter sichtbar. Automatische NPCs warten nach Abschluss der Animationen fünf Sekunden.
 

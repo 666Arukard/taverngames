@@ -1,10 +1,10 @@
 {
     "id":  "taverngames",
     "title":  "Taverngames – Foundry Extension",
-    "description":  "\u003ch3\u003eDeutsch\u003c/h3\u003e\u003cp\u003eTaverngames bringt Schocken, Farkle, Schweinchen, Schiff–Kapitän–Mannschaft, Kniffel, Straßenlotto, Lügenwürfel und Drachenhort mit SL-Moderation, freiwilligem Beitritt und benannten NPCs an deinen Foundry-Tisch. Alle acht Spiele sind stabil. Der Reiter ist nur für SL sichtbar.\u003c/p\u003e\u003ch3\u003eEnglish\u003c/h3\u003e\u003cp\u003eTaverngames brings eight stable games to Foundry: Schocken, Farkle, Pig, Ship–Captain–Crew, Kniffel, Street lottery, Liar’s Dice and Dragon’s Hoard, with GM moderation, voluntary participation and named NPCs. The tab is GM-only.\u003c/p\u003e\u003ch3\u003e1.4.14 · Versionshinweise / Release notes\u003c/h3\u003e\u003cp\u003eSchweinchen: Der letzte 3D-Würfel bleibt bis zum nächsten Wurf oder Zugende liegen. Eine Eins bleibt bis Weiter sichtbar. Automatische NPCs warten nach Abschluss der Animationen fünf Sekunden.\u003c/p\u003e\u003cp\u003ePig: the last 3D die remains until the next roll or turn end. A one stays visible until Continue. Automatic NPCs wait five seconds after the animations finish.\u003c/p\u003e\u003cp\u003eFolgeaktionen warten auf die Würfelanimationen der Mitspieler. / Subsequent actions wait for other players’ dice animations.\u003c/p\u003e\u003cp\u003e3D und Chō-Han bleiben Beta. / 3D and Cho-Han remain beta.\u003c/p\u003e\u003cp\u003eChō-Han-Regelvorlagen: bereitgestellte Regelsammlung von Daniel sowie Dice-Play und NetExl. / Cho-Han rule references: collection supplied by Daniel, Dice-Play and NetExl.\u003c/p\u003e",
-    "version":  "1.4.14",
+    "description":  "\u003ch3\u003eDeutsch\u003c/h3\u003e\u003cp\u003eTaverngames bringt neun stabile Tavernenspiele mit SL-Moderation, freiwilligem Beitritt und benannten NPCs an deinen Foundry-Tisch: Schocken, Farkle, Schweinchen, Schiff–Kapitän–Mannschaft, Kniffel, Straßenlotto, Lügenwürfel, Drachenhort und Chō-Han. Der Reiter ist nur für SL sichtbar.\u003c/p\u003e\u003ch3\u003eEnglish\u003c/h3\u003e\u003cp\u003eTaverngames brings nine stable games to Foundry: Schocken, Farkle, Pig, Ship–Captain–Crew, Kniffel, Street lottery, Liar’s Dice, Dragon’s Hoard and Cho-Han, with GM moderation, voluntary participation and named NPCs. The tab is GM-only.\u003c/p\u003e\u003ch3\u003e1.5.0 · Versionshinweise / Release notes\u003c/h3\u003e\u003cp\u003eChō-Han ist jetzt regulär ohne Spiele-Beta-Schalter verfügbar. Straßenlotto erhält eine optionale private SL-Einsicht vor dem Aufdecken, standardmäßig ausgeschaltet. Alle neun Spiele sind stabil; die allgemeine 3D-Anbindung bleibt separat schaltbare Beta.\u003c/p\u003e\u003cp\u003eCho-Han is now available without the game beta setting. Street lottery gains optional private GM inspection before reveal, disabled by default. All nine games are stable; the general 3D integration remains a separate optional beta.\u003c/p\u003e\u003cp\u003eSL-Einsicht nur für autorisierte Spielleiter, auch ohne eigenen Tippschein. Spieler erhalten die Ziehung erst beim Aufdecken. / Inspection is restricted to authorized GMs, including without a personal ticket. Players receive the draw only on reveal.\u003c/p\u003e\u003cp\u003eChō-Han-Regelvorlagen: Daniels Regelsammlung, Dice-Play und NetExl. / Cho-Han rule references: Daniel’s rule collection, Dice-Play and NetExl.\u003c/p\u003e",
+    "version":  "1.5.0",
     "readme":  "README.md",
-    "changelog":  "https://github.com/666Arukard/taverngames/releases/tag/v1.4.14",
+    "changelog":  "https://github.com/666Arukard/taverngames/releases/tag/v1.5.0",
     "url":  "https://dnd.brunecoaching.de",
     "compatibility":  {
                           "verified":  "14.369"
@@ -80,7 +80,7 @@
                    "styles/table.css"
                ],
     "manifest":  "https://github.com/666Arukard/taverngames/releases/latest/download/module.json",
-    "download":  "https://github.com/666Arukard/taverngames/releases/download/v1.4.14/taverngames-1.4.14.zip",
+    "download":  "https://github.com/666Arukard/taverngames/releases/download/v1.5.0/taverngames-1.5.0.zip",
     "relationships":  {
                           "recommends":  [
                                              {

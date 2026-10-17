@@ -19,9 +19,10 @@ export class FarklePersistentDice {
  constructor({game,warn=()=>{},scope='farkle'}){this.scope=scope;this.game=game;this.warn=warn;this.poses=new Map();this.meshes=new Map();this.turn=null;this.warned=false;this.serial=Promise.resolve();}
  enqueue(fn){const result=this.serial.then(fn);this.serial=result.catch(()=>{});return result;}
  spawnOptions(_pose){return {};}
+ dieType(state){return this.scope==='hoard'&&[6,10,20].includes(state?.cup?.sides)?`d${state.cup.sides}`:'d6';}
  capture(state,indices,eventId){
   const box=this.game().dice3d?.box,engine=box?.throwEngine;
-  const meshes=[...(engine?.diceList??[]),...(engine?.deadDiceList??[])].filter(m=>m.notation?.type==='d6'&&!m.userData?.persistent&&(eventId===undefined||m.options?.taverngamesEvent===eventId));
+  const meshes=[...(engine?.diceList??[]),...(engine?.deadDiceList??[])].filter(m=>m.notation?.type===this.dieType(state)&&!m.userData?.persistent&&(eventId===undefined||m.options?.taverngamesEvent===eventId));
   const available=[...meshes];
   for(const index of indices){const value=state.cup.dice[index],at=available.findIndex(m=>Number(m.forcedResult)===value);if(at<0)continue;const mesh=available.splice(at,1)[0];this.poses.set(index,{value,quaternion:mesh.quaternion.clone(),parentQuaternion:mesh.parent.quaternion.clone(),height:mesh.parent.position.y,position:box.toPositionPct?.(mesh.parent.position.x,mesh.parent.position.z),source:mesh});}
  }
@@ -39,7 +40,7 @@ export class FarklePersistentDice {
   if(!desired.size)return;
   if(typeof dsn?.persistent?.spawn!=='function'||typeof dsn?.persistent?.remove!=='function'||typeof box?.physicsWorker?.exec!=='function'){if(!this.warned){this.warned=true;this.warn();}return;}
   for(const index of desired){const existing=this.meshes.get(index);if(existing&&Array.isArray(box?.persistentDiceList)&&!box.persistentDiceList.includes(existing.mesh))this.meshes.delete(index);if(this.meshes.has(index))continue;const pose=this.poses.get(index);if(!pose||pose.value!==state.cup.dice[index])continue;
-   const enabled=box.persistentDiceEnabled;let task;try{box.persistentDiceEnabled=true;task=dsn.persistent.spawn('d6',pose.position??{x:0.18+index*0.11,y:this.scope==='kniffel'?0.70:this.scope==='ship'?0.58:0.82},{ownerUserId:state.order[state.turn],guest:{pendingId:'taverngames-'+this.scope,reservedForUserId:'taverngames-locked'},...this.spawnOptions(pose)},false);}finally{box.persistentDiceEnabled=enabled;}
+   const enabled=box.persistentDiceEnabled;let task;try{box.persistentDiceEnabled=true;task=dsn.persistent.spawn(this.dieType(state,index),pose.position??{x:0.18+index*0.11,y:this.scope==='kniffel'?0.70:this.scope==='ship'?0.58:0.82},{ownerUserId:state.order[state.turn],guest:{pendingId:'taverngames-'+this.scope,reservedForUserId:'taverngames-locked'},...this.spawnOptions(pose)},false);}finally{box.persistentDiceEnabled=enabled;}
    const mesh=await task;
    if(!mesh)continue;
    // These are inert display pieces. Native grab checks lockedBy even for the GM.
@@ -50,7 +51,7 @@ export class FarklePersistentDice {
    const q=pose.parentQuaternion,w=Math.max(-1,Math.min(1,q.w??1)),sin=Math.sqrt(1-w*w),axis=sin<0.00001?{x:0,y:0,z:0,a:0}:{x:q.x/sin,y:q.y/sin,z:q.z/sin,a:Math.acos(w)/Math.PI};
    const position={x:mesh.parent.position.x??0,y:pose.height,z:mesh.parent.position.z??0};
    await box.physicsWorker.exec('removeDice',[mesh.id]);
-   await box.physicsWorker.exec('createDice',{id:mesh.id,shape:mesh.shape??'d6',material:'plastic',mass:0,startAtIteration:0,options:{persistent:true},vectordata:{type:'d6',pos:position,axis,angle:{x:0,y:0,z:0},velocity:{x:0,y:0,z:0}}});
+   await box.physicsWorker.exec('createDice',{id:mesh.id,shape:mesh.shape??this.dieType(state,index),material:'plastic',mass:0,startAtIteration:0,options:{persistent:true},vectordata:{type:this.dieType(state,index),pos:position,axis,angle:{x:0,y:0,z:0},velocity:{x:0,y:0,z:0}}});
    await box.physicsWorker.exec('addDice',mesh.id);
    await box.physicsWorker.exec('setCollisionResponse',{ids:[mesh.id],enabled:false});
    mesh.quaternion.copy(pose.quaternion);mesh.parent.quaternion.copy(pose.parentQuaternion);mesh.parent.position.y=pose.height;mesh.result=pose.value;mesh.forcedResult=pose.value;pose.source.visible=false;

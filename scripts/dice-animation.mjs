@@ -4,7 +4,7 @@ export class DiceEvents {
  constructor(){this.events=[];this.serial=0;this.captured={};}
  record(scope,action,count){if(count)this.captured[scope]={action,count,time:Date.now()};}
  diagnostics(){return {lastCaptures:structuredClone(this.captured),buffered:this.events.length,sequence:this.serial};}
- add(scope,actor,dice,{privateTo=null,now=Date.now(),farkle=null,held=null,schocken=null}={}){if(!dice.length&&!farkle&&!held&&!schocken)return;this.events.push({id:++this.serial,scope,actor,dice:structuredClone(dice),...(farkle?{farkle:structuredClone(farkle)}:{}),...(held?{held:structuredClone(held)}:{}),...(schocken?{schocken:structuredClone(schocken)}:{}),privateTo,time:now});this.events=this.events.filter(e=>now-e.time<15000).slice(-128);}
+ add(scope,actor,dice,{privateTo=null,now=Date.now(),farkle=null,held=null,schocken=null,hidden=null}={}){if(!dice.length&&!farkle&&!held&&!schocken&&!hidden)return;this.events.push({id:++this.serial,scope,actor,dice:structuredClone(dice),...(farkle?{farkle:structuredClone(farkle)}:{}),...(held?{held:structuredClone(held)}:{}),...(schocken?{schocken:structuredClone(schocken)}:{}),...(hidden?{hidden:structuredClone(hidden)}:{}),privateTo,time:now});this.events=this.events.filter(e=>now-e.time<15000).slice(-128);}
  read(user,after=0,now=Date.now()){return {cursor:this.serial,events:this.events.filter(e=>e.id>after&&now-e.time<15000&&(!e.privateTo||e.privateTo.includes(user.id))).map(({privateTo,time,...event})=>event)};}
  clear(){this.events=[];}
 }
@@ -21,7 +21,7 @@ export class DiceAnimator {
    const dice=[];
    for(const {sides,value,blank} of event.dice){
     if(![6,10,20,100].includes(sides)||!Number.isInteger(value)||value<1||value>sides)return;
-    if(blank&&(event.scope!=='schocken'||!registerSchockenBlank(dsn)))throw Error('Schocken hidden dice preset unavailable');
+    if(blank&&(!['schocken','lottery','chohan'].includes(event.scope)||!registerSchockenBlank(dsn)))throw Error('Schocken hidden dice preset unavailable');
     const entry=(type,result,label)=>({type,result,resultLabel:blank?'':String(label),vectors:[],options:{owner:this.game.users.get(event.actor)?.id??this.game.user.id,...(event.id?{taverngamesEvent:event.id}:{}),...(blank?{colorset:'custom',appearance:schockenAppearance(true)}:{})},fvttResult:{result:value,active:true},resultIndex:dice.length});
     if(sides===100){
      const tens=Math.floor(value/10)%10,ones=value%10;

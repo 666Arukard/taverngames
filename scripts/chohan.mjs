@@ -7,16 +7,18 @@ export function allocate(total,weights){
  const rows=weights.map((w,i)=>({i,value:Number(BigInt(total)*BigInt(w)/BigInt(sum)),rest:BigInt(total)*BigInt(w)%BigInt(sum)}));
  let remainder=total-rows.reduce((n,r)=>n+r.value,0);for(const row of [...rows].sort((a,b)=>a.rest===b.rest?a.i-b.i:a.rest>b.rest?-1:1)){if(!remainder--)break;row.value++;}return rows.map(r=>r.value);
 }
-export function createCho({npcs={},currency='gp',minStake=1,maxStake=100,commission=5,feeBase='pot',matching='proportional',variant='B',payoutBasis=190,bankFunds=1000}={}){
+export function createCho({npcs={},currency='gp',minStake=1,maxStake=100,commission=5,feeBase='pot',matching='proportional',variant='B',payoutBasis=190,bankFunds=1000,gmPeek=false}={}){
  check(['cp','sp','ep','gp','pp'].includes(currency),'Invalid currency or funding.');check(integer(minStake,1,10000)&&integer(maxStake,minStake,10000),'Invalid stake.');check(integer(commission,0,50)&&['pot','profit'].includes(feeBase)&&['proportional','order'].includes(matching),'Invalid rule option.');
  check(['A','B','C','D'].includes(variant)&&integer(payoutBasis,100,200)&&integer(bankFunds,1,1000000),'Invalid rule option.');
  const players=Object.keys(npcs);check(players.length<=20&&players.every(id=>id.startsWith('npc-')&&typeof npcs[id]==='string'&&npcs[id].trim()&&npcs[id].length<=60),'Invalid NPCs.');
- return {variant,payoutBasis,bankFunds,bank:bankFunds*({cp:1,sp:10,ep:50,gp:100,pp:1000})[currency],carry:0,carryContrib:{},unit:({cp:1,sp:10,ep:50,gp:100,pp:1000})[currency],version:1,game:'chohan',gameId:crypto.randomUUID(),revision:0,phase:'lobby',players,npcs:structuredClone(npcs),npcManual:{},balances:Object.fromEntries(players.map(id=>[id,10000])),bets:[],currency,minStake,maxStake,commission,feeBase,matching,dice:null,paused:false,round:1,order:[],turn:0,tickets:[],log:[]};
+ return {gmPeek:gmPeek===true,variant,payoutBasis,bankFunds,bank:bankFunds*({cp:1,sp:10,ep:50,gp:100,pp:1000})[currency],carry:0,carryContrib:{},unit:({cp:1,sp:10,ep:50,gp:100,pp:1000})[currency],version:1,game:'chohan',gameId:crypto.randomUUID(),revision:0,phase:'lobby',players,npcs:structuredClone(npcs),npcManual:{},balances:Object.fromEntries(players.map(id=>[id,10000])),bets:[],currency,minStake,maxStake,commission,feeBase,matching,dice:null,paused:false,round:1,order:[],turn:0,tickets:[],log:[]};
 }
-export function choView(state){if(!state)return null;const v=structuredClone(state);if(v.phase!=='finished')v.dice=null;return v;}
+export function choView(state,user={}){if(!state)return null;const v=structuredClone(state);if(v.phase!=='finished'&&!(v.phase==='hidden'&&v.gmPeek===true&&user.isGM===true))v.dice=null;return v;}
 export function actCho(original,id,action,args={},random=()=>1,gm=false){
  const s=structuredClone(original);check(s&&s.game==='chohan','No game exists.');s.variant??='B';s.bank??=100000;s.payoutBasis??=190;s.carry??=0;s.carryContrib??={};
+ if(action==='closeGame'){check(gm&&s.phase==='finished'&&!s.presentationClosed,'GM only.');s.presentationClosed=true;s.revision++;return s;}
  if(action==='abort'){check(gm,'GM only.');check(!['finished','aborted'].includes(s.phase)||s.carry>0,'This game has ended.');if(s.phase!=='finished')for(const b of s.bets)s.balances[b.id]+=b.accepted??b.amount;for(const [id,n]of Object.entries(s.carryContrib))s.balances[id]=(s.balances[id]??0)+n;s.carry=0;s.carryContrib={};s.phase='aborted';s.dice=null;}
+ else if(action==='peek'){check(gm&&!['finished','aborted'].includes(s.phase)&&typeof args.enabled==='boolean','GM only.');s.gmPeek=args.enabled;}
  else if(action==='pause'){check(gm&&!['finished','aborted'].includes(s.phase),'GM only.');s.paused=!s.paused;}
  else if(action==='npcControl'){check(gm&&Object.hasOwn(s.npcs,args.id)&&typeof args.manual==='boolean','GM only.');s.npcManual[args.id]=args.manual;}
  else{check(!s.paused,'The game is not running.');
@@ -56,10 +58,10 @@ export function actCho(original,id,action,args={},random=()=>1,gm=false){
 export class ChoSession{
  constructor(_scope,deps){Object.assign(this,deps);this.state=null;this.now=()=>Date.now();this.wait=0;}
  restore(s){if(s!==null&&(s.version!==1||s.game!=='chohan'))throw Error('Invalid game save.');this.state=structuredClone(s);this.updateNpcWait();}
- project(){return choView(this.state);}
+ project(user={}){return choView(this.state,user);}
  updateNpcWait(){this.wait=this.now()+5000;}
  async handle(data,user){
-  if(!this.enabled()&&!(data.action==='abort'&&user.isGM))throw Error('Beta testing is disabled.');if(data.action==='read')return this.project();
+  if(!this.enabled()&&!(data.action==='abort'&&user.isGM))throw Error('Beta testing is disabled.');if(data.action==='read')return this.project(user);
   const old=this.state;check(['join','leave'].includes(data.action)||data.action==='abort'&&user.isGM||data.revision===(old?.revision??-1),'The game state changed. Please try again.');let next;
   if(['lobby','restart'].includes(data.action)){
    check(user.isGM,'GM only.');check(!old||['finished','aborted','lobby'].includes(old.phase),'Finish or end the current game first.');
@@ -67,7 +69,7 @@ export class ChoSession{
    else{check(!old?.carry,'Resolve or refund the carried pot first.');const names=data.args?.npcs??[];check(Array.isArray(names)&&names.length<=20&&names.every(n=>typeof n==='string'&&n.trim()&&n.length<=60),'Invalid NPCs.');next=createCho({...data.args,npcs:Object.fromEntries(names.map(n=>['npc-'+crypto.randomUUID(),n.trim()]))});}
    next.revision=(old?.revision??0)+1;
   }else{const id=user.isGM&&old?.npcs?.[data.args?.id]?data.args.id:user.id;next=actCho(old,id,data.action,data.args,this.random,user.isGM);}
-  await this.commit(next);return this.project();
+  await this.commit(next);return this.project(user);
  }
  async commit(next){
   await this.save(next);this.state=next;this.updateNpcWait();

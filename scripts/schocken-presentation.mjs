@@ -7,7 +7,7 @@ export function registerSchockenBlank(dsn){
  if(registered.has(dsn))return true;
  if(typeof dsn?.addSystem!=='function'||typeof dsn?.addDicePreset!=='function')return false;
  dsn.addSystem({id:SYSTEM,name:'Taverngames · Hidden dice'},'default');
- dsn.addDicePreset({type:'d6',labels:['','','','','',''],system:SYSTEM},'d6');
+ for(const [type,count] of [['d6',6],['d10',10],['d100',10]])dsn.addDicePreset({type,labels:Array(count).fill(''),system:SYSTEM},type);
  registered.add(dsn);return true;
 }
 export function schockenRollPresentation(event){

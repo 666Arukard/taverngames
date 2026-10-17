@@ -48,9 +48,10 @@ export class TavernUI{
     if(mode){const update=()=>rounds.disabled=mode.value!=='rounds';update();mode.addEventListener('change',update);}
     if(!s)return;
     if(!['finished','aborted'].includes(s.phase)){
-      const row=node('div',undefined,'schocken-actions');
+      if(this.scope==='lottery'){const label=node('label',undefined,'schocken-choice'),peek=node('input');peek.type='checkbox';peek.dataset.lotteryPeek='true';peek.checked=s.gmPeek===true;peek.disabled=!!s.animationWaiting;peek.onchange=()=>this.request('peek',{enabled:peek.checked});label.append(peek,document.createTextNode(f('SL: verdeckte Würfel einsehen','GM: inspect hidden dice')));c.append(label);if(s.phase==='hidden'&&s.gmPeek&&s.result!==undefined)c.append(node('p',f('Nur SL: W100 ','GM only: d100 ')+s.result,'lottery-gm-peek'));}const row=node('div',undefined,'schocken-actions');
       if(s.phase==='lobby')control(row,this.scope==='lottery'?f('Annahme schließen','Close acceptance'):f('Spiel starten','Start game'),()=>this.request('begin'),s.paused||(this.scope==='lottery'?!s.tickets.length:s.players.length<2));
-      if(this.scope==='lottery'&&s.phase==='closed')control(row,f('W100 ziehen','Draw d100'),()=>this.request('draw'),s.paused);
+      if(this.scope==='lottery'&&s.phase==='closed')control(row,f('W100 ziehen','Draw d100'),()=>this.request('draw'),s.paused||s.animationWaiting);
+      if(this.scope==='lottery'&&s.phase==='hidden')control(row,f('Aufdecken','Reveal'),()=>this.request('reveal'),s.paused||s.animationWaiting);
       if(s.phase==='playing'&&this.scope==='pig'&&s.cup.bust)control(row,f('Weiter','Continue'),()=>this.request('next'),s.paused||s.animationWaiting||s.animationNextWaiting);
       if(s.phase==='playing'&&this.scope==='ship'&&s.cup.rolls===3)control(row,f('Zug abschließen','End turn'),()=>this.request('bank'),s.paused);
       control(row,s.paused?f('Fortsetzen','Resume'):f('Pause','Pause'),()=>this.request('pause'));
@@ -58,7 +59,7 @@ export class TavernUI{
       if(this.scope==='ship'&&s.mode==='endless'&&s.phase==='playing'&&!s.tieBreak)control(row,f('Nach dieser Runde abschließen','Finish after this round'),()=>this.request('finishRound'),s.stopAfterRound);
       control(row,f('Spiel beenden','End game'),()=>{if(confirm(f('Spiel und aktive Runde für alle abbrechen? Es erfolgt keine Abrechnung.','Abort the game and active round for everyone? No settlement will occur.')))void this.request('abort');});c.append(row);
     }
-    if(['finished','aborted'].includes(s.phase))control(c,f('Nächste Partie vorbereiten','Prepare next game'),()=>this.request('restart'));
+    if(['finished','aborted'].includes(s.phase)){const row=node('div',undefined,'schocken-actions');control(row,f('Nächste Partie vorbereiten','Prepare next game'),()=>this.request('restart'));if(this.scope==='lottery'&&s.phase==='finished')control(row,f('Spiel beenden','End game'),()=>this.request('closeGame'),!!s.presentationClosed);c.append(row);}
     for(const id of Object.keys(s.npcs)){const row=node('div',undefined,'schocken-npc');row.append(node('span',`${this.name(id)} · ${s.npcManual[id]?f('SL steuert','GM controls'):f('Automatisch','Automatic')}`));control(row,s.npcManual[id]?f('Automatik einschalten','Enable automatic play'):f('Selbst steuern','Control manually'),()=>this.request('npcControl',{id,manual:!s.npcManual[id]}),['finished','aborted'].includes(s.phase));c.append(row);}
     if(this.scope==='lottery'&&s.phase==='finished'&&s.winners.length&&s.prizeUuid){control(c,f('Preis übergeben / erneut versuchen','Deliver prize / retry'),()=>this.request('awardPrize'));control(c,f('Preis selbst übergeben','Deliver prize manually'),()=>{if(confirm(f('Automatische Übergabe verwerfen und Preis selbst übergeben?','Waive automatic delivery and give the prize yourself?')))void this.request('waivePrize');});}
   }
@@ -79,6 +80,7 @@ export class TavernUI{
         }
       }else c.append(node('div',title,'schocken-player'));
     }
+    if(this.scope==='lottery'&&s.animationPending)c.append(node('p',f('Die 3D-Würfel rollen …','The 3D dice are rolling …'),'schocken-help'));
     if(s.paused)c.append(node('p',f('Spiel pausiert','Game paused')));
     if(s.phase==='aborted'){c.append(node('h3',f('Spiel durch den GM beendet','Game ended by the GM')));}
     else if(s.phase==='finished'){
@@ -90,9 +92,10 @@ export class TavernUI{
       if(game.user.isGM)control(c,this.scope==='lottery'?f('Annahme schließen','Close acceptance'):f('Spiel starten','Start game'),()=>this.request('begin'),s.paused||(this.scope==='lottery'?!s.tickets.length:s.players.length<2));
     }
     if(this.scope==='lottery'){
+      if(s.phase==='hidden')c.append(node('p',f('Die Ziehung bleibt verdeckt, bis der SL aufdeckt.','The draw stays hidden until the GM reveals it.')));
       c.append(node('p',`${f('Hauptgewinn','Prize')}: ${s.prize} · ${s.prizeValue} ${coinLabel(s.currency)} · ${s.tickets.length}/${s.maxTickets} ${f('Tipps','tickets')} · ${s.numbersPerTicket??5} ${f('Zahlen je Tippschein','numbers per ticket')}`));
       for(const t of s.tickets)c.append(node('p',`${this.name(t.id)}: ${t.numbers.join(', ')}`));
-      if(s.phase==='closed'&&game.user.isGM)control(c,f('W100 ziehen','Draw d100'),()=>this.request('draw'),s.paused);
+      if(s.phase==='closed'&&game.user.isGM)control(c,f('W100 ziehen','Draw d100'),()=>this.request('draw'),s.paused||s.animationWaiting);
       if(s.phase==='lobby'&&!s.paused&&s.tickets.length<s.maxTickets){
         const eligible=s.players.filter(id=>id===game.user.id||game.user.isGM&&s.npcs[id]);
         const count=s.numbersPerTicket??5,used=new Set(s.tickets.flatMap(t=>t.numbers));
@@ -126,7 +129,7 @@ export class TavernUI{
         die.title=s.cup.held[i]?f('Herausgelegt','Set aside'):f('Passenden Würfel für Schiff, Kapitän oder Mannschaft herauslegen','Set aside the required ship, captain or crew die');
       });c.append(dice);
       if(enabled){
-        const row=node('div',undefined,'schocken-actions');
+        if(this.scope==='lottery'){const label=node('label',undefined,'schocken-choice'),peek=node('input');peek.type='checkbox';peek.dataset.lotteryPeek='true';peek.checked=s.gmPeek===true;peek.disabled=!!s.animationWaiting;peek.onchange=()=>this.request('peek',{enabled:peek.checked});label.append(peek,document.createTextNode(f('SL: verdeckte Würfel einsehen','GM: inspect hidden dice')));c.append(label);if(s.phase==='hidden'&&s.gmPeek&&s.result!==undefined)c.append(node('p',f('Nur SL: W100 ','GM only: d100 ')+s.result,'lottery-gm-peek'));}const row=node('div',undefined,'schocken-actions');
         if(this.scope==='pig'&&s.cup.bust)control(row,f('Weiter','Continue'),()=>this.request('next'),s.animationNextWaiting);
         else{
           control(row,f('Würfeln','Roll'),()=>this.request('roll'),s.animationNextWaiting||this.scope==='ship'&&s.cup.rolls>=3);

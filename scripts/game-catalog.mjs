@@ -8,7 +8,7 @@ export const GAME_CATALOG=Object.freeze([
  {id:'kniffel',category:'dice',names:['Kniffel']},
  {id:'liars',category:'dice',names:['Lügenwürfel','Liar’s Dice','Liars Dice']},
  {id:'hoard',category:'chance',names:['Drachenhort','Dragon’s Hoard','Dragons Hoard']},
- {id:'chohan',category:'chance',names:['Chō-Han','Cho-Han','Gerade oder Ungerade','Even or Odd'],beta:true},
+ {id:'chohan',category:'chance',names:['Chō-Han','Cho-Han','Gerade oder Ungerade','Even or Odd']},
  {id:'lottery',category:'chance',names:['Straßenlotto','Street lottery']}
 ]);
 const normalize=value=>String(value??'').toLocaleLowerCase().replace(/ß/g,'ss').normalize('NFD').replace(/\p{M}/gu,'').replace(/[^\p{L}\p{N}]+/gu,' ').trim();
