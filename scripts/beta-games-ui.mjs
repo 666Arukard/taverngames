@@ -9,7 +9,7 @@ export class BetaGameUI extends TavernUI{
  drawModeration(){
   const root=this.windows.get('moderation')?.root;if(!root||!game.user.isGM)return;
   const s=this.getState(),key=JSON.stringify([s,game.settings.get('taverngames',`show${this.scope}Launcher`),game.settings.get('taverngames','allowElectrum')]);
-  if(this.scope==='hoard'&&this.moderationRoot===root&&this.moderationKey===key)return;
+  if(this.moderationRoot===root&&this.moderationKey===key)return;
   const active=root.contains(document.activeElement)?document.activeElement:null,focus=active?.dataset.draft,selection=focus?{start:active.selectionStart,end:active.selectionEnd}:null;
   this.moderationRoot=root;this.moderationKey=key;root.replaceChildren();if(!enabled())return;
   const c=node('div',undefined,'schocken-content');root.append(c);if(this.openOutcome)control(c,f('Wetten','Bets'),()=>this.openOutcome(this.scope));c.append(node('h2',`${gameTitle(this.scope)}`));control(c,f('Spieltisch öffnen','Open game table'),()=>{this.window('table');this.drawTable();});control(c,f('Anleitung','Instructions'),()=>this.guide());
@@ -47,10 +47,10 @@ export class BetaGameUI extends TavernUI{
   for(const id of s.players)c.append(node('div',`${id===active?'▶ ':''}${this.name(id)}${s.npcs[id]?' (NPC)':''}${s.out.includes(id)?` · ${f('Ausgeschieden','Eliminated')}`:''} · ${this.scope==='liars'?`${s.counts[id]??5} ${f('Würfel','dice')}`:`${s.balances[id]??s.startAmounts[id]} ${f('Münzen','coins')}`}`,'schocken-player'));
   if(s.phase==='lobby'){const joined=s.players.includes(game.user.id);control(c,joined?f('Lobby verlassen','Leave lobby'):f('Beitreten','Join'),()=>this.request(joined?'leave':'join'),s.paused||!joined&&s.players.length>=20);if(game.user.isGM)control(c,f('Spiel starten','Start game'),()=>this.request('begin'),s.paused||s.players.length<2);}
   if(this.scope==='liars'){
-   c.append(node('p',`${f('Runde','Round')} ${s.round}`));for(const [id,dice] of Object.entries(s.hands))c.append(node('p',`${this.name(id)} · ${f('Eigener / übernommener Becher','Your / controlled cup')}: ${dice.join(' · ')}`,'beta-private-cup'));
+   c.append(node('p',`${f('Runde','Round')} ${s.round}`));if(game.settings.get('taverngames','diceSoNiceBeta'))c.append(node('p',f('3D-Becher folgen der Spielerliste. Die Anordnung passt sich der Würfelgröße und Fläche an.','3D cups follow the player list. Their layout adapts to the dice size and available area.')));for(const [id,dice] of Object.entries(s.hands))c.append(node('p',`${this.name(id)} · ${f('Eigener / übernommener Becher','Your / controlled cup')}: ${dice.join(' · ')}`,'beta-private-cup'));
    if(s.phase==='rolling'){
     c.append(node('p',f('Alle würfeln ihren Becher geheim.','Everyone rolls their cup secretly.')));
-    for(const id of s.players.filter(id=>!s.out.includes(id)))if(!s.rolled.includes(id)&&(id===game.user.id||game.user.isGM&&s.npcs[id]))control(c,`${f('Verdeckt würfeln','Roll secretly')} · ${this.name(id)}`,()=>this.request('roll',{id}),s.paused);
+    for(const id of s.players.filter(id=>!s.out.includes(id)))if(!s.rolled.includes(id)&&(id===game.user.id||game.user.isGM&&s.npcs[id]))control(c,`${f('Verdeckt würfeln','Roll secretly')} · ${this.name(id)}`,()=>this.request('roll',{id}),s.paused||s.animationWaiting);
    }else if(s.phase==='bidding'){
     c.append(node('h3',`${this.name(active)} · ${f('am Zug','to play')}`));c.append(node('p',s.bid?`${this.name(s.bid.id)}: ${s.bid.amount} × ${s.bid.face}`:f('Noch kein Gebot.','No bid yet.')));
     if(can){const amount=number(c,f('Anzahl Würfel','Dice count'),this.bidAmount??Math.max(1,s.bid?.amount??1),1,Object.values(s.counts).reduce((a,b)=>a+b,0)),face=number(c,f('Augenzahl','Face'),this.bidFace??Math.min(6,(s.bid?.face??1)+1),1,6);amount.addEventListener('input',()=>this.bidAmount=amount.value);face.addEventListener('input',()=>this.bidFace=face.value);control(c,f('Gebot abgeben','Place bid'),()=>{this.bidAmount=null;this.bidFace=null;void request('bid',{amount:Number(amount.value),face:Number(face.value)});});control(c,f('Anzweifeln','Challenge'),()=>request('challenge'),!s.bid);}

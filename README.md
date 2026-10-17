@@ -1,9 +1,53 @@
 # Taverngames – Foundry Extension
 
-**Version 1.5.0**. Alle acht Spiele sind regulär verfügbar: Schocken, Farkle, Schweinchen, Schiff–Kapitän–Mannschaft, Kniffel, Straßenlotto, Lügenwürfel und Drachenhort. Kniffel wurde von Daniel am 14. Oktober 2026 für die stabile Version freigegeben.
+**Version 2.0.0**. Neun stabile Spiele mit optionaler stabiler Dice-So-Nice-Anbindung: Chō-Han, Drachenhort, Farkle, Kniffel, Lügenwürfel, Schiff–Kapitän–Mannschaft, Schocken, Schweinchen und Straßenlotto.
 
 
-## Aktuell in 1.5.0
+## Aktuell in 2.0.0
+
+Version 2: Die Dice-So-Nice-Anbindung ist nach den bestätigten Spieltests stabil. Alle neun Spiele unterstützen die optionale 3D-Darstellung mit geschützten verdeckten Würfen, ruhenden Würfeln und abgestimmten Spielaktionen. Der 3D-Schalter bleibt separat; vorhandene Einstellungen und Spielstände bleiben erhalten. Ohne Dice So Nice bleiben alle Spiele spielbar.
+
+Version 2: Dice So Nice integration is stable following confirmed playtests. All nine games support optional 3D presentation with private hidden rolls, resting dice and coordinated game actions. The 3D toggle remains separate, preserving existing settings and saved games. All games remain playable without Dice So Nice.
+
+Dice So Nice installieren und aktivieren, dann in den Moduleinstellungen „Taverngames: 3D-Würfel mit Dice So Nice“ einschalten. Bei Neuinstallationen ist die Option aus; vorhandene an-/ausgeschaltete Einstellungen bleiben erhalten. Der allgemeine Spiele-Beta-Schalter ist unabhängig und für keines der neun Spiele erforderlich. Ohne DSN bleibt die normale Würfeldarstellung verfügbar. Auswahl und Steuerung erfolgen weiterhin im Spielfenster.
+
+Daniel hat die Spieltests und den letzten Straßenlotto-Fix bestätigt und die stabile Freigabe beauftragt. Technische Referenz: Foundry 14.369 und DSN 6.4.4; keine pauschale Testzusage für andere Versionen. Die Veröffentlichung ist noch nicht erfolgt.
+
+Karten, SL-Manipulation, eigene Spielnamen, direkte Auswahl an 3D-Würfeln, Accountant/Suite und die integrierte linke Spielansicht bleiben separate Zukunftsaufträge.
+
+## Vorheriger Stand 1.5.4
+
+Straßenlotto: Die Scrollposition bleibt bei neuen Tippscheinen von Spielern und NPCs erhalten. Verdeckte 3D-Würfel verwenden eigene interne Würfeltypen mit getrennten Materialeinträgen. SL-Einsicht und Aufdecken wechseln zurück zu normalen Zahlenwürfeln. Die Diagnose zeigt zusätzlich den Zustand der normalen Würfelvorlagen. 3D bleibt Beta.
+
+Street Lottery preserves the scroll position when players or NPCs submit tickets. Hidden 3D dice use separate internal die types and material entries. GM peeking and revealing switch back to normal numbered dice. Diagnostics now also show the status of normal dice presets. 3D remains beta.
+
+Nach Installation Welt neu laden. Die erneute Korrektur trennt leere Würfel vollständig von den normalen d6-/d10-/d100-Typen. Der Live-Test steht noch aus. Die neue integrierte Oberfläche und Accountant/Suite bleiben reine Zukunftsplanung.
+
+## Vorheriger Stand 1.5.3
+
+Korrektur der verdeckten 3D-Würfel: Straßenlotto verändert keine normalen Würfelvorlagen mehr. Zahlen bleiben in anschließenden Spielen erhalten. Verdeckte Würfel übernehmen persönliche Farben, Texturen und Materialien; nur berechtigte SL sehen bei aktivierter Einsicht die Zahlen. Der Sichtbarkeitswechsel erhält die ruhenden Würfel. Die allgemeine 3D-Anbindung bleibt Beta.
+
+Hidden 3D dice fix: Street Lottery no longer replaces normal dice presets, preserving numbered dice in subsequent games. Hidden dice inherit personal colors, textures and materials; only authorized GMs see their values when peeking. Switching visibility preserves resting dice. The general 3D integration remains beta.
+
+Nach Installation die Welt neu laden. Die Korrektur verändert keine gespeicherten persönlichen DSN-Einstellungen. Die Zahlengeheimhaltung nutzt getrennte leere Vorlagen; persönliche Beschriftungen und Bibliotheksbilder werden dabei nicht auf verdeckten Flächen übernommen. Spielregeln und Geldverwaltung bleiben unverändert.
+
+## Vorheriger Stand 1.5.2
+
+Lügenwürfel: Größe und Abstand der ruhenden Würfel passen sich der verfügbaren Fläche an, auch beim Aufdecken. Straßenlotto und Chō-Han verwenden für sichtbare ruhende Würfel wieder das persönliche Dice-So-Nice-Design. Verdeckte Werte bleiben verborgen. Die 3D-Anbindung bleibt Beta.
+
+Liar’s Dice: resting dice size and spacing adapt to the available area, including public reveals. Street Lottery and Chō-Han use your personal Dice So Nice appearance for visible resting dice. Hidden values remain concealed. The 3D integration remains beta.
+
+## Vorheriger Stand 1.5.1
+
+Lügenwürfel: Eigene 3D-Würfel bleiben privat liegen. Beim Anzweifeln erscheinen alle gespeicherten Becher als ruhende Würfelreihen, ohne zweite Wurfanimation oder neue Zufallswerte. Die allgemeine 3D-Anbindung bleibt Beta.
+
+Vor dem Anzweifeln sieht jeder nur seinen eigenen Becher, der SL zusätzlich ausdrücklich manuell übernommene NPC-Becher. Automatische NPCs und ein nicht mitspielender SL erhalten keine fremden privaten Werte. Die eigenen Würfel werden einmal animiert und bleiben während des Bietens liegen. Beim Anzweifeln werden weitere bekannte Becher als ruhende 3D-Stücke ergänzt: drei Becher pro Zeile in Reihenfolge der Spielerliste. Es gibt keinen zweiten Wurf. Einser-Joker, Trefferzählung und Ausscheiden bleiben unverändert.
+
+Weiter, neue Partie, Abbruch und ausgeschaltete 3D-Beta räumen eigene Stücke auf. Die nächste Runde verwendet die verbleibende Würfelzahl. Ein wieder geöffnetes Fenster kann bereits erlaubte Werte als ruhende Stücke anzeigen. Folgeaktionen warten auf Animationsrückmeldungen oder die begrenzte Ausfallsicherung; automatische NPCs warten anschließend wieder fünf Sekunden. Ohne DSN bleibt der bisherige Ablauf nutzbar. Neun Spiele bleiben stabil, die gesamte 3D-Anbindung bleibt bis zum Praxistest Beta. Keine Freigabe oder Veröffentlichung von 2.0.0.
+
+English: Liar’s Dice: your 3D dice stay on the table privately. Challenging reveals all stored cups as resting rows without a second roll animation or new random values. The general 3D integration remains beta. Private NPC cups follow existing GM-control permissions. Revealed cups use three cups per row in player-list order. New rounds, abort and disabling 3D clear local pieces. Existing rules remain unchanged; no character currency transactions.
+
+## Vorheriger Stand 1.5.0
 
 Chō-Han ist jetzt regulär ohne Spiele-Beta-Schalter verfügbar. Straßenlotto erhält eine optionale private SL-Einsicht vor dem Aufdecken, standardmäßig ausgeschaltet. Alle neun Spiele sind stabil; die allgemeine 3D-Anbindung bleibt separat schaltbare Beta.
 

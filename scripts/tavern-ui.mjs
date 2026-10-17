@@ -1,4 +1,4 @@
-import {keepModerationScroll} from './scroll-state.mjs';
+import {keepModerationScroll,withScroll} from './scroll-state.mjs';
 import {createNativeWindow} from './native-ui.mjs';
 import {f} from './farkle-text.mjs';
 import {gameTitle,tavernGuide} from './tavern-text.mjs';
@@ -9,7 +9,7 @@ export function selectField(parent,title,entries,value,key){const label=node('la
 function inputField(parent,title,value,key,min=0,max=1000000){const label=node('label',title),input=node('input');input.type='number';input.min=min;input.max=max;input.step=1;input.value=value;input.dataset.draft=key;label.append(input);parent.append(label);return input;}
 export function currencyOptions(){return Object.keys(COINS).filter(c=>c!=='ep'||game.settings.get('taverngames','allowElectrum')===true).map(c=>[c,coinLabel(c)]);}
 export class TavernUI{
-  constructor(scope,{request,getState,openBetting,openOutcome}){Object.assign(this,{scope,request,getState,openBetting,openOutcome});this.windows=new Map();keepModerationScroll(this,'moderation');}
+  constructor(scope,{request,getState,openBetting,openOutcome}){Object.assign(this,{scope,request,getState,openBetting,openOutcome});this.windows=new Map();keepModerationScroll(this,'moderation');if(scope==='lottery'){const draw=this.drawTable.bind(this);this.drawTable=(...args)=>withScroll(this.windows.get('table')?.root,()=>draw(...args));}}
   get isOpen(){return this.windows.size>0;}
   name(id){return this.getState()?.npcs[id]??game.users.get(id)?.name??id;}
   window(kind){if(this.windows.has(kind)){this.windows.get(kind).app.bringToFront();return this.windows.get(kind).root;}const root=node('section',undefined,'taverngames-surface'),app=createNativeWindow(foundry,`${this.scope}-${kind}`,root,()=>this.windows.delete(kind));this.windows.set(kind,{root,app});return root;}

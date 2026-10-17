@@ -2,15 +2,16 @@
   "schemaVersion": 1,
   "blocks": {
     "patchnotes": {
-      "title": "Patchnotes Version 1.5.0",
+      "title": "Patchnotes Version 2.0.0",
       "paragraphs": [
-        "Chō-Han ist jetzt regulär ohne Spiele-Beta-Schalter verfügbar. Straßenlotto erhält eine optionale private SL-Einsicht vor dem Aufdecken, standardmäßig ausgeschaltet. Alle neun Spiele sind stabil; die allgemeine 3D-Anbindung bleibt separat schaltbare Beta."
+        "Version 2: Die Dice-So-Nice-Anbindung ist nach den bestätigten Spieltests stabil. Alle neun Spiele unterstützen die optionale 3D-Darstellung mit geschützten verdeckten Würfen, ruhenden Würfeln und abgestimmten Spielaktionen. Der 3D-Schalter bleibt separat; vorhandene Einstellungen und Spielstände bleiben erhalten. Ohne Dice So Nice bleiben alle Spiele spielbar."
       ],
       "items": [
-        "Chō-Han aus dem Spiele-Beta-Schalter in das reguläre Spieleangebot übernommen.",
-        "Straßenlotto: private SL-Einsicht per standardmäßig ausgeschaltetem Häkchen, auch ohne Teilnahme.",
-        "Spielerwerte bleiben bis zum ausdrücklichen Aufdecken geheim.",
-        "Allgemeine 3D-Anbindung bleibt unabhängig davon Beta; keine neue V2-Freigabe."
+        "Dice-So-Nice-Anbindung nach bestätigten Tests aller neun Spiele stabil freigegeben.",
+        "Optionaler 3D-Schalter ohne Beta-Kennzeichnung; bestehende Aktivierung und Spielstände bleiben erhalten.",
+        "Geschützte verdeckte Würfe, ruhende Würfel, SL-Einsicht und Aufdecken gemäß dem jeweiligen Spiel.",
+        "Spiele weiterhin ohne Dice So Nice nutzbar; Auswahl erfolgt im Spielfenster.",
+        "Anleitungen und Einstellungsbeschreibung aktualisiert. Keine neuen Spielregeln oder Zukunftsfunktionen."
       ]
     },
     "games": {
@@ -76,34 +77,35 @@
       ]
     },
     "plans2": {
-      "title": "geplante Funktionen (9)",
+      "title": "geplante Funktionen (10)",
       "paragraphs": [
         "Größere Erweiterungen werden schrittweise geprüft. Die folgende Liste beschreibt Überlegungen und noch keine fertigen Funktionen.",
         "Karteneinbindung auf Daniels Wunsch zurückgestellt. Als späterer erster Schritt vorgeschlagen: einfache Vorder-/Rückseiten und eine Kartenhand mit Sichtbarkeitsprüfung zwischen zwei Spielern, zunächst ohne Animationen. Noch keine Umsetzungsfreigabe."
       ],
       "items": [
         "Weitere Tags und Filter, etwa nach Spieldauer und Einsätzen.",
-        "Dice-So-Nice-Beta nach den übrigen Spieltests stabil freigeben; anschließend kompakte halbtransparente Bedienung mit anklickbaren 3D-Würfeln prüfen.",
+        "Kompakte halbtransparente Spielansicht anstelle der linken Foundry-Bedienelemente; später direkte Auswahl an 3D-Würfeln prüfen. Noch nicht umgesetzt.",
         "Eigene Spielnamen und ein durch den SL anpassbares Spieleangebot; Titel auch in Anleitungen und Chat übernehmen.",
         "Grafische Kartenverwaltung und spätere Kartenanimationen; Entwicklung derzeit zurückgestellt.",
         "Eigene Erweiterung für gezielte SL-Manipulationen von Ergebnissen oder Gewinnchancen.",
         "Kniffel-Serien und zugehörige Einsatzverwaltung.",
         "Echte Charaktergeld-Abrechnung für Drachenhort und Ausgangswetten sowie weitere SL-Einsatzgrenzen; bisher dort nur virtuelle Guthaben.",
         "Beschleunigte NPC-Wettpartien.",
-        "Grafisch wachsende Münzstapel auf den Drachenhorten."
+        "Grafisch wachsende Münzstapel auf den Drachenhorten.",
+        "Optionale Accountant-Anbindung für Buchungen über eine versionierte API und Einbettung in die RPG Management Suite; alle Module bleiben unabhängig."
       ]
     },
     "functions": {
       "title": "aktuelle Funktionen (9)",
       "paragraphs": [
-        "Neun stabile Spiele. Die allgemeine optionale 3D-Anbindung ist weiterhin separat schaltbare Beta."
+        "Neun stabile Spiele mit optionaler stabiler Dice-So-Nice-Anbindung. Alle Spiele bleiben auch ohne zusätzliche Würfelmodule nutzbar."
       ],
       "items": [
         "SL-Spielauswahl mit Kategorien, deutsch-englischer Suche, alphabetischer Liste und bis zu fünf lokalen Favoriten.",
         "Freiwilliger Spielerbeitritt über SL-freigegebene Buttons; getrennte Spiel- und Moderationsfenster, benannte automatische oder manuell gesteuerte NPCs, Pause und Abbruch.",
         "Deutsche und englische Anleitungen mit Quellen, konfigurierbare Hausvarianten, Folgepartien und Ergebnisnachrichten im Chat.",
         "Verschlüsselte Spielstände und Wiederaufnahme über den ursprünglichen GM-Browser.",
-        "Optionale Dice-So-Nice-Würfel als Beta mit geschützten verdeckten Würfen, liegenden Spielwürfeln und abgestimmten Spielaktionen bei den angebundenen Spielen.",
+        "Optionale stabile Dice-So-Nice-Würfel mit geschützten verdeckten Würfen, liegenden Spielwürfeln und abgestimmten Spielaktionen bei den angebundenen Spielen. Lügenwürfel unterstützt private Becher und ruhendes öffentliches Aufdecken.",
         "Ausgangswetten für Spieler, Zuschauer und NPCs mit internen Goldkonten, gleichmäßiger Topfverteilung unter richtigen Wettern und Chat-Auswertung.",
         "Optionale D&D-5e/5.5e-Charaktergeld-Abrechnung in unterstützten Spielen auf ausdrücklichen SL-Befehl; Elektrum separat schaltbar.",
         "Straßenlotto mit konfigurierbaren Tippscheinen, ausdrücklich durch den SL aufgedeckter Ziehung und einmaliger Übergabe eines SL-ausgewählten Gegenstandspreises.",
@@ -115,13 +117,15 @@
       "paragraphs": [
         "Öffne die Foundry-Moduleinstellungen für Taverngames. Die Moduloberfläche kann auf Deutsch oder Englisch eingestellt werden; Standard ist Englisch.",
         "Der Taverngames-Reiter ist nur für SL sichtbar. Dort ein Spiel starten und in seiner Moderation den unteren Beitrittsbutton für die Spieler freigeben. Alle neun Spiele einschließlich Chō-Han sind ohne Spiele-Beta-Schalter verfügbar.",
-        "Für 3D-Würfel Dice So Nice installieren und aktivieren. Danach den separaten Schalter „3D-Würfel mit Dice So Nice (Beta)“ in den Taverngames-Moduleinstellungen aktivieren. DSN 6.4.4 ist der geprüfte API-Quellstand. Sound und Lautstärke folgen den DSN-Einstellungen. Eine direkte Auswahl per Klick auf 3D-Stücke ist noch nicht umgesetzt.",
-        "Nach Installation von 1.5.0 die Welt neu laden. Straßenlotto: Annahme schließen, dann W100 ziehen. Jeder Tippscheinbesitzer sieht ein eigenes blankes Würfelpaar; die Zahl bleibt nach Animationsende geheim. Erst Aufdecken im Moderationsfenster zeigt die gespeicherte Zahl auf den Würfeln und im Spieltisch. Chat und Preisübergabe folgen danach.",
+        "Für 3D-Würfel Dice So Nice installieren und aktivieren. Danach den separaten Schalter „3D-Würfel mit Dice So Nice“ in den Taverngames-Moduleinstellungen aktivieren. DSN 6.4.4 ist der geprüfte API-Quellstand. Sound und Lautstärke folgen den DSN-Einstellungen. Eine direkte Auswahl per Klick auf 3D-Stücke ist noch nicht umgesetzt.",
+        "Nach Installation von 2.0.0 die Welt neu laden. Straßenlotto: Annahme schließen, dann W100 ziehen. Jeder Tippscheinbesitzer sieht ein eigenes blankes Würfelpaar; die Zahl bleibt nach Animationsende geheim. Erst Aufdecken im Moderationsfenster zeigt die gespeicherte Zahl auf den Würfeln und im Spieltisch. Chat und Preisübergabe folgen danach.",
         "Chō-Han: Wetten abgeben, Annahme schließen, verdeckt würfeln und aufdecken. Das Häkchen „SL: verdeckte Würfel einsehen“ in der Moderation ist standardmäßig aus und gibt nur SL eine vorzeitige Einsicht. Aufdecken zeigt dieselben gespeicherten Werte ohne zweiten Wurf.",
         "Die 3D-Diagnose liegt unter Moduleinstellungen → Taverngames → 3D-Würfel prüfen → Test & Diagnose öffnen. Ohne DSN bleibt die normale 2D-Darstellung verfügbar.",
         "Ausgangswetten und die Guthaben von Drachenhort/Chō-Han sind rein intern. Echte Charaktergeld-Abrechnung nur in den dafür unterstützten Spielen über den ausdrücklichen SL-Abrechnungsbefehl verwenden; Elektrum ist standardmäßig aus.",
         "Straßenlotto und Chō-Han: Nach der Auswertung entfernt Spiel beenden im Moderationsfenster die ruhenden Würfel für alle. Nächste Partie vorbereiten bleibt daneben verfügbar. Abgeschlossene Gewinne und Guthaben bleiben erhalten.",
-        "Straßenlotto: In der Moderation SL: verdeckte Würfel einsehen aktivieren, um die gespeicherte Ziehung privat einzusehen. Standardmäßig aus. Auch ohne eigenen Tippschein möglich; Spieler erhalten die Zahl erst beim Aufdecken. Ohne DSN erscheint die private Zahl im Moderationsfenster."
+        "Straßenlotto: In der Moderation SL: verdeckte Würfel einsehen aktivieren, um die gespeicherte Ziehung privat einzusehen. Standardmäßig aus. Auch ohne eigenen Tippschein möglich; Spieler erhalten die Zahl erst beim Aufdecken. Ohne DSN erscheint die private Zahl im Moderationsfenster.",
+        "Lügenwürfel: Nach einem Modulupdate die Welt neu laden und den separaten Dice-So-Nice-Schalter aktivieren. Jeder würfelt seinen Becher einmal geheim. Beim Anzweifeln erscheinen alle gespeicherten Becher ohne erneute Wurfanimation. Die 3D-Reihen folgen der Spielerliste; Größe und Anordnung passen sich der verfügbaren Fläche an. Weiter entfernt die vorigen Würfel und beginnt den nächsten Durchgang.",
+        "Ab Version 2.0.0 ist die 3D-Anbindung stabil: Dice So Nice installieren und aktivieren; in den Moduleinstellungen Taverngames: 3D-Würfel mit Dice So Nice einschalten. Vorhandene Einstellungen bleiben erhalten. Bei Neuinstallationen bleibt 3D zunächst ausgeschaltet. Der Spiele-Beta-Schalter ist davon unabhängig. Nach dem Modulupdate die Welt neu laden."
       ],
       "items": []
     },
@@ -182,9 +186,9 @@
         "Kniffel: nach gestrichenem Kniffelfeld kein Zusatzkniffel-Bonus und keine Joker-Sonderwertung; diese Festlegung klärt die offene Stelle der Regelreferenz.",
         "Ausgangswetten: der gesamte Topf wird gleichmäßig über alle richtigen Wetter verteilt, unabhängig von ihrer individuellen Einsatzhöhe.",
         "Drachenhort: vorzeitiger regulärer Abschluss mit gleichmäßiger Hortverteilung und geheimen Resttipps; Gleichstände werden nur unter den gleich nahen Tipps wiederholt.",
-        "Chō-Han-Beta: interne Testguthaben, größter-Bruchteil-Rundung und Folgepartien als Modulergänzungen. Provisionsbasis und Kürzung auswählbar; keine Betrugsregeln umgesetzt."
+        "Chō-Han: interne Testguthaben, größter-Bruchteil-Rundung und Folgepartien als Modulergänzungen. Provisionsbasis und Kürzung auswählbar; keine Betrugsregeln umgesetzt."
       ]
     }
   },
-  "version": "1.5.0"
+  "version": "2.0.0"
 }

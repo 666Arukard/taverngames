@@ -1,10 +1,10 @@
 {
     "id":  "taverngames",
     "title":  "Taverngames – Foundry Extension",
-    "description":  "\u003ch3\u003eDeutsch\u003c/h3\u003e\u003cp\u003eTaverngames bringt neun stabile Tavernenspiele mit SL-Moderation, freiwilligem Beitritt und benannten NPCs an deinen Foundry-Tisch: Schocken, Farkle, Schweinchen, Schiff–Kapitän–Mannschaft, Kniffel, Straßenlotto, Lügenwürfel, Drachenhort und Chō-Han. Der Reiter ist nur für SL sichtbar.\u003c/p\u003e\u003ch3\u003eEnglish\u003c/h3\u003e\u003cp\u003eTaverngames brings nine stable games to Foundry: Schocken, Farkle, Pig, Ship–Captain–Crew, Kniffel, Street lottery, Liar’s Dice, Dragon’s Hoard and Cho-Han, with GM moderation, voluntary participation and named NPCs. The tab is GM-only.\u003c/p\u003e\u003ch3\u003e1.5.0 · Versionshinweise / Release notes\u003c/h3\u003e\u003cp\u003eChō-Han ist jetzt regulär ohne Spiele-Beta-Schalter verfügbar. Straßenlotto erhält eine optionale private SL-Einsicht vor dem Aufdecken, standardmäßig ausgeschaltet. Alle neun Spiele sind stabil; die allgemeine 3D-Anbindung bleibt separat schaltbare Beta.\u003c/p\u003e\u003cp\u003eCho-Han is now available without the game beta setting. Street lottery gains optional private GM inspection before reveal, disabled by default. All nine games are stable; the general 3D integration remains a separate optional beta.\u003c/p\u003e\u003cp\u003eSL-Einsicht nur für autorisierte Spielleiter, auch ohne eigenen Tippschein. Spieler erhalten die Ziehung erst beim Aufdecken. / Inspection is restricted to authorized GMs, including without a personal ticket. Players receive the draw only on reveal.\u003c/p\u003e\u003cp\u003eChō-Han-Regelvorlagen: Daniels Regelsammlung, Dice-Play und NetExl. / Cho-Han rule references: Daniel’s rule collection, Dice-Play and NetExl.\u003c/p\u003e",
-    "version":  "1.5.0",
+    "description":  "\u003ch3\u003eDeutsch\u003c/h3\u003e\u003cp\u003eTaverngames bringt neun stabile Tavernenspiele mit SL-Moderation, freiwilligem Beitritt und benannten NPCs an deinen Foundry-Tisch: Schocken, Farkle, Schweinchen, Schiff–Kapitän–Mannschaft, Kniffel, Straßenlotto, Lügenwürfel, Drachenhort und Chō-Han. Der Reiter ist nur für SL sichtbar.\u003c/p\u003e\u003ch3\u003eEnglish\u003c/h3\u003e\u003cp\u003eTaverngames brings nine stable games to Foundry: Schocken, Farkle, Pig, Ship–Captain–Crew, Kniffel, Street lottery, Liar’s Dice, Dragon’s Hoard and Cho-Han, with GM moderation, voluntary participation and named NPCs. The tab is GM-only.\u003c/p\u003e\u003ch3\u003e2.0.0 · Versionshinweise / Release notes\u003c/h3\u003e\u003cp\u003eVersion 2: Die Dice-So-Nice-Anbindung ist nach den bestätigten Spieltests stabil. Alle neun Spiele unterstützen die optionale 3D-Darstellung mit geschützten verdeckten Würfen, ruhenden Würfeln und abgestimmten Spielaktionen. Der 3D-Schalter bleibt separat; vorhandene Einstellungen und Spielstände bleiben erhalten. Ohne Dice So Nice bleiben alle Spiele spielbar.\u003c/p\u003e\u003cp\u003eVersion 2: Dice So Nice integration is stable following confirmed playtests. All nine games support optional 3D presentation with private hidden rolls, resting dice and coordinated game actions. The 3D toggle remains separate, preserving existing settings and saved games. All games remain playable without Dice So Nice.\u003c/p\u003e\u003cp\u003eRegelquellen: Schockfreunde, PlayMonster, Awiana, Paul Cossmer, Schmidt, TZawalich sowie Daniels Chō-Han-Regelsammlung mit Dice-Play und NetExl. / Rule sources are credited in the game instructions and author list.\u003c/p\u003e",
+    "version":  "2.0.0",
     "readme":  "README.md",
-    "changelog":  "https://github.com/666Arukard/taverngames/releases/tag/v1.5.0",
+    "changelog":  "https://github.com/666Arukard/taverngames/releases/tag/v2.0.0",
     "url":  "https://dnd.brunecoaching.de",
     "compatibility":  {
                           "verified":  "14.369"
@@ -80,7 +80,7 @@
                    "styles/table.css"
                ],
     "manifest":  "https://github.com/666Arukard/taverngames/releases/latest/download/module.json",
-    "download":  "https://github.com/666Arukard/taverngames/releases/download/v1.5.0/taverngames-1.5.0.zip",
+    "download":  "https://github.com/666Arukard/taverngames/releases/download/v2.0.0/taverngames-2.0.0.zip",
     "relationships":  {
                           "recommends":  [
                                              {

@@ -1,5 +1,5 @@
 import {SchockenAnimationGate} from './schocken-dice.mjs';
-import {SchockenPersistentDice} from './schocken-presentation.mjs';
+import {SchockenPersistentDice,hiddenDiceAppearance} from './schocken-presentation.mjs';
 import {choView} from './chohan.mjs';
 import {tavernView} from './tavern-engine.mjs';
 export const HIDDEN_GAMES=['lottery','chohan'];
@@ -21,6 +21,15 @@ export function hiddenRoll(event){const s=event.hidden.state;return {...event,di
 export class HiddenPersistentDice extends SchockenPersistentDice{
  constructor(options){super(options);this.scope=options.scope;}
  dieType(state,index=0){return state?.cup?.types?.[index]??'d6';}
+ // Visible dice use the normal local DSN appearance, just like their roll.
+ // Only unknown results require the separate blank preset and suppressed library faces.
+ spawnOptions(pose){return pose.value===null?{appearance:hiddenDiceAppearance(this.game(),pose.type??'d6'),diceLibrary:[]}:{};}
+ async _sync(state){
+  await super._sync(state);
+  // Removing the previous pair can schedule DSN's canvas fade while its
+  // replacement is being created. Cancel that fade once replacement is ready.
+  if([...this.meshes.values()].some(e=>e.mesh.visible!==false&&e.mesh.parent?.visible!==false))this.game().dice3d?.persistent?.canvasVisibility?.show?.();
+ }
  retarget(state){if(this.scope!=='lottery')return super.retarget(state);return this.enqueue(async()=>{
   await this._alignTurn(state);
   for(const [i,p]of this.poses){const value=state?.cup?.dice[i];if(value===undefined||value===p.value)continue;
@@ -34,6 +43,6 @@ export class HiddenPersistentDice extends SchockenPersistentDice{
  capture(state,indices,eventId){
   const box=this.game().dice3d?.box,engine=box?.throwEngine;
   const available=[...(engine?.diceList??[]),...(engine?.deadDiceList??[])].filter(m=>!m.userData?.persistent&&m.options?.taverngamesEvent===eventId);
-  for(const i of indices){const value=state.cup.dice[i],type=this.dieType(state,i),face=value??(type==='d100'?0:1),at=available.findIndex(m=>m.notation?.type===type&&Number(m.forcedResult)===face);if(at<0)continue;const mesh=available.splice(at,1)[0];this.poses.set(i,{value,faceValue:face,neutral:true,quaternion:mesh.quaternion.clone(),parentQuaternion:mesh.parent.quaternion.clone(),height:mesh.parent.position.y,position:box.toPositionPct?.(mesh.parent.position.x,mesh.parent.position.z),source:mesh});}
+  for(const i of indices){const value=state.cup.dice[i],type=this.dieType(state,i),face=value??(type==='d100'?0:1),at=available.findIndex(m=>(m.options?.taverngamesDieType??m.notation?.type)===type&&Number(m.forcedResult)===face);if(at<0)continue;const mesh=available.splice(at,1)[0];this.poses.set(i,{type,value,faceValue:face,neutral:true,quaternion:mesh.quaternion.clone(),parentQuaternion:mesh.parent.quaternion.clone(),height:mesh.parent.position.y,position:box.toPositionPct?.(mesh.parent.position.x,mesh.parent.position.z),source:mesh});}
  }
 }
