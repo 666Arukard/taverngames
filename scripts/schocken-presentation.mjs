@@ -3,7 +3,7 @@ const SYSTEM='taverngames-hidden';
 const PALETTE='taverngames-hidden-style';
 // Separate numeric denominations use native d6/d10 geometry without touching
 // normal d6/d10/d100 keys or sharing their material-cache identities.
-const BLANK_TYPES={d6:'d1000006',d10:'d1000010',d100:'d1000100'};
+const BLANK_TYPES={d4:'d1000004',d8:'d1000008',d12:'d1000012',d6:'d1000006',d10:'d1000010',d100:'d1000100'};
 export const blankDiceType=type=>BLANK_TYPES[type]??type;
 export function dicePresentationDiagnostics(game){
  const factory=game.dice3d?.DiceFactory??game.dice3d?.persistent?.factory;
@@ -17,11 +17,11 @@ export function registerSchockenBlank(dsn){
  if(registered.has(dsn))return true;
  if(typeof dsn?.addSystem!=='function'||typeof dsn?.addDicePreset!=='function'||typeof dsn?.addColorset!=='function')return false;
  dsn.addSystem({id:SYSTEM,name:'Taverngames · Hidden dice'},'default');
- for(const [type,count] of [['d6',6],['d10',10],['d100',10]]){
+ for(const [type,count] of [['d4',4],['d6',6],['d8',8],['d10',10],['d12',12],['d100',10]]){
   dsn.addDicePreset({type:blankDiceType(type),labels:Array(count).fill(''),system:SYSTEM},type);
  }
  // Keep blank appearance choices in our own palette, separate for each base type.
- for(const type of ['d6','d10','d100'])dsn.addColorset({name:`${PALETTE}-${type}`,description:'Taverngames · Hidden style',category:'Taverngames',visibility:'hidden',foreground:'custom',background:'custom',outline:'custom',edge:'custom',texture:'custom',material:'custom',font:''},'default');
+ for(const type of ['d4','d6','d8','d10','d12','d100'])dsn.addColorset({name:`${PALETTE}-${type}`,description:'Taverngames · Hidden style',category:'Taverngames',visibility:'hidden',foreground:'custom',background:'custom',outline:'custom',edge:'custom',texture:'custom',material:'custom',font:''},'default');
  registered.add(dsn);return true;
 }
 export function hiddenDiceAppearance(game,type,owner=game.user){

@@ -66,7 +66,7 @@ export class TavernUI{
     const s=this.getState();if(this.openOutcome)control(c,f('Wetten','Bets'),()=>this.openOutcome(this.scope));if(game.user.isGM)control(c,f('Moderation öffnen','Open moderation'),()=>{this.window('moderation');this.drawModeration();});
     if(!s){c.append(node('p',f('Der SL öffnet eine Lobby.','The GM opens a lobby.')));return;}
     if(s.economy?.mode==='tokens')c.append(node('p',`${f('Grundeinsatz','Base stake')}: ${s.stake} ${coinLabel(s.currency)} · ${f('Abrechnung mit Spieltoken','Settlement in game tokens')}`));
-    for(const id of s.players){
+    for(const id of s.order?.length===s.players.length?s.order:s.players){
       const title=`${id===s.order[s.turn]?'▶ ':''}${this.name(id)}${s.npcs[id]?' (NPC)':''}${this.scope!=='lottery'?` · ${s.scores[id]} ${f('Punkte','points')}`:''}`;
       if(this.scope==='pig'){
         const b=control(c,title,()=>{this.historyPlayer=this.historyPlayer===id?null:id;this.drawTable();});b.classList.add('schocken-player');b.dataset.historyPlayer=id;b.setAttribute('aria-expanded',String(this.historyPlayer===id));b.title=f('Letzte Würfe anzeigen','Show recent rolls');

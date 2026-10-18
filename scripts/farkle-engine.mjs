@@ -1,3 +1,4 @@
+import {startingOrder,chosenStarter} from './start-choice.mjs';
 // PlayMonster scoring. Selection is confined to the dice of the latest roll.
 const check=(ok,message)=>{if(!ok)throw new Error(message);};
 function groupScore(dice,rules){
@@ -87,7 +88,8 @@ export function actFarkle(original,actor,action,args={},diceSource=()=>1,gm=fals
   }else if(action==='begin'){
     check(gm&&s.phase==='lobby','Only the GM can start the lobby.');check(s.players.length>=(s.mode==='target'?1:2),'Not enough participants.');
     s.order=[...s.players.filter(id=>!s.npcs[id]),...s.players.filter(id=>s.npcs[id])];
-    if(s.mode==='target'){
+    const selected=chosenStarter(s);if(selected){const i=s.order.indexOf(selected);s.order=[...s.order.slice(i),...s.order.slice(0,i)];s.startRolls=[];}
+    else if(s.mode==='target'){
       s.startRolls=s.order.map(id=>{const value=diceSource();check(Number.isInteger(value)&&value>=1&&value<=6,'Invalid random value.');return {id,value};});
       const highest=Math.max(...s.startRolls.map(roll=>roll.value)),first=s.order.indexOf(s.startRolls.find(roll=>roll.value===highest).id);
       s.order=[...s.order.slice(first),...s.order.slice(0,first)];

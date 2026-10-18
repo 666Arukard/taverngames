@@ -1,3 +1,4 @@
+import {startingOrder,chosenStarter} from './start-choice.mjs';
 const check=(ok,message)=>{if(!ok)throw Error(message)};
 export const SEVENTEEN_COINS={token:1,cp:1,sp:10,ep:50,gp:100,pp:1000};
 export function seventeenStake(amount,currency){const unit=SEVENTEEN_COINS[currency];check(Number.isSafeInteger(amount)&&amount>=1&&amount<=1000000000&&unit&&amount*unit<=1000000000,'Invalid stake.');return {amount,currency,cp:amount*unit};}
@@ -29,7 +30,7 @@ export function actSeventeen(original,actor,action,args={},random=()=>1,gm=false
  else if(action==='npcControl'){check(gm&&Object.hasOwn(s.npcs,args.id)&&typeof args.manual==='boolean','GM only.');s.npcManual[args.id]=args.manual;}
  else if(action==='stake'){check(s.currency!=='token'||args.currency==='token','Use game tokens only.');check(s.variableStakes&&s.phase==='lobby'&&!s.paused,'Set stakes in the lobby.');const id=gm&&s.npcs[args.id]?args.id:actor;check(s.players.includes(id),'Invalid participant.');const bet=seventeenStake(args.amount,args.currency);check(bet.cp>=s.minStake.cp&&bet.cp<=s.maxStake.cp,'Stake is outside the allowed range.');s.stakes[id]=bet;}
  else if(action==='join'||action==='leave'){check(s.phase==='lobby'&&!s.paused,'Join in the lobby.');check(typeof actor==='string'&&!actor.startsWith('npc-')&&actor.length<=64,'Invalid participant.');if(action==='join'){check(!s.players.includes(actor)&&s.players.length<20,'Invalid participant.');s.players.push(actor);s.hands[actor]=[];s.scores[actor]=0;if(s.variableStakes)s.stakes[actor]=null}else{check(s.players.includes(actor),'Invalid participant.');s.players=s.players.filter(id=>id!==actor);delete s.hands[actor];delete s.scores[actor];delete s.stakes?.[actor]}}
- else if(action==='begin'){check(gm&&s.phase==='lobby'&&!s.paused,'GM only.');check(s.players.length>0,'Not enough participants.');check(!s.variableStakes||s.players.every(id=>seventeenStakeFor(s,id)),'Each participant must choose a stake first.');s.order=[...s.players];s.phase='playing';s.bankStop=15+roll(2);s.bank=[throwDice()];}
+ else if(action==='begin'){check(gm&&s.phase==='lobby'&&!s.paused,'GM only.');check(s.players.length>0,'Not enough participants.');check(!s.variableStakes||s.players.every(id=>seventeenStakeFor(s,id)),'Each participant must choose a stake first.');s.order=startingOrder(s);s.phase='playing';s.bankStop=15+roll(2);s.bank=[throwDice()];}
  else if(action==='bankRoll'){check(gm&&s.phase==='bank'&&!s.paused,'GM only.');if(sum(s.bank)>=s.bankStop)settle(s);else s.bank.push(throwDice());}
  else {check(s.phase==='playing'&&!s.paused,'The game is not running.');const id=s.order[s.turn];check(actor===id||gm,'It is not your turn.');
   if(action==='roll'){check(sum(s.hands[id])<21,'No more rolls.');s.hands[id].push(throwDice());}

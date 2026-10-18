@@ -1,3 +1,4 @@
+import {startingOrder,chosenStarter} from './start-choice.mjs';
 import {f} from './farkle-text.mjs';
 import {escapeHTML} from './tavern-text.mjs';
 const check=(v,m)=>{if(!v)throw Error(m);};
@@ -23,7 +24,7 @@ export function actCho(original,id,action,args={},random=()=>1,gm=false){
  else if(action==='npcControl'){check(gm&&Object.hasOwn(s.npcs,args.id)&&typeof args.manual==='boolean','GM only.');s.npcManual[args.id]=args.manual;}
  else{check(!s.paused,'The game is not running.');
  if(['join','leave'].includes(action)){check(s.phase==='lobby','Join in the lobby.');if(action==='join'){check(!s.players.includes(id)&&s.players.length<20&&!id.startsWith('npc-'),'Invalid participant.');s.players.push(id);s.balances[id]=10000;}else{check(!s.carry&&s.players.includes(id)&&!s.bets.some(b=>b.id===id),'Committed tickets cannot be withdrawn.');s.players=s.players.filter(p=>p!==id);delete s.balances[id];}}
- else if(action==='begin'){check(gm&&s.phase==='lobby'&&s.players.length>0,'GM only.');s.phase='accepting';}
+ else if(action==='begin'){check(gm&&s.phase==='lobby'&&s.players.length>0,'GM only.');s.order=startingOrder(s);s.phase='accepting';}
  else if(action==='placeBet'){check(s.phase==='accepting'&&s.players.includes(id)&&!s.bets.some(b=>b.id===id),'Invalid participant.');check(['even','odd'].includes(args.side)&&integer(args.amount,s.minStake,s.maxStake)&&s.balances[id]>=args.amount*s.unit,'Invalid stake.');check(s.variant!=='A'||args.amount===s.minStake,'Invalid stake.');const amount=args.amount*s.unit;s.balances[id]-=amount;s.bets.push({id,side:args.side,amount});}
  else if(action==='withdraw'){check(s.phase==='accepting','Ticket acceptance is closed.');const b=s.bets.find(b=>b.id===id);check(b,'Invalid participant.');s.balances[id]+=b.amount;s.bets=s.bets.filter(b=>b.id!==id);}
  else if(action==='close'){

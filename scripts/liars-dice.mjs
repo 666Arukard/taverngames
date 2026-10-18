@@ -1,3 +1,4 @@
+import {participantOptions} from './participant-appearance.mjs';
 import {FarklePersistentDice} from './farkle-dice.mjs';
 import {SchockenAnimationGate} from './schocken-dice.mjs';
 import {betaView} from './beta-games-engine.mjs';
@@ -12,7 +13,8 @@ export const liarsLayout=index=>({x:0.10+(Math.floor(index/5)%3)*0.30+(index%5)*
 export function liarsDiceState(s,user){
  if(!s)return null;const view=betaView(s,user),hands=s.reveal?.hands??view.hands,visible=['rolling','bidding','reveal','finished'].includes(s.phase);
  const dice=Array(s.order.length*5).fill(null);if(visible)for(const [id,hand]of Object.entries(hands))for(const [i,n]of hand.entries()){const slot=s.order.indexOf(id);if(slot>=0)dice[slot*5+i]=n;}
- return {game:'liars',gameId:s.gameId,revision:s.revision,round:s.round,sourcePhase:s.phase,phase:visible?'playing':s.phase,turnNumber:`liars:${s.round}`,order:[user.id],turn:0,cup:visible?{dice,held:dice.map(()=>false),selected:[]}:null};
+ const groups=s.order.filter(id=>(s.rolled??Object.keys(s.hands??{})).includes(id)||s.reveal?.hands?.[id]).map(id=>{const hand=hands[id]??Array(s.counts[id]).fill(null);return {game:'liars',gameId:s.gameId,participant:id,phase:'playing',turnNumber:`liars:${s.round}:${id}`,order:[id],turn:0,cup:{dice:hand,held:hand.map(()=>false),types:hand.map(()=>'d6')}};});
+ return {game:'liars',groups,ownerOrder:s.order,gameId:s.gameId,revision:s.revision,round:s.round,sourcePhase:s.phase,phase:visible?'playing':s.phase,turnNumber:`liars:${s.round}`,order:[user.id],turn:0,cup:visible?{dice,owners:dice.map((_,i)=>s.order[Math.floor(i/5)]),held:dice.map(()=>false),selected:[]}:null};
 }
 export function liarsDiceEvent(s,user,actor,action,animation=null){
  const state=liarsDiceState(s,user),start=s.order.indexOf(actor)*5;
@@ -46,7 +48,7 @@ export class LiarsPersistentDice extends FarklePersistentDice{
  }
  async seed(s,index,value){
   const dsn=this.game().dice3d,box=dsn?.box,api=dsn?.persistent;if(typeof api?.spawn!=='function'||typeof api?.remove!=='function'||typeof box?.physicsWorker?.exec!=='function'||typeof box?.throwEngine?.swapDiceFace!=='function')throw Error('Liars reveal requires Dice So Nice 6.4.4');
-  const enabled=box.persistentDiceEnabled;let task;try{box.persistentDiceEnabled=true;task=api.spawn('d6',liarsLayout(index),{ownerUserId:s.order[0],guest:{pendingId:'taverngames-liars',reservedForUserId:'taverngames-locked'},appearance:schockenAppearance(false),diceLibrary:[]},false);}finally{box.persistentDiceEnabled=enabled;}
+  const enabled=box.persistentDiceEnabled;let task;try{box.persistentDiceEnabled=true;task=api.spawn('d6',liarsLayout(index),{ownerUserId:s.cup.owners?.[index]??s.order[0],guest:{pendingId:'taverngames-liars',reservedForUserId:'taverngames-locked'},...participantOptions(this.game(),s.cup.owners?.[index]??s.order[0],'d6')},false);}finally{box.persistentDiceEnabled=enabled;}
   const mesh=await task;if(!mesh)return;const layoutVisible=mesh.visible!==false;mesh.visible=false;
   try{
    mesh.userData.lockedBy='taverngames-locked';mesh.userData.taverngames=true;

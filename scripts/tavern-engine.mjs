@@ -1,3 +1,4 @@
+import {startingOrder,chosenStarter} from './start-choice.mjs';
 import {createSeventeen,actSeventeen,seventeenNpcAction,seventeenView} from './seventeen-engine.mjs';
 import {BETA_GAMES,createBetaGame,actBetaGame,betaNpcAction} from './beta-games-engine.mjs';
 import {createKniffel,actKniffel,kniffelNpcAction} from './kniffel-engine.mjs';
@@ -70,8 +71,8 @@ export function actTavern(original,actor,action,args={},random=sides=>1,gm=false
     s.tickets.push({id:actor,numbers:[...numbers].sort((a,b)=>a-b)});
   }else if(action==='begin'){
     check(gm&&s.phase==='lobby'&&!s.paused,'GM only.');
-    if(s.game==='lottery'){check(s.tickets.length>0&&s.prize,'A prize and at least one ticket are required.');s.phase='closed';}
-    else{check(s.players.length>=2,'Not enough participants.');s.order=s.startOrder??[...s.players.filter(id=>!s.npcs[id]),...s.players.filter(id=>s.npcs[id])];s.startOrder=[...s.order];s.phase='playing';s.cup=cup(s.game);}
+    if(s.game==='lottery'){check(s.tickets.length>0&&s.prize,'A prize and at least one ticket are required.');s.order=startingOrder(s);s.phase='closed';}
+    else{check(s.players.length>=2,'Not enough participants.');s.order=startingOrder(s,s.startOrder??[...s.players.filter(id=>!s.npcs[id]),...s.players.filter(id=>s.npcs[id])]);s.startOrder=[...s.order];s.phase='playing';s.cup=cup(s.game);}
   }else if(s.game==='lottery'){
     check(gm&&!s.paused,'GM only.');
     if(action==='draw'){check(s.phase==='closed','GM only.');s.result=roll(100);s.phase='hidden';}

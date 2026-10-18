@@ -1,3 +1,4 @@
+import {startingOrder,chosenStarter} from './start-choice.mjs';
 // Independent implementation of the rules described by TZawalich, extended
 // with Daniel's elimination and remainder rules. No upstream code copied.
 export const BETA_GAMES=['liars','hoard'];
@@ -38,7 +39,7 @@ export function actBetaGame(original,actor,action,args={},random=()=>1,gm=false)
  }else if(action==='setBalance'){
   check(gm&&s.game==='hoard'&&s.hoardMode==='gambler'&&s.phase==='lobby'&&s.players.includes(args.id)&&integer(args.amount,1,100000),'Invalid starting balance.');s.startAmounts[args.id]=args.amount;
  }else if(action==='begin'){
-  check(gm&&s.phase==='lobby'&&!s.paused,'GM only.');check(s.players.length>=2,'Not enough participants.');s.order=[...s.players];s.turn=0;
+  check(gm&&s.phase==='lobby'&&!s.paused,'GM only.');check(s.players.length>=2,'Not enough participants.');s.order=startingOrder(s);s.turn=0;
   if(s.game==='liars'){s.counts=Object.fromEntries(s.players.map(id=>[id,5]));newLiarsRound(s,s.order[0]);}
   else{s.balances=Object.fromEntries(s.players.map(id=>[id,s.hoardMode==='tokens'?s.initialCoins:s.startAmounts[id]]));s.phase='playing';}
  }else{

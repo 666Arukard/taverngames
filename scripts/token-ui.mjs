@@ -1,3 +1,4 @@
+import {renderStartChoice} from './start-choice.mjs';
 import {createNativeWindow} from './native-ui.mjs';
 import {node,control,selectField} from './tavern-ui.mjs';
 import {f} from './farkle-text.mjs';
@@ -15,17 +16,20 @@ export class TokenUI{
  c.append(node('p',f('Nur für diese Partie. Keine Charakter-Geldbuchungen.','For this game only. No character currency transactions.')));
  if(gm&&s.phase==='lobby'){
   const setup=node('details');setup.open=this.tab!=='bets';setup.append(node('summary',f('Einsatzverwaltung','Stake management')));setup.append(node('p',f('Die Startzuteilung gilt für neue Teilnehmerkonten. Bestehende Bestände darunter einzeln anpassen.','The initial allocation applies to new participant accounts. Adjust existing balances individually below.')));const cfg=e.config,mode=selectField(setup,f('Einsatzmodus','Stake mode'),[['none',f('Ohne Einsatz','No stakes')],['tokens',f('Spieltoken','Game tokens')]],e.mode,'token-mode'),fields={};
-  for(const [k,de,en]of [['initial','Startzuteilung je Teilnehmer','Initial allocation per participant'],['stake','Grundeinsatz / Tippscheinpreis (0 erlaubt)','Base stake / ticket price (0 allowed)'],['min','Mindesteinsatz (Bankspiele)','Minimum stake (bank games)'],['max','Höchsteinsatz (Bankspiele)','Maximum stake (bank games)'],['bank','Bankbudget','Bank budget']])fields[k]=num(setup,f(de,en),cfg[k],k);
+  for(const [k,de,en]of [['initial','Startzuteilung je Teilnehmer','Initial allocation per participant'],['stake','Grundeinsatz / Tippscheinpreis (0 erlaubt)','Base stake / ticket price (0 allowed)'],['min','Mindesteinsatz (Bankspiele)','Minimum stake (bank games)'],['max','Höchsteinsatz (Bankspiele)','Maximum stake (bank games)'],['bank','Bankbudget','Bank budget']])fields[k]=num(setup,this.scope==='aalstechen'&&k==='stake'?f('Einmaliger Einkauf (mindestens 1 Token)','One-time buy-in (at least 1 token)'):f(de,en),cfg[k],k);
   const funding=selectField(setup,f('Finanzierung gleicher Prämien','Funding tied prizes'),[['redistribute',f('Gewinn neu aufteilen','Redistribute pot')],['bank',f('Tavernenbank','Tavern bank')]],cfg.funding,'token-funding');funding.disabled=this.scope!=='pig';
+  control(setup,f('Allen gleichen Bestand zuteilen','Give everyone an equal balance'),()=>this.send('tokenAllocateAll',{amount:Number(fields.initial.value)}),e.mode!=='tokens'||!s.players.length);
   control(setup,f('Einsatzmodus speichern','Save stake mode'),()=>this.send('tokenConfig',{mode:mode.value,...Object.fromEntries(Object.entries(fields).map(([k,n])=>[k,Number(n.value)])),funding:funding.value}));c.append(setup);
  }
  c.append(node('h3',e.mode==='tokens'?unit():f('Ohne Einsatz','No stakes')));if(this.payload.bankShortfall>0){const warning=node('p',f(`Die Bank kann um ${this.payload.bankShortfall} Token unterdeckt sein. Fortsetzen ist erlaubt; Gewinne werden vollständig ausgezahlt.`,`The bank may be short by ${this.payload.bankShortfall} tokens. Play is allowed; winnings are paid in full.`));warning.setAttribute('role','alert');c.append(warning);}
  if(e.mode==='tokens'){
   c.append(node('p',`${f('Bankbestand','Bank balance')}: ${e.bank} · ${f('Bankschuld','Bank debt')}: ${Math.max(0,-e.bank)} ${unit()}`));
+  if(this.scope==='aalstechen')c.append(node('p',f('Grundeinsatz = einmaliger Einkauf. Weitere Setzphasen alle fünf Runden, All-in und getrennte Nebentöpfe.','Base stake = one-time buy-in. Further betting phases every five rounds, all-in and separate side pots.')));
+  if(this.scope==='meiern')c.append(node('p',f(`Vor jedem Durchgang benötigt jeder ${2*e.config.stake} freie Token. Abgeschlossene Zahlungen bleiben bei Abbruch erhalten.`,`Before each round, everyone needs ${2*e.config.stake} free tokens. Aborting preserves completed payments.`)));
   if(this.scope==='schocken')c.append(node('p',f(`Zum Start benötigt jeder ${s.players.length} × ${e.config.stake} = ${s.players.length*e.config.stake} Token. Nur der Verlierer zahlt jedem anderen ${e.config.stake}.`,`To start, each needs ${s.players.length} × ${e.config.stake} = ${s.players.length*e.config.stake} tokens. Only the loser pays each other player ${e.config.stake}.`)));
   const ids=[...new Set([...s.players,...Object.keys(e.balances)])],table=node('table'),head=node('tr');for(const text of [f('Spieler','Player'),f('Bestand','Balance'),f('Reserviert','Reserved'),f('Verfügbar','Available')])head.append(node('th',text));table.append(head);
   for(const id of ids){const row=node('tr'),held=(e.balances[id]??0)-availableTokens(e,id);for(const text of [name(id),e.balances[id]??0,held,availableTokens(e,id)])row.append(node('td',String(text)));table.append(row);}c.append(table);
-  if(gm&&s.phase==='lobby'){
+  if(gm&&!done){
    const entries=[...new Map([...game.users.map(u=>[u.id,u.name]),...Object.entries(s.npcs),...Object.entries(e.bets?.npcs??{})]).entries()],recipient=selectField(c,f('Tokenempfänger','Token recipient'),entries,entries[0]?.[0],'token-recipient'),amount=num(c,f('Neuer Tokenbestand','New token balance'),e.config.initial,'grant');control(c,f('Bestand zuteilen','Set balance'),()=>this.send('tokenGrant',{id:recipient.value,amount:Number(amount.value)}));
   }
   const bets=node('details');bets.open=this.tab==='bets'||this.betOpen===true;bets.ontoggle=()=>this.betOpen=bets.open;bets.append(node('summary',f('Wetten auf den Spielausgang','Bets on the outcome')));this.bets(bets,s,e,name);c.append(bets);
@@ -50,5 +54,5 @@ export class TokenUI{
  }
 }
 export function installTokenControls(ui,open,openBets){
- for(const kind of ['Moderation','Table']){const draw=ui['draw'+kind].bind(ui);ui['draw'+kind]=(...args)=>{draw(...args);const root=ui.windows.get(ui.scope==='farkle'?(kind==='Moderation'?'farkle-moderation':'farkle'):(kind==='Moderation'?'moderation':'table'))?.root,c=root?.querySelector('.schocken-content');if(!c)return;if(![...c.querySelectorAll('button')].some(b=>b.textContent===f('Einsätze & Spieltoken','Stakes & game tokens')))control(c,f('Einsätze & Spieltoken','Stakes & game tokens'),()=>open(ui.scope));if(openBets&&![...c.querySelectorAll('button')].some(b=>b.textContent===f('Wetten','Bets')))control(c,f('Wetten','Bets'),()=>openBets(ui.scope));};}
+ for(const kind of ['Moderation','Table']){const draw=ui['draw'+kind].bind(ui);ui['draw'+kind]=(...args)=>{draw(...args);const root=ui.windows.get(ui.scope==='farkle'?(kind==='Moderation'?'farkle-moderation':'farkle'):(kind==='Moderation'?'moderation':'table'))?.root,c=root?.querySelector('.schocken-content');if(!c)return;if(kind==='Moderation')renderStartChoice(c,ui.getState(),(a,b)=>ui.request(a,b),id=>ui.name(id));if(![...c.querySelectorAll('button')].some(b=>b.textContent===f('Einsätze & Spieltoken','Stakes & game tokens')))control(c,f('Einsätze & Spieltoken','Stakes & game tokens'),()=>open(ui.scope));if(openBets&&![...c.querySelectorAll('button')].some(b=>b.textContent===f('Wetten','Bets')))control(c,f('Wetten','Bets'),()=>openBets(ui.scope));};}
 }

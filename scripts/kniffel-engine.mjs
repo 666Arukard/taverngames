@@ -1,3 +1,4 @@
+import {startingOrder,chosenStarter} from './start-choice.mjs';
 import {EXTREME_FIELDS,isExtreme,extremeValue,extremeTotal,extremeNpcAction} from './kniffel-extreme.mjs';
 export const KNIFFEL_FIELDS=['ones','twos','threes','fours','fives','sixes','threeKind','fourKind','fullHouse','smallStraight','largeStraight','kniffel','chance'];
 const check=(ok,message)=>{if(!ok)throw new Error(message);};
@@ -39,7 +40,7 @@ export function actKniffel(original,actor,action,args={},random=()=>1,gm=false){
     check(gm&&s.phase==='lobby'&&!s.paused,'GM only.');check(s.players.length>=2,'Not enough participants.');
     // Highest preparation roll begins. Only tied leaders reroll; a deterministic
     // tie fallback after 100 attempts prevents a broken RNG blocking the GM.
-    let candidates=[...s.players];s.startRolls=[];
+    const selected=chosenStarter(s);let candidates=selected?[selected]:[...s.players];s.startRolls=[];
     for(let attempt=0;candidates.length>1&&attempt<100;attempt++){
       const results=candidates.map(id=>({id,value:roll()}));s.startRolls.push(results);const high=Math.max(...results.map(r=>r.value));candidates=results.filter(r=>r.value===high).map(r=>r.id);
     }

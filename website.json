@@ -2,22 +2,21 @@
   "schemaVersion": 1,
   "blocks": {
     "patchnotes": {
-      "title": "Patchnotes Version 2.2.0",
+      "title": "Patchnotes Version 2.2.5",
       "paragraphs": [
-        "17 und 4 ist nach Daniels Freigabe stabil. Alle zehn Spiele bieten Ohne Einsatz oder partiengebundene Spieltoken mit gemeinsamer SL-Zuteilung, Bankbudgets und Ausgangswetten. Schocken: jeder benötigt Spieleranzahl × Einsatz; der endgültige Verlierer zahlt jedem anderen einmal den Einsatz. Direkte Charakter-Geldbuchungen sind entfernt. Token können ausdrücklich in die Folgepartie übernommen oder verworfen werden. Der 17-und-4-Animationshinweis verschiebt die Ansicht nicht mehr."
+        "Der Package Title lautet jetzt TavernGames. Die Modul-ID taverngames, Einstellungen, Spielstände und Spielfunktionen bleiben unverändert. Meiern und Aalstechen bleiben Beta.",
+        "The package title is now TavernGames. The module ID taverngames, settings, saved games and gameplay remain unchanged. Meiern and Aalstechen remain beta."
       ],
       "items": [
-        "17 und 4 regulär ohne Beta-Schalter verfügbar.",
-        "Gemeinsame Spieltoken-Verwaltung und Ausgangswetten für alle zehn Spiele.",
-        "Schocken mit Sicherheit von N × Einsatz und Zahlung allein durch den Verlierer.",
-        "Charakter-Geldbuchungen entfernt; Gegenstandspreise und historische Nachweise bleiben erhalten.",
-        "17 und 4: Animationshinweis ohne springende Ansicht."
+        "Package Title: TavernGames.",
+        "Modul-ID und gespeicherte Einstellungen bleiben erhalten.",
+        "Keine Änderungen an Spielregeln oder Würfeldarstellung."
       ]
     },
     "games": {
-      "title": "aktuelle Spiele (10)",
+      "title": "aktuelle Spiele (12)",
       "paragraphs": [
-        "Zehn stabile Spiele; Kniffel enthält zusätzlich die stabile Variante Kniffel Extreme nach Schmidt-Regeln."
+        "Zehn stabile Spiele und zwei zuschaltbare Betas: Aalstechen und Meiern. Kniffel Extreme bleibt stabil."
       ],
       "items": [
         "17 und 4",
@@ -29,17 +28,18 @@
         "Schiff–Kapitän–Mannschaft",
         "Schocken",
         "Schweinchen",
-        "Straßenlotto"
+        "Straßenlotto",
+        "Aalstechen (Beta)",
+        "Meiern (Beta)"
       ]
     },
     "plans": {
-      "title": "geplante Spiele (38)",
+      "title": "geplante Spiele (35)",
       "paragraphs": [
         "Für diese Spiele und Wettbewerbe liegen Regelreferenzen vor. Die Auswahl ist Planung und keine Zusage zur Umsetzung; einzelne Regelfragen sind noch offen."
       ],
       "items": [
         "17+4 (Kartenspiel)",
-        "Aalstechen",
         "Armdrücken",
         "Binokel",
         "Blackjack",
@@ -61,13 +61,11 @@
         "Koboldpoker",
         "König und Bettler / Präsident",
         "Mau-Mau",
-        "Meiern / Mäxchen",
         "Offenes Würfelpoker",
         "Pfeilwurf",
         "Piratenzunge",
         "Roulette (PDF-Variante)",
         "Schach (abstrakter Wettbewerb)",
-        "Schlangenfangen",
         "Schummeln (Kartenspiel)",
         "Schwimmen / Knack",
         "Sechsundsechzig",
@@ -79,7 +77,7 @@
       ]
     },
     "plans2": {
-      "title": "geplante Funktionen (9)",
+      "title": "geplante Funktionen (10)",
       "paragraphs": [
         "Größere Erweiterungen werden schrittweise geprüft. Die folgende Liste beschreibt Überlegungen und noch keine fertigen Funktionen.",
         "Karteneinbindung auf Daniels Wunsch zurückgestellt. Als späterer erster Schritt vorgeschlagen: einfache Vorder-/Rückseiten und eine Kartenhand mit Sichtbarkeitsprüfung zwischen zwei Spielern, zunächst ohne Animationen. Noch keine Umsetzungsfreigabe."
@@ -93,13 +91,14 @@
         "Kniffel-Serien mit addierten Ergebnissen.",
         "Beschleunigte NPC-Wettpartien.",
         "Grafisch wachsende Münzstapel auf den Drachenhorten.",
-        "Optionale Accountant-Anbindung für Buchungen über eine versionierte API und Einbettung in die RPG Management Suite; alle Module bleiben unabhängig."
+        "Optionale Accountant-Anbindung für Buchungen über eine versionierte API und Einbettung in die RPG Management Suite; alle Module bleiben unabhängig.",
+        "Lügenwürfel: pokerartige Setzphase alle fünf Runden mit Grundeinsatz, Mitgehen, Erhöhen, Aussteigen und späterer Poker-Topfaufteilung. Noch nicht umgesetzt."
       ]
     },
     "functions": {
-      "title": "aktuelle Funktionen (9)",
+      "title": "aktuelle Funktionen (12)",
       "paragraphs": [
-        "Zehn stabile Spiele mit gemeinsamer SL-Moderation, optionalen Spieltoken und unabhängiger Spielbarkeit ohne weitere Module."
+        "Zehn stabile Spiele sowie Aalstechen und Meiern als Beta, mit gemeinsamer SL-Moderation und optionalen Spieltoken."
       ],
       "items": [
         "SL-Spielauswahl mit Kategorien, deutsch-englischer Suche, alphabetischer Liste und bis zu fünf Favoriten.",
@@ -110,23 +109,27 @@
         "Gemeinsame partiengebundene Spieltoken-Verwaltung: Ohne Einsatz, SL-Zuteilung, spielgerechte Einsatzmodelle, Bankbudget/Schuld und ausdrückliche Übernahme oder Verwerfen nach der Partie.",
         "Ausgangswetten für Teilnehmer, Zuschauer und NPCs aus demselben Tokenbestand, gleichmäßige Gewinnverteilung unter richtigen Wettern und Chat-Auswertung.",
         "Straßenlotto mit konfigurierbaren Tippscheinen, SL-Aufdeckung und separater Übergabe eines ausgewählten Gegenstandspreises.",
-        "Kniffel Extreme mit 22 Feldern, W10 und Zusatzwurf-Chips; 17 und 4 mit W12 oder W8+W6 und manueller oder automatischer Bank."
+        "Kniffel Extreme mit 22 Feldern, W10 und Zusatzwurf-Chips; 17 und 4 mit W12 oder W8+W6 und manueller oder automatischer Bank.",
+        "Gemeinsame Startspielerwahl: Standard nach Spielregel, konkrete Teilnehmer oder Zufall; Bank und gemeinsame Ziehungen bleiben SL-gesteuert.",
+        "Getrennte 3D-Würfelgruppen je Teilnehmer mit eigenen SC-Designs, einfachen NSC-Farben und geschützten verdeckten Ergebnissen.",
+        "Gleiche Tokenzuteilung als Vorlage, individuelle Bestände und sichere SL-Änderungen während laufender Partien."
       ]
     },
     "settings": {
       "title": "Einstellungen in Foundry",
       "paragraphs": [
-        "In den Foundry-Moduleinstellungen die Sprache Deutsch oder Englisch wählen; Standard ist Englisch. Alle zehn Spiele einschließlich 17 und 4 sind stabil und ohne Beta-Schalter zugänglich.",
+        "In den Moduleinstellungen Sprache Deutsch oder Englisch wählen; Standard Englisch. Zehn Spiele sind stabil. Aalstechen und Meiern über Taverngames: Beta-Test zusätzlich einschalten.",
         "Der Taverngames-Reiter ist nur für SL sichtbar. Spiel öffnen, Lobby vorbereiten und unteren Beitrittsbutton über die Moderation freigeben.",
         "In der Moderation Einsätze & Spieltoken öffnen. Standard ist Ohne Einsatz. Für Spieltoken Zuteilung, Grundeinsatz und passende Banklimits festlegen. Standardvorlage sind 100 Token je Teilnehmer; Beträge sind durch SL anpassbar.",
         "Ausgangswetten verwenden denselben freien Bestand. SL öffnet die Annahme vor dem Spiel und schließt sie vor dem Start. Am Ende Token ausdrücklich übernehmen oder verwerfen; keine weltweiten Konten.",
         "Keine direkten Charakter-Geldbuchungen mehr. Alte Abrechnungen und Test-Goldkonten sind historische Nachweise und werden nicht umgewandelt. Gegenstandspreise bleiben erhalten. Für die neue Einsatzverwaltung eine neue Lobby verwenden.",
-        "Dice So Nice ist optional und separat einschaltbar. Nach Installation des Updates die Welt neu laden."
+        "Dice So Nice ist optional und separat einschaltbar. Nach Installation des Updates die Welt neu laden.",
+        "Vor dem Start Wer beginnt? in der Moderation einstellen. Im Tokenfenster Allen gleichen Bestand zuteilen oder Einzelbestände auswählen; während des Spiels können freie Bestände weiter geändert werden."
       ],
       "items": []
     },
     "sources": {
-      "title": "Regelquellen (34)",
+      "title": "Regelquellen (36)",
       "paragraphs": [
         "Hier findet ihr alle genutzten Regelquellen. Quellen für noch nicht umgesetzte Spiele sind ausdrücklich als geplante Regelreferenzen gekennzeichnet."
       ],
@@ -164,7 +167,9 @@
         "Stayandplay – Gaigel-Kurzanleitung (geplante Regelreferenz) – https://stayandplay.cards/wp-content/uploads/2020/03/DE-Gaigel-1.pdf",
         "Pagat – Gaigel, regionale Partnerschaftsfassung (geplante Regelreferenz) – https://www.pagat.com/marriage/gaigel.html",
         "Kniffel Extreme: offizielle Schmidt-Spiele-Anleitung (5 W6 + W10 0–9, 22 Felder, drei Chips).",
-        "17 und 4 (Würfel-Hausvariante): Leif und Daniels Festlegungen; Awiana als abweichende Elfenlauf-Regelreferenz."
+        "17 und 4 (Würfel-Hausvariante): Leif und Daniels Festlegungen; Awiana als abweichende Elfenlauf-Regelreferenz.",
+        "Meiern / Schlangenfangen: Awiana (https://awiana.fandom.com/de/wiki/Schlangenfangen?oldid=6670), bereitgestellte D&D-Minispiele v1.0 vom 15.10.2026, bestätigte Hausregeln von Daniel Brune.",
+        "Aalstechen: Awiana (https://awiana.fandom.com/de/wiki/Aalstechen?oldid=5758), sichtbare Fünferblock-/Setzvariante Daniel Brune. All-in-/Nebentopf-Referenz: PokerStars (https://www.pokerstars.com/de/help/articles/poker-rules-master/215804/)."
       ]
     },
     "sources1": {
@@ -191,5 +196,5 @@
       ]
     }
   },
-  "version": "2.2.0"
+  "version": "2.2.5"
 }

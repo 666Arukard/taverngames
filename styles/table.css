@@ -68,3 +68,14 @@
 
 /* Keep the bank and player controls stationary while animation status changes. */
 .seventeen-animation-status{min-height:1.4em;line-height:1.4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* Meiern uses display-only dice; actions remain beside the active participant. */
+
+.taverngames-surface .aal-removed{opacity:.65;border:2px solid #a64332;text-decoration:line-through}
+
+/* Player names use the same compact metrics as the Farkle player rows. */
+.taverngames-surface .schocken-player{font:inherit;padding:7px 10px}
+.taverngames-surface .schocken-player h3{font:inherit;font-weight:600;margin:0;border:0;line-height:1.45}
+.taverngames-surface .schocken-player p{margin:4px 0}
+.taverngames-surface [data-start-choice]{padding:8px 0}
+.taverngames-surface [data-start-choice] label{display:flex;gap:8px;align-items:center}

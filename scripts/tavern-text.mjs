@@ -1,11 +1,40 @@
+import {aalstechenGuide} from './aalstechen-text.mjs';
+import {meiernGuide} from './meiern-text.mjs';
 import {tokenGuide} from './token-guide.mjs';
 import {seventeenGuide} from './seventeen-text.mjs';
 import {betaGuide} from './beta-games-text.mjs';
 import {kniffelGuide} from './kniffel-text.mjs';
 import {f} from './farkle-text.mjs';
 export const escapeHTML=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-export const gameTitle=game=>({seventeen:f('17 und 4','Seventeen and Four'),chohan:'Chō-Han',liars:f('Lügenwürfel','Liar’s Dice'),hoard:f('Drachenhort','Dragon’s Hoard'),kniffel:'Kniffel',schocken:'Schocken',farkle:'Farkle',pig:f('Schweinchen','Pig'),ship:f('Schiff, Kapitän und Mannschaft','Ship, Captain and Crew'),lottery:f('Straßenlotto','Street lottery')})[game]??game;
+export const gameTitle=game=>({aalstechen:'Aalstechen',meiern:'Meiern',seventeen:f('17 und 4','Seventeen and Four'),chohan:'Chō-Han',liars:f('Lügenwürfel','Liar’s Dice'),hoard:f('Drachenhort','Dragon’s Hoard'),kniffel:'Kniffel',schocken:'Schocken',farkle:'Farkle',pig:f('Schweinchen','Pig'),ship:f('Schiff, Kapitän und Mannschaft','Ship, Captain and Crew'),lottery:f('Straßenlotto','Street lottery')})[game]??game;
 const ERRORS={
+ 'Choose the starting player in the lobby.':'Wähle den Startspieler vor dem Start in der Lobby.',
+ 'Select a participating starting player.':'Wähle einen teilnehmenden Startspieler.',
+ 'Configure before the game ends.':'Token vor dem Partieende bearbeiten.',
+ 'Please wait for all dice animations to finish.':'Bitte vor dem Rundenwechsel alle Würfelanimationen abwarten.',
+
+ 'Invalid minimum raise.':'Ungültige Mindesterhöhung.',
+ 'Check instead of folding.':'Ohne offene Forderung kannst du schieben.',
+ 'Call the current bet first.':'Du musst die offene Forderung mitgehen oder aussteigen.',
+ 'No bet to call.':'Es gibt keine offene Forderung zum Mitgehen.',
+ 'Invalid raise.':'Ungültiger Erhöhungsbetrag.',
+ 'A short all-in does not reopen raising.':'Dieses kurze All-in eröffnet das Erhöhen nicht erneut.',
+ 'No opponent can match another raise.':'Kein Gegner kann eine weitere Erhöhung mitgehen.',
+ 'Raise below the minimum.':'Diese Erhöhung liegt unter dem Mindestbetrag.',
+ 'Choose a positive buy-in.':'Lege einen Grundeinsatz größer als null fest.',
+ 'Roll once per active round.':'Jeder aktive Teilnehmer darf pro Runde einmal würfeln.',
+ 'Continue after everyone rolled.':'Erst fortfahren, wenn alle Teilnehmer gewürfelt haben.',
+
+ 'Finish between revealed rounds.':'Die Partie kann nur zwischen aufgedeckten Durchgängen gewertet werden.',
+ 'Continue after revealing.':'Erst nach dem Aufdecken mit dem nächsten Durchgang fortfahren.',
+ 'Roll after accepting.':'Du kannst würfeln, wenn du an der Reihe bist und die vorige Ansage angenommen hast.',
+ 'Roll before declaring.':'Vor der Ansage musst du würfeln.',
+ 'The claim must increase.':'Die Ansage muss höher sein als die vorige Ansage.',
+ 'Challenge a declared Meier.':'Eine angesagte 21 muss angezweifelt werden.',
+ 'No claim to challenge.':'Es gibt keine Ansage zum Anzweifeln.',
+ 'Join in the lobby.':'Ein- und Austreten ist nur in der Lobby möglich.',
+ 'Invalid participant.':'Ungültiger Teilnehmer oder maximale Spielerzahl erreicht.',
+
  'Not enough game tokens.':'Nicht genügend freie Spieltoken vorhanden.',
  'Invalid token amount.':'Ungültige Anzahl Spieltoken.',
  'Invalid token limits.':'Ungültige Einsatzgrenzen für Spieltoken.',
@@ -69,6 +98,8 @@ const ERRORS={
 };
 export const tavernError=message=>f(ERRORS[message]??message,message);
 export function tavernGuide(game){
+  if(game==='aalstechen')return aalstechenGuide();
+  if(game==='meiern')return meiernGuide();
   if(game==='seventeen')return seventeenGuide(gameTitle(game));
   if(['liars','hoard'].includes(game))return betaGuide(game)+tokenGuide(game);
   if(game==='kniffel')return kniffelGuide()+tokenGuide(game);

@@ -1,19 +1,20 @@
+import {meiernView} from './meiern-engine.mjs';
 import {SchockenAnimationGate} from './schocken-dice.mjs';
 import {SchockenPersistentDice,hiddenDiceAppearance} from './schocken-presentation.mjs';
 import {choView} from './chohan.mjs';
 import {tavernView} from './tavern-engine.mjs';
-export const HIDDEN_GAMES=['lottery','chohan'];
-export const hiddenView=(s,user)=>s?.game==='chohan'?choView(s,user):tavernView(s,user);
+export const HIDDEN_GAMES=['lottery','chohan','meiern'];
+export const hiddenView=(s,user)=>s?.game==='meiern'?meiernView(s,user):s?.game==='chohan'?choView(s,user):tavernView(s,user);
 export class HiddenGameGate extends SchockenAnimationGate{
  constructor(options={}){super(options);this.onClear=options.onClear??(()=>{});this.before=null;}
  open(before,after,users){this.before=structuredClone(before);return super.open(after,users);}
  clear(){const had=this.current;super.clear();this.before=null;if(had)this.onClear();}
 }
 export function hiddenDiceState(s,user){
- if(!s)return null;const lottery=s.game==='lottery',eligible=!lottery||user.isGM||s.tickets.some(t=>t.id===user.id||user.isGM&&!!s.npcs[t.id]);
+ if(!s)return null;if(s.game==='meiern'){const view=meiernView(s,user),active=!!view.cup&&!['lobby','aborted','ready'].includes(s.phase);return {game:s.game,participant:view.cup?.actor??user.id,gameId:s.gameId,revision:s.revision,sourcePhase:s.phase,phase:active?'playing':s.phase,order:[view.cup?.actor??user.id],turn:0,turnNumber:`${s.gameId}:${s.round}:${s.rollNumber}`,cup:active?{dice:view.cup.dice,types:['d6','d6'],held:[false,false],selected:[]}:null};}const lottery=s.game==='lottery',eligible=!lottery||user.isGM||s.tickets.some(t=>t.id===user.id||user.isGM&&!!s.npcs[t.id]);
  const visible=s.phase==='finished'||s.phase==='hidden'&&s.gmPeek===true&&user.isGM===true;
  const active=!s.presentationClosed&&['hidden','finished'].includes(s.phase);
- return {game:s.game,gameId:s.gameId,revision:s.revision,sourcePhase:s.phase,phase:active?'playing':s.phase,order:[user.id],turn:0,turnNumber:`${s.game}:${s.gameId}`,
+ return {game:s.game,participant:lottery?user.id:(globalThis.game?.users?.activeGM?.id??user.id),gameId:s.gameId,revision:s.revision,sourcePhase:s.phase,phase:active?'playing':s.phase,order:[lottery?user.id:(globalThis.game?.users?.activeGM?.id??user.id)],turn:0,turnNumber:`${s.game}:${s.gameId}`,
  cup:active&&eligible?{dice:lottery?visible?[Math.floor(s.result/10)%10,s.result%10]:[null,null]:visible?[...s.dice]:[null,null],types:lottery?['d100','d10']:['d6','d6'],held:[false,false],selected:[]}:null};
 }
 // These are local display placeholders, never another game result.

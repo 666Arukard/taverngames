@@ -1,9 +1,59 @@
-# Taverngames – Foundry Extension
+# TavernGames
 
-**Version 2.2.0**. Zehn stabile Spiele mit optionaler stabiler Dice-So-Nice-Anbindung: 17 und 4, Chō-Han, Drachenhort, Farkle, Kniffel, Lügenwürfel, Schiff–Kapitän–Mannschaft, Schocken, Schweinchen und Straßenlotto.
+**Version 2.2.5**. Aalstechen und Meiern als zuschaltbare Betas sowie zehn stabile Spiele mit optionaler stabiler Dice-So-Nice-Anbindung: 17 und 4, Chō-Han, Drachenhort, Farkle, Kniffel, Lügenwürfel, Schiff–Kapitän–Mannschaft, Schocken, Schweinchen und Straßenlotto.
 
 
-## Aktuell in 2.2.0
+## Aktuell in 2.2.5
+
+Der Package Title lautet jetzt TavernGames. Die Modul-ID taverngames, Einstellungen, Spielstände und Spielfunktionen bleiben unverändert. Meiern und Aalstechen bleiben Beta.
+
+The package title is now TavernGames. The module ID taverngames, settings, saved games and gameplay remain unchanged. Meiern and Aalstechen remain beta.
+
+## Vorheriger Stand 2.2.4
+
+Aalstechen zeigt neue Würfelergebnisse erst nach Abschluss der jeweiligen 3D-Animation, ohne vorheriges Aufblitzen. Bisherige Ergebnisse und Restwürfel bleiben währenddessen stabil. Bei Meiern verschwinden bisherige 3D-Würfel beim Akzeptieren der Ansage; beim Anzweifeln bleiben sie zum Aufdecken erhalten. Meiern und Aalstechen bleiben Beta.
+
+Aalstechen reveals new dice results only after the corresponding 3D animation, without briefly flashing them beforehand. Previous results and remaining dice stay stable meanwhile. Meiern removes the previous 3D pair when a claim is accepted and retains it for a challenge reveal. Meiern and Aalstechen remain beta.
+
+## Vorheriger Stand 2.2.3
+
+Gemeinsame Überarbeitung aller Spiele: kompakte Spielerlisten nach Farkle-Vorbild, Startspieler manuell oder zufällig wählbar und getrennte 3D-Würfel je Teilnehmer mit eigenem SC-Design beziehungsweise einfachen unterschiedlichen NSC-Designs. Aalstechen erlaubt unabhängige Würfelklicks ohne fremde Animationen abzuwarten; der Rundenwechsel wartet weiterhin auf alle. Spieltoken standardmäßig gleich zuteilen, individuell anpassen und während der Partie durch die SL bearbeiten; gebundene Einsätze bleiben geschützt. Haupt-/Nebentöpfe bei Aalstechen bereits während der Partie sichtbar. Meiern zeigt Punkte statt Bilanzpunkte. Meiern und Aalstechen bleiben Beta.
+
+Shared improvements across all games: compact player lists based on Farkle, manual or random starting-player selection, and separate 3D dice per participant using each player’s saved appearance and simple distinct NPC styles. Aalstechen accepts independent roll clicks without waiting for other animations; advancing the round still waits for everyone. Allocate equal game-token balances, adjust individuals and edit balances during play as GM, while protecting committed stakes. Aalstechen main/side pots are visible during the game. Meiern uses Points instead of Net points. Meiern and Aalstechen remain beta.
+
+Vor Spielbeginn in der Moderation unter Wer beginnt? einen Teilnehmer einschließlich NPC, Zufällig bestimmen oder Standard nach Spielregel wählen. Bei 17 und 4 bleibt die Bankregel erhalten, bei Aalstechen wird die erste Setzreihenfolge festgelegt; die gemeinsamen Würfelrunden sind unabhängig. Bei Straßenlotto und Chō-Han wird die Teilnehmerreihenfolge festgelegt, gemeinsame Ziehung und Bank bleiben SL-gesteuert. Auswahl in jeder neuen Lobby möglich.
+
+In Einsätze & Spieltoken erhalten neue Teilnehmer standardmäßig denselben Startbestand. Allen gleichen Bestand zuteilen setzt die Lobby-Teilnehmer und die Vorlage für spätere Beitritte gemeinsam. Über Tokenempfänger und Bestand zuteilen Einzelwerte setzen – nun auch während einer laufenden oder pausierten Partie. Gebundene Spieleinsätze und Ausgangswetten können nicht entfernt werden. Änderungen betreffen ausschließlich interne Token; keine Charakterbuchung.
+
+Mit aktiver Dice-So-Nice-Anbindung liegen die Sets getrennt nach Teilnehmer. SCs verwenden ihre gespeicherten DSN-Designs, NSCs einfache unterscheidbare Farben. Verdeckte Ergebnisse bleiben geschützt; aufgedeckt wird derselbe Wert ohne neuen Wurf. Bei Aalstechen muss jeder Mensch selbst klicken, kann dies aber schon während eines fremden Wurfs tun. Erst zur nächsten Runde müssen alle Würfe und deren Ansichten fertig sein; Hintergrundabfragen geben die Bedienung danach frei.
+
+Meiern und Aalstechen bleiben ausdrücklich Beta. Kniffel Extreme und die zehn bisherigen Spiele bleiben stabil.
+
+## Vorheriger Stand 2.2.2
+
+Aalstechen ist als Beta verfügbar: W4/W6/W8/W10/W12, sichtbare Restwürfel, Einsen entfernen und Setzphasen nach fünf Runden. Optionaler Token-Einkauf, Schieben, Mitgehen, Erhöhen, Aussteigen, All-in und getrennte Haupt-/Nebentöpfe. Meiern bleibt Beta und verwendet im Spielfenster dieselbe numerische Würfeldarstellung wie die anderen Spiele. Die zehn stabilen Spiele bleiben unverändert.
+
+Aalstechen is available as a beta: d4/d6/d8/d10/d12, public remaining dice, remove ones and bet after five rounds. Optional token buy-in, checking, calling, raising, folding, all-in and separate main/side pots. Meiern remains beta and now uses the same numeric dice presentation as the other games. The ten stable games remain unchanged.
+
+Aktivieren: Moduleinstellungen → Taverngames: Beta-Test. Im SL-Reiter Aalstechen starten, NPCs und Mindesterhöhung festlegen, Lobby öffnen. Spieler treten freiwillig bei; der SL muss nicht mitspielen. In Einsätze & Spieltoken Ohne Einsatz oder Token wählen. Im Tokenmodus ist der Grundeinsatz der einmalige Einkauf; vorhandene Guthaben über Bestand zuteilen ändern. Nach fünf abgeschlossenen Würfelrunden öffnet Nächste Würfelrunde die Setzphase. Ohne Token oder wenn nur noch ein Spieler setzen könnte, geht es direkt weiter.
+
+Jeder würfelt pro Runde einmal; Einsen bleiben bis zur nächsten Runde sichtbar. Die letzte Eins wird für alle Teilnehmer derselben Runde gemeinsam gewertet. Bei Haupt-/Nebentöpfen entscheidet die Überlebensdauer unter den jeweils Berechtigten; gleichzeitig Ausgeschiedene teilen. Nicht mitgegangene Einzelüberschüsse zurückgeben; unteilbare Tokenreste in Teilnehmerreihenfolge. Abbruch erstattet die Beiträge. Keine Charakterbuchungen.
+
+Die verdeckte Awiana-Variante bleibt später; diese Beta verwendet Daniels sichtbare Fünferblock-Variante. Koboldpoker ist noch nicht umgesetzt, seine All-in-/Nebentopfentscheidung ist dokumentiert. Meiern bleibt Beta für weitere Tests.
+
+## Vorheriger Stand 2.2.1
+
+Meiern ist als Beta über den Beta-Test-Schalter verfügbar: verdeckte W6, höhere Ansagen, Anzweifeln und Aufdecken, feste oder unbegrenzte Durchgänge sowie automatische oder manuell gesteuerte NPCs. Spieltoken werden pro aufgedecktem Durchgang direkt verrechnet. Vor dem nächsten Durchgang scheidet aus, wer den doppelten Grundeinsatz nicht mehr deckt. Die zehn bisherigen Spiele bleiben stabil.
+
+Meiern is available through the beta-testing setting: hidden d6, increasing claims, challenges and reveals, fixed or unlimited rounds, and automatic or GM-controlled NPCs. Game tokens transfer directly after each revealed round. Anyone unable to cover twice the base stake is eliminated before the next round. The ten existing games remain stable.
+
+Meiern aktivieren: Moduleinstellungen → Taverngames: Beta-Test einschalten. Im SL-Reiter Meiern starten, unter Neue Partie & Regeln Durchgangsmodus und gegebenenfalls NPC-Namen wählen und Lobby öffnen. SL kann selbst beitreten oder nur moderieren. Optional über Einsätze & Spieltoken Guthaben und Grundeinsatz festlegen. Jeder braucht vor dem ersten Durchgang 2 × Grundeinsatz. Unteren Beitrittsbutton ausschließlich in der Moderation einschalten.
+
+Bei einem echten Meier zahlen alle anderen aktiven Teilnehmer doppelt. Sonst zahlt der erfolglose Zweifler oder entlarvte Lügner einfach. Bereits ausgeführte Zahlungen bleiben bei Abbruch erhalten. Ohne Einsatz werden entsprechende Bilanzpunkte gezählt. Höchste Bilanz gewinnt; Gleichstände teilen den Platz, der letzte aktive Spieler gewinnt.
+
+Lügenwürfel-Poker-Setzphasen sind nur vorgemerkt und noch nicht eingebaut.
+
+## Vorheriger Stand 2.2.0
 
 17 und 4 ist nach Daniels Freigabe stabil. Alle zehn Spiele bieten Ohne Einsatz oder partiengebundene Spieltoken mit gemeinsamer SL-Zuteilung, Bankbudgets und Ausgangswetten. Schocken: jeder benötigt Spieleranzahl × Einsatz; der endgültige Verlierer zahlt jedem anderen einmal den Einsatz. Direkte Charakter-Geldbuchungen sind entfernt. Token können ausdrücklich in die Folgepartie übernommen oder verworfen werden. Der 17-und-4-Animationshinweis verschiebt die Ansicht nicht mehr.
 

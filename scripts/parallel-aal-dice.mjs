@@ -1,0 +1,10 @@
+export class ParallelAalGate{
+ constructor({now=()=>Date.now(),id=()=>crypto.randomUUID(),onClear=()=>{}}={}){Object.assign(this,{now,id,onClear});this.entries=new Map();}
+ active(s){for(const [id,e]of this.entries)if(e.gameId!==s?.gameId||s?.phase==='aborted'||this.now()>=e.until){this.entries.delete(id);this.onClear();}return [...this.entries.values()];}
+ open(before,after,actor,users){const e={id:this.id(),gameId:after.gameId,round:after.round,actor,until:this.now()+15000,beforeLast:structuredClone(before.last[actor]??null),beforeRemaining:structuredClone(before.remaining[actor]??null),pending:new Set(users)};this.entries.set(e.id,e);return this.project(after);}
+ project(s){return this.active(s).map(({pending,...e})=>structuredClone(e));}
+ ack(s,id,user){const e=this.entries.get(id);if(e&&e.gameId===s?.gameId&&e.pending.has(user)){e.pending.delete(user);if(!e.pending.size){this.entries.delete(id);this.onClear();}}}
+ clear(){const had=this.entries.size;this.entries.clear();if(had)this.onClear();}
+}
+export function aalProjection(s,animations=[]){if(!s)return null;const next=structuredClone(s),pending=animations.filter(a=>a.gameId===s.gameId&&a.round===s.round&&Date.now()<a.until);next.aalAnimations=animations;next.animationActors=pending.map(a=>a.actor);next.animationWaiting=!!pending.length;next.animationPending=!!pending.length;for(const a of pending){if(a.beforeLast)next.last[a.actor]=a.beforeLast;else delete next.last[a.actor];next.remaining[a.actor]=a.beforeRemaining??(a.beforeLast??s.last[a.actor]??[]).map(d=>d.sides);}if(pending.length&&['finished','roundEnd'].includes(next.phase)){next.phase='rolling';next.winners=[];next.losers=[];next.pots=[];next.payouts={};}return next;}
+export function aalParticipantState(s,actor){const dice=s?.last?.[actor];return s?{game:s.game,gameId:s.gameId,revision:s.revision,participant:actor,round:s.round,phase:dice&&!['lobby','aborted'].includes(s.phase)?'playing':s.phase,order:[actor],turn:0,turnNumber:`${s.gameId}:${s.round}:${actor}`,cup:dice?{dice:dice.map(d=>d.value),types:dice.map(d=>'d'+d.sides),held:dice.map(()=>false),actor}:null}:null;}

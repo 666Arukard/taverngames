@@ -1,3 +1,4 @@
+import {startingOrder,chosenStarter} from './start-choice.mjs';
 // Pure rules engine. No Foundry documents, network or randomness accessed here.
 const check = (ok, message) => { if (!ok) throw new Error(message); };
 export const DEFAULT_LABELS={simple:"Einfacher Wurf",straight:"Straße",triple:"Jennie/General",schock2:"Schock doof",schock3:"Schock 3",schock4:"Schock 4",schock5:"Schock 5",schock6:"Schock 6",out:"Schock Aus"};
@@ -72,7 +73,7 @@ export function act(original, actor, action, args={}, diceSource=()=>1, gm=false
     else {check(s.players.includes(actor),"Du bist nicht dabei.");s.players=s.players.filter(id=>id!==actor);delete s.lids[actor];}
   } else if(action==='begin') {
     check(gm&&s.phase==='lobby',"Nur GM kann die Lobby starten.");
-      const ordered=[...s.players.filter(id=>!s.npcs?.[id]),...s.players.filter(id=>s.npcs?.[id])];
+      const ordered=startingOrder(s,[...s.players.filter(id=>!s.npcs?.[id]),...s.players.filter(id=>s.npcs?.[id])]);
       const playing=create(ordered,{...s.rules,loading:s.loadAtStart,npcs:s.npcs,labels:s.labels});
     Object.assign(s,playing,{revision:s.revision,gameId:s.gameId,npcManual:s.npcManual});
   } else if(action==='reveal') {

@@ -1,10 +1,10 @@
 {
   "id": "taverngames",
-  "title": "Taverngames – Foundry Extension",
-  "description": "<h3>Deutsch</h3><p>Taverngames bringt zehn stabile Tavernenspiele mit SL-Moderation, freiwilligem Beitritt, benannten NPCs und optionalen 3D-Würfeln an deinen Foundry-Tisch: 17 und 4, Schocken, Farkle, Schweinchen, Schiff–Kapitän–Mannschaft, Kniffel, Straßenlotto, Lügenwürfel, Drachenhort und Chō-Han. Der Reiter ist nur für SL sichtbar.</p><h3>English</h3><p>Taverngames brings ten stable games to Foundry: Seventeen and Four, Schocken, Farkle, Pig, Ship–Captain–Crew, Kniffel, Street lottery, Liar’s Dice, Dragon’s Hoard and Cho-Han, with GM moderation, voluntary participation, named NPCs and optional 3D dice. The tab is GM-only.</p><h3>2.2.0 · Versionshinweise / Release notes</h3><p>17 und 4 ist nach Daniels Freigabe stabil. Alle zehn Spiele bieten Ohne Einsatz oder partiengebundene Spieltoken mit gemeinsamer SL-Zuteilung, Bankbudgets und Ausgangswetten. Schocken: jeder benötigt Spieleranzahl × Einsatz; der endgültige Verlierer zahlt jedem anderen einmal den Einsatz. Direkte Charakter-Geldbuchungen sind entfernt. Token können ausdrücklich in die Folgepartie übernommen oder verworfen werden. Der 17-und-4-Animationshinweis verschiebt die Ansicht nicht mehr.</p><p>Seventeen and Four is stable following Daniel’s acceptance. All ten games offer no stakes or game-scoped tokens with common GM allocation, bank budgets and outcome bets. Schocken: each player needs player count × stake; the final loser pays one stake to every other player. Direct character currency transactions have been removed. Tokens can explicitly be carried into the next game or discarded. The Seventeen and Four animation notice no longer shifts the view.</p><p>Regelquellen einschließlich Daniels Chō-Han-Regelsammlung sind in den Anleitungen und Autorenangaben genannt. / Rule sources, including Daniel’s Cho-Han collection, are credited in the instructions and author list.</p>",
-  "version": "2.2.0",
+  "title": "TavernGames",
+  "description": "<h3>Deutsch</h3><p>Taverngames bringt zehn stabile Tavernenspiele mit SL-Moderation, freiwilligem Beitritt, benannten NPCs und optionalen 3D-Würfeln an deinen Foundry-Tisch: 17 und 4, Schocken, Farkle, Schweinchen, Schiff–Kapitän–Mannschaft, Kniffel, Straßenlotto, Lügenwürfel, Drachenhort und Chō-Han. Der Reiter ist nur für SL sichtbar.</p><h3>English</h3><p>Taverngames brings ten stable games to Foundry: Seventeen and Four, Schocken, Farkle, Pig, Ship–Captain–Crew, Kniffel, Street lottery, Liar’s Dice, Dragon’s Hoard and Cho-Han, with GM moderation, voluntary participation, named NPCs and optional 3D dice. The tab is GM-only.</p><h3>2.2.5 · Versionshinweise / Release notes</h3><p>Der Package Title lautet jetzt TavernGames. Die Modul-ID taverngames, Einstellungen, Spielstände und Spielfunktionen bleiben unverändert. Meiern und Aalstechen bleiben Beta.</p><p>The package title is now TavernGames. The module ID taverngames, settings, saved games and gameplay remain unchanged. Meiern and Aalstechen remain beta.</p><p>Regelquellen einschließlich Daniels Chō-Han-Regelsammlung und Awianas Vorlagen stehen in den Anleitungen. / Rule sources, including Daniel’s Cho-Han collection and Awiana references, are credited in the instructions.</p>",
+  "version": "2.2.5",
   "readme": "README.md",
-  "changelog": "https://github.com/666Arukard/taverngames/releases/tag/v2.2.0",
+  "changelog": "https://github.com/666Arukard/taverngames/releases/tag/v2.2.5",
   "url": "https://dnd.brunecoaching.de",
   "compatibility": {
     "verified": "14.369"
@@ -29,7 +29,7 @@
       "url": "https://playmonster.com/wp-content/uploads/2018/06/Farkle-Rules.pdf"
     },
     {
-      "name": "Awiana (geplante Regelvorlagen)",
+      "name": "Awiana (Regelvorlagen, einschließlich Aalstechen und Schlangenfangen/Meiern)",
       "url": "https://awiana.fandom.com/de/wiki/Liste_an_Kneipen_spielen"
     },
     {
@@ -78,6 +78,10 @@
     },
     {
       "name": "Leif (Würfeladaption 17 und 4, ursprünglich Elfenlauf; Hausregeln Daniel Brune)"
+    },
+    {
+      "name": "PokerStars (ergänzende Referenz für All-in und Nebentöpfe)",
+      "url": "https://www.pokerstars.com/de/help/articles/poker-rules-master/215804/"
     }
   ],
   "esmodules": [
@@ -87,7 +91,7 @@
     "styles/table.css"
   ],
   "manifest": "https://github.com/666Arukard/taverngames/releases/latest/download/module.json",
-  "download": "https://github.com/666Arukard/taverngames/releases/download/v2.2.0/taverngames-2.2.0.zip",
+  "download": "https://github.com/666Arukard/taverngames/releases/download/v2.2.5/taverngames-2.2.5.zip",
   "relationships": {
     "recommends": [
       {

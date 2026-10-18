@@ -14,9 +14,9 @@ export function diceDiameter(mesh,fallback=0.05){
 export function diceViewport(box){const display=box?.display??box?.diceScene?.display;return {width:positive(display?.innerWidth,1),height:positive(display?.innerHeight,0.65)};}
 // Group by stable cup slot (five dice), but lay out only currently visible pieces.
 // Every slot has a bounding diameter plus padding, rather than a fixed percentage.
-export function groupedDiceLayout(indices,{width=1,height=0.65,diameter=0.05}={}){
+export function groupedDiceLayout(indices,{width=1,height=0.65,diameter=0.05,groupSize=5}={}){
  width=positive(width,1);height=positive(height,0.65);diameter=positive(diameter,0.05);
- const groups=new Map();for(const index of [...indices].sort((a,b)=>a-b)){const id=Math.floor(index/5);if(!groups.has(id))groups.set(id,[]);groups.get(id).push(index);}
+ const groups=new Map();for(const index of [...indices].sort((a,b)=>a-b)){const id=Math.floor(index/groupSize);if(!groups.has(id))groups.set(id,[]);groups.get(id).push(index);}
  const cups=[...groups.values()];if(!cups.length)return {positions:new Map(),scale:1,diameter};
  const maxCount=Math.max(...cups.map(c=>c.length)),dx=diameter*1.28/width,dy=diameter*1.28/height;let best;
  for(let columns=1;columns<=maxCount;columns++)for(let across=1;across<=cups.length;across++){
