@@ -1,6 +1,6 @@
 import {FarkleAnimationGate} from './farkle-dice.mjs';
 export const HELD_GAMES=['kniffel','ship','pig','hoard'];
-export function heldState(s){return s?{...s,turnNumber:`${s.game}:${s.round}:${s.tieBreak??0}:${s.order?.[s.turn]??''}`,cup:s.cup?{...s.cup,...(s.game==='pig'?{dice:s.cup.dice.slice(-1),held:[false]}:{}),selected:[]}:null}:null;}
+export function heldState(s){return s?{...s,turnNumber:`${s.game}:${s.round}:${s.tieBreak??0}:${s.order?.[s.turn]??''}`,cup:s.cup?{...s.cup,...(s.game==='kniffel'&&s.variant==='extreme'?{types:['d6','d6','d6','d6','d6','d10']}:{}),...(s.game==='pig'?{dice:s.cup.dice.slice(-1),held:[false]}:{}),selected:[]}:null}:null;}
 export class HeldAnimationGate extends FarkleAnimationGate{
  constructor(options={}){super(options);this.onClear=options.onClear??(()=>{});}
  clear(){const current=this.current;super.clear();if(current)this.onClear();}

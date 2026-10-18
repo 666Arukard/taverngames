@@ -20,12 +20,12 @@ export class FarklePersistentDice {
  enqueue(fn){const result=this.serial.then(fn);this.serial=result.catch(()=>{});return result;}
  spawnOptions(_pose){return {};}
  spawnType(state,index,_pose){return this.dieType(state,index);}
- dieType(state){return this.scope==='hoard'&&[6,10,20].includes(state?.cup?.sides)?`d${state.cup.sides}`:'d6';}
+ dieType(state,index=0){if(this.scope==='kniffel'&&state?.cup?.types?.[index]==='d10')return 'd10';return this.scope==='hoard'&&[6,10,20].includes(state?.cup?.sides)?`d${state.cup.sides}`:'d6';}
  capture(state,indices,eventId){
   const box=this.game().dice3d?.box,engine=box?.throwEngine;
-  const meshes=[...(engine?.diceList??[]),...(engine?.deadDiceList??[])].filter(m=>(m.options?.taverngamesDieType??m.notation?.type)===this.dieType(state)&&!m.userData?.persistent&&(eventId===undefined||m.options?.taverngamesEvent===eventId));
+  const meshes=[...(engine?.diceList??[]),...(engine?.deadDiceList??[])].filter(m=>!m.userData?.persistent&&(eventId===undefined||m.options?.taverngamesEvent===eventId));
   const available=[...meshes];
-  for(const index of indices){const value=state.cup.dice[index],at=available.findIndex(m=>Number(m.forcedResult)===value);if(at<0)continue;const mesh=available.splice(at,1)[0];this.poses.set(index,{value,quaternion:mesh.quaternion.clone(),parentQuaternion:mesh.parent.quaternion.clone(),height:mesh.parent.position.y,position:box.toPositionPct?.(mesh.parent.position.x,mesh.parent.position.z),source:mesh});}
+  for(const index of indices){const value=state.cup.dice[index],at=available.findIndex(m=>(m.options?.taverngamesDieType??m.notation?.type)===this.dieType(state,index)&&Number(m.forcedResult)===value);if(at<0)continue;const mesh=available.splice(at,1)[0];this.poses.set(index,{value,quaternion:mesh.quaternion.clone(),parentQuaternion:mesh.parent.quaternion.clone(),height:mesh.parent.position.y,position:box.toPositionPct?.(mesh.parent.position.x,mesh.parent.position.z),source:mesh});}
  }
  sync(state){return this.enqueue(()=>this._sync(state));}
  beginRoll(state,indices){return this.enqueue(async()=>{await this._alignTurn(state);for(const index of indices){const entry=this.meshes.get(index);if(entry){await this._remove(entry);this.meshes.delete(index);}this.poses.delete(index);}});}

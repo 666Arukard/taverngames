@@ -9,7 +9,7 @@ export function allocate(total,weights){
 }
 export function createCho({npcs={},currency='gp',minStake=1,maxStake=100,commission=5,feeBase='pot',matching='proportional',variant='B',payoutBasis=190,bankFunds=1000,gmPeek=false}={}){
  check(['cp','sp','ep','gp','pp'].includes(currency),'Invalid currency or funding.');check(integer(minStake,1,10000)&&integer(maxStake,minStake,10000),'Invalid stake.');check(integer(commission,0,50)&&['pot','profit'].includes(feeBase)&&['proportional','order'].includes(matching),'Invalid rule option.');
- check(['A','B','C','D'].includes(variant)&&integer(payoutBasis,100,200)&&integer(bankFunds,1,1000000),'Invalid rule option.');
+ check(['A','B','C','D'].includes(variant)&&integer(payoutBasis,100,200)&&integer(bankFunds,0,1000000),'Invalid rule option.');
  const players=Object.keys(npcs);check(players.length<=20&&players.every(id=>id.startsWith('npc-')&&typeof npcs[id]==='string'&&npcs[id].trim()&&npcs[id].length<=60),'Invalid NPCs.');
  return {gmPeek:gmPeek===true,variant,payoutBasis,bankFunds,bank:bankFunds*({cp:1,sp:10,ep:50,gp:100,pp:1000})[currency],carry:0,carryContrib:{},unit:({cp:1,sp:10,ep:50,gp:100,pp:1000})[currency],version:1,game:'chohan',gameId:crypto.randomUUID(),revision:0,phase:'lobby',players,npcs:structuredClone(npcs),npcManual:{},balances:Object.fromEntries(players.map(id=>[id,10000])),bets:[],currency,minStake,maxStake,commission,feeBase,matching,dice:null,paused:false,round:1,order:[],turn:0,tickets:[],log:[]};
 }
@@ -35,7 +35,7 @@ export function actCho(original,id,action,args={},random=()=>1,gm=false){
   s.pot=2*matched;
  }else{
   s.pot=totals[0]+totals[1]+(s.variant==='D'?s.carry:0);
-  if(['A','C'].includes(s.variant)){const factor=s.variant==='A'?200:s.payoutBasis;const exposure=Math.max(...['even','odd'].map(side=>s.bets.filter(b=>b.side===side).reduce((n,b)=>n+Math.floor(b.amount*factor/100),0)));check(exposure<=s.bank+s.pot,'The bank cannot cover these bets.');}
+  if(['A','C'].includes(s.variant)){const factor=s.variant==='A'?200:s.payoutBasis;const exposure=Math.max(...['even','odd'].map(side=>s.bets.filter(b=>b.side===side).reduce((n,b)=>n+Math.floor(b.amount*factor/100),0)));s.bankShortfall=Math.max(0,exposure-s.bank-s.pot);}
   for(const b of s.bets){b.accepted=b.amount;b.refund=0;}
  }
  s.phase='closed';}
@@ -43,7 +43,7 @@ export function actCho(original,id,action,args={},random=()=>1,gm=false){
  else if(action==='reveal'){
  check(gm&&s.phase==='hidden','GM only.');s.result=s.dice.reduce((n,d)=>n+d,0)%2?'odd':'even';const rows=s.bets.filter(b=>b.side===s.result&&b.accepted>0);
  if(['A','C'].includes(s.variant)){
-  s.fee=0;const factor=s.variant==='A'?200:s.payoutBasis;for(const b of rows){b.payout=Math.floor(b.accepted*factor/100);s.balances[b.id]+=b.payout;}s.bank+=s.pot-rows.reduce((n,b)=>n+b.payout,0);
+  s.fee=0;const factor=s.variant==='A'?200:s.payoutBasis;for(const b of rows){b.payout=Math.floor(b.accepted*factor/100);s.balances[b.id]+=b.payout;}s.bank+=s.pot-rows.reduce((n,b)=>n+b.payout,0);s.bankDebt=Math.max(0,-s.bank);
  }else if(s.variant==='D'&&!rows.length){
   s.fee=0;s.carry=s.pot;for(const b of s.bets)s.carryContrib[b.id]=(s.carryContrib[b.id]??0)+b.accepted;
  }else{
@@ -74,8 +74,10 @@ export class ChoSession{
  async commit(next){
   await this.save(next);this.state=next;this.updateNpcWait();
   if(next.phase==='finished'&&!this.hasAnnouncement(next.gameId)){
-   const name=id=>escapeHTML(next.npcs[id]??this.getName(id));try{await this.announce({content:`<h2>Chō-Han · ${f('Auswertung','Results')}</h2><p>${next.dice.join(' + ')} · ${next.result==='even'?f('Gerade','Even'):f('Ungerade','Odd')} · ${f('Topf','Pot')}: ${next.pot/next.unit} ${next.currency} · ${f('Provision','Commission')}: ${next.fee/next.unit}</p><p>${f('Gewonnen','Winners')}: ${next.winners.map(name).join(', ')||'–'}${next.carry?` · ${f('Übertrag','Carry-over')}: ${next.carry/next.unit} ${next.currency}`:''}</p><ul>${next.bets.map(b=>`<li>${name(b.id)}: ${f('Angenommen','Accepted')} ${b.accepted/next.unit}; ${f('Rückgabe','Refund')} ${b.refund/next.unit}; ${f('Auszahlung','Payout')} ${(b.payout??0)/next.unit}</li>`).join('')}</ul><p>${f('Nur interne Testmünzen. Kein Charaktergeld verändert.','Internal test coins only. Character currency unchanged.')}</p>`,flags:{taverngames:{game:'chohan',gameId:next.gameId}}});}catch(e){globalThis.ui?.notifications?.warn(e.message);}
+   const name=id=>escapeHTML(next.npcs[id]??this.getName(id));try{await this.announce({content:`<h2>Chō-Han · ${f('Auswertung','Results')}</h2><p>${next.dice.join(' + ')} · ${next.result==='even'?f('Gerade','Even'):f('Ungerade','Odd')} · ${f('Topf','Pot')}: ${next.pot/next.unit} ${next.currency} · ${f('Provision','Commission')}: ${next.fee/next.unit}</p><p>${f('Gewonnen','Winners')}: ${next.winners.map(name).join(', ')||'–'}${next.carry?` · ${f('Übertrag','Carry-over')}: ${next.carry/next.unit} ${next.currency}`:''}</p><ul>${next.bets.map(b=>`<li>${name(b.id)}: ${f('Angenommen','Accepted')} ${b.accepted/next.unit}; ${f('Rückgabe','Refund')} ${b.refund/next.unit}; ${f('Auszahlung','Payout')} ${(b.payout??0)/next.unit}</li>`).join('')}</ul><p>${f('Bankguthaben','Bank balance')}: ${next.bank/next.unit} · ${f('Bankschuld','Bank debt')}: ${Math.max(0,-next.bank)/next.unit} ${next.currency}</p><p>${f('Nur interne Testmünzen. Kein Charaktergeld verändert.','Internal test coins only. Character currency unchanged.')}</p>`,flags:{taverngames:{game:'chohan',gameId:next.gameId}}});}catch(e){globalThis.ui?.notifications?.warn(e.message);}
   }
  }
  async npcStep(){if(!this.enabled()||!this.state||this.state.paused||this.state.phase!=='accepting'||this.now()<this.wait)return false;const s=this.state,id=s.players.find(id=>s.npcs[id]&&!s.npcManual[id]&&!s.bets.some(b=>b.id===id)&&s.balances[id]>=s.minStake*s.unit);if(!id)return false;await this.commit(actCho(s,id,'placeBet',{side:this.random(6)<=3?'even':'odd',amount:s.minStake},this.random));return true;}
 }
+
+export function choBankShortfall(s){if(!s||!['A','C'].includes(s.variant)||['finished','aborted'].includes(s.phase))return 0;const factor=s.variant==='A'?200:s.payoutBasis,pot=s.bets.reduce((n,b)=>n+b.amount,0),exposure=Math.max(0,...['even','odd'].map(side=>s.bets.filter(b=>b.side===side).reduce((n,b)=>n+Math.floor(b.amount*factor/100),0)));return Math.max(0,exposure-s.bank-pot);}

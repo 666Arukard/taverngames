@@ -1,9 +1,35 @@
 # Taverngames – Foundry Extension
 
-**Version 2.0.0**. Neun stabile Spiele mit optionaler stabiler Dice-So-Nice-Anbindung: Chō-Han, Drachenhort, Farkle, Kniffel, Lügenwürfel, Schiff–Kapitän–Mannschaft, Schocken, Schweinchen und Straßenlotto.
+**Version 2.1.0**. Neun stabile Spiele mit optionaler stabiler Dice-So-Nice-Anbindung: Chō-Han, Drachenhort, Farkle, Kniffel, Lügenwürfel, Schiff–Kapitän–Mannschaft, Schocken, Schweinchen und Straßenlotto.
 
 
-## Aktuell in 2.0.0
+## Aktuell in 2.1.0
+
+Kniffel Extreme ist nach Daniels Praxistest stabil und ohne Beta-Schalter auswählbar. Bei 17 und 4 bleiben alle Spielerwürfe privat; den ersten Bankwurf sieht nur die SL, weitere Bankwürfe sind offen. Die Bank ist manuell oder automatisch steuerbar. Interne Bankbudgets in 17 und 4 und Chō-Han warnen bei fehlender Deckung, erlauben aber vollständige Auszahlungen mit fortgeführter Bankschuld. Keine Charakterbuchungen. 17 und 4 bleibt Beta.
+
+Kniffel Extreme is stable following Daniel’s playtest and available without beta testing. In Seventeen and Four all player rolls are private; the initial bank roll is GM-only and later bank rolls are public. The bank supports manual or automatic control. Internal bank budgets in Seventeen and Four and Cho-Han warn of insufficient coverage while allowing full payouts with carried bank debt. No character transactions. Seventeen and Four remains beta.
+
+Kniffel → Moderation → Kniffel-Variante: Kniffel Extreme, unabhängig vom Beta-Schalter. 17 und 4 bleibt hinter Beta-Test. Dessen Banksteuerung im Moderationsfenster zwischen Automatik-Modus und SL steuert umschalten. SL sieht nur eigene Spielerwürfe, manuell übernommene NPCs und den ersten Bankwurf. Andere sehen keinerlei Spielerwürfe bis zur Auswertung. Die Bank folgt auch bei manueller Auslösung weiterhin ihrer Stoppregel 16/17; die 10-Prozent-Idee bei 18 ist nicht implementiert.
+
+Bankbudget (internes Gold) vor dem Öffnen einer 17-und-4-Lobby festlegen. Chō-Han A/C nutzen das bestehende Bankkapital-Feld in der gewählten Münzart. Fehlende Deckung warnt in der Moderation, blockiert aber nicht. Vollständige Auszahlung; Negativsaldo ist interne Schuld. Folgepartien übernehmen den Saldo; ausdrücklich neue Lobby legt neues Anfangsbudget fest. Start-/Budget-/NPC-Einstellungen nur SL. Keine Actor-Geldänderungen oder Accountant-Anbindung. Die getrennte vorhandene Charakterabrechnung anderer Spiele wird durch diese internen Budgets nicht verändert.
+
+## Vorheriger Stand 2.0.2
+
+17 und 4 ist als neues Beta-Würfelspiel verfügbar: einzeln gegen die Bank, mit W12 oder optional W8+W6, verdeckten Folgewürfen, benannten NPCs und internen Testeinsätzen. Elfenlauf bleibt als späterer Ambiente-Namensvorschlag hinterlegt. Die allgemeine Umbenennungsfunktion bleibt Planung. Neun Grundspiele bleiben stabil; Kniffel Extreme bleibt eine optionale Beta-Variante.
+
+Seventeen and Four is available as a new beta dice game: play individually against the bank using d12 or optional d8+d6, private later throws, named NPCs and internal test stakes. Elfenlauf is reserved as a future flavor-name suggestion. General renaming remains planned. Nine base games remain stable; Kniffel Extreme remains an optional beta variant.
+
+Moduleinstellungen → Beta-Test einschalten; im Reiter 17 und 4 starten, Würfelvariante und internen Einsatz wählen, Lobby öffnen. Der untere Beitrittsbutton wird nur per SL-Häkchen eingeblendet. Die Bank startet offen, Teilnehmer spielen nacheinander, danach spielt die Bank zu Ende. Weitere Würfe bleiben privat; auch über 21 bewusst Zug abschließen. Standard W12; optional immer beide W8+W6. Gleichstand gewinnt die Bank. Gesamtauszahlung bei Sieg 2×, bei 21 2,5× Einsatz. Abbruch rechnet nichts ab. Kein Zugriff auf Charaktervermögen. Optional DSN für W6/W8/W12-Wurfanimationen; keine liegenbleibende Hand. Praxistest steht aus. Foundry verified unverändert 14.369.
+
+## Vorheriger Stand 2.0.1
+
+Kniffel Extreme steht als optionale Beta-Variante unter Kniffel bereit: fünf W6 und ein W10 mit 0–9, 22 Wertungsfelder, 45 Bonuspunkte ab 73 im oberen Teil und drei Chips für je einen vierten Wurf. Inklusive NPCs, DE/EN-Anleitung und optionaler 3D-Darstellung. Klassisches Kniffel und alle neun stabilen Spiele bleiben regulär verfügbar.
+
+Kniffel Extreme is available as an optional beta variant within Kniffel: five d6 and a zero-based d10, 22 score fields, a 45-point upper bonus at 73, and three chips for one fourth roll each. Includes NPCs, DE/EN instructions and optional 3D dice. Classic Kniffel and all nine stable games remain available normally.
+
+Moduleinstellungen → Beta-Test einschalten; Kniffel-Moderation → Neue Partie & Regeln → Kniffel-Variante: Kniffel Extreme. Standard bleibt klassisches Kniffel. Eine laufende Extreme-Partie bleibt beim Ausschalten des Beta-Schalters spielbar; neue Extreme-Partien benötigen den Schalter. Zwei bis vier Teilnehmer; der sechste Würfel ist ein W10 mit 0–9. Ein Chip ermöglicht nach dem dritten Wurf genau einen vierten Wurf; drei Chips pro Person für die ganze Partie. Kein Zusatzkniffelbonus. Ohne DSN bleibt die Fensterdarstellung verfügbar. Foundry-Verifizierung unverändert 14.369. Neue Variante benötigt noch Daniels Live-Abnahme.
+
+## Vorheriger Stand 2.0.0
 
 Version 2: Die Dice-So-Nice-Anbindung ist nach den bestätigten Spieltests stabil. Alle neun Spiele unterstützen die optionale 3D-Darstellung mit geschützten verdeckten Würfen, ruhenden Würfeln und abgestimmten Spielaktionen. Der 3D-Schalter bleibt separat; vorhandene Einstellungen und Spielstände bleiben erhalten. Ohne Dice So Nice bleiben alle Spiele spielbar.
 
@@ -11,7 +37,7 @@ Version 2: Dice So Nice integration is stable following confirmed playtests. All
 
 Dice So Nice installieren und aktivieren, dann in den Moduleinstellungen „Taverngames: 3D-Würfel mit Dice So Nice“ einschalten. Bei Neuinstallationen ist die Option aus; vorhandene an-/ausgeschaltete Einstellungen bleiben erhalten. Der allgemeine Spiele-Beta-Schalter ist unabhängig und für keines der neun Spiele erforderlich. Ohne DSN bleibt die normale Würfeldarstellung verfügbar. Auswahl und Steuerung erfolgen weiterhin im Spielfenster.
 
-Daniel hat die Spieltests und den letzten Straßenlotto-Fix bestätigt und die stabile Freigabe beauftragt. Technische Referenz: Foundry 14.369 und DSN 6.4.4; keine pauschale Testzusage für andere Versionen. Die Veröffentlichung ist noch nicht erfolgt.
+Daniel hat die Spieltests und den letzten Straßenlotto-Fix bestätigt und die stabile Freigabe beauftragt. Technische Referenz: Foundry 14.369 und DSN 6.4.4; keine pauschale Testzusage für andere Versionen. Version 2.0.0 wurde von Daniel veröffentlicht.
 
 Karten, SL-Manipulation, eigene Spielnamen, direkte Auswahl an 3D-Würfeln, Accountant/Suite und die integrierte linke Spielansicht bleiben separate Zukunftsaufträge.
 

@@ -19,14 +19,14 @@ export class DiceAnimator {
   const game=this.game,dsn=game.dice3d;
   if(!game.modules?.get('dice-so-nice')?.active||typeof dsn?.show!=='function'){this.stats.status='unavailable';this.stats.errors++;if(!this.warned){this.warned=true;this.warn();}return 'unavailable';}
    const dice=[];
-   for(const {sides,value,blank} of event.dice){
-    if(![6,10,20,100].includes(sides)||!Number.isInteger(value)||value<1||value>sides)return;
+   for(const {sides,value,blank,zeroBased} of event.dice){
+    if(![6,8,10,12,20,100].includes(sides)||!Number.isInteger(value)||value<1||value>sides)return;
     if(blank&&(!['schocken','lottery','chohan'].includes(event.scope)||!registerSchockenBlank(dsn)))throw Error('Schocken hidden dice preset unavailable');
     const entry=(type,result,label)=>({type:blank?blankDiceType(type):type,result,resultLabel:blank?'':String(label),vectors:[],options:{owner:this.game.users.get(event.actor)?.id??this.game.user.id,...(event.id?{taverngamesEvent:event.id}:{}),...(blank?{taverngamesDieType:type,colorset:`taverngames-hidden-style-${type}`,appearance:hiddenDiceAppearance(game,type,this.game.users.get(event.actor)??game.user)}:{})},fvttResult:{result:value,active:true},resultIndex:dice.length});
     if(sides===100){
      const tens=Math.floor(value/10)%10,ones=value%10;
      dice.push({...entry('d100',tens,tens*10),compositeResult:value,compositeType:'d100'}, {...entry('d10',ones,ones),compositeResult:value,compositeType:'d100'});
-    }else dice.push(entry(`d${sides}`,value,value));
+    }else dice.push(entry(`d${sides}`,zeroBased&&sides===10&&value===10?0:value,zeroBased&&sides===10&&value===10?0:value));
    }
    if(!dice.length)return;
    // Direct DSN notation avoids reconstructing an evaluated Roll/AST on Foundry 14.

@@ -2,21 +2,25 @@
   "schemaVersion": 1,
   "blocks": {
     "patchnotes": {
-      "title": "Patchnotes Version 2.0.0",
+      "title": "Patchnotes Version 2.1.0",
       "paragraphs": [
-        "Version 2: Die Dice-So-Nice-Anbindung ist nach den bestätigten Spieltests stabil. Alle neun Spiele unterstützen die optionale 3D-Darstellung mit geschützten verdeckten Würfen, ruhenden Würfeln und abgestimmten Spielaktionen. Der 3D-Schalter bleibt separat; vorhandene Einstellungen und Spielstände bleiben erhalten. Ohne Dice So Nice bleiben alle Spiele spielbar."
+        "Kniffel Extreme ist nach Daniels Praxistest stabil und ohne Beta-Schalter auswählbar. Bei 17 und 4 bleiben alle Spielerwürfe privat; den ersten Bankwurf sieht nur die SL, weitere Bankwürfe sind offen. Die Bank ist manuell oder automatisch steuerbar. Interne Bankbudgets in 17 und 4 und Chō-Han warnen bei fehlender Deckung, erlauben aber vollständige Auszahlungen mit fortgeführter Bankschuld. Keine Charakterbuchungen. 17 und 4 bleibt Beta."
       ],
       "items": [
-        "Dice-So-Nice-Anbindung nach bestätigten Tests aller neun Spiele stabil freigegeben.",
-        "Optionaler 3D-Schalter ohne Beta-Kennzeichnung; bestehende Aktivierung und Spielstände bleiben erhalten.",
-        "Geschützte verdeckte Würfe, ruhende Würfel, SL-Einsicht und Aufdecken gemäß dem jeweiligen Spiel.",
-        "Spiele weiterhin ohne Dice So Nice nutzbar; Auswahl erfolgt im Spielfenster.",
-        "Anleitungen und Einstellungsbeschreibung aktualisiert. Keine neuen Spielregeln oder Zukunftsfunktionen."
+        "Kniffel Extreme nach Praxistest stabil freigegeben; ohne Beta-Schalter auswählbar.",
+        "17 und 4: alle Spielerwürfe privat, erster Bankwurf nur für SL, weitere Bankwürfe öffentlich.",
+        "Banksteuerung in der Moderation: SL oder Automatik.",
+        "Interne Bankbudgets mit Warnung bei Unterdeckung und vollständiger Auszahlung; Bankschulden bleiben in Folgepartien erhalten.",
+        "17 und 4 bleibt Beta; keine Buchungen auf Charakterbögen."
       ]
     },
     "games": {
-      "title": "aktuelle Spiele (9)",
-      "paragraphs": [],
+      "title": "aktuelle Spiele (10)",
+      "paragraphs": [
+        "Kniffel enthält zusätzlich die stabile Variante Kniffel Extreme nach Schmidt-Regeln.",
+        "Neun stabile Grundspiele, ein neues Beta-Spiel (17 und 4) und zusätzlich Kniffel Extreme als stabile Variante.",
+        "17 und 4 ist eine Würfel-Hausvariante gegen die Bank mit W12 oder W8+W6 und bleibt Beta."
+      ],
       "items": [
         "Chō-Han",
         "Drachenhort",
@@ -26,11 +30,12 @@
         "Schiff–Kapitän–Mannschaft",
         "Schocken",
         "Schweinchen",
-        "Straßenlotto"
+        "Straßenlotto",
+        "17 und 4 (Beta)"
       ]
     },
     "plans": {
-      "title": "geplante Spiele (39)",
+      "title": "geplante Spiele (38)",
       "paragraphs": [
         "Für diese Spiele und Wettbewerbe liegen Regelreferenzen vor. Die Auswahl ist Planung und keine Zusage zur Umsetzung; einzelne Regelfragen sind noch offen."
       ],
@@ -46,7 +51,6 @@
         "Die böse Dreizehn",
         "Doppelkopf",
         "Durak",
-        "Elfenlauf",
         "Escalero",
         "Gaigel",
         "Gerade oder Ungerade",
@@ -96,9 +100,9 @@
       ]
     },
     "functions": {
-      "title": "aktuelle Funktionen (9)",
+      "title": "aktuelle Funktionen (10)",
       "paragraphs": [
-        "Neun stabile Spiele mit optionaler stabiler Dice-So-Nice-Anbindung. Alle Spiele bleiben auch ohne zusätzliche Würfelmodule nutzbar."
+        "Neun stabile Grundspiele und ein zuschaltbares Beta-Spiel. Optionale 3D-Würfel, SL-Moderation, NPCs und Anleitungen bleiben die gemeinsame Grundlage."
       ],
       "items": [
         "SL-Spielauswahl mit Kategorien, deutsch-englischer Suche, alphabetischer Liste und bis zu fünf lokalen Favoriten.",
@@ -109,7 +113,8 @@
         "Ausgangswetten für Spieler, Zuschauer und NPCs mit internen Goldkonten, gleichmäßiger Topfverteilung unter richtigen Wettern und Chat-Auswertung.",
         "Optionale D&D-5e/5.5e-Charaktergeld-Abrechnung in unterstützten Spielen auf ausdrücklichen SL-Befehl; Elektrum separat schaltbar.",
         "Straßenlotto mit konfigurierbaren Tippscheinen, ausdrücklich durch den SL aufgedeckter Ziehung und einmaliger Übergabe eines SL-ausgewählten Gegenstandspreises.",
-        "Drachenhort und Chō-Han verwenden interne Spielmünzen. Chō-Han bietet Varianten A–D; Chō-Han und Straßenlotto erlauben eine private optionale SL-Einsicht; keine Charaktergeldbuchung für diese Spiele."
+        "Drachenhort und Chō-Han verwenden interne Spielmünzen. Chō-Han bietet Varianten A–D; Chō-Han und Straßenlotto erlauben eine private optionale SL-Einsicht; keine Charaktergeldbuchung für diese Spiele.",
+        "Stabile Kniffel-Extreme-Variante mit 22 Feldern, W10 und Zusatzwurf-Chips."
       ]
     },
     "settings": {
@@ -125,12 +130,15 @@
         "Straßenlotto und Chō-Han: Nach der Auswertung entfernt Spiel beenden im Moderationsfenster die ruhenden Würfel für alle. Nächste Partie vorbereiten bleibt daneben verfügbar. Abgeschlossene Gewinne und Guthaben bleiben erhalten.",
         "Straßenlotto: In der Moderation SL: verdeckte Würfel einsehen aktivieren, um die gespeicherte Ziehung privat einzusehen. Standardmäßig aus. Auch ohne eigenen Tippschein möglich; Spieler erhalten die Zahl erst beim Aufdecken. Ohne DSN erscheint die private Zahl im Moderationsfenster.",
         "Lügenwürfel: Nach einem Modulupdate die Welt neu laden und den separaten Dice-So-Nice-Schalter aktivieren. Jeder würfelt seinen Becher einmal geheim. Beim Anzweifeln erscheinen alle gespeicherten Becher ohne erneute Wurfanimation. Die 3D-Reihen folgen der Spielerliste; Größe und Anordnung passen sich der verfügbaren Fläche an. Weiter entfernt die vorigen Würfel und beginnt den nächsten Durchgang.",
-        "Ab Version 2.0.0 ist die 3D-Anbindung stabil: Dice So Nice installieren und aktivieren; in den Moduleinstellungen Taverngames: 3D-Würfel mit Dice So Nice einschalten. Vorhandene Einstellungen bleiben erhalten. Bei Neuinstallationen bleibt 3D zunächst ausgeschaltet. Der Spiele-Beta-Schalter ist davon unabhängig. Nach dem Modulupdate die Welt neu laden."
+        "Ab Version 2.0.0 ist die 3D-Anbindung stabil: Dice So Nice installieren und aktivieren; in den Moduleinstellungen Taverngames: 3D-Würfel mit Dice So Nice einschalten. Vorhandene Einstellungen bleiben erhalten. Bei Neuinstallationen bleibt 3D zunächst ausgeschaltet. Der Spiele-Beta-Schalter ist davon unabhängig. Nach dem Modulupdate die Welt neu laden.",
+        "2.0.1: Kniffel Extreme ist seit 2.1.0 ohne Beta-Test im Kniffel-Moderationsfenster auswählbar. Standard bleibt klassisch. Der 3D-Schalter ist unabhängig.",
+        "2.0.2: Beta-Test aktiviert weiterhin 17 und 4. Im Moderationsfenster W12 oder W8+W6 und internen Gold-Einsatz wählen. Unteren Startbutton nur über das SL-Häkchen einblenden. Keine Charakterbuchungen. Nach dem Modulupdate die Welt neu laden.",
+        "2.1.0: Kniffel Extreme ohne Beta-Schalter wählen. Bei 17 und 4 Banksteuerung in der Moderation auf Automatik oder SL stellen. Internes Bankbudget vor neuer Lobby setzen; Chō-Han A/C verwenden ihr Bankkapital-Feld. Fehlende Deckung warnt nur, Gewinne werden vollständig ausgezahlt; negative Bankstände werden in Folgepartien übernommen. Kein Charaktergeld. Nach Update Welt neu laden."
       ],
       "items": []
     },
     "sources": {
-      "title": "Regelquellen (32)",
+      "title": "Regelquellen (34)",
       "paragraphs": [
         "Hier findet ihr alle genutzten Regelquellen. Quellen für noch nicht umgesetzte Spiele sind ausdrücklich als geplante Regelreferenzen gekennzeichnet."
       ],
@@ -166,7 +174,9 @@
         "ASS Altenburger – Binokel, Zweierfassung (geplante Regelreferenz) – https://www.spielkarten.com/wp-content/uploads/2019/07/0_Binokel.pdf",
         "Pagat – Binokel, regionale Dreierfassung (geplante Regelreferenz) – https://www.pagat.com/de/marriage/binokel.html",
         "Stayandplay – Gaigel-Kurzanleitung (geplante Regelreferenz) – https://stayandplay.cards/wp-content/uploads/2020/03/DE-Gaigel-1.pdf",
-        "Pagat – Gaigel, regionale Partnerschaftsfassung (geplante Regelreferenz) – https://www.pagat.com/marriage/gaigel.html"
+        "Pagat – Gaigel, regionale Partnerschaftsfassung (geplante Regelreferenz) – https://www.pagat.com/marriage/gaigel.html",
+        "Kniffel Extreme: offizielle Schmidt-Spiele-Anleitung (5 W6 + W10 0–9, 22 Felder, drei Chips).",
+        "17 und 4 (Würfel-Hausvariante): Leif und Daniels Festlegungen; Awiana als abweichende Elfenlauf-Regelreferenz."
       ]
     },
     "sources1": {
@@ -186,9 +196,11 @@
         "Kniffel: nach gestrichenem Kniffelfeld kein Zusatzkniffel-Bonus und keine Joker-Sonderwertung; diese Festlegung klärt die offene Stelle der Regelreferenz.",
         "Ausgangswetten: der gesamte Topf wird gleichmäßig über alle richtigen Wetter verteilt, unabhängig von ihrer individuellen Einsatzhöhe.",
         "Drachenhort: vorzeitiger regulärer Abschluss mit gleichmäßiger Hortverteilung und geheimen Resttipps; Gleichstände werden nur unter den gleich nahen Tipps wiederholt.",
-        "Chō-Han: interne Testguthaben, größter-Bruchteil-Rundung und Folgepartien als Modulergänzungen. Provisionsbasis und Kürzung auswählbar; keine Betrugsregeln umgesetzt."
+        "Chō-Han: interne Testguthaben, größter-Bruchteil-Rundung und Folgepartien als Modulergänzungen. Provisionsbasis und Kürzung auswählbar; keine Betrugsregeln umgesetzt.",
+        "Kniffel Extreme – Schmidt Spiele: https://www.schmidtspiele.de/files/Produkte/5/51296%20-%20Kniffel%C2%AE%20Extreme/51296_Kniffel_Extreme_DE.pdf",
+        "17 und 4: Leifs Würfeladaption mit Daniels Hausregeln; Awiana Elfenlauf, Revision 6669: https://awiana.fandom.com/de/wiki/Elfenlauf?oldid=6669 . Nicht mit klassischem Karten-Blackjack gleichsetzen."
       ]
     }
   },
-  "version": "2.0.0"
+  "version": "2.1.0"
 }
