@@ -1,3 +1,6 @@
+import {prepareTokenState,tokenAction,tokenSnapshot,tokenGuard} from './game-tokens.mjs';
+import {TokenUI,installTokenControls} from './token-ui.mjs';
+import {SeventeenAnimationGate} from './seventeen-presentation.mjs';
 import {SeventeenUI} from './seventeen-ui.mjs';
 import {LiarsAnimationGate,LiarsPersistentDice,liarsDiceState,liarsDiceEvent} from './liars-dice.mjs';
 import {HoardAnimationGate,hoardPublic,hoardDiceState} from './hoard-dice.mjs';
@@ -13,7 +16,6 @@ import {ChoSession} from './chohan.mjs';
 import {ChoUI} from './chohan-ui.mjs';
 import {DiceEvents,DiceAnimator} from './dice-animation.mjs';
 import {OutcomeBets} from './outcome-bets.mjs';
-import {OutcomeUI} from './outcome-ui.mjs';
 import {BETA_GAMES} from './beta-games-engine.mjs';
 import {BetaGameSession} from './beta-games-session.mjs';
 import {BetaGameUI} from './beta-games-ui.mjs';
@@ -32,7 +34,6 @@ import {TavernSession} from './tavern-session.mjs';
 import {KniffelUI} from './kniffel-ui.mjs';
 import {TavernUI} from './tavern-ui.mjs';
 import {BettingManager,COINS} from './wagers.mjs';
-import {BettingUI} from './wagers-ui.mjs';
 import {PrizeManager} from './prizes.mjs';
 import {gameTitle,tavernError} from './tavern-text.mjs';
 const NEW_GAMES=[...ENGINE_GAMES,'chohan'];
@@ -55,7 +56,8 @@ const randomDie=()=>randomSides(6);
 const hasMessage=(flag,value)=>game.messages?.some(m=>(m.getFlag?.(ID,flag)??m.flags?.[ID]?.[flag])===value)??false;
 let ledgerUnavailable=false;
 const clients={},tavernBusy={};
-let seventeenAnimating=false;
+let seventeenAnimating=false,seventeenPreparing=null;
+const seventeenGate=new SeventeenAnimationGate({onClear:()=>sessions.seventeen.updateNpcWait()});
 const gameEnabled=scope=>!GAME_CATALOG.find(entry=>entry.id===scope)?.beta||game.settings.get(ID,'betaTest')===true;
 const diceEvents=new DiceEvents();
 const schockenGate=new SchockenAnimationGate(),schockenPhases=new Map();let schockenVisual=null,schockenLatest=null;
@@ -73,7 +75,7 @@ function liarsProjected(){const raw=authority()?sessions.liars.project(game.user
 function emitLiars(state,actor,action){for(const user of game.users.filter(u=>u.active)){const e=liarsDiceEvent(state,user,actor,action,liarsGate.project(state));diceEvents.add('liars',actor??user.id,e.dice,{privateTo:[user.id],liars:e.liars});}}
 async function syncLiars(next,indices=null){let timer;try{await Promise.race([indices?liarsPersistent.beginRoll(next,indices):liarsPersistent.sync(next),new Promise((_,reject)=>{timer=setTimeout(()=>reject(Error('Liars dice API timeout')),8000);})]);}catch(error){console.warn('Taverngames: Liars dice',error);}finally{clearTimeout(timer);}}
 async function liarsAction(actor,action,fn){
- if(['read','diceRead','diceDiagnostics','liarsAnimationAck','connect'].includes(action))return fn();
+ if(['read','tokenRead','diceRead','diceDiagnostics','liarsAnimationAck','connect'].includes(action))return fn();
  const enabled=game.settings.get(ID,'diceSoNiceBeta')&&game.modules?.get('dice-so-nice')?.active;
  if(!enabled)return diceActionBase('liars',actor,action,fn);
  const before=sessions.liars.state,values=[];capturedDice=values;liarsPreparing={actor,action,before};
@@ -106,7 +108,7 @@ function emitHidden(scope,s,action){for(const user of game.users.filter(u=>u.act
 function hiddenLock(scope,raw){if(!game.settings.get(ID,'diceSoNiceBeta'))return null;const a=authority()?hiddenGates[scope].project(scopeState(scope)):raw?.hiddenAnimation;return a&&Date.now()<a.until?a:null;}
 function hiddenProjected(scope){const raw=authority()?hiddenView(scopeState(scope),game.user):clients[scope];if(hiddenPreparing[scope])return {...hiddenView(hiddenPreparing[scope],game.user),animationPending:true,animationWaiting:true};const a=hiddenLock(scope,raw);if(!a)return raw;return {...(authority()?hiddenView(hiddenGates[scope].before,game.user):raw.hiddenBefore??raw),animationPending:hiddenGatePhases.get(a.id)!=='done',animationWaiting:true};}
 async function syncHidden(scope,s,indices=null,retarget=false){let timer;try{await Promise.race([retarget?hiddenRenderers[scope].retarget(s):indices?hiddenRenderers[scope].beginRoll(s,indices):hiddenRenderers[scope].sync(s),new Promise((_,reject)=>{timer=setTimeout(()=>reject(Error('Hidden dice API timeout')),1000);})]);}catch(e){console.warn('Taverngames: hidden dice',e);}finally{clearTimeout(timer);}}
-async function hiddenAction(scope,actor,action,fn){if(['read','diceRead','diceDiagnostics','hiddenAnimationAck','connect'].includes(action))return fn();const before=structuredClone(scopeState(scope)),values=[];capturedDice=values;const enabled=game.settings.get(ID,'diceSoNiceBeta')&&game.modules?.get('dice-so-nice')?.active;
+async function hiddenAction(scope,actor,action,fn){if(['read','tokenRead','diceRead','diceDiagnostics','hiddenAnimationAck','connect'].includes(action))return fn();const before=structuredClone(scopeState(scope)),values=[];capturedDice=values;const enabled=game.settings.get(ID,'diceSoNiceBeta')&&game.modules?.get('dice-so-nice')?.active;
  if(enabled&&['roll','draw'].includes(action))hiddenPreparing[scope]=before;
  try{const result=await fn(),after=scopeState(scope);diceEvents.record(scope,action,values.length);if(enabled&&after?.revision!==before?.revision){if(values.length&&['roll','draw'].includes(action))hiddenGates[scope].open(before,after,game.users.filter(u=>u.active).map(u=>u.id));else if(['abort','lobby','restart'].includes(action))hiddenGates[scope].clear();emitHidden(scope,after,action);}return result;
  }finally{capturedDice=null;delete hiddenPreparing[scope];if(before?.revision!==scopeState(scope)?.revision)tavernUIs[scope].draw();}}
@@ -124,7 +126,7 @@ function schockenLock(){if(!game.settings.get(ID,'diceSoNiceBeta'))return null;c
 async function syncSchocken(next,indices=null,retarget=false){let timer;try{await Promise.race([retarget?schockenPersistent.retarget(next):indices?schockenPersistent.beginRoll(next,indices):schockenPersistent.sync(next),new Promise((_,reject)=>{timer=setTimeout(()=>reject(Error('Schocken dice API timeout')),1000);})]);}catch(error){console.warn('Taverngames: Schocken 3D',error);}finally{clearTimeout(timer);}}
 function emitSchocken(before,after,action){for(const user of game.users.filter(u=>u.active)){const e=schockenDiceEvent(before,after,user,action,schockenGate.project(after));diceEvents.add('schocken',e.actor,e.dice,{privateTo:[user.id],schocken:e.schocken});}}
 async function schockenAction(actor,action,fn){
- if(['read','diceRead','diceDiagnostics','schockenAnimationAck','connect'].includes(action))return fn();
+ if(['read','tokenRead','diceRead','diceDiagnostics','schockenAnimationAck','connect'].includes(action))return fn();
  const before=structuredClone(state),values=[];capturedDice=values;
  try{const result=await fn();diceEvents.record('schocken',action,values.length);
   if(state?.revision!==before?.revision&&game.settings.get(ID,'diceSoNiceBeta')&&game.modules?.get('dice-so-nice')?.active){
@@ -171,9 +173,9 @@ async function presentHeld(event,play){const {scope,animation:a,state:next}=even
  const live=authority()?sessions[scope].state:clients[scope];if(live?.gameId!==a.gameId||live?.phase==='aborted'||Date.now()>=a.until){await requestFinance(scope,'heldAnimationAck',{id:a.id}).catch(()=>{});return;}
  heldPhases.set(a.id,'rolling');tavernUIs[scope].draw();await syncHeld(scope,a.preview,a.indices);const result=await play();if(result==='confirmed')heldRenderers[scope].capture(scope==='hoard'?hoardDiceState(a.preview):heldState(a.preview),a.indices,event.id);await syncHeld(scope,game.settings.get(ID,'diceSoNiceBeta')?(authority()?sessions[scope].state:clients[scope]):null);const ack=await requestFinance(scope,'heldAnimationAck',{id:a.id}).catch(()=>null);if(!authority()&&clients[scope]?.animation?.id===a.id&&ack)clients[scope]={...clients[scope],animation:ack.animation};heldPhases.set(a.id,'done');if(heldPhases.size>80)heldPhases.delete(heldPhases.keys().next().value);tavernUIs[scope].draw();}
 async function heldAction(scope,actor,action,fn){const before=structuredClone(sessions[scope].state),values=[];capturedDice=values;const enabled=game.settings.get(ID,'diceSoNiceBeta')&&game.modules?.get('dice-so-nice')?.active;if(['roll','resolveGuess'].includes(action)&&enabled)heldPreparing[scope]=scope==='hoard'?hoardPublic(before):before;
- try{const result=await fn();diceEvents.record(scope,action,values.length);const after=sessions[scope].state;if(enabled&&after?.revision!==before?.revision){if(['roll','resolveGuess'].includes(action)&&values.length){const animation=heldGates[scope].open(before,after,values,game.users.filter(u=>u.active).map(u=>u.id));diceEvents.add(scope,actor,scope==='kniffel'&&after.variant==='extreme'?values.map(d=>d.sides===10?{...d,zeroBased:true}:d):values,{held:{scope,animation,state:scope==='hoard'?hoardPublic(after):after}});}else{if(['abort','lobby','restart','undo'].includes(action))heldGates[scope].clear();diceEvents.add(scope,actor,[],{held:{scope,state:scope==='hoard'?hoardPublic(after):after,lock:heldGates[scope].project(after)}});}}return result;}finally{capturedDice=null;delete heldPreparing[scope];if(!['read','heldAnimationAck'].includes(action)&&(!['pig','hoard'].includes(scope)||before?.revision!==sessions[scope].state?.revision))tavernUIs[scope].draw();}}
+ try{const result=await fn();diceEvents.record(scope,action,values.length);const after=sessions[scope].state;if(enabled&&after?.revision!==before?.revision){if(['roll','resolveGuess'].includes(action)&&values.length){const animation=heldGates[scope].open(before,after,values,game.users.filter(u=>u.active).map(u=>u.id));diceEvents.add(scope,actor,scope==='kniffel'&&after.variant==='extreme'?values.map(d=>d.sides===10?{...d,zeroBased:true}:d):values,{held:{scope,animation,state:scope==='hoard'?hoardPublic(after):after}});}else{if(['abort','lobby','restart','undo'].includes(action))heldGates[scope].clear();diceEvents.add(scope,actor,[],{held:{scope,state:scope==='hoard'?hoardPublic(after):after,lock:heldGates[scope].project(after)}});}}return result;}finally{capturedDice=null;delete heldPreparing[scope];if(!['read','heldAnimationAck'].includes(action)&&before?.revision!==sessions[scope].state?.revision)tavernUIs[scope].draw();}}
 async function presentDice(event,play){
- if(event.scope==='seventeen'){seventeenAnimating=true;tavernUIs.seventeen.drawTable();try{return await play();}finally{seventeenAnimating=false;tavernUIs.seventeen.drawTable();}}
+ if(event.scope==='seventeen'){seventeenAnimating=true;tavernUIs.seventeen.drawTable();try{const state=authority()?sessions.seventeen.state:clients.seventeen;if(state?.phase==='aborted'||event.seventeen&&Date.now()>=event.seventeen.until||event.seventeen&&state&&state.gameId!==event.seventeen.gameId)return;return await play();}finally{if(event.seventeen){const next=await requestFinance('seventeen','seventeenAnimationAck',{id:event.seventeen.id}).catch(()=>null);if(!authority()&&next?.game==='seventeen')clients.seventeen=next;}seventeenAnimating=false;tavernUIs.seventeen.drawTable();}}
  if(event.liars)return presentLiars(event);
  if(event.hidden)return presentHidden(event);
  if(event.schocken)return presentSchocken(event,play);
@@ -195,6 +197,7 @@ async function presentDice(event,play){
  }else{await safeFarkleSync(data.state);farkleUI.draw();}
 }
 async function diceAction(scope,actor,action,fn){
+ if(action==='tokenRead')return fn();
  if(scope==='liars')return liarsAction(actor,action,fn);
  if(HIDDEN_GAMES.includes(scope))return hiddenAction(scope,actor,action,fn);
  if(scope==='schocken')return schockenAction(actor,action,fn);
@@ -213,27 +216,28 @@ async function diceAction(scope,actor,action,fn){
   return result;
  }finally{capturedDice=null;farklePreparing=null;if(action!=='read'&&action!=='diceRead'&&action!=='diceDiagnostics'&&action!=='farkleAnimationAck')farkleUI.draw();}
 }
-function seventeenProjected(){const s=authority()?sessions.seventeen.project(game.user):clients.seventeen;return s?{...s,localAnimation:seventeenAnimating}:null;}
+function seventeenProjected(){const s=authority()?(seventeenPreparing?{...sessions.seventeen.project(game.user),...seventeenGate.project(seventeenPreparing,game.user),animationPending:true,animationWaiting:true}:seventeenGate.project(sessions.seventeen.state,game.user)):clients.seventeen;return s?{...s,localAnimation:seventeenAnimating}:null;}
 async function seventeenDiceAction(actor,action,fn){
- if(['read','diceRead','diceDiagnostics','connect'].includes(action))return fn();const before=structuredClone(sessions.seventeen.state),values=[];capturedDice=values;
- try{const result=await fn(),after=sessions.seventeen.state;if(game.settings.get(ID,'diceSoNiceBeta')&&after?.revision!==before?.revision&&['begin','roll','bankRoll'].includes(action)){
- const dice=values.filter(d=>[6,8,12].includes(d.sides));if(dice.length){diceEvents.record('seventeen',action,dice.length);const privateTo=action==='begin'?game.users.filter(u=>u.active&&u.isGM).map(u=>u.id):action==='roll'?[actor,...(before.npcs[actor]&&before.npcManual[actor]?[game.user.id]:[])]:null;diceEvents.add('seventeen',actor,dice,{privateTo});}}
- return result;}finally{capturedDice=null;}
+ if(['read','tokenRead','diceRead','diceDiagnostics','connect','seventeenAnimationAck'].includes(action))return fn();const before=structuredClone(sessions.seventeen.state),values=[];capturedDice=values;const animated=game.settings.get(ID,'diceSoNiceBeta')&&game.modules?.get('dice-so-nice')?.active;
+ if(animated&&['begin','roll','bankRoll'].includes(action))seventeenPreparing=before;
+ try{const result=await fn(),after=sessions.seventeen.state;if(after?.revision!==before?.revision){if(['abort','lobby','restart','undo'].includes(action))seventeenGate.clear();if(animated&&['begin','roll','bankRoll'].includes(action)){const dice=values.filter(d=>[6,8,12].includes(d.sides));if(dice.length){diceEvents.record('seventeen',action,dice.length);const privateTo=action==='begin'?game.users.filter(u=>u.active&&u.isGM).map(u=>u.id):action==='roll'&&!before.hands[actor]?.length?[actor,...(before.npcs[actor]&&before.npcManual[actor]?[game.user.id]:[])]:null,recipients=game.users.filter(u=>u.active&&(!privateTo||privateTo.includes(u.id))).map(u=>u.id),animation=seventeenGate.open(after,actor,action,recipients);for(const id of recipients)diceEvents.add('seventeen',actor,dice,{privateTo:[id],seventeen:animation});}}}return result;
+ }finally{capturedDice=null;seventeenPreparing=null;if(before?.revision!==sessions.seventeen.state?.revision)tavernUIs.seventeen.draw();}
 }
 async function diceActionBase(scope,actor,action,fn){const values=[];capturedDice=values;try{const result=await fn();diceEvents.record(scope,action,values.length);if(game.settings.get(ID,'diceSoNiceBeta')===true){const current=scopeState(scope);if(['roll','draw','resolveGuess'].includes(action)){let privateTo=null;if(scope==='liars')privateTo=[actor,...(current?.npcs?.[actor]&&current?.npcManual?.[actor]?[game.user.id]:[])];if(scope==='schocken')privateTo=current?.cup?.concealed?[]:[actor];if(scope==='chohan')privateTo=[];diceEvents.add(scope,actor,values,{privateTo});}if(scope==='liars'&&action==='challenge'&&current?.reveal)for(const [id,hand]of Object.entries(current.reveal.hands))diceEvents.add(scope,id,hand.map(value=>({sides:6,value})));if(scope==='schocken'&&action==='reveal'){const cup=current?.cup;const result=current?.results?.find(r=>r.id===actor);const dice=cup?.revealed?cup.dice:result&&!result.hidden?result.dice:[];diceEvents.add(scope,actor,(dice??[]).filter(Number.isInteger).map(value=>({sides:6,value})));}}return result;}finally{capturedDice=null;}}
 const sessions=Object.fromEntries(NEW_GAMES.map(scope=>[scope,new (scope==='chohan'?ChoSession:BETA_GAMES.includes(scope)?BetaGameSession:TavernSession)(scope,{enabled:()=>gameEnabled(scope),save:next=>save(next,`${scope}State`),random:randomSides,getName:id=>game.users.get(id)?.name??id,announce:data=>{if(scope==='liars'&&liarsPreparing){liarsAnnouncement=data;return Promise.resolve();}if(hiddenPreparing[scope]){hiddenMessages[scope]=data;return Promise.resolve();}if(scope==='hoard'&&heldPreparing.hoard){hoardAnnouncement=data;return Promise.resolve();}return ChatMessage.create(data);},hasAnnouncement:id=>hasMessage('gameId',id)})]));
 const betting=new BettingManager({isAuthority:authority,save:next=>save(next,'bettingState'),enabled:()=>game.settings.get(ID,'managedBetting')===true,electrum:()=>game.settings.get(ID,'allowElectrum')===true,system:()=>game.system?.id,actor:id=>game.actors?.get(id),character:id=>game.users.get(id)?.character,announce:data=>ChatMessage.create(data),hasMessage:(tx,id)=>game.messages?.some(m=>(m.getFlag?.(ID,'betTx')??m.flags?.[ID]?.betTx)===tx&&(m.getFlag?.(ID,'betActor')??m.flags?.[ID]?.betActor)===id)??false});
 const prizes=new PrizeManager({isAuthority:authority,save:next=>save(next,'prizeState'),system:()=>game.system?.id,actor:id=>game.actors?.get(id),item:uuid=>(globalThis.foundry?.utils?.fromUuid??globalThis.fromUuid)(uuid),announce:data=>ChatMessage.create(data),hasMessage:id=>hasMessage('prizeAward',id)});
-const moneyUI=new BettingUI({request:requestFinance});
+const moneyUI=new TokenUI({request:requestFinance});
 const outcomes=new OutcomeBets({isAuthority:authority,save:next=>save(next,'outcomeState'),user:id=>game.users.get(id),announce:data=>ChatMessage.create(data),hasAnnouncement:id=>hasMessage('outcomeBet',id)});
-const outcomeUI=new OutcomeUI({request:requestFinance});
-async function settleOutcome(scope){if(scope==='liars'&&(liarsPreparing||liarsGate.active(sessions.liars.state)))return;if(HIDDEN_GAMES.includes(scope)&&(hiddenPreparing[scope]||hiddenGates[scope].active(scopeState(scope))))return;if(scope==='hoard'&&(heldPreparing.hoard||heldGates.hoard.active(sessions.hoard.state)))return;if(!ledgerUnavailable)await outcomes.observe(scope,scopeState(scope));}
+const outcomeUI=new TokenUI({request:requestFinance});const outcomeOpen=outcomeUI.open.bind(outcomeUI);outcomeUI.open=scope=>outcomeOpen(scope,'bets');
+async function settleOutcome(scope){if(scope==='liars'&&(liarsPreparing||liarsGate.active(sessions.liars.state)))return;if(HIDDEN_GAMES.includes(scope)&&(hiddenPreparing[scope]||hiddenGates[scope].active(scopeState(scope))))return;if(scope==='hoard'&&(heldPreparing.hoard||heldGates.hoard.active(sessions.hoard.state)))return;await announceTokens(scope);}
 const tavernUIs=Object.fromEntries(NEW_GAMES.map(scope=>[scope,new (scope==='chohan'?ChoUI:BETA_GAMES.includes(scope)?BetaGameUI:scope==='kniffel'?KniffelUI:scope==='seventeen'?SeventeenUI:TavernUI)(scope,{request:(action,args)=>requestTavern(scope,action,args),getState:()=>scope==='liars'?liarsProjected():scope==='seventeen'?seventeenProjected():HIDDEN_GAMES.includes(scope)?hiddenProjected(scope):HELD_GAMES.includes(scope)?heldProjected(scope):authority()?(sessions[scope].project?sessions[scope].project(game.user):sessions[scope].state):clients[scope],openOutcome:scope=>outcomeUI.open(scope),openBetting:scope=>moneyUI.open(scope)})]));
 const scopeState=scope=>scope==='schocken'?state:scope==='farkle'?farkleSession.state:sessions[scope]?.state;
-async function deliverPrize(current,user){const id=current?.winners?.[0],actorId=betting.state.books[current?.gameId]?.mapping[id]??game.users.get(id)?.character?.id;await prizes.deliver(current,user,actorId);}
+for(const panel of Object.values(tavernUIs))installTokenControls(panel,scope=>moneyUI.open(scope),scope=>outcomeUI.open(scope));
+async function deliverPrize(current,user){const id=current?.winners?.[0],actorId=current?.economy?.mapping?.[id]??betting.state.books[current?.gameId]?.mapping[id]??game.users.get(id)?.character?.id;await prizes.deliver(current,user,actorId);}
 let farkleClient=null,farkleBusy=false;
 const farkleSession=new FarkleSession({save:next=>save(next,'farkleState'),diceSource:randomDie,getName:id=>game.users.get(id)?.name??id,announce:data=>ChatMessage.create(data),hasAnnouncement:id=>game.messages?.some(message=>message.getFlag?.(ID,'gameId')===id)??false,allowBestSelection:()=>game.settings.get(ID,'allowFarkleBestSelection')===true});
-const farkleUI=new FarkleUI({request:requestFarkle,getState:farkleProjected,openOutcome:scope=>outcomeUI.open(scope),openBetting:scope=>moneyUI.open(scope)});
+const farkleUI=new FarkleUI({request:requestFarkle,getState:farkleProjected,openOutcome:scope=>outcomeUI.open(scope),openBetting:scope=>moneyUI.open(scope)});farkleUI.scope='farkle';installTokenControls(farkleUI,scope=>moneyUI.open(scope),scope=>outcomeUI.open(scope));
 function enqueue(fn) {const result=queue.then(fn);queue=result.catch(()=>{});return result;}
 const base64=bytes=>btoa(String.fromCharCode(...new Uint8Array(bytes)));
 const unbase64=text=>Uint8Array.from(atob(text),c=>c.charCodeAt(0));
@@ -245,6 +249,7 @@ async function storageKey() {
   key=await crypto.subtle.importKey("raw",unbase64(raw),"AES-GCM",false,["encrypt","decrypt"]);return key;
 }
 async function save(next,setting='state') {
+  const scope=setting==='state'?'schocken':setting==='farkleState'?'farkle':NEW_GAMES.find(id=>setting===id+'State');if(scope)prepareTokenState(next,scopeState(scope),scope);
   const iv=crypto.getRandomValues(new Uint8Array(12));
   const cipher=await crypto.subtle.encrypt({name:"AES-GCM",iv},await storageKey(),new TextEncoder().encode(JSON.stringify(next)));
   await game.settings.set(ID,setting,{format:1,iv:base64(iv),cipher:base64(cipher)});if(setting==='state')savedExists=true;
@@ -255,6 +260,11 @@ async function announceFinished(previous,next) {
   try {
     await ChatMessage.create(announcement(next,id=>next.npcs?.[id]??game.users.get(id)?.name??id));announced.add(next.gameId);
   }catch(e){ui.notifications.warn(tr`Schocken: Spiel gespeichert, Chat-Ankündigung fehlgeschlagen: ${t(e.message)}`);}
+}
+function tokenPayload(scope,s,user){const payload=tokenSnapshot(scope,s);if(user.isGM)payload.legacy=structuredClone({settlements:Object.values(betting.state.books).filter(b=>b.scope===scope),outcomeBets:Object.values(outcomes.state.books).filter(b=>b.scope===scope),virtualGoldAccounts:outcomes.state.accounts});return payload;}
+async function announceTokens(scope){
+ const s=scopeState(scope),e=s?.economy;if(scope==='chohan'&&e?.mode==='none'&&s.phase==='finished'){const flag=s.gameId+':no-stakes';if(!hasMessage('tokenSettlement',flag))try{await ChatMessage.create({content:`<h2>Chō-Han</h2><p>${s.dice.join(' + ')} · ${s.result==='even'?f('Gerade','Even'):f('Ungerade','Odd')} · ${f('Ohne Einsatz','No stakes')}</p>`,flags:{taverngames:{tokenSettlement:flag}}});}catch(error){ui.notifications.warn(error.message);}return;}if(!e?.summary)return;const flag=s.gameId+':'+s.phase;if(hasMessage('tokenSettlement',flag))return;const esc=v=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));const label=id=>esc(s.npcs?.[id]??e.bets?.npcs?.[id]??game.users.get(id)?.name??id);
+ try{await ChatMessage.create({content:`<h2>${esc(gameTitle(scope))} · ${f('Spieltoken-Abrechnung','Game token settlement')}</h2><p>${f('Keine Charakter-Geldbuchung.','No character currency transaction.')}</p>${scope==='chohan'&&s.phase==='finished'?`<p>${s.dice.join(' + ')} · ${s.result==='even'?f('Gerade','Even'):f('Ungerade','Odd')} · ${f('Gewonnen','Winners')}: ${(s.winners??[]).map(label).join(', ')||'–'}</p>`:''}<ul>${Object.entries(e.summary.net).map(([id,n])=>`<li>${label(id)} · ${f('Einsatz / Sicherheit','Stake / security')}: ${e.summary.stakes[id]??0} · ${f('Auszahlung / Freigabe','Payout / release')}: ${e.summary.payouts[id]??0} = ${Math.abs(n)} ${f('Spieltoken','game tokens')} ${n>=0?f('Gewinn','profit'):f('Verlust','loss')}</li>`).join('')}</ul><p>${f('Bankbestand','Bank balance')}: ${e.bank} · ${f('Bankschuld','Bank debt')}: ${Math.max(0,-e.bank)}</p>${e.bets?.payouts?`<h3>${f('Ausgangswetten','Outcome bets')}</h3><ul>${e.bets.bets.map(b=>`<li>${label(b.id)} → ${label(b.target)} · ${b.amount} → ${e.bets.payouts[b.id]??0} ${f('Spieltoken','game tokens')}</li>`).join('')}</ul>`:''}`,flags:{taverngames:{tokenSettlement:flag}}});}catch(error){ui.notifications.warn(error.message);}
 }
 async function initializeAuthority() {
   if(!authority()||initialized)return;
@@ -285,7 +295,7 @@ async function grant(user) {
   const token=crypto.randomUUID()+crypto.randomUUID();tokens.set(user.id,token);
   try {await user.query(GRANT,{token},{timeout:5000});}catch {tokens.delete(user.id);}
 }
-async function command(data,local=false){const scope=data?.game??'schocken',before=scopeState(scope),user=local?game.user:game.users.get(data?.user),actor=scope==='liars'?(user?.isGM&&before?.npcs?.[data?.args?.id]?data.args.id:user?.id):(before?.order?.[before.turn]??data?.user);const result=await diceAction(scope,actor,data?.action,()=>commandCore(data,local));if(scope==='liars'&&result?.game==='liars')return {...result,liarsAnimation:liarsLock(result)};if(HIDDEN_GAMES.includes(scope)&&result?.game===scope){const a=hiddenLock(scope,result),before=a?hiddenView(hiddenGates[scope].before,user):null;return {...(scope==='lottery'&&a?{...before,revision:result.revision}:result),hiddenAnimation:a,hiddenBefore:before};}return scope==='schocken'&&result?.version===1&&Array.isArray(result.order)?{...result,schockenAnimation:game.settings.get(ID,'diceSoNiceBeta')?schockenGate.project(state):null}:HELD_GAMES.includes(scope)&&result?.game===scope?{...result,animation:game.settings.get(ID,'diceSoNiceBeta')?heldGates[scope].project(sessions[scope].state):null}:scope==='farkle'&&result?.game==='farkle'?{...result,animation:game.settings.get(ID,'diceSoNiceBeta')?farkleGate.project(farkleSession.state):null}:result;}
+async function command(data,local=false){const scope=data?.game??'schocken',before=scopeState(scope),user=local?game.user:game.users.get(data?.user),actor=scope==='liars'?(user?.isGM&&before?.npcs?.[data?.args?.id]?data.args.id:user?.id):(before?.order?.[before.turn]??data?.user);const result=await diceAction(scope,actor,data?.action,()=>commandCore(data,local));if(scope==='seventeen'&&result?.game==='seventeen')return seventeenGate.project(sessions.seventeen.state,user);if(scope==='liars'&&result?.game==='liars')return {...result,liarsAnimation:liarsLock(result)};if(HIDDEN_GAMES.includes(scope)&&result?.game===scope){const a=hiddenLock(scope,result),before=a?hiddenView(hiddenGates[scope].before,user):null;return {...(scope==='lottery'&&a?{...before,revision:result.revision}:result),hiddenAnimation:a,hiddenBefore:before};}return scope==='schocken'&&result?.version===1&&Array.isArray(result.order)?{...result,schockenAnimation:game.settings.get(ID,'diceSoNiceBeta')?schockenGate.project(state):null}:HELD_GAMES.includes(scope)&&result?.game===scope?{...result,animation:game.settings.get(ID,'diceSoNiceBeta')?heldGates[scope].project(sessions[scope].state):null}:scope==='farkle'&&result?.game==='farkle'?{...result,animation:game.settings.get(ID,'diceSoNiceBeta')?farkleGate.project(farkleSession.state):null}:result;}
 
 async function commandCore(data, local=false) {
   if(game.modules?.get('schocken')?.active)throw new Error(t('Altes Modul Schocken zuerst deaktivieren.'));
@@ -302,37 +312,37 @@ async function commandCore(data, local=false) {
    const current=schockenGate.active(state);if(current?.id===data.args?.id&&current.pending.has(user.id)){schockenGate.ack(current.id,user.id);if(!schockenGate.active(state)){emitSchocken(state,state,'sync');draw();}}
    return {animation:schockenGate.project(state)};
   }
-  if((data.game??'schocken')==='schocken'&&game.settings.get(ID,'diceSoNiceBeta')&&schockenGate.active(state)&&!['read','diceRead','diceDiagnostics','connect','abort','pause','npcControl'].includes(data.action))throw Error(f('Bitte das Ende der Würfelanimation abwarten.','Please wait for the dice animation to finish.'));
+  if((data.game??'schocken')==='schocken'&&game.settings.get(ID,'diceSoNiceBeta')&&schockenGate.active(state)&&!['read','tokenRead','diceRead','diceDiagnostics','connect','abort','pause','npcControl'].includes(data.action))throw Error(f('Bitte das Ende der Würfelanimation abwarten.','Please wait for the dice animation to finish.'));
   if(data.action==='liarsAnimationAck'){if(data.game!=='liars')throw Error('Unknown game.');const c=liarsGate.active(sessions.liars.state);if(c?.id===data.args?.id&&c.pending.has(user.id))liarsGate.ack(c.id,user.id);return {animation:liarsGate.project(sessions.liars.state)};}
-  if(data.game==='liars'&&liarsLock(sessions.liars.state)&&!['read','abort','pause','npcControl'].includes(data.action))throw Error(f('Bitte das Ende der Würfelanimation abwarten.','Please wait for the dice animation to finish.'));
+  if(data.game==='liars'&&liarsLock(sessions.liars.state)&&!['read','tokenRead','abort','pause','npcControl'].includes(data.action))throw Error(f('Bitte das Ende der Würfelanimation abwarten.','Please wait for the dice animation to finish.'));
   if(data.action==='hiddenAnimationAck'){if(!HIDDEN_GAMES.includes(data.game))throw Error('Unknown game.');const g=hiddenGates[data.game],c=g.active(scopeState(data.game));if(c?.id===data.args?.id&&c.pending.has(user.id))g.ack(c.id,user.id);return {animation:g.project(scopeState(data.game))};}
-  if(HIDDEN_GAMES.includes(data.game)&&hiddenLock(data.game,scopeState(data.game))&&!['read','abort','pause','npcControl'].includes(data.action))throw Error(f('Bitte das Ende der Würfelanimation abwarten.','Please wait for the dice animation to finish.'));
+  if(HIDDEN_GAMES.includes(data.game)&&hiddenLock(data.game,scopeState(data.game))&&!['read','tokenRead','abort','pause','npcControl'].includes(data.action))throw Error(f('Bitte das Ende der Würfelanimation abwarten.','Please wait for the dice animation to finish.'));
   if(data.action==='heldAnimationAck'){if(!HELD_GAMES.includes(data.game))throw Error('Unknown game.');const current=heldGates[data.game].active(sessions[data.game].state);if(current?.id!==data.args?.id||!current?.pending.has(user.id))return {animation:heldGates[data.game].project(sessions[data.game].state)};heldGates[data.game].ack(data.args?.id,user.id);const animation=heldGates[data.game].project(sessions[data.game].state);diceEvents.add(data.game,user.id,[],{held:{scope:data.game,state:data.game==='hoard'?hoardPublic(sessions.hoard.state):sessions[data.game].state,lock:animation}});return {animation};}
-  if(HELD_GAMES.includes(data.game)&&game.settings.get(ID,'diceSoNiceBeta')&&heldGates[data.game].active(sessions[data.game].state)&&!['read','abort','pause','npcControl'].includes(data.action)&&!(['hold','return'].includes(data.action)&&!heldGates[data.game].current.pending.has(user.id)))throw Error(f('Bitte das Ende der Würfelanimation abwarten.','Please wait for the dice animation to finish.'));
+  if(HELD_GAMES.includes(data.game)&&game.settings.get(ID,'diceSoNiceBeta')&&heldGates[data.game].active(sessions[data.game].state)&&!['read','tokenRead','abort','pause','npcControl'].includes(data.action)&&!(['hold','return'].includes(data.action)&&!heldGates[data.game].current.pending.has(user.id)))throw Error(f('Bitte das Ende der Würfelanimation abwarten.','Please wait for the dice animation to finish.'));
   if(data.action==='farkleAnimationAck'){const current=farkleGate.active(farkleSession.state);if(current?.id!==data.args?.id||!current?.pending.has(user.id))return {animation:farkleGate.project(farkleSession.state)};farkleGate.ack(data.args?.id,user.id);const animation=farkleGate.project(farkleSession.state);diceEvents.add('farkle',user.id,[],{farkle:{state:farkleSession.state,lock:animation}});farkleUI.draw();return {animation};}
-  if(data.game==='farkle'&&game.settings.get(ID,'diceSoNiceBeta')&&farkleGate.active(farkleSession.state)&&!['read','abort','pause','npcControl'].includes(data.action)&&!(['toggle','select','best'].includes(data.action)&&!farkleGate.current.pending.has(user.id))){throw Error(f('Bitte das Ende der Würfelanimation abwarten.','Please wait for the dice animation to finish.'));}
+  if(data.game==='farkle'&&game.settings.get(ID,'diceSoNiceBeta')&&farkleGate.active(farkleSession.state)&&!['read','tokenRead','abort','pause','npcControl'].includes(data.action)&&!(['toggle','select','best'].includes(data.action)&&!farkleGate.current.pending.has(user.id))){throw Error(f('Bitte das Ende der Würfelanimation abwarten.','Please wait for the dice animation to finish.'));}
+  if(data.game==='seventeen'&&data.action==='seventeenAnimationAck'){seventeenGate.ack(data.args?.id,user.id);return gameEnabled('seventeen')?seventeenGate.project(sessions.seventeen.state,user):null;}
   if(data.action==='diceDiagnostics'){if(!user.isGM)throw Error('GM only.');return diceEvents.diagnostics();}
   if(data.action==='diceRead'){const batch=diceEvents.read(user,Number.isSafeInteger(data.args?.after)?data.args.after:0);return game.settings.get(ID,'diceSoNiceBeta')===true?batch:{cursor:batch.cursor,events:[]};}
   const scope=data.game??'schocken';
   if(!['schocken','farkle',...NEW_GAMES].includes(scope))throw new Error('Unknown game.');
   if(!gameEnabled(scope)&&!(data.action==='abort'&&user.isGM))throw new Error('Beta testing is disabled.');
-  if(data.action.startsWith('outcome')){if(ledgerUnavailable)throw new Error('Resume in the original GM browser before modifying wallets or items.');await settleOutcome(scope);return outcomes.handle(scope,scopeState(scope),data,user);}
-  await settleOutcome(scope);outcomes.guard(scope,scopeState(scope),data.action);
-  if((BETA_GAMES.includes(scope)||scope==='chohan'||scope==='seventeen')&&data.action.startsWith('bet'))throw new Error('Automatic currency transactions are not available.');
-  if(scope==='kniffel'&&data.action.startsWith('bet'))throw new Error('Kniffel betting is not available.');
-  if(ledgerUnavailable&&['betConfigure','betSettle','awardPrize','waivePrize'].includes(data.action))throw new Error('Resume in the original GM browser before modifying wallets or items.');
-  if(data.action.startsWith('bet')){
-    if(data.action!=='betRead'&&data.args?.gameId!==scopeState(scope)?.gameId)throw new Error('The game state changed. Please try again.');
-    return betting.handle(scope,scopeState(scope),data,user);
+  if(scope==='seventeen'&&seventeenGate.active(sessions.seventeen.state)&&!['read','tokenRead','abort','pause','npcControl','bankControl'].includes(data.action))throw Error(f('Bitte das Ende der Würfelanimation abwarten.','Please wait for the dice animation to finish.'));
+  if(data.action==='tokenRead')return tokenPayload(scope,scopeState(scope),user);
+  if(data.action.startsWith('token')){
+    const next=tokenAction(scope,scopeState(scope),data.action,data.args??{},user,{users:game.users.map(u=>u.id)});await save(next,scope==='schocken'?'state':scope==='farkle'?'farkleState':scope+'State');if(scope==='schocken')state=next;else if(scope==='farkle')farkleSession.state=next;else sessions[scope].state=next;if(scope==='schocken')draw();else if(scope==='farkle')farkleUI.draw();else tavernUIs[scope].draw();return tokenPayload(scope,next,user);
   }
+  if(data.action.startsWith('outcome'))throw Error(f('Alte Goldwetten sind nur noch historische Nachweise. Neue Wetten über Spieltoken öffnen.','Legacy gold bets are historical records. Open new bets through game tokens.'));
+  if(data.action.startsWith('bet'))throw Error(f('Direkte Charakter-Geldbuchungen wurden entfernt. Bitte Spieltoken verwenden.','Direct character currency transactions have been removed. Please use game tokens.'));
+  await settleOutcome(scope);tokenGuard(scope,scopeState(scope),data.action);
+  if(ledgerUnavailable&&['awardPrize','waivePrize'].includes(data.action))throw new Error('Resume in the original GM browser before modifying wallets or items.');
   if(['awardPrize','waivePrize'].includes(data.action)){
     if(!user.isGM||scope!=='lottery')throw new Error('GM only.');
     if(data.revision!==sessions.lottery.state?.revision)throw new Error('The game state changed. Please try again.');
     if(data.action==='waivePrize')await prizes.waive(sessions.lottery.state,user);else await deliverPrize(sessions.lottery.state,user);return structuredClone(sessions.lottery.state);
   }
-  if(['start','lobby','restart'].includes(data.action)&&(betting.hasPending(scope)||prizes.pending(scopeState(scope))))throw new Error('Complete the pending settlement or prize delivery first.');
+  if(['start','lobby','restart'].includes(data.action)&&prizes.pending(scopeState(scope)))throw new Error('Complete the pending settlement or prize delivery first.');
   if(NEW_GAMES.includes(scope)){
-    if(data.action==='lobby'&&data.args?.currency==='ep'&&!game.settings.get(ID,'allowElectrum'))throw new Error('Electrum is disabled.');
     if(scope==='lottery'&&data.action==='begin'&&sessions.lottery.state?.prizeUuid){if(!user.isGM)throw new Error('GM only.');const item=await (globalThis.foundry?.utils?.fromUuid??globalThis.fromUuid)(sessions.lottery.state.prizeUuid);if(item?.documentName!=='Item'||!Number.isSafeInteger(item.system?.quantity)||item.system.quantity<1)throw new Error('The prize item is missing or out of stock.');}
     const previous=sessions[scope].state,result=await sessions[scope].handle(data,user);
     await settleOutcome(scope);if(data.action!=='read')tavernUIs[scope].draw();
@@ -346,7 +356,9 @@ async function commandCore(data, local=false) {
   if(data.action==="read") return view(state,user.id,user.isGM);
   if(!['join','leave'].includes(data.action)&&!(data.action==='abort'&&user.isGM)&&data.revision!== (state?.revision ?? -1)) throw new Error(t("Spielstand wurde inzwischen geändert. Bitte erneut versuchen."));
   let next;
-  if(data.action==="start"||data.action==="lobby") {
+  if(data.action==='restart'){
+    if(!user.isGM||!state||!['finished','aborted'].includes(state.phase))throw Error('Finish or end the current game first.');next=create(state.players,{npcs:state.npcs,labels:state.labels,loading:state.loadAtStart,allowReturn:state.rules.allowReturn,hiddenThird:state.rules.hiddenThird,lobby:true});next.gameId=crypto.randomUUID();next.revision=state.revision+1;
+  }else if(data.action==="start"||data.action==="lobby") {
     if(!user.isGM) throw new Error(t("Nur GM kann starten."));
     const ids=data.action==='lobby'?[]:data.args?.ids;
     if(!Array.isArray(ids)||ids.some(id=>!game.users.get(id)?.active)) throw new Error(t("Nur verbundene Spieler auswählen."));
@@ -384,16 +396,16 @@ async function requestTavern(scope,action,args={}){
   try{
     const gm=primary();if(!gm)throw new Error('A GM must be connected.');
     await ensureCapability(gm);
-    const old=authority()?sessions[scope].state:clients[scope],previousAnimation=clients[scope]?.animation?.id,data={game:scope,action,args,user:game.user.id,token:capability,revision:old?.revision??-1};
+    const old=authority()?sessions[scope].state:clients[scope],previousPresentation=tavernUIs[scope].lastReadPresentation,previousAnimation=clients[scope]?.animation?.id,data={game:scope,action,args,user:game.user.id,token:capability,revision:old?.revision??-1};
     const result=authority()?await enqueue(()=>command(data,true)):await gm.query(QUERY,data,{timeout:15000});
-    if(action!=='read')void pollDice();if(!authority())clients[scope]=result;if(scope==='liars'&&!liarsLock(result)&&game.settings.get(ID,'diceSoNiceBeta')){const visual=liarsDiceState(result,game.user);liarsPersistent.latest=visual;void syncLiars(visual);}if(action!=='read'||old?.revision!==result?.revision||scope==='liars'&&(result?.liarsAnimation||old?.liarsAnimation)||HIDDEN_GAMES.includes(scope)&&(result?.hiddenAnimation||old?.hiddenAnimation)||HELD_GAMES.includes(scope)&&(result?.animation||previousAnimation))tavernUIs[scope].draw();
+    const presentation=scope==='seventeen'?JSON.stringify([!!result?.animationWaiting,!!result?.animationPending,result?.seventeenAnimation?.id??null]):null;if(scope==='seventeen')tavernUIs[scope].lastReadPresentation=presentation;if(action!=='read')void pollDice();if(!authority())clients[scope]=result;if(scope==='liars'&&!liarsLock(result)&&game.settings.get(ID,'diceSoNiceBeta')){const visual=liarsDiceState(result,game.user);liarsPersistent.latest=visual;void syncLiars(visual);}if(action!=='read'||old?.revision!==result?.revision||scope==='seventeen'&&previousPresentation!==presentation||scope==='liars'&&(result?.liarsAnimation||old?.liarsAnimation)||HIDDEN_GAMES.includes(scope)&&(result?.hiddenAnimation||old?.hiddenAnimation)||HELD_GAMES.includes(scope)&&result?.animation?.id!==previousAnimation)tavernUIs[scope].draw();
   }catch(e){ui.notifications.warn(`${gameTitle(scope)}: ${tavernError(e.message)}`);}finally{tavernBusy[scope]=false;}
 }
 async function requestFinance(scope,action,args={}){
   const gm=primary();if(!gm)throw new Error(tavernError('A GM must be connected.'));
   await ensureCapability(gm);
   const data={game:scope,action,args,revision:args.revision,user:game.user.id,token:capability};
-  try{return authority()?await enqueue(()=>command(data,true)):await gm.query(QUERY,data,{timeout:30000});}catch(e){throw new Error(tavernError(e.message));}
+  try{const result=authority()?await enqueue(()=>command(data,true)):await gm.query(QUERY,data,{timeout:30000});if(!authority()&&action.startsWith('token')&&action!=='tokenRead'){if(scope==='schocken')void request('read');else if(scope==='farkle')void requestFarkle('read');else void requestTavern(scope,'read');}return result;}catch(e){throw new Error(tavernError(e.message));}
 }
 async function requestFarkle(action,args={}){
   if(farkleBusy)return;farkleBusy=true;
@@ -427,7 +439,7 @@ function drawModerationContent() {
   moderation.replaceChildren();
   const content=el('div',undefined,'schocken-content');moderation.append(content);
   content.append(el('p',`Schocken ${game.modules.get(ID)?.version??''} · ${checkFoundry(game.release,game.version).message}`,'schocken-help'));
-  button(content,'Spieltisch öffnen',()=>open(false));button(content,'Anleitung',openGuide);button(content,f('Einsätze & Charaktere','Stakes & characters'),()=>moneyUI.open('schocken'),!state);button(content,f('Wetten','Bets'),()=>outcomeUI.open('schocken'));
+  button(content,'Spieltisch öffnen',()=>open(false));button(content,'Anleitung',openGuide);button(content,f('Einsätze & Spieltoken','Stakes & game tokens'),()=>moneyUI.open('schocken'),!state);button(content,f('Wetten','Bets'),()=>outcomeUI.open('schocken'));
   const showLabel=el('label',undefined,'schocken-choice'),show=el('input');show.type='checkbox';show.checked=game.settings.get(ID,'showLauncher');show.addEventListener('change',async()=>{try{await game.settings.set(ID,'showLauncher',show.checked);}catch(e){ui.notifications.warn(t(e.message));drawModeration();}});showLabel.append(show,document.createTextNode(t('Unteren Schocken-Button für alle einblenden')));content.append(showLabel);
   if(game.user.isGM) {
     const setup=el("details");setup.dataset.section='setup';setup.append(el("summary","Spieler, NPCs & neues Spiel"));
@@ -453,7 +465,7 @@ function drawModerationContent() {
 
   if(!state)return;
   const s=state;
-  const tools=el('div',undefined,'schocken-actions');if(!['aborted','finished'].includes(s.phase)){if(s.phase==='lobby')button(tools,'Spiel starten',()=>request('begin'),s.paused||s.players.length<2);button(tools,s.paused?'Fortsetzen':'Pause',()=>request('pause'));button(tools,'Rückgängig',()=>request('undo'));button(tools,'Spiel beenden',()=>{if(confirm(t('Spiel für alle Teilnehmer einschließlich der aktiven Runde beenden?')))void request('abort');});}content.append(tools);
+  const tools=el('div',undefined,'schocken-actions');if(['aborted','finished'].includes(s.phase))button(tools,f('Nächste Partie vorbereiten','Prepare next game'),()=>request('restart'));if(!['aborted','finished'].includes(s.phase)){if(s.phase==='lobby')button(tools,'Spiel starten',()=>request('begin'),s.paused||s.players.length<2);button(tools,s.paused?'Fortsetzen':'Pause',()=>request('pause'));button(tools,'Rückgängig',()=>request('undo'));button(tools,'Spiel beenden',()=>{if(confirm(t('Spiel für alle Teilnehmer einschließlich der aktiven Runde beenden?')))void request('abort');});}content.append(tools);
   if(Object.keys(s.npcs??{}).length) {
     content.append(el('h3','NPC-Steuerung'));
     for(const id of Object.keys(s.npcs)) {
@@ -555,10 +567,10 @@ Hooks.once("init",()=>{
   game.settings.register(ID,'allowFarkleBestSelection',{scope:'world',config:false,restricted:true,type:Boolean,default:false,onChange:()=>farkleUI.draw()});
   for(const scope of NEW_GAMES){game.settings.register(ID,`${scope}State`,{scope:'world',config:false,restricted:true,type:Object,default:null});game.settings.register(ID,`show${scope}Launcher`,{scope:'world',config:false,restricted:true,type:Boolean,default:false,onChange:()=>{refreshLauncher();tavernUIs[scope].drawModeration();}});}
   for(const setting of ['bettingState','prizeState','outcomeState'])game.settings.register(ID,setting,{scope:'world',config:false,restricted:true,type:Object,default:null});
-  for(const [setting,de,en] of [['managedBetting','Verwaltetes Setzen','Managed betting'],['allowElectrum','Elektrum verwenden','Use electrum']])game.settings.register(ID,setting,{name:`Taverngames: ${f(de,en)}`,scope:'world',config:true,restricted:true,type:Boolean,default:false,onChange:()=>{moneyUI.draw();for(const panel of Object.values(tavernUIs))panel.drawModeration();}});
-  game.settings.register(ID,'betaTest',{name:f('Taverngames: Beta-Test','Taverngames: Beta testing'),hint:f('Testinhalte freischalten: aktuell 17 und 4. Kniffel Extreme und alle neun Grundspiele sind stabil.','Enable test content: currently Seventeen and Four. Kniffel Extreme and all nine base games are stable.'),scope:'world',config:true,restricted:true,type:Boolean,default:false,onChange:()=>{refreshLauncher();tavernUIs.kniffel.drawModeration();sessions.chohan.updateNpcWait();if(!gameEnabled('chohan')){clients.chohan=null;void tavernUIs.chohan.close();}ui.taverngames?.render?.({force:true});}});
-  game.settings.register(ID,'diceSoNiceBeta',{name:f('Taverngames: 3D-Würfel mit Dice So Nice','Taverngames: 3D dice with Dice So Nice'),hint:f('Optionale 3D-Wurfanimationen und liegende Spielwürfel. Dice So Nice muss installiert und aktiv sein. Die Auswahl erfolgt im Spielfenster.','Optional 3D roll animations and resting game dice. Dice So Nice must be installed and active. Select dice in the game window.'),scope:'world',config:true,restricted:true,type:Boolean,default:false,onChange:()=>{diceEvents.clear();liarsGate.clear();liarsLatest=null;liarsPersistent.latest={sourcePhase:'aborted'};void liarsPersistent.clear();tavernUIs.liars.draw();for(const scope of HIDDEN_GAMES){hiddenGates[scope].clear();delete hiddenLatest[scope];void hiddenRenderers[scope].clear();tavernUIs[scope].draw();}schockenGate.clear();schockenVisual=null;schockenLatest=null;void schockenPersistent.clear();draw();diceAnimator.warned=false;farkleGate.clear();void farklePersistent.clear();farkleUI.draw();for(const scope of HELD_GAMES){heldGates[scope].clear();void heldRenderers[scope].clear();tavernUIs[scope].draw();}}});
-  if(game.settings.registerMenu)game.settings.registerMenu(ID,'diceDiagnostics',{name:f('Taverngames: 3D-Würfel prüfen','Taverngames: check3D dice'),label:f('Test & Diagnose öffnen','Open test & diagnostics'),hint:f('Lokaler3D-Test und Diagnose ohne geheime Würfelwerte.','Local3D test and diagnostics without secret dice values.'),icon:'fas fa-dice',restricted:true,type:diceMenu(foundry,{test:()=>diceAnimator.play({actor:game.user.id,dice:[{sides:6,value:3},{sides:6,value:5}]},{test:true}),diagnostics:async()=>({codeVersion:'2.1.0',moduleVersion:game.modules.get(ID)?.version??game.modules.get(ID)?.manifest?.version,dsnVersion:game.modules.get('dice-so-nice')?.version,dsnActive:game.modules.get('dice-so-nice')?.active===true,animationEnabled:game.settings.get(ID,'diceSoNiceBeta')===true,local:{...structuredClone(diceAnimator.stats),presentation:dicePresentationDiagnostics(game),restingDice:{liars:liarsPersistent.meshes.size,schocken:schockenPersistent.meshes.size,farkle:farklePersistent.meshes.size,kniffel:heldRenderers.kniffel.meshes.size,ship:heldRenderers.ship.meshes.size,pig:heldRenderers.pig.meshes.size,hoard:heldRenderers.hoard.meshes.size,lottery:hiddenRenderers.lottery.meshes.size,chohan:hiddenRenderers.chohan.meshes.size}},authority:await requestFinance('schocken','diceDiagnostics')})})});
+  for(const [setting,de,en] of [['managedBetting','Verwaltetes Setzen','Managed betting'],['allowElectrum','Elektrum verwenden','Use electrum']])game.settings.register(ID,setting,{name:`Taverngames: ${f(de,en)}`,scope:'world',config:false,restricted:true,type:Boolean,default:false,onChange:()=>{moneyUI.draw();for(const panel of Object.values(tavernUIs))panel.drawModeration();}});
+  game.settings.register(ID,'betaTest',{name:f('Taverngames: Beta-Test','Taverngames: Beta testing'),hint:f('Künftige Testinhalte freischalten. Alle zehn enthaltenen Spiele sind stabil.','Enable future test content. All ten included games are stable.'),scope:'world',config:true,restricted:true,type:Boolean,default:false,onChange:()=>{refreshLauncher();tavernUIs.kniffel.drawModeration();sessions.chohan.updateNpcWait();if(!gameEnabled('chohan')){clients.chohan=null;void tavernUIs.chohan.close();}ui.taverngames?.render?.({force:true});}});
+  game.settings.register(ID,'diceSoNiceBeta',{name:f('Taverngames: 3D-Würfel mit Dice So Nice','Taverngames: 3D dice with Dice So Nice'),hint:f('Optionale 3D-Wurfanimationen und liegende Spielwürfel. Dice So Nice muss installiert und aktiv sein. Die Auswahl erfolgt im Spielfenster.','Optional 3D roll animations and resting game dice. Dice So Nice must be installed and active. Select dice in the game window.'),scope:'world',config:true,restricted:true,type:Boolean,default:false,onChange:()=>{seventeenGate.clear();seventeenPreparing=null;tavernUIs.seventeen.draw();diceEvents.clear();liarsGate.clear();liarsLatest=null;liarsPersistent.latest={sourcePhase:'aborted'};void liarsPersistent.clear();tavernUIs.liars.draw();for(const scope of HIDDEN_GAMES){hiddenGates[scope].clear();delete hiddenLatest[scope];void hiddenRenderers[scope].clear();tavernUIs[scope].draw();}schockenGate.clear();schockenVisual=null;schockenLatest=null;void schockenPersistent.clear();draw();diceAnimator.warned=false;farkleGate.clear();void farklePersistent.clear();farkleUI.draw();for(const scope of HELD_GAMES){heldGates[scope].clear();void heldRenderers[scope].clear();tavernUIs[scope].draw();}}});
+  if(game.settings.registerMenu)game.settings.registerMenu(ID,'diceDiagnostics',{name:f('Taverngames: 3D-Würfel prüfen','Taverngames: check3D dice'),label:f('Test & Diagnose öffnen','Open test & diagnostics'),hint:f('Lokaler3D-Test und Diagnose ohne geheime Würfelwerte.','Local3D test and diagnostics without secret dice values.'),icon:'fas fa-dice',restricted:true,type:diceMenu(foundry,{test:()=>diceAnimator.play({actor:game.user.id,dice:[{sides:6,value:3},{sides:6,value:5}]},{test:true}),diagnostics:async()=>({codeVersion:'2.2.0',moduleVersion:game.modules.get(ID)?.version??game.modules.get(ID)?.manifest?.version,dsnVersion:game.modules.get('dice-so-nice')?.version,dsnActive:game.modules.get('dice-so-nice')?.active===true,animationEnabled:game.settings.get(ID,'diceSoNiceBeta')===true,local:{...structuredClone(diceAnimator.stats),presentation:dicePresentationDiagnostics(game),restingDice:{liars:liarsPersistent.meshes.size,schocken:schockenPersistent.meshes.size,farkle:farklePersistent.meshes.size,kniffel:heldRenderers.kniffel.meshes.size,ship:heldRenderers.ship.meshes.size,pig:heldRenderers.pig.meshes.size,hoard:heldRenderers.hoard.meshes.size,lottery:hiddenRenderers.lottery.meshes.size,chohan:hiddenRenderers.chohan.meshes.size}},authority:await requestFinance('schocken','diceDiagnostics')})})});
   if(!registerSidebar(CONFIG,globalThis.foundry,game,{open:()=>open(),guide:openGuide,farkle:()=>farkleUI.open(),farkleGuide:()=>farkleUI.guide(),tavern:scope=>tavernUIs[scope]?.open(),tavernGuide:scope=>tavernUIs[scope]?.guide()}))ui.notifications.warn(t('Taverngames: native Sidebar-Schnittstelle fehlt. Einstieg über den unteren Button bleibt verfügbar.'));
   CONFIG.queries[GRANT]=({token})=>{if(typeof token!=="string"||token.length>100)throw new Error(t("Ungültige Verbindung."));capability=token;return true;};
   CONFIG.queries[QUERY]=data=>enqueue(()=>command(data));
@@ -579,7 +591,7 @@ Hooks.once("ready",async()=>{
     if(lastGM!==primary()?.id){lastGM=primary()?.id;capability=null;}
     if(wasAuthority!==authority()) {wasAuthority=authority();initialized=false;capability=null;void enqueue(initializeAuthority);}
     if((panel||moderation)&&!busy&&primary())void request("read");
-    if(outcomeUI.root&&!outcomeUI.busy&&primary()&&gameEnabled(outcomeUI.scope))void outcomeUI.send('outcomeRead');
+    if(outcomeUI.root&&!outcomeUI.busy&&primary()&&gameEnabled(outcomeUI.scope))void outcomeUI.send('tokenRead');if(moneyUI.root&&!moneyUI.busy&&primary())void moneyUI.send('tokenRead');
     if(farkleUI.isOpen&&!farkleBusy&&primary())void requestFarkle('read');
     if(primary())for(const scope of NEW_GAMES)if(gameEnabled(scope)&&tavernUIs[scope].isOpen&&!tavernBusy[scope])void requestTavern(scope,'read');
   },2500);
@@ -599,7 +611,7 @@ Hooks.once("ready",async()=>{
   },1400);
   setInterval(()=>{
     if(!authority()||!initialized)return;
-    void enqueue(async()=>{if(!authority())return;for(const scope of NEW_GAMES){if(scope==='liars'&&game.settings.get(ID,'diceSoNiceBeta')&&liarsGate.active(sessions.liars.state))continue;if(HELD_GAMES.includes(scope)&&game.settings.get(ID,'diceSoNiceBeta')&&heldGates[scope].active(sessions[scope].state))continue;const old=sessions[scope].state,move=old&&scope!=='chohan'?tavernNpcAction(old):null;await diceAction(scope,move?.id,move?.action,async()=>{if(await sessions[scope].npcStep()){await settleOutcome(scope);tavernUIs[scope].draw();}});}}).catch(e=>ui.notifications.warn(tavernError(e.message)));
+    void enqueue(async()=>{if(!authority())return;for(const scope of NEW_GAMES){if(scope==='seventeen'&&seventeenGate.active(sessions.seventeen.state))continue;if(scope==='liars'&&game.settings.get(ID,'diceSoNiceBeta')&&liarsGate.active(sessions.liars.state))continue;if(HELD_GAMES.includes(scope)&&game.settings.get(ID,'diceSoNiceBeta')&&heldGates[scope].active(sessions[scope].state))continue;const old=sessions[scope].state,move=old&&scope!=='chohan'?tavernNpcAction(old):null;await diceAction(scope,move?.id,move?.action,async()=>{if(await sessions[scope].npcStep()){await settleOutcome(scope);tavernUIs[scope].draw();}});}}).catch(e=>ui.notifications.warn(tavernError(e.message)));
   },1400);
 });
 Hooks.on("userConnected",(user,connected)=>{if(connected)void grant(user);if(panel||moderation)draw();});

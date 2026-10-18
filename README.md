@@ -1,9 +1,53 @@
 # Taverngames – Foundry Extension
 
-**Version 2.1.0**. Neun stabile Spiele mit optionaler stabiler Dice-So-Nice-Anbindung: Chō-Han, Drachenhort, Farkle, Kniffel, Lügenwürfel, Schiff–Kapitän–Mannschaft, Schocken, Schweinchen und Straßenlotto.
+**Version 2.2.0**. Zehn stabile Spiele mit optionaler stabiler Dice-So-Nice-Anbindung: 17 und 4, Chō-Han, Drachenhort, Farkle, Kniffel, Lügenwürfel, Schiff–Kapitän–Mannschaft, Schocken, Schweinchen und Straßenlotto.
 
 
-## Aktuell in 2.1.0
+## Aktuell in 2.2.0
+
+17 und 4 ist nach Daniels Freigabe stabil. Alle zehn Spiele bieten Ohne Einsatz oder partiengebundene Spieltoken mit gemeinsamer SL-Zuteilung, Bankbudgets und Ausgangswetten. Schocken: jeder benötigt Spieleranzahl × Einsatz; der endgültige Verlierer zahlt jedem anderen einmal den Einsatz. Direkte Charakter-Geldbuchungen sind entfernt. Token können ausdrücklich in die Folgepartie übernommen oder verworfen werden. Der 17-und-4-Animationshinweis verschiebt die Ansicht nicht mehr.
+
+Seventeen and Four is stable following Daniel’s acceptance. All ten games offer no stakes or game-scoped tokens with common GM allocation, bank budgets and outcome bets. Schocken: each player needs player count × stake; the final loser pays one stake to every other player. Direct character currency transactions have been removed. Tokens can explicitly be carried into the next game or discarded. The Seventeen and Four animation notice no longer shifts the view.
+
+Neue Lobby öffnen → beitreten → in der Moderation Einsätze & Spieltoken öffnen. Standard Ohne Einsatz; bei Spieltoken Zuteilungsvorlage (Standard 100), Grundeinsatz, passende Banklimits und Budget festlegen und speichern. Teilnehmer/NPCs erhalten ihre Zuteilung; Zuschauer können separat bedacht werden. Vor Beginn gegebenenfalls Ausgangswetten öffnen und ausdrücklich schließen. Ganze Token; 21-Auszahlung aufrunden, prozentuale Provisionen können bei kleinen Beträgen abweichen. Bei Folgepartien Übernahme ausdrücklich im Tokenfenster aktivieren; sonst beginnt die neue Partie ohne Einsatz. Direkte D&D-Geldbuchungen und weltweite Test-Goldkonten sind nicht mehr nutzbar. Historische Nachweise sind im Tokenfenster für SL lesbar; Gegenstandspreise bleiben separat erhalten. Accountant bleibt später.
+
+## Vorheriger Stand 2.1.4
+
+Fensterkorrekturen: Unveränderte Hintergrundabfragen bauen die Spielansicht nicht mehr unnötig neu auf. Das verhindert schließende Dropdowns und unterbrochene Würfelauswahl, insbesondere bei 17 und 4 sowie Kniffel. Bei 17 und 4 stehen Würfeln und Zugabschluss im Eintrag des aktiven Spielers; die platzraubenden Wurfnummern entfallen. Spielregeln und bisherige Geldverwaltung bleiben unverändert. 17 und 4 bleibt Beta.
+
+Window fixes: unchanged background polling no longer needlessly rebuilds the game view. This prevents closing dropdowns and interrupted die selection, especially in Seventeen and Four and Kniffel. In Seventeen and Four, roll and end-turn controls appear in the active player entry; redundant throw labels are removed. Rules and existing money handling are unchanged. Seventeen and Four remains beta.
+
+## Vorheriger Stand 2.1.3
+
+17 und 4 erhält NPC-Risikoprofile für zufällige Einsätze: vorsichtig, ausgeglichen, risikofreudig oder zufällig, zusätzlich zur manuellen SL-Auswahl. Einsätze werden einmal pro Partie bestimmt. Würfe im Fenster stehen nebeneinander, die Würfelaktionen bleiben darüber. Mit aktiver 3D-Anbindung erscheinen neue Zahlen erst nach Ende der Animation; die nächste Aktion wartet auf die beteiligten Ansichten. Spielregeln, private Erstwürfe und interne Geldführung bleiben erhalten.
+
+Seventeen and Four gains NPC stake risk profiles: cautious, balanced, risk-taking or random, alongside manual GM selection. Stakes are chosen once per game. Rolls appear side by side with fixed roll actions above them. With 3D integration active, new numbers appear only after animation completion; the next action waits for participating views. Game rules, private initial throws and internal money handling are preserved.
+
+In einer 17-und-4-Lobby pro NPC im Moderationsfenster Einsatzrisiko wählen: Manuell (Standard, beginnt am Mindesteinsatz), Vorsichtig, Ausgeglichen, Risikofreudig oder Zufällig. Profilwahl bestimmt einmal einen Einsatz innerhalb des SL-Rahmens; Folgepartien bestimmen ihn einmal neu. Der SL kann den aktuellen Einsatz im Spielfenster weiterhin überschreiben. Fensteröffnen/Lesen/Bildaktualisierung erzeugen keinen neuen Einsatz. Profile ändern nicht die Weiterwürfelstrategie.
+
+Wurfanzeigen pro Hand horizontal mit Umbruch bei Platzmangel; Würfelaktionen oberhalb, dadurch kein Wandern des Würfeln-Buttons beim nächsten Wurf. Mit DSN Zahlen und Summen des neuen Wurfs erst nach lokalem Animationsende, weitere Spielaktion erst nach Bestätigung der berechtigten aktiven Empfänger. Fehlende Animation fällt auf die normale Ansicht zurück, abgebrochene/alte Animationen sperren nicht dauerhaft. Ohne aktive DSN-Anbindung sofortige Anzeige. Die 3D-Fläche selbst wird nicht neu gestaltet.
+
+## Vorheriger Stand 2.1.2
+
+17 und 4 unterstützt individuelle Einsätze: Die SL legt Mindest- und Höchstbetrag mit Währung fest, Teilnehmer bestätigen ihren eigenen Einsatz vor dem Start. Kupfer, Silber, Gold und Platin sind möglich; Elektrum nur mit aktivierter Einstellung. Währungsübergreifende Grenzen, individuelle Gewinnanzeigen und Bankwarnungen werden berücksichtigt. 21-Auszahlungen werden zugunsten des Spielers auf volle Kupfer aufgerundet. Ausschließlich interne Testbeträge.
+
+Seventeen and Four supports individual stakes: the GM sets minimum and maximum amounts with currencies, and participants confirm their own stake before starting. Copper, silver, gold and platinum are supported; electrum requires its setting. Cross-currency limits, individual results and bank warnings are respected. Payouts for 21 round up to whole copper in the player’s favor. Internal test amounts only.
+
+Neue 17-und-4-Lobby öffnen: SL wählt Mindest- und Höchsteinsatz getrennt mit Münzart, Standard 1 Kupfer bis 1 Platin. Jeder menschliche Teilnehmer bestätigt im Spielfenster den eigenen Einsatz. NPCs erhalten zunächst das Minimum; die SL kann ihre Einsätze im Spielfenster ändern. Start erst nach Bestätigung aller Menschen. Einsatzänderung nur in der Lobby und innerhalb der umgerechneten Kupfergrenzen. Nach Start sind Einsätze gesperrt. Folgepartien verlangen eine neue Bestätigung; NPCs starten wieder am Minimum.
+
+Keine echten Charakterbuchungen. Budget bleibt intern in Goldwert; individuelle Einsätze werden kupfergenau verglichen. Auszahlung bei 21 auf volle Kupfer aufrunden: 1 Kupfer Einsatz → 3 Kupfer Auszahlung → 2 Kupfer Gewinn. Anzeige erfolgt in der gewählten Einsatzwährung. Alte gespeicherte Partien ohne individuellen Einsatzrahmen bleiben mit bisherigem Festeinsatz spielbar; für individuelle Einsätze ausdrücklich neue Lobby öffnen. Alle bisherigen Sicht- und Bankregeln bleiben erhalten.
+
+## Vorheriger Stand 2.1.1
+
+17 und 4 zeigt Ergebnisse verständlich mit Einsatz, Auszahlung, Gewinn oder Verlust und Währungseinheit im Spielfenster und Chat. Nur der erste Spielerwurf bleibt privat; spätere Spielerwürfe sind öffentlich. Der erste Bankwurf wird nach dem letzten Spielerzug aufgedeckt, bevor die Bank offen weiterspielt. Kniffel Extreme bleibt stabil, 17 und 4 bleibt Beta. Keine Änderung an Auszahlungsfaktoren oder Charaktervermögen.
+
+Seventeen and Four now shows clear stake, payout and profit or loss amounts with currency in the game window and chat. Only the initial player throw is private; later throws are public. The initial bank throw is revealed after the final player turn, before the bank continues openly. Kniffel Extreme remains stable; Seventeen and Four remains beta. Payout factors and character wallets are unchanged.
+
+Beispiel bei 21 und gewonnenem Vergleich: Gewonnen – Einsatz: 2 Gold – Auszahlung: 5 Gold = 3 Gold Gewinn. Bei Niederlage: Verloren – Einsatz: 2 Gold – Auszahlung: 0 Gold = 2 Gold Verlust. Die Auszahlung enthält den ursprünglichen Einsatz. Normaler Sieg weiterhin 2×, Sieg mit 21 weiterhin 2,5× Auszahlung. Gleichstand gewinnt Bank.
+
+Aktuelle Sichtregel ersetzt alle älteren widersprüchlichen Festlegungen: erster Spielerwurf nur für den Betroffenen (manuell übernommene NPCs für SL); sämtliche weiteren Spielerwürfe öffentlich. Erster Bankwurf während der Spielerphase nur SL, nach letztem Spielerzug im Fenster automatisch offen. Weitere Bankwürfe offen. Spieler-Erstwürfe erst zur abschließenden Auswertung offen. 3D-Folgewürfe sind öffentlich, Erstwürfe empfängerbeschränkt. Für das Aufdecken im Fenster wird kein neuer Zufallswert und kein erneuter Würfelwurf erzeugt.
+
+## Vorheriger Stand 2.1.0
 
 Kniffel Extreme ist nach Daniels Praxistest stabil und ohne Beta-Schalter auswählbar. Bei 17 und 4 bleiben alle Spielerwürfe privat; den ersten Bankwurf sieht nur die SL, weitere Bankwürfe sind offen. Die Bank ist manuell oder automatisch steuerbar. Interne Bankbudgets in 17 und 4 und Chō-Han warnen bei fehlender Deckung, erlauben aber vollständige Auszahlungen mit fortgeführter Bankschuld. Keine Charakterbuchungen. 17 und 4 bleibt Beta.
 

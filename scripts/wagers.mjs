@@ -2,7 +2,7 @@ import {f} from './farkle-text.mjs';
 import {escapeHTML,gameTitle} from './tavern-text.mjs';
 export const COINS={pp:1000,gp:100,ep:50,sp:10,cp:1};
 const check=(ok,message)=>{if(!ok)throw new Error(message);};
-export const coinLabel=coin=>({pp:f('Platin','Platinum'),gp:f('Gold','Gold'),ep:f('Elektrum','Electrum'),sp:f('Silber','Silver'),cp:f('Kupfer','Copper')})[coin];
+export const coinLabel=coin=>({token:f('Spieltoken','game tokens'),pp:f('Platin','Platinum'),gp:f('Gold','Gold'),ep:f('Elektrum','Electrum'),sp:f('Silber','Silver'),cp:f('Kupfer','Copper')})[coin];
 export const amountText=cp=>`${cp/100} ${f('Goldwert','gold value')}`;
 export function walletValue(currency,ep=false){
   check(currency&&typeof currency==='object'&&!Array.isArray(currency),'Invalid character currency.');
@@ -78,33 +78,7 @@ export class BettingManager{
       const used=Object.values(mapping).filter(Boolean);check(new Set(used).size===used.length,'Each participant needs a different character.');
       book={gameId:state.gameId,scope,status:'configured',stake,currency,funding,mapping,house:typeof args.house==='string'?args.house:''};await this.persist(book);
     }else if(data.action==='betSettle'){
-      check(this.enabled(),'Managed betting is disabled.');check(book,'Configure the stakes first.');
-      if(book.status==='settled')return this.snapshot(scope,state);
-      check(this.system()==='dnd5e','Managed currency currently supports D&D 5e/5.5e only.');
-      const config=globalThis.CONFIG?.DND5E?.currencies;
-      if(config)check(Object.entries(COINS).every(([coin,value])=>Math.abs(config[coin]?.conversion-100/value)<0.000001),'Custom currency conversions are not supported.');
-      check(book.currency!=='ep'||this.electrum(),'Electrum is disabled.');
-      if(book.status!=='pending'){
-        const plan=settlementPlan(state,book);
-        for(const entry of plan.entries){const actor=this.actor(entry.actorId);check(actor&&typeof actor.update==='function','Settlement character is missing.');changedWallet(actor.system?.currency,entry.delta,this.electrum());}
-        book={...book,status:'pending',txId:crypto.randomUUID(),plan,electrum:this.electrum()};await this.persist(book);
-      }
-      check(!book.electrum||this.electrum(),'Electrum is disabled.');
-      for(const entry of book.plan.entries){
-        check(this.isAuthority?.()!==false,'GM authority changed. Resume with the active GM.');
-        const actor=this.actor(entry.actorId);check(actor,'Settlement character is missing.');
-        const flag=`transactions.${book.txId}`;let marker=actor.getFlag('taverngames',flag);
-        if(!marker){
-          const before=walletValue(actor.system?.currency,book.electrum),next=changedWallet(actor.system?.currency,entry.delta,book.electrum),after=before+entry.delta;
-          const record={gameId:state.gameId,delta:entry.delta,before,after},changes=Object.fromEntries(Object.keys(COINS).filter(c=>c!=='ep'||book.electrum).map(c=>[`system.currency.${c}`,next[c]]));
-          await actor.update({...changes,[`flags.taverngames.${flag}`]:record});
-          marker=actor.getFlag('taverngames',flag);check(marker,'Currency update was not confirmed; resume settlement.');
-        }
-        check(marker.gameId===state.gameId&&marker.delta===entry.delta,'Conflicting transaction marker.');
-        if(!this.hasMessage(book.txId,entry.actorId))await this.announce({content:`<h2>Taverngames · ${f('Währungsbuchung','Currency transaction')}</h2><p>${escapeHTML(gameTitle(scope))}: ${escapeHTML(actor.name)} · ${entry.delta>0?'+':''}${amountText(entry.delta)}</p><p>${amountText(marker.before)} → ${amountText(marker.after)}</p><p>${f('Abrechnung durch','Settled by')} ${escapeHTML(user.name??user.id)}</p>`,flags:{taverngames:{betTx:book.txId,betActor:entry.actorId}}});
-      }
-      if(!this.hasMessage(book.txId,'summary'))await this.announce({content:`<h2>Taverngames · ${f('Einsätze abgerechnet','Stakes settled')}</h2><p>${escapeHTML(gameTitle(scope))} · ${f('Gesamteinsatz','Total stakes')}: ${amountText(book.plan.total)}</p><p>${f('Bankanteil','Bank change')}: ${amountText(book.plan.bankDelta)}</p>`,flags:{taverngames:{betTx:book.txId,betActor:'summary'}}});
-      book={...book,status:'settled'};await this.persist(book);
+      throw new Error('Direct character currency transactions have been removed. Use game tokens.');
     }else throw new Error('Unknown action.');
     return this.snapshot(scope,state);
   }

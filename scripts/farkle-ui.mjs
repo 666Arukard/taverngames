@@ -1,3 +1,4 @@
+import {tokenGuide} from './token-guide.mjs';
 import {keepModerationScroll} from './scroll-state.mjs';
 import {createNativeWindow} from './native-ui.mjs';
 import {selectionScore} from './farkle-engine.mjs';
@@ -16,8 +17,8 @@ export class FarkleUI{
   async close(){await Promise.all([...this.windows.values()].map(({app})=>app.close()));}
   guide(){
     if(!game.user.isGM)return;
-    const root=this.window('farkle-guide');root.replaceChildren();const content=el('div',undefined,'schocken-content');content.innerHTML=farkleGuide(this.getState()?.rules);root.append(content);
-    button(content,f('Anleitung in den Chat posten','Post instructions to chat'),async()=>{if(!game.user.isGM)return;try{await ChatMessage.create({content:farkleGuide(this.getState()?.rules)});}catch(error){ui.notifications.warn(error.message);}});
+    const root=this.window('farkle-guide');root.replaceChildren();const content=el('div',undefined,'schocken-content');content.innerHTML=(farkleGuide(this.getState()?.rules)+tokenGuide('farkle'));root.append(content);
+    button(content,f('Anleitung in den Chat posten','Post instructions to chat'),async()=>{if(!game.user.isGM)return;try{await ChatMessage.create({content:(farkleGuide(this.getState()?.rules)+tokenGuide('farkle'))});}catch(error){ui.notifications.warn(error.message);}});
   }
   draw(){this.drawModeration();this.drawTable();}
   drawModeration(){
@@ -33,7 +34,7 @@ export class FarkleUI{
     root.replaceChildren();const content=el('div',undefined,'schocken-content');root.append(content);if(this.openOutcome)button(content,f('Wetten','Bets'),()=>this.openOutcome('farkle'));
     content.append(el('p','Farkle · PlayMonster','schocken-help'));
     button(content,f('Spieltisch öffnen','Open game table'),()=>{this.window('farkle');this.drawTable();});button(content,f('Anleitung','Instructions'),()=>this.guide());
-    if(this.openBetting)button(content,f('Einsätze & Charaktere','Stakes & characters'),()=>this.openBetting('farkle'),!this.getState()).dataset.farkleBetting='';
+    if(this.openBetting)button(content,f('Einsätze & Spieltoken','Stakes & game tokens'),()=>this.openBetting('farkle'),!this.getState()).dataset.farkleBetting='';
     const showLabel=el('label',undefined,'schocken-choice'),show=el('input');show.type='checkbox';show.dataset.farkleLauncher='true';show.checked=game.settings.get('taverngames','showFarkleLauncher')===true;
     show.addEventListener('change',async()=>{if(!game.user.isGM)return;try{await game.settings.set('taverngames','showFarkleLauncher',show.checked);}catch(error){ui.notifications.warn(error.message);this.drawModeration();}});
     showLabel.append(show,document.createTextNode(f('Unteren Farkle-Button für alle einblenden','Show the bottom Farkle button for everyone')));content.append(showLabel);

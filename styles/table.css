@@ -63,3 +63,8 @@
 .chohan-concealed-rolling .chohan-cup{animation:chohan-cup-shake 900ms ease-in-out both}
 @keyframes chohan-cup-shake{0%,100%{transform:translateX(0) rotate(0)}15%,45%,75%{transform:translateX(-12px) rotate(-12deg)}30%,60%,90%{transform:translateX(12px) rotate(12deg)}}
 @media(prefers-reduced-motion:reduce){.chohan-concealed-rolling .chohan-cup{animation:none}}
+
+.seventeen-rolls{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0;align-items:flex-start}.seventeen-roll-group{display:inline-flex;flex-wrap:nowrap;align-items:center;gap:4px;padding:4px;border:1px solid #d8c8ae;border-radius:6px}.seventeen-roll-group small{font-size:11px;max-width:36px;line-height:1.2}
+
+/* Keep the bank and player controls stationary while animation status changes. */
+.seventeen-animation-status{min-height:1.4em;line-height:1.4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}

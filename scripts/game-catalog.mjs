@@ -1,7 +1,7 @@
 // Names and categories are data so future tags can extend the catalog without
 // coupling navigation to gameplay. No duration or betting claims are invented.
 export const GAME_CATALOG=Object.freeze([
- {id:'seventeen',category:'dice',beta:true,names:['17 und 4','Siebzehn und Vier','Seventeen and Four'],suggestedNames:['Elfenlauf']},
+ {id:'seventeen',category:'dice',names:['17 und 4','Siebzehn und Vier','Seventeen and Four'],suggestedNames:['Elfenlauf']},
  {id:'schocken',category:'dice',names:['Schocken']},
  {id:'farkle',category:'dice',names:['Farkle','Farkel']},
  {id:'pig',category:'dice',names:['Schweinchen','Pig']},

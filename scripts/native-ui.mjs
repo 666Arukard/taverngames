@@ -4,7 +4,7 @@ import {GAME_CATALOG,filterCatalog,toggleFavorite} from './game-catalog.mjs';
 export function createNativeWindow(foundry,kind,root,onClose) {
   const Base=foundry?.applications?.api?.ApplicationV2;
   if(!Base)throw new Error(t('Foundry ApplicationV2 fehlt. Das native Taverngames-Fenster kann nicht geöffnet werden.'));
-  const titles={'outcome-bets':language()==='de'?'Taverngames · Wetten':'Taverngames · Bets',table:'Taverngames · Schocken',moderation:'Taverngames · Moderation',guide:'Schocken · Anleitung',farkle:'Taverngames · Farkle','farkle-moderation':'Farkle · Moderation','farkle-guide':language()==='de'?'Farkle · Anleitung':'Farkle · Instructions'};
+  const titles={'game-tokens':language()==='de'?'Taverngames · Einsätze & Spieltoken':'Taverngames · Stakes & game tokens','outcome-bets':language()==='de'?'Taverngames · Wetten':'Taverngames · Bets',table:'Taverngames · Schocken',moderation:'Taverngames · Moderation',guide:'Schocken · Anleitung',farkle:'Taverngames · Farkle','farkle-moderation':'Farkle · Moderation','farkle-guide':language()==='de'?'Farkle · Anleitung':'Farkle · Instructions'};
   class TavernWindow extends Base {
     static DEFAULT_OPTIONS={classes:['taverngames-window'],window:{resizable:true,minimizable:true},position:{width:560,height:650}};
     async _renderHTML(){return root;}

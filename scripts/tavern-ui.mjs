@@ -22,16 +22,14 @@ export class TavernUI{
     const drafts=new Map([...root.querySelectorAll('[data-draft]')].map(e=>[e.dataset.draft,e.value])),expanded=root.querySelector('details')?.open??false,focus=document.activeElement?.dataset.draft;
     root.replaceChildren();const c=node('div',undefined,'schocken-content');root.append(c);const s=this.getState();
     c.append(node('p',`${gameTitle(this.scope)}`,'schocken-help'));if(this.openOutcome)control(c,f('Wetten','Bets'),()=>this.openOutcome(this.scope));control(c,f('Spieltisch öffnen','Open game table'),()=>{this.window('table');this.drawTable();});control(c,f('Anleitung','Instructions'),()=>this.guide());
-    control(c,f('Einsätze & Charaktere','Stakes & characters'),()=>this.openBetting(this.scope),!s);
+    control(c,f('Einsätze & Spieltoken','Stakes & game tokens'),()=>this.openBetting(this.scope),!s);
     const label=node('label',undefined,'schocken-choice'),show=node('input');show.type='checkbox';show.dataset.tavernLauncher=this.scope;show.checked=game.settings.get('taverngames',`show${this.scope}Launcher`)===true;
     show.addEventListener('change',()=>void game.settings.set('taverngames',`show${this.scope}Launcher`,show.checked).catch(e=>ui.notifications.warn(e.message)));label.append(show,document.createTextNode(f('Unteren Spielbutton für alle einblenden','Show the bottom game button for everyone')));c.append(label);
     const setup=node('details');setup.open=expanded;setup.append(node('summary',f('Neue Partie & Regeln','New game & rules')));
     let target,immediateTarget,mode,rounds,prize,prizeValue,maxTickets,perPlayer,item,numbersPerTicket;
     if(this.scope==='pig'){target=inputField(setup,f('Zielpunktzahl','Target score'),s?.target??100,'target',10);immediateTarget=selectField(setup,f('Bei gesicherter Zielpunktzahl sofort beenden','End immediately when the target is banked'),[['false',f('Aus – Schlussrunde spielen','Off – play the final round')],['true',f('Ein – sofort beenden','On – end immediately')]],String(s?.immediateTarget===true),'immediateTarget');}
     if(this.scope==='ship'){mode=selectField(setup,f('Spielmodus','Game mode'),[['single',f('Einzelspiel','Single game')],['rounds',f('Feste Runden','Fixed rounds')],['endless',f('Unbegrenzte Runden','Unlimited rounds')]],s?.mode??'single','mode');rounds=inputField(setup,f('Rundenanzahl','Round count'),s?.roundLimit??3,'roundLimit',1,100);}
-    const stake=inputField(setup,this.scope==='lottery'?f('Einsatz je Tippschein','Stake per ticket'):f('Grundeinsatz pro Partie / Serie','Base stake per game / series'),s?.stake??2,'stake');
-    const currency=selectField(setup,f('Währung','Currency'),currencyOptions(),s?.currency??'gp','currency');
-    const funding=selectField(setup,f('Finanzierung gleicher Prämien','Funding tied prizes'),[['redistribute',f('Gewinn neu aufteilen','Redistribute the pot')],['bank',f('Tavernenbank','Tavern bank')]],s?.funding??'redistribute','funding');funding.disabled=this.scope==='lottery';
+    const stake={value:0},currency={value:'token'},funding={value:'redistribute'};
     if(this.scope==='lottery'){
       const items=[...(game.items??[])].filter(i=>Number.isSafeInteger(i.system?.quantity)&&i.system.quantity>=1).map(i=>[i.uuid,`${f('Vorlage','Template')}: ${i.name}`]);
       for(const actor of game.actors??[])for(const i of actor.items??[])if(Number.isInteger(i.system?.quantity)&&i.system.quantity>0)items.push([i.uuid,`${actor.name}: ${i.name} (${i.system.quantity})`]);
@@ -67,7 +65,7 @@ export class TavernUI{
     const root=this.windows.get('table')?.root;if(!root)return;root.replaceChildren();const c=node('div',undefined,'schocken-content');root.append(c);c.append(node('h2',`${gameTitle(this.scope)}`));
     const s=this.getState();if(this.openOutcome)control(c,f('Wetten','Bets'),()=>this.openOutcome(this.scope));if(game.user.isGM)control(c,f('Moderation öffnen','Open moderation'),()=>{this.window('moderation');this.drawModeration();});
     if(!s){c.append(node('p',f('Der SL öffnet eine Lobby.','The GM opens a lobby.')));return;}
-    c.append(node('p',`${f('Grundeinsatz','Base stake')}: ${s.stake} ${coinLabel(s.currency)} · ${f('Buchung erst auf SL-Befehl','Settlement by GM command only')}`));
+    if(s.economy?.mode==='tokens')c.append(node('p',`${f('Grundeinsatz','Base stake')}: ${s.stake} ${coinLabel(s.currency)} · ${f('Abrechnung mit Spieltoken','Settlement in game tokens')}`));
     for(const id of s.players){
       const title=`${id===s.order[s.turn]?'▶ ':''}${this.name(id)}${s.npcs[id]?' (NPC)':''}${this.scope!=='lottery'?` · ${s.scores[id]} ${f('Punkte','points')}`:''}`;
       if(this.scope==='pig'){

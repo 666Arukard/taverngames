@@ -2,26 +2,25 @@
   "schemaVersion": 1,
   "blocks": {
     "patchnotes": {
-      "title": "Patchnotes Version 2.1.0",
+      "title": "Patchnotes Version 2.2.0",
       "paragraphs": [
-        "Kniffel Extreme ist nach Daniels Praxistest stabil und ohne Beta-Schalter auswählbar. Bei 17 und 4 bleiben alle Spielerwürfe privat; den ersten Bankwurf sieht nur die SL, weitere Bankwürfe sind offen. Die Bank ist manuell oder automatisch steuerbar. Interne Bankbudgets in 17 und 4 und Chō-Han warnen bei fehlender Deckung, erlauben aber vollständige Auszahlungen mit fortgeführter Bankschuld. Keine Charakterbuchungen. 17 und 4 bleibt Beta."
+        "17 und 4 ist nach Daniels Freigabe stabil. Alle zehn Spiele bieten Ohne Einsatz oder partiengebundene Spieltoken mit gemeinsamer SL-Zuteilung, Bankbudgets und Ausgangswetten. Schocken: jeder benötigt Spieleranzahl × Einsatz; der endgültige Verlierer zahlt jedem anderen einmal den Einsatz. Direkte Charakter-Geldbuchungen sind entfernt. Token können ausdrücklich in die Folgepartie übernommen oder verworfen werden. Der 17-und-4-Animationshinweis verschiebt die Ansicht nicht mehr."
       ],
       "items": [
-        "Kniffel Extreme nach Praxistest stabil freigegeben; ohne Beta-Schalter auswählbar.",
-        "17 und 4: alle Spielerwürfe privat, erster Bankwurf nur für SL, weitere Bankwürfe öffentlich.",
-        "Banksteuerung in der Moderation: SL oder Automatik.",
-        "Interne Bankbudgets mit Warnung bei Unterdeckung und vollständiger Auszahlung; Bankschulden bleiben in Folgepartien erhalten.",
-        "17 und 4 bleibt Beta; keine Buchungen auf Charakterbögen."
+        "17 und 4 regulär ohne Beta-Schalter verfügbar.",
+        "Gemeinsame Spieltoken-Verwaltung und Ausgangswetten für alle zehn Spiele.",
+        "Schocken mit Sicherheit von N × Einsatz und Zahlung allein durch den Verlierer.",
+        "Charakter-Geldbuchungen entfernt; Gegenstandspreise und historische Nachweise bleiben erhalten.",
+        "17 und 4: Animationshinweis ohne springende Ansicht."
       ]
     },
     "games": {
       "title": "aktuelle Spiele (10)",
       "paragraphs": [
-        "Kniffel enthält zusätzlich die stabile Variante Kniffel Extreme nach Schmidt-Regeln.",
-        "Neun stabile Grundspiele, ein neues Beta-Spiel (17 und 4) und zusätzlich Kniffel Extreme als stabile Variante.",
-        "17 und 4 ist eine Würfel-Hausvariante gegen die Bank mit W12 oder W8+W6 und bleibt Beta."
+        "Zehn stabile Spiele; Kniffel enthält zusätzlich die stabile Variante Kniffel Extreme nach Schmidt-Regeln."
       ],
       "items": [
+        "17 und 4",
         "Chō-Han",
         "Drachenhort",
         "Farkle",
@@ -30,8 +29,7 @@
         "Schiff–Kapitän–Mannschaft",
         "Schocken",
         "Schweinchen",
-        "Straßenlotto",
-        "17 und 4 (Beta)"
+        "Straßenlotto"
       ]
     },
     "plans": {
@@ -40,7 +38,7 @@
         "Für diese Spiele und Wettbewerbe liegen Regelreferenzen vor. Die Auswahl ist Planung und keine Zusage zur Umsetzung; einzelne Regelfragen sind noch offen."
       ],
       "items": [
-        "17+4",
+        "17+4 (Kartenspiel)",
         "Aalstechen",
         "Armdrücken",
         "Binokel",
@@ -81,7 +79,7 @@
       ]
     },
     "plans2": {
-      "title": "geplante Funktionen (10)",
+      "title": "geplante Funktionen (9)",
       "paragraphs": [
         "Größere Erweiterungen werden schrittweise geprüft. Die folgende Liste beschreibt Überlegungen und noch keine fertigen Funktionen.",
         "Karteneinbindung auf Daniels Wunsch zurückgestellt. Als späterer erster Schritt vorgeschlagen: einfache Vorder-/Rückseiten und eine Kartenhand mit Sichtbarkeitsprüfung zwischen zwei Spielern, zunächst ohne Animationen. Noch keine Umsetzungsfreigabe."
@@ -92,48 +90,38 @@
         "Eigene Spielnamen und ein durch den SL anpassbares Spieleangebot; Titel auch in Anleitungen und Chat übernehmen.",
         "Grafische Kartenverwaltung und spätere Kartenanimationen; Entwicklung derzeit zurückgestellt.",
         "Eigene Erweiterung für gezielte SL-Manipulationen von Ergebnissen oder Gewinnchancen.",
-        "Kniffel-Serien und zugehörige Einsatzverwaltung.",
-        "Echte Charaktergeld-Abrechnung für Drachenhort und Ausgangswetten sowie weitere SL-Einsatzgrenzen; bisher dort nur virtuelle Guthaben.",
+        "Kniffel-Serien mit addierten Ergebnissen.",
         "Beschleunigte NPC-Wettpartien.",
         "Grafisch wachsende Münzstapel auf den Drachenhorten.",
         "Optionale Accountant-Anbindung für Buchungen über eine versionierte API und Einbettung in die RPG Management Suite; alle Module bleiben unabhängig."
       ]
     },
     "functions": {
-      "title": "aktuelle Funktionen (10)",
+      "title": "aktuelle Funktionen (9)",
       "paragraphs": [
-        "Neun stabile Grundspiele und ein zuschaltbares Beta-Spiel. Optionale 3D-Würfel, SL-Moderation, NPCs und Anleitungen bleiben die gemeinsame Grundlage."
+        "Zehn stabile Spiele mit gemeinsamer SL-Moderation, optionalen Spieltoken und unabhängiger Spielbarkeit ohne weitere Module."
       ],
       "items": [
-        "SL-Spielauswahl mit Kategorien, deutsch-englischer Suche, alphabetischer Liste und bis zu fünf lokalen Favoriten.",
-        "Freiwilliger Spielerbeitritt über SL-freigegebene Buttons; getrennte Spiel- und Moderationsfenster, benannte automatische oder manuell gesteuerte NPCs, Pause und Abbruch.",
-        "Deutsche und englische Anleitungen mit Quellen, konfigurierbare Hausvarianten, Folgepartien und Ergebnisnachrichten im Chat.",
+        "SL-Spielauswahl mit Kategorien, deutsch-englischer Suche, alphabetischer Liste und bis zu fünf Favoriten.",
+        "Freiwilliger Beitritt über SL-freigegebene Buttons, getrennte Spiel-/Moderationsfenster, benannte automatische oder manuell gesteuerte NPCs, Pause und Abbruch.",
+        "Deutsche und englische Anleitungen mit Regelquellen, Hausvarianten, Folgepartien und Ergebnisnachrichten im Chat.",
         "Verschlüsselte Spielstände und Wiederaufnahme über den ursprünglichen GM-Browser.",
-        "Optionale stabile Dice-So-Nice-Würfel mit geschützten verdeckten Würfen, liegenden Spielwürfeln und abgestimmten Spielaktionen bei den angebundenen Spielen. Lügenwürfel unterstützt private Becher und ruhendes öffentliches Aufdecken.",
-        "Ausgangswetten für Spieler, Zuschauer und NPCs mit internen Goldkonten, gleichmäßiger Topfverteilung unter richtigen Wettern und Chat-Auswertung.",
-        "Optionale D&D-5e/5.5e-Charaktergeld-Abrechnung in unterstützten Spielen auf ausdrücklichen SL-Befehl; Elektrum separat schaltbar.",
-        "Straßenlotto mit konfigurierbaren Tippscheinen, ausdrücklich durch den SL aufgedeckter Ziehung und einmaliger Übergabe eines SL-ausgewählten Gegenstandspreises.",
-        "Drachenhort und Chō-Han verwenden interne Spielmünzen. Chō-Han bietet Varianten A–D; Chō-Han und Straßenlotto erlauben eine private optionale SL-Einsicht; keine Charaktergeldbuchung für diese Spiele.",
-        "Stabile Kniffel-Extreme-Variante mit 22 Feldern, W10 und Zusatzwurf-Chips."
+        "Optionale stabile Dice-So-Nice-Anbindung mit geschützten verdeckten Würfen, ruhenden Spielwürfeln und abgestimmten Aktionen.",
+        "Gemeinsame partiengebundene Spieltoken-Verwaltung: Ohne Einsatz, SL-Zuteilung, spielgerechte Einsatzmodelle, Bankbudget/Schuld und ausdrückliche Übernahme oder Verwerfen nach der Partie.",
+        "Ausgangswetten für Teilnehmer, Zuschauer und NPCs aus demselben Tokenbestand, gleichmäßige Gewinnverteilung unter richtigen Wettern und Chat-Auswertung.",
+        "Straßenlotto mit konfigurierbaren Tippscheinen, SL-Aufdeckung und separater Übergabe eines ausgewählten Gegenstandspreises.",
+        "Kniffel Extreme mit 22 Feldern, W10 und Zusatzwurf-Chips; 17 und 4 mit W12 oder W8+W6 und manueller oder automatischer Bank."
       ]
     },
     "settings": {
       "title": "Einstellungen in Foundry",
       "paragraphs": [
-        "Öffne die Foundry-Moduleinstellungen für Taverngames. Die Moduloberfläche kann auf Deutsch oder Englisch eingestellt werden; Standard ist Englisch.",
-        "Der Taverngames-Reiter ist nur für SL sichtbar. Dort ein Spiel starten und in seiner Moderation den unteren Beitrittsbutton für die Spieler freigeben. Alle neun Spiele einschließlich Chō-Han sind ohne Spiele-Beta-Schalter verfügbar.",
-        "Für 3D-Würfel Dice So Nice installieren und aktivieren. Danach den separaten Schalter „3D-Würfel mit Dice So Nice“ in den Taverngames-Moduleinstellungen aktivieren. DSN 6.4.4 ist der geprüfte API-Quellstand. Sound und Lautstärke folgen den DSN-Einstellungen. Eine direkte Auswahl per Klick auf 3D-Stücke ist noch nicht umgesetzt.",
-        "Nach Installation von 2.0.0 die Welt neu laden. Straßenlotto: Annahme schließen, dann W100 ziehen. Jeder Tippscheinbesitzer sieht ein eigenes blankes Würfelpaar; die Zahl bleibt nach Animationsende geheim. Erst Aufdecken im Moderationsfenster zeigt die gespeicherte Zahl auf den Würfeln und im Spieltisch. Chat und Preisübergabe folgen danach.",
-        "Chō-Han: Wetten abgeben, Annahme schließen, verdeckt würfeln und aufdecken. Das Häkchen „SL: verdeckte Würfel einsehen“ in der Moderation ist standardmäßig aus und gibt nur SL eine vorzeitige Einsicht. Aufdecken zeigt dieselben gespeicherten Werte ohne zweiten Wurf.",
-        "Die 3D-Diagnose liegt unter Moduleinstellungen → Taverngames → 3D-Würfel prüfen → Test & Diagnose öffnen. Ohne DSN bleibt die normale 2D-Darstellung verfügbar.",
-        "Ausgangswetten und die Guthaben von Drachenhort/Chō-Han sind rein intern. Echte Charaktergeld-Abrechnung nur in den dafür unterstützten Spielen über den ausdrücklichen SL-Abrechnungsbefehl verwenden; Elektrum ist standardmäßig aus.",
-        "Straßenlotto und Chō-Han: Nach der Auswertung entfernt Spiel beenden im Moderationsfenster die ruhenden Würfel für alle. Nächste Partie vorbereiten bleibt daneben verfügbar. Abgeschlossene Gewinne und Guthaben bleiben erhalten.",
-        "Straßenlotto: In der Moderation SL: verdeckte Würfel einsehen aktivieren, um die gespeicherte Ziehung privat einzusehen. Standardmäßig aus. Auch ohne eigenen Tippschein möglich; Spieler erhalten die Zahl erst beim Aufdecken. Ohne DSN erscheint die private Zahl im Moderationsfenster.",
-        "Lügenwürfel: Nach einem Modulupdate die Welt neu laden und den separaten Dice-So-Nice-Schalter aktivieren. Jeder würfelt seinen Becher einmal geheim. Beim Anzweifeln erscheinen alle gespeicherten Becher ohne erneute Wurfanimation. Die 3D-Reihen folgen der Spielerliste; Größe und Anordnung passen sich der verfügbaren Fläche an. Weiter entfernt die vorigen Würfel und beginnt den nächsten Durchgang.",
-        "Ab Version 2.0.0 ist die 3D-Anbindung stabil: Dice So Nice installieren und aktivieren; in den Moduleinstellungen Taverngames: 3D-Würfel mit Dice So Nice einschalten. Vorhandene Einstellungen bleiben erhalten. Bei Neuinstallationen bleibt 3D zunächst ausgeschaltet. Der Spiele-Beta-Schalter ist davon unabhängig. Nach dem Modulupdate die Welt neu laden.",
-        "2.0.1: Kniffel Extreme ist seit 2.1.0 ohne Beta-Test im Kniffel-Moderationsfenster auswählbar. Standard bleibt klassisch. Der 3D-Schalter ist unabhängig.",
-        "2.0.2: Beta-Test aktiviert weiterhin 17 und 4. Im Moderationsfenster W12 oder W8+W6 und internen Gold-Einsatz wählen. Unteren Startbutton nur über das SL-Häkchen einblenden. Keine Charakterbuchungen. Nach dem Modulupdate die Welt neu laden.",
-        "2.1.0: Kniffel Extreme ohne Beta-Schalter wählen. Bei 17 und 4 Banksteuerung in der Moderation auf Automatik oder SL stellen. Internes Bankbudget vor neuer Lobby setzen; Chō-Han A/C verwenden ihr Bankkapital-Feld. Fehlende Deckung warnt nur, Gewinne werden vollständig ausgezahlt; negative Bankstände werden in Folgepartien übernommen. Kein Charaktergeld. Nach Update Welt neu laden."
+        "In den Foundry-Moduleinstellungen die Sprache Deutsch oder Englisch wählen; Standard ist Englisch. Alle zehn Spiele einschließlich 17 und 4 sind stabil und ohne Beta-Schalter zugänglich.",
+        "Der Taverngames-Reiter ist nur für SL sichtbar. Spiel öffnen, Lobby vorbereiten und unteren Beitrittsbutton über die Moderation freigeben.",
+        "In der Moderation Einsätze & Spieltoken öffnen. Standard ist Ohne Einsatz. Für Spieltoken Zuteilung, Grundeinsatz und passende Banklimits festlegen. Standardvorlage sind 100 Token je Teilnehmer; Beträge sind durch SL anpassbar.",
+        "Ausgangswetten verwenden denselben freien Bestand. SL öffnet die Annahme vor dem Spiel und schließt sie vor dem Start. Am Ende Token ausdrücklich übernehmen oder verwerfen; keine weltweiten Konten.",
+        "Keine direkten Charakter-Geldbuchungen mehr. Alte Abrechnungen und Test-Goldkonten sind historische Nachweise und werden nicht umgewandelt. Gegenstandspreise bleiben erhalten. Für die neue Einsatzverwaltung eine neue Lobby verwenden.",
+        "Dice So Nice ist optional und separat einschaltbar. Nach Installation des Updates die Welt neu laden."
       ],
       "items": []
     },
@@ -198,9 +186,10 @@
         "Drachenhort: vorzeitiger regulärer Abschluss mit gleichmäßiger Hortverteilung und geheimen Resttipps; Gleichstände werden nur unter den gleich nahen Tipps wiederholt.",
         "Chō-Han: interne Testguthaben, größter-Bruchteil-Rundung und Folgepartien als Modulergänzungen. Provisionsbasis und Kürzung auswählbar; keine Betrugsregeln umgesetzt.",
         "Kniffel Extreme – Schmidt Spiele: https://www.schmidtspiele.de/files/Produkte/5/51296%20-%20Kniffel%C2%AE%20Extreme/51296_Kniffel_Extreme_DE.pdf",
-        "17 und 4: Leifs Würfeladaption mit Daniels Hausregeln; Awiana Elfenlauf, Revision 6669: https://awiana.fandom.com/de/wiki/Elfenlauf?oldid=6669 . Nicht mit klassischem Karten-Blackjack gleichsetzen."
+        "17 und 4: Leifs Würfeladaption mit Daniels Hausregeln; Awiana Elfenlauf, Revision 6669: https://awiana.fandom.com/de/wiki/Elfenlauf?oldid=6669 . Nicht mit klassischem Karten-Blackjack gleichsetzen.",
+        "Schocken-Einsatzregel von Daniel: Mindestbestand N × Einsatz; der endgültige Verlierer zahlt jedem anderen einmal den Einsatz. Optionale interne Spieltoken statt echter Charakterwährung."
       ]
     }
   },
-  "version": "2.1.0"
+  "version": "2.2.0"
 }

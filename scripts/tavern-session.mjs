@@ -1,3 +1,5 @@
+import {prepareSeventeenRisk} from './seventeen-engine.mjs';
+import {seventeenResultText} from './seventeen-text.mjs';
 import {kniffelFields} from './kniffel-engine.mjs';
 import {createTavern,actTavern,tavernNpcAction,tavernView} from './tavern-engine.mjs';
 import {f} from './farkle-text.mjs';
@@ -23,7 +25,7 @@ export class TavernSession{
       if(data.action==='restart'&&!old)throw new Error('No game exists.');
       if(data.action==='restart'){
         next=createTavern(this.game,old);next.players=[...old.players];next.scores=Object.fromEntries(next.players.map(id=>[id,0]));next.npcManual=structuredClone(old.npcManual);
-        if(this.game==='seventeen'){next.hands=Object.fromEntries(next.players.map(id=>[id,[]]));next.bankBalance=old.bankBalance??old.bankFunds??1000;next.bankDebt=Math.max(0,-next.bankBalance);}
+        if(this.game==='seventeen'){next.hands=Object.fromEntries(next.players.map(id=>[id,[]]));next.bankBalance=old.bankBalance??old.bankFunds??1000;next.bankDebt=Math.max(0,-next.bankBalance);if(next.variableStakes)next.stakes=Object.fromEntries(next.players.map(id=>[id,next.npcs[id]?next.minStake:null]));next.npcRisk=structuredClone(old.npcRisk??{});next=prepareSeventeenRisk(next,this.random);}
         if(this.game==='kniffel'){next.sheets=Object.fromEntries(next.players.map(id=>[id,Object.fromEntries(kniffelFields(next).map(k=>[k,null]))]));next.extras=Object.fromEntries(next.players.map(id=>[id,0]));if(next.variant==='extreme')next.chips=Object.fromEntries(next.players.map(id=>[id,3]));}
         if(this.game==='ship'){const ids=[...(old.startOrder??old.players)];ids.unshift(ids.pop());next.startOrder=ids;}
       }else{
@@ -48,8 +50,8 @@ export class TavernSession{
     this.state=next;this.updateNpcWait();
     if(next.phase==='finished'&&old?.phase!=='finished'&&!this.hasAnnouncement(next.gameId)){
       const names=ids=>ids.map(id=>escapeHTML(next.npcs[id]??this.getName(id))).join(', ');
-      const content=`<h2>${gameTitle(this.game)} – ${f('Spiel beendet','Game over')}</h2>${next.result?`<p>W100: ${next.result}</p>`:''}<p>${f('Gewonnen','Winners')}: ${next.winners.length?names(next.winners):f('Niemand','Nobody')}</p><p>${f('Verloren','Losers')}: ${names(next.losers)||'–'}</p>${this.game==='lottery'?`<p>${f('Hauptgewinn','Prize')}: ${escapeHTML(next.prize)}</p>`:`<ul>${next.players.map(id=>`<li>${names([id])}: ${next.scores[id]}</li>`).join('')}</ul>`}`;
-      const details=this.game==='seventeen'?`<p>${f('Bank','Bank')}: ${next.bank.flat().reduce((a,b)=>a+b,0)} · ${f('Stoppgrenze','Stop threshold')}: ${next.bankStop}</p><p>${f('Bankguthaben','Bank balance')}: ${next.bankBalance} · ${f('Bankschuld','Bank debt')}: ${next.bankDebt}</p><p>${f('Nur interne Testbeträge; keine Charakterbuchung.','Internal test amounts only; no character transactions.')}</p><ul>${next.players.map(id=>`<li>${names([id])}: ${next.settlements[id].total} · ${f('Einsatz','Stake')}: ${next.stake} · ${f('Auszahlung','Payout')}: ${next.settlements[id].payout} · ${f('Netto','Net')}: ${next.scores[id]}</li>`).join('')}</ul>`:'';
+      const content=`<h2>${gameTitle(this.game)} – ${f('Spiel beendet','Game over')}</h2>${next.result?`<p>W100: ${next.result}</p>`:''}<p>${f('Gewonnen','Winners')}: ${next.winners.length?names(next.winners):f('Niemand','Nobody')}</p><p>${f('Verloren','Losers')}: ${names(next.losers)||'–'}</p>${this.game==='seventeen'?'':this.game==='lottery'?`<p>${f('Hauptgewinn','Prize')}: ${escapeHTML(next.prize)}</p>`:`<ul>${next.players.map(id=>`<li>${names([id])}: ${next.scores[id]}</li>`).join('')}</ul>`}`;
+      const details=this.game==='seventeen'?`<p>${f('Bank','Bank')}: ${next.bank.flat().reduce((a,b)=>a+b,0)} · ${f('Stoppgrenze','Stop threshold')}: ${next.bankStop}</p><p>${f('Bankguthaben','Bank balance')}: ${next.bankBalance} · ${f('Bankschuld','Bank debt')}: ${next.bankDebt}</p><p>${f('Nur interne Testbeträge; keine Charakterbuchung.','Internal test amounts only; no character transactions.')}</p><ul>${next.players.map(id=>`<li>${names([id])}: ${next.settlements[id].total} · ${next.economy?.mode==='none'?(next.settlements[id].win?f('Gewonnen','Won'):f('Verloren','Lost')):escapeHTML(seventeenResultText(next.settlements[id],next.settlements[id].currency??next.currency))}</li>`).join('')}</ul>`:'';
       try{await this.announce({content:content+details,flags:{taverngames:{game:this.game,gameId:next.gameId}}});}catch(error){globalThis.ui?.notifications?.warn(error.message);}
     }
   }

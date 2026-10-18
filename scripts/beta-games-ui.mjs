@@ -17,9 +17,8 @@ export class BetaGameUI extends TavernUI{
   const setup=node('details');setup.open=this.setupOpen??!s;setup.addEventListener('toggle',()=>this.setupOpen=setup.open);setup.append(node('summary',f('Neue Partie & Regeln','New game & rules')));let mode,coins,entry,currency;
   if(this.scope==='hoard'){
    mode=selectField(setup,f('Spielvariante','Game variant'),[['tokens',f('Eintritt & Spielmünzen (virtuell)','Entry & tokens (virtual)')],['gambler',f('Zocker (virtuelle Bestände)','Gambler (virtual balances)')]],this.draftMode??s?.hoardMode??'tokens','hoardMode');mode.addEventListener('change',()=>this.draftMode=mode.value);
-   coins=number(setup,f('Spielmünzen / Standard-Anfangsbestand','Tokens / default starting balance'),this.draftCoins??s?.initialCoins??30,1);coins.dataset.draft='initialCoins';coins.addEventListener('input',()=>this.draftCoins=coins.value);
-   entry=number(setup,f('Eintrittsbetrag (nur Vorschau)','Entry amount (preview only)'),this.draftEntry??s?.entryAmount??2);entry.dataset.draft='entryAmount';entry.addEventListener('input',()=>this.draftEntry=entry.value);
-   currency=selectField(setup,f('Münzeinheit','Coin unit'),[['cp',f('Kupfer','Copper')],['sp',f('Silber','Silver')],...(game.settings.get('taverngames','allowElectrum')?[['ep',f('Elektrum','Electrum')]]:[]),['gp',f('Gold','Gold')],['pp',f('Platin','Platinum')]],this.draftCurrency??s?.currency??'gp','currency');currency.addEventListener('change',()=>this.draftCurrency=currency.value);
+   coins=number(setup,f('Regelmünzen / Standard-Anfangsbestand','Rule coins / default starting balance'),this.draftCoins??s?.initialCoins??30,1);coins.dataset.draft='initialCoins';coins.addEventListener('input',()=>this.draftCoins=coins.value);
+   entry={value:0};currency={value:'token'};
    setup.append(node('p',f('Nur interne Spielstände. Kein Charaktergeld wird gelesen oder verändert.','Internal balances only. Character currency is neither read nor changed.'),'schocken-help'));
   }
   const labelNPC=node('label',f('NPCs – ein Name pro Zeile','NPCs – one name per line')),names=node('textarea');names.rows=3;names.dataset.draft='npcs';names.value=this.draftNPC??Object.values(s?.npcs??{}).join('\n');names.addEventListener('input',()=>this.draftNPC=names.value);labelNPC.append(names);setup.append(labelNPC);
@@ -71,7 +70,7 @@ export class BetaGameUI extends TavernUI{
     if(game.user.isGM)control(c,f('Restwurf auslösen','Roll for remainder'),()=>this.request('resolveGuess'),s.paused||s.animationWaiting||s.animationNextWaiting||contest.entrants.some(id=>!contest.submitted.includes(id)));
    }
    if(s.lastContest){c.append(node('p',`${f('Letzter Restwurf','Last remainder roll')}: 1W${s.lastContest.sides} = ${s.lastContest.value} · ${s.lastContest.closest.map(id=>this.name(id)).join(', ')}`));for(const [id,guess] of Object.entries(s.lastContest.guesses))c.append(node('p',`${this.name(id)}: ${guess} · ${f('Abstand','Distance')}: ${Math.abs(guess-s.lastContest.value)}`));}
-   if(s.payouts&&s.phase==='finished'){c.append(node('h3',f('Virtuelle Auszahlungsvorschau','Virtual payout preview')));for(const id of s.players)c.append(node('p',`${this.name(id)}: ${s.payouts[id]} ${s.hoardMode==='tokens'?f('Kupfer Gegenwert','copper equivalent'):s.currency}`));}
+   if(s.economy?.mode==='tokens'&&s.payouts&&s.phase==='finished'){c.append(node('h3',f('Virtuelle Auszahlungsvorschau','Virtual payout preview')));for(const id of s.players)c.append(node('p',`${this.name(id)}: ${s.payouts[id]} ${s.hoardMode==='tokens'?f('Spieltoken','game tokens'):s.currency}`));}
   }
   if(s.phase==='finished')c.append(node('h3',s.reason==='early'?f('Vorzeitig regulär abgeschlossen','Finished early'):`${f('Gewonnen','Winners')}: ${s.winners.map(id=>this.name(id)).join(', ')}`));if(s.phase==='aborted')c.append(node('h3',f('Spiel durch den GM beendet','Game ended by the GM')));
   if(['finished','aborted'].includes(s.phase)&&game.user.isGM)control(c,f('Nächste Partie vorbereiten','Prepare next game'),()=>this.request('restart'));c.scrollTop=top;

@@ -1,10 +1,10 @@
 {
   "id": "taverngames",
   "title": "Taverngames – Foundry Extension",
-  "description": "<h3>Deutsch</h3><p>Taverngames bringt neun stabile Tavernenspiele mit SL-Moderation, freiwilligem Beitritt und benannten NPCs an deinen Foundry-Tisch: Schocken, Farkle, Schweinchen, Schiff–Kapitän–Mannschaft, Kniffel, Straßenlotto, Lügenwürfel, Drachenhort und Chō-Han. Der Reiter ist nur für SL sichtbar.</p><h3>English</h3><p>Taverngames brings nine stable games to Foundry: Schocken, Farkle, Pig, Ship–Captain–Crew, Kniffel, Street lottery, Liar’s Dice, Dragon’s Hoard and Cho-Han, with GM moderation, voluntary participation and named NPCs. The tab is GM-only.</p><h3>2.1.0 · Versionshinweise / Release notes</h3><p>Kniffel Extreme ist nach Daniels Praxistest stabil und ohne Beta-Schalter auswählbar. Bei 17 und 4 bleiben alle Spielerwürfe privat; den ersten Bankwurf sieht nur die SL, weitere Bankwürfe sind offen. Die Bank ist manuell oder automatisch steuerbar. Interne Bankbudgets in 17 und 4 und Chō-Han warnen bei fehlender Deckung, erlauben aber vollständige Auszahlungen mit fortgeführter Bankschuld. Keine Charakterbuchungen. 17 und 4 bleibt Beta.</p><p>Kniffel Extreme is stable following Daniel’s playtest and available without beta testing. In Seventeen and Four all player rolls are private; the initial bank roll is GM-only and later bank rolls are public. The bank supports manual or automatic control. Internal bank budgets in Seventeen and Four and Cho-Han warn of insufficient coverage while allowing full payouts with carried bank debt. No character transactions. Seventeen and Four remains beta.</p><p>Regelquellen: Schockfreunde, PlayMonster, Awiana, Paul Cossmer, Schmidt Spiele, TZawalich sowie Daniels Chō-Han-Regelsammlung mit Dice-Play und NetExl. 17 und 4: Leifs Würfeladaption mit Daniels Hausregeln. / Sources are credited in the instructions and author list.</p>",
-  "version": "2.1.0",
+  "description": "<h3>Deutsch</h3><p>Taverngames bringt zehn stabile Tavernenspiele mit SL-Moderation, freiwilligem Beitritt, benannten NPCs und optionalen 3D-Würfeln an deinen Foundry-Tisch: 17 und 4, Schocken, Farkle, Schweinchen, Schiff–Kapitän–Mannschaft, Kniffel, Straßenlotto, Lügenwürfel, Drachenhort und Chō-Han. Der Reiter ist nur für SL sichtbar.</p><h3>English</h3><p>Taverngames brings ten stable games to Foundry: Seventeen and Four, Schocken, Farkle, Pig, Ship–Captain–Crew, Kniffel, Street lottery, Liar’s Dice, Dragon’s Hoard and Cho-Han, with GM moderation, voluntary participation, named NPCs and optional 3D dice. The tab is GM-only.</p><h3>2.2.0 · Versionshinweise / Release notes</h3><p>17 und 4 ist nach Daniels Freigabe stabil. Alle zehn Spiele bieten Ohne Einsatz oder partiengebundene Spieltoken mit gemeinsamer SL-Zuteilung, Bankbudgets und Ausgangswetten. Schocken: jeder benötigt Spieleranzahl × Einsatz; der endgültige Verlierer zahlt jedem anderen einmal den Einsatz. Direkte Charakter-Geldbuchungen sind entfernt. Token können ausdrücklich in die Folgepartie übernommen oder verworfen werden. Der 17-und-4-Animationshinweis verschiebt die Ansicht nicht mehr.</p><p>Seventeen and Four is stable following Daniel’s acceptance. All ten games offer no stakes or game-scoped tokens with common GM allocation, bank budgets and outcome bets. Schocken: each player needs player count × stake; the final loser pays one stake to every other player. Direct character currency transactions have been removed. Tokens can explicitly be carried into the next game or discarded. The Seventeen and Four animation notice no longer shifts the view.</p><p>Regelquellen einschließlich Daniels Chō-Han-Regelsammlung sind in den Anleitungen und Autorenangaben genannt. / Rule sources, including Daniel’s Cho-Han collection, are credited in the instructions and author list.</p>",
+  "version": "2.2.0",
   "readme": "README.md",
-  "changelog": "https://github.com/666Arukard/taverngames/releases/tag/v2.1.0",
+  "changelog": "https://github.com/666Arukard/taverngames/releases/tag/v2.2.0",
   "url": "https://dnd.brunecoaching.de",
   "compatibility": {
     "verified": "14.369"
@@ -87,7 +87,7 @@
     "styles/table.css"
   ],
   "manifest": "https://github.com/666Arukard/taverngames/releases/latest/download/module.json",
-  "download": "https://github.com/666Arukard/taverngames/releases/download/v2.1.0/taverngames-2.1.0.zip",
+  "download": "https://github.com/666Arukard/taverngames/releases/download/v2.2.0/taverngames-2.2.0.zip",
   "relationships": {
     "recommends": [
       {

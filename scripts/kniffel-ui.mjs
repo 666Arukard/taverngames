@@ -13,7 +13,7 @@ export class KniffelUI extends TavernUI{
     const setup=node('details');setup.open=this.setupOpen??!s;setup.addEventListener('toggle',()=>this.setupOpen=setup.open);setup.append(node('summary',f('Neue Partie & Regeln','New game & rules')));
     const variant=selectField(setup,f('Kniffel-Variante','Kniffel variant'),[['standard',f('Klassisch','Classic')],['extreme','Kniffel Extreme']],this.variantDraft??s?.variant??'standard','variant');variant.addEventListener('change',()=>{this.variantDraft=variant.value;});
     const nl=node('label',f('NPCs – ein Name pro Zeile','NPCs – one name per line')),names=node('textarea');names.rows=3;names.dataset.draft='npcs';names.value=this.npcDraft??Object.values(s?.npcs??{}).join('\n');names.addEventListener('input',()=>this.npcDraft=names.value);nl.append(names);setup.append(nl);
-    setup.append(node('p',f('Schmidt-Regeln: klassisch 13 Züge; Extreme 22 Züge, 5W6 + W10, drei Chips. Keine Einsätze.','Schmidt rules: classic 13 turns; Extreme 22 turns, 5d6 + d10, three chips. No stakes.'),'schocken-help'));
+    setup.append(node('p',f('Schmidt-Regeln: klassisch 13 Züge; Extreme 22 Züge, 5W6 + W10, drei Chips. Optionale Einsätze über Spieltoken.','Schmidt rules: classic 13 turns; Extreme 22 turns, 5d6 + d10, three chips. Optional stakes through game tokens.'),'schocken-help'));
     control(setup,f('Lobby öffnen','Open lobby'),()=>{if(s&&!confirm(f('Gespeicherte Partie ersetzen?','Replace the saved game?')))return;void this.request('lobby',{variant:variant.value,npcs:names.value.split('\n').map(n=>n.trim()).filter(Boolean)});},s&&!['finished','aborted'].includes(s.phase)&&s.phase!=='lobby');c.append(setup);
     if(!s)return;
     const row=node('div',undefined,'schocken-actions');c.append(row);

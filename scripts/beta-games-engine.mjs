@@ -8,7 +8,7 @@ const roll=(random,sides)=>{const n=random(sides);check(integer(n,1,sides),'Inva
 export function createBetaGame(game,{npcs={},hoardMode='tokens',initialCoins=30,entryAmount=2,currency='gp'}={}){
  check(BETA_GAMES.includes(game),'Unknown game.');check(npcs&&typeof npcs==='object'&&!Array.isArray(npcs)&&Object.keys(npcs).length<=20,'Invalid NPCs.');
  for(const [id,name] of Object.entries(npcs))check(id.startsWith('npc-')&&typeof name==='string'&&name.trim()&&name.length<=60,'Invalid NPCs.');
- check(['tokens','gambler'].includes(hoardMode)&&integer(initialCoins,1,100000)&&integer(entryAmount,0,100000)&&['cp','sp','ep','gp','pp'].includes(currency),'Invalid virtual coin settings.');
+ check(['tokens','gambler'].includes(hoardMode)&&integer(initialCoins,1,100000)&&integer(entryAmount,0,100000)&&['token','cp','sp','ep','gp','pp'].includes(currency),'Invalid virtual coin settings.');
  const players=Object.keys(npcs);
  return {version:1,game,phase:'lobby',revision:0,paused:false,npcs:structuredClone(npcs),npcManual:{},players,out:[],order:[],turn:0,round:1,log:[],scores:{},counts:{},hands:{},bid:null,reveal:null,hoardMode,initialCoins,entryAmount,currency,startAmounts:Object.fromEntries(players.map(id=>[id,initialCoins])),balances:{},board:Array(9).fill(0),pending:null,contest:null,payouts:null};
 }
@@ -18,12 +18,12 @@ function newLiarsRound(s,starter){s.phase='rolling';s.hands={};s.bid=null;s.reve
 function newContest(s,remaining,kind){const eligible=activePlayers(s);s.contest={kind,remaining,eligible,entrants:[...eligible],guesses:{},awarded:[]};s.phase='contest';}
 function calculatePayouts(s){
  if(s.hoardMode==='gambler'){s.payouts=structuredClone(s.balances);finish(s,'early');return;}
- const pool=s.players.length*s.entryAmount*({cp:1,sp:10,ep:50,gp:100,pp:1000})[s.currency],total=Object.values(s.balances).reduce((a,b)=>a+b,0);
+ const pool=s.players.length*s.entryAmount*({token:1,cp:1,sp:10,ep:50,gp:100,pp:1000})[s.currency],total=Object.values(s.balances).reduce((a,b)=>a+b,0);
  s.payouts=Object.fromEntries(s.players.map(id=>[id,Math.floor(pool*s.balances[id]/total)]));const rest=pool-Object.values(s.payouts).reduce((a,b)=>a+b,0);
  if(rest)newContest(s,rest,'payout');else finish(s,'early');
 }
 function checkLast(s){const alive=activePlayers(s);if(alive.length!==1)return false;const id=alive[0];s.balances[id]+=s.board.reduce((a,b)=>a+b,0);s.board.fill(0);
- if(s.hoardMode==='tokens'){s.payouts=Object.fromEntries(s.players.map(pid=>[pid,pid===id?s.players.length*s.entryAmount*({cp:1,sp:10,ep:50,gp:100,pp:1000})[s.currency]:0]));}else s.payouts=structuredClone(s.balances);
+ if(s.hoardMode==='tokens'){s.payouts=Object.fromEntries(s.players.map(pid=>[pid,pid===id?s.players.length*s.entryAmount*({token:1,cp:1,sp:10,ep:50,gp:100,pp:1000})[s.currency]:0]));}else s.payouts=structuredClone(s.balances);
  finish(s,'last');return true;
 }
 export function actBetaGame(original,actor,action,args={},random=()=>1,gm=false){
