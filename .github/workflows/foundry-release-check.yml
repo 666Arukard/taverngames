@@ -1,0 +1,114 @@
+name: Foundry - Release pruefen (Dry-run)
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Bereits auf GitHub veroeffentlichte Version, z. B. 3.0.1 (ohne v)'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: foundry-release-dry-run
+  cancel-in-progress: false
+
+jobs:
+  check-release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Release-Dateien und Foundry-Anmeldung nur pruefen
+        env:
+          RELEASE_VERSION: ${{ inputs.version }}
+          RELEASE_REPOSITORY: ${{ github.repository }}
+          GH_READ_TOKEN: ${{ github.token }}
+          FOUNDRY_RELEASE_TOKEN: ${{ secrets.FOUNDRY_RELEASE_TOKEN }}
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import io, json, os, re, sys, urllib.error, urllib.request, zipfile
+
+          API = "https://foundryvtt.com/_api/packages/release_version/"
+          MINIMUM = "14.369"
+
+          def main():
+              version = os.environ.get("RELEASE_VERSION", "").strip()
+              repo = os.environ.get("RELEASE_REPOSITORY", "")
+              token = os.environ.get("FOUNDRY_RELEASE_TOKEN", "").strip()
+              gh_token = os.environ.get("GH_READ_TOKEN", "")
+              if not re.fullmatch(r"[0-9]+\.[0-9]+\.[0-9]+", version):
+                  raise ValueError("Bitte eine stabile Versionsnummer wie 3.0.1 ohne v eingeben.")
+              if repo != "666Arukard/taverngames":
+                  raise ValueError("Dieser Workflow ist nur fuer 666Arukard/taverngames vorgesehen.")
+              if not token.startswith("fvttp_") or any(c.isspace() for c in token):
+                  raise ValueError("Repository-Secret FOUNDRY_RELEASE_TOKEN fehlt oder hat ein ungueltiges Format.")
+              base = "https://github.com/" + repo
+              manifest_url = f"{base}/releases/download/v{version}/module.json"
+              download_url = f"{base}/releases/download/v{version}/taverngames-{version}.zip"
+
+              def fetch(url, limit, github_api=False):
+                  headers = {"User-Agent": "TavernGames-Foundry-DryRun", "Accept": "application/json" if github_api else "*/*"}
+                  if github_api and gh_token:
+                      headers["Authorization"] = "Bearer " + gh_token
+                  request = urllib.request.Request(url, headers=headers)
+                  with urllib.request.urlopen(request, timeout=60) as response:
+                      data = response.read(limit + 1)
+                  if len(data) > limit:
+                      raise ValueError("Release-Datei ist fuer diesen Testlauf zu gross.")
+                  return data
+
+              release = json.loads(fetch(f"https://api.github.com/repos/{repo}/releases/tags/v{version}", 2000000, True))
+              if release.get("draft") or release.get("prerelease") or release.get("tag_name") != "v" + version:
+                  raise ValueError("Bitte einen veroeffentlichten stabilen GitHub-Release verwenden.")
+              assets = {asset["name"]: asset for asset in release.get("assets", [])}
+              for name, expected in [("module.json", manifest_url), (f"taverngames-{version}.zip", download_url)]:
+                  if assets.get(name, {}).get("browser_download_url") != expected:
+                      raise ValueError("Release-Asset fehlt oder hat eine unerwartete URL: " + name)
+              manifest = json.loads(fetch(manifest_url, 2000000))
+              if manifest.get("id") != "taverngames" or manifest.get("version") != version:
+                  raise ValueError("Paket-ID oder Versionsnummer im Manifest stimmt nicht.")
+              if manifest.get("download") != download_url:
+                  raise ValueError("Der ZIP-Link im Manifest stimmt nicht mit diesem Release ueberein.")
+              if manifest.get("manifest") != base + "/releases/latest/download/module.json":
+                  raise ValueError("Unerwarteter allgemeiner Update-Link im Modulmanifest.")
+              compatibility = manifest.get("compatibility", {})
+              if compatibility.get("minimum") not in (None, MINIMUM) or compatibility.get("verified") != MINIMUM or compatibility.get("maximum"):
+                  raise ValueError("Dieser vorbereitete Testlauf erwartet minimum/verified 14.369 und keine Hoechstversion.")
+              if compatibility.get("minimum") is None:
+                  print("Hinweis: Dieses historische Release-Manifest hat noch keine Mindestversion. Nur der API-Test verwendet die neu beschlossene 14.369. Vor echtem Publizieren ist ein neues, konsistentes Paket erforderlich.")
+              archive = fetch(download_url, 256 * 1024 * 1024)
+              with zipfile.ZipFile(io.BytesIO(archive)) as z:
+                  info = z.getinfo("taverngames/module.json")
+                  if info.file_size > 2000000:
+                      raise ValueError("Manifest im ZIP ist zu gross.")
+                  if json.loads(z.read(info)) != manifest:
+                      raise ValueError("ZIP und veroeffentlichtes module.json enthalten unterschiedliche Manifeste.")
+              payload = {"id": "taverngames", "dry-run": True, "release": {
+                  "version": version, "manifest": manifest_url,
+                  "notes": f"{base}/releases/tag/v{version}",
+                  "compatibility": {"minimum": MINIMUM, "verified": MINIMUM}
+              }}
+              print("Gepruefter Testauftrag (keine Veroeffentlichung):")
+              print(json.dumps(payload, indent=2))
+              request = urllib.request.Request(API, data=json.dumps(payload).encode("utf-8"),
+                  headers={"Content-Type": "application/json", "Authorization": token, "User-Agent": "TavernGames-Foundry-DryRun"}, method="POST")
+              with urllib.request.urlopen(request, timeout=60) as response:
+                  result = json.loads(response.read(2000000))
+              if result.get("status") != "success" or result.get("message") != "Dry run completed successfully. To save, submit the request again without dry-run":
+                  raise ValueError("Foundry hat keinen erfolgreichen Dry-run bestaetigt. Details auf der Paketseite pruefen.")
+              print("Foundry-Testlauf erfolgreich. Es wurde kein Release-Eintrag gespeichert.")
+
+          if __name__ == "__main__":
+              try:
+                  main()
+              except urllib.error.HTTPError as error:
+                  print(f"Testlauf fehlgeschlagen: HTTP {error.code}. Bei 401/403 Token und Paketberechtigung pruefen; bei 404 Release/Assets pruefen; bei 400 Versions- und Kompatibilitaetsangaben pruefen. Antwortinhalt wird zum Schutz des Tokens nicht ausgegeben.", file=sys.stderr)
+                  sys.exit(1)
+              except Exception as error:
+                  # Never echo arbitrary exceptions or server replies: they could contain credentials.
+                  print("Testlauf fehlgeschlagen (" + type(error).__name__ + "). Release-Dateien, Eingaben und Secret-Konfiguration pruefen; keine Veroeffentlichung ausgefuehrt.", file=sys.stderr)
+                  sys.exit(1)
+          PY
