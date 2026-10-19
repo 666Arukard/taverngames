@@ -1,3 +1,4 @@
+import {InteractionQueue,renderSurface} from './interaction-queue.mjs';
 import {t,language} from './i18n.mjs';
 import {gameTitle} from './tavern-text.mjs';
 import {GAME_CATALOG,filterCatalog,toggleFavorite} from './game-catalog.mjs';
@@ -28,7 +29,8 @@ export function registerSidebar(config,foundry,game,actions) {
     async _renderHTML(){
       const root=document.createElement('section');root.className='taverngames-catalog';
       if(!game.user.isGM)return root;
-      const de=language()==='de',filters=document.createElement('div');filters.className='taverngames-catalog-filters';root.append(filters);
+      this.favoriteRequests??=new InteractionQueue();const de=language()==='de',filters=document.createElement('div');filters.className='taverngames-catalog-filters';root.append(filters);
+      const reconnect=document.createElement('button');reconnect.type='button';reconnect.dataset.connectionsRefresh='';reconnect.textContent=de?'Verbindungen erneuern':'Refresh connections';reconnect.disabled=game.users.activeGM?.id!==game.user.id;reconnect.addEventListener('click',()=>void actions.refreshConnections?.());filters.append(reconnect);
       const category=document.createElement('div');category.className='taverngames-category-buttons';category.setAttribute('role','group');category.setAttribute('aria-label',de?'Spielekategorie':'Game category');filters.append(category);
       const categories=[['all','fa-solid fa-layer-group',de?'Alle Spiele':'All games'],['dice','fa-solid fa-dice',de?'Würfelspiele':'Dice games'],['chance','fa-solid fa-coins',de?'Glücksspiele':'Games of chance']];
       for(const [value,icon,title] of categories){const button=document.createElement('button');button.type='button';button.dataset.catalogCategory=value;button.title=title;button.setAttribute('aria-label',title);const symbol=document.createElement('i');symbol.className=icon;symbol.setAttribute('aria-hidden','true');button.append(symbol,document.createTextNode(value==='all'?(de?'Alle':'All'):''));button.addEventListener('click',()=>{this.category=value;draw();});category.append(button);}
@@ -44,7 +46,7 @@ export function registerSidebar(config,foundry,game,actions) {
           const entries=games.filter(g=>g.category===type).sort((a,b)=>gameTitle(a.id).localeCompare(gameTitle(b.id),de?'de':'en'));if(!entries.length)continue;
           const h=document.createElement('h1');h.className='taverngames-category';h.textContent=type==='dice'?(de?'Würfelspiele':'Dice games'):(de?'Glücksspiele':'Games of chance');results.append(h);
           for(const entry of entries){
-            const titleRow=document.createElement('div');titleRow.className='taverngames-game-title';const heading=document.createElement('h2');heading.textContent=gameTitle(entry.id)+(entry.beta?' · Beta':'');titleRow.append(heading);const star=document.createElement('button');star.type='button';star.className='taverngames-favorite-star';star.dataset.favoriteGame=entry.id;star.textContent='★';star.classList.toggle('is-favorite',favorites.includes(entry.id));star.setAttribute('aria-pressed',String(favorites.includes(entry.id)));star.title=star.getAttribute('aria-pressed')==='true'?(de?'Favorit entfernen':'Remove favorite'):(de?'Als Favorit markieren':'Mark favorite');star.setAttribute('aria-label',`${gameTitle(entry.id)} · ${star.title}`);star.addEventListener('click',async()=>{try{await game.settings.set('taverngames','favorites',toggleFavorite(game.settings.get('taverngames','favorites'),entry.id));draw();}catch(error){globalThis.ui?.notifications?.warn(error.message==='At most five favorites.'?(de?'Höchstens fünf Favoriten möglich.':'At most five favorites.'):error.message);}});titleRow.append(star);results.append(titleRow);
+            const titleRow=document.createElement('div');titleRow.className='taverngames-game-title';const heading=document.createElement('h2');heading.textContent=gameTitle(entry.id)+(entry.beta?' · Beta':'');titleRow.append(heading);const star=document.createElement('button');star.type='button';star.className='taverngames-favorite-star';star.dataset.favoriteGame=entry.id;star.textContent='★';star.classList.toggle('is-favorite',favorites.includes(entry.id));star.setAttribute('aria-pressed',String(favorites.includes(entry.id)));star.title=star.getAttribute('aria-pressed')==='true'?(de?'Favorit entfernen':'Remove favorite'):(de?'Als Favorit markieren':'Mark favorite');star.setAttribute('aria-label',`${gameTitle(entry.id)} · ${star.title}`);star.addEventListener('click',async()=>{try{await this.favoriteRequests.run('favorite',async()=>{await game.settings.set('taverngames','favorites',toggleFavorite(game.settings.get('taverngames','favorites'),entry.id));draw();});}catch(error){globalThis.ui?.notifications?.warn(error.message==='At most five favorites.'?(de?'Höchstens fünf Favoriten möglich.':'At most five favorites.'):error.message);}});titleRow.append(star);results.append(titleRow);
             const row=document.createElement('div');row.className='taverngames-start-row';row.dataset.game=entry.id;
             const open=entry.id==='schocken'?actions.open:entry.id==='farkle'?actions.farkle:()=>actions.tavern?.(entry.id);
             const guide=entry.id==='schocken'?actions.guide:entry.id==='farkle'?actions.farkleGuide:()=>actions.tavernGuide?.(entry.id);
@@ -55,7 +57,7 @@ export function registerSidebar(config,foundry,game,actions) {
       search.addEventListener('input',draw);draw();
       return root;
     }
-    _replaceHTML(result,content){content.replaceChildren(result);}
+    _replaceHTML(result,content){renderSurface(content,()=>content.replaceChildren(result));}
   }
   config.ui.taverngames=TavernSidebar;
   const entries=Object.entries(config.ui.sidebar.TABS),index=entries.findIndex(([key])=>key==='settings');

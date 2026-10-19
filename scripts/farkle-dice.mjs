@@ -1,3 +1,4 @@
+import {boundedSpawn} from './persistent-budget.mjs';
 import {participantOptions} from './participant-appearance.mjs';
 import {selectionScore} from './farkle-engine.mjs';
 // Farkle-only presentation state. Never changes scores or generates results.
@@ -42,8 +43,7 @@ export class FarklePersistentDice {
   if(!desired.size)return;
   if(typeof dsn?.persistent?.spawn!=='function'||typeof dsn?.persistent?.remove!=='function'||typeof box?.physicsWorker?.exec!=='function'){if(!this.warned){this.warned=true;this.warn();}return;}
   for(const index of desired){const existing=this.meshes.get(index);if(existing&&Array.isArray(box?.persistentDiceList)&&!box.persistentDiceList.includes(existing.mesh))this.meshes.delete(index);if(this.meshes.has(index))continue;const pose=this.poses.get(index);if(!pose||pose.value!==state.cup.dice[index])continue;
-   const enabled=box.persistentDiceEnabled;let task;try{box.persistentDiceEnabled=true;task=dsn.persistent.spawn(this.spawnType(state,index,pose),pose.position??{x:0.18+index*0.11,y:this.scope==='kniffel'?0.70:this.scope==='ship'?0.58:0.82},{ownerUserId:this.game().users?.get?.(state.cup?.owners?.[index]??state.participant??state.order[state.turn])?.id??this.game().user?.id??state.order[state.turn],guest:{pendingId:'taverngames-'+this.scope,reservedForUserId:'taverngames-locked'},...participantOptions(this.game(),state.cup?.owners?.[index]??state.participant??state.order[state.turn],this.dieType(state,index)),...this.spawnOptions(pose,state,index)},false);}finally{box.persistentDiceEnabled=enabled;}
-   const mesh=await task;
+   const mesh=await boundedSpawn(this.game(),async()=>{const enabled=box.persistentDiceEnabled;try{box.persistentDiceEnabled=true;return dsn.persistent.spawn(this.spawnType(state,index,pose),pose.position??{x:0.18+index*0.11,y:this.scope==='kniffel'?0.70:this.scope==='ship'?0.58:0.82},{ownerUserId:this.game().users?.get?.(state.cup?.owners?.[index]??state.participant??state.order[state.turn])?.id??this.game().user?.id??state.order[state.turn],guest:{pendingId:'taverngames-'+this.scope,reservedForUserId:'taverngames-locked'},...participantOptions(this.game(),state.cup?.owners?.[index]??state.participant??state.order[state.turn],this.dieType(state,index)),...this.spawnOptions(pose,state,index)},false);}finally{box.persistentDiceEnabled=enabled;}});
    if(!mesh)continue;
    // These are inert display pieces. Native grab checks lockedBy even for the GM.
    mesh.userData.lockedBy='taverngames-locked';mesh.userData.taverngames=true;

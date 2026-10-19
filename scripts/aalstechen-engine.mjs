@@ -9,16 +9,16 @@ export function createAalstechen({npcs={},minimumRaise=1}={}){
 }
 export const aalActive=s=>s.players.filter(id=>!s.folded.includes(id)&&!Object.hasOwn(s.eliminatedAt,id));
 const tokenMode=s=>s.economy?.mode==='tokens';
-export function aalFree(s,id){const e=s.economy;if(!tokenMode(s))return 0;const held=['open','closed'].includes(e.bets?.status)?e.bets.bets.filter(b=>b.id===id).reduce((n,b)=>n+b.amount,0):0;return Math.max(0,(e.balances[id]??0)-(s.contributions[id]??0)-held);}
+export function aalFree(s,id){const e=s.economy;if(!tokenMode(s))return 0;const held=['open','closed'].includes(e.bets?.status)?e.bets.bets.filter(b=>b.id===id).reduce((n,b)=>n+b.amount,0):0;return Math.max(0,(e.balances[id]??0)-(['finished','aborted'].includes(s.phase)?0:s.contributions[id]??0)-held);}
 export const aalCanRaise=(s,id)=>!Object.hasOwn(s.actedAt,id)||s.currentBet-s.actedAt[id]>=s.lastRaise;
 const ordered=(s,ids,after)=>{const start=s.order.indexOf(after);return [...ids].sort((a,b)=>(s.order.indexOf(a)-start-1+s.order.length)%s.order.length-(s.order.indexOf(b)-start-1+s.order.length)%s.order.length);};
 // Each contribution band is an independent pot. A shorter all-in cannot win higher bands.
-export function aalPots(s){
+export function aalPots(s,rankOverride=null){
  const levels=[...new Set(Object.values(s.contributions).filter(n=>n>0))].sort((a,b)=>a-b),pots=[],payouts=Object.fromEntries(s.players.map(id=>[id,0]));let previous=0;
  for(const level of levels){const contributors=s.order.filter(id=>(s.contributions[id]??0)>=level),part=level-previous,amount=part*contributors.length;previous=level;
   const eligible=contributors.filter(id=>!s.folded.includes(id));let winners,refund=false;
   if(contributors.length===1||!eligible.length){winners=contributors;refund=true;}
-  else{const rank=id=>Object.hasOwn(s.eliminatedAt,id)?s.eliminatedAt[id]:Number.MAX_SAFE_INTEGER,best=Math.max(...eligible.map(rank));winners=eligible.filter(id=>rank(id)===best);}
+  else{const rank=rankOverride??(id=>Object.hasOwn(s.eliminatedAt,id)?s.eliminatedAt[id]:Number.MAX_SAFE_INTEGER),best=Math.max(...eligible.map(rank));winners=eligible.filter(id=>rank(id)===best);}
   const shares={};winners.forEach((id,i)=>{const n=Math.floor(amount/winners.length)+(i<amount%winners.length?1:0);payouts[id]+=n;shares[id]=n;});pots.push({level,amount,contributors,eligible,winners,shares,refund});
  }
  return {pots,payouts};
@@ -32,7 +32,7 @@ function startBetting(s){
  const start=(Math.floor(s.round/5)-1)%s.order.length;s.pending=ordered(s,can,s.order[(start-1+s.order.length)%s.order.length]);s.turn=s.order.indexOf(s.pending[0]);
 }
 function contribute(s,id,n){check(whole(n)&&n<=aalFree(s,id),'Not enough game tokens.');s.contributions[id]+=n;s.street[id]=(s.street[id]??0)+n;}
-function betAction(s,id,action,args){
+export function betAction(s,id,action,args,advance=nextRound,complete=finish){
  check(s.phase==='betting'&&s.pending[0]===id,'It is not your turn.');const free=aalFree(s,id),own=s.street[id]??0,owing=s.currentBet-own;
  if(action==='fold'){check(owing>0,'Check instead of folding.');s.folded.push(id);}
  else if(action==='check'){check(owing===0,'Call the current bet first.');s.actedAt[id]=s.currentBet;}
@@ -43,10 +43,10 @@ function betAction(s,id,action,args){
   contribute(s,id,cost);if(increase>=s.lastRaise)s.lastRaise=increase;s.currentBet=target;s.actedAt[id]=target;
  }else throw Error('Unknown action.');
  s.log.push({round:s.round,id,action,to:s.street[id]??0});s.log=s.log.slice(-100);
- const alive=aalActive(s);if(alive.length===1){finish(s,alive,'folds');return;}
+ const alive=aalActive(s);if(alive.length===1){complete(s,alive,'folds');return;}
  const pending=s.pending.filter(other=>other!==id&&alive.includes(other)&&aalFree(s,other)>0);
  for(const other of alive)if(other!==id&&aalFree(s,other)>0&&(s.street[other]??0)<s.currentBet&&!pending.includes(other))pending.push(other);
- s.pending=ordered(s,pending,id);if(!s.pending.length){nextRound(s);return;}s.turn=s.order.indexOf(s.pending[0]);
+ s.pending=ordered(s,pending,id);if(!s.pending.length){advance(s);return;}s.turn=s.order.indexOf(s.pending[0]);
 }
 export function actAalstechen(original,id,action,args={},random=()=>1,gm=false){
  const s=structuredClone(original);check(s?.game==='aalstechen'&&s.version===1,'No game exists.');check(!['finished','aborted'].includes(s.phase),'This game has ended.');

@@ -39,15 +39,16 @@ export function bestSelection(dice,indices=dice.map((_n,index)=>index),rules={})
   return best;
 }
 const newCup=()=>({dice:null,held:Array(6).fill(false),fresh:[],selected:[],points:0,rolls:0,hot:0});
-export function createFarkle({mode='quick',target=10000,roundLimit=3,npcs={},rules={}}={}){
+export function createFarkle({mode='quick',target=10000,roundLimit=3,entry=mode==='target'?500:0,npcs={},rules={}}={}){
   check(['quick','rounds','target'].includes(mode),'Invalid game mode.');
   check(Number.isInteger(target)&&target>=500&&target<=1000000,'Target must be between 500 and 1,000,000.');
+  check(Number.isInteger(entry)&&entry>=0&&entry<=(mode==='target'?target:1000000),'Invalid entry minimum.');
   check(Number.isInteger(roundLimit)&&roundLimit>=1&&roundLimit<=100,'Round count must be between 1 and 100.');
   check(rules&&typeof rules==='object'&&!Array.isArray(rules)&&Object.entries(rules).every(([key,value])=>['smallStraight','onesBonus','immediateTarget'].includes(key)&&typeof value==='boolean'),'Invalid optional rules.');
   check(npcs&&typeof npcs==='object'&&!Array.isArray(npcs)&&Object.keys(npcs).length<=20,'Invalid NPCs.');
   for(const [id,name] of Object.entries(npcs))check(id.startsWith('npc-')&&id.length<=64&&typeof name==='string'&&name.trim()&&name.length<=60,'Invalid NPC.');
   const players=Object.keys(npcs);
-  return {version:1,game:'farkle',revision:0,phase:'lobby',paused:false,mode,target,roundLimit,round:0,entry:mode==='target'?500:0,rules:{smallStraight:false,onesBonus:false,immediateTarget:false,...rules},players,npcs:structuredClone(npcs),npcManual:{},scores:Object.fromEntries(players.map(id=>[id,0])),order:[],turn:0,turnNumber:0,cup:null,finalRemaining:null,log:[]};
+  return {version:1,game:'farkle',revision:0,phase:'lobby',paused:false,mode,target,roundLimit,round:0,entry,rules:{smallStraight:false,onesBonus:false,immediateTarget:false,...rules},players,npcs:structuredClone(npcs),npcManual:{},scores:Object.fromEntries(players.map(id=>[id,0])),order:[],turn:0,turnNumber:0,cup:null,finalRemaining:null,log:[]};
 }
 function outcome(s){
   s.phase='finished';s.cup=null;
@@ -110,7 +111,7 @@ export function actFarkle(original,actor,action,args={},diceSource=()=>1,gm=fals
       if(!bestSelection(c.dice,c.fresh,s.rules).score)endTurn(s,true);
     }else if(action==='bank'){
       check(c.dice!==null,'Roll first.');commit(s);
-      check(s.scores[s.order[s.turn]]>0||c.points>=s.entry,'You need at least 500 points to enter the scoreboard.');endTurn(s,false);
+      check(s.scores[s.order[s.turn]]>0||c.points>=s.entry,'Entry minimum has not been reached.');endTurn(s,false);
     }else throw new Error('Unknown action.');
   }
   s.revision++;return s;

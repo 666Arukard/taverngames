@@ -26,7 +26,7 @@ export class FarkleSession{
     }else if(data.action==='restart'){
       if(!user.isGM)throw new Error('GM only.');
       if(!old||!['finished','aborted'].includes(old.phase))throw new Error('Finish or end the current game first.');
-      next=createFarkle({mode:old.mode,target:old.target,roundLimit:old.roundLimit??3,npcs:old.npcs,rules:old.rules});
+      next=createFarkle({mode:old.mode,target:old.target,entry:old.entry,roundLimit:old.roundLimit??3,npcs:old.npcs,rules:old.rules});
       next.players=[...old.players];next.scores=Object.fromEntries(next.players.map(id=>[id,0]));next.npcManual=structuredClone(old.npcManual);
       if(data.args?.prepare!==true)next=actFarkle(next,user.id,'begin',{},this.diceSource,true);next.gameId=crypto.randomUUID();next.revision=old.revision+1;
     }else if(data.action==='undo'){

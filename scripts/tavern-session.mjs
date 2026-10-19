@@ -1,3 +1,4 @@
+import {seriesMetadata} from './continuous-play.mjs';
 import {prepareSeventeenRisk} from './seventeen-engine.mjs';
 import {seventeenResultText} from './seventeen-text.mjs';
 import {kniffelFields} from './kniffel-engine.mjs';
@@ -19,11 +20,11 @@ export class TavernSession{
     const old=this.state;
     if(!['join','leave'].includes(data.action)&&!(data.action==='abort'&&user.isGM)&&data.revision!==(old?.revision??-1))throw new Error('The game state changed. Please try again.');
     let next;
-    if(data.action==='lobby'||data.action==='restart'){
+    if(['lobby','restart','nextRound'].includes(data.action)){
       if(!user.isGM)throw new Error('GM only.');
       if(old&&!['finished','aborted'].includes(old.phase)&&!(data.action==='lobby'&&old.phase==='lobby'&&!old.tickets?.length))throw new Error('Finish or end the current game first.');
-      if(data.action==='restart'&&!old)throw new Error('No game exists.');
-      if(data.action==='restart'){
+      if(['restart','nextRound'].includes(data.action)&&!old)throw new Error('No game exists.');
+      if(['restart','nextRound'].includes(data.action)){
         next=createTavern(this.game,old);next.players=[...old.players];next.scores=Object.fromEntries(next.players.map(id=>[id,0]));next.npcManual=structuredClone(old.npcManual);
         if(this.game==='seventeen'){next.hands=Object.fromEntries(next.players.map(id=>[id,[]]));next.bankBalance=old.bankBalance??old.bankFunds??1000;next.bankDebt=Math.max(0,-next.bankBalance);if(next.variableStakes)next.stakes=Object.fromEntries(next.players.map(id=>[id,next.npcs[id]?next.minStake:null]));next.npcRisk=structuredClone(old.npcRisk??{});next=prepareSeventeenRisk(next,this.random);}
         if(this.game==='kniffel'){next.sheets=Object.fromEntries(next.players.map(id=>[id,Object.fromEntries(kniffelFields(next).map(k=>[k,null]))]));next.extras=Object.fromEntries(next.players.map(id=>[id,0]));if(next.variant==='extreme')next.chips=Object.fromEntries(next.players.map(id=>[id,3]));}
@@ -41,16 +42,16 @@ export class TavernSession{
       const id=user.isGM&&data.action==='ticket'&&old?.npcs[data.args?.id]?data.args.id:user.id;
       next=actTavern(old,id,data.action,data.args,this.random,user.isGM);
     }
-    await this.commit(next,data.action);return this.project(user);
+    seriesMetadata(next,old,data.action);await this.commit(next,data.action);return this.project(user);
   }
   async commit(next,action){
-    const old=this.state;await this.save(next);
-    if(['lobby','restart'].includes(action))this.history=[];
+    const old=this.state;seriesMetadata(next,old,action);await this.save(next);
+    if(['lobby','restart','nextRound'].includes(action))this.history=[];
     else if(action==='undo')this.history.pop();else if(old&&!['abort','pause','npcControl','bankControl'].includes(action)){this.history.push(structuredClone(old));this.history=this.history.slice(-30);}
     this.state=next;this.updateNpcWait();
     if(next.phase==='finished'&&old?.phase!=='finished'&&!this.hasAnnouncement(next.gameId)){
       const names=ids=>ids.map(id=>escapeHTML(next.npcs[id]??this.getName(id))).join(', ');
-      const content=`<h2>${gameTitle(this.game)} – ${f('Spiel beendet','Game over')}</h2>${next.result?`<p>W100: ${next.result}</p>`:''}<p>${f('Gewonnen','Winners')}: ${next.winners.length?names(next.winners):f('Niemand','Nobody')}</p><p>${f('Verloren','Losers')}: ${names(next.losers)||'–'}</p>${this.game==='seventeen'?'':this.game==='lottery'?`<p>${f('Hauptgewinn','Prize')}: ${escapeHTML(next.prize)}</p>`:`<ul>${next.players.map(id=>`<li>${names([id])}: ${next.scores[id]}</li>`).join('')}</ul>`}`;
+      const content=`<h2>${gameTitle(this.game)} – ${this.game==='seventeen'?f('Runde beendet','Round over'):f('Spiel beendet','Game over')}</h2>${next.result?`<p>W100: ${next.result}</p>`:''}<p>${f('Gewonnen','Winners')}: ${next.winners.length?names(next.winners):f('Niemand','Nobody')}</p><p>${f('Verloren','Losers')}: ${names(next.losers)||'–'}</p>${this.game==='seventeen'?'':this.game==='lottery'?`<p>${f('Hauptgewinn','Prize')}: ${escapeHTML(next.prize)}</p>`:`<ul>${next.players.map(id=>`<li>${names([id])}: ${next.scores[id]}</li>`).join('')}</ul>`}`;
       const details=this.game==='seventeen'?`<p>${f('Bank','Bank')}: ${next.bank.flat().reduce((a,b)=>a+b,0)} · ${f('Stoppgrenze','Stop threshold')}: ${next.bankStop}</p><p>${f('Bankguthaben','Bank balance')}: ${next.bankBalance} · ${f('Bankschuld','Bank debt')}: ${next.bankDebt}</p><p>${f('Nur interne Testbeträge; keine Charakterbuchung.','Internal test amounts only; no character transactions.')}</p><ul>${next.players.map(id=>`<li>${names([id])}: ${next.settlements[id].total} · ${next.economy?.mode==='none'?(next.settlements[id].win?f('Gewonnen','Won'):f('Verloren','Lost')):escapeHTML(seventeenResultText(next.settlements[id],next.settlements[id].currency??next.currency))}</li>`).join('')}</ul>`:'';
       try{await this.announce({content:content+details,flags:{taverngames:{game:this.game,gameId:next.gameId}}});}catch(error){globalThis.ui?.notifications?.warn(error.message);}
     }

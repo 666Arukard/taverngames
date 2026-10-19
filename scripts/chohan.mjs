@@ -1,3 +1,4 @@
+import {seriesMetadata} from './continuous-play.mjs';
 import {startingOrder,chosenStarter} from './start-choice.mjs';
 import {f} from './farkle-text.mjs';
 import {escapeHTML} from './tavern-text.mjs';
@@ -64,16 +65,16 @@ export class ChoSession{
  async handle(data,user){
   if(!this.enabled()&&!(data.action==='abort'&&user.isGM))throw Error('Beta testing is disabled.');if(data.action==='read')return this.project(user);
   const old=this.state;check(['join','leave'].includes(data.action)||data.action==='abort'&&user.isGM||data.revision===(old?.revision??-1),'The game state changed. Please try again.');let next;
-  if(['lobby','restart'].includes(data.action)){
+  if(['lobby','restart','nextRound'].includes(data.action)){
    check(user.isGM,'GM only.');check(!old||['finished','aborted','lobby'].includes(old.phase),'Finish or end the current game first.');
-   if(data.action==='restart'){check(old,'No game exists.');next=createCho(old);next.players=[...old.players];next.balances=structuredClone(old.balances);next.npcManual=structuredClone(old.npcManual);next.round=old.round+1;next.bank=old.bank??next.bank;next.carry=old.carry??0;next.carryContrib=structuredClone(old.carryContrib??{});}
+   if(['restart','nextRound'].includes(data.action)){check(old,'No game exists.');next=createCho(old);next.players=[...old.players];next.balances=structuredClone(old.balances);next.npcManual=structuredClone(old.npcManual);next.round=old.round+1;next.bank=old.bank??next.bank;next.carry=old.carry??0;next.carryContrib=structuredClone(old.carryContrib??{});}
    else{check(!old?.carry,'Resolve or refund the carried pot first.');const names=data.args?.npcs??[];check(Array.isArray(names)&&names.length<=20&&names.every(n=>typeof n==='string'&&n.trim()&&n.length<=60),'Invalid NPCs.');next=createCho({...data.args,npcs:Object.fromEntries(names.map(n=>['npc-'+crypto.randomUUID(),n.trim()]))});}
    next.revision=(old?.revision??0)+1;
   }else{const id=user.isGM&&old?.npcs?.[data.args?.id]?data.args.id:user.id;next=actCho(old,id,data.action,data.args,this.random,user.isGM);}
-  await this.commit(next);return this.project(user);
+  seriesMetadata(next,old,data.action);await this.commit(next);return this.project(user);
  }
  async commit(next){
-  await this.save(next);this.state=next;this.updateNpcWait();
+  seriesMetadata(next,this.state);await this.save(next);this.state=next;this.updateNpcWait();
   if(!next.economy&&next.phase==='finished'&&!this.hasAnnouncement(next.gameId)){
    const name=id=>escapeHTML(next.npcs[id]??this.getName(id));try{await this.announce({content:`<h2>Chō-Han · ${f('Auswertung','Results')}</h2><p>${next.dice.join(' + ')} · ${next.result==='even'?f('Gerade','Even'):f('Ungerade','Odd')} · ${f('Topf','Pot')}: ${next.pot/next.unit} ${next.currency} · ${f('Provision','Commission')}: ${next.fee/next.unit}</p><p>${f('Gewonnen','Winners')}: ${next.winners.map(name).join(', ')||'–'}${next.carry?` · ${f('Übertrag','Carry-over')}: ${next.carry/next.unit} ${next.currency}`:''}</p><ul>${next.bets.map(b=>`<li>${name(b.id)}: ${f('Angenommen','Accepted')} ${b.accepted/next.unit}; ${f('Rückgabe','Refund')} ${b.refund/next.unit}; ${f('Auszahlung','Payout')} ${(b.payout??0)/next.unit}</li>`).join('')}</ul><p>${f('Bankguthaben','Bank balance')}: ${next.bank/next.unit} · ${f('Bankschuld','Bank debt')}: ${Math.max(0,-next.bank)/next.unit} ${next.currency}</p><p>${f('Nur interne Testmünzen. Kein Charaktergeld verändert.','Internal test coins only. Character currency unchanged.')}</p>`,flags:{taverngames:{game:'chohan',gameId:next.gameId}}});}catch(e){globalThis.ui?.notifications?.warn(e.message);}
   }

@@ -1,9 +1,57 @@
+## Version 3.2.0
+
+Aalstechen ist jetzt stabil verfügbar. Klickschutz und Anfragereihenfolge wurden auf alle Spiele und Moderationen erweitert. Farkle erlaubt eine optionale Einstiegshürde in allen Spielmodi. Klippklapp bietet zusätzlich die Variante Summe oder beide Einzelzahlen, mit einem einzelnen Feld nur bei Pasch. Meiern richtet aufgedeckte 3D-Würfel nach dem tatsächlichen gespeicherten Ergebnis aus. Dauerhafte Würfel beachten das Dice-so-Nice-Limit; weitere Würfel bleiben im Spielfenster sichtbar.
+
+Aalstechen is now stable. Click protection and ordered requests cover all games and moderation panels. Farkle supports an optional entry minimum in every mode. Klippklapp adds a total-or-both-faces variant, allowing a single face only on doubles. Meiern aligns revealed 3D faces with the actual stored result. Persistent dice respect the Dice So Nice limit; additional dice remain visible in the game window.
+
+Nach Installation alle Clients neu laden. Aalstechen benötigt keinen Beta-Schalter mehr; Meiern bleibt Beta.
+
 # TavernGames
 
-**Version 3.0.2**. Aalstechen und Meiern als zuschaltbare Betas sowie zehn stabile Spiele mit optionaler stabiler Dice-So-Nice-Anbindung: 17 und 4, Chō-Han, Drachenhort, Farkle, Kniffel, Lügenwürfel, Schiff–Kapitän–Mannschaft, Schocken, Schweinchen und Straßenlotto.
+**Version 3.1.4**. Aalstechen, Klippklapp, Meiern und Würfelpoker als zuschaltbare Betas sowie zehn stabile Spiele mit optionaler stabiler Dice-So-Nice-Anbindung: 17 und 4, Chō-Han, Drachenhort, Farkle, Kniffel, Lügenwürfel, Schiff–Kapitän–Mannschaft, Schocken, Schweinchen und Straßenlotto.
 
 
-## Aktuell in 3.0.2
+## Aktuell in 3.1.4
+
+Farkle verarbeitet schnelle Auswahlen nacheinander und verwirft Klicks nicht mehr wegen gleichzeitig laufender Anfragen. Ein begonnener Mausklick bleibt bei Aktualisierungen des Spielfensters erhalten. Veraltete Aktionen werden nicht auf einen neuen Wurf oder Zug angewandt. Im Zielpunktmodus kann die SL die Einstiegshürde ausschalten oder frei bis zur Zielpunktzahl einstellen; Standard bleibt 500. Folgepartien behalten die Auswahl. Alle bisherigen Stabil-/Beta-Einstufungen bleiben erhalten.
+
+Farkle processes rapid selections in order instead of discarding clicks while another request is pending. In-progress mouse clicks survive game-table redraws. Stale actions cannot apply to a new roll or turn. In target mode the GM can disable or customize the entry minimum up to the target score; the default remains 500. Follow-up games retain the setting. All stable/beta classifications remain unchanged.
+
+Farkle: Neue Partie & Regeln → Zielpunktzahl → Einstiegshürde verwenden. Ausschalten oder benötigte Punkte eingeben, dann die Lobby öffnen. Bestehende laufende Partien behalten ihre Regeln.
+
+## Vorheriger Stand 3.1.3
+
+Verbindungen werden nach abgewiesenem Verbindungsschlüssel automatisch wiederhergestellt. Gleichzeitige Verbindungsanfragen teilen sich einen stabilen Schlüssel; manuelles Erneuern ist zentral im TavernGames-Reiter und in jeder Moderation erreichbar. 3D-Freigaben warten auf aktive Teilnehmer und die zuständige SL, nicht auf unbeteiligte Zuschauer. Getrennte Benutzer geben keine Animationssperre mehr vor; laufende Teilnehmeranimationen bleiben geschützt. Alle Spiele behalten ihren bisherigen Stabil-/Beta-Status.
+
+Connections recover automatically after a rejected connection key. Concurrent connection requests share a stable key; manual refresh is available in the TavernGames tab and every moderation panel. 3D completion waits for active participants and the authoritative GM, not unrelated spectators. Disconnected users no longer hold animation locks; live participant animations remain protected. All games keep their current stable/beta status.
+
+Nach Installation auf SL- und Spielerseite neu laden. Manuelles Erneuern ist keine Voraussetzung für den normalen Spielbeitritt mehr.
+
+## Vorheriger Stand 3.1.2
+
+Klippklapp ist neu als Beta verfügbar: zwölf Klappen, zwei W6, zwei Regelvarianten, frei gewählte Klappen, niedrigere Restwertansagen und Bluffen. Anzweifeln ist bis zum ersten eigenen Wurf möglich. Jede Zahlung beendet den Durchgang; der Zahler beginnt den nächsten. Beim vollständigen Klippklapp zahlen alle anderen, danach beginnt der nächste aktive Spieler. Die fortlaufende Partie unterstützt NPCs, interne Spieltoken und optionale 3D-Würfel. Zehn Spiele bleiben stabil; Aalstechen, Klippklapp, Meiern und Würfelpoker sind zuschaltbare Betas.
+
+Klippklapp is now available as a beta: twelve tiles, two d6, two rule variants, manual tile selection, decreasing remainder claims and bluffing. Claims may be challenged until the next player actually rolls. Each payment ends the round and the payer starts the next. Closing all tiles makes every other active player pay; the next active player then starts. Continuous sessions support NPCs, internal game tokens and optional 3D dice. Ten games remain stable; Aalstechen, Klippklapp, Meiern and Dice Poker are optional betas.
+
+Neue geplante Spiele: Tic-Tac-Toe, Vier gewinnt, Mühle und Streichholzspiel. Bereits vorhandene englische Spielnamen werden nicht doppelt aufgenommen. Klippklapp wird jetzt als Beta umgesetzt und aus der offenen Planungsliste entfernt. Die genaue Variante des Streichholzspiels bleibt zu klären.
+
+## Vorheriger Stand 3.1.1
+
+17 und 4, Würfelpoker und Chō-Han laufen nun als fortlaufende Rundenpartien mit erhaltenen Teilnehmern, Tokenbeständen und Bankbudget bis zum SL-Abschluss. Die SL kann alle Spiele direkt im Spielfenster starten, beenden oder die nächste Partie vorbereiten. Göttliche Hand unterstützt mehrere dauerhafte Glücks-/Pechprofile, global oder je Spiel mit Vorrang einschließlich 0 Prozent. Die Stärke steuert Eingriffshäufigkeit und weiche, spielgerechte Qualitätsziele. Zehn Spiele bleiben stabil; Meiern, Aalstechen und Würfelpoker bleiben Beta.
+
+Seventeen and Four, Dice Poker and Cho-Han now support continuous sessions with retained participants, token balances and bank budget until the GM ends the session. The GM can start, end or prepare games directly in every game table. Divine Hand supports multiple persistent luck/misfortune profiles, globally or per game, with game-specific overrides including zero percent. Strength controls intervention frequency and soft game-specific quality targets. Ten games remain stable; Meiern, Aalstechen and Dice Poker remain beta.
+
+Für fortlaufende Setzspiele nach Abrechnung Nächste Runde wählen; Partie beenden schließt die Sitzung. Einsätze werden je Runde neu gebunden. Göttliche Hand bleibt gespeichert, bis die SL sie ausschaltet; Spielausnahme entfernen übernimmt wieder die globale Vorgabe. 0 Prozent bedeutet unveränderten Zufall. Kein garantierter Sieg oder Verlust.
+
+## Vorheriger Stand 3.1.0
+
+Würfelpoker ist neu als Beta verfügbar: fünf verdeckte W8, ein gezielter Neuwurf, zwei Setzphasen, All-in und Nebentöpfe mit internen Spieltoken. Die Göttliche Hand kann ausgewählte Teilnehmer oder die Bank nun auch benachteiligen; Richtung und Stärke bleiben ausschließlich für die SL sichtbar. Bisherige Einstellungen bleiben positiv. Zehn stabile Spiele bleiben regulär, Meiern, Aalstechen und Würfelpoker sind zuschaltbare Betas.
+
+Dice Poker is now available as a beta: five hidden d8, one selective redraw, two betting rounds, all-in and side pots using internal game tokens. Divine Hand can now also disfavor selected participants or the bank; direction and strength remain GM-only. Existing settings retain their positive effect. Ten stable games remain available normally; Meiern, Aalstechen and Dice Poker are optional betas.
+
+Würfelpoker über den Beta-Test-Schalter freischalten. Göttliche Hand: Teilnehmer wählen, Wirkung Begünstigen oder Benachteiligen wählen, Stärke festlegen und speichern. Es wird pro Partie ein Ziel in einer Richtung beeinflusst. 0 Prozent ist unveränderter Zufall; 100 Prozent ist keine garantierte Gewinn- oder Verlustquote.
+
+## Vorheriger Stand 3.0.2
 
 17 und 4: Die Göttliche Hand ermöglicht abwechslungsreiche Wege zur 21 über mehrere selbst ausgelöste Würfe. Rollende 3D-Würfel verschwinden nach der Animation, die gruppierte Übersicht bleibt. Farkle entfernt Fehlwurfwürfel und behält herausgelegte Würfel; gesicherte Punkte bleiben im Spielstand. Alle Spiele wurden auf ihre jeweilige Begünstigungsbewertung geprüft. Mindestversion ist Foundry 14.369; höhere Versionen sind ungetestet. Meiern und Aalstechen bleiben Beta.
 

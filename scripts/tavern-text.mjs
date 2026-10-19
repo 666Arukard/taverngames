@@ -1,3 +1,5 @@
+import {klippGuide} from './klippklapp-text.mjs';
+import {pokerGuide} from './poker-text.mjs';
 import {aalstechenGuide} from './aalstechen-text.mjs';
 import {meiernGuide} from './meiern-text.mjs';
 import {tokenGuide} from './token-guide.mjs';
@@ -6,8 +8,21 @@ import {betaGuide} from './beta-games-text.mjs';
 import {kniffelGuide} from './kniffel-text.mjs';
 import {f} from './farkle-text.mjs';
 export const escapeHTML=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-export const gameTitle=game=>({aalstechen:'Aalstechen',meiern:'Meiern',seventeen:f('17 und 4','Seventeen and Four'),chohan:'Chō-Han',liars:f('Lügenwürfel','Liar’s Dice'),hoard:f('Drachenhort','Dragon’s Hoard'),kniffel:'Kniffel',schocken:'Schocken',farkle:'Farkle',pig:f('Schweinchen','Pig'),ship:f('Schiff, Kapitän und Mannschaft','Ship, Captain and Crew'),lottery:f('Straßenlotto','Street lottery')})[game]??game;
+export const gameTitle=game=>({klippklapp:'Klippklapp',poker:f('Würfelpoker','Dice Poker'),aalstechen:'Aalstechen',meiern:'Meiern',seventeen:f('17 und 4','Seventeen and Four'),chohan:'Chō-Han',liars:f('Lügenwürfel','Liar’s Dice'),hoard:f('Drachenhort','Dragon’s Hoard'),kniffel:'Kniffel',schocken:'Schocken',farkle:'Farkle',pig:f('Schweinchen','Pig'),ship:f('Schiff, Kapitän und Mannschaft','Ship, Captain and Crew'),lottery:f('Straßenlotto','Street lottery')})[game]??game;
 const ERRORS={
+ 'Invalid Klippklapp variant.':'Wähle Variante A, B oder C.',
+ 'Leave only outside your own turn.':'Du kannst nur außerhalb deines eigenen Zuges aussteigen.',
+ 'Close tiles before rolling again.':'Schließe zuerst passende Klappen. Nur bei Pasch darfst du ohne Schließen neu würfeln.',
+ 'Choose a valid tile combination.':'Wähle eine erlaubte Kombination offener Klappen.',
+ 'Complete your turn before declaring.':'Spiele deinen Zug zuerst vollständig aus.',
+ 'The announced remainder must be lower.':'Die Ansage muss zwischen 0 und 78 liegen und die vorige Ansage unterbieten.',
+ 'Challenge a zero remainder.':'Eine angesagte 0 muss angezweifelt werden.',
+ 'Finish the round first.':'Zuerst die laufende Runde abschließen.',
+ 'This game has no continuous rounds.':'Dieses Spiel verwendet seinen eigenen Rundenmodus.',
+ 'End the session before discarding tokens.':'Vor dem Verwerfen der Token die gesamte Partie beenden.',
+ 'Choose favor or disfavor.':'Wähle Begünstigen oder Benachteiligen.',
+ 'Invalid poker dice.':'Würfelpoker benötigt fünf gültige W8.',
+ 'Invalid die selection.':'Ungültige Würfelauswahl.',
  'Choose the starting player in the lobby.':'Wähle den Startspieler vor dem Start in der Lobby.',
  'Select a participating starting player.':'Wähle einen teilnehmenden Startspieler.',
  'Configure before the game ends.':'Token vor dem Partieende bearbeiten.',
@@ -98,6 +113,8 @@ const ERRORS={
 };
 export const tavernError=message=>f(ERRORS[message]??message,message);
 export function tavernGuide(game){
+  if(game==='klippklapp')return klippGuide();
+  if(game==='poker')return pokerGuide();
   if(game==='aalstechen')return aalstechenGuide();
   if(game==='meiern')return meiernGuide();
   if(game==='seventeen')return seventeenGuide(gameTitle(game));

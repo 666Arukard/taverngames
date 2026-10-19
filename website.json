@@ -2,25 +2,27 @@
   "schemaVersion": 1,
   "blocks": {
     "patchnotes": {
-      "title": "Patchnotes Version 3.0.2",
+      "title": "Patchnotes Version 3.2.0",
       "paragraphs": [
-        "17 und 4: Die Göttliche Hand ermöglicht abwechslungsreiche Wege zur 21 über mehrere selbst ausgelöste Würfe. Rollende 3D-Würfel verschwinden nach der Animation, die gruppierte Übersicht bleibt. Farkle entfernt Fehlwurfwürfel und behält herausgelegte Würfel; gesicherte Punkte bleiben im Spielstand. Alle Spiele wurden auf ihre jeweilige Begünstigungsbewertung geprüft. Mindestversion ist Foundry 14.369; höhere Versionen sind ungetestet. Meiern und Aalstechen bleiben Beta.",
-        "Seventeen and Four: Divine Hand allows varied paths to 21 over multiple player-triggered throws. Animated 3D dice disappear after rolling, while the grouped summary remains. Farkle removes bust dice and keeps laid-aside dice; banked points remain in the game state. Game-specific influence scoring was reviewed for every game. Minimum Foundry version is 14.369; later versions are untested. Meiern and Aalstechen remain beta."
+        "Aalstechen ist jetzt stabil verfügbar. Klickschutz und Anfragereihenfolge wurden auf alle Spiele und Moderationen erweitert. Farkle erlaubt eine optionale Einstiegshürde in allen Spielmodi. Klippklapp bietet zusätzlich die Variante Summe oder beide Einzelzahlen, mit einem einzelnen Feld nur bei Pasch. Meiern richtet aufgedeckte 3D-Würfel nach dem tatsächlichen gespeicherten Ergebnis aus. Dauerhafte Würfel beachten das Dice-so-Nice-Limit; weitere Würfel bleiben im Spielfenster sichtbar.",
+        "Meiern, Klippklapp und Würfelpoker bleiben optionale Beta-Spiele. Neu seit der letzten veröffentlichten Version sind unter anderem Würfelpoker und Klippklapp, dauerhafte Glücks-/Pechprofile der Göttlichen Hand sowie fortlaufende Rundenpartien."
       ],
       "items": [
-        "17 und 4: abwechslungsreiche Wege zur 21, Würfelgrenzen und eigene Entscheidungen bleiben erhalten.",
-        "3D: rollende Kopien bei 17 und 4 sowie Fehlwurfwürfel bei Farkle aufräumen.",
-        "Göttliche Hand: spielbezogene Bewertung aller zwölf Spiele geprüft; keine negative Wirkung.",
-        "Foundry 14.369 als Mindestversion; Meiern und Aalstechen weiterhin Beta."
+        "Aalstechen stabil; Meiern, Klippklapp und Würfelpoker bleiben Beta.",
+        "Modulweiter Schutz schneller Klicks und laufender Eingaben.",
+        "Farkle-Einstiegshürde in allen Modi; Klippklapp zusätzlich Variante C.",
+        "Meiern: aufgedeckte 3D-Flächen aus gespeichertem Ergebnis.",
+        "DSN-Limit wird ohne Änderung fremder Würfel oder Einstellungen berücksichtigt."
       ]
     },
     "games": {
-      "title": "aktuelle Spiele (12)",
+      "title": "aktuelle Spiele (14)",
       "paragraphs": [
-        "Zehn stabile Spiele und zwei zuschaltbare Betas: Aalstechen und Meiern. Kniffel Extreme bleibt stabil."
+        "Elf stabile Spiele und drei optionale Betas: Klippklapp, Meiern und Würfelpoker."
       ],
       "items": [
         "17 und 4",
+        "Aalstechen",
         "Chō-Han",
         "Drachenhort",
         "Farkle",
@@ -30,14 +32,15 @@
         "Schocken",
         "Schweinchen",
         "Straßenlotto",
-        "Aalstechen (Beta)",
-        "Meiern (Beta)"
+        "Klippklapp (Beta)",
+        "Meiern (Beta)",
+        "Würfelpoker (Beta)"
       ]
     },
     "plans": {
-      "title": "geplante Spiele (35)",
+      "title": "geplante Spiele (36)",
       "paragraphs": [
-        "Für diese Spiele und Wettbewerbe liegen Regelreferenzen vor. Die Auswahl ist Planung und keine Zusage zur Umsetzung; einzelne Regelfragen sind noch offen."
+        "Geplante Spiele und Wettbewerbe mit vorhandenen Referenzen oder neu vorgemerkten Namen. Einzelne Regeln sind noch offen; insbesondere ist beim Streichholzspiel noch keine genaue Variante festgelegt. Vorhandene Spiele werden nicht unter ihren englischen Namen erneut geplant."
       ],
       "items": [
         "17+4 (Kartenspiel)",
@@ -52,33 +55,34 @@
         "Durak",
         "Escalero",
         "Gaigel",
-        "Gerade oder Ungerade",
         "Gewichteheben",
         "Hütchenspiel",
         "Karaoke",
         "Kartendomino / Fan Tan",
-        "Klippklapp",
+        "Käsekästchen / Dots and Boxes (Variante noch offen)",
         "Kneipenquiz",
-        "Koboldpoker",
         "König und Bettler / Präsident",
         "Mau-Mau",
+        "Mühle / Nine Men’s Morris",
         "Offenes Würfelpoker",
         "Pfeilwurf",
-        "Piratenzunge",
         "Roulette (PDF-Variante)",
         "Schach (abstrakter Wettbewerb)",
+        "Schiffe versenken / Battleship (Variante noch offen)",
         "Schummeln (Kartenspiel)",
         "Schwimmen / Knack",
         "Sechsundsechzig",
         "Skat",
         "Spiel der Könige",
+        "Streichholzspiel / Matchstick Game (Variante noch offen)",
+        "Tic-Tac-Toe / Drei gewinnt",
+        "Vier gewinnt / Four in a Row",
         "Wettessen",
-        "Wetttrinken",
-        "Yahtzee"
+        "Wetttrinken"
       ]
     },
     "plans2": {
-      "title": "geplante Funktionen (10)",
+      "title": "geplante Funktionen (9)",
       "paragraphs": [
         "Größere Erweiterungen werden schrittweise geprüft. Die folgende Liste beschreibt Überlegungen und noch keine fertigen Funktionen.",
         "Karteneinbindung auf Daniels Wunsch zurückgestellt. Als späterer erster Schritt vorgeschlagen: einfache Vorder-/Rückseiten und eine Kartenhand mit Sichtbarkeitsprüfung zwischen zwei Spielern, zunächst ohne Animationen. Noch keine Umsetzungsfreigabe."
@@ -88,7 +92,6 @@
         "Kompakte halbtransparente Spielansicht anstelle der linken Foundry-Bedienelemente; später direkte Auswahl an 3D-Würfeln prüfen. Noch nicht umgesetzt.",
         "Eigene Spielnamen und ein durch den SL anpassbares Spieleangebot; Titel auch in Anleitungen und Chat übernehmen.",
         "Grafische Kartenverwaltung und spätere Kartenanimationen; Entwicklung derzeit zurückgestellt.",
-        "Eigene Erweiterung für gezielte SL-Manipulationen von Ergebnissen oder Gewinnchancen.",
         "Kniffel-Serien mit addierten Ergebnissen.",
         "Beschleunigte NPC-Wettpartien.",
         "Grafisch wachsende Münzstapel auf den Drachenhorten.",
@@ -99,7 +102,7 @@
     "functions": {
       "title": "aktuelle Funktionen (13)",
       "paragraphs": [
-        "Zehn stabile Spiele sowie Aalstechen und Meiern als Beta, mit gemeinsamer SL-Moderation und optionalen Spieltoken."
+        "Elf stabile Spiele und drei zuschaltbare Betas: Klippklapp, Meiern und Würfelpoker. Gemeinsame SL-Moderation, optionale Spieltoken und 3D-Würfel unterstützen die Partien."
       ],
       "items": [
         "SL-Spielauswahl mit Kategorien, deutsch-englischer Suche, alphabetischer Liste und bis zu fünf Favoriten.",
@@ -112,15 +115,15 @@
         "Straßenlotto mit konfigurierbaren Tippscheinen, SL-Aufdeckung und separater Übergabe eines ausgewählten Gegenstandspreises.",
         "Kniffel Extreme mit 22 Feldern, W10 und Zusatzwurf-Chips; 17 und 4 mit W12 oder W8+W6 und manueller oder automatischer Bank.",
         "Gemeinsame Startspielerwahl: Standard nach Spielregel, konkrete Teilnehmer oder Zufall; Bank und gemeinsame Ziehungen bleiben SL-gesteuert.",
-        "Getrennte 3D-Würfelgruppen je Teilnehmer mit eigenen SC-Designs, einfachen NSC-Farben und geschützten verdeckten Ergebnissen.",
-        "Gleiche Tokenzuteilung als Vorlage, individuelle Bestände und sichere SL-Änderungen während laufender Partien.",
-        "Göttliche Hand: ausschließlich für die SL sichtbare positive Begünstigung eines Teilnehmers oder der Bank je Partie, mit einstellbarer Stärke. Bei 0 Prozent bleibt der bisherige Zufall unverändert; keine garantierte Gewinnchance."
+        "Göttliche Hand: mehrere dauerhafte, ausschließlich für die SL sichtbare Glücks-/Pechprofile je Teilnehmer; globale Vorgaben, spielbezogene Ausnahmen und weiche Qualitätsziele. 0 Prozent bleibt unveränderter Zufall, keine garantierte Gewinnquote.",
+        "Fortlaufende Rundenpartien bei 17 und 4, Würfelpoker und Chō-Han mit erhaltenen Tokenbeständen und SL-Steuerung direkt im Spielfenster aller Spiele.",
+        "Klippklapp: öffentliches Klappenbrett, private automatische Restsumme, Bluffansagen und direkte Abrechnung fortlaufender Durchgänge."
       ]
     },
     "settings": {
       "title": "Einstellungen in Foundry",
       "paragraphs": [
-        "In den Moduleinstellungen Sprache Deutsch oder Englisch wählen; Standard Englisch. Zehn Spiele sind stabil. Aalstechen und Meiern über Taverngames: Beta-Test zusätzlich einschalten.",
+        "In den Moduleinstellungen Sprache Deutsch oder Englisch wählen; Standard Englisch. Elf Spiele sind stabil, einschließlich Aalstechen. Klippklapp, Meiern und Würfelpoker über den Beta-Test-Schalter zusätzlich einschalten.",
         "Der Taverngames-Reiter ist nur für SL sichtbar. Spiel öffnen, Lobby vorbereiten und unteren Beitrittsbutton über die Moderation freigeben.",
         "In der Moderation Einsätze & Spieltoken öffnen. Standard ist Ohne Einsatz. Für Spieltoken Zuteilung, Grundeinsatz und passende Banklimits festlegen. Standardvorlage sind 100 Token je Teilnehmer; Beträge sind durch SL anpassbar.",
         "Ausgangswetten verwenden denselben freien Bestand. SL öffnet die Annahme vor dem Spiel und schließt sie vor dem Start. Am Ende Token ausdrücklich übernehmen oder verwerfen; keine weltweiten Konten.",
@@ -131,7 +134,7 @@
       "items": []
     },
     "sources": {
-      "title": "Regelquellen (36)",
+      "title": "Regelquellen (37)",
       "paragraphs": [
         "Hier findet ihr alle genutzten Regelquellen. Quellen für noch nicht umgesetzte Spiele sind ausdrücklich als geplante Regelreferenzen gekennzeichnet."
       ],
@@ -146,9 +149,9 @@
         "TS Spielkarten (ergänzende Regelreferenz Schwimmen) – https://ts-spielkarten.de/spielregeln-kartenspiele/schwimmen-spielregeln/",
         "Schmidt Spiele (Regelquelle Kniffel) – https://www.schmidtspiele.de/files/Produkte/4/49203%20-%20Kniffel%C2%AE/49203_Kniffel_DE.pdf",
         "TZawalich (Regelquelle Lügenwürfel und Drachenhort) – https://github.com/TZawalich/tavern-games-current",
-        "Awiana – Aalstechen (geplante Regelreferenz): https://awiana.fandom.com/de/wiki/Aalstechen",
+        "Awiana – Aalstechen (Regelquelle): https://awiana.fandom.com/de/wiki/Aalstechen",
         "Awiana – Elfenlauf (geplante Regelreferenz): https://awiana.fandom.com/de/wiki/Elfenlauf",
-        "Awiana – Koboldpoker (geplante Regelreferenz): https://awiana.fandom.com/de/wiki/Koboldpoker",
+        "Awiana – Koboldpoker (Vorlage für Würfelpoker): https://awiana.fandom.com/de/wiki/Koboldpoker",
         "Awiana – Piratenzunge (geplante Regelreferenz): https://awiana.fandom.com/de/wiki/Piratenzunge",
         "Awiana – Schlangenfangen (geplante Regelreferenz): https://awiana.fandom.com/de/wiki/Schlangenfangen",
         "Bicycle Cards (ergänzende/geplante Regelreferenz) – https://bicyclecards.com/how-to-play/blackjack",
@@ -171,7 +174,8 @@
         "Kniffel Extreme: offizielle Schmidt-Spiele-Anleitung (5 W6 + W10 0–9, 22 Felder, drei Chips).",
         "17 und 4 (Würfel-Hausvariante): Leif und Daniels Festlegungen; Awiana als abweichende Elfenlauf-Regelreferenz.",
         "Meiern / Schlangenfangen: Awiana (https://awiana.fandom.com/de/wiki/Schlangenfangen?oldid=6670), bereitgestellte D&D-Minispiele v1.0 vom 15.10.2026, bestätigte Hausregeln von Daniel Brune.",
-        "Aalstechen: Awiana (https://awiana.fandom.com/de/wiki/Aalstechen?oldid=5758), sichtbare Fünferblock-/Setzvariante Daniel Brune. All-in-/Nebentopf-Referenz: PokerStars (https://www.pokerstars.com/de/help/articles/poker-rules-master/215804/)."
+        "Aalstechen: Awiana (https://awiana.fandom.com/de/wiki/Aalstechen?oldid=5758), sichtbare Fünferblock-/Setzvariante Daniel Brune. All-in-/Nebentopf-Referenz: PokerStars (https://www.pokerstars.com/de/help/articles/poker-rules-master/215804/).",
+        "Daniel Brune – bereitgestellte Klippklapp-Regelvorlage vom 13.10.2026 und bestätigte Bluff-, Zahlungs- und Startspielerregeln; neue Brettspielnamen zunächst nur vorgemerkt."
       ]
     },
     "sources1": {
@@ -194,9 +198,13 @@
         "Chō-Han: interne Testguthaben, größter-Bruchteil-Rundung und Folgepartien als Modulergänzungen. Provisionsbasis und Kürzung auswählbar; keine Betrugsregeln umgesetzt.",
         "Kniffel Extreme – Schmidt Spiele: https://www.schmidtspiele.de/files/Produkte/5/51296%20-%20Kniffel%C2%AE%20Extreme/51296_Kniffel_Extreme_DE.pdf",
         "17 und 4: Leifs Würfeladaption mit Daniels Hausregeln; Awiana Elfenlauf, Revision 6669: https://awiana.fandom.com/de/wiki/Elfenlauf?oldid=6669 . Nicht mit klassischem Karten-Blackjack gleichsetzen.",
-        "Schocken-Einsatzregel von Daniel: Mindestbestand N × Einsatz; der endgültige Verlierer zahlt jedem anderen einmal den Einsatz. Optionale interne Spieltoken statt echter Charakterwährung."
+        "Schocken-Einsatzregel von Daniel: Mindestbestand N × Einsatz; der endgültige Verlierer zahlt jedem anderen einmal den Einsatz. Optionale interne Spieltoken statt echter Charakterwährung.",
+        "Würfelpoker: fünf W8 nach Awiana/Koboldpoker, Leifs abweichende Rangfolge und Daniels bestätigte Vergleiche; zwei Setzphasen mit All-in und Nebentöpfen. Full House nach Summe, dann höherem Drilling; zwei Paare nach höherem/niedrigerem Paar und Restwürfel.",
+        "Klippklapp: zwölf Klappen, drei Varianten, Pasch-Neuwurf, niedrigere bluffbare Ansagen, exakte Anzweiflung bis zum ersten Wurf; jede Zahlung beendet den Durchgang. Zahler startet, bei echtem Klippklapp der nächste aktive Spieler.",
+        "Farkle, optional in allen Modi: Einstiegshürde ausschaltbar oder frei bis zur Zielpunktzahl einstellbar; klassische Voreinstellung 500 Punkte.",
+        "Klippklapp Variante C: 3+5 erlaubt 8 oder 3 und 5 gemeinsam; 2+2 erlaubt 4 oder eine 2. Keine einzelnen ungleichen Würfelwerte."
       ]
     }
   },
-  "version": "3.0.2"
+  "version": "3.2.0"
 }

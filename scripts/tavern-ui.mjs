@@ -98,11 +98,13 @@ export class TavernUI{
         const eligible=s.players.filter(id=>id===game.user.id||game.user.isGM&&s.npcs[id]);
         const count=s.numbersPerTicket??5,used=new Set(s.tickets.flatMap(t=>t.numbers));
         if(100-used.size<count)c.append(node('p',f('Nicht mehr genug freie Zahlen für einen vollständigen Tippschein. Der SL kann die Annahme schließen.','Not enough free numbers for another complete ticket. The GM can close acceptance.')));
-        else if(eligible.length){const participant=selectField(c,f('Tippschein für','Ticket for'),eligible.map(id=>[id,this.name(id)]),eligible.includes(game.user.id)?game.user.id:eligible[0],'ticketPlayer'),numbers=new Set(),grid=node('div',undefined,'taverngames-number-grid');
-          const submit=control(c,f('Tippschein verbindlich abgeben','Commit ticket'),()=>{if(confirm(f('Tippschein verbindlich abgeben? Der Einsatz wird vorgemerkt.','Commit ticket? The stake will be recorded.')))void this.request('ticket',{numbers:[...numbers],id:participant.value});},true);
+        else if(eligible.length){if(this.ticketGame!==s.gameId){this.ticketGame=s.gameId;this.ticketDrafts=new Map();this.ticketPlayer=null;}
+          const preferred=eligible.includes(this.ticketPlayer)?this.ticketPlayer:eligible.includes(game.user.id)?game.user.id:eligible[0];
+          const participant=selectField(c,f('Tippschein für','Ticket for'),eligible.map(id=>[id,this.name(id)]),preferred,'ticketPlayer');this.ticketPlayer=preferred;if(!this.ticketDrafts.has(preferred))this.ticketDrafts.set(preferred,new Set());const numbers=this.ticketDrafts.get(preferred),grid=node('div',undefined,'taverngames-number-grid');for(const n of numbers)if(used.has(n))numbers.delete(n);
+          const submit=control(c,f('Tippschein verbindlich abgeben','Commit ticket'),()=>{if(confirm(f('Tippschein verbindlich abgeben? Der Einsatz wird vorgemerkt.','Commit ticket? The stake will be recorded.')))void this.request('ticket',{numbers:[...numbers],id:participant.value}).then(result=>{if(result?.gameId===s.gameId){numbers.clear();this.drawTable();}});},true);
           const update=()=>submit.disabled=numbers.size!==count||s.tickets.filter(t=>t.id===participant.value).length>=s.perPlayer;
-          participant.addEventListener('change',update);
-          for(let n=1;n<=100;n++){const b=control(grid,String(n),()=>{if(numbers.has(n))numbers.delete(n);else if(numbers.size<count)numbers.add(n);b.classList.toggle('farkle-selected',numbers.has(n));update();},used.has(n));}c.append(grid);
+          participant.addEventListener('change',()=>{this.ticketPlayer=participant.value;this.drawTable();});
+          for(let n=1;n<=100;n++){const b=control(grid,String(n),()=>{if(numbers.has(n))numbers.delete(n);else if(numbers.size<count)numbers.add(n);b.classList.toggle('farkle-selected',numbers.has(n));update();},used.has(n));b.classList.toggle('farkle-selected',numbers.has(n));}update();c.append(grid);
         }
       }
     }else if(s.phase==='playing'){
