@@ -2,15 +2,16 @@
   "schemaVersion": 1,
   "blocks": {
     "patchnotes": {
-      "title": "Patchnotes Version 2.2.5",
+      "title": "Patchnotes Version 3.0.2",
       "paragraphs": [
-        "Der Package Title lautet jetzt TavernGames. Die Modul-ID taverngames, Einstellungen, Spielstände und Spielfunktionen bleiben unverändert. Meiern und Aalstechen bleiben Beta.",
-        "The package title is now TavernGames. The module ID taverngames, settings, saved games and gameplay remain unchanged. Meiern and Aalstechen remain beta."
+        "17 und 4: Die Göttliche Hand ermöglicht abwechslungsreiche Wege zur 21 über mehrere selbst ausgelöste Würfe. Rollende 3D-Würfel verschwinden nach der Animation, die gruppierte Übersicht bleibt. Farkle entfernt Fehlwurfwürfel und behält herausgelegte Würfel; gesicherte Punkte bleiben im Spielstand. Alle Spiele wurden auf ihre jeweilige Begünstigungsbewertung geprüft. Mindestversion ist Foundry 14.369; höhere Versionen sind ungetestet. Meiern und Aalstechen bleiben Beta.",
+        "Seventeen and Four: Divine Hand allows varied paths to 21 over multiple player-triggered throws. Animated 3D dice disappear after rolling, while the grouped summary remains. Farkle removes bust dice and keeps laid-aside dice; banked points remain in the game state. Game-specific influence scoring was reviewed for every game. Minimum Foundry version is 14.369; later versions are untested. Meiern and Aalstechen remain beta."
       ],
       "items": [
-        "Package Title: TavernGames.",
-        "Modul-ID und gespeicherte Einstellungen bleiben erhalten.",
-        "Keine Änderungen an Spielregeln oder Würfeldarstellung."
+        "17 und 4: abwechslungsreiche Wege zur 21, Würfelgrenzen und eigene Entscheidungen bleiben erhalten.",
+        "3D: rollende Kopien bei 17 und 4 sowie Fehlwurfwürfel bei Farkle aufräumen.",
+        "Göttliche Hand: spielbezogene Bewertung aller zwölf Spiele geprüft; keine negative Wirkung.",
+        "Foundry 14.369 als Mindestversion; Meiern und Aalstechen weiterhin Beta."
       ]
     },
     "games": {
@@ -96,7 +97,7 @@
       ]
     },
     "functions": {
-      "title": "aktuelle Funktionen (12)",
+      "title": "aktuelle Funktionen (13)",
       "paragraphs": [
         "Zehn stabile Spiele sowie Aalstechen und Meiern als Beta, mit gemeinsamer SL-Moderation und optionalen Spieltoken."
       ],
@@ -112,7 +113,8 @@
         "Kniffel Extreme mit 22 Feldern, W10 und Zusatzwurf-Chips; 17 und 4 mit W12 oder W8+W6 und manueller oder automatischer Bank.",
         "Gemeinsame Startspielerwahl: Standard nach Spielregel, konkrete Teilnehmer oder Zufall; Bank und gemeinsame Ziehungen bleiben SL-gesteuert.",
         "Getrennte 3D-Würfelgruppen je Teilnehmer mit eigenen SC-Designs, einfachen NSC-Farben und geschützten verdeckten Ergebnissen.",
-        "Gleiche Tokenzuteilung als Vorlage, individuelle Bestände und sichere SL-Änderungen während laufender Partien."
+        "Gleiche Tokenzuteilung als Vorlage, individuelle Bestände und sichere SL-Änderungen während laufender Partien.",
+        "Göttliche Hand: ausschließlich für die SL sichtbare positive Begünstigung eines Teilnehmers oder der Bank je Partie, mit einstellbarer Stärke. Bei 0 Prozent bleibt der bisherige Zufall unverändert; keine garantierte Gewinnchance."
       ]
     },
     "settings": {
@@ -196,5 +198,5 @@
       ]
     }
   },
-  "version": "2.2.5"
+  "version": "3.0.2"
 }

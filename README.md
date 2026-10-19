@@ -1,9 +1,37 @@
 # TavernGames
 
-**Version 2.2.5**. Aalstechen und Meiern als zuschaltbare Betas sowie zehn stabile Spiele mit optionaler stabiler Dice-So-Nice-Anbindung: 17 und 4, Chō-Han, Drachenhort, Farkle, Kniffel, Lügenwürfel, Schiff–Kapitän–Mannschaft, Schocken, Schweinchen und Straßenlotto.
+**Version 3.0.2**. Aalstechen und Meiern als zuschaltbare Betas sowie zehn stabile Spiele mit optionaler stabiler Dice-So-Nice-Anbindung: 17 und 4, Chō-Han, Drachenhort, Farkle, Kniffel, Lügenwürfel, Schiff–Kapitän–Mannschaft, Schocken, Schweinchen und Straßenlotto.
 
 
-## Aktuell in 2.2.5
+## Aktuell in 3.0.2
+
+17 und 4: Die Göttliche Hand ermöglicht abwechslungsreiche Wege zur 21 über mehrere selbst ausgelöste Würfe. Rollende 3D-Würfel verschwinden nach der Animation, die gruppierte Übersicht bleibt. Farkle entfernt Fehlwurfwürfel und behält herausgelegte Würfel; gesicherte Punkte bleiben im Spielstand. Alle Spiele wurden auf ihre jeweilige Begünstigungsbewertung geprüft. Mindestversion ist Foundry 14.369; höhere Versionen sind ungetestet. Meiern und Aalstechen bleiben Beta.
+
+Seventeen and Four: Divine Hand allows varied paths to 21 over multiple player-triggered throws. Animated 3D dice disappear after rolling, while the grouped summary remains. Farkle removes bust dice and keeps laid-aside dice; banked points remain in the game state. Game-specific influence scoring was reviewed for every game. Minimum Foundry version is 14.369; later versions are untested. Meiern and Aalstechen remain beta.
+
+## Vorheriger Stand 3.0.1
+
+Schocken: Verdeckt beendete Würfe bleiben auch auf dem eigenen 3D-Tisch verdeckt; herausgelegte Würfel bleiben sichtbar, explizites Aufdecken zeigt die gespeicherten Werte. Göttliche Hand: Mittlere Stärken sind deutlich sanfter, maximale Kombinationen werden erst im obersten Bereich bevorzugt. Kniffel und Extreme berücksichtigen gezielt freie Wertungsfelder, tatsächlich behaltene Würfel samt Positionen und den noch erreichbaren Zahlenbonus. Die SL-Einstellungen bleiben geheim; negative Beeinflussung bleibt ausschließlich vorgemerkt.
+
+Schocken: concealed completed throws stay hidden on the owner’s 3D table; held dice remain public and explicit reveal shows the stored values. Divine Hand: medium strengths are substantially gentler, with strongest combinations reserved for the upper range. Kniffel and Extreme target unfilled score fields around the actual kept dice and their slots, including a reachable upper-section bonus. GM settings remain private; negative influence is still planning only.
+
+0 Prozent bleibt unveränderter Zufall. Mittlere Stärken bevorzugen nur wenige zufällige Kandidaten; 100 bleibt maximal. Der Prozentwert ist keine Gewinnwahrscheinlichkeit. Bereits gespeicherte Einstellungen gelten weiter, können aber nach Bedarf niedriger eingestellt werden.
+
+## Vorheriger Stand 3.0.0
+
+Neue Hauptfunktion Göttliche Hand: Die SL kann pro Partie einen Teilnehmer oder bei Bankspielen die Bank begünstigen und eine Eingriffsstärke von 0 bis 100 Prozent wählen. Günstige regelkonforme Würfe werden vor der Auswertung ausgewählt; vorhandene Ergebnisse werden nicht nachträglich geändert. Die gewerteten Zahlen stimmen mit der optionalen 3D-Animation überein. Die Einstellungen bleiben ausschließlich für die SL sichtbar. Bei 0 Prozent bleibt der bisherige Zufall unverändert. Der Prozentwert ist keine garantierte Gewinnchance. Meiern und Aalstechen bleiben Beta.
+
+New major feature Divine Hand: the GM can favor one participant per game, or the bank in bank games, with an intervention strength from 0 to 100 percent. Favorable legal throws are selected before resolution; existing results are never changed retroactively. Scored values match the optional 3D animation. Settings remain visible only to the GM. At zero percent the existing randomness is unchanged. The percentage is not a guaranteed win probability. Meiern and Aalstechen remain beta.
+
+SL-Bedienung: in der Spielmoderation Göttliche Hand öffnen, Teilnehmer und Prozentstärke wählen und Einfluss speichern. Alternativ über Moduleinstellungen → TavernGames: Göttliche Hand. Standard ohne Einfluss, neue Partie ohne ausgewählten Teilnehmer. Einstellungen nur für künftige Würfe.
+
+## Vorheriger Stand 2.2.6
+
+Automatische NPCs bei Aalstechen lösen ihren Wurf kurz nach Beginn jeder Würfelrunde aus, innerhalb von zwei Sekunden bei regulärem Betrieb. Mehrere NPCs teilen sich dieselbe Wartezeit und warten nicht auf fremde 3D-Animationen. Pause und manuelle NPC-Steuerung bleiben erhalten; der Rundenwechsel wartet weiterhin auf alle Würfe und Animationen. Meiern und Aalstechen bleiben Beta.
+
+Automatic Aalstechen NPCs roll shortly after each dice round starts, within two seconds under normal operation. NPCs share the same delay and do not wait for other participants’ 3D animations. Pause and manual NPC control remain available; advancing the round still waits for all rolls and animations. Meiern and Aalstechen remain beta.
+
+## Vorheriger Stand 2.2.5
 
 Der Package Title lautet jetzt TavernGames. Die Modul-ID taverngames, Einstellungen, Spielstände und Spielfunktionen bleiben unverändert. Meiern und Aalstechen bleiben Beta.
 

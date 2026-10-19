@@ -5,7 +5,12 @@ export class AalstechenSession{
  constructor(_scope,deps){Object.assign(this,deps);this.now=()=>Date.now();this.state=null;this.wait=null;}
  restore(s){if(s!==null&&(s.version!==1||s.game!=='aalstechen'))throw Error('Invalid game save.');this.state=structuredClone(s);this.updateNpcWait();}
  project(){return structuredClone(this.state);}
- updateNpcWait(){this.wait=this.state?{revision:this.state.revision,until:this.now()+5000}:null;}
+ updateNpcWait(){
+  const s=this.state;if(!s){this.wait=null;return;}
+  // All automatic rollers share the round deadline; commits and animation ACKs must not postpone it.
+  const key=`${s.gameId}:${s.round}:${s.phase}:${s.paused}`,rolling=s.phase==='rolling';
+  this.wait={revision:s.revision,key,until:rolling&&this.wait?.key===key?this.wait.until:this.now()+(rolling?1000:5000)};
+ }
  async handle(data,user){
   if(!this.enabled()&&!(data.action==='abort'&&user.isGM))throw Error('Beta testing is disabled.');if(data.action==='read')return this.project();const old=this.state;
   const parallelRoll=data.action==='roll'&&data.args?.gameId===old?.gameId&&data.args?.round===old?.round&&Number.isInteger(data.revision)&&data.revision<=old.revision;

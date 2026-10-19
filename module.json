@@ -1,103 +1,104 @@
 {
-  "id": "taverngames",
-  "title": "TavernGames",
-  "description": "<h3>Deutsch</h3><p>Taverngames bringt zehn stabile Tavernenspiele mit SL-Moderation, freiwilligem Beitritt, benannten NPCs und optionalen 3D-Würfeln an deinen Foundry-Tisch: 17 und 4, Schocken, Farkle, Schweinchen, Schiff–Kapitän–Mannschaft, Kniffel, Straßenlotto, Lügenwürfel, Drachenhort und Chō-Han. Der Reiter ist nur für SL sichtbar.</p><h3>English</h3><p>Taverngames brings ten stable games to Foundry: Seventeen and Four, Schocken, Farkle, Pig, Ship–Captain–Crew, Kniffel, Street lottery, Liar’s Dice, Dragon’s Hoard and Cho-Han, with GM moderation, voluntary participation, named NPCs and optional 3D dice. The tab is GM-only.</p><h3>2.2.5 · Versionshinweise / Release notes</h3><p>Der Package Title lautet jetzt TavernGames. Die Modul-ID taverngames, Einstellungen, Spielstände und Spielfunktionen bleiben unverändert. Meiern und Aalstechen bleiben Beta.</p><p>The package title is now TavernGames. The module ID taverngames, settings, saved games and gameplay remain unchanged. Meiern and Aalstechen remain beta.</p><p>Regelquellen einschließlich Daniels Chō-Han-Regelsammlung und Awianas Vorlagen stehen in den Anleitungen. / Rule sources, including Daniel’s Cho-Han collection and Awiana references, are credited in the instructions.</p>",
-  "version": "2.2.5",
-  "readme": "README.md",
-  "changelog": "https://github.com/666Arukard/taverngames/releases/tag/v2.2.5",
-  "url": "https://dnd.brunecoaching.de",
-  "compatibility": {
-    "verified": "14.369"
-  },
-  "authors": [
-    {
-      "name": "Daniel Brune (Modulautor und Chō-Han-Regelsammlung; mit KI-Unterstützung durch ChatGPT/Codex)",
-      "url": "https://dnd.brunecoaching.de",
-      "discord": "arukard",
-      "email": "daniel@brunecoaching.de"
-    },
-    {
-      "name": "Philipp D.",
-      "discord": "theonlyzaodiac"
-    },
-    {
-      "name": "Schockfreunde (Regelquelle Schocken)",
-      "url": "https://schockfreunde.de/schockregeln"
-    },
-    {
-      "name": "PlayMonster (Regelquelle Farkle)",
-      "url": "https://playmonster.com/wp-content/uploads/2018/06/Farkle-Rules.pdf"
-    },
-    {
-      "name": "Awiana (Regelvorlagen, einschließlich Aalstechen und Schlangenfangen/Meiern)",
-      "url": "https://awiana.fandom.com/de/wiki/Liste_an_Kneipen_spielen"
-    },
-    {
-      "name": "Paul Cossmer / DnDDiary (PDF-Regelvorlagen)",
-      "url": "https://keeponrolling.de/"
-    },
-    {
-      "name": "Bicycle Cards (Regelquelle Schiff und Blackjack)",
-      "url": "https://bicyclecards.com/how-to-play/ship-captain-and-crew"
-    },
-    {
-      "name": "moses. Verlag (Regelreferenzen 17+4 und Schwimmen)",
-      "url": "https://www.moses-verlag.de/media/20/99/c5/1599117493/81716_Karten-und_Wuerfelspiele_fuer_unterwegs_Regeln_deutsch_web.pdf"
-    },
-    {
-      "name": "John McLeod / Pagat (Regelreferenz Schwimmen)",
-      "url": "https://www.pagat.com/commerce/schwimmen.html"
-    },
-    {
-      "name": "TS Spielkarten (ergänzende Regelreferenz Schwimmen)",
-      "url": "https://ts-spielkarten.de/spielregeln-kartenspiele/schwimmen-spielregeln/"
-    },
-    {
-      "name": "Wikipedia (von TS Spielkarten genannte Textquelle)",
-      "url": "https://de.wikipedia.org/wiki/Schwimmen_(Kartenspiel)"
-    },
-    {
-      "name": "Schmidt Spiele (Regelquelle Kniffel)",
-      "url": "https://www.schmidtspiele.de/files/Produkte/4/49203%20-%20Kniffel%C2%AE/49203_Kniffel_DE.pdf"
-    },
-    {
-      "name": "TZawalich (Regelquelle Lügenwürfel und Drachenhort)",
-      "url": "https://github.com/TZawalich/tavern-games-current"
-    },
-    {
-      "name": "Dice-Play (ergänzende Regelreferenz Chō-Han)",
-      "url": "https://www.dice-play.com/Games/ChoHanBakuchi.htm"
-    },
-    {
-      "name": "NetExl (ergänzende Regelreferenz Chō-Han)",
-      "url": "https://www.netexl.com/howtoplay/cho-han/"
-    },
-    {
-      "name": "Schmidt Spiele (Regelquelle Kniffel Extreme)",
-      "url": "https://www.schmidtspiele.de/files/Produkte/5/51296%20-%20Kniffel%C2%AE%20Extreme/51296_Kniffel_Extreme_DE.pdf"
-    },
-    {
-      "name": "Leif (Würfeladaption 17 und 4, ursprünglich Elfenlauf; Hausregeln Daniel Brune)"
-    },
-    {
-      "name": "PokerStars (ergänzende Referenz für All-in und Nebentöpfe)",
-      "url": "https://www.pokerstars.com/de/help/articles/poker-rules-master/215804/"
-    }
-  ],
-  "esmodules": [
-    "scripts/main.mjs"
-  ],
-  "styles": [
-    "styles/table.css"
-  ],
-  "manifest": "https://github.com/666Arukard/taverngames/releases/latest/download/module.json",
-  "download": "https://github.com/666Arukard/taverngames/releases/download/v2.2.5/taverngames-2.2.5.zip",
-  "relationships": {
-    "recommends": [
-      {
-        "id": "dice-so-nice",
-        "type": "module"
-      }
-    ]
-  }
+    "id":  "taverngames",
+    "title":  "TavernGames",
+    "description":  "\u003ch3\u003eDeutsch\u003c/h3\u003e\u003cp\u003eTaverngames bringt zehn stabile Tavernenspiele mit SL-Moderation, freiwilligem Beitritt, benannten NPCs und optionalen 3D-Würfeln an deinen Foundry-Tisch: 17 und 4, Schocken, Farkle, Schweinchen, Schiff–Kapitän–Mannschaft, Kniffel, Straßenlotto, Lügenwürfel, Drachenhort und Chō-Han. Der Reiter ist nur für SL sichtbar.\u003c/p\u003e\u003ch3\u003eEnglish\u003c/h3\u003e\u003cp\u003eTaverngames brings ten stable games to Foundry: Seventeen and Four, Schocken, Farkle, Pig, Ship–Captain–Crew, Kniffel, Street lottery, Liar’s Dice, Dragon’s Hoard and Cho-Han, with GM moderation, voluntary participation, named NPCs and optional 3D dice. The tab is GM-only.\u003c/p\u003e\u003ch3\u003e3.0.2 · Versionshinweise / Release notes\u003c/h3\u003e\u003cp\u003e17 und 4: Die Göttliche Hand ermöglicht abwechslungsreiche Wege zur 21 über mehrere selbst ausgelöste Würfe. Rollende 3D-Würfel verschwinden nach der Animation, die gruppierte Übersicht bleibt. Farkle entfernt Fehlwurfwürfel und behält herausgelegte Würfel; gesicherte Punkte bleiben im Spielstand. Alle Spiele wurden auf ihre jeweilige Begünstigungsbewertung geprüft. Mindestversion ist Foundry 14.369; höhere Versionen sind ungetestet. Meiern und Aalstechen bleiben Beta.\u003c/p\u003e\u003cp\u003eSeventeen and Four: Divine Hand allows varied paths to 21 over multiple player-triggered throws. Animated 3D dice disappear after rolling, while the grouped summary remains. Farkle removes bust dice and keeps laid-aside dice; banked points remain in the game state. Game-specific influence scoring was reviewed for every game. Minimum Foundry version is 14.369; later versions are untested. Meiern and Aalstechen remain beta.\u003c/p\u003e\u003cp\u003eRegelquellen einschließlich Daniels Chō-Han-Regelsammlung und Awianas Vorlagen stehen in den Anleitungen. / Rule sources, including Daniel’s Cho-Han collection and Awiana references, are credited in the instructions.\u003c/p\u003e",
+    "version":  "3.0.2",
+    "readme":  "README.md",
+    "changelog":  "https://github.com/666Arukard/taverngames/releases/tag/v3.0.2",
+    "url":  "https://dnd.brunecoaching.de",
+    "compatibility":  {
+                          "minimum":  "14.369",
+                          "verified":  "14.369"
+                      },
+    "authors":  [
+                    {
+                        "name":  "Daniel Brune (Modulautor und Chō-Han-Regelsammlung; mit KI-Unterstützung durch ChatGPT/Codex)",
+                        "url":  "https://dnd.brunecoaching.de",
+                        "discord":  "arukard",
+                        "email":  "daniel@brunecoaching.de"
+                    },
+                    {
+                        "name":  "Philipp D.",
+                        "discord":  "theonlyzaodiac"
+                    },
+                    {
+                        "name":  "Schockfreunde (Regelquelle Schocken)",
+                        "url":  "https://schockfreunde.de/schockregeln"
+                    },
+                    {
+                        "name":  "PlayMonster (Regelquelle Farkle)",
+                        "url":  "https://playmonster.com/wp-content/uploads/2018/06/Farkle-Rules.pdf"
+                    },
+                    {
+                        "name":  "Awiana (Regelvorlagen, einschließlich Aalstechen und Schlangenfangen/Meiern)",
+                        "url":  "https://awiana.fandom.com/de/wiki/Liste_an_Kneipen_spielen"
+                    },
+                    {
+                        "name":  "Paul Cossmer / DnDDiary (PDF-Regelvorlagen)",
+                        "url":  "https://keeponrolling.de/"
+                    },
+                    {
+                        "name":  "Bicycle Cards (Regelquelle Schiff und Blackjack)",
+                        "url":  "https://bicyclecards.com/how-to-play/ship-captain-and-crew"
+                    },
+                    {
+                        "name":  "moses. Verlag (Regelreferenzen 17+4 und Schwimmen)",
+                        "url":  "https://www.moses-verlag.de/media/20/99/c5/1599117493/81716_Karten-und_Wuerfelspiele_fuer_unterwegs_Regeln_deutsch_web.pdf"
+                    },
+                    {
+                        "name":  "John McLeod / Pagat (Regelreferenz Schwimmen)",
+                        "url":  "https://www.pagat.com/commerce/schwimmen.html"
+                    },
+                    {
+                        "name":  "TS Spielkarten (ergänzende Regelreferenz Schwimmen)",
+                        "url":  "https://ts-spielkarten.de/spielregeln-kartenspiele/schwimmen-spielregeln/"
+                    },
+                    {
+                        "name":  "Wikipedia (von TS Spielkarten genannte Textquelle)",
+                        "url":  "https://de.wikipedia.org/wiki/Schwimmen_(Kartenspiel)"
+                    },
+                    {
+                        "name":  "Schmidt Spiele (Regelquelle Kniffel)",
+                        "url":  "https://www.schmidtspiele.de/files/Produkte/4/49203%20-%20Kniffel%C2%AE/49203_Kniffel_DE.pdf"
+                    },
+                    {
+                        "name":  "TZawalich (Regelquelle Lügenwürfel und Drachenhort)",
+                        "url":  "https://github.com/TZawalich/tavern-games-current"
+                    },
+                    {
+                        "name":  "Dice-Play (ergänzende Regelreferenz Chō-Han)",
+                        "url":  "https://www.dice-play.com/Games/ChoHanBakuchi.htm"
+                    },
+                    {
+                        "name":  "NetExl (ergänzende Regelreferenz Chō-Han)",
+                        "url":  "https://www.netexl.com/howtoplay/cho-han/"
+                    },
+                    {
+                        "name":  "Schmidt Spiele (Regelquelle Kniffel Extreme)",
+                        "url":  "https://www.schmidtspiele.de/files/Produkte/5/51296%20-%20Kniffel%C2%AE%20Extreme/51296_Kniffel_Extreme_DE.pdf"
+                    },
+                    {
+                        "name":  "Leif (Würfeladaption 17 und 4, ursprünglich Elfenlauf; Hausregeln Daniel Brune)"
+                    },
+                    {
+                        "name":  "PokerStars (ergänzende Referenz für All-in und Nebentöpfe)",
+                        "url":  "https://www.pokerstars.com/de/help/articles/poker-rules-master/215804/"
+                    }
+                ],
+    "esmodules":  [
+                      "scripts/main.mjs"
+                  ],
+    "styles":  [
+                   "styles/table.css"
+               ],
+    "manifest":  "https://github.com/666Arukard/taverngames/releases/latest/download/module.json",
+    "download":  "https://github.com/666Arukard/taverngames/releases/download/v3.0.2/taverngames-3.0.2.zip",
+    "relationships":  {
+                          "recommends":  [
+                                             {
+                                                 "id":  "dice-so-nice",
+                                                 "type":  "module"
+                                             }
+                                         ]
+                      }
 }
