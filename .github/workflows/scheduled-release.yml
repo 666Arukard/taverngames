@@ -1,0 +1,37 @@
+name: TavernGames - geplante Releases
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/scheduled-release.yml'
+      - 'tools/scheduled-release.mjs'
+      - 'tools/tests/scheduled-release.test.mjs'
+      - 'publishing/release-schedule.json'
+  schedule:
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Nur pruefen, nichts veroeffentlichen'
+        type: boolean
+        default: true
+permissions:
+  contents: write
+concurrency:
+  group: taverngames-scheduled-release
+  cancel-in-progress: false
+jobs:
+  release:
+    if: github.repository == '666Arukard/taverngames'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Tests der Zeitsteuerung
+        run: node --test tools/tests/scheduled-release.test.mjs
+      - name: Faellige Entwuerfe pruefen und freigeben
+        env:
+          GH_TOKEN: ${{ github.token }}
+          FOUNDRY_RELEASE_TOKEN: ${{ secrets.FOUNDRY_RELEASE_TOKEN }}
+          DRY_RUN: ${{ (github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.dry_run)) && 'true' || 'false' }}
+        run: node tools/scheduled-release.mjs

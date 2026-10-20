@@ -1,0 +1,7 @@
+{
+  "timezone": "Europe/Berlin",
+  "releases": [
+    { "version": "3.4.1", "publishAt": "2026-10-21T08:00:00+02:00", "expiresAt": "2026-10-21T10:00:00+02:00" },
+    { "version": "3.4.2", "publishAt": "2026-10-21T12:00:00+02:00", "expiresAt": "2026-10-21T14:00:00+02:00" }
+  ]
+}
