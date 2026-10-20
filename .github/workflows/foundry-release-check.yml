@@ -93,10 +93,12 @@ jobs:
                   raise ValueError("Die Veroeffentlichung erwartet minimum/verified 14.369 und keine Hoechstversion.")
               archive = fetch(download_url, 256 * 1024 * 1024)
               with zipfile.ZipFile(io.BytesIO(archive)) as z:
-                  manifests = [name for name in ("taverngames/module.json", "module.json") if name in z.namelist()]
+                  # PowerShell's historical ZIPs store backslashes; Linux keeps them literal.
+                  manifests = [info for info in z.infolist()
+                               if info.orig_filename.replace(chr(92), "/") in ("taverngames/module.json", "module.json")]
                   if len(manifests) != 1:
                       raise ValueError("ZIP muss genau ein Manifest enthalten: module.json im Hauptverzeichnis oder taverngames/module.json.")
-                  info = z.getinfo(manifests[0])
+                  info = manifests[0]
                   if info.file_size > 2000000:
                       raise ValueError("Manifest im ZIP ist zu gross.")
                   if json.loads(z.read(info)) != manifest:
