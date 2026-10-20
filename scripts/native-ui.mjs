@@ -8,7 +8,7 @@ export function createNativeWindow(foundry,kind,root,onClose) {
   if(!Base)throw new Error(t('Foundry ApplicationV2 fehlt. Das native Taverngames-Fenster kann nicht geöffnet werden.'));
   const titles={'divine-hand':language()==='de'?'TavernGames · Göttliche Hand':'TavernGames · Divine Hand','game-tokens':language()==='de'?'Taverngames · Einsätze & Spieltoken':'Taverngames · Stakes & game tokens','outcome-bets':language()==='de'?'Taverngames · Wetten':'Taverngames · Bets',table:'Taverngames · Schocken',moderation:'Taverngames · Moderation',guide:'Schocken · Anleitung',farkle:'Taverngames · Farkle','farkle-moderation':'Farkle · Moderation','farkle-guide':language()==='de'?'Farkle · Anleitung':'Farkle · Instructions'};
   class TavernWindow extends Base {
-    static DEFAULT_OPTIONS={classes:['taverngames-window',...(gameView.enabled()&&(kind==='table'||kind==='farkle'||kind.endsWith('-table')||kind==='moderation'||kind.endsWith('-moderation'))?['taverngames-docking-pending']:[])],window:{resizable:true,minimizable:true},position:{width:560,height:650}};
+    static DEFAULT_OPTIONS={classes:['taverngames-window',...(gameView.enabled()&&(kind==='divine-hand'||kind==='table'||kind==='farkle'||kind.endsWith('-table')||kind==='moderation'||kind.endsWith('-moderation'))?['taverngames-docking-pending']:[])],window:{resizable:true,minimizable:true},position:{width:560,height:650}};
     async _renderHTML(){return root;}
     _replaceHTML(result,content){content.replaceChildren(result);}
     async _onClose(options){gameView.untrack(kind);await super._onClose(options);onClose();}

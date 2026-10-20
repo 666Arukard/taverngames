@@ -119,3 +119,26 @@
 [data-integrated-moderation] .taverngames-surface button{background:var(--button-background-color,rgba(128,128,128,.12));color:inherit;border-color:var(--color-border-light-primary,#807562)}
 [data-integrated-moderation] .taverngames-surface button:hover{border-color:#c6a96c;color:inherit}
 [data-integrated-moderation] .taverngames-surface input,[data-integrated-moderation] .taverngames-surface textarea,[data-integrated-moderation] .taverngames-surface select{background:var(--input-background-color,rgba(128,128,128,.12));color:inherit}
+
+/* 3.3.1 optional view: native palette and a floating control rail. */
+#taverngames-player-panel{overflow:visible;border-radius:0}
+#taverngames-player-panel>header{background:transparent;color:inherit;flex-wrap:wrap}
+#taverngames-player-panel .taverngames-surface{background:transparent;color:inherit}
+#taverngames-player-panel .taverngames-surface h3,#taverngames-player-panel .schocken-help{color:inherit}
+#taverngames-player-panel .taverngames-surface button,#taverngames-player-panel .taverngames-surface input,#taverngames-player-panel .taverngames-surface select,#taverngames-player-panel .taverngames-surface textarea{background:rgba(128,128,128,.12);color:inherit}
+#taverngames-player-panel .taverngames-surface option{background:var(--color-cool-5,#252830);color:#eee}
+#taverngames-player-panel .taverngames-die{color:#30251e}
+#taverngames-player-panel .taverngames-surface .held,#taverngames-player-panel .taverngames-surface button.farkle-selected{background:rgba(191,155,74,.5);border-color:#d9bc72}
+#taverngames-player-panel .kniffel-sheet .kniffel-upper td,#taverngames-player-panel .kniffel-sheet .kniffel-upper th,#taverngames-player-panel .kniffel-sheet .kniffel-special td,#taverngames-player-panel .kniffel-sheet .kniffel-special th{color:#30251e}
+.taverngames-player-tabs{position:absolute;left:100%;top:0;bottom:0;width:38px;display:flex;flex-direction:column;gap:6px;padding:6px 2px;pointer-events:none;box-sizing:border-box}
+.taverngames-player-tabs button{pointer-events:auto;flex:none;width:32px;min-height:34px;padding:3px;border:1px solid #81735e;border-radius:4px;background:#35353b;color:#eee;cursor:pointer}
+.taverngames-player-tabs button:hover,.taverngames-player-tabs button[aria-pressed=true]{border-color:#c6a96c;color:#e9c783}
+.taverngames-player-tabs .taverngames-player-collapse{margin-top:auto}
+#taverngames-player-panel.is-collapsed{width:0;height:100dvh;bottom:0;border:0;box-shadow:none}
+#taverngames-player-panel.is-collapsed>header,#taverngames-player-panel.is-collapsed .taverngames-panel-content{display:none}
+
+/* 3.4.0: one left-hand lobby scroller, with normal reading order inside. */
+#taverngames-player-panel{border:0;box-shadow:none}
+#taverngames-player-panel .taverngames-panel-content{direction:rtl;overflow-y:auto;overflow-x:hidden;scrollbar-gutter:stable}
+#taverngames-player-panel .taverngames-panel-content>.taverngames-surface{direction:ltr;height:auto;min-height:100%}
+#taverngames-player-panel .taverngames-panel-content>.taverngames-surface>.schocken-content{overflow:visible;flex:none}

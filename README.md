@@ -1,3 +1,19 @@
+## Version 3.4.0
+
+Die böse Dreizehn ist nach dem Praxistest stabil verfügbar. Damit enthält TavernGames 15 stabile Spiele ohne Spiele-Beta-Schalter. Die optionale Beta-Spielansicht erhält eine linke Scrollbar und keinen goldenen Außenrahmen. Beim Schließen mehrerer geöffneter Spiele werden Inhalte vollständig entfernt, damit keine Ansichten übereinander zurückbleiben. Die Abstufung der Göttlichen Hand bei Die böse Dreizehn bleibt ein bekannter offener Korrekturpunkt.
+
+Wicked Thirteen is now stable following user testing, bringing TavernGames to 15 stable games without the game beta switch. The optional beta game view gains a left-hand scrollbar and loses its gold outer border. Closing multiple open games fully removes closed content so views no longer stack. Divine Hand weighting for Wicked Thirteen remains a known issue awaiting refinement.
+
+Alle Clients neu laden. Kein Beta-Schalter für Die böse Dreizehn nötig. Die neue Seitenansicht bleibt separat wählbare Beta; Fenster bleiben Standard. Noch nicht veröffentlicht.
+
+## Version 3.3.1
+
+Die böse Dreizehn ergänzt die 14 stabilen Spiele als zuschaltbare Beta: drei W6, ein Wurf je Zug, 12 gewinnt den Topf, 13 verdoppelt ihn bei voller Deckung. Bei Zahlungsunfähigkeit wird der Rest gezahlt und der Teilnehmer scheidet aus. Die integrierte Beta-Spielansicht zeigt Göttliche Hand direkt im rechten Reiter; die linke Lobby übernimmt den Reiterstil und erhält eine schwebende Bedienleiste mit unterem Klapppfeil.
+
+Wicked Thirteen joins the 14 stable games as an optional beta: three d6, one throw per turn, 12 wins the pot and 13 doubles it when fully covered. Insolvent participants pay their remaining balance and are eliminated. The integrated beta game view embeds Divine Hand in the right tab; the left lobby inherits the sidebar style and gains a floating control rail with a bottom collapse arrow.
+
+Nach Installation alle Clients neu laden. Die böse Dreizehn unter Moduleinstellungen → Beta-Test aktivieren. Die Seitenansicht bleibt separat pro Client unter Spielansicht wählbar; Fenster bleiben Standard. Kein Upload oder Commit.
+
 ## Version 3.3.0
 
 Klippklapp, Meiern und Würfelpoker sind jetzt stabil und ohne Beta-Schalter verfügbar. Damit umfasst TavernGames 14 stabile Spiele. Die integrierte Spielansicht bleibt eine freiwillige Beta: Vorbereitung und Lobby werden für die SL sofort eingebettet, offene Ansichten bleiben auch nach Partieende eingebettet und mehrere geöffnete Spiele erzeugen keine zusätzlichen Fenster. Das linke Panel reicht bis an die Bildschirmränder, die Moderation übernimmt den Hintergrund und die Textfarbe des Reiters. Eigene Schließen-Schaltflächen und ein Schutz vor unbeabsichtigtem Fensterziehen verbessern das Schließen. Göttliche Hand zeigt nach Entfernen einer Spielausnahme den tatsächlich übernommenen globalen Wert oder 0 Prozent samt Herkunft an.

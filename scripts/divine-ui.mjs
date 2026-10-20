@@ -1,3 +1,4 @@
+import {gameView} from './game-view.mjs';
 import {InteractionQueue,protectUtility} from './interaction-queue.mjs';
 import {createNativeWindow} from './native-ui.mjs';
 import {node,control,selectField} from './tavern-ui.mjs';
@@ -11,7 +12,7 @@ export class DivineUI{
  async open(scope='schocken'){
   if(!game.user.isGM)return;await this.actions.tail.catch(()=>{});this.scope=scope;
   if(!this.root){this.root=node('section',undefined,'taverngames-surface');this.app=createNativeWindow(foundry,'divine-hand',this.root,()=>{this.root=null;});}else this.app.bringToFront();
-  await this.send('divineRead');
+  await this.send('divineRead');if(gameView.enabled())gameView.showDivine();
  }
  send(action,args={}){const scope=this.scope,gameId=this.payload?.gameId;return this.actions.run(action==='divineRead'?'read':action,()=>this.perform(action,args,scope,gameId));}
  async perform(action,args,scope,gameId){

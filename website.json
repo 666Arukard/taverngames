@@ -2,28 +2,28 @@
   "schemaVersion": 1,
   "blocks": {
     "patchnotes": {
-      "title": "Patchnotes Version 3.3.0",
+      "title": "Patchnotes Version 3.4.0",
       "paragraphs": [
-        "Klippklapp, Meiern und Würfelpoker sind jetzt stabil und ohne Beta-Schalter verfügbar. Damit umfasst TavernGames 14 stabile Spiele. Die integrierte Spielansicht bleibt eine freiwillige Beta: Vorbereitung und Lobby werden für die SL sofort eingebettet, offene Ansichten bleiben auch nach Partieende eingebettet und mehrere geöffnete Spiele erzeugen keine zusätzlichen Fenster. Das linke Panel reicht bis an die Bildschirmränder, die Moderation übernimmt den Hintergrund und die Textfarbe des Reiters. Eigene Schließen-Schaltflächen und ein Schutz vor unbeabsichtigtem Fensterziehen verbessern das Schließen. Göttliche Hand zeigt nach Entfernen einer Spielausnahme den tatsächlich übernommenen globalen Wert oder 0 Prozent samt Herkunft an.",
-        "Klippklapp, Meiern and Dice Poker are now stable and available without the beta switch, bringing TavernGames to 14 stable games. The integrated game view remains an optional beta: GM preparation and lobby views dock immediately, open views stay docked after the session ends and multiple open games no longer spawn extra windows. The left panel spans the screen edge to edge; moderation inherits the sidebar background and text color. Dedicated close controls and protection against accidental header dragging improve closing. Divine Hand displays the actual inherited global value or zero after removing an override, together with its source."
+        "Die böse Dreizehn ist nach dem Praxistest stabil verfügbar. Damit enthält TavernGames 15 stabile Spiele ohne Spiele-Beta-Schalter. Die optionale Beta-Spielansicht erhält eine linke Scrollbar und keinen goldenen Außenrahmen. Beim Schließen mehrerer geöffneter Spiele werden Inhalte vollständig entfernt, damit keine Ansichten übereinander zurückbleiben. Die Abstufung der Göttlichen Hand bei Die böse Dreizehn bleibt ein bekannter offener Korrekturpunkt.",
+        "Wicked Thirteen is now stable following user testing, bringing TavernGames to 15 stable games without the game beta switch. The optional beta game view gains a left-hand scrollbar and loses its gold outer border. Closing multiple open games fully removes closed content so views no longer stack. Divine Hand weighting for Wicked Thirteen remains a known issue awaiting refinement."
       ],
       "items": [
-        "Klippklapp, Meiern und Würfelpoker stabil: 14 Spiele ohne Beta-Schalter.",
-        "Spielansicht bleibt Beta: direkte Einbettung von Vorbereitung und Lobby sowie Ergebnisse ohne Fensterwechsel.",
-        "Linkes Panel über volle Höhe; rechte Moderation übernimmt den Reiterstil.",
-        "Schließen auf ersten Klick und eigene Schließen-Buttons in den Panels.",
-        "Göttliche Hand: nach Entfernen einer Ausnahme tatsächlichen Wert und Herkunft anzeigen."
+        "Die böse Dreizehn stabil: 15 Spiele ohne Beta-Schalter.",
+        "Beta-Spielansicht: linke Scrollbar und kein goldener Außenrahmen.",
+        "Schließen mehrerer geöffneter Spiele ohne zurückbleibende Inhalte.",
+        "Bekannt: Die Abstufung der Göttlichen Hand bei Die böse Dreizehn wird noch überarbeitet."
       ]
     },
     "games": {
-      "title": "aktuelle Spiele (14)",
+      "title": "aktuelle Spiele (15)",
       "paragraphs": [
-        "Alle 14 Spiele sind stabil verfügbar. Die integrierte Spielansicht bleibt eine davon unabhängige freiwillige Beta."
+        "Alle 15 Spiele sind stabil verfügbar. Die freiwillige integrierte Spielansicht bleibt separat Beta."
       ],
       "items": [
         "17 und 4",
         "Aalstechen",
         "Chō-Han",
+        "Die böse Dreizehn",
         "Drachenhort",
         "Farkle",
         "Klippklapp",
@@ -38,7 +38,7 @@
       ]
     },
     "plans": {
-      "title": "geplante Spiele (36)",
+      "title": "geplante Spiele (35)",
       "paragraphs": [
         "Geplante Spiele und Wettbewerbe mit vorhandenen Referenzen oder neu vorgemerkten Namen. Einzelne Regeln sind noch offen; insbesondere ist beim Streichholzspiel noch keine genaue Variante festgelegt. Vorhandene Spiele werden nicht unter ihren englischen Namen erneut geplant."
       ],
@@ -50,7 +50,6 @@
         "Bogenschießen",
         "Das Spiel der edlen Dame",
         "Der Glückstag",
-        "Die böse Dreizehn",
         "Doppelkopf",
         "Durak",
         "Escalero",
@@ -102,7 +101,7 @@
     "functions": {
       "title": "aktuelle Funktionen (14)",
       "paragraphs": [
-        "Alle 14 Spiele sind stabil verfügbar. Gemeinsame SL-Moderation, optionale Spieltoken und 3D-Würfel unterstützen die Partien. Die integrierte Spielansicht bleibt eine freiwillige Beta; Fenster bleiben Standard."
+        "15 stabile Spiele mit gemeinsamer SL-Moderation, internen Spieltoken und optionalen 3D-Würfeln. Die integrierte Spielansicht bleibt separat Beta; Fenster bleiben Standard."
       ],
       "items": [
         "SL-Spielauswahl mit Kategorien, deutsch-englischer Suche, alphabetischer Liste und bis zu fünf Favoriten.",
@@ -124,7 +123,7 @@
     "settings": {
       "title": "Einstellungen in Foundry",
       "paragraphs": [
-        "In den Moduleinstellungen Sprache Deutsch oder Englisch wählen; Standard Englisch. Alle 14 Spiele sind stabil verfügbar und benötigen keinen Beta-Test-Schalter.",
+        "In den Moduleinstellungen Sprache Deutsch oder Englisch wählen; Standard Englisch. Alle 15 Spiele sind stabil verfügbar und benötigen keinen Beta-Test-Schalter.",
         "Der Taverngames-Reiter ist nur für SL sichtbar. Spiel öffnen, Lobby vorbereiten und unteren Beitrittsbutton über die Moderation freigeben.",
         "In der Moderation Einsätze & Spieltoken öffnen. Standard ist Ohne Einsatz. Für Spieltoken Zuteilung, Grundeinsatz und passende Banklimits festlegen. Standardvorlage sind 100 Token je Teilnehmer; Beträge sind durch SL anpassbar.",
         "Ausgangswetten verwenden denselben freien Bestand. SL öffnet die Annahme vor dem Spiel und schließt sie vor dem Start. Am Ende Token ausdrücklich übernehmen oder verwerfen; keine weltweiten Konten.",
@@ -132,12 +131,13 @@
         "Dice So Nice ist optional und separat einschaltbar. Nach Installation des Updates die Welt neu laden.",
         "Vor dem Start Wer beginnt? in der Moderation einstellen. Im Tokenfenster Allen gleichen Bestand zuteilen oder Einzelbestände auswählen; während des Spiels können freie Bestände weiter geändert werden.",
         "Spielansicht: Jeder Benutzer kann zwischen Fenster (Standard) und Integriertes Spielmenü (Beta) wählen. Für Spieler wird das Teilnehmerpanel nach bestätigtem Beitritt eingeblendet; die SL kann Vorbereitung und Lobby bereits vorher eingebettet öffnen. Die Ansicht ist unabhängig vom Beta-Schalter für Spiele. Göttliche Hand verwendet den Stärkeschieber; der globale Ausschalter löscht alle Glücks- und Pechprofile.",
-        "Ab 3.3.0 benötigen Meiern, Klippklapp und Würfelpoker keinen Beta-Schalter mehr. Die integrierte Spielansicht bleibt je Benutzer optional. Offene Ansichten bleiben nach Partieende eingebettet; auf Fenster wird bewusst zurückgeschaltet. Entfernte Spielausnahmen übernehmen den globalen Einfluss oder zeigen 0 Prozent, jeweils mit Herkunftshinweis."
+        "Ab 3.3.0 benötigen Meiern, Klippklapp und Würfelpoker keinen Beta-Schalter mehr. Die integrierte Spielansicht bleibt je Benutzer optional. Offene Ansichten bleiben nach Partieende eingebettet; auf Fenster wird bewusst zurückgeschaltet. Entfernte Spielausnahmen übernehmen den globalen Einfluss oder zeigen 0 Prozent, jeweils mit Herkunftshinweis.",
+        "Die böse Dreizehn ist ab 3.4.0 stabil und braucht keinen Beta-Test-Schalter. Göttliche Hand ist angebunden, ihre Abstufung bei diesem Spiel ist noch ein offener Korrekturpunkt."
       ],
       "items": []
     },
     "sources": {
-      "title": "Regelquellen (37)",
+      "title": "Regelquellen (38)",
       "paragraphs": [
         "Hier findet ihr alle genutzten Regelquellen. Quellen für noch nicht umgesetzte Spiele sind ausdrücklich als geplante Regelreferenzen gekennzeichnet."
       ],
@@ -178,7 +178,8 @@
         "17 und 4 (Würfel-Hausvariante): Leif und Daniels Festlegungen; Awiana als abweichende Elfenlauf-Regelreferenz.",
         "Meiern / Schlangenfangen: Awiana (https://awiana.fandom.com/de/wiki/Schlangenfangen?oldid=6670), bereitgestellte D&D-Minispiele v1.0 vom 15.10.2026, bestätigte Hausregeln von Daniel Brune.",
         "Aalstechen: Awiana (https://awiana.fandom.com/de/wiki/Aalstechen?oldid=5758), sichtbare Fünferblock-/Setzvariante Daniel Brune. All-in-/Nebentopf-Referenz: PokerStars (https://www.pokerstars.com/de/help/articles/poker-rules-master/215804/).",
-        "Daniel Brune – bereitgestellte Klippklapp-Regelvorlage vom 13.10.2026 und bestätigte Bluff-, Zahlungs- und Startspielerregeln; neue Brettspielnamen zunächst nur vorgemerkt."
+        "Daniel Brune – bereitgestellte Klippklapp-Regelvorlage vom 13.10.2026 und bestätigte Bluff-, Zahlungs- und Startspielerregeln; neue Brettspielnamen zunächst nur vorgemerkt.",
+        "O’Donnell – Die böse Dreizehn: https://odonnell.de/blogs/news/die-besten-wurfelspiele-fur-drei-wurfel"
       ]
     },
     "sources1": {
@@ -205,9 +206,10 @@
         "Würfelpoker: fünf W8 nach Awiana/Koboldpoker, Leifs abweichende Rangfolge und Daniels bestätigte Vergleiche; zwei Setzphasen mit All-in und Nebentöpfen. Full House nach Summe, dann höherem Drilling; zwei Paare nach höherem/niedrigerem Paar und Restwürfel.",
         "Klippklapp nach Daniels aktueller Festlegung: tatsächliche Restsummen strikt unterbieten, direkter Grundeinsatz an Vorgänger bei Niederlage, bei Klippklapp Grundeinsatz von allen anderen aktiven Teilnehmern.",
         "Farkle, optional in allen Modi: Einstiegshürde ausschaltbar oder frei bis zur Zielpunktzahl einstellbar; klassische Voreinstellung 500 Punkte.",
-        "Klippklapp Variante C: 3+5 erlaubt 8 oder 3 und 5 gemeinsam; 2+2 erlaubt 4 oder eine 2. Keine einzelnen ungleichen Würfelwerte."
+        "Klippklapp Variante C: 3+5 erlaubt 8 oder 3 und 5 gemeinsam; 2+2 erlaubt 4 oder eine 2. Keine einzelnen ungleichen Würfelwerte.",
+        "Daniel Brune: Die böse Dreizehn mit Restzahlung und Ausscheiden, fortlaufenden Töpfen und internen Spieltoken."
       ]
     }
   },
-  "version": "3.3.0"
+  "version": "3.4.0"
 }

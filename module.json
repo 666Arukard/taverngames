@@ -1,10 +1,10 @@
 {
     "id":  "taverngames",
     "title":  "TavernGames",
-    "description":  "\u003ch3\u003eDeutsch\u003c/h3\u003e\u003cp\u003eTavernGames bietet 14 stabile Tavernenspiele: 17 und 4, Aalstechen, Chō-Han, Drachenhort, Farkle, Klippklapp, Kniffel einschließlich Extreme, Lügenwürfel, Meiern, Schiff–Kapitän–Mannschaft, Schocken, Schweinchen, Straßenlotto und Würfelpoker. Mit SL-Moderation, freiwilligem Beitritt, benannten NPCs, internen Spieltoken und optionalen 3D-Würfeln. Der Reiter ist nur für SL sichtbar; die neue Spielansicht ist eine freiwillige Beta.\u003c/p\u003e\u003ch3\u003eEnglish\u003c/h3\u003e\u003cp\u003eTavernGames provides 14 stable tavern games: Seventeen and Four, Aalstechen, Cho-Han, Dragon’s Hoard, Farkle, Klippklapp, Kniffel including Extreme, Liar’s Dice, Meiern, Ship–Captain–Crew, Schocken, Pig, Street Lottery and Dice Poker. Includes GM moderation, voluntary participation, named NPCs, internal game tokens and optional 3D dice. The tab is GM-only; the new game view is an optional beta.\u003c/p\u003e\u003ch3\u003e3.3.0 · Versionshinweise / Release notes\u003c/h3\u003e\u003cp\u003eKlippklapp, Meiern und Würfelpoker sind jetzt stabil und ohne Beta-Schalter verfügbar. Damit umfasst TavernGames 14 stabile Spiele. Die integrierte Spielansicht bleibt eine freiwillige Beta: Vorbereitung und Lobby werden für die SL sofort eingebettet, offene Ansichten bleiben auch nach Partieende eingebettet und mehrere geöffnete Spiele erzeugen keine zusätzlichen Fenster. Das linke Panel reicht bis an die Bildschirmränder, die Moderation übernimmt den Hintergrund und die Textfarbe des Reiters. Eigene Schließen-Schaltflächen und ein Schutz vor unbeabsichtigtem Fensterziehen verbessern das Schließen. Göttliche Hand zeigt nach Entfernen einer Spielausnahme den tatsächlich übernommenen globalen Wert oder 0 Prozent samt Herkunft an.\u003c/p\u003e\u003cp\u003eKlippklapp, Meiern and Dice Poker are now stable and available without the beta switch, bringing TavernGames to 14 stable games. The integrated game view remains an optional beta: GM preparation and lobby views dock immediately, open views stay docked after the session ends and multiple open games no longer spawn extra windows. The left panel spans the screen edge to edge; moderation inherits the sidebar background and text color. Dedicated close controls and protection against accidental header dragging improve closing. Divine Hand displays the actual inherited global value or zero after removing an override, together with its source.\u003c/p\u003e\u003cp\u003eRegelquellen einschließlich Daniels Chō-Han-Regelsammlung und Awianas Vorlagen stehen in den Anleitungen. / Rule sources, including Daniel’s Cho-Han collection and Awiana references, are credited in the instructions.\u003c/p\u003e",
-    "version":  "3.3.0",
+    "description":  "\u003ch3\u003eDeutsch\u003c/h3\u003e\u003cp\u003eTavernGames bietet 15 stabile Tavernenspiele: 17 und 4, Aalstechen, Chō-Han, Die böse Dreizehn, Drachenhort, Farkle, Klippklapp, Kniffel einschließlich Extreme, Lügenwürfel, Meiern, Schiff–Kapitän–Mannschaft, Schocken, Schweinchen, Straßenlotto und Würfelpoker. Mit SL-Moderation, freiwilligem Beitritt, benannten NPCs, internen Spieltoken und optionalen 3D-Würfeln. Der Reiter ist nur für SL sichtbar; die neue Spielansicht ist eine freiwillige Beta.\u003c/p\u003e\u003ch3\u003eEnglish\u003c/h3\u003e\u003cp\u003eTavernGames provides 15 stable tavern games: Seventeen and Four, Aalstechen, Cho-Han, Wicked Thirteen, Dragon’s Hoard, Farkle, Klippklapp, Kniffel including Extreme, Liar’s Dice, Meiern, Ship–Captain–Crew, Schocken, Pig, Street Lottery and Dice Poker. Includes GM moderation, voluntary participation, named NPCs, internal game tokens and optional 3D dice. The tab is GM-only; the new game view is an optional beta.\u003c/p\u003e\u003ch3\u003e3.4.0 · Versionshinweise / Release notes\u003c/h3\u003e\u003cp\u003eDie böse Dreizehn ist nach dem Praxistest stabil verfügbar. Damit enthält TavernGames 15 stabile Spiele ohne Spiele-Beta-Schalter. Die optionale Beta-Spielansicht erhält eine linke Scrollbar und keinen goldenen Außenrahmen. Beim Schließen mehrerer geöffneter Spiele werden Inhalte vollständig entfernt, damit keine Ansichten übereinander zurückbleiben. Die Abstufung der Göttlichen Hand bei Die böse Dreizehn bleibt ein bekannter offener Korrekturpunkt.\u003c/p\u003e\u003cp\u003eWicked Thirteen is now stable following user testing, bringing TavernGames to 15 stable games without the game beta switch. The optional beta game view gains a left-hand scrollbar and loses its gold outer border. Closing multiple open games fully removes closed content so views no longer stack. Divine Hand weighting for Wicked Thirteen remains a known issue awaiting refinement.\u003c/p\u003e\u003cp\u003eRegelquellen einschließlich Daniels Chō-Han-Regelsammlung, Awiana und O’Donnell werden in den Anleitungen genannt. / Rule sources, including Daniel’s Cho-Han collection, Awiana and O’Donnell, are credited in the instructions.\u003c/p\u003e",
+    "version":  "3.4.0",
     "readme":  "README.md",
-    "changelog":  "https://github.com/666Arukard/taverngames/releases/tag/v3.3.0",
+    "changelog":  "https://github.com/666Arukard/taverngames/releases/tag/v3.4.0",
     "url":  "https://dnd.brunecoaching.de",
     "compatibility":  {
                           "minimum":  "14.369",
@@ -83,6 +83,10 @@
                     {
                         "name":  "PokerStars (ergänzende Referenz für All-in und Nebentöpfe)",
                         "url":  "https://www.pokerstars.com/de/help/articles/poker-rules-master/215804/"
+                    },
+                    {
+                        "name":  "O’Donnell (ergänzende Regelquelle Die böse Dreizehn; Hausregeln Daniel Brune)",
+                        "url":  "https://odonnell.de/blogs/news/die-besten-wurfelspiele-fur-drei-wurfel"
                     }
                 ],
     "esmodules":  [
@@ -92,7 +96,7 @@
                    "styles/table.css"
                ],
     "manifest":  "https://github.com/666Arukard/taverngames/releases/latest/download/module.json",
-    "download":  "https://github.com/666Arukard/taverngames/releases/download/v3.3.0/taverngames-3.3.0.zip",
+    "download":  "https://github.com/666Arukard/taverngames/releases/download/v3.4.0/taverngames-3.4.0.zip",
     "relationships":  {
                           "recommends":  [
                                              {
