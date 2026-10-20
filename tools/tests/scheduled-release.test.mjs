@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { dueEntries, run } from '../scheduled-release.mjs';
+import { sha256 } from '../publishing-common.mjs';
 
 const plan = { releases: [
   { version: '3.4.1', publishAt: '2026-10-21T08:00:00+02:00', expiresAt: '2026-10-21T10:00:00+02:00' },
@@ -56,4 +57,38 @@ test('Neuere aktuelle Version wird niemals zurueckgestuft', async () => {
     return reply(url.includes('/latest') ? { tag_name: 'v3.4.2' } : [{ tag_name: 'v3.4.1', draft: true }]);
   } });
   assert.match(result[0], /keine Rueckstufung/);
+});
+
+function fixture() {
+  const v = '3.4.1';
+  const manifest = { id: 'taverngames', version: v, compatibility: { minimum: '14.369', verified: '14.369' },
+    manifest: 'https://github.com/666Arukard/taverngames/releases/latest/download/module.json',
+    download: `https://github.com/666Arukard/taverngames/releases/download/v${v}/taverngames-${v}.zip` };
+  const content = Buffer.from(JSON.stringify(manifest));
+  const name = Buffer.from('module.json');
+  const local = Buffer.alloc(30); local.writeUInt32LE(0x04034b50); local.writeUInt16LE(name.length, 26);
+  const central = Buffer.alloc(46); central.writeUInt32LE(0x02014b50); central.writeUInt32LE(content.length, 20); central.writeUInt16LE(name.length, 28);
+  const end = Buffer.alloc(22); end.writeUInt32LE(0x06054b50); end.writeUInt16LE(1, 10); end.writeUInt32LE(local.length + name.length + content.length, 16);
+  const zip = Buffer.concat([local, name, content, central, name, end]);
+  const titles = { patchnotes: 'Patchnotes Version 3.4.1', games: 'aktuelle Spiele (1)', plans: 'geplante Spiele (1)',
+    plans2: 'geplante Funktionen (1)', functions: 'aktuelle Funktionen (1)', settings: 'Einstellungen in Foundry', sources: 'Regelquellen (1)', sources1: 'Hausvarianten' };
+  const website = { schemaVersion: 1, version: v, blocks: Object.fromEntries(Object.entries(titles).map(([k, title]) => [k, { title, paragraphs: ['Test'], items: ['Test'] }])) };
+  const data = [zip, content, Buffer.from(JSON.stringify(website))];
+  const assets = [`taverngames-${v}.zip`, 'module.json', 'website.json'].map((name, id) => ({ name, id, state: 'uploaded', size: data[id].length, digest: `sha256:${sha256(data[id])}` }));
+  return { release: { id: 99, tag_name: `v${v}`, draft: true, body: 'Testhinweise', assets }, data };
+}
+for (const dryRun of [true, false]) test(`Vollstaendige Assets: ${dryRun ? 'Probelauf ohne Schreibzugriff' : 'GitHub und Foundry genau einmal in Reihenfolge'}`, async () => {
+  const { release, data } = fixture(); const writes = [];
+  const result = await run({ plan, now, dryRun, token: 'test-token', foundryToken: 'fvttp_test', request: async (url, options) => {
+    if (options.method === 'PATCH' || options.method === 'POST') { writes.push({ url, body: JSON.parse(options.body) }); return reply({ status: 'success' }); }
+    if (url.includes('/assets/')) return { ok: true, arrayBuffer: async () => data[Number(url.split('/').at(-1))] };
+    return reply(url.endsWith('/latest') ? { tag_name: 'v3.4.0' } : [release]);
+  } });
+  if (dryRun) { assert.equal(writes.length, 0); assert.match(result[0], /Dry-run/); }
+  else {
+    assert.equal(writes.length, 4); assert.equal(writes[0].body.draft, false);
+    assert.match(writes[1].body.body, /foundry-attempted/);
+    assert.equal(writes[2].body.release.version, '3.4.1');
+    assert.match(writes[3].body.body, /foundry-published/);
+  }
 });
