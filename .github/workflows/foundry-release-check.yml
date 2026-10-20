@@ -90,10 +90,13 @@ jobs:
                   raise ValueError("Unerwarteter allgemeiner Update-Link im Modulmanifest.")
               compatibility = manifest.get("compatibility", {})
               if compatibility.get("minimum") != MINIMUM or compatibility.get("verified") != MINIMUM or compatibility.get("maximum"):
-                  raise ValueError("Dieser vorbereitete Testlauf erwartet minimum/verified 14.369 und keine Hoechstversion.")
+                  raise ValueError("Die Veroeffentlichung erwartet minimum/verified 14.369 und keine Hoechstversion.")
               archive = fetch(download_url, 256 * 1024 * 1024)
               with zipfile.ZipFile(io.BytesIO(archive)) as z:
-                  info = z.getinfo("taverngames/module.json")
+                  manifests = [name for name in ("taverngames/module.json", "module.json") if name in z.namelist()]
+                  if len(manifests) != 1:
+                      raise ValueError("ZIP muss genau ein Manifest enthalten: module.json im Hauptverzeichnis oder taverngames/module.json.")
+                  info = z.getinfo(manifests[0])
                   if info.file_size > 2000000:
                       raise ValueError("Manifest im ZIP ist zu gross.")
                   if json.loads(z.read(info)) != manifest:
@@ -126,11 +129,23 @@ jobs:
               print("Version " + version + " erfolgreich im Foundry-Verzeichnis eingetragen.")
 
 
+          def token_safe(message):
+              return all(not value or value not in message for value in (os.environ.get("FOUNDRY_RELEASE_TOKEN", ""), os.environ.get("GH_READ_TOKEN", "")))
+
           if __name__ == "__main__":
               try:
                   main()
               except urllib.error.HTTPError as error:
                   print(f"Foundry-Veroeffentlichung fehlgeschlagen: HTTP {error.code}. Bei 401/403 Token und Paketberechtigung pruefen; bei 404 Release/Assets pruefen; bei 400 Versions- und Kompatibilitaetsangaben pruefen. Antwortinhalt wird zum Schutz des Tokens nicht ausgegeben.", file=sys.stderr)
+                  sys.exit(1)
+              except ValueError as error:
+                  # Only known local validation messages are allowed in public logs.
+                  allowed = ("ZIP muss genau ein Manifest enthalten:", "ZIP und veroeffentlichtes module.json", "Release-Asset fehlt", "Paket-ID oder Versionsnummer", "Der ZIP-Link", "Unerwarteter allgemeiner Update-Link", "Die Veroeffentlichung erwartet", "Repository-Secret", "Bitte einen veroeffentlichten stabilen", "Foundry hat die Veroeffentlichung nicht bestaetigt.")
+                  message = str(error)
+                  if message.startswith(allowed) and token_safe(message):
+                      print("Pruefung fehlgeschlagen: " + message, file=sys.stderr)
+                  else:
+                      print("Pruefung fehlgeschlagen: ungueltige Release-Daten. Version, Tag und Dateien pruefen.", file=sys.stderr)
                   sys.exit(1)
               except Exception as error:
                   # Never echo arbitrary exceptions or server replies: they could contain credentials.
