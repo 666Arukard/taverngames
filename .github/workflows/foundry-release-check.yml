@@ -1,6 +1,8 @@
-name: Foundry - Release pruefen (Dry-run)
+name: Foundry - automatisch veroeffentlichen
 
 on:
+  release:
+    types: [published]
   workflow_dispatch:
     inputs:
       version:
@@ -12,16 +14,19 @@ permissions:
   contents: read
 
 concurrency:
-  group: foundry-release-dry-run
+  group: foundry-release-publish
   cancel-in-progress: false
 
 jobs:
-  check-release:
-    runs-on: ubuntu-latest
+  publish-release:
+    if: github.repository == '666Arukard/taverngames' && (github.event_name == 'workflow_dispatch' || (github.event.release.draft == false && github.event.release.prerelease == false))
+    runs-on: ubuntu-24.04
     timeout-minutes: 8
     steps:
-      - name: Release-Dateien und Foundry-Anmeldung nur pruefen
+      - name: Release-Dateien pruefen und bei Foundry eintragen
         env:
+          RELEASE_EVENT: ${{ github.event_name }}
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
           RELEASE_VERSION: ${{ inputs.version }}
           RELEASE_REPOSITORY: ${{ github.repository }}
           GH_READ_TOKEN: ${{ github.token }}
@@ -29,13 +34,22 @@ jobs:
         shell: bash
         run: |
           python3 - <<'PY'
-          import io, json, os, re, sys, urllib.error, urllib.request, zipfile
+          import io, json, os, re, sys, time, urllib.error, urllib.request, zipfile
 
           API = "https://foundryvtt.com/_api/packages/release_version/"
           MINIMUM = "14.369"
 
           def main():
-              version = os.environ.get("RELEASE_VERSION", "").strip()
+              event = os.environ.get("RELEASE_EVENT", "")
+              if event == "release":
+                  tag = os.environ.get("RELEASE_TAG", "")
+                  if not re.fullmatch(r"v[0-9]+\.[0-9]+\.[0-9]+", tag):
+                      raise ValueError("Release-Tag muss vX.Y.Z lauten.")
+                  version = tag[1:]
+              elif event == "workflow_dispatch":
+                  version = os.environ.get("RELEASE_VERSION", "").strip()
+              else:
+                  raise ValueError("Nicht erlaubter Workflow-Ausloeser.")
               repo = os.environ.get("RELEASE_REPOSITORY", "")
               token = os.environ.get("FOUNDRY_RELEASE_TOKEN", "").strip()
               gh_token = os.environ.get("GH_READ_TOKEN", "")
@@ -50,7 +64,7 @@ jobs:
               download_url = f"{base}/releases/download/v{version}/taverngames-{version}.zip"
 
               def fetch(url, limit, github_api=False):
-                  headers = {"User-Agent": "TavernGames-Foundry-DryRun", "Accept": "application/json" if github_api else "*/*"}
+                  headers = {"User-Agent": "TavernGames-Foundry-Release", "Accept": "application/json" if github_api else "*/*"}
                   if github_api and gh_token:
                       headers["Authorization"] = "Bearer " + gh_token
                   request = urllib.request.Request(url, headers=headers)
@@ -75,10 +89,8 @@ jobs:
               if manifest.get("manifest") != base + "/releases/latest/download/module.json":
                   raise ValueError("Unerwarteter allgemeiner Update-Link im Modulmanifest.")
               compatibility = manifest.get("compatibility", {})
-              if compatibility.get("minimum") not in (None, MINIMUM) or compatibility.get("verified") != MINIMUM or compatibility.get("maximum"):
+              if compatibility.get("minimum") != MINIMUM or compatibility.get("verified") != MINIMUM or compatibility.get("maximum"):
                   raise ValueError("Dieser vorbereitete Testlauf erwartet minimum/verified 14.369 und keine Hoechstversion.")
-              if compatibility.get("minimum") is None:
-                  print("Hinweis: Dieses historische Release-Manifest hat noch keine Mindestversion. Nur der API-Test verwendet die neu beschlossene 14.369. Vor echtem Publizieren ist ein neues, konsistentes Paket erforderlich.")
               archive = fetch(download_url, 256 * 1024 * 1024)
               with zipfile.ZipFile(io.BytesIO(archive)) as z:
                   info = z.getinfo("taverngames/module.json")
@@ -86,29 +98,42 @@ jobs:
                       raise ValueError("Manifest im ZIP ist zu gross.")
                   if json.loads(z.read(info)) != manifest:
                       raise ValueError("ZIP und veroeffentlichtes module.json enthalten unterschiedliche Manifeste.")
-              payload = {"id": "taverngames", "dry-run": True, "release": {
+              payload = {"id": "taverngames", "release": {
                   "version": version, "manifest": manifest_url,
                   "notes": f"{base}/releases/tag/v{version}",
                   "compatibility": {"minimum": MINIMUM, "verified": MINIMUM}
               }}
-              print("Gepruefter Testauftrag (keine Veroeffentlichung):")
+              print("Gepruefter Foundry-Veroeffentlichungsauftrag:")
               print(json.dumps(payload, indent=2))
               request = urllib.request.Request(API, data=json.dumps(payload).encode("utf-8"),
-                  headers={"Content-Type": "application/json", "Authorization": token, "User-Agent": "TavernGames-Foundry-DryRun"}, method="POST")
-              with urllib.request.urlopen(request, timeout=60) as response:
-                  result = json.loads(response.read(2000000))
-              if result.get("status") != "success" or result.get("message") != "Dry run completed successfully. To save, submit the request again without dry-run":
-                  raise ValueError("Foundry hat keinen erfolgreichen Dry-run bestaetigt. Details auf der Paketseite pruefen.")
-              print("Foundry-Testlauf erfolgreich. Es wurde kein Release-Eintrag gespeichert.")
+                  headers={"Content-Type": "application/json", "Authorization": token, "User-Agent": "TavernGames-Foundry-Release"}, method="POST")
+              # Foundry limits successive release requests; retry only a rate-limit response.
+              for attempt in range(2):
+                  try:
+                      with urllib.request.urlopen(request, timeout=60) as response:
+                          result = json.loads(response.read(2000000))
+                      break
+                  except urllib.error.HTTPError as error:
+                      if error.code != 429 or attempt:
+                          raise
+                      delay = error.headers.get("Retry-After", "60")
+                      if not delay.isdigit() or int(delay) > 180:
+                          raise
+                      print("Foundry-Nutzungslimit: ein erneuter Versuch nach Wartezeit.")
+                      time.sleep(max(60, int(delay)))
+              if result.get("status") != "success" or result.get("message", "").startswith("Dry run"):
+                  raise ValueError("Foundry hat die Veroeffentlichung nicht bestaetigt.")
+              print("Version " + version + " erfolgreich im Foundry-Verzeichnis eingetragen.")
+
 
           if __name__ == "__main__":
               try:
                   main()
               except urllib.error.HTTPError as error:
-                  print(f"Testlauf fehlgeschlagen: HTTP {error.code}. Bei 401/403 Token und Paketberechtigung pruefen; bei 404 Release/Assets pruefen; bei 400 Versions- und Kompatibilitaetsangaben pruefen. Antwortinhalt wird zum Schutz des Tokens nicht ausgegeben.", file=sys.stderr)
+                  print(f"Foundry-Veroeffentlichung fehlgeschlagen: HTTP {error.code}. Bei 401/403 Token und Paketberechtigung pruefen; bei 404 Release/Assets pruefen; bei 400 Versions- und Kompatibilitaetsangaben pruefen. Antwortinhalt wird zum Schutz des Tokens nicht ausgegeben.", file=sys.stderr)
                   sys.exit(1)
               except Exception as error:
                   # Never echo arbitrary exceptions or server replies: they could contain credentials.
-                  print("Testlauf fehlgeschlagen (" + type(error).__name__ + "). Release-Dateien, Eingaben und Secret-Konfiguration pruefen; keine Veroeffentlichung ausgefuehrt.", file=sys.stderr)
+                  print("Foundry-Veroeffentlichung fehlgeschlagen (" + type(error).__name__ + "). Release-Dateien, Eingaben und Secret-Konfiguration pruefen; Kein Erfolg bestaetigt; vor erneutem Start Paketseite pruefen.", file=sys.stderr)
                   sys.exit(1)
           PY
