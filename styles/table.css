@@ -146,3 +146,15 @@
 /* Native controls remain visible; only the redundant floating menu icons disappear. */
 #taverngames-player-panel.taverngames-native-access .taverngames-player-tabs button:not(.taverngames-player-collapse){display:none}
 #controls .taverngames-menu-open{outline:1px solid var(--color-border-highlight,#c6a96c)}
+
+/* 3.4.2: highlight actions without replacing readable native text with a dark hover palette. */
+.taverngames-catalog button:not(.taverngames-favorite-star){color:inherit;background:var(--button-background-color,rgba(128,128,128,.12))}
+.taverngames-catalog button:not(.taverngames-favorite-star):enabled:hover,.taverngames-catalog button:not(.taverngames-favorite-star):enabled:focus-visible{color:inherit;background:var(--button-background-color,rgba(128,128,128,.12));outline:2px solid #c6a96c;outline-offset:0;box-shadow:none;text-shadow:none;filter:none}
+.taverngames-catalog .taverngames-favorite-star:hover,.taverngames-catalog .taverngames-favorite-star:focus-visible{background:transparent;outline:2px solid #c6a96c;box-shadow:none;text-shadow:none;filter:none}
+.taverngames-catalog select:hover,.taverngames-catalog select:focus-visible{outline:2px solid #c6a96c;outline-offset:0;filter:none}
+.taverngames-catalog select option{color:#f4ead7;background:#252830}
+.taverngames-catalog select option:hover,.taverngames-catalog select option:checked{color:#fff7e6;background:#705924}
+#taverngames-player-panel .taverngames-surface button:enabled:hover,#taverngames-player-panel .taverngames-surface button:enabled:focus-visible{color:inherit;background:rgba(128,128,128,.12);outline:2px solid #c6a96c;box-shadow:none;text-shadow:none;filter:none}
+
+.taverngames-catalog .taverngames-favorite-star:not(.is-favorite):is(:hover,:focus-visible){color:#777}
+.taverngames-catalog .taverngames-favorite-star.is-favorite:is(:hover,:focus-visible){color:#b78925}

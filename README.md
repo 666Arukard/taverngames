@@ -1,3 +1,11 @@
+## Version 3.4.2
+
+Göttliche Hand bewertet bei Aalstechen nur noch das Ausscheiden durch eine 1. Begünstigung senkt deren Wahrscheinlichkeit, ohne hohe Zahlen zu bevorzugen; die übrigen Augen bleiben gleich wahrscheinlich. Die Hover-Hervorhebung im TavernGames-Reiter erhält einen goldenen Rahmen bei lesbarer Schrift, auch in Moderation und Auswahllisten. Das Liegenbleiben der Aalstechen-Würfel bleibt für weitere Tests unverändert.
+
+For Aalstechen, Divine Hand now affects only elimination by rolling a one. Favor reduces that probability without preferring high values; the remaining faces stay equally likely. TavernGames sidebar hover highlighting uses a gold outline and readable text, including moderation and dropdown options. Resting Aalstechen dice remain unchanged for further testing.
+
+Alle Clients neu laden. 15 stabile Spiele, Spiel der Könige bleibt Beta; die Seitenansicht bleibt separat Beta. Noch nicht veröffentlicht.
+
 ## Version 3.4.1
 
 Spiel der Könige ergänzt die 15 stabilen Spiele als optionale Beta: verdeckter W8, W6 und W4 mit je einer anschließenden Setzphase, All-in, Haupt- und Nebentöpfen. Die höchste Summe gewinnt. In der Beta-Spielansicht öffnet ein TavernGames-Symbol in Foundrys linker Werkzeugleiste die Lobby; die übrigen Werkzeuge bleiben erreichbar. Das Schließen mehrerer Moderationen und Göttlicher Hand wurde abgesichert. Die bekannte Abstufung der Göttlichen Hand bei Die böse Dreizehn bleibt unverändert offen.

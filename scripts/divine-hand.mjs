@@ -64,7 +64,7 @@ function quality(scope,b,a,id,target,action){
  if(scope==='kniffel')return kniffelFavorScore(b,a,target);
  if(scope==='liars'){const d=a.hands[target];return d.filter(v=>v===1).length*100+Math.max(...[1,2,3,4,5,6].map(v=>d.filter(n=>n===v).length));}
  if(scope==='meiern')return meiernRank(meiernValue(a.cup.dice));
- if(scope==='aalstechen')return a.remaining[target].length*100+total((a.last[target]??[]).map(d=>d.value));
+ if(scope==='aalstechen')return a.remaining[target].length;
  if(scope==='hoard')return action==='resolveGuess'&&a.lastContest?.closest?Number(a.lastContest.closest.includes(target))*1000:a.out.includes(target)?-100000:(a.balances[target]-b.balances[target])*1000;
  if(scope==='lottery')return Number(a.tickets.some(t=>t.id===target&&t.numbers.includes(a.result)));
  if(scope==='chohan'){const side=total(a.dice)%2?'odd':'even';if(target==='@bank')return -a.bets.filter(x=>x.side===side).reduce((n,x)=>n+(x.accepted??0),0);return Number(a.bets.some(x=>x.id===target&&x.side===side&&(x.accepted??0)>0));}
@@ -91,7 +91,20 @@ export function divineRandom({scope,state:s,actor,action,args={},config,raw}){
  if(!all.length||s?.paused||!['roll','draw','bankRoll','resolveGuess'].includes(action))return raw;
  const shared=['lottery','chohan'].includes(scope)||scope==='hoard'&&action==='resolveGuess',id=scope==='seventeen'&&action==='bankRoll'?'@bank':['aalstechen','liars'].includes(scope)?actor:s?.order?.[s.turn];
  const configs=all.filter(c=>(shared||id===c.target||scope==='seventeen'&&id==='@bank')&&!(scope==='lottery'&&!s.tickets.some(t=>t.id===c.target))&&!(scope==='chohan'&&c.target!=='@bank'&&!s.bets.some(b=>b.id===c.target&&(b.accepted??0)>0)));
- if(!configs.length)return raw;const strength=Math.max(...configs.map(c=>c.strength)),intensity=strength/100;
+ if(!configs.length)return raw;
+ // Only survival matters in Aalstechen: change the chance of a one, never rank safe faces.
+ // Conditional on not rolling one, all remaining faces stay equally likely.
+ if(scope==='aalstechen'){
+  const profile=configs.find(c=>c.target===id);
+  if(!profile||s.phase!=='rolling'||!s.remaining?.[id]?.length)return raw;
+  return sides=>{
+   const value=raw(sides);check(Number.isInteger(value)&&value>=1&&value<=sides,'Invalid dice.');
+   if(!s.remaining[id].includes(sides))return value;
+   if(profile.mode==='disfavor')return value!==1&&raw(10000)<=profile.strength*100?1:value;
+   return value===1&&raw(10000)<=profile.strength*100?raw(sides-1)+1:value;
+  };
+ }
+ const strength=Math.max(...configs.map(c=>c.strength)),intensity=strength/100;
  if(raw(10000)>strength*100)return raw;
  const own=configs.find(c=>c.target===id),ownTotal=total(s.hands?.[id]);
  const step=scope==='seventeen'&&id!=='@bank'&&own?.mode!=='disfavor'&&ownTotal<15?ownTotal+raw(Math.min(s.diceMode==='d8d6'?14:12,21-ownTotal)):null;

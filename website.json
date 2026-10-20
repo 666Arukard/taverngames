@@ -2,16 +2,16 @@
   "schemaVersion": 1,
   "blocks": {
     "patchnotes": {
-      "title": "Patchnotes Version 3.4.1",
+      "title": "Patchnotes Version 3.4.2",
       "paragraphs": [
-        "Spiel der Könige ergänzt die 15 stabilen Spiele als optionale Beta: verdeckter W8, W6 und W4 mit je einer anschließenden Setzphase, All-in, Haupt- und Nebentöpfen. Die höchste Summe gewinnt. In der Beta-Spielansicht öffnet ein TavernGames-Symbol in Foundrys linker Werkzeugleiste die Lobby; die übrigen Werkzeuge bleiben erreichbar. Das Schließen mehrerer Moderationen und Göttlicher Hand wurde abgesichert. Die bekannte Abstufung der Göttlichen Hand bei Die böse Dreizehn bleibt unverändert offen.",
-        "Game of Kings joins the 15 stable games as an optional beta: hidden d8, d6 and d4, each followed by a betting round, with all-in, main and side pots. Highest total wins. In the beta game view a TavernGames icon in Foundry’s left toolbar opens the lobby while other tools stay accessible. Closing multiple moderation views and Divine Hand is safeguarded. The known Divine Hand weighting issue for Wicked Thirteen remains open and unchanged."
+        "Göttliche Hand bewertet bei Aalstechen nur noch das Ausscheiden durch eine 1. Begünstigung senkt deren Wahrscheinlichkeit, ohne hohe Zahlen zu bevorzugen; die übrigen Augen bleiben gleich wahrscheinlich. Die Hover-Hervorhebung im TavernGames-Reiter erhält einen goldenen Rahmen bei lesbarer Schrift, auch in Moderation und Auswahllisten. Das Liegenbleiben der Aalstechen-Würfel bleibt für weitere Tests unverändert.",
+        "For Aalstechen, Divine Hand now affects only elimination by rolling a one. Favor reduces that probability without preferring high values; the remaining faces stay equally likely. TavernGames sidebar hover highlighting uses a gold outline and readable text, including moderation and dropdown options. Resting Aalstechen dice remain unchanged for further testing."
       ],
       "items": [
-        "Spiel der Könige als Beta: private W8/W6/W4, drei Setzphasen und Nebentöpfe.",
-        "TavernGames-Zugang in der nativen linken Werkzeugleiste; andere Werkzeuge bleiben erreichbar.",
-        "Schließen von Moderation und Göttlicher Hand ohne zurückbleibende Ansichten.",
-        "Die Abstufung der Göttlichen Hand bei Die böse Dreizehn bleibt offen."
+        "Aalstechen: Göttliche Hand beeinflusst die Eins-Chance; sichere Werte bleiben gleichberechtigt.",
+        "Lesbare Hover-Hervorhebung mit goldenem Rahmen und kontrastierenden Auswahllisten.",
+        "Aalstechen-Würfel bleiben für die weitere Evaluation unverändert liegen.",
+        "15 stabile Spiele; Spiel der Könige und integrierte Spielansicht bleiben Beta."
       ]
     },
     "games": {
@@ -133,7 +133,8 @@
         "Spielansicht: Jeder Benutzer kann zwischen Fenster (Standard) und Integriertes Spielmenü (Beta) wählen. Für Spieler wird das Teilnehmerpanel nach bestätigtem Beitritt eingeblendet; die SL kann Vorbereitung und Lobby bereits vorher eingebettet öffnen. Die Ansicht ist unabhängig vom Beta-Schalter für Spiele. Göttliche Hand verwendet den Stärkeschieber; der globale Ausschalter löscht alle Glücks- und Pechprofile.",
         "Ab 3.3.0 benötigen Meiern, Klippklapp und Würfelpoker keinen Beta-Schalter mehr. Die integrierte Spielansicht bleibt je Benutzer optional. Offene Ansichten bleiben nach Partieende eingebettet; auf Fenster wird bewusst zurückgeschaltet. Entfernte Spielausnahmen übernehmen den globalen Einfluss oder zeigen 0 Prozent, jeweils mit Herkunftshinweis.",
         "Die böse Dreizehn ist ab 3.4.0 stabil und braucht keinen Beta-Test-Schalter. Göttliche Hand ist angebunden, ihre Abstufung bei diesem Spiel ist noch ein offener Korrekturpunkt.",
-        "Spiel der Könige unter Moduleinstellungen → Beta-Test freischalten. In der integrierten Ansicht öffnet das TavernGames-Icon links die berechtigte Lobby. Fenster bleiben als Alternative verfügbar."
+        "Spiel der Könige unter Moduleinstellungen → Beta-Test freischalten. In der integrierten Ansicht öffnet das TavernGames-Icon links die berechtigte Lobby. Fenster bleiben als Alternative verfügbar.",
+        "Aalstechen: Glück senkt die natürliche Eins-Chance pro Würfel, ohne hohe sichere Werte zu bevorzugen. Bei 100 % Glück keine Eins; bei 0 % unveränderter Zufall. Die Anzeige liegender Würfel ist in 3.4.2 unverändert."
       ],
       "items": []
     },
@@ -213,5 +214,5 @@
       ]
     }
   },
-  "version": "3.4.1"
+  "version": "3.4.2"
 }
