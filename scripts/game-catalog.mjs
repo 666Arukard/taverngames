@@ -1,6 +1,7 @@
 // Names and categories are data so future tags can extend the catalog without
 // coupling navigation to gameplay. No duration or betting claims are invented.
 export const GAME_CATALOG=Object.freeze([
+ {id:'kings',category:'chance',beta:true,names:['Spiel der Könige','Game of Kings']},
  {id:'thirteen',category:'dice',names:['Die böse Dreizehn','Böse 13','Wicked Thirteen']},
  {id:'klippklapp',category:'dice',names:['Klippklapp','KlippKlapp','Shut the Box']},
  {id:'poker',category:'dice',names:['Würfelpoker','Dice Poker','Koboldpoker'],suggestedNames:['Koboldpoker','Orakelwürfel']},

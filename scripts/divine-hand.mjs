@@ -1,3 +1,4 @@
+import {actKings,kingsTotal} from './kings-engine.mjs';
 import {actThirteen} from './thirteen-engine.mjs';
 import {actKlippklapp,klippChoices} from './klippklapp-engine.mjs';
 import {actPoker,pokerValue} from './poker-engine.mjs';
@@ -9,7 +10,7 @@ import {actMeiern,meiernRank,meiernValue} from './meiern-engine.mjs';
 import {actAalstechen} from './aalstechen-engine.mjs';
 import {kniffelFavorScore,kniffelGoalDraws} from './kniffel-favor.mjs';
 
-export const DIVINE_SCOPES=['schocken','farkle','pig','ship','lottery','kniffel','liars','hoard','chohan','seventeen','meiern','aalstechen','poker','klippklapp','thirteen'];
+export const DIVINE_SCOPES=['schocken','farkle','pig','ship','lottery','kniffel','liars','hoard','chohan','seventeen','meiern','aalstechen','poker','klippklapp','thirteen','kings'];
 const check=(v,m)=>{if(!v)throw Error(m);};
 const percent=n=>Number.isInteger(n)&&n>=0&&n<=100;
 export const divineBook=()=>({version:1,revision:0,defaultStrength:0,games:{},profiles:{},selection:{}});
@@ -35,6 +36,7 @@ export function divinePayload(book,scope,s,user,getName=id=>id,participants=[]){
  return {scope,source:b.profiles[scope]?.[target]?'scope':c?'all':'none',inherited:scope==='all'?[]:Object.entries(b.profiles.all??{}).map(([id,c])=>({id,...c})),revision:b.revision,defaultStrength:b.defaultStrength,gameId:s?.gameId??null,phase:s?.phase??null,target,strength:c?.strength??0,mode:c?.mode??'favor',players:ids.map(id=>({id,name:s?.npcs?.[id]??getName(id)})),bank:['all','seventeen','chohan'].includes(scope),entries:Object.entries(b.profiles[scope]??{}).map(([id,c])=>({id,name:s?.npcs?.[id]??getName(id),...c})),effective:divineConfigs(b,scope,s)};
 }
 function simulate(scope,s,id,action,args,random){
+ if(scope==='kings')return actKings(s,id,action,args,random,true);
  if(scope==='thirteen')return actThirteen(s,id,action,args,random,true);
  if(scope==='klippklapp')return actKlippklapp(s,id,action,args,random,true);
  if(scope==='poker')return actPoker(s,id,action,args,random,true);
@@ -47,6 +49,7 @@ function simulate(scope,s,id,action,args,random){
 }
 const total=h=>(h??[]).flat().reduce((n,v)=>n+v,0);
 function quality(scope,b,a,id,target,action){
+ if(scope==='kings')return kingsTotal(a.hands[target]);
  if(scope==='thirteen')return a.last?.sum===12?1000000:-(a.last?.requested??0)-(a.out.includes(target)?100000:0);
  if(scope==='schocken'){const v=value(a.cup.dice,a.cup.hand);return v.rank*1000+v.high;}
  if(scope==='farkle')return a.cup?.dice&&a.order[a.turn]===target?bestSelection(a.cup.dice,a.cup.fresh,a.rules).score:-100000;

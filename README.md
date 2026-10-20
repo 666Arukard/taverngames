@@ -1,3 +1,11 @@
+## Version 3.4.1
+
+Spiel der Könige ergänzt die 15 stabilen Spiele als optionale Beta: verdeckter W8, W6 und W4 mit je einer anschließenden Setzphase, All-in, Haupt- und Nebentöpfen. Die höchste Summe gewinnt. In der Beta-Spielansicht öffnet ein TavernGames-Symbol in Foundrys linker Werkzeugleiste die Lobby; die übrigen Werkzeuge bleiben erreichbar. Das Schließen mehrerer Moderationen und Göttlicher Hand wurde abgesichert. Die bekannte Abstufung der Göttlichen Hand bei Die böse Dreizehn bleibt unverändert offen.
+
+Game of Kings joins the 15 stable games as an optional beta: hidden d8, d6 and d4, each followed by a betting round, with all-in, main and side pots. Highest total wins. In the beta game view a TavernGames icon in Foundry’s left toolbar opens the lobby while other tools stay accessible. Closing multiple moderation views and Divine Hand is safeguarded. The known Divine Hand weighting issue for Wicked Thirteen remains open and unchanged.
+
+Alle Clients neu laden. Spiel der Könige über Moduleinstellungen → Beta-Test aktivieren. Die Seitenansicht bleibt eine separat je Client wählbare Beta; Fenster bleiben Standard. Noch nicht veröffentlicht.
+
 ## Version 3.4.0
 
 Die böse Dreizehn ist nach dem Praxistest stabil verfügbar. Damit enthält TavernGames 15 stabile Spiele ohne Spiele-Beta-Schalter. Die optionale Beta-Spielansicht erhält eine linke Scrollbar und keinen goldenen Außenrahmen. Beim Schließen mehrerer geöffneter Spiele werden Inhalte vollständig entfernt, damit keine Ansichten übereinander zurückbleiben. Die Abstufung der Göttlichen Hand bei Die böse Dreizehn bleibt ein bekannter offener Korrekturpunkt.

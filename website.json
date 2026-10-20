@@ -2,22 +2,22 @@
   "schemaVersion": 1,
   "blocks": {
     "patchnotes": {
-      "title": "Patchnotes Version 3.4.0",
+      "title": "Patchnotes Version 3.4.1",
       "paragraphs": [
-        "Die böse Dreizehn ist nach dem Praxistest stabil verfügbar. Damit enthält TavernGames 15 stabile Spiele ohne Spiele-Beta-Schalter. Die optionale Beta-Spielansicht erhält eine linke Scrollbar und keinen goldenen Außenrahmen. Beim Schließen mehrerer geöffneter Spiele werden Inhalte vollständig entfernt, damit keine Ansichten übereinander zurückbleiben. Die Abstufung der Göttlichen Hand bei Die böse Dreizehn bleibt ein bekannter offener Korrekturpunkt.",
-        "Wicked Thirteen is now stable following user testing, bringing TavernGames to 15 stable games without the game beta switch. The optional beta game view gains a left-hand scrollbar and loses its gold outer border. Closing multiple open games fully removes closed content so views no longer stack. Divine Hand weighting for Wicked Thirteen remains a known issue awaiting refinement."
+        "Spiel der Könige ergänzt die 15 stabilen Spiele als optionale Beta: verdeckter W8, W6 und W4 mit je einer anschließenden Setzphase, All-in, Haupt- und Nebentöpfen. Die höchste Summe gewinnt. In der Beta-Spielansicht öffnet ein TavernGames-Symbol in Foundrys linker Werkzeugleiste die Lobby; die übrigen Werkzeuge bleiben erreichbar. Das Schließen mehrerer Moderationen und Göttlicher Hand wurde abgesichert. Die bekannte Abstufung der Göttlichen Hand bei Die böse Dreizehn bleibt unverändert offen.",
+        "Game of Kings joins the 15 stable games as an optional beta: hidden d8, d6 and d4, each followed by a betting round, with all-in, main and side pots. Highest total wins. In the beta game view a TavernGames icon in Foundry’s left toolbar opens the lobby while other tools stay accessible. Closing multiple moderation views and Divine Hand is safeguarded. The known Divine Hand weighting issue for Wicked Thirteen remains open and unchanged."
       ],
       "items": [
-        "Die böse Dreizehn stabil: 15 Spiele ohne Beta-Schalter.",
-        "Beta-Spielansicht: linke Scrollbar und kein goldener Außenrahmen.",
-        "Schließen mehrerer geöffneter Spiele ohne zurückbleibende Inhalte.",
-        "Bekannt: Die Abstufung der Göttlichen Hand bei Die böse Dreizehn wird noch überarbeitet."
+        "Spiel der Könige als Beta: private W8/W6/W4, drei Setzphasen und Nebentöpfe.",
+        "TavernGames-Zugang in der nativen linken Werkzeugleiste; andere Werkzeuge bleiben erreichbar.",
+        "Schließen von Moderation und Göttlicher Hand ohne zurückbleibende Ansichten.",
+        "Die Abstufung der Göttlichen Hand bei Die böse Dreizehn bleibt offen."
       ]
     },
     "games": {
-      "title": "aktuelle Spiele (15)",
+      "title": "aktuelle Spiele (16)",
       "paragraphs": [
-        "Alle 15 Spiele sind stabil verfügbar. Die freiwillige integrierte Spielansicht bleibt separat Beta."
+        "15 stabile Spiele und Spiel der Könige als optionale Beta. Die integrierte Spielansicht bleibt separat Beta."
       ],
       "items": [
         "17 und 4",
@@ -34,11 +34,12 @@
         "Schocken",
         "Schweinchen",
         "Straßenlotto",
-        "Würfelpoker"
+        "Würfelpoker",
+        "Spiel der Könige (Beta)"
       ]
     },
     "plans": {
-      "title": "geplante Spiele (35)",
+      "title": "geplante Spiele (34)",
       "paragraphs": [
         "Geplante Spiele und Wettbewerbe mit vorhandenen Referenzen oder neu vorgemerkten Namen. Einzelne Regeln sind noch offen; insbesondere ist beim Streichholzspiel noch keine genaue Variante festgelegt. Vorhandene Spiele werden nicht unter ihren englischen Namen erneut geplant."
       ],
@@ -72,7 +73,6 @@
         "Schwimmen / Knack",
         "Sechsundsechzig",
         "Skat",
-        "Spiel der Könige",
         "Streichholzspiel / Matchstick Game (Variante noch offen)",
         "Tic-Tac-Toe / Drei gewinnt",
         "Vier gewinnt / Four in a Row",
@@ -101,7 +101,7 @@
     "functions": {
       "title": "aktuelle Funktionen (14)",
       "paragraphs": [
-        "15 stabile Spiele mit gemeinsamer SL-Moderation, internen Spieltoken und optionalen 3D-Würfeln. Die integrierte Spielansicht bleibt separat Beta; Fenster bleiben Standard."
+        "15 stabile Spiele und Spiel der Könige als optionale Beta. Gemeinsame SL-Moderation, interne Spieltoken und optionale 3D-Würfel. Integrierte Spielansicht als separate Beta mit nativem Werkzeugleisten-Zugang; Fenster bleiben Standard."
       ],
       "items": [
         "SL-Spielauswahl mit Kategorien, deutsch-englischer Suche, alphabetischer Liste und bis zu fünf Favoriten.",
@@ -132,7 +132,8 @@
         "Vor dem Start Wer beginnt? in der Moderation einstellen. Im Tokenfenster Allen gleichen Bestand zuteilen oder Einzelbestände auswählen; während des Spiels können freie Bestände weiter geändert werden.",
         "Spielansicht: Jeder Benutzer kann zwischen Fenster (Standard) und Integriertes Spielmenü (Beta) wählen. Für Spieler wird das Teilnehmerpanel nach bestätigtem Beitritt eingeblendet; die SL kann Vorbereitung und Lobby bereits vorher eingebettet öffnen. Die Ansicht ist unabhängig vom Beta-Schalter für Spiele. Göttliche Hand verwendet den Stärkeschieber; der globale Ausschalter löscht alle Glücks- und Pechprofile.",
         "Ab 3.3.0 benötigen Meiern, Klippklapp und Würfelpoker keinen Beta-Schalter mehr. Die integrierte Spielansicht bleibt je Benutzer optional. Offene Ansichten bleiben nach Partieende eingebettet; auf Fenster wird bewusst zurückgeschaltet. Entfernte Spielausnahmen übernehmen den globalen Einfluss oder zeigen 0 Prozent, jeweils mit Herkunftshinweis.",
-        "Die böse Dreizehn ist ab 3.4.0 stabil und braucht keinen Beta-Test-Schalter. Göttliche Hand ist angebunden, ihre Abstufung bei diesem Spiel ist noch ein offener Korrekturpunkt."
+        "Die böse Dreizehn ist ab 3.4.0 stabil und braucht keinen Beta-Test-Schalter. Göttliche Hand ist angebunden, ihre Abstufung bei diesem Spiel ist noch ein offener Korrekturpunkt.",
+        "Spiel der Könige unter Moduleinstellungen → Beta-Test freischalten. In der integrierten Ansicht öffnet das TavernGames-Icon links die berechtigte Lobby. Fenster bleiben als Alternative verfügbar."
       ],
       "items": []
     },
@@ -207,9 +208,10 @@
         "Klippklapp nach Daniels aktueller Festlegung: tatsächliche Restsummen strikt unterbieten, direkter Grundeinsatz an Vorgänger bei Niederlage, bei Klippklapp Grundeinsatz von allen anderen aktiven Teilnehmern.",
         "Farkle, optional in allen Modi: Einstiegshürde ausschaltbar oder frei bis zur Zielpunktzahl einstellbar; klassische Voreinstellung 500 Punkte.",
         "Klippklapp Variante C: 3+5 erlaubt 8 oder 3 und 5 gemeinsam; 2+2 erlaubt 4 oder eine 2. Keine einzelnen ungleichen Würfelwerte.",
-        "Daniel Brune: Die böse Dreizehn mit Restzahlung und Ausscheiden, fortlaufenden Töpfen und internen Spieltoken."
+        "Daniel Brune: Die böse Dreizehn mit Restzahlung und Ausscheiden, fortlaufenden Töpfen und internen Spieltoken.",
+        "Spiel der Könige: Daniels bestätigte Umsetzung mit nacheinander geworfenen W8/W6/W4, drei Setzphasen, All-in/Nebentöpfen und Topfteilung; Regelvorlage Paul Cossmer."
       ]
     }
   },
-  "version": "3.4.0"
+  "version": "3.4.1"
 }

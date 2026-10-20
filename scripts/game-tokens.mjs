@@ -32,7 +32,7 @@ export function tokenAction(scope,original,action,args,user,{users=[]}={}){
  if(action==='tokenConfig'){
   gm();lobby();check(['none','tokens'].includes(args.mode),'Invalid token mode.');
   for(const k of ['stake','min','max','initial','bank'])check(whole(args[k]),'Invalid token amount.');check(args.min>=1&&args.max>=args.min&&['bank','redistribute'].includes(args.funding),'Invalid token limits.');
-  if(['aalstechen','poker','thirteen'].includes(scope)&&args.mode==='tokens')check(args.stake>0,'Choose a positive buy-in.');
+  if(['aalstechen','poker','thirteen','kings'].includes(scope)&&args.mode==='tokens')check(args.stake>0,'Choose a positive buy-in.');
   if(scope==='chohan')check(args.max<=10000,'Maximum token stake is 10000 for Cho-Han.');if(scope==='hoard')check(args.stake<=100000,'Maximum entry is 100000 tokens.');
   const oldMode=e.mode,limitsChanged=e.config.min!==args.min||e.config.max!==args.max;
   e.mode=args.mode;e.config=Object.fromEntries(['stake','min','max','initial','bank','funding'].map(k=>[k,args[k]]));e.bank=args.bank;
@@ -95,7 +95,7 @@ export function prepareTokenState(s,old,scope){
   check(e.bets?.status!=='open','Close betting before starting the game.');e.playersAtStart=[...s.players];e.started=true;e.status='playing';
   for(const id of s.players){let amount=e.config.stake;
    if(scope==='schocken')amount=s.players.length*e.config.stake;
-   else if(scope==='thirteen'||scope==='lottery'||scope==='chohan'||['meiern','klippklapp'].includes(scope)||['aalstechen','poker'].includes(scope))continue;
+   else if(scope==='thirteen'||scope==='lottery'||scope==='chohan'||['meiern','klippklapp'].includes(scope)||['aalstechen','poker','kings'].includes(scope))continue;
    else if(scope==='seventeen'){const bet=s.stakes[id];check(bet?.currency==='token','Choose a token stake first.');amount=bet.cp;}
    else if(scope==='hoard'&&s.hoardMode==='gambler')amount=s.startAmounts[id];
    setReserve(e,id,amount);
@@ -103,7 +103,7 @@ export function prepareTokenState(s,old,scope){
  }
  if(scope==='lottery'&&!ended(s))for(const id of s.players)setReserve(e,id,s.tickets.filter(t=>t.id===id).length*e.config.stake);
  if(scope==='chohan'&&!ended(s))for(const id of s.players)setReserve(e,id,s.bets.filter(b=>b.id===id).reduce((n,b)=>n+(b.accepted??b.amount),0));
- if(['aalstechen','poker'].includes(scope)&&e.started&&!ended(s))for(const id of s.players)setReserve(e,id,s.contributions[id]??0);
+ if(['aalstechen','poker','kings'].includes(scope)&&e.started&&!ended(s))for(const id of s.players)setReserve(e,id,s.contributions[id]??0);
  if(['meiern','klippklapp'].includes(scope)&&e.started){
   const r=s.resolution;if(r&&r.round>(e.meiernPaidRound??0)){
    e.meiernPaid??={};e.meiernReceived??={};
@@ -116,7 +116,7 @@ export function prepareTokenState(s,old,scope){
  return s;
 }
 function settle(s,scope,e){
- const ids=e.playersAtStart??s.players,stakes=structuredClone(scope==='thirteen'?s.paid:['meiern','klippklapp'].includes(scope)?e.meiernPaid??{}:['aalstechen','poker'].includes(scope)?s.contributions:e.reserved),payouts=Object.fromEntries(ids.map(id=>[id,0]));let bankDelta=0;const carryRefund={};
+ const ids=e.playersAtStart??s.players,stakes=structuredClone(scope==='thirteen'?s.paid:['meiern','klippklapp'].includes(scope)?e.meiernPaid??{}:['aalstechen','poker','kings'].includes(scope)?s.contributions:e.reserved),payouts=Object.fromEntries(ids.map(id=>[id,0]));let bankDelta=0;const carryRefund={};
  if(scope==='thirteen'){Object.assign(payouts,s.received??{});}
  else if(['meiern','klippklapp'].includes(scope)){Object.assign(payouts,e.meiernReceived??{});}
  else if(s.phase==='aborted'){for(const id of ids)payouts[id]=stakes[id]??0;
@@ -135,7 +135,7 @@ function settle(s,scope,e){
   if(s.hoardMode==='gambler'){for(const id of ids)payouts[id]=s.balances[id]??0;}
   else if(s.payouts){for(const id of ids)payouts[id]=s.payouts[id]??0;}
   else {const values=allocate(total(stakes),ids.map(id=>s.balances[id]??0));ids.forEach((id,i)=>payouts[id]=values[i]);}
- }else if(['aalstechen','poker'].includes(scope)){Object.assign(payouts,s.payouts);}
+ }else if(['aalstechen','poker','kings'].includes(scope)){Object.assign(payouts,s.payouts);}
  else if(scope==='lottery'){bankDelta=total(stakes);}
  else{Object.assign(payouts,prizeShares(s,e.config.stake,scope==='pig'?e.config.funding:'redistribute'));bankDelta=total(stakes)-total(payouts);}
  for(const id of ids){const delta=(payouts[id]??0)-(stakes[id]??0);if(!['meiern','klippklapp','thirteen'].includes(scope))e.balances[id]=(e.balances[id]??0)+delta;check(whole(e.balances[id],1000000000),'Invalid token settlement.');}

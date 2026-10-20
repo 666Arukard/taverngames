@@ -11,12 +11,14 @@ export function createNativeWindow(foundry,kind,root,onClose) {
     static DEFAULT_OPTIONS={classes:['taverngames-window',...(gameView.enabled()&&(kind==='divine-hand'||kind==='table'||kind==='farkle'||kind.endsWith('-table')||kind==='moderation'||kind.endsWith('-moderation'))?['taverngames-docking-pending']:[])],window:{resizable:true,minimizable:true},position:{width:560,height:650}};
     async _renderHTML(){return root;}
     _replaceHTML(result,content){content.replaceChildren(result);}
-    async _onClose(options){gameView.untrack(kind);await super._onClose(options);onClose();}
+    _cleanupTavern(){if(this._tavernCleaned)return;this._tavernCleaned=true;gameView.untrack(kind);onClose();}
+    async close(options){this._cleanupTavern();return super.close(options);}
+    async _onClose(options){this._cleanupTavern();await super._onClose(options);}
   }
   const scope=kind.split('-')[0],title=titles[kind]??(kind==='betting'?(language()==='de'?'Taverngames · Einsätze':'Taverngames · Stakes'):`${gameTitle(scope)} · ${language()==='de'?(kind.endsWith('moderation')?'Moderation':kind.endsWith('guide')?'Anleitung':'Spieltisch'):(kind.endsWith('moderation')?'Moderation':kind.endsWith('guide')?'Instructions':'Game table')}`);
   const viewportHeight=globalThis.innerHeight??800,viewportWidth=globalThis.innerWidth??1200,width=Math.min(kind.includes('moderation')?390:560,Math.max(240,viewportWidth-24)),top=Math.min(65,Math.max(12,viewportHeight-300));
   const app=new TavernWindow({id:`taverngames-${kind}`,window:{title:t(title)},position:{width,height:Math.max(180,Math.min(650,viewportHeight-top-24)),left:Math.max(12,Math.min(kind.includes('moderation')?610:32,viewportWidth-width-12)),top}});
-  void app.render({force:true}).then(()=>{app.element?.addEventListener('pointerdown',event=>{if(event.target.closest?.('.window-header button,.window-header [data-action=close]'))event.stopPropagation();},true);gameView.track(kind,root,app);app.element?.classList?.remove('taverngames-docking-pending');}).catch(error=>{onClose();globalThis.ui?.notifications?.warn(`Taverngames: ${error.message}`);});
+  void app.render({force:true}).then(()=>{if(app._tavernCleaned)return;app.element?.addEventListener('pointerdown',event=>{if(event.target.closest?.('.window-header button,.window-header [data-action=close]'))event.stopPropagation();},true);gameView.track(kind,root,app);app.element?.classList?.remove('taverngames-docking-pending');}).catch(error=>{app._cleanupTavern();globalThis.ui?.notifications?.warn(`Taverngames: ${error.message}`);});
   return app;
 }
 

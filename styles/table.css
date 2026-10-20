@@ -142,3 +142,7 @@
 #taverngames-player-panel .taverngames-panel-content{direction:rtl;overflow-y:auto;overflow-x:hidden;scrollbar-gutter:stable}
 #taverngames-player-panel .taverngames-panel-content>.taverngames-surface{direction:ltr;height:auto;min-height:100%}
 #taverngames-player-panel .taverngames-panel-content>.taverngames-surface>.schocken-content{overflow:visible;flex:none}
+
+/* Native controls remain visible; only the redundant floating menu icons disappear. */
+#taverngames-player-panel.taverngames-native-access .taverngames-player-tabs button:not(.taverngames-player-collapse){display:none}
+#controls .taverngames-menu-open{outline:1px solid var(--color-border-highlight,#c6a96c)}

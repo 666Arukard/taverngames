@@ -1,4 +1,4 @@
-export const CONTINUOUS_GAMES=['seventeen','poker','chohan'];
+export const CONTINUOUS_GAMES=['seventeen','poker','chohan','kings'];
 export function seriesMetadata(next,old,action){
  if(!CONTINUOUS_GAMES.includes(next?.game)){if(action==='nextRound')throw Error('This game has no continuous rounds.');return next;}
  if(action==='nextRound'){
