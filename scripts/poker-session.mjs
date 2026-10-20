@@ -13,7 +13,7 @@ export class PokerSession{
   this.wait={revision:s.revision,key,until:rolling&&this.wait?.key===key?this.wait.until:this.now()+(rolling?1000:5000)};
  }
  async handle(data,user){
-  if(!this.enabled()&&!(data.action==='abort'&&user.isGM))throw Error('Beta testing is disabled.');if(data.action==='read')return this.project(user);const old=this.state;
+  if(!this.enabled()&&!(data.action==='abort'&&user.isGM))throw Error('This game is disabled.');if(data.action==='read')return this.project(user);const old=this.state;
   if(!['join','leave'].includes(data.action)&&!(data.action==='abort'&&user.isGM)&&data.revision!==(old?.revision??-1))throw Error('The game state changed. Please try again.');let next;
   if(['lobby','restart','nextRound'].includes(data.action)){
    if(!user.isGM)throw Error('GM only.');if(old&&!['lobby','finished','aborted'].includes(old.phase))throw Error('Finish or end the current game first.');

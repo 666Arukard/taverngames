@@ -79,3 +79,43 @@
 .taverngames-surface .schocken-player p{margin:4px 0}
 .taverngames-surface [data-start-choice]{padding:8px 0}
 .taverngames-surface [data-start-choice] label{display:flex;gap:8px;align-items:center}
+
+/* Optional game view beta: local presentation only; restore native access on exit. */
+.taverngames-docked-frame,.taverngames-controls-hidden{display:none!important}
+#taverngames-player-panel{position:fixed;left:12px;top:85px;bottom:100px;width:min(410px,calc(100vw - 36px));z-index:70;display:flex;flex-direction:column;background:rgba(25,22,19,.9);color:#f4ead7;border:1px solid #bc9655;border-radius:8px;box-shadow:0 6px 24px #0008;backdrop-filter:blur(5px);overflow:hidden}
+#taverngames-player-panel>header,[data-integrated-moderation]>header{display:flex;gap:4px;flex-wrap:wrap;padding:6px;flex-shrink:0}
+#taverngames-player-panel>header button{width:auto;flex:1}
+#taverngames-player-panel>header select{width:100%}
+#taverngames-player-panel .taverngames-panel-content{flex:1;min-height:0;overflow:auto}
+#taverngames-player-panel .taverngames-surface{height:100%;min-height:0}
+#taverngames-player-panel .schocken-content{max-height:none;height:100%;overflow:auto}
+#taverngames-player-panel.is-collapsed{bottom:auto;width:190px}
+#taverngames-player-panel.is-collapsed .taverngames-panel-content,#taverngames-player-panel.is-collapsed header select{display:none}
+.taverngames-catalog-moderating>.taverngames-catalog-filters,.taverngames-catalog-moderating>.taverngames-catalog-results{display:none}
+[data-integrated-moderation]{min-height:0;display:flex;flex-direction:column;height:100%}
+[data-integrated-moderation]>div{overflow:auto;flex:1;min-height:0}
+[data-integrated-moderation] .schocken-content{height:auto;max-height:none}
+[data-integrated-moderation] .taverngames-surface{min-width:0}
+@media(max-height:600px){#taverngames-player-panel{top:42px;bottom:50px}}
+
+#taverngames-player-panel{background:transparent}
+#taverngames-player-panel>header{background:rgba(25,22,19,.86)}
+#taverngames-player-panel .taverngames-surface{background:rgba(250,243,228,.84)}
+[data-integrated-moderation] h2{font-size:1.15rem}
+
+[data-integrated-moderation].is-catalog-only{height:auto;flex:none}
+
+/* 3.3: full-height edge panel and sidebar-native moderation palette. */
+#taverngames-player-panel{left:0;top:0;bottom:0;border-radius:0;height:100dvh;max-height:100dvh}
+#taverngames-player-panel.is-collapsed{height:auto;bottom:auto}
+[data-integrated-moderation]{color:inherit}
+[data-integrated-moderation] .taverngames-surface{background:transparent;color:inherit}
+[data-integrated-moderation] .taverngames-surface h2,[data-integrated-moderation] .taverngames-surface h3,[data-integrated-moderation] .schocken-help{color:inherit}
+[data-integrated-moderation] .taverngames-surface select,[data-integrated-moderation] .taverngames-surface input,[data-integrated-moderation] .taverngames-surface textarea{background:var(--color-cool-5,#252830);color:var(--color-light-1,#f7f3e8);border-color:var(--color-border-light-primary,#807562)}
+[data-integrated-moderation] .taverngames-surface option{background:var(--color-cool-5,#252830);color:var(--color-light-1,#f7f3e8)}
+
+.taverngames-docking-pending{visibility:hidden!important}
+#taverngames-player-panel{box-sizing:border-box}
+[data-integrated-moderation] .taverngames-surface button{background:var(--button-background-color,rgba(128,128,128,.12));color:inherit;border-color:var(--color-border-light-primary,#807562)}
+[data-integrated-moderation] .taverngames-surface button:hover{border-color:#c6a96c;color:inherit}
+[data-integrated-moderation] .taverngames-surface input,[data-integrated-moderation] .taverngames-surface textarea,[data-integrated-moderation] .taverngames-surface select{background:var(--input-background-color,rgba(128,128,128,.12));color:inherit}

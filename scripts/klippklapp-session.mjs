@@ -7,7 +7,7 @@ export class KlippklappSession{
  project(user){return klippView(this.state,user);}
  updateNpcWait(){this.wait=this.state?{revision:this.state.revision,until:this.now()+5000}:null;}
  async handle(data,user){
-  if(!this.enabled()&&!(data.action==='abort'&&user.isGM))throw Error('Beta testing is disabled.');
+  if(!this.enabled()&&!(data.action==='abort'&&user.isGM))throw Error('This game is disabled.');
   if(data.action==='read')return this.project(user);const old=this.state;
   if(!['join','leave'].includes(data.action)&&!(data.action==='abort'&&user.isGM)&&data.revision!==(old?.revision??-1))throw Error('The game state changed. Please try again.');let next;
   if(['lobby','restart'].includes(data.action)){
@@ -22,7 +22,7 @@ export class KlippklappSession{
   const old=this.state;await this.save(next);this.state=next;this.updateNpcWait();
   const r=next.resolution;if(r&&next.completedRounds>(old?.completedRounds??0)){
    const flag=next.gameId+':round:'+r.round,name=id=>escapeHTML(next.npcs[id]??this.getName(id));
-   if(!this.hasAnnouncement(flag))try{await this.announce({content:`<h2>Klippklapp · ${f('Runde beendet','Round over')} ${r.round}</h2><p>${r.kind==='klippklapp'?'Klippklapp':`${f('Ansage','Claim')}: ${r.claim} · ${f('Tatsächlich','Actual')}: ${r.actual}`}</p>${r.payments.map(p=>`<p>${name(p.from)} → ${name(p.to)}: ${p.multiplier*(next.economy?.mode==='tokens'?next.economy.config.stake:1)} ${next.economy?.mode==='tokens'?f('Spieltoken','game tokens'):f('Punkte','points')}</p>`).join('')}<p>${f('Nächster Startspieler','Next starting player')}: ${name(r.starter)}</p>`,flags:{taverngames:{game:'klippklapp',gameId:flag}}});}catch(e){globalThis.ui?.notifications?.warn(e.message);}
+   if(!this.hasAnnouncement(flag))try{await this.announce({content:`<h2>Klippklapp · ${f('Runde beendet','Round over')} ${r.round}</h2><p>${r.kind==='klippklapp'?'Klippklapp':r.kind==='comparison'?`${f('Restwert','Remainder')}: ${r.actual}`:`${f('Ansage','Claim')}: ${r.claim} · ${f('Tatsächlich','Actual')}: ${r.actual}`}</p>${r.payments.map(p=>`<p>${name(p.from)} → ${name(p.to)}: ${p.multiplier*(next.economy?.mode==='tokens'?next.economy.config.stake:1)} ${next.economy?.mode==='tokens'?f('Spieltoken','game tokens'):f('Punkte','points')}</p>`).join('')}<p>${f('Nächster Startspieler','Next starting player')}: ${name(r.starter)}</p>`,flags:{taverngames:{game:'klippklapp',gameId:flag}}});}catch(e){globalThis.ui?.notifications?.warn(e.message);}
   }
 
   if(next.phase==='finished'&&old?.phase!=='finished'&&!this.hasAnnouncement(next.gameId)){

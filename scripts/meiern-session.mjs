@@ -5,9 +5,9 @@ export class MeiernSession{
  constructor(_scope,deps){Object.assign(this,deps);this.now=()=>Date.now();this.state=null;this.wait=null;}
  restore(s){if(s!==null&&(s.version!==1||s.game!=='meiern'))throw Error('Invalid game save.');this.state=structuredClone(s);this.updateNpcWait();}
  project(user){return meiernView(this.state,user);}
- updateNpcWait(){this.wait=this.state?{revision:this.state.revision,until:this.now()+5000}:null;}
+ updateNpcWait(){this.wait=this.state?{revision:this.state.revision,until:this.now()+(this.state.phase==='reveal'?2000:1000)}:null;}
  async handle(data,user){
-  if(!this.enabled()&&!(data.action==='abort'&&user.isGM))throw Error('Beta testing is disabled.');
+  if(!this.enabled()&&!(data.action==='abort'&&user.isGM))throw Error('This game is disabled.');
   if(data.action==='read')return this.project(user);const old=this.state;
   if(!['join','leave'].includes(data.action)&&!(data.action==='abort'&&user.isGM)&&data.revision!==(old?.revision??-1))throw Error('The game state changed. Please try again.');let next;
   if(['lobby','restart'].includes(data.action)){

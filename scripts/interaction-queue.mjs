@@ -48,11 +48,11 @@ export function renderSurface(root,draw,context){
  let guard=surfaces.get(root);
  if(!guard){
   guard={pressed:false,latest:null,timer:null,controller:null};surfaces.set(root,guard);
-  const editing=()=>{const el=root.ownerDocument.activeElement;return root.contains(el)&&(el?.tagName==='SELECT'||el?.tagName==='TEXTAREA'||el?.tagName==='INPUT'&&!['checkbox','radio','button','submit'].includes(el.type));};
+  const editing=()=>{const el=root.ownerDocument.activeElement;return root.contains(el)&&(el?.tagName==='SELECT'||el?.tagName==='TEXTAREA'||el?.tagName==='INPUT'&&!['checkbox','radio','button','submit','range'].includes(el.type));};
   guard.run=task=>{if(guard.pressed||editing()){guard.latest=task;return false;}guard.latest=null;const content=root.querySelector('.schocken-content'),top=content?.scrollTop??0,left=content?.scrollLeft??0;task.draw();const next=root.querySelector('.schocken-content');if(next){next.scrollTop=top;next.scrollLeft=left;}stampControls(root,task.context?.());return true;};
   const flush=event=>{if(event?.type==='focusout'){setTimeout(()=>{if(!guard.pressed&&guard.latest)guard.run(guard.latest);},0);return;}clearTimeout(guard.timer);guard.timer=setTimeout(()=>{guard.pressed=false;guard.controller?.abort();if(guard.latest)guard.run(guard.latest);},0);};
-  const press=()=>{clearTimeout(guard.timer);guard.pressed=true;guard.controller?.abort();guard.controller=new AbortController();for(const event of ['pointerup','pointercancel','keyup'])window.addEventListener(event,flush,{capture:true,once:true,signal:guard.controller.signal});window.addEventListener('blur',flush,{once:true,signal:guard.controller.signal});};
-  root.addEventListener('pointerdown',press,true);root.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' ')press();},true);root.addEventListener('focusout',flush,true);
+  const press=event=>{clearTimeout(guard.timer);guard.pressed=true;guard.pointer=event?.type==='pointerdown';guard.controller?.abort();guard.controller=new AbortController();for(const event of ['pointerup','pointercancel','keyup'])window.addEventListener(event,flush,{capture:true,once:true,signal:guard.controller.signal});window.addEventListener('blur',flush,{once:true,signal:guard.controller.signal});};
+  root.addEventListener('pointerdown',press,true);root.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' ')press();},true);root.addEventListener('focusout',flush,true);for(const event of ['pointermove','pointerenter'])root.addEventListener(event,e=>{if(guard.pressed&&guard.pointer&&e.buttons===0)flush(e);});
   for(const event of ['click','change'])root.addEventListener(event,e=>{const element=e.composedPath().find(el=>contexts.has(el));if(!element)return;const ticket={...contexts.get(element)};eventContext=ticket;queueMicrotask(()=>{if(eventContext===ticket)eventContext=null;});},true);
  }
  return guard.run({draw,context});

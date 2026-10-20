@@ -17,7 +17,8 @@ export function divineConfigs(book,scope,s){if(!s)return [];const b=divineMigrat
 export function divineConfig(book,scope,s,target){const rows=divineConfigs(book,scope,s);return target?rows.find(c=>c.target===target)??null:rows.find(c=>c.strength>0)??null;}
 export function divineEdit(book,scope,s,user,action,args,participants=[]){
  check(user?.isGM,'GM only.');check(args.revision===book.revision,'Divine Hand settings changed. Refresh and try again.');const next=divineMigrate(book);
- if(action==='divineDefault'){check(percent(args.strength),'Choose a percentage from 0 to 100.');next.defaultStrength=args.strength;}
+ if(action==='divineClearAll'){next.profiles={};next.games={};next.selection={};next.defaultStrength=0;}
+ else if(action==='divineDefault'){check(percent(args.strength),'Choose a percentage from 0 to 100.');next.defaultStrength=args.strength;}
  else{
   check(['divineSet','divineRemove'].includes(action)&&['all',...DIVINE_SCOPES].includes(scope),'Unknown Divine Hand action.');
   const allowed=[...new Set([...(s?.players??[]),...participants,...(['all','seventeen','chohan'].includes(scope)?['@bank']:[])])];
@@ -30,7 +31,7 @@ export function divineEdit(book,scope,s,user,action,args,participants=[]){
 }
 export function divinePayload(book,scope,s,user,getName=id=>id,participants=[]){
  check(user?.isGM,'GM only.');check(['all',...DIVINE_SCOPES].includes(scope),'Unknown game.');const b=divineMigrate(book),ids=[...new Set([...(s?.players??[]),...participants,...Object.keys(b.profiles[scope]??{})])].filter(id=>id!=='@bank'),target=b.selection[scope]??Object.keys(b.profiles[scope]??{})[0]??'',c=b.profiles[scope]?.[target]??(scope!=='all'?b.profiles.all?.[target]:undefined);
- return {scope,revision:b.revision,defaultStrength:b.defaultStrength,gameId:s?.gameId??null,phase:s?.phase??null,target,strength:c?.strength??(Object.hasOwn(b.selection,scope)?0:b.defaultStrength),mode:c?.mode??'favor',players:ids.map(id=>({id,name:s?.npcs?.[id]??getName(id)})),bank:['all','seventeen','chohan'].includes(scope),entries:Object.entries(b.profiles[scope]??{}).map(([id,c])=>({id,name:s?.npcs?.[id]??getName(id),...c})),effective:divineConfigs(b,scope,s)};
+ return {scope,source:b.profiles[scope]?.[target]?'scope':c?'all':'none',inherited:scope==='all'?[]:Object.entries(b.profiles.all??{}).map(([id,c])=>({id,...c})),revision:b.revision,defaultStrength:b.defaultStrength,gameId:s?.gameId??null,phase:s?.phase??null,target,strength:c?.strength??0,mode:c?.mode??'favor',players:ids.map(id=>({id,name:s?.npcs?.[id]??getName(id)})),bank:['all','seventeen','chohan'].includes(scope),entries:Object.entries(b.profiles[scope]??{}).map(([id,c])=>({id,name:s?.npcs?.[id]??getName(id),...c})),effective:divineConfigs(b,scope,s)};
 }
 function simulate(scope,s,id,action,args,random){
  if(scope==='klippklapp')return actKlippklapp(s,id,action,args,random,true);

@@ -1,3 +1,4 @@
+import {gameView} from './game-view.mjs';
 import {InteractionQueue,renderSurface} from './interaction-queue.mjs';
 import {t,language} from './i18n.mjs';
 import {gameTitle} from './tavern-text.mjs';
@@ -7,15 +8,15 @@ export function createNativeWindow(foundry,kind,root,onClose) {
   if(!Base)throw new Error(t('Foundry ApplicationV2 fehlt. Das native Taverngames-Fenster kann nicht geöffnet werden.'));
   const titles={'divine-hand':language()==='de'?'TavernGames · Göttliche Hand':'TavernGames · Divine Hand','game-tokens':language()==='de'?'Taverngames · Einsätze & Spieltoken':'Taverngames · Stakes & game tokens','outcome-bets':language()==='de'?'Taverngames · Wetten':'Taverngames · Bets',table:'Taverngames · Schocken',moderation:'Taverngames · Moderation',guide:'Schocken · Anleitung',farkle:'Taverngames · Farkle','farkle-moderation':'Farkle · Moderation','farkle-guide':language()==='de'?'Farkle · Anleitung':'Farkle · Instructions'};
   class TavernWindow extends Base {
-    static DEFAULT_OPTIONS={classes:['taverngames-window'],window:{resizable:true,minimizable:true},position:{width:560,height:650}};
+    static DEFAULT_OPTIONS={classes:['taverngames-window',...(gameView.enabled()&&(kind==='table'||kind==='farkle'||kind.endsWith('-table')||kind==='moderation'||kind.endsWith('-moderation'))?['taverngames-docking-pending']:[])],window:{resizable:true,minimizable:true},position:{width:560,height:650}};
     async _renderHTML(){return root;}
     _replaceHTML(result,content){content.replaceChildren(result);}
-    async _onClose(options){await super._onClose(options);onClose();}
+    async _onClose(options){gameView.untrack(kind);await super._onClose(options);onClose();}
   }
   const scope=kind.split('-')[0],title=titles[kind]??(kind==='betting'?(language()==='de'?'Taverngames · Einsätze':'Taverngames · Stakes'):`${gameTitle(scope)} · ${language()==='de'?(kind.endsWith('moderation')?'Moderation':kind.endsWith('guide')?'Anleitung':'Spieltisch'):(kind.endsWith('moderation')?'Moderation':kind.endsWith('guide')?'Instructions':'Game table')}`);
   const viewportHeight=globalThis.innerHeight??800,viewportWidth=globalThis.innerWidth??1200,width=Math.min(kind.includes('moderation')?390:560,Math.max(240,viewportWidth-24)),top=Math.min(65,Math.max(12,viewportHeight-300));
   const app=new TavernWindow({id:`taverngames-${kind}`,window:{title:t(title)},position:{width,height:Math.max(180,Math.min(650,viewportHeight-top-24)),left:Math.max(12,Math.min(kind.includes('moderation')?610:32,viewportWidth-width-12)),top}});
-  void app.render({force:true}).catch(error=>{onClose();globalThis.ui?.notifications?.warn(`Taverngames: ${error.message}`);});
+  void app.render({force:true}).then(()=>{app.element?.addEventListener('pointerdown',event=>{if(event.target.closest?.('.window-header button,.window-header [data-action=close]'))event.stopPropagation();},true);gameView.track(kind,root,app);app.element?.classList?.remove('taverngames-docking-pending');}).catch(error=>{onClose();globalThis.ui?.notifications?.warn(`Taverngames: ${error.message}`);});
   return app;
 }
 

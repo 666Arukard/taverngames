@@ -7,7 +7,7 @@ export class MeiernUI extends TavernUI{
  drawModeration(){
   const root=this.windows.get('moderation')?.root;if(!root||!game.user.isGM)return;
   const drafts=new Map([...root.querySelectorAll('[data-draft]')].map(e=>[e.dataset.draft,e.value])),expanded=root.querySelector('details')?.open??false,focus=document.activeElement?.dataset.draft;
-  root.replaceChildren();const c=node('div',undefined,'schocken-content'),s=this.getState();root.append(c);c.append(node('h2','Meiern · Beta'));
+  root.replaceChildren();const c=node('div',undefined,'schocken-content'),s=this.getState();root.append(c);c.append(node('h2','Meiern'));
   control(c,f('Spieltisch öffnen','Open game table'),()=>{this.window('table');this.drawTable();});control(c,f('Anleitung','Instructions'),()=>this.guide());
   const label=node('label'),show=node('input');show.type='checkbox';show.checked=game.settings.get('taverngames','showmeiernLauncher')===true;show.onchange=()=>void game.settings.set('taverngames','showmeiernLauncher',show.checked);label.append(show,document.createTextNode(f('Unteren Spielbutton einblenden','Show bottom game button')));c.append(label);
   const setup=node('details');setup.open=expanded;setup.append(node('summary',f('Neue Partie & Regeln','New game & rules')));
@@ -22,7 +22,7 @@ export class MeiernUI extends TavernUI{
   for(const [id,name]of Object.entries(s.npcs)){const row=node('div',`${name} · ${s.npcManual[id]?f('SL steuert','GM controls'):f('Automatisch','Automatic')}`);control(row,s.npcManual[id]?f('Automatik einschalten','Enable automatic play'):f('Selbst steuern','Control manually'),()=>this.request('npcControl',{id,manual:!s.npcManual[id]}),ended);c.append(row);}
  }
  drawTable(){
-  const root=this.windows.get('table')?.root;if(!root)return;root.replaceChildren();const c=node('div',undefined,'schocken-content'),s=this.getState();root.append(c);c.append(node('h2','Meiern · Beta'));
+  const root=this.windows.get('table')?.root;if(!root)return;root.replaceChildren();const c=node('div',undefined,'schocken-content'),s=this.getState();root.append(c);c.append(node('h2','Meiern'));
   if(!s){c.append(node('p',f('Der SL öffnet eine Lobby.','The GM opens a lobby.')));return;}
   c.append(node('p',`${f('Durchgang','Round')} ${s.round}${s.mode==='rounds'?` / ${s.roundLimit}`:''} · ${s.completedRounds} ${f('aufgedeckt','revealed')}`));
   const status=node('p',f('Die 3D-Würfel rollen …','The 3D dice are rolling …'));status.style.minHeight='1.5em';status.style.visibility=s.animationPending?'visible':'hidden';c.append(status);

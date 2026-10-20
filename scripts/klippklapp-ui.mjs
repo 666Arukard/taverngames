@@ -7,7 +7,7 @@ export class KlippklappUI extends TavernUI{
  drawModeration(){
   const root=this.windows.get('moderation')?.root;if(!root||!game.user.isGM)return;
   const drafts=new Map([...root.querySelectorAll('[data-draft]')].map(e=>[e.dataset.draft,e.value])),expanded=root.querySelector('details')?.open??false,focus=document.activeElement?.dataset.draft;
-  root.replaceChildren();const c=node('div',undefined,'schocken-content'),s=this.getState();root.append(c);c.append(node('h2','Klippklapp · Beta'));
+  root.replaceChildren();const c=node('div',undefined,'schocken-content'),s=this.getState();root.append(c);c.append(node('h2','Klippklapp'));
   control(c,f('Spieltisch öffnen','Open game table'),()=>{this.window('table');this.drawTable();});control(c,f('Anleitung','Instructions'),()=>this.guide());
   const label=node('label'),show=node('input');show.type='checkbox';show.checked=game.settings.get('taverngames','showklippklappLauncher')===true;show.onchange=()=>void game.settings.set('taverngames','showklippklappLauncher',show.checked);label.append(show,document.createTextNode(f('Unteren Spielbutton einblenden','Show bottom game button')));c.append(label);
   const setup=node('details');setup.open=expanded;setup.append(node('summary',f('Neue Partie & Regeln','New game & rules')));
@@ -23,11 +23,11 @@ export class KlippklappUI extends TavernUI{
  }
  drawTable(){
   const root=this.windows.get('table')?.root;if(!root)return;const claim=root.querySelector('[data-klipp-claim]'),claimValue=claim?.value,claimFocused=document.activeElement===claim;
-  root.replaceChildren();const c=node('div',undefined,'schocken-content'),s=this.getState();root.append(c);c.append(node('h2','Klippklapp · Beta'));if(!s){c.append(node('p',f('Der SL öffnet eine Lobby.','The GM opens a lobby.')));return;}
+  root.replaceChildren();const c=node('div',undefined,'schocken-content'),s=this.getState();root.append(c);c.append(node('h2','Klippklapp'));if(!s){c.append(node('p',f('Der SL öffnet eine Lobby.','The GM opens a lobby.')));return;}
   const active=s.order[s.turn],blocked=s.paused||s.animationWaiting||!game.users.activeGM,own=active===game.user.id||game.user.isGM&&s.npcs[active]&&s.npcManual[active];
   c.append(node('p',`${f('Runde','Round')} ${s.round} · ${f('Variante','Variant')} ${s.variant}`));const status=node('p',f('Die 3D-Würfel rollen …','The 3D dice are rolling …'));status.style.minHeight='1.5em';status.style.visibility=s.animationPending?'visible':'hidden';c.append(status);
   if(s.paused)c.append(node('p',f('Spiel pausiert','Game paused')));
-  for(const id of s.players){const row=node('section',undefined,'schocken-player');row.dataset.klippPlayer=id;row.append(node('h3',`${id===active?'▶ ':''}${this.name(id)} · ${s.scores[id]} ${f('Punkte','points')}${s.out.includes(id)?' · '+f('ausgestiegen','left'):s.leaving.includes(id)?' · '+f('Ausstieg vorgemerkt','leaving after claim'):''}`));if(Object.hasOwn(s.actuals,id))row.append(node('p',`${f('Dein Restwert','Your remainder')}: ${s.actuals[id]}`));c.append(row);}
+  for(const id of s.players){const row=node('section',undefined,'schocken-player');row.dataset.klippPlayer=id;row.append(node('h3',`${id===active?'▶ ':''}${this.name(id)} · ${s.scores[id]} ${f('Punkte','points')}${s.out.includes(id)?' · '+f('ausgestiegen','left'):s.leaving.includes(id)?' · '+f('Ausstieg vorgemerkt','leaving after claim'):''}`));if(Object.hasOwn(s.actuals,id))row.append(node('p',`${f('Restwert','Remainder')}: ${s.actuals[id]}`));c.append(row);}
   if(s.phase!=='lobby'){
    const key=`${s.gameId}:${s.round}:${s.rollNumber}:${s.board.join()}`;if(this.selectionKey!==key){this.selectionKey=key;this.tiles=new Set();}
    const board=node('div',undefined,'klippklapp-board');board.style.display='grid';board.style.gridTemplateColumns='repeat(6,minmax(0,1fr))';board.style.gap='0.3rem';board.dataset.klippBoard='';c.append(board);
@@ -44,8 +44,9 @@ export class KlippklappUI extends TavernUI{
    }
    if(own&&s.phase==='respond'){control(c,f('Annehmen & Zug beginnen','Accept & begin turn'),()=>this.request('believe'),blocked||s.bid.value===0);control(c,f('Anzweifeln & aufdecken','Challenge & reveal'),()=>this.request('challenge'),blocked);}
   }
+  if(s.directComparison&&s.previous)c.append(node('p',`${f('Zu unterbieten','Beat this remainder')}: ${this.name(s.previous.actor)} · ${s.previous.value}`));
   if(s.bid)c.append(node('p',`${f('Ansage','Claim')}: ${this.name(s.bid.actor)} · ${s.bid.value} · ${f('Die nächste Ansage muss niedriger sein.','The next claim must be lower.')}`));
-  if(s.resolution){const r=s.resolution;c.append(node('p',r.kind==='klippklapp'?'Klippklapp!':`${f('Ansage','Claim')}: ${r.claim} · ${f('Tatsächlich','Actual')}: ${r.actual}`));for(const p of r.payments)c.append(node('p',`${this.name(p.from)} → ${this.name(p.to)}: ${p.multiplier*(s.economy?.mode==='tokens'?s.economy.config.stake:1)} ${s.economy?.mode==='tokens'?f('Spieltoken','game tokens'):f('Punkte','points')}`));
+  if(s.resolution){const r=s.resolution;c.append(node('p',r.kind==='klippklapp'?'Klippklapp!':r.kind==='comparison'?`${f('Nicht unterboten – Restwert','Failed to beat – remainder')}: ${r.actual}`:`${f('Ansage','Claim')}: ${r.claim} · ${f('Tatsächlich','Actual')}: ${r.actual}`));for(const p of r.payments)c.append(node('p',`${this.name(p.from)} → ${this.name(p.to)}: ${p.multiplier*(s.economy?.mode==='tokens'?s.economy.config.stake:1)} ${s.economy?.mode==='tokens'?f('Spieltoken','game tokens'):f('Punkte','points')}`));
    if(s.phase==='reveal'&&(game.user.isGM||game.user.id===r.starter))control(c,f('Nächster Durchgang','Next round'),()=>this.request('next'),blocked);
    if(s.phase==='reveal'&&game.user.isGM)control(c,f('Partie abschließen','Finish session'),()=>this.request('finish'),blocked);
   }

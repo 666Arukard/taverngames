@@ -2,23 +2,23 @@
   "schemaVersion": 1,
   "blocks": {
     "patchnotes": {
-      "title": "Patchnotes Version 3.2.0",
+      "title": "Patchnotes Version 3.3.0",
       "paragraphs": [
-        "Aalstechen ist jetzt stabil verfügbar. Klickschutz und Anfragereihenfolge wurden auf alle Spiele und Moderationen erweitert. Farkle erlaubt eine optionale Einstiegshürde in allen Spielmodi. Klippklapp bietet zusätzlich die Variante Summe oder beide Einzelzahlen, mit einem einzelnen Feld nur bei Pasch. Meiern richtet aufgedeckte 3D-Würfel nach dem tatsächlichen gespeicherten Ergebnis aus. Dauerhafte Würfel beachten das Dice-so-Nice-Limit; weitere Würfel bleiben im Spielfenster sichtbar.",
-        "Meiern, Klippklapp und Würfelpoker bleiben optionale Beta-Spiele. Neu seit der letzten veröffentlichten Version sind unter anderem Würfelpoker und Klippklapp, dauerhafte Glücks-/Pechprofile der Göttlichen Hand sowie fortlaufende Rundenpartien."
+        "Klippklapp, Meiern und Würfelpoker sind jetzt stabil und ohne Beta-Schalter verfügbar. Damit umfasst TavernGames 14 stabile Spiele. Die integrierte Spielansicht bleibt eine freiwillige Beta: Vorbereitung und Lobby werden für die SL sofort eingebettet, offene Ansichten bleiben auch nach Partieende eingebettet und mehrere geöffnete Spiele erzeugen keine zusätzlichen Fenster. Das linke Panel reicht bis an die Bildschirmränder, die Moderation übernimmt den Hintergrund und die Textfarbe des Reiters. Eigene Schließen-Schaltflächen und ein Schutz vor unbeabsichtigtem Fensterziehen verbessern das Schließen. Göttliche Hand zeigt nach Entfernen einer Spielausnahme den tatsächlich übernommenen globalen Wert oder 0 Prozent samt Herkunft an.",
+        "Klippklapp, Meiern and Dice Poker are now stable and available without the beta switch, bringing TavernGames to 14 stable games. The integrated game view remains an optional beta: GM preparation and lobby views dock immediately, open views stay docked after the session ends and multiple open games no longer spawn extra windows. The left panel spans the screen edge to edge; moderation inherits the sidebar background and text color. Dedicated close controls and protection against accidental header dragging improve closing. Divine Hand displays the actual inherited global value or zero after removing an override, together with its source."
       ],
       "items": [
-        "Aalstechen stabil; Meiern, Klippklapp und Würfelpoker bleiben Beta.",
-        "Modulweiter Schutz schneller Klicks und laufender Eingaben.",
-        "Farkle-Einstiegshürde in allen Modi; Klippklapp zusätzlich Variante C.",
-        "Meiern: aufgedeckte 3D-Flächen aus gespeichertem Ergebnis.",
-        "DSN-Limit wird ohne Änderung fremder Würfel oder Einstellungen berücksichtigt."
+        "Klippklapp, Meiern und Würfelpoker stabil: 14 Spiele ohne Beta-Schalter.",
+        "Spielansicht bleibt Beta: direkte Einbettung von Vorbereitung und Lobby sowie Ergebnisse ohne Fensterwechsel.",
+        "Linkes Panel über volle Höhe; rechte Moderation übernimmt den Reiterstil.",
+        "Schließen auf ersten Klick und eigene Schließen-Buttons in den Panels.",
+        "Göttliche Hand: nach Entfernen einer Ausnahme tatsächlichen Wert und Herkunft anzeigen."
       ]
     },
     "games": {
       "title": "aktuelle Spiele (14)",
       "paragraphs": [
-        "Elf stabile Spiele und drei optionale Betas: Klippklapp, Meiern und Würfelpoker."
+        "Alle 14 Spiele sind stabil verfügbar. Die integrierte Spielansicht bleibt eine davon unabhängige freiwillige Beta."
       ],
       "items": [
         "17 und 4",
@@ -26,15 +26,15 @@
         "Chō-Han",
         "Drachenhort",
         "Farkle",
+        "Klippklapp",
         "Kniffel",
         "Lügenwürfel",
+        "Meiern",
         "Schiff–Kapitän–Mannschaft",
         "Schocken",
         "Schweinchen",
         "Straßenlotto",
-        "Klippklapp (Beta)",
-        "Meiern (Beta)",
-        "Würfelpoker (Beta)"
+        "Würfelpoker"
       ]
     },
     "plans": {
@@ -89,20 +89,20 @@
       ],
       "items": [
         "Weitere Tags und Filter, etwa nach Spieldauer und Einsätzen.",
-        "Kompakte halbtransparente Spielansicht anstelle der linken Foundry-Bedienelemente; später direkte Auswahl an 3D-Würfeln prüfen. Noch nicht umgesetzt.",
         "Eigene Spielnamen und ein durch den SL anpassbares Spieleangebot; Titel auch in Anleitungen und Chat übernehmen.",
         "Grafische Kartenverwaltung und spätere Kartenanimationen; Entwicklung derzeit zurückgestellt.",
         "Kniffel-Serien mit addierten Ergebnissen.",
         "Beschleunigte NPC-Wettpartien.",
         "Grafisch wachsende Münzstapel auf den Drachenhorten.",
         "Optionale Accountant-Anbindung für Buchungen über eine versionierte API und Einbettung in die RPG Management Suite; alle Module bleiben unabhängig.",
-        "Lügenwürfel: pokerartige Setzphase alle fünf Runden mit Grundeinsatz, Mitgehen, Erhöhen, Aussteigen und späterer Poker-Topfaufteilung. Noch nicht umgesetzt."
+        "Lügenwürfel: pokerartige Setzphase alle fünf Runden mit Grundeinsatz, Mitgehen, Erhöhen, Aussteigen und späterer Poker-Topfaufteilung. Noch nicht umgesetzt.",
+        "Integriertes Spielmenü nach Beta-Praxistests vervollständigen und erst nach Abnahme mit Version 4.0 stabil freigeben."
       ]
     },
     "functions": {
-      "title": "aktuelle Funktionen (13)",
+      "title": "aktuelle Funktionen (14)",
       "paragraphs": [
-        "Elf stabile Spiele und drei zuschaltbare Betas: Klippklapp, Meiern und Würfelpoker. Gemeinsame SL-Moderation, optionale Spieltoken und 3D-Würfel unterstützen die Partien."
+        "Alle 14 Spiele sind stabil verfügbar. Gemeinsame SL-Moderation, optionale Spieltoken und 3D-Würfel unterstützen die Partien. Die integrierte Spielansicht bleibt eine freiwillige Beta; Fenster bleiben Standard."
       ],
       "items": [
         "SL-Spielauswahl mit Kategorien, deutsch-englischer Suche, alphabetischer Liste und bis zu fünf Favoriten.",
@@ -117,19 +117,22 @@
         "Gemeinsame Startspielerwahl: Standard nach Spielregel, konkrete Teilnehmer oder Zufall; Bank und gemeinsame Ziehungen bleiben SL-gesteuert.",
         "Göttliche Hand: mehrere dauerhafte, ausschließlich für die SL sichtbare Glücks-/Pechprofile je Teilnehmer; globale Vorgaben, spielbezogene Ausnahmen und weiche Qualitätsziele. 0 Prozent bleibt unveränderter Zufall, keine garantierte Gewinnquote.",
         "Fortlaufende Rundenpartien bei 17 und 4, Würfelpoker und Chō-Han mit erhaltenen Tokenbeständen und SL-Steuerung direkt im Spielfenster aller Spiele.",
-        "Klippklapp: öffentliches Klappenbrett, private automatische Restsumme, Bluffansagen und direkte Abrechnung fortlaufender Durchgänge."
+        "Klippklapp: öffentliches Klappenbrett, tatsächliche Restsumme, direkter Vorgängervergleich und interne Tokenzahlungen.",
+        "Optionales integriertes Spielmenü als Beta: klappbares Teilnehmerpanel links, Moderation im TavernGames-Reiter, Fenster jederzeit wählbar."
       ]
     },
     "settings": {
       "title": "Einstellungen in Foundry",
       "paragraphs": [
-        "In den Moduleinstellungen Sprache Deutsch oder Englisch wählen; Standard Englisch. Elf Spiele sind stabil, einschließlich Aalstechen. Klippklapp, Meiern und Würfelpoker über den Beta-Test-Schalter zusätzlich einschalten.",
+        "In den Moduleinstellungen Sprache Deutsch oder Englisch wählen; Standard Englisch. Alle 14 Spiele sind stabil verfügbar und benötigen keinen Beta-Test-Schalter.",
         "Der Taverngames-Reiter ist nur für SL sichtbar. Spiel öffnen, Lobby vorbereiten und unteren Beitrittsbutton über die Moderation freigeben.",
         "In der Moderation Einsätze & Spieltoken öffnen. Standard ist Ohne Einsatz. Für Spieltoken Zuteilung, Grundeinsatz und passende Banklimits festlegen. Standardvorlage sind 100 Token je Teilnehmer; Beträge sind durch SL anpassbar.",
         "Ausgangswetten verwenden denselben freien Bestand. SL öffnet die Annahme vor dem Spiel und schließt sie vor dem Start. Am Ende Token ausdrücklich übernehmen oder verwerfen; keine weltweiten Konten.",
         "Keine direkten Charakter-Geldbuchungen mehr. Alte Abrechnungen und Test-Goldkonten sind historische Nachweise und werden nicht umgewandelt. Gegenstandspreise bleiben erhalten. Für die neue Einsatzverwaltung eine neue Lobby verwenden.",
         "Dice So Nice ist optional und separat einschaltbar. Nach Installation des Updates die Welt neu laden.",
-        "Vor dem Start Wer beginnt? in der Moderation einstellen. Im Tokenfenster Allen gleichen Bestand zuteilen oder Einzelbestände auswählen; während des Spiels können freie Bestände weiter geändert werden."
+        "Vor dem Start Wer beginnt? in der Moderation einstellen. Im Tokenfenster Allen gleichen Bestand zuteilen oder Einzelbestände auswählen; während des Spiels können freie Bestände weiter geändert werden.",
+        "Spielansicht: Jeder Benutzer kann zwischen Fenster (Standard) und Integriertes Spielmenü (Beta) wählen. Für Spieler wird das Teilnehmerpanel nach bestätigtem Beitritt eingeblendet; die SL kann Vorbereitung und Lobby bereits vorher eingebettet öffnen. Die Ansicht ist unabhängig vom Beta-Schalter für Spiele. Göttliche Hand verwendet den Stärkeschieber; der globale Ausschalter löscht alle Glücks- und Pechprofile.",
+        "Ab 3.3.0 benötigen Meiern, Klippklapp und Würfelpoker keinen Beta-Schalter mehr. Die integrierte Spielansicht bleibt je Benutzer optional. Offene Ansichten bleiben nach Partieende eingebettet; auf Fenster wird bewusst zurückgeschaltet. Entfernte Spielausnahmen übernehmen den globalen Einfluss oder zeigen 0 Prozent, jeweils mit Herkunftshinweis."
       ],
       "items": []
     },
@@ -200,11 +203,11 @@
         "17 und 4: Leifs Würfeladaption mit Daniels Hausregeln; Awiana Elfenlauf, Revision 6669: https://awiana.fandom.com/de/wiki/Elfenlauf?oldid=6669 . Nicht mit klassischem Karten-Blackjack gleichsetzen.",
         "Schocken-Einsatzregel von Daniel: Mindestbestand N × Einsatz; der endgültige Verlierer zahlt jedem anderen einmal den Einsatz. Optionale interne Spieltoken statt echter Charakterwährung.",
         "Würfelpoker: fünf W8 nach Awiana/Koboldpoker, Leifs abweichende Rangfolge und Daniels bestätigte Vergleiche; zwei Setzphasen mit All-in und Nebentöpfen. Full House nach Summe, dann höherem Drilling; zwei Paare nach höherem/niedrigerem Paar und Restwürfel.",
-        "Klippklapp: zwölf Klappen, drei Varianten, Pasch-Neuwurf, niedrigere bluffbare Ansagen, exakte Anzweiflung bis zum ersten Wurf; jede Zahlung beendet den Durchgang. Zahler startet, bei echtem Klippklapp der nächste aktive Spieler.",
+        "Klippklapp nach Daniels aktueller Festlegung: tatsächliche Restsummen strikt unterbieten, direkter Grundeinsatz an Vorgänger bei Niederlage, bei Klippklapp Grundeinsatz von allen anderen aktiven Teilnehmern.",
         "Farkle, optional in allen Modi: Einstiegshürde ausschaltbar oder frei bis zur Zielpunktzahl einstellbar; klassische Voreinstellung 500 Punkte.",
         "Klippklapp Variante C: 3+5 erlaubt 8 oder 3 und 5 gemeinsam; 2+2 erlaubt 4 oder eine 2. Keine einzelnen ungleichen Würfelwerte."
       ]
     }
   },
-  "version": "3.2.0"
+  "version": "3.3.0"
 }

@@ -1,3 +1,19 @@
+## Version 3.3.0
+
+Klippklapp, Meiern und Würfelpoker sind jetzt stabil und ohne Beta-Schalter verfügbar. Damit umfasst TavernGames 14 stabile Spiele. Die integrierte Spielansicht bleibt eine freiwillige Beta: Vorbereitung und Lobby werden für die SL sofort eingebettet, offene Ansichten bleiben auch nach Partieende eingebettet und mehrere geöffnete Spiele erzeugen keine zusätzlichen Fenster. Das linke Panel reicht bis an die Bildschirmränder, die Moderation übernimmt den Hintergrund und die Textfarbe des Reiters. Eigene Schließen-Schaltflächen und ein Schutz vor unbeabsichtigtem Fensterziehen verbessern das Schließen. Göttliche Hand zeigt nach Entfernen einer Spielausnahme den tatsächlich übernommenen globalen Wert oder 0 Prozent samt Herkunft an.
+
+Klippklapp, Meiern and Dice Poker are now stable and available without the beta switch, bringing TavernGames to 14 stable games. The integrated game view remains an optional beta: GM preparation and lobby views dock immediately, open views stay docked after the session ends and multiple open games no longer spawn extra windows. The left panel spans the screen edge to edge; moderation inherits the sidebar background and text color. Dedicated close controls and protection against accidental header dragging improve closing. Divine Hand displays the actual inherited global value or zero after removing an override, together with its source.
+
+Nach Installation alle Clients neu laden. Die neue Spielansicht bleibt unabhängig vom Spiele-Beta-Schalter eine freiwillige Beta. Noch keine Veröffentlichung oder Commits.
+
+## Version 3.2.1
+
+Optionales integriertes Spielmenü als Beta: beigetretene Teilnehmer erhalten ein halbtransparentes, klappbares Panel links; die SL moderiert im TavernGames-Reiter. Die Fensteransicht bleibt Standard und jederzeit wählbar. Klippklapp vergleicht in neuen Partien tatsächliche Restsummen ohne Ansagen oder Anzweifeln; Verlierer zahlen dem Vorgänger, bei Klippklapp alle anderen dem Sieger. Göttliche Hand erhält einen globalen Ausschalter, eine szenenbezogene Spielerliste und nur noch den Stärkeschieber. Chō-Hans 3D-Aufdeckung wurde korrigiert. Meiern aktualisiert nach Animationsfreigabe unmittelbar und NPC-Aktionen warten kürzer. Kniffel kennzeichnet die reguläre Zusatzkniffel-Sonderwertung deutlicher.
+
+Optional integrated game view beta: joined participants receive a translucent collapsible left panel; the GM moderates in the TavernGames tab. Windows remain the default and can be restored at any time. New Klippklapp sessions compare actual remainders without claims or challenges; a losing player pays their predecessor, while a complete board earns one stake from every other active player. Divine Hand gains a global reset, scene-based player selection and a single strength slider. Cho-Han revealed 3D faces are corrected. Meiern refreshes immediately after animation acknowledgement and NPC actions wait less. Kniffel explains its standard extra-Kniffel scoring more clearly.
+
+Die neue Ansicht ist eine freiwillige Beta unter Moduleinstellungen → TavernGames: Spielansicht. Jeder Benutzer wählt selbst zwischen Fenstern und integriertem Spielmenü. Keine Freigabe als Version 4.0. Nach Installation alle Clients neu laden. Klippklapp-Regeländerung gilt für neu eröffnete Partien.
+
 ## Version 3.2.0
 
 Aalstechen ist jetzt stabil verfügbar. Klickschutz und Anfragereihenfolge wurden auf alle Spiele und Moderationen erweitert. Farkle erlaubt eine optionale Einstiegshürde in allen Spielmodi. Klippklapp bietet zusätzlich die Variante Summe oder beide Einzelzahlen, mit einem einzelnen Feld nur bei Pasch. Meiern richtet aufgedeckte 3D-Würfel nach dem tatsächlichen gespeicherten Ergebnis aus. Dauerhafte Würfel beachten das Dice-so-Nice-Limit; weitere Würfel bleiben im Spielfenster sichtbar.
