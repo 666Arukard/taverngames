@@ -1,3 +1,9 @@
+# TavernGames 4.1.1
+
+Mau-Mau: Handkarten passen sich dem freien Bildschirmbereich an und werden bei großen Händen kompakter. Weitere Karten sind horizontal scrollbar, auch per Mausrad, mit sichtbarem Hinweis. Der Kartentisch bleibt bei eingeklappter Lobby spielbar. Ein deutliches Banner meldet eigene und gegnerische Siege sowie Unentschieden. Die Breitenberechnung berücksichtigt geöffnete und geschlossene rechte Seitenleisten.
+
+Mau-Mau: Hand cards adapt to the available screen area and become more compact for large hands. Extra cards remain accessible through horizontal scrolling, including the mouse wheel, with a visible hint. The card table stays playable when the lobby is collapsed. A prominent banner announces your win, an opponent’s win or a draw. Width calculations account for expanded and collapsed right sidebars.
+
 # TavernGames 4.1.0
 
 Mau-Mau: Der große Kartentisch wird bei unverändertem Spielstand nicht mehr neu aufgebaut. Seine Darstellung ist von der Seitenleisten-Größenberechnung getrennt; Handkarten behalten eine feste sichtbare Höhe. Spiel der Könige ist nach Freigabe stabil, Mau-Mau bleibt Beta.

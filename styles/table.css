@@ -226,3 +226,15 @@
 #taverngames-card-stage>.taverngames-card-stage-hand{width:100%;max-height:none}
 #taverngames-card-stage .taverngames-card-hand{height:clamp(150px,27dvh,276px);box-sizing:content-box;min-width:0}
 #taverngames-card-stage .taverngames-card-hand>.taverngames-card{height:100%;width:auto;flex:0 0 auto;min-height:0;aspect-ratio:2/3}
+
+/* Keep the table playable with a collapsed lobby and fit the current free width. */
+#taverngames-card-stage>.taverngames-card-stage-hand{background:transparent;border:0;padding:4px 10px 6px}
+#taverngames-card-stage .taverngames-card-hand{height:auto;min-height:0;max-width:100%;box-sizing:border-box;overflow-x:auto;overflow-y:hidden;scrollbar-gutter:auto;padding:12px 3px 10px}
+#taverngames-card-stage .taverngames-card-hand>.taverngames-card{width:var(--tg-card-width,176px);height:auto;flex:0 0 var(--tg-card-width,176px);aspect-ratio:2/3}
+
+/* Large hands remain readable; excess cards are reachable without a second row. */
+#taverngames-card-stage .taverngames-card-hand{scrollbar-width:auto;scrollbar-color:#c6a96c #252321;scroll-snap-type:x proximity}
+#taverngames-card-stage .taverngames-card-hand>.taverngames-card{scroll-snap-align:start}
+#taverngames-card-stage .taverngames-card-scroll-hint{font-size:13px;color:#ffe4a7;margin:3px 0;text-align:center}
+#taverngames-card-stage .taverngames-card-scroll-hint[hidden]{display:none}
+#taverngames-card-stage .taverngames-card-result{position:absolute;left:4%;right:4%;top:43%;transform:translateY(-50%);z-index:2;padding:16px 20px;box-sizing:border-box;text-align:center;font-size:clamp(20px,2.4vw,36px);line-height:1.25;font-weight:700;color:#fff2c7;background:rgba(36,28,17,.96);border:2px solid #d9b35e;border-radius:8px;box-shadow:0 5px 24px #0009;overflow-wrap:anywhere;pointer-events:none}

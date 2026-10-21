@@ -2,15 +2,17 @@
   "schemaVersion": 1,
   "blocks": {
     "patchnotes": {
-      "title": "Patchnotes Version 4.1.0",
+      "title": "Patchnotes Version 4.1.1",
       "paragraphs": [
-        "Mau-Mau: Der große Kartentisch wird bei unverändertem Spielstand nicht mehr neu aufgebaut. Seine Darstellung ist von der Seitenleisten-Größenberechnung getrennt; Handkarten behalten eine feste sichtbare Höhe. Spiel der Könige ist nach Freigabe stabil, Mau-Mau bleibt Beta.",
-        "Mau-Mau: The large card table no longer rebuilds for unchanged game state. Its layout is isolated from sidebar sizing, and hand cards retain a visible height. Game of Kings is approved as stable; Mau-Mau remains beta."
+        "Mau-Mau: Handkarten passen sich dem freien Bildschirmbereich an und werden bei großen Händen kompakter. Weitere Karten sind horizontal scrollbar, auch per Mausrad, mit sichtbarem Hinweis. Der Kartentisch bleibt bei eingeklappter Lobby spielbar. Ein deutliches Banner meldet eigene und gegnerische Siege sowie Unentschieden. Die Breitenberechnung berücksichtigt geöffnete und geschlossene rechte Seitenleisten.",
+        "Mau-Mau: Hand cards adapt to the available screen area and become more compact for large hands. Extra cards remain accessible through horizontal scrolling, including the mouse wheel, with a visible hint. The card table stays playable when the lobby is collapsed. A prominent banner announces your win, an opponent’s win or a draw. Width calculations account for expanded and collapsed right sidebars."
       ],
       "items": [
-        "Spiel der Könige stabil.",
-        "Mau-Mau: ruhige Seitenleisten, sichtbare große Handkarten.",
-        "Mau-Mau bleibt Beta. Alle Clients neu laden."
+        "Handkarten passen sich dem Platz an; große Hände werden kleiner und sind horizontal scrollbar.",
+        "Mausradbedienung und Hinweis bei überlaufenden Handkarten.",
+        "Karten bleiben bei eingeklappter Lobby spielbar.",
+        "Deutliches Ergebnisbanner direkt auf dem Kartentisch.",
+        "16 stabile Spiele; Mau-Mau bleibt Beta. Alle Clients neu laden."
       ]
     },
     "games": {
@@ -222,5 +224,5 @@
       ]
     }
   },
-  "version": "4.1.0"
+  "version": "4.1.1"
 }
