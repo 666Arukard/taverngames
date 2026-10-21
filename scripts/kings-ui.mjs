@@ -7,7 +7,7 @@ export class KingsUI extends TavernUI{
  constructor(...args){super(...args);const draw=this.drawTable.bind(this);this.drawTable=()=>withScroll(this.windows.get('table')?.root,draw);}
  drawModeration(){
   const root=this.windows.get('moderation')?.root;if(!root||!game.user.isGM)return;
-  const drafts=new Map([...root.querySelectorAll('[data-draft]')].map(e=>[e.dataset.draft,e.value])),expanded=root.querySelector('details')?.open??false,focus=document.activeElement?.dataset.draft;root.replaceChildren();const c=node('div',undefined,'schocken-content'),s=this.getState();root.append(c);c.append(node('h2',f('Spiel der Könige · Beta','Game of Kings · Beta')));
+  const drafts=new Map([...root.querySelectorAll('[data-draft]')].map(e=>[e.dataset.draft,e.value])),expanded=root.querySelector('details')?.open??false,focus=document.activeElement?.dataset.draft;root.replaceChildren();const c=node('div',undefined,'schocken-content'),s=this.getState();root.append(c);c.append(node('h2',f('Spiel der Könige','Game of Kings')));
   control(c,f('Spieltisch öffnen','Open game table'),()=>{this.window('table');this.drawTable();});control(c,f('Anleitung','Instructions'),()=>this.guide());
   const label=node('label'),show=node('input');show.type='checkbox';show.checked=game.settings.get('taverngames','showkingsLauncher')===true;show.onchange=()=>void game.settings.set('taverngames','showkingsLauncher',show.checked);label.append(show,document.createTextNode(f('Unteren Spielbutton einblenden','Show bottom game button')));c.append(label);
   const setup=node('details');setup.open=expanded;setup.append(node('summary',f('Neue Partie & Regeln','New game & rules')));setup.append(node('p',f('Verdeckt W8, W6 und W4 würfeln, nach jedem Würfel setzen. Höchste Summe gewinnt.','Hidden d8, d6 and d4, betting after each die. Highest total wins.')));
@@ -23,7 +23,7 @@ export class KingsUI extends TavernUI{
  drawTable(){
   const root=this.windows.get('table')?.root;if(!root)return;
   const old=root.querySelector('[data-poker-raise]'),value=old?.value,focus=document.activeElement===old;
-  root.replaceChildren();const c=node('div',undefined,'schocken-content'),s=this.getState();root.append(c);c.append(node('h2',f('Spiel der Könige · Beta','Game of Kings · Beta')));
+  root.replaceChildren();const c=node('div',undefined,'schocken-content'),s=this.getState();root.append(c);c.append(node('h2',f('Spiel der Könige','Game of Kings')));
   if(!s){c.append(node('p',f('Der SL öffnet eine Lobby.','The GM opens a lobby.')));return;}
   const tokens=s.economy?.mode==='tokens',alive=aalActive(s),blocked=s.paused||s.animationWaiting||!game.users.activeGM;
   const status={lobby:f('Lobby','Lobby'),rolling:f('Verdeckter Wurf','Hidden throw')+' · '+f('W','d')+KINGS_DICE[s.stage],betting:f('Setzphase','Betting round')+' '+s.bettingStage,finished:s.seriesClosed?f('Partie beendet','Session ended'):f('Runde beendet','Round over'),aborted:f('Spiel beendet – Einsätze erstattet','Game ended – stakes refunded')};

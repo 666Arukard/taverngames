@@ -219,3 +219,10 @@
 .taverngames-card-stage .taverngames-card-hand>.taverngames-card:is(:hover,:focus-visible){transform:translateY(-5px);outline:2px solid #c6a96c;outline-offset:1px}
 @media(max-height:650px){.taverngames-surface.taverngames-card-stage{top:24px;bottom:54px;gap:6px}.taverngames-card-stage .taverngames-card-table>.taverngames-card,.taverngames-card-stage .taverngames-card-table>div>.taverngames-card{width:100px}.taverngames-card-stage .taverngames-card-hand>.taverngames-card{flex-basis:96px}}
 @media(prefers-reduced-motion:reduce){.taverngames-card-stage .taverngames-card-hand>.taverngames-card{transition:none}}
+
+/* Isolate the card overlay from native sidebar sizing and intrinsic image sizes. */
+#taverngames-card-stage{box-sizing:border-box;margin:0;padding:0;min-width:0;max-width:none;contain:layout style size;isolation:isolate}
+#taverngames-card-stage>.taverngames-card-stage-shared,#taverngames-card-stage>.taverngames-card-stage-hand{box-sizing:border-box;min-width:0;max-width:100%;flex-shrink:0}
+#taverngames-card-stage>.taverngames-card-stage-hand{width:100%;max-height:none}
+#taverngames-card-stage .taverngames-card-hand{height:clamp(150px,27dvh,276px);box-sizing:content-box;min-width:0}
+#taverngames-card-stage .taverngames-card-hand>.taverngames-card{height:100%;width:auto;flex:0 0 auto;min-height:0;aspect-ratio:2/3}

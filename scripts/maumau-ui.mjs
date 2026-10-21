@@ -8,12 +8,17 @@ import {renderSurface,gameInteractionKey} from './interaction-queue.mjs';
 const suitName=(s,dragon)=>SUITS.includes(s)?(dragon?[f('Bierkrug','Tankard'),f('Schwert','Sword'),f('Schild','Shield'),f('Münze','Coin')]:[f('Herz','Hearts'),f('Kreuz','Clubs'),f('Pik','Spades'),f('Karo','Diamonds')])[SUITS.indexOf(s)]:'';
 const rankName=r=>({jack:f('Bube','Jack'),queen:f('Dame','Queen'),king:f('König','King'),ace:f('Ass','Ace')})[r]??r;
 export class MauUI extends TavernUI{
- constructor(...args){super(...args);this.sets=[{key:'standard',label:'Standard · 52'}];this.cardTable=null;this.cardSlots=[];const draw=this.drawTable.bind(this);this.drawTable=()=>{const root=this.windows.get('table')?.root;if(!root)return draw();if(!this.cardTable){this.cardTable=node('aside',undefined,'taverngames-surface taverngames-card-stage');this.cardTable.id='taverngames-card-stage';this.cardTable.hidden=true;}return renderSurface(this.cardTable,()=>withScroll(root,()=>{this.restoreCardNodes();draw();this.syncCardTable();}),()=>({scope:'maumau',key:gameInteractionKey('maumau',this.getState(),game.user.id)}));};gameView.observePresentation(()=>this.syncCardTable());}
+ constructor(...args){super(...args);this.sets=[{key:'standard',label:'Standard · 52'}];this.cardTable=null;this.cardSlots=[];const draw=this.drawTable.bind(this);this.drawTable=()=>{const root=this.windows.get('table')?.root;if(!root)return draw();if(!this.cardTable){this.cardTable=node('div',undefined,'taverngames-surface taverngames-card-stage');this.cardTable.id='taverngames-card-stage';this.cardTable.hidden=true;}return renderSurface(this.cardTable,()=>withScroll(root,()=>{const key=JSON.stringify([this.getState(),game.users.activeGM?.id,game.user.id]);if(this.cardRenderRoot!==root||this.cardRenderKey!==key){this.restoreCardNodes();draw();this.cardRenderRoot=root;this.cardRenderKey=key;}this.syncCardTable();}),()=>({scope:'maumau',key:gameInteractionKey('maumau',this.getState(),game.user.id)}));};gameView.observePresentation(()=>this.syncCardTable());}
  restoreCardNodes(){for(const slot of this.cardSlots){if(slot.anchor.isConnected)slot.anchor.replaceWith(slot.node);else slot.node.remove();}this.cardSlots=[];this.cardTable?.replaceChildren();}
  syncCardTable(){
   if(!this.cardTable)return;
   const root=this.windows.get('table')?.root,s=this.getState(),visible=gameView.enabled()&&!gameView.collapsed&&gameView.selected==='maumau-table'&&root?.parentElement===gameView.playerContent&&s?.discard?.length&&!s.seriesClosed&&!['lobby','aborted'].includes(s.phase);
   if(!visible){this.restoreCardNodes();this.cardTable.hidden=true;this.cardTable.remove();return;}
+  const left=Math.max(0,gameView.left?.getBoundingClientRect().right??0)+50;let right=innerWidth-12;
+  for(const sidebar of document.querySelectorAll('#ui-right,#sidebar,#sidebar-tabs,.taverngames-sidebar')){const r=sidebar.getBoundingClientRect();if(r.height>40&&r.width>0&&r.left>=0&&r.left<innerWidth&&getComputedStyle(sidebar).visibility!=='hidden')right=Math.min(right,r.left-12);}
+  // Decide from native bounds before changing the card DOM: no layout feedback.
+  if(right-left<240){this.restoreCardNodes();this.cardTable.hidden=true;this.cardTable.remove();return;}
+  const leftCss=left+'px',rightCss=(innerWidth-right)+'px';if(this.cardTable.style.left!==leftCss)this.cardTable.style.left=leftCss;if(this.cardTable.style.right!==rightCss)this.cardTable.style.right=rightCss;
   if(!this.cardSlots.length){
    const move=(element,container)=>{if(!element)return;const anchor=document.createComment('TavernGames card position');element.before(anchor);container.append(element);this.cardSlots.push({node:element,anchor});};
    const shared=node('section',undefined,'taverngames-card-stage-shared'),hand=node('section',undefined,'taverngames-card-stage-hand');shared.setAttribute('aria-label',f('Ablage und Nachziehstapel','Discard and draw pile'));hand.setAttribute('aria-label',f('Eigene Karten','Your cards'));this.cardTable.append(shared,hand);
@@ -21,11 +26,7 @@ export class MauUI extends TavernUI{
    const turn=s.order[s.turn],actor=game.user.isGM&&s.npcs[turn]&&s.npcManual[turn]?turn:game.user.id,row=[...root.querySelectorAll('[data-mau-player]')].find(e=>e.dataset.mauPlayer===actor);
    if(row){hand.style.setProperty('--tg-hand-count',String(Math.max(1,s.hands[actor]?.length??0)));hand.append(node('p',this.name(actor)));move(row.querySelector('.taverngames-card-hand'),hand);}
   }
-  const left=(gameView.left?.getBoundingClientRect().right??0)+12;let right=innerWidth-12;
-  for(const sidebar of document.querySelectorAll('#sidebar,.taverngames-sidebar')){const r=sidebar.getBoundingClientRect();if(r.height>40&&r.width>30&&r.left>left)right=Math.min(right,r.left-12);}
-  // Narrow viewports keep the compact panel rather than cover moderation/tools.
-  if(right-left<240){this.restoreCardNodes();this.cardTable.hidden=true;this.cardTable.remove();return;}
-  this.cardTable.style.left=left+'px';this.cardTable.style.right=(innerWidth-right)+'px';this.cardTable.hidden=false;if(!this.cardTable.isConnected)document.body.append(this.cardTable);
+  if(this.cardTable.hidden)this.cardTable.hidden=false;if(!this.cardTable.isConnected)document.body.append(this.cardTable);
  }
  async open(){if(game.user.isGM)this.sets=await listCardSets(game);super.open();}
  drawModeration(){

@@ -2,23 +2,21 @@
   "schemaVersion": 1,
   "blocks": {
     "patchnotes": {
-      "title": "Patchnotes Version 4.0.1",
+      "title": "Patchnotes Version 4.1.0",
       "paragraphs": [
-        "Mau-Mau erhält in der Reiteransicht einen großen Kartentisch im freien Bildschirmbereich: oben die offene Ablage und der anklickbare Nachziehstapel, unten ausschließlich die eigene Hand. Passende Karten lassen sich direkt ausspielen. Die obere Spielauswahl der Moderation sieht nun aus wie die Auswahl im Spielerpanel. Karten und Regeln bleiben unverändert.",
-        "Mau-Mau gains a large card table in the free screen area when using sidebar view: the face-up discard and clickable draw pile above, only your own hand below. Play legal cards directly. The moderation game selector now matches the player-panel selector. Cards and rules are unchanged."
+        "Mau-Mau: Der große Kartentisch wird bei unverändertem Spielstand nicht mehr neu aufgebaut. Seine Darstellung ist von der Seitenleisten-Größenberechnung getrennt; Handkarten behalten eine feste sichtbare Höhe. Spiel der Könige ist nach Freigabe stabil, Mau-Mau bleibt Beta.",
+        "Mau-Mau: The large card table no longer rebuilds for unchanged game state. Its layout is isolated from sidebar sizing, and hand cards retain a visible height. Game of Kings is approved as stable; Mau-Mau remains beta."
       ],
       "items": [
-        "Großer Mau-Mau-Kartentisch: Ablage und Nachziehstapel oben, eigene Hand unten; direkte Kartenaktionen.",
-        "Karten bleiben privat. Beim Einklappen, Wechseln und Schließen wird die große Darstellung sauber entfernt.",
-        "Fensteransicht und schmale Bildschirmbereiche behalten die kompakte Kartendarstellung.",
-        "Obere Spielauswahl in Moderation und Spielerpanel optisch vereinheitlicht.",
-        "15 stabile Spiele; Mau-Mau und Spiel der Könige bleiben Beta."
+        "Spiel der Könige stabil.",
+        "Mau-Mau: ruhige Seitenleisten, sichtbare große Handkarten.",
+        "Mau-Mau bleibt Beta. Alle Clients neu laden."
       ]
     },
     "games": {
       "title": "aktuelle Spiele (17)",
       "paragraphs": [
-        "15 stabile Spiele sowie Mau-Mau und Spiel der Könige als optionale Betas. Die integrierte Reiteransicht ist regulärer Standard, Fenster bleiben optional."
+        "16 stabile Spiele und Mau-Mau als optionale Beta. Reiteransicht als Standard, Fenster optional."
       ],
       "items": [
         "17 und 4",
@@ -34,10 +32,10 @@
         "Schiff–Kapitän–Mannschaft",
         "Schocken",
         "Schweinchen",
+        "Spiel der Könige",
         "Straßenlotto",
         "Würfelpoker",
-        "Mau-Mau (Beta)",
-        "Spiel der Könige (Beta)"
+        "Mau-Mau (Beta)"
       ]
     },
     "plans": {
@@ -224,5 +222,5 @@
       ]
     }
   },
-  "version": "4.0.1"
+  "version": "4.1.0"
 }

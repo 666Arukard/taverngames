@@ -1,3 +1,9 @@
+# TavernGames 4.1.0
+
+Mau-Mau: Der große Kartentisch wird bei unverändertem Spielstand nicht mehr neu aufgebaut. Seine Darstellung ist von der Seitenleisten-Größenberechnung getrennt; Handkarten behalten eine feste sichtbare Höhe. Spiel der Könige ist nach Freigabe stabil, Mau-Mau bleibt Beta.
+
+Mau-Mau: The large card table no longer rebuilds for unchanged game state. Its layout is isolated from sidebar sizing, and hand cards retain a visible height. Game of Kings is approved as stable; Mau-Mau remains beta.
+
 ## Version 4.0.1
 
 Mau-Mau erhält in der Reiteransicht einen großen Kartentisch im freien Bildschirmbereich: oben die offene Ablage und der anklickbare Nachziehstapel, unten ausschließlich die eigene Hand. Passende Karten lassen sich direkt ausspielen. Die obere Spielauswahl der Moderation sieht nun aus wie die Auswahl im Spielerpanel. Karten und Regeln bleiben unverändert.
