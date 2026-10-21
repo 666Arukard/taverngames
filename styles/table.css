@@ -158,3 +158,22 @@
 
 .taverngames-catalog .taverngames-favorite-star:not(.is-favorite):is(:hover,:focus-visible){color:#777}
 .taverngames-catalog .taverngames-favorite-star.is-favorite:is(:hover,:focus-visible){color:#b78925}
+
+/* 3.4.3: own control palettes in floating windows and native sidebar surfaces.
+   Hover adds an outline; it must not hide text or erase held/selected dice. */
+.taverngames-surface{--tg-control-bg:#fff9ef;--tg-control-text:#30251e;--tg-held-bg:#d8c593;--tg-selected-bg:#c2e0bd}
+[data-integrated-moderation] .taverngames-surface{--tg-control-bg:var(--button-background-color,rgba(128,128,128,.12));--tg-control-text:inherit}
+#taverngames-player-panel .taverngames-surface{--tg-control-bg:rgba(128,128,128,.12);--tg-control-text:inherit;--tg-held-bg:rgba(191,155,74,.5);--tg-selected-bg:rgba(191,155,74,.5)}
+.taverngames-surface button{--tg-action-bg:var(--tg-control-bg);--tg-action-text:var(--tg-control-text)}
+.taverngames-surface header button{--tg-action-bg:transparent;--tg-action-text:white}
+.taverngames-surface .kniffel-sheet button{--tg-action-bg:#f4e7cc;--tg-action-text:#241b12}
+.taverngames-surface button.held{--tg-action-bg:var(--tg-held-bg)}
+.taverngames-surface button.farkle-selected{--tg-action-bg:var(--tg-selected-bg)}
+.taverngames-surface button:enabled:is(:hover,:focus-visible){background:var(--tg-action-bg);color:var(--tg-action-text);outline:2px solid #c6a96c;outline-offset:0;box-shadow:none;text-shadow:none;filter:none}
+/* Higher-specificity panel rules above must preserve the same state palettes. */
+#taverngames-player-panel .taverngames-surface button:enabled:is(:hover,:focus-visible),
+[data-integrated-moderation] .taverngames-surface button:enabled:is(:hover,:focus-visible){background:var(--tg-action-bg);color:var(--tg-action-text);outline:2px solid #c6a96c;box-shadow:none;text-shadow:none;filter:none}
+.taverngames-surface.taverngames-surface summary:is(:hover,:focus-visible){background:transparent;color:inherit;outline:2px solid #c6a96c;outline-offset:0;box-shadow:none;text-shadow:none;filter:none}
+.taverngames-surface.taverngames-surface :is(select,textarea,input[type=text],input[type=number]):is(:hover,:focus-visible){background:#fff9ef;color:#30251e;outline:2px solid #c6a96c;outline-offset:0;box-shadow:none;text-shadow:none;filter:none}
+[data-integrated-moderation] .taverngames-surface.taverngames-surface :is(select,textarea,input[type=text],input[type=number]):is(:hover,:focus-visible){background:var(--input-background-color,rgba(128,128,128,.12));color:inherit}
+#taverngames-player-panel .taverngames-surface.taverngames-surface :is(select,textarea,input[type=text],input[type=number]):is(:hover,:focus-visible){background:rgba(128,128,128,.12);color:inherit}

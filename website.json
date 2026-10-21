@@ -2,16 +2,16 @@
   "schemaVersion": 1,
   "blocks": {
     "patchnotes": {
-      "title": "Patchnotes Version 3.4.2",
+      "title": "Patchnotes Version 3.4.3",
       "paragraphs": [
-        "Göttliche Hand bewertet bei Aalstechen nur noch das Ausscheiden durch eine 1. Begünstigung senkt deren Wahrscheinlichkeit, ohne hohe Zahlen zu bevorzugen; die übrigen Augen bleiben gleich wahrscheinlich. Die Hover-Hervorhebung im TavernGames-Reiter erhält einen goldenen Rahmen bei lesbarer Schrift, auch in Moderation und Auswahllisten. Das Liegenbleiben der Aalstechen-Würfel bleibt für weitere Tests unverändert.",
-        "For Aalstechen, Divine Hand now affects only elimination by rolling a one. Favor reduces that probability without preferring high values; the remaining faces stay equally likely. TavernGames sidebar hover highlighting uses a gold outline and readable text, including moderation and dropdown options. Resting Aalstechen dice remain unchanged for further testing."
+        "Die Hover-Hervorhebung bleibt jetzt auch in frei beweglichen Moderations- und Spielfenstern lesbar. Buttons, Auswahl- und Eingabefelder sowie aufklappbare Überschriften erhalten einen goldenen Fokusrahmen statt einer dunklen Überlagerung. Markierungen gehaltener und ausgewählter Würfel bleiben erhalten.",
+        "Hover highlighting now stays readable in floating moderation and game windows as well. Buttons, dropdowns, text fields and expandable headings use a gold focus outline instead of a dark overlay. Held and selected dice retain their highlights."
       ],
       "items": [
-        "Aalstechen: Göttliche Hand beeinflusst die Eins-Chance; sichere Werte bleiben gleichberechtigt.",
-        "Lesbare Hover-Hervorhebung mit goldenem Rahmen und kontrastierenden Auswahllisten.",
-        "Aalstechen-Würfel bleiben für die weitere Evaluation unverändert liegen.",
-        "15 stabile Spiele; Spiel der Könige und integrierte Spielansicht bleiben Beta."
+        "Lesbare Hover-Zustände in Fenstern und integrierter Seitenansicht.",
+        "Goldener Fokusrahmen für Buttons, Felder und aufklappbare Überschriften.",
+        "Würfelauswahl bleibt farblich erkennbar; keine Änderungen am Würfel-Lebenszyklus.",
+        "15 stabile Spiele; Spiel der Könige und Seitenansicht bleiben Beta."
       ]
     },
     "games": {
@@ -214,5 +214,5 @@
       ]
     }
   },
-  "version": "3.4.2"
+  "version": "3.4.3"
 }

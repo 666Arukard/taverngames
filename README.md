@@ -1,3 +1,11 @@
+## Version 3.4.3
+
+Die Hover-Hervorhebung bleibt jetzt auch in frei beweglichen Moderations- und Spielfenstern lesbar. Buttons, Auswahl- und Eingabefelder sowie aufklappbare Überschriften erhalten einen goldenen Fokusrahmen statt einer dunklen Überlagerung. Markierungen gehaltener und ausgewählter Würfel bleiben erhalten.
+
+Hover highlighting now stays readable in floating moderation and game windows as well. Buttons, dropdowns, text fields and expandable headings use a gold focus outline instead of a dark overlay. Held and selected dice retain their highlights.
+
+Alle Clients neu laden. 15 stabile Spiele; Spiel der Könige und Seitenansicht bleiben Beta. Noch nicht veröffentlicht.
+
 ## Version 3.4.2
 
 Göttliche Hand bewertet bei Aalstechen nur noch das Ausscheiden durch eine 1. Begünstigung senkt deren Wahrscheinlichkeit, ohne hohe Zahlen zu bevorzugen; die übrigen Augen bleiben gleich wahrscheinlich. Die Hover-Hervorhebung im TavernGames-Reiter erhält einen goldenen Rahmen bei lesbarer Schrift, auch in Moderation und Auswahllisten. Das Liegenbleiben der Aalstechen-Würfel bleibt für weitere Tests unverändert.
