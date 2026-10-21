@@ -3,10 +3,30 @@ import {f} from './farkle-text.mjs';
 import {withScroll} from './scroll-state.mjs';
 import {listCardSets,SUITS,BACK} from './card-sets.mjs';
 import {mauLegal} from './maumau-engine.mjs';
+import {gameView} from './game-view.mjs';
+import {renderSurface,gameInteractionKey} from './interaction-queue.mjs';
 const suitName=(s,dragon)=>SUITS.includes(s)?(dragon?[f('Bierkrug','Tankard'),f('Schwert','Sword'),f('Schild','Shield'),f('Münze','Coin')]:[f('Herz','Hearts'),f('Kreuz','Clubs'),f('Pik','Spades'),f('Karo','Diamonds')])[SUITS.indexOf(s)]:'';
 const rankName=r=>({jack:f('Bube','Jack'),queen:f('Dame','Queen'),king:f('König','King'),ace:f('Ass','Ace')})[r]??r;
 export class MauUI extends TavernUI{
- constructor(...args){super(...args);this.sets=[{key:'standard',label:'Standard · 52'}];const draw=this.drawTable.bind(this);this.drawTable=()=>withScroll(this.windows.get('table')?.root,draw);}
+ constructor(...args){super(...args);this.sets=[{key:'standard',label:'Standard · 52'}];this.cardTable=null;this.cardSlots=[];const draw=this.drawTable.bind(this);this.drawTable=()=>{const root=this.windows.get('table')?.root;if(!root)return draw();if(!this.cardTable){this.cardTable=node('aside',undefined,'taverngames-surface taverngames-card-stage');this.cardTable.id='taverngames-card-stage';this.cardTable.hidden=true;}return renderSurface(this.cardTable,()=>withScroll(root,()=>{this.restoreCardNodes();draw();this.syncCardTable();}),()=>({scope:'maumau',key:gameInteractionKey('maumau',this.getState(),game.user.id)}));};gameView.observePresentation(()=>this.syncCardTable());}
+ restoreCardNodes(){for(const slot of this.cardSlots){if(slot.anchor.isConnected)slot.anchor.replaceWith(slot.node);else slot.node.remove();}this.cardSlots=[];this.cardTable?.replaceChildren();}
+ syncCardTable(){
+  if(!this.cardTable)return;
+  const root=this.windows.get('table')?.root,s=this.getState(),visible=gameView.enabled()&&!gameView.collapsed&&gameView.selected==='maumau-table'&&root?.parentElement===gameView.playerContent&&s?.discard?.length&&!s.seriesClosed&&!['lobby','aborted'].includes(s.phase);
+  if(!visible){this.restoreCardNodes();this.cardTable.hidden=true;this.cardTable.remove();return;}
+  if(!this.cardSlots.length){
+   const move=(element,container)=>{if(!element)return;const anchor=document.createComment('TavernGames card position');element.before(anchor);container.append(element);this.cardSlots.push({node:element,anchor});};
+   const shared=node('section',undefined,'taverngames-card-stage-shared'),hand=node('section',undefined,'taverngames-card-stage-hand');shared.setAttribute('aria-label',f('Ablage und Nachziehstapel','Discard and draw pile'));hand.setAttribute('aria-label',f('Eigene Karten','Your cards'));this.cardTable.append(shared,hand);
+   move(root.querySelector('.taverngames-card-table'),shared);
+   const turn=s.order[s.turn],actor=game.user.isGM&&s.npcs[turn]&&s.npcManual[turn]?turn:game.user.id,row=[...root.querySelectorAll('[data-mau-player]')].find(e=>e.dataset.mauPlayer===actor);
+   if(row){hand.style.setProperty('--tg-hand-count',String(Math.max(1,s.hands[actor]?.length??0)));hand.append(node('p',this.name(actor)));move(row.querySelector('.taverngames-card-hand'),hand);}
+  }
+  const left=(gameView.left?.getBoundingClientRect().right??0)+12;let right=innerWidth-12;
+  for(const sidebar of document.querySelectorAll('#sidebar,.taverngames-sidebar')){const r=sidebar.getBoundingClientRect();if(r.height>40&&r.width>30&&r.left>left)right=Math.min(right,r.left-12);}
+  // Narrow viewports keep the compact panel rather than cover moderation/tools.
+  if(right-left<240){this.restoreCardNodes();this.cardTable.hidden=true;this.cardTable.remove();return;}
+  this.cardTable.style.left=left+'px';this.cardTable.style.right=(innerWidth-right)+'px';this.cardTable.hidden=false;if(!this.cardTable.isConnected)document.body.append(this.cardTable);
+ }
  async open(){if(game.user.isGM)this.sets=await listCardSets(game);super.open();}
  drawModeration(){
   const root=this.windows.get('moderation')?.root;if(!root||!game.user.isGM)return;const drafts=new Map([...root.querySelectorAll('[data-draft]')].map(e=>[e.dataset.draft,e.type==='checkbox'?e.checked:e.value])),expanded=root.querySelector('details')?.open??true,s=this.getState();root.replaceChildren();const c=node('div',undefined,'schocken-content');root.append(c);c.append(node('h2','Mau-Mau · Beta'));
@@ -30,7 +50,7 @@ export class MauUI extends TavernUI{
  drawTable(){
   const root=this.windows.get('table')?.root;if(!root)return;const wish=root.querySelector('[data-draft=wish]')?.value,announce=root.querySelector('[data-draft=announce]')?.checked??true;root.replaceChildren();const c=node('div',undefined,'schocken-content');root.append(c);c.append(node('h2','Mau-Mau · Beta'));const s=this.getState();if(!s){c.append(node('p',f('Der SL öffnet eine Lobby.','The GM opens a lobby.')));return;}
   const dragon=s.cardSet.style!=='standard',blocked=s.paused||!game.users.activeGM;c.append(node('p',s.phase==='lobby'?f('Lobby · 2–5 Teilnehmer','Lobby · 2–5 participants'):s.phase==='aborted'?f('Partie beendet','Session ended'):s.phase==='finished'?(s.draw?f('Unentschieden','Draw'):f('Gewonnen: ','Winner: ')+s.winners.map(id=>this.name(id)).join(', ')):f('Am Zug: ','Current turn: ')+this.name(s.order[s.turn])));
-  if(s.discard.length){const area=node('div',undefined,'taverngames-card-table');this.card(area,s.cards[s.discard.at(-1)]);const pile=node('div');this.card(pile,null,Object.values(s.cards)[0]?.back??BACK);pile.append(node('p',`${f('Nachziehen','Draw pile')}: ${s.drawCount}`));area.append(pile);c.append(area,node('p',f('Aktuelle Farbe: ','Current suit: ')+suitName(s.activeSuit,dragon)));}
+  if(s.discard.length){const area=node('div',undefined,'taverngames-card-table');this.card(area,s.cards[s.discard.at(-1)]);const pile=node('div'),turn=s.order[s.turn],can=turn===game.user.id||game.user.isGM&&s.npcs[turn]&&s.npcManual[turn],canDraw=can&&s.phase==='playing'&&!blocked&&!s.drawnCard&&(s.pendingDraw||!s.hands[turn]?.some(card=>mauLegal(s,turn,card))),drawCard=this.card(pile,null,Object.values(s.cards)[0]?.back??BACK,canDraw?()=>this.request('draw',{id:turn}):null);drawCard.setAttribute('aria-label',f('Karte ziehen','Draw card'));drawCard.title=f('Karte ziehen','Draw card');drawCard.dataset.cardDraw='';pile.append(node('p',`${f('Nachziehen','Draw pile')}: ${s.drawCount}`));area.append(pile);c.append(area,node('p',f('Aktuelle Farbe: ','Current suit: ')+suitName(s.activeSuit,dragon)));}
   if(s.candidate)c.append(node('p',f('Letzte Karte: Einspruchfrist läuft bis zum Ende des nächsten Spielerzugs.','Last card: the challenge window remains open until the following player ends their turn.')));
   for(const id of s.players){const row=node('section',undefined,'schocken-player');row.dataset.mauPlayer=id;const current=s.order[s.turn]===id,can=id===game.user.id||game.user.isGM&&s.npcs[id]&&s.npcManual[id],send=(action,args={})=>this.request(action,{...args,id});row.append(node('h3',`${current&&s.phase==='playing'?'▶ ':''}${this.name(id)} · ${(s.hands[id]??[]).length} ${f('Karten','cards')}`));c.append(row);
    let suit,call;if(can&&current&&s.phase==='playing'){suit=selectField(row,f('Wunschfarbe bei Bube','Suit when playing a jack'),SUITS.map(v=>[v,suitName(v,dragon)]),wish??SUITS[0],'wish');if(s.penalties){const l=node('label',undefined,'schocken-choice');call=node('input');call.type='checkbox';call.dataset.draft='announce';call.checked=announce;l.append(call,document.createTextNode(f('Mau / Mau-Mau ansagen','Call Mau / Mau-Mau')));row.append(l);}}

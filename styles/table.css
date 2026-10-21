@@ -197,3 +197,25 @@
 .taverngames-card-standard{display:flex;flex-direction:column;justify-content:space-around;align-items:center;font-size:12px;font-weight:bold;text-align:center}
 .taverngames-surface .taverngames-card.is-playable{border:2px solid #c6a96c;cursor:pointer}
 .taverngames-card-table>.taverngames-card,.taverngames-card-table>div>.taverngames-card{width:88px;height:132px;flex-basis:88px}
+
+/* Both game-view headers share one selector style; moderation spans its full row. */
+:is(#taverngames-player-panel,[data-integrated-moderation])>header>select.taverngames-game-select{box-sizing:border-box;flex:1 0 100%;width:100%;max-width:100%;height:32px;min-height:32px;margin:0;padding:4px 8px;border:1px solid #807562;border-radius:4px;font:14px/1.25 system-ui;background:#fff9ef;color:#30251e;color-scheme:light}
+:is(#taverngames-player-panel,[data-integrated-moderation])>header>select.taverngames-game-select:is(:hover,:focus-visible){background:#f4e7cc!important;color:#241b12!important;outline:2px solid #c6a96c!important;outline-offset:0;box-shadow:none!important;text-shadow:none!important;filter:none!important}
+:is(#taverngames-player-panel,[data-integrated-moderation])>header>select.taverngames-game-select option{background:#fff9ef;color:#30251e}
+:is(#taverngames-player-panel,[data-integrated-moderation])>header>select.taverngames-game-select option:is(:hover,:checked){background:#705924;color:#fff7e6}
+
+/* Large card table in the available canvas; reuse existing authorized card nodes. */
+.taverngames-surface.taverngames-card-stage{position:fixed;top:56px;bottom:66px;width:auto;height:auto;min-height:0;z-index:65;display:flex;flex-direction:column;justify-content:space-between;gap:18px;pointer-events:none;background:transparent;color:#f4ead7;overflow:hidden}
+.taverngames-card-stage[hidden]{display:none!important}
+.taverngames-card-stage-shared{align-self:center;max-width:100%;padding:8px 14px;border-radius:8px;background:rgba(24,21,19,.64)}
+.taverngames-card-stage .taverngames-card-table{justify-content:center;gap:24px;margin:0}
+.taverngames-card-stage .taverngames-card-table>.taverngames-card,.taverngames-card-stage .taverngames-card-table>div>.taverngames-card{width:clamp(112px,15vw,196px);height:auto;aspect-ratio:2/3;flex:0 0 auto}
+.taverngames-card-stage .taverngames-card{pointer-events:auto}
+.taverngames-card-stage .taverngames-card-table p{margin:4px 0 0;text-align:center;font-size:14px}
+.taverngames-card-stage-hand{margin-top:auto;min-height:0;max-height:54%;pointer-events:auto;overflow:hidden;background:rgba(24,21,19,.64);border-radius:8px;padding:4px 10px 6px}
+.taverngames-card-stage-hand>p{margin:0;text-align:center;font-size:14px}
+.taverngames-card-stage .taverngames-card-hand{flex-wrap:nowrap;justify-content:flex-start;overflow:auto;gap:10px;margin:0;padding:12px 3px 4px}
+.taverngames-card-stage .taverngames-card-hand>.taverngames-card{flex:0 0 clamp(88px,calc((100% - (var(--tg-hand-count) - 1)*10px)/var(--tg-hand-count)),176px);width:auto;height:auto;aspect-ratio:2/3;transition:transform .12s ease}
+.taverngames-card-stage .taverngames-card-hand>.taverngames-card:is(:hover,:focus-visible){transform:translateY(-5px);outline:2px solid #c6a96c;outline-offset:1px}
+@media(max-height:650px){.taverngames-surface.taverngames-card-stage{top:24px;bottom:54px;gap:6px}.taverngames-card-stage .taverngames-card-table>.taverngames-card,.taverngames-card-stage .taverngames-card-table>div>.taverngames-card{width:100px}.taverngames-card-stage .taverngames-card-hand>.taverngames-card{flex-basis:96px}}
+@media(prefers-reduced-motion:reduce){.taverngames-card-stage .taverngames-card-hand>.taverngames-card{transition:none}}

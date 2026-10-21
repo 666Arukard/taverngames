@@ -1,3 +1,11 @@
+## Version 4.0.1
+
+Mau-Mau erhält in der Reiteransicht einen großen Kartentisch im freien Bildschirmbereich: oben die offene Ablage und der anklickbare Nachziehstapel, unten ausschließlich die eigene Hand. Passende Karten lassen sich direkt ausspielen. Die obere Spielauswahl der Moderation sieht nun aus wie die Auswahl im Spielerpanel. Karten und Regeln bleiben unverändert.
+
+Mau-Mau gains a large card table in the free screen area when using sidebar view: the face-up discard and clickable draw pile above, only your own hand below. Play legal cards directly. The moderation game selector now matches the player-panel selector. Cards and rules are unchanged.
+
+Der Kartentisch öffnet nur für die sichtbare Mau-Mau-Spielansicht; Einklappen, Spielwechsel oder Schließen blendet ihn aus. Bei wenig Platz oder Fensteransicht bleiben Karten im kompakten Spielfenster. Der SL sieht beim manuellen Steuern eines NPCs dessen Hand. Mau-Mau bleibt Beta. Alle Clients neu laden. Noch nicht veröffentlicht.
+
 ## Version 4.0.0
 
 Mau-Mau startet als erstes Kartenspiel in der Beta: zwei bis fünf Teilnehmer, 32 Karten von 7 bis Ass, private Hände, Ziehen und Ausspielen, Wunschfarbe, NPC-Automatik und optionale Ansagestrafen. Der SL wählt das Standardset oder einen der drei importierten Dragon-Cards-Stile. Spieldeck, Hände und Ablage werden automatisch verwaltet, Vorlagen bleiben unverändert. Die Reiteransicht ist jetzt Standard; klassische Fenster bleiben optional.

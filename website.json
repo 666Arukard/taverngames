@@ -2,16 +2,16 @@
   "schemaVersion": 1,
   "blocks": {
     "patchnotes": {
-      "title": "Patchnotes Version 4.0.0",
+      "title": "Patchnotes Version 4.0.1",
       "paragraphs": [
-        "Mau-Mau startet als erstes Kartenspiel in der Beta: zwei bis fünf Teilnehmer, 32 Karten von 7 bis Ass, private Hände, Ziehen und Ausspielen, Wunschfarbe, NPC-Automatik und optionale Ansagestrafen. Der SL wählt das Standardset oder einen der drei importierten Dragon-Cards-Stile. Spieldeck, Hände und Ablage werden automatisch verwaltet, Vorlagen bleiben unverändert. Die Reiteransicht ist jetzt Standard; klassische Fenster bleiben optional.",
-        "Mau-Mau joins as the first card-game beta: two to five participants, 32 cards from seven through ace, private hands, drawing and playing cards, suit choices, NPC automation and optional call penalties. The GM chooses the standard set or any of the three imported Dragon Cards styles. Session deck, hands and discard are managed automatically without changing templates. Sidebar view is now the default; classic windows remain optional."
+        "Mau-Mau erhält in der Reiteransicht einen großen Kartentisch im freien Bildschirmbereich: oben die offene Ablage und der anklickbare Nachziehstapel, unten ausschließlich die eigene Hand. Passende Karten lassen sich direkt ausspielen. Die obere Spielauswahl der Moderation sieht nun aus wie die Auswahl im Spielerpanel. Karten und Regeln bleiben unverändert.",
+        "Mau-Mau gains a large card table in the free screen area when using sidebar view: the face-up discard and clickable draw pile above, only your own hand below. Play legal cards directly. The moderation game selector now matches the player-panel selector. Cards and rules are unchanged."
       ],
       "items": [
-        "Mau-Mau als Karten-Beta: 2–5 Teilnehmer, 32 Karten, Sonderkarten, optionale Ansagestrafen und NPCs.",
-        "Kartenset je Partie wählen: Standard oder drei importierte Dragon-Cards-Stile. Benötigte Karten werden regelabhängig gefiltert.",
-        "Native Kartenbestände werden automatisch erstellt und aufgeräumt; Vorlagendecks bleiben unverändert.",
-        "Reiteransicht wird Standard, Fenster bleiben optional.",
+        "Großer Mau-Mau-Kartentisch: Ablage und Nachziehstapel oben, eigene Hand unten; direkte Kartenaktionen.",
+        "Karten bleiben privat. Beim Einklappen, Wechseln und Schließen wird die große Darstellung sauber entfernt.",
+        "Fensteransicht und schmale Bildschirmbereiche behalten die kompakte Kartendarstellung.",
+        "Obere Spielauswahl in Moderation und Spielerpanel optisch vereinheitlicht.",
         "15 stabile Spiele; Mau-Mau und Spiel der Könige bleiben Beta."
       ]
     },
@@ -99,7 +99,7 @@
       ]
     },
     "functions": {
-      "title": "aktuelle Funktionen (16)",
+      "title": "aktuelle Funktionen (17)",
       "paragraphs": [
         "15 stabile Spiele und Spiel der Könige als optionale Beta. Gemeinsame SL-Moderation, interne Spieltoken und optionale 3D-Würfel. Integrierte Spielansicht als separate Beta mit nativem Werkzeugleisten-Zugang; Fenster bleiben Standard."
       ],
@@ -119,7 +119,8 @@
         "Klippklapp: öffentliches Klappenbrett, tatsächliche Restsumme, direkter Vorgängervergleich und interne Tokenzahlungen.",
         "Reguläre integrierte Reiteransicht: klappbares Teilnehmerpanel links, Moderation im TavernGames-Reiter; klassische Fenster optional.",
         "Karten-Beta: Kartensetauswahl, regelabhängige Rangfilter, private Hände, öffentliche Ablage, verschlüsselte Wiederaufnahme und automatische Verwaltung der nativen Kartenstapel.",
-        "Mau-Mau: optional zwei Strafkarten bei vergessenen Ansagen, Einspruch bis zum Ende des folgenden Spielerzugs, neu gemischte Ablage und Unentschieden bei vollständiger Blockade."
+        "Mau-Mau: optional zwei Strafkarten bei vergessenen Ansagen, Einspruch bis zum Ende des folgenden Spielerzugs, neu gemischte Ablage und Unentschieden bei vollständiger Blockade.",
+        "Mau-Mau in der Reiteransicht mit großem Kartentisch, privater eigener Hand unten und direkt anklickbaren Karten sowie Nachziehstapel."
       ]
     },
     "settings": {
@@ -138,7 +139,8 @@
         "Mau-Mau und Spiel der Könige unter Moduleinstellungen → Beta-Test freischalten. Über das TavernGames-Symbol links die berechtigte Lobby öffnen.",
         "Aalstechen: Glück senkt die natürliche Eins-Chance pro Würfel, ohne hohe sichere Werte zu bevorzugen. Bei 100 % Glück keine Eins; bei 0 % unveränderter Zufall. Die Anzeige liegender Würfel ist in 3.4.2 unverändert.",
         "Mau-Mau: Kartenset in der Moderation wählen. Die drei importierten Dragon-Cards-Decks werden anhand ihrer Metadaten erkannt; ein schlichtes Standardset funktioniert ohne Zusatzmodul. Das Spiel verwendet nur 7 bis Ass ohne Joker.",
-        "Mau-Mau: Ansagestrafe standardmäßig aus. Endgültiges Beenden entfernt die automatisch erzeugten Spielstapel. Vorlagendecks bleiben unberührt. Bei fehlenden nativen Spielkarten Kartenbestände wiederherstellen verwenden."
+        "Mau-Mau: Ansagestrafe standardmäßig aus. Endgültiges Beenden entfernt die automatisch erzeugten Spielstapel. Vorlagendecks bleiben unberührt. Bei fehlenden nativen Spielkarten Kartenbestände wiederherstellen verwenden.",
+        "Mau-Mau: Im integrierten Spielmenü erscheint der große Kartentisch automatisch im freien Bildschirmbereich. Menü einklappen oder Spielansicht schließen blendet ihn aus; in Fensteransicht oder bei sehr wenig Platz bleiben die Karten kompakt."
       ],
       "items": []
     },
@@ -222,5 +224,5 @@
       ]
     }
   },
-  "version": "4.0.0"
+  "version": "4.0.1"
 }
