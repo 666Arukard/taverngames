@@ -1,3 +1,11 @@
+## Version 3.4.5
+
+Bei Dropdowns und anderen Eingaben wird nur noch das bediente Feld hervorgehoben. Die umgebende Beschriftung bleibt ohne Hintergrund oder Rahmen. Die lesbare Hervorhebung der eigentlichen Bedienelemente bleibt erhalten.
+
+Dropdowns and other inputs now highlight only the control itself. Surrounding labels keep their normal background and have no outline. Readable highlighting of the actual controls is retained.
+
+Alle Clients neu laden. Noch nicht veröffentlicht.
+
 ## Version 3.4.4
 
 Die eingebettete Moderation schützt ihre Hover-Farben jetzt auch gegen stärker gewichtete Reiter- und Theme-Regeln. Buttons, Eingaben, Auswahlfelder, Beschriftungen und aufklappbare Bereiche verwenden beim Darüberfahren eine helle Fläche mit dunkler Schrift und goldenem Rahmen. Ausgewählte Würfel behalten ihre Markierung.

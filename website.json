@@ -2,15 +2,15 @@
   "schemaVersion": 1,
   "blocks": {
     "patchnotes": {
-      "title": "Patchnotes Version 3.4.4",
+      "title": "Patchnotes Version 3.4.5",
       "paragraphs": [
-        "Die eingebettete Moderation schützt ihre Hover-Farben jetzt auch gegen stärker gewichtete Reiter- und Theme-Regeln. Buttons, Eingaben, Auswahlfelder, Beschriftungen und aufklappbare Bereiche verwenden beim Darüberfahren eine helle Fläche mit dunkler Schrift und goldenem Rahmen. Ausgewählte Würfel behalten ihre Markierung.",
-        "Embedded moderation now protects hover colors against stronger sidebar and theme rules. Buttons, inputs, dropdowns, labels and expandable sections use a light background, dark text and a gold outline on hover. Selected dice keep their highlights."
+        "Bei Dropdowns und anderen Eingaben wird nur noch das bediente Feld hervorgehoben. Die umgebende Beschriftung bleibt ohne Hintergrund oder Rahmen. Die lesbare Hervorhebung der eigentlichen Bedienelemente bleibt erhalten.",
+        "Dropdowns and other inputs now highlight only the control itself. Surrounding labels keep their normal background and have no outline. Readable highlighting of the actual controls is retained."
       ],
       "items": [
-        "Nachkorrektur der Hover-Lesbarkeit ausdrücklich in der eingebetteten Moderation.",
-        "Helle Hover-Fläche, dunkle Schrift, goldener Rahmen; Würfelauswahl bleibt erkennbar.",
-        "Keine Änderungen an Spielregeln, Würfel-Lebenszyklus oder Ansichtsstandard.",
+        "Hover-Markierung nur am Eingabefeld, nicht mehr an seiner Beschriftung.",
+        "Lesbarkeit und goldene Hervorhebung der eigentlichen Bedienelemente bleiben erhalten.",
+        "Keine Änderungen an Spielen, Kartenplanung oder Ansichtsstandard.",
         "15 stabile Spiele; Spiel der Könige und Seitenansicht bleiben derzeit Beta."
       ]
     },
@@ -214,5 +214,5 @@
       ]
     }
   },
-  "version": "3.4.4"
+  "version": "3.4.5"
 }

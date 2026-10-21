@@ -179,8 +179,12 @@
 #taverngames-player-panel .taverngames-surface.taverngames-surface :is(select,textarea,input[type=text],input[type=number]):is(:hover,:focus-visible){background:rgba(128,128,128,.12);color:inherit}
 
 /* Sidebar moderation may inherit stronger theme hover overlays than floating windows.
-   Keep an explicit paired palette, including labels and controls in the dock header.
+   Keep an explicit paired palette, including controls in the dock header.
    Important declarations are limited to TavernGames interaction states. */
-.taverngames-catalog.taverngames-catalog [data-integrated-moderation] :is(button:enabled,summary,select,input,textarea,label,a):is(:hover,:focus-visible){background:#f4e7cc!important;color:#241b12!important;outline:2px solid #c6a96c!important;outline-offset:0;box-shadow:none!important;text-shadow:none!important;filter:none!important}
+.taverngames-catalog.taverngames-catalog [data-integrated-moderation] :is(button:enabled,summary,select,input,textarea,a):is(:hover,:focus-visible){background:#f4e7cc!important;color:#241b12!important;outline:2px solid #c6a96c!important;outline-offset:0;box-shadow:none!important;text-shadow:none!important;filter:none!important}
 .taverngames-catalog.taverngames-catalog [data-integrated-moderation] button.held:is(:hover,:focus-visible){background:#d8c593!important}
 .taverngames-catalog.taverngames-catalog [data-integrated-moderation] button.farkle-selected:is(:hover,:focus-visible){background:#c2e0bd!important}
+
+/* Labels wrap dropdowns: hovering a child also hovers its label, but must not
+   highlight the surrounding caption or apply a filter to the whole field. */
+.taverngames-catalog.taverngames-catalog [data-integrated-moderation] label:is(:hover,:focus-visible){background:transparent!important;color:inherit!important;outline:none!important;box-shadow:none!important;text-shadow:none!important;filter:none!important}

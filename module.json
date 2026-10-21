@@ -2,9 +2,9 @@
     "id":  "taverngames",
     "title":  "TavernGames",
     "description":  "\u003ch3\u003eDeutsch\u003c/h3\u003e\u003cp\u003eTavernGames bietet 15 stabile Tavernenspiele: 17 und 4, Aalstechen, Chō-Han, Die böse Dreizehn, Drachenhort, Farkle, Klippklapp, Kniffel einschließlich Extreme, Lügenwürfel, Meiern, Schiff–Kapitän–Mannschaft, Schocken, Schweinchen, Straßenlotto und Würfelpoker. Mit SL-Moderation, freiwilligem Beitritt, benannten NPCs, internen Spieltoken und optionalen 3D-Würfeln. Spiel der Könige ist als optionale Beta enthalten. Der Reiter ist nur für SL sichtbar; die neue Spielansicht ist eine freiwillige Beta.\u003c/p\u003e\u003ch3\u003eEnglish\u003c/h3\u003e\u003cp\u003eTavernGames provides 15 stable tavern games: Seventeen and Four, Aalstechen, Cho-Han, Wicked Thirteen, Dragon’s Hoard, Farkle, Klippklapp, Kniffel including Extreme, Liar’s Dice, Meiern, Ship–Captain–Crew, Schocken, Pig, Street Lottery and Dice Poker. Includes GM moderation, voluntary participation, named NPCs, internal game tokens and optional 3D dice. Game of Kings is included as an optional beta. The tab is GM-only; the new game view is an optional beta.\u003c/p\u003e\u003ch3\u003e3.4.2 · Versionshinweise / Release notes\u003c/h3\u003e\u003cp\u003eGöttliche Hand bewertet bei Aalstechen nur noch das Ausscheiden durch eine 1. Begünstigung senkt deren Wahrscheinlichkeit, ohne hohe Zahlen zu bevorzugen; die übrigen Augen bleiben gleich wahrscheinlich. Die Hover-Hervorhebung im TavernGames-Reiter erhält einen goldenen Rahmen bei lesbarer Schrift, auch in Moderation und Auswahllisten. Das Liegenbleiben der Aalstechen-Würfel bleibt für weitere Tests unverändert.\u003c/p\u003e\u003cp\u003eFor Aalstechen, Divine Hand now affects only elimination by rolling a one. Favor reduces that probability without preferring high values; the remaining faces stay equally likely. TavernGames sidebar hover highlighting uses a gold outline and readable text, including moderation and dropdown options. Resting Aalstechen dice remain unchanged for further testing.\u003c/p\u003e\u003cp\u003eRegelquellen einschließlich Daniels Chō-Han-Regelsammlung, Awiana, O’Donnell und Paul Cossmers PDF-Vorlagen stehen in den Anleitungen. / Rule sources, including Daniel’s Cho-Han collection, Awiana, O’Donnell and Paul Cossmer’s PDF references, are credited in the instructions.\u003c/p\u003e",
-    "version":  "3.4.4",
+    "version":  "3.4.5",
     "readme":  "README.md",
-    "changelog":  "https://github.com/666Arukard/taverngames/releases/tag/v3.4.4",
+    "changelog":  "https://github.com/666Arukard/taverngames/releases/tag/v3.4.5",
     "url":  "https://dnd.brunecoaching.de",
     "compatibility":  {
                           "minimum":  "14.369",
@@ -96,7 +96,7 @@
                    "styles/table.css"
                ],
     "manifest":  "https://github.com/666Arukard/taverngames/releases/latest/download/module.json",
-    "download":  "https://github.com/666Arukard/taverngames/releases/download/v3.4.4/taverngames-3.4.4.zip",
+    "download":  "https://github.com/666Arukard/taverngames/releases/download/v3.4.5/taverngames-3.4.5.zip",
     "relationships":  {
                           "recommends":  [
                                              {
