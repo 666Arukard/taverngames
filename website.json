@@ -2,22 +2,23 @@
   "schemaVersion": 1,
   "blocks": {
     "patchnotes": {
-      "title": "Patchnotes Version 3.4.5",
+      "title": "Patchnotes Version 4.0.0",
       "paragraphs": [
-        "Bei Dropdowns und anderen Eingaben wird nur noch das bediente Feld hervorgehoben. Die umgebende Beschriftung bleibt ohne Hintergrund oder Rahmen. Die lesbare Hervorhebung der eigentlichen Bedienelemente bleibt erhalten.",
-        "Dropdowns and other inputs now highlight only the control itself. Surrounding labels keep their normal background and have no outline. Readable highlighting of the actual controls is retained."
+        "Mau-Mau startet als erstes Kartenspiel in der Beta: zwei bis fünf Teilnehmer, 32 Karten von 7 bis Ass, private Hände, Ziehen und Ausspielen, Wunschfarbe, NPC-Automatik und optionale Ansagestrafen. Der SL wählt das Standardset oder einen der drei importierten Dragon-Cards-Stile. Spieldeck, Hände und Ablage werden automatisch verwaltet, Vorlagen bleiben unverändert. Die Reiteransicht ist jetzt Standard; klassische Fenster bleiben optional.",
+        "Mau-Mau joins as the first card-game beta: two to five participants, 32 cards from seven through ace, private hands, drawing and playing cards, suit choices, NPC automation and optional call penalties. The GM chooses the standard set or any of the three imported Dragon Cards styles. Session deck, hands and discard are managed automatically without changing templates. Sidebar view is now the default; classic windows remain optional."
       ],
       "items": [
-        "Hover-Markierung nur am Eingabefeld, nicht mehr an seiner Beschriftung.",
-        "Lesbarkeit und goldene Hervorhebung der eigentlichen Bedienelemente bleiben erhalten.",
-        "Keine Änderungen an Spielen, Kartenplanung oder Ansichtsstandard.",
-        "15 stabile Spiele; Spiel der Könige und Seitenansicht bleiben derzeit Beta."
+        "Mau-Mau als Karten-Beta: 2–5 Teilnehmer, 32 Karten, Sonderkarten, optionale Ansagestrafen und NPCs.",
+        "Kartenset je Partie wählen: Standard oder drei importierte Dragon-Cards-Stile. Benötigte Karten werden regelabhängig gefiltert.",
+        "Native Kartenbestände werden automatisch erstellt und aufgeräumt; Vorlagendecks bleiben unverändert.",
+        "Reiteransicht wird Standard, Fenster bleiben optional.",
+        "15 stabile Spiele; Mau-Mau und Spiel der Könige bleiben Beta."
       ]
     },
     "games": {
-      "title": "aktuelle Spiele (16)",
+      "title": "aktuelle Spiele (17)",
       "paragraphs": [
-        "15 stabile Spiele und Spiel der Könige als optionale Beta. Die integrierte Spielansicht bleibt separat Beta."
+        "15 stabile Spiele sowie Mau-Mau und Spiel der Könige als optionale Betas. Die integrierte Reiteransicht ist regulärer Standard, Fenster bleiben optional."
       ],
       "items": [
         "17 und 4",
@@ -35,11 +36,12 @@
         "Schweinchen",
         "Straßenlotto",
         "Würfelpoker",
+        "Mau-Mau (Beta)",
         "Spiel der Könige (Beta)"
       ]
     },
     "plans": {
-      "title": "geplante Spiele (34)",
+      "title": "geplante Spiele (33)",
       "paragraphs": [
         "Geplante Spiele und Wettbewerbe mit vorhandenen Referenzen oder neu vorgemerkten Namen. Einzelne Regeln sind noch offen; insbesondere ist beim Streichholzspiel noch keine genaue Variante festgelegt. Vorhandene Spiele werden nicht unter ihren englischen Namen erneut geplant."
       ],
@@ -62,7 +64,6 @@
         "Käsekästchen / Dots and Boxes (Variante noch offen)",
         "Kneipenquiz",
         "König und Bettler / Präsident",
-        "Mau-Mau",
         "Mühle / Nine Men’s Morris",
         "Offenes Würfelpoker",
         "Pfeilwurf",
@@ -83,23 +84,22 @@
     "plans2": {
       "title": "geplante Funktionen (9)",
       "paragraphs": [
-        "Größere Erweiterungen werden schrittweise geprüft. Die folgende Liste beschreibt Überlegungen und noch keine fertigen Funktionen.",
-        "Karteneinbindung auf Daniels Wunsch zurückgestellt. Als späterer erster Schritt vorgeschlagen: einfache Vorder-/Rückseiten und eine Kartenhand mit Sichtbarkeitsprüfung zwischen zwei Spielern, zunächst ohne Animationen. Noch keine Umsetzungsfreigabe."
+        "Weitere Kartenregeln und Animationen folgen schrittweise. Die gemeinsame Kartenbasis und Mau-Mau sind ab 4.0.0 als Karten-Beta umgesetzt."
       ],
       "items": [
         "Weitere Tags und Filter, etwa nach Spieldauer und Einsätzen.",
         "Eigene Spielnamen und ein durch den SL anpassbares Spieleangebot; Titel auch in Anleitungen und Chat übernehmen.",
-        "Grafische Kartenverwaltung und spätere Kartenanimationen; Entwicklung derzeit zurückgestellt.",
+        "Kartenanimationen für Mischen, Austeilen, Ziehen, Aufdecken und Ablegen.",
         "Kniffel-Serien mit addierten Ergebnissen.",
         "Beschleunigte NPC-Wettpartien.",
         "Grafisch wachsende Münzstapel auf den Drachenhorten.",
         "Optionale Accountant-Anbindung für Buchungen über eine versionierte API und Einbettung in die RPG Management Suite; alle Module bleiben unabhängig.",
         "Lügenwürfel: pokerartige Setzphase alle fünf Runden mit Grundeinsatz, Mitgehen, Erhöhen, Aussteigen und späterer Poker-Topfaufteilung. Noch nicht umgesetzt.",
-        "Integriertes Spielmenü nach Beta-Praxistests vervollständigen und erst nach Abnahme mit Version 4.0 stabil freigeben."
+        "RP-Schummeln nach SL-Freigabe: spielbezogene Karten-/Würfelwirkung, Arkane Kunde oder Fingerfertigkeit gegen SL-DC, danach immer Heimlichkeit; Bemerken entscheidet die SL je Spieler. Noch nicht umgesetzt."
       ]
     },
     "functions": {
-      "title": "aktuelle Funktionen (14)",
+      "title": "aktuelle Funktionen (16)",
       "paragraphs": [
         "15 stabile Spiele und Spiel der Könige als optionale Beta. Gemeinsame SL-Moderation, interne Spieltoken und optionale 3D-Würfel. Integrierte Spielansicht als separate Beta mit nativem Werkzeugleisten-Zugang; Fenster bleiben Standard."
       ],
@@ -115,9 +115,11 @@
         "Kniffel Extreme mit 22 Feldern, W10 und Zusatzwurf-Chips; 17 und 4 mit W12 oder W8+W6 und manueller oder automatischer Bank.",
         "Gemeinsame Startspielerwahl: Standard nach Spielregel, konkrete Teilnehmer oder Zufall; Bank und gemeinsame Ziehungen bleiben SL-gesteuert.",
         "Göttliche Hand: mehrere dauerhafte, ausschließlich für die SL sichtbare Glücks-/Pechprofile je Teilnehmer; globale Vorgaben, spielbezogene Ausnahmen und weiche Qualitätsziele. 0 Prozent bleibt unveränderter Zufall, keine garantierte Gewinnquote.",
-        "Fortlaufende Rundenpartien bei 17 und 4, Würfelpoker und Chō-Han mit erhaltenen Tokenbeständen und SL-Steuerung direkt im Spielfenster aller Spiele.",
+        "Fortlaufende Runden bei 17 und 4, Würfelpoker, Chō-Han, Spiel der Könige und Mau-Mau mit erhaltenen Tokenbeständen und SL-Steuerung direkt in der Lobby.",
         "Klippklapp: öffentliches Klappenbrett, tatsächliche Restsumme, direkter Vorgängervergleich und interne Tokenzahlungen.",
-        "Optionales integriertes Spielmenü als Beta: klappbares Teilnehmerpanel links, Moderation im TavernGames-Reiter, Fenster jederzeit wählbar."
+        "Reguläre integrierte Reiteransicht: klappbares Teilnehmerpanel links, Moderation im TavernGames-Reiter; klassische Fenster optional.",
+        "Karten-Beta: Kartensetauswahl, regelabhängige Rangfilter, private Hände, öffentliche Ablage, verschlüsselte Wiederaufnahme und automatische Verwaltung der nativen Kartenstapel.",
+        "Mau-Mau: optional zwei Strafkarten bei vergessenen Ansagen, Einspruch bis zum Ende des folgenden Spielerzugs, neu gemischte Ablage und Unentschieden bei vollständiger Blockade."
       ]
     },
     "settings": {
@@ -130,16 +132,18 @@
         "Keine direkten Charakter-Geldbuchungen mehr. Alte Abrechnungen und Test-Goldkonten sind historische Nachweise und werden nicht umgewandelt. Gegenstandspreise bleiben erhalten. Für die neue Einsatzverwaltung eine neue Lobby verwenden.",
         "Dice So Nice ist optional und separat einschaltbar. Nach Installation des Updates die Welt neu laden.",
         "Vor dem Start Wer beginnt? in der Moderation einstellen. Im Tokenfenster Allen gleichen Bestand zuteilen oder Einzelbestände auswählen; während des Spiels können freie Bestände weiter geändert werden.",
-        "Spielansicht: Jeder Benutzer kann zwischen Fenster (Standard) und Integriertes Spielmenü (Beta) wählen. Für Spieler wird das Teilnehmerpanel nach bestätigtem Beitritt eingeblendet; die SL kann Vorbereitung und Lobby bereits vorher eingebettet öffnen. Die Ansicht ist unabhängig vom Beta-Schalter für Spiele. Göttliche Hand verwendet den Stärkeschieber; der globale Ausschalter löscht alle Glücks- und Pechprofile.",
-        "Ab 3.3.0 benötigen Meiern, Klippklapp und Würfelpoker keinen Beta-Schalter mehr. Die integrierte Spielansicht bleibt je Benutzer optional. Offene Ansichten bleiben nach Partieende eingebettet; auf Fenster wird bewusst zurückgeschaltet. Entfernte Spielausnahmen übernehmen den globalen Einfluss oder zeigen 0 Prozent, jeweils mit Herkunftshinweis.",
+        "Spielansicht: Die integrierte Reiteransicht ist Standard; je Benutzer kann die klassische Fensteransicht gewählt werden. Gespeicherte Fensterwahl bleibt erhalten. Teilnehmer erhalten das linke Spielmenü nach Beitritt, SL-Vorbereitung wird sofort eingebettet.",
+        "Ab 3.3.0 benötigen Meiern, Klippklapp und Würfelpoker keinen Beta-Schalter. Ab 4.0.0 ist die Reiteransicht regulär; Fenster bleiben ausdrücklich wählbar.",
         "Die böse Dreizehn ist ab 3.4.0 stabil und braucht keinen Beta-Test-Schalter. Göttliche Hand ist angebunden, ihre Abstufung bei diesem Spiel ist noch ein offener Korrekturpunkt.",
-        "Spiel der Könige unter Moduleinstellungen → Beta-Test freischalten. In der integrierten Ansicht öffnet das TavernGames-Icon links die berechtigte Lobby. Fenster bleiben als Alternative verfügbar.",
-        "Aalstechen: Glück senkt die natürliche Eins-Chance pro Würfel, ohne hohe sichere Werte zu bevorzugen. Bei 100 % Glück keine Eins; bei 0 % unveränderter Zufall. Die Anzeige liegender Würfel ist in 3.4.2 unverändert."
+        "Mau-Mau und Spiel der Könige unter Moduleinstellungen → Beta-Test freischalten. Über das TavernGames-Symbol links die berechtigte Lobby öffnen.",
+        "Aalstechen: Glück senkt die natürliche Eins-Chance pro Würfel, ohne hohe sichere Werte zu bevorzugen. Bei 100 % Glück keine Eins; bei 0 % unveränderter Zufall. Die Anzeige liegender Würfel ist in 3.4.2 unverändert.",
+        "Mau-Mau: Kartenset in der Moderation wählen. Die drei importierten Dragon-Cards-Decks werden anhand ihrer Metadaten erkannt; ein schlichtes Standardset funktioniert ohne Zusatzmodul. Das Spiel verwendet nur 7 bis Ass ohne Joker.",
+        "Mau-Mau: Ansagestrafe standardmäßig aus. Endgültiges Beenden entfernt die automatisch erzeugten Spielstapel. Vorlagendecks bleiben unberührt. Bei fehlenden nativen Spielkarten Kartenbestände wiederherstellen verwenden."
       ],
       "items": []
     },
     "sources": {
-      "title": "Regelquellen (38)",
+      "title": "Regelquellen (40)",
       "paragraphs": [
         "Hier findet ihr alle genutzten Regelquellen. Quellen für noch nicht umgesetzte Spiele sind ausdrücklich als geplante Regelreferenzen gekennzeichnet."
       ],
@@ -181,7 +185,9 @@
         "Meiern / Schlangenfangen: Awiana (https://awiana.fandom.com/de/wiki/Schlangenfangen?oldid=6670), bereitgestellte D&D-Minispiele v1.0 vom 15.10.2026, bestätigte Hausregeln von Daniel Brune.",
         "Aalstechen: Awiana (https://awiana.fandom.com/de/wiki/Aalstechen?oldid=5758), sichtbare Fünferblock-/Setzvariante Daniel Brune. All-in-/Nebentopf-Referenz: PokerStars (https://www.pokerstars.com/de/help/articles/poker-rules-master/215804/).",
         "Daniel Brune – bereitgestellte Klippklapp-Regelvorlage vom 13.10.2026 und bestätigte Bluff-, Zahlungs- und Startspielerregeln; neue Brettspielnamen zunächst nur vorgemerkt.",
-        "O’Donnell – Die böse Dreizehn: https://odonnell.de/blogs/news/die-besten-wurfelspiele-fur-drei-wurfel"
+        "O’Donnell – Die böse Dreizehn: https://odonnell.de/blogs/news/die-besten-wurfelspiele-fur-drei-wurfel",
+        "Mau-Mau: Daniels D&D-Minispiele-Sammlung vom 15.10.2026, bestätigte Randregeln und Spielewiki – https://spielewiki.org/wiki/Mau_Mau",
+        "Dragon Cards – Card Deck: Daniel Brune, optionale KI-generierte bzw. KI-basierte Dracima-Gestaltung; drei Stile, Kartenmetadaten-Schema und Lese-API v1. Kein Bestandteil des Hauptmoduls."
       ]
     },
     "sources1": {
@@ -210,9 +216,11 @@
         "Farkle, optional in allen Modi: Einstiegshürde ausschaltbar oder frei bis zur Zielpunktzahl einstellbar; klassische Voreinstellung 500 Punkte.",
         "Klippklapp Variante C: 3+5 erlaubt 8 oder 3 und 5 gemeinsam; 2+2 erlaubt 4 oder eine 2. Keine einzelnen ungleichen Würfelwerte.",
         "Daniel Brune: Die böse Dreizehn mit Restzahlung und Ausscheiden, fortlaufenden Töpfen und internen Spieltoken.",
-        "Spiel der Könige: Daniels bestätigte Umsetzung mit nacheinander geworfenen W8/W6/W4, drei Setzphasen, All-in/Nebentöpfen und Topfteilung; Regelvorlage Paul Cossmer."
+        "Spiel der Könige: Daniels bestätigte Umsetzung mit nacheinander geworfenen W8/W6/W4, drei Setzphasen, All-in/Nebentöpfen und Topfteilung; Regelvorlage Paul Cossmer.",
+        "Mau-Mau: 32 Karten von 7 bis Ass, fünf Startkarten, keine Joker oder Siebener-Stapel. Nur ohne spielbare Karte ziehen.",
+        "Mau-Mau: optionale Ansagestrafe aus; aktiviert zwei Karten nach rechtzeitigem Einspruch bis zum Ende des folgenden Spielerzugs, auch nach letzter Karte. Vollständige Blockade endet unentschieden."
       ]
     }
   },
-  "version": "3.4.5"
+  "version": "4.0.0"
 }

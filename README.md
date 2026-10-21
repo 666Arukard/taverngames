@@ -1,3 +1,17 @@
+## Version 4.0.0
+
+Mau-Mau startet als erstes Kartenspiel in der Beta: zwei bis fünf Teilnehmer, 32 Karten von 7 bis Ass, private Hände, Ziehen und Ausspielen, Wunschfarbe, NPC-Automatik und optionale Ansagestrafen. Der SL wählt das Standardset oder einen der drei importierten Dragon-Cards-Stile. Spieldeck, Hände und Ablage werden automatisch verwaltet, Vorlagen bleiben unverändert. Die Reiteransicht ist jetzt Standard; klassische Fenster bleiben optional.
+
+Mau-Mau joins as the first card-game beta: two to five participants, 32 cards from seven through ace, private hands, drawing and playing cards, suit choices, NPC automation and optional call penalties. The GM chooses the standard set or any of the three imported Dragon Cards styles. Session deck, hands and discard are managed automatically without changing templates. Sidebar view is now the default; classic windows remain optional.
+
+Mau-Mau unter Moduleinstellungen → Beta-Test freischalten. In der Moderation Kartenset und NPCs wählen, Lobby öffnen, Teilnehmer beitreten lassen und Startspieler bestimmen. Ohne Einsatz ist Standard; optional interne Spieltoken mit gemeinsamem Einsatz und Sieger-Topf. Weitere Runden bleiben innerhalb derselben Partie. Ende/Abbruch entfernt erzeugte native Kartenbestände, nicht deine Deckvorlagen.
+
+Enable Beta testing in module settings for Mau-Mau. Choose a card set and NPCs in moderation, open the lobby, join and choose the starting player. No stakes by default; optional internal tokens use a shared stake and winner-takes-pot payout. More rounds stay in the same session. Ending/aborting cleans up session card stacks, never imported templates.
+
+Dragon Cards – Card Deck (`dragon-cards-card-deck`) ist optional. Alle drei importierten Stile werden anhand ihrer Metadaten erkannt; alternativ Lese-API v1 bei aktivem Grafikpaket. TavernGames liefert ein schlichtes eigenes Standardset. Keine Drachenkartengrafiken im Hauptmodul gebündelt. Nur zum Spiel passende Ränge werden verwendet; bei Mau-Mau keine Joker. Keine Kartenanimationen, kein Karten-Schummeln und noch keine klassische Mau-Mau-Minuspunkte-Serie.
+
+Die Reiteransicht ist Standard für Clients ohne gespeicherte abweichende Auswahl. Explizite Fensterwahl bleibt erhalten; ältere `panel-beta`-Auswahl wird nach `panel` übernommen. Alle Clients nach Installation vollständig neu laden. Tests nutzen native Foundry-/Netzwerk-Doubles, kein Live-Foundry-Test dieser Karten-Beta. Noch nicht veröffentlicht.
+
 ## Version 3.4.5
 
 Bei Dropdowns und anderen Eingaben wird nur noch das bediente Feld hervorgehoben. Die umgebende Beschriftung bleibt ohne Hintergrund oder Rahmen. Die lesbare Hervorhebung der eigentlichen Bedienelemente bleibt erhalten.
