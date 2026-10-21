@@ -177,3 +177,10 @@
 .taverngames-surface.taverngames-surface :is(select,textarea,input[type=text],input[type=number]):is(:hover,:focus-visible){background:#fff9ef;color:#30251e;outline:2px solid #c6a96c;outline-offset:0;box-shadow:none;text-shadow:none;filter:none}
 [data-integrated-moderation] .taverngames-surface.taverngames-surface :is(select,textarea,input[type=text],input[type=number]):is(:hover,:focus-visible){background:var(--input-background-color,rgba(128,128,128,.12));color:inherit}
 #taverngames-player-panel .taverngames-surface.taverngames-surface :is(select,textarea,input[type=text],input[type=number]):is(:hover,:focus-visible){background:rgba(128,128,128,.12);color:inherit}
+
+/* Sidebar moderation may inherit stronger theme hover overlays than floating windows.
+   Keep an explicit paired palette, including labels and controls in the dock header.
+   Important declarations are limited to TavernGames interaction states. */
+.taverngames-catalog.taverngames-catalog [data-integrated-moderation] :is(button:enabled,summary,select,input,textarea,label,a):is(:hover,:focus-visible){background:#f4e7cc!important;color:#241b12!important;outline:2px solid #c6a96c!important;outline-offset:0;box-shadow:none!important;text-shadow:none!important;filter:none!important}
+.taverngames-catalog.taverngames-catalog [data-integrated-moderation] button.held:is(:hover,:focus-visible){background:#d8c593!important}
+.taverngames-catalog.taverngames-catalog [data-integrated-moderation] button.farkle-selected:is(:hover,:focus-visible){background:#c2e0bd!important}

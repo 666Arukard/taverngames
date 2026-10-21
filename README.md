@@ -1,3 +1,11 @@
+## Version 3.4.4
+
+Die eingebettete Moderation schützt ihre Hover-Farben jetzt auch gegen stärker gewichtete Reiter- und Theme-Regeln. Buttons, Eingaben, Auswahlfelder, Beschriftungen und aufklappbare Bereiche verwenden beim Darüberfahren eine helle Fläche mit dunkler Schrift und goldenem Rahmen. Ausgewählte Würfel behalten ihre Markierung.
+
+Embedded moderation now protects hover colors against stronger sidebar and theme rules. Buttons, inputs, dropdowns, labels and expandable sections use a light background, dark text and a gold outline on hover. Selected dice keep their highlights.
+
+Alle Clients neu laden. Noch nicht veröffentlicht.
+
 ## Version 3.4.3
 
 Die Hover-Hervorhebung bleibt jetzt auch in frei beweglichen Moderations- und Spielfenstern lesbar. Buttons, Auswahl- und Eingabefelder sowie aufklappbare Überschriften erhalten einen goldenen Fokusrahmen statt einer dunklen Überlagerung. Markierungen gehaltener und ausgewählter Würfel bleiben erhalten.
