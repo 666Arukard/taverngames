@@ -14,7 +14,7 @@ export class GameView{
  toggleMenu(){if(!this.enabled()||!this.hasLobby())return;this.setCollapsed(!this.collapsed);this.refresh();}
  enabled(){try{return ['panel','panel-beta'].includes(globalThis.game?.settings?.get('taverngames','gameViewMode'));}catch{return false;}}
  active(s){return !!s&&s.phase!=='aborted'&&(s.phase!=='finished'||CONTINUOUS_GAMES.includes(s.game)&&!s.seriesClosed);}
- eligible(e){const s=this.getState?.(e.scope),joined=!!s&&(s.players??[]).includes(game.user.id)&&!(s.out??[]).includes(game.user.id)&&!(s.leaving??[]).includes(game.user.id);if(joined)e.joined=true;if(game.user.isGM)return true;return joined||(!this.active(s)&&e.joined&&this.moves.has(e.kind));}
+ eligible(e){const s=this.getState?.(e.scope),joined=!!s&&(s.players??[]).includes(game.user.id)&&!(s.out??[]).includes(game.user.id)&&!(s.leaving??[]).includes(game.user.id);if(joined)e.joined=true;if(game.user.isGM||e.role==='table')return true;return joined||(!this.active(s)&&e.joined&&this.moves.has(e.kind));}
  mount(e,destination){
   if(!destination?.isConnected||!e.app?.element?.isConnected||!e.root.isConnected)return false;
   if(!this.moves.has(e.kind)){const anchor=document.createComment('TavernGames content');e.root.before(anchor);this.moves.set(e.kind,{anchor,frame:e.app.element});}

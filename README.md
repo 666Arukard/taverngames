@@ -667,3 +667,9 @@ Eigene abgelegte 3D-Würfel größer; Verkleinerung nur bei Platzmangel. Tischbe
 ## 5.0.4
 
 Über abgelegten 3D-Würfelgruppen erscheint die sichtbare Augensumme. Verdeckte Würfel werden ausschließlich als unbekannter Anteil angezeigt, beispielsweise 12 + ?. Vollständig verdeckte Gruppen zeigen ?. Die Anzeige blockiert keine Mausbedienung. Glückstag bleibt unverändert. Keine Veröffentlichung.
+
+## 5.0.5
+
+17 und 4 nutzt dichtere Würfelhaufen und mehr Tischfläche. Summen stehen gemeinsam oberhalb aller abgelegten Würfel. Die Reiteransicht öffnet sich bereits vor dem Beitritt. Das mitgelieferte Standard-Kartenset entfällt; vorhandene Decks und externe Kartensets bleiben nutzbar. Englisch ist als Sprach-Beta gekennzeichnet und unabhängig vom Beta-Schalter verfügbar.
+
+Keine Veröffentlichung/Commits. Keine Weltdecks löschen. Fehlendes geeignetes Deck: Cards / Card Decks erstellen oder importieren. Laufende Spielberechtigungen und verdeckte Daten bleiben unverändert. Glückstag-Regeln unverändert.

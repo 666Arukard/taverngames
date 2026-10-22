@@ -14,10 +14,22 @@ export function diceDiameter(mesh,fallback=0.05){
 export function diceViewport(box){const display=box?.display??box?.diceScene?.display;return {width:positive(display?.innerWidth,1),height:positive(display?.innerHeight,0.65)};}
 // Group by stable cup slot (five dice), but lay out only currently visible pieces.
 // Every slot has a bounding diameter plus padding, rather than a fixed percentage.
-export function groupedDiceLayout(indices,{width=1,height=0.65,diameter=0.05,groupSize=5}={}){
+export function groupedDiceLayout(indices,{width=1,height=0.65,diameter=0.05,groupSize=5,compact=false}={}){
  width=positive(width,1);height=positive(height,0.65);diameter=positive(diameter,0.05);
  const groups=new Map();for(const index of [...indices].sort((a,b)=>a-b)){const id=Math.floor(index/groupSize);if(!groups.has(id))groups.set(id,[]);groups.get(id).push(index);}
  const cups=[...groups.values()];if(!cups.length)return {positions:new Map(),scale:1,diameter};
+ if(compact){
+  const dx=diameter*1.08/width,dy=diameter*1.08/height;let best;
+  for(let columns=1;columns<=Math.max(...cups.map(c=>c.length));columns++)for(let across=1;across<=cups.length;across++){
+   const sizes=cups.map(c=>({w:Math.min(columns,c.length)*dx,h:Math.ceil(c.length/columns)*dy})),rows=[];
+   for(let i=0;i<cups.length;i+=across){const row=sizes.slice(i,i+across);rows.push({w:row.reduce((n,s)=>n+s.w,0)+Math.max(0,row.length-1)*dx*.5,h:Math.max(...row.map(s=>s.h)),start:i});}
+   const w=Math.max(...rows.map(r=>r.w)),h=rows.reduce((n,r)=>n+r.h,0)+Math.max(0,rows.length-1)*dy*.65,scale=Math.min(1,.94/w,.86/h),area=w*h;
+   if(!best||scale>best.scale+1e-8||Math.abs(scale-best.scale)<1e-8&&area<best.area)best={columns,across,sizes,rows,w,h,scale,area};
+  }
+  const positions=new Map(),b=best;let y=(1-b.h*b.scale)/2;
+  for(const row of b.rows){let x=(1-row.w*b.scale)/2;for(let i=row.start;i<Math.min(row.start+b.across,cups.length);i++){cups[i].forEach((index,n)=>positions.set(index,{x:x+(n%b.columns+.5)*dx*b.scale,y:y+(Math.floor(n/b.columns)+.5)*dy*b.scale}));x+=(b.sizes[i].w+dx*.5)*b.scale;}y+=(row.h+dy*.65)*b.scale;}
+  return {positions,scale:b.scale,diameter,columns:b.columns,across:b.across};
+ }
  const maxCount=Math.max(...cups.map(c=>c.length)),dx=diameter*1.28/width,dy=diameter*1.28/height;let best;
  for(let columns=1;columns<=maxCount;columns++)for(let across=1;across<=cups.length;across++){
   const cupW=columns*dx,cupH=Math.ceil(maxCount/columns)*dy,rows=Math.ceil(cups.length/across),totalW=across*cupW+(across-1)*dx*0.65,totalH=rows*cupH+(rows-1)*dy*0.8;

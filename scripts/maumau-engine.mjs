@@ -1,10 +1,10 @@
 import {startingOrder} from './start-choice.mjs';
-import {SUITS,MAU_PROFILE,selectCards,standardCards} from './card-sets.mjs';
+import {SUITS,MAU_PROFILE,selectCards} from './card-sets.mjs';
 const check=(v,m)=>{if(!v)throw Error(m);};
 export function shuffle(cards,random){const a=[...cards];for(let i=a.length-1;i>0;i--){const n=random(i+1)-1;check(Number.isInteger(n)&&n>=0&&n<=i,'Invalid shuffle.');[a[i],a[n]]=[a[n],a[i]];}return a;}
 export function createMau(options={}){
- const cards=selectCards(options.cardSet?.cards??standardCards(),MAU_PROFILE),npcs=options.npcs??{};
- return {version:1,game:'maumau',gameId:null,revision:0,phase:'lobby',paused:false,players:Object.keys(npcs),npcs:structuredClone(npcs),npcManual:{},startSelection:options.startSelection??'rules',order:[],turn:0,turnSerial:0,cards:Object.fromEntries(cards.map(c=>[c.id,c])),cardSet:{key:options.cardSet?.key??'standard',label:options.cardSet?.label??'Standard',style:options.cardSet?.style??'standard'},hands:{},drawPile:[],discard:[],activeSuit:null,drawnCard:null,pendingDraw:0,calls:[],candidate:null,blockedTurns:0,voluntaryDraw:options.voluntaryDraw===true,penalties:options.penalties===true,winners:[],losers:[],draw:false};
+ const cards=selectCards(options.cardSet?.cards??[],MAU_PROFILE),npcs=options.npcs??{};
+ return {version:1,game:'maumau',gameId:null,revision:0,phase:'lobby',paused:false,players:Object.keys(npcs),npcs:structuredClone(npcs),npcManual:{},startSelection:options.startSelection??'rules',order:[],turn:0,turnSerial:0,cards:Object.fromEntries(cards.map(c=>[c.id,c])),cardSet:{key:options.cardSet?.key??'custom',label:options.cardSet?.label??'Custom',style:options.cardSet?.style??'custom'},hands:{},drawPile:[],discard:[],activeSuit:null,drawnCard:null,pendingDraw:0,calls:[],candidate:null,blockedTurns:0,voluntaryDraw:options.voluntaryDraw===true,penalties:options.penalties===true,winners:[],losers:[],draw:false};
 }
 export const mauLegal=(s,id,cardId)=>s?.phase==='playing'&&!s.pendingDraw&&s.hands[id]?.includes(cardId)&&(!s.drawnCard||s.drawnCard===cardId)&&(s.cards[cardId].rank==='jack'||s.cards[cardId].suit===s.activeSuit||s.cards[cardId].rank===s.cards[s.discard.at(-1)]?.rank);
 function finish(s,id){s.phase='finished';s.winners=id?[id]:[];s.losers=id?s.players.filter(p=>p!==id):[];s.draw=!id;s.calls=[];s.candidate=null;}
