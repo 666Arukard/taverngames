@@ -1,11 +1,9 @@
 name: Foundry - Zugang pruefen ohne Veroeffentlichung
 on:
   push:
-    if: ${{ false }} # Foundry auf Nutzerwunsch pausiert
     branches: [main]
     paths: ['.github/workflows/foundry-connection-check.yml']
   workflow_dispatch:
-    if: ${{ false }} # Foundry auf Nutzerwunsch pausiert
 permissions:
   contents: read
 jobs:
