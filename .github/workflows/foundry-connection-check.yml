@@ -1,0 +1,31 @@
+name: Foundry - Zugang pruefen ohne Veroeffentlichung
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/foundry-connection-check.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Foundry-Zugang nur mit dry-run pruefen
+        env:
+          FOUNDRY_RELEASE_TOKEN: ${{ secrets.FOUNDRY_RELEASE_TOKEN }}
+        shell: python
+        run: |
+          import os,json,urllib.request,urllib.error
+          token=os.environ.get('FOUNDRY_RELEASE_TOKEN','').strip()
+          if not token.startswith('fvttp_'): raise SystemExit('Foundry-Secret fehlt oder ist ungueltig.')
+          payload={'id':'taverngames','dry-run':True,'release':{'version':'5.1.0','manifest':'https://github.com/666Arukard/taverngames/releases/download/v5.1.0/module.json','notes':'https://github.com/666Arukard/taverngames/releases/tag/v5.1.0','compatibility':{'minimum':'14.369','verified':'14.369'}}}
+          req=urllib.request.Request('https://foundryvtt.com/_api/packages/release_version/',data=json.dumps(payload).encode(),headers={'Content-Type':'application/json','Authorization':token,'User-Agent':'TavernGames-Foundry-Release'},method='POST')
+          try:
+              with urllib.request.urlopen(req,timeout=60) as r: result=json.load(r)
+              if result.get('status')!='success': raise SystemExit('Foundry bestaetigt den Test nicht.')
+              print('Foundry-Zugang erfolgreich; Dry-run, keine Veroeffentlichung.')
+          except urllib.error.HTTPError as e:
+              body=e.read(200000).decode('utf-8','replace').lower()
+              reason='CSRF' if 'csrf' in body else 'Version bereits vorhanden' if 'unique_together' in body else 'Web-Schutz' if ('cloudflare' in body or 'just a moment' in body) else 'Berechtigung oder unbekannter Serverfehler'
+              print('Foundry-Test HTTP '+str(e.code)+'; Kategorie: '+reason+'. Antwortinhalt bleibt vertraulich.')
+              raise SystemExit(1)
