@@ -2,23 +2,24 @@
   "schemaVersion": 1,
   "blocks": {
     "patchnotes": {
-      "title": "Patchnotes Version 4.1.1",
+      "title": "Patchnotes Version 5.0.0",
       "paragraphs": [
-        "Mau-Mau: Handkarten passen sich dem freien Bildschirmbereich an und werden bei großen Händen kompakter. Weitere Karten sind horizontal scrollbar, auch per Mausrad, mit sichtbarem Hinweis. Der Kartentisch bleibt bei eingeklappter Lobby spielbar. Ein deutliches Banner meldet eigene und gegnerische Siege sowie Unentschieden. Die Breitenberechnung berücksichtigt geöffnete und geschlossene rechte Seitenleisten.",
-        "Mau-Mau: Hand cards adapt to the available screen area and become more compact for large hands. Extra cards remain accessible through horizontal scrolling, including the mouse wheel, with a visible hint. The card table stays playable when the lobby is collapsed. A prominent banner announces your win, an opponent’s win or a draw. Width calculations account for expanded and collapsed right sidebars."
+        "Stabile Kartenbasis mit Mau-Mau und zentralem, anklickbarem Kartentisch. Mau-Mau erlaubt optional freiwilliges Ziehen; die SL kann die nächste Runde direkt am Ergebnisbanner vorbereiten. Neu als Beta: Der Glückstag mit verdeckten Würfeln, optionalen Erhöhungen und interner Bank sowie Schwimmen / Knack mit drei Leben, Schwimmen und optionalem Blitz. Spiel der Könige gehört zu den Würfelspielen. Direkte Bedienung eigener liegender 3D-Würfel, schwebender Würfeln-Button und wählbare Markierungsbedeutung sind ergänzt.",
+        "Stable card foundation with Mau-Mau and a central clickable card table. Mau-Mau optionally allows voluntary draws; the GM can prepare the next round directly from the result banner. New betas: Lucky Day with hidden dice, optional raises and an internal bank, and Schwimmen / Knack with three lives, swimming and optional Blitz. Game of Kings is categorized as a dice game. Direct controls for your own resting 3D dice, a floating Roll button and selectable marker meaning are included."
       ],
       "items": [
-        "Handkarten passen sich dem Platz an; große Hände werden kleiner und sind horizontal scrollbar.",
-        "Mausradbedienung und Hinweis bei überlaufenden Handkarten.",
-        "Karten bleiben bei eingeklappter Lobby spielbar.",
-        "Deutliches Ergebnisbanner direkt auf dem Kartentisch.",
-        "16 stabile Spiele; Mau-Mau bleibt Beta. Alle Clients neu laden."
+        "Mau-Mau und gemeinsame Kartenbasis stabil; zentraler Kartentisch mit eigener Hand und Rundenstart am Banner.",
+        "Mau-Mau: freiwilliges Ziehen als optionale Regel, standardmäßig aus.",
+        "Glückstag als Beta: standardmäßig verdeckte Würfel, eigene Aufdeckung, optionales Erhöhen, abgerundete Auszahlungen und interne Bank.",
+        "Schwimmen / Knack als Beta: drei Leben, 30½, Knack, optionaler Blitz, Passen und einmaliger Einkauf.",
+        "Spiel der Könige als Würfelspiel eingeordnet.",
+        "Eigene liegende 3D-Würfel direkt auswählen, schwebender Würfeln-Button und Markierungsmodus Behalten/Neuwurf."
       ]
     },
     "games": {
-      "title": "aktuelle Spiele (17)",
+      "title": "aktuelle Spiele (19)",
       "paragraphs": [
-        "16 stabile Spiele und Mau-Mau als optionale Beta. Reiteransicht als Standard, Fenster optional."
+        "17 stabile Spiele, darunter Mau-Mau. Glückstag und Schwimmen sind optionale Betas. Reiteransicht als Standard; Fenster bleiben wählbar."
       ],
       "items": [
         "17 und 4",
@@ -30,6 +31,7 @@
         "Klippklapp",
         "Kniffel",
         "Lügenwürfel",
+        "Mau-Mau",
         "Meiern",
         "Schiff–Kapitän–Mannschaft",
         "Schocken",
@@ -37,11 +39,12 @@
         "Spiel der Könige",
         "Straßenlotto",
         "Würfelpoker",
-        "Mau-Mau (Beta)"
+        "Der Glückstag (Beta)",
+        "Schwimmen / Knack (Beta)"
       ]
     },
     "plans": {
-      "title": "geplante Spiele (33)",
+      "title": "geplante Spiele (31)",
       "paragraphs": [
         "Geplante Spiele und Wettbewerbe mit vorhandenen Referenzen oder neu vorgemerkten Namen. Einzelne Regeln sind noch offen; insbesondere ist beim Streichholzspiel noch keine genaue Variante festgelegt. Vorhandene Spiele werden nicht unter ihren englischen Namen erneut geplant."
       ],
@@ -52,7 +55,6 @@
         "Blackjack",
         "Bogenschießen",
         "Das Spiel der edlen Dame",
-        "Der Glückstag",
         "Doppelkopf",
         "Durak",
         "Escalero",
@@ -71,7 +73,6 @@
         "Schach (abstrakter Wettbewerb)",
         "Schiffe versenken / Battleship (Variante noch offen)",
         "Schummeln (Kartenspiel)",
-        "Schwimmen / Knack",
         "Sechsundsechzig",
         "Skat",
         "Streichholzspiel / Matchstick Game (Variante noch offen)",
@@ -99,7 +100,7 @@
       ]
     },
     "functions": {
-      "title": "aktuelle Funktionen (17)",
+      "title": "aktuelle Funktionen (20)",
       "paragraphs": [
         "15 stabile Spiele und Spiel der Könige als optionale Beta. Gemeinsame SL-Moderation, interne Spieltoken und optionale 3D-Würfel. Integrierte Spielansicht als separate Beta mit nativem Werkzeugleisten-Zugang; Fenster bleiben Standard."
       ],
@@ -120,7 +121,10 @@
         "Reguläre integrierte Reiteransicht: klappbares Teilnehmerpanel links, Moderation im TavernGames-Reiter; klassische Fenster optional.",
         "Karten-Beta: Kartensetauswahl, regelabhängige Rangfilter, private Hände, öffentliche Ablage, verschlüsselte Wiederaufnahme und automatische Verwaltung der nativen Kartenstapel.",
         "Mau-Mau: optional zwei Strafkarten bei vergessenen Ansagen, Einspruch bis zum Ende des folgenden Spielerzugs, neu gemischte Ablage und Unentschieden bei vollständiger Blockade.",
-        "Mau-Mau in der Reiteransicht mit großem Kartentisch, privater eigener Hand unten und direkt anklickbaren Karten sowie Nachziehstapel."
+        "Mau-Mau in der Reiteransicht mit großem Kartentisch, privater eigener Hand unten und direkt anklickbaren Karten sowie Nachziehstapel.",
+        "Stabile gemeinsame Kartenbasis mit auswählbaren Decks und zentralem Kartentisch.",
+        "Direkte Auswahl eigener liegender 3D-Würfel und schwebender Würfeln-Button.",
+        "Markierte Würfel nach persönlicher Einstellung behalten oder erneut würfeln."
       ]
     },
     "settings": {
@@ -222,7 +226,19 @@
         "Mau-Mau: 32 Karten von 7 bis Ass, fünf Startkarten, keine Joker oder Siebener-Stapel. Nur ohne spielbare Karte ziehen.",
         "Mau-Mau: optionale Ansagestrafe aus; aktiviert zwei Karten nach rechtzeitigem Einspruch bis zum Ende des folgenden Spielerzugs, auch nach letzter Karte. Vollständige Blockade endet unentschieden."
       ]
+    },
+    "milestones": {
+      "title": "Meilensteine",
+      "items": [
+        "5.0.0 – Stabile Kartenbasis mit Mau-Mau und zentralem Kartentisch; Glückstag und Schwimmen kommen als Beta hinzu.",
+        "4.0.0 – Einstieg in Kartenspiele mit Mau-Mau als Beta; Reiteransicht wird regulärer Standard, Fenster bleiben optional.",
+        "3.0.0 – Göttliche Hand: ausschließlich für die SL sichtbare Beeinflussung regelkonformer Würfelergebnisse.",
+        "2.0.0 – Stabile optionale Dice-So-Nice-Anbindung für 3D-Würfel; neun stabile Spiele.",
+        "1.0.0 – Erste Hauptversion mit deutscher und englischer Oberfläche sowie updatefähigen Installationspaketen.",
+        "0.0.1 – Start des Weges: erstes Würfelspiel."
+      ],
+      "paragraphs": []
     }
   },
-  "version": "4.1.1"
+  "version": "5.0.0"
 }

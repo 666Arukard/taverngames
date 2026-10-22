@@ -1,3 +1,4 @@
+import {newGameGuide} from './new-games-text.mjs';
 import {mauGuide} from './maumau-text.mjs';
 import {kingsGuide} from './kings-text.mjs';
 import {thirteenGuide} from './thirteen-text.mjs';
@@ -11,7 +12,7 @@ import {betaGuide} from './beta-games-text.mjs';
 import {kniffelGuide} from './kniffel-text.mjs';
 import {f} from './farkle-text.mjs';
 export const escapeHTML=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-export const gameTitle=game=>({maumau:'Mau-Mau',kings:f('Spiel der Könige','Game of Kings'),thirteen:f('Die böse Dreizehn','Wicked Thirteen'),klippklapp:'Klippklapp',poker:f('Würfelpoker','Dice Poker'),aalstechen:'Aalstechen',meiern:'Meiern',seventeen:f('17 und 4','Seventeen and Four'),chohan:'Chō-Han',liars:f('Lügenwürfel','Liar’s Dice'),hoard:f('Drachenhort','Dragon’s Hoard'),kniffel:'Kniffel',schocken:'Schocken',farkle:'Farkle',pig:f('Schweinchen','Pig'),ship:f('Schiff, Kapitän und Mannschaft','Ship, Captain and Crew'),lottery:f('Straßenlotto','Street lottery')})[game]??game;
+export const gameTitle=game=>({lucky:f('Der Glückstag','Lucky Day'),swim:f('Schwimmen / Knack','Schwimmen / Knack'),maumau:'Mau-Mau',kings:f('Spiel der Könige','Game of Kings'),thirteen:f('Die böse Dreizehn','Wicked Thirteen'),klippklapp:'Klippklapp',poker:f('Würfelpoker','Dice Poker'),aalstechen:'Aalstechen',meiern:'Meiern',seventeen:f('17 und 4','Seventeen and Four'),chohan:'Chō-Han',liars:f('Lügenwürfel','Liar’s Dice'),hoard:f('Drachenhort','Dragon’s Hoard'),kniffel:'Kniffel',schocken:'Schocken',farkle:'Farkle',pig:f('Schweinchen','Pig'),ship:f('Schiff, Kapitän und Mannschaft','Ship, Captain and Crew'),lottery:f('Straßenlotto','Street lottery')})[game]??game;
 const ERRORS={
  'Not enough game tokens for the buy-in.':'Jeder Teilnehmer benötigt fünf Grundeinsätze für den Einkauf.',
  'Complete the previous throw first.':'Schließe zuerst den vorherigen Wurf ab.',
@@ -121,6 +122,7 @@ const ERRORS={
 Object.assign(ERRORS,{"The selected deck does not contain the required cards.": "Das Kartenset enthält nicht alle benötigten Karten eindeutig.", "The selected card set is unavailable.": "Das gewählte Kartenset ist nicht verfügbar.", "Two to five players.": "Mau-Mau benötigt zwei bis fünf Teilnehmer.", "This card cannot be played.": "Diese Karte kann gerade nicht ausgespielt werden.", "Choose a suit.": "Bitte eine Wunschfarbe wählen.", "Play a matching card first.": "Eine passende Karte ausspielen; weiteres Ziehen ist gerade nicht erlaubt.", "Draw first.": "Zuerst eine Karte ziehen.", "No missed call.": "Es gibt keine fristgerecht anfechtbare vergessene Ansage.", "The game has ended or is paused.": "Das Spiel ist beendet oder pausiert.", "Native Foundry Cards API is unavailable.": "Die native Foundry-Kartenverwaltung ist nicht verfügbar.", "A native game card is missing; restore the session stacks.": "Eine Spielkarte fehlt im Kartenbestand. Bitte Kartenbestände wiederherstellen."});
 export const tavernError=message=>f(ERRORS[message]??message,message);
 export function tavernGuide(game){
+ if(['lucky','swim'].includes(game))return newGameGuide(game);
  if(game==='maumau')return mauGuide();
  if(game==='kings')return kingsGuide();
  if(game==='thirteen')return thirteenGuide();

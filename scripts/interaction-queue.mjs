@@ -40,7 +40,9 @@ export function sameInteraction(action,key,current){
 let eventContext=null;
 const contexts=new WeakMap(),surfaces=new WeakMap();
 export const inputContext=scope=>eventContext?.scope===scope?eventContext.key:null;
-function stampControls(root,context){if(!context)return;for(const element of root.querySelectorAll('button,input,select,textarea'))contexts.set(element,context);}
+function stampControls(root,context){if(!context)return;
+ if(['farkle','kniffel','schocken','poker'].includes(context.scope)){let invert=false;try{invert=globalThis.game?.settings?.get('taverngames','markedDiceAction')==='reroll';}catch{}for(const dice of root.querySelectorAll('.schocken-dice')){for(const button of dice.querySelectorAll('button')){if(button.disabled&&button.classList.contains('held')){button.classList.remove('tg-inverted-marker');continue;}const kept=button.classList.contains('held')||button.classList.contains('farkle-selected');button.dataset.tgMarked=String(invert?!kept:kept);button.classList.toggle('tg-inverted-marker',invert);if(invert)button.setAttribute('aria-pressed',String(!kept));}let hint=dice.querySelector('[data-marker-hint]');if(invert&&!hint){hint=document.createElement('small');hint.dataset.markerHint='';hint.textContent=globalThis.game?.settings?.get('taverngames','language')==='de'?'Markierte Würfel werden erneut gewürfelt.':'Marked dice will be rerolled.';dice.append(hint);}else if(!invert)hint?.remove();}}
+for(const element of root.querySelectorAll('button,input,select,textarea'))contexts.set(element,context);}
 // Retain the actual DOM until click/keyup has completed. Editing controls stay
 // attached until focus leaves, preserving native select popups and input cursors.
 export function renderSurface(root,draw,context){

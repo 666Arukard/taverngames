@@ -4,7 +4,7 @@ const check=(v,m)=>{if(!v)throw Error(m);};
 export function shuffle(cards,random){const a=[...cards];for(let i=a.length-1;i>0;i--){const n=random(i+1)-1;check(Number.isInteger(n)&&n>=0&&n<=i,'Invalid shuffle.');[a[i],a[n]]=[a[n],a[i]];}return a;}
 export function createMau(options={}){
  const cards=selectCards(options.cardSet?.cards??standardCards(),MAU_PROFILE),npcs=options.npcs??{};
- return {version:1,game:'maumau',gameId:null,revision:0,phase:'lobby',paused:false,players:Object.keys(npcs),npcs:structuredClone(npcs),npcManual:{},startSelection:options.startSelection??'rules',order:[],turn:0,turnSerial:0,cards:Object.fromEntries(cards.map(c=>[c.id,c])),cardSet:{key:options.cardSet?.key??'standard',label:options.cardSet?.label??'Standard',style:options.cardSet?.style??'standard'},hands:{},drawPile:[],discard:[],activeSuit:null,drawnCard:null,pendingDraw:0,calls:[],candidate:null,blockedTurns:0,penalties:options.penalties===true,winners:[],losers:[],draw:false};
+ return {version:1,game:'maumau',gameId:null,revision:0,phase:'lobby',paused:false,players:Object.keys(npcs),npcs:structuredClone(npcs),npcManual:{},startSelection:options.startSelection??'rules',order:[],turn:0,turnSerial:0,cards:Object.fromEntries(cards.map(c=>[c.id,c])),cardSet:{key:options.cardSet?.key??'standard',label:options.cardSet?.label??'Standard',style:options.cardSet?.style??'standard'},hands:{},drawPile:[],discard:[],activeSuit:null,drawnCard:null,pendingDraw:0,calls:[],candidate:null,blockedTurns:0,voluntaryDraw:options.voluntaryDraw===true,penalties:options.penalties===true,winners:[],losers:[],draw:false};
 }
 export const mauLegal=(s,id,cardId)=>s?.phase==='playing'&&!s.pendingDraw&&s.hands[id]?.includes(cardId)&&(!s.drawnCard||s.drawnCard===cardId)&&(s.cards[cardId].rank==='jack'||s.cards[cardId].suit===s.activeSuit||s.cards[cardId].rank===s.cards[s.discard.at(-1)]?.rank);
 function finish(s,id){s.phase='finished';s.winners=id?[id]:[];s.losers=id?s.players.filter(p=>p!==id):[];s.draw=!id;s.calls=[];s.candidate=null;}
@@ -32,7 +32,7 @@ export function actMau(original,id,action,args={},random=()=>1,gm=false){
     if(count===0&&!s.candidate){if(!missed)finish(s,id);else s.candidate={id,expires:s.turnSerial+2};}
     if(s.phase==='playing'){s.pendingDraw=c.rank==='7'?2:0;advance(s,c.rank==='8'?2:1);}
    }else if(action==='draw'){
-    check(!s.drawnCard&&(s.pendingDraw>0||!s.hands[id].some(c=>mauLegal(s,id,c))),'Play a matching card first.');const penalty=s.pendingDraw;s.pendingDraw=0;const drawn=take(s,id,penalty||1,random);s.blockedTurns=drawn.length?0:s.blockedTurns+1;
+    check(!s.drawnCard&&(s.pendingDraw>0||s.voluntaryDraw||!s.hands[id].some(c=>mauLegal(s,id,c))),'Play a matching card first.');const penalty=s.pendingDraw;s.pendingDraw=0;const drawn=take(s,id,penalty||1,random);s.blockedTurns=drawn.length?0:s.blockedTurns+1;
     if(!penalty&&drawn.length&&mauLegal(s,id,drawn[0]))s.drawnCard=drawn[0];else advance(s);
    }else if(action==='pass'){check(s.drawnCard,'Draw first.');advance(s);}
    else throw Error('Unknown action.');

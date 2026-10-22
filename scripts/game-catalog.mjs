@@ -1,8 +1,10 @@
 // Names and categories are data so future tags can extend the catalog without
 // coupling navigation to gameplay. No duration or betting claims are invented.
 export const GAME_CATALOG=Object.freeze([
- {id:'maumau',category:'cards',beta:true,names:['Mau-Mau','Mau Mau']},
- {id:'kings',category:'chance',names:['Spiel der Könige','Game of Kings']},
+ {id:'lucky',category:'dice',beta:true,names:['Der Glückstag','Glückstag','Lucky Day']},
+ {id:'swim',category:'cards',beta:true,names:['Schwimmen','Knack','Thirty-one']},
+ {id:'maumau',category:'cards',names:['Mau-Mau','Mau Mau']},
+ {id:'kings',category:'dice',names:['Spiel der Könige','Game of Kings']},
  {id:'thirteen',category:'dice',names:['Die böse Dreizehn','Böse 13','Wicked Thirteen']},
  {id:'klippklapp',category:'dice',names:['Klippklapp','KlippKlapp','Shut the Box']},
  {id:'poker',category:'dice',names:['Würfelpoker','Dice Poker','Koboldpoker'],suggestedNames:['Koboldpoker','Orakelwürfel']},

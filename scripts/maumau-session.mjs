@@ -17,7 +17,7 @@ export class MauSession{
    if(!user.isGM)throw Error('GM only.');if(old&&!['lobby','finished','aborted'].includes(old.phase))throw Error('Finish or end the current game first.');
    if(data.action==='lobby'){
     const names=data.args?.npcs??[];if(!Array.isArray(names)||names.length>5||names.some(n=>typeof n!=='string'||!n.trim()||n.length>60))throw Error('Invalid NPCs.');
-    next=createMau({cardSet:await this.resolveSet(data.args?.set??'standard'),penalties:data.args?.penalties===true,npcs:Object.fromEntries(names.map(n=>['npc-'+crypto.randomUUID(),n.trim()]))});
+    next=createMau({cardSet:await this.resolveSet(data.args?.set??'standard'),voluntaryDraw:data.args?.voluntaryDraw===true,penalties:data.args?.penalties===true,npcs:Object.fromEntries(names.map(n=>['npc-'+crypto.randomUUID(),n.trim()]))});
    }else{if(!old)throw Error('No game exists.');next=createMau({...old,cardSet:{...old.cardSet,cards:Object.values(old.cards)}});next.players=[...old.players];next.npcManual=structuredClone(old.npcManual);}
    next.gameId=crypto.randomUUID();next.revision=(old?.revision??0)+1;
   }else{const id=user.isGM&&old?.npcs[data.args?.id]&&old.npcManual[data.args.id]?data.args.id:user.id;next=actMau(old,id,data.action,data.args,this.random,user.isGM);}
@@ -25,7 +25,7 @@ export class MauSession{
  }
  async commit(next){const old=this.state;seriesMetadata(next,old);await this.save(next);this.state=next;this.updateNpcWait();await this.repair();if(next.phase==='finished'&&old?.phase!=='finished'&&!this.hasAnnouncement(next.gameId)){
   const names=ids=>ids.map(id=>escapeHTML(next.npcs[id]??this.getName(id))).join(', ');
-  try{await this.announce({content:`<h2>Mau-Mau · Beta</h2><p>${next.draw?f('Unentschieden','Draw'):f('Gewonnen','Winner')+': '+names(next.winners)}</p>${next.draw?'':`<p>${f('Verloren','Losers')}: ${names(next.losers)}</p>`}`,flags:{taverngames:{game:'maumau',gameId:next.gameId}}});}catch(e){globalThis.ui?.notifications?.warn(e.message);}
+  try{await this.announce({content:`<h2>Mau-Mau</h2><p>${next.draw?f('Unentschieden','Draw'):f('Gewonnen','Winner')+': '+names(next.winners)}</p>${next.draw?'':`<p>${f('Verloren','Losers')}: ${names(next.losers)}</p>`}`,flags:{taverngames:{game:'maumau',gameId:next.gameId}}});}catch(e){globalThis.ui?.notifications?.warn(e.message);}
  }}
  async npcStep(){if(!this.enabled()||!this.state||this.now()<this.wait?.until)return false;const move=mauNpcAction(this.state);if(!move)return false;await this.commit(actMau(this.state,move.id,move.action,move.args,this.random));return true;}
 }

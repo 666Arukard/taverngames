@@ -22,7 +22,7 @@ export class DiceAnimator {
    const dice=[];
    for(const {sides,value,blank,zeroBased} of event.dice){
     if(![4,6,8,10,12,20,100].includes(sides)||!Number.isInteger(value)||value<1||value>sides)return;
-    if(blank&&(!['schocken','lottery','chohan','meiern','seventeen','poker','kings'].includes(event.scope)||!registerSchockenBlank(dsn)))throw Error('Schocken hidden dice preset unavailable');
+    if(blank&&(!['schocken','lottery','chohan','meiern','seventeen','poker','kings','lucky'].includes(event.scope)||!registerSchockenBlank(dsn)))throw Error('Schocken hidden dice preset unavailable');
     const entry=(type,result,label)=>({type:blank?blankDiceType(type):type,result,resultLabel:blank?'':String(label),vectors:[],options:{owner:this.game.users.get(event.actor)?.id??this.game.user.id,...(event.id?{taverngamesEvent:event.id}:{}),...participantOptions(game,event.actor,type),...(blank?{taverngamesDieType:type,colorset:`taverngames-hidden-style-${type}`,appearance:hiddenDiceAppearance(game,type,diceOwner(game,event.actor))}:{})},fvttResult:{result:value,active:true},resultIndex:dice.length});
     if(sides===100){
      const tens=Math.floor(value/10)%10,ones=value%10;

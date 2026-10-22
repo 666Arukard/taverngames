@@ -9,8 +9,9 @@ export function validateWebsite(website, version) {
   const countedTitles = major > 1 || (major === 1 && (minor > 4 || (minor === 4 && patch > 6)));
   const expanded = major > 1 || (major === 1 && minor >= 4);
   const keys = expanded ? ['patchnotes', 'games', 'plans', 'plans2', 'functions', 'settings', 'sources', 'sources1'] : ['patchnotes', 'games', 'plans', 'settings'];
+  if(major>=5)keys.push('milestones');
   if (website.schemaVersion !== 1 || !website.blocks || !isDeepStrictEqual(Object.keys(website.blocks).sort(), [...keys].sort())) throw new Error('website.json: Schema oder Blocknamen ungültig.');
-  const titles = { patchnotes: `Patchnotes Version ${version}`, games: lowercaseTitles ? 'aktuelle Spiele' : 'Aktuelle Spiele', plans: expanded ? 'geplante Spiele' : 'Geplante Spiele', plans2: 'geplante Funktionen', functions: 'aktuelle Funktionen', settings: 'Einstellungen in Foundry', sources: 'Regelquellen', sources1: 'Hausvarianten' };
+  const titles = { milestones:'Meilensteine', patchnotes: `Patchnotes Version ${version}`, games: lowercaseTitles ? 'aktuelle Spiele' : 'Aktuelle Spiele', plans: expanded ? 'geplante Spiele' : 'Geplante Spiele', plans2: 'geplante Funktionen', functions: 'aktuelle Funktionen', settings: 'Einstellungen in Foundry', sources: 'Regelquellen', sources1: 'Hausvarianten' };
   for (const key of keys) {
     const block = website.blocks[key];
     const expectedTitle = countedTitles && ['games','functions','plans','plans2','sources'].includes(key) ? `${titles[key]} (${block.items?.length})` : titles[key];
@@ -23,6 +24,7 @@ export function validateWebsite(website, version) {
     }
     if (!website.blocks.sources.paragraphs.length || !website.blocks.sources1.paragraphs.length) throw new Error('website.json: Quellen-/Hausvarianten-Einleitung fehlt.');
   }
+  if(major>=5&&(!website.blocks.milestones.items.length||website.blocks.milestones.paragraphs.length))throw new Error('website.json: Meilensteine ungültig.');
   const games = website.blocks.games.items;
   const stable = games.filter(name => !name.endsWith(' (Beta)'));
   const beta = games.filter(name => name.endsWith(' (Beta)'));

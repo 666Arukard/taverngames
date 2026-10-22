@@ -1,3 +1,9 @@
+# TavernGames 5.0.0
+
+Stabile Kartenbasis mit Mau-Mau und zentralem, anklickbarem Kartentisch. Mau-Mau erlaubt optional freiwilliges Ziehen; die SL kann die nächste Runde direkt am Ergebnisbanner vorbereiten. Neu als Beta: Der Glückstag mit verdeckten Würfeln, optionalen Erhöhungen und interner Bank sowie Schwimmen / Knack mit drei Leben, Schwimmen und optionalem Blitz. Spiel der Könige gehört zu den Würfelspielen. Direkte Bedienung eigener liegender 3D-Würfel, schwebender Würfeln-Button und wählbare Markierungsbedeutung sind ergänzt.
+
+Stable card foundation with Mau-Mau and a central clickable card table. Mau-Mau optionally allows voluntary draws; the GM can prepare the next round directly from the result banner. New betas: Lucky Day with hidden dice, optional raises and an internal bank, and Schwimmen / Knack with three lives, swimming and optional Blitz. Game of Kings is categorized as a dice game. Direct controls for your own resting 3D dice, a floating Roll button and selectable marker meaning are included.
+
 # TavernGames 4.1.1
 
 Mau-Mau: Handkarten passen sich dem freien Bildschirmbereich an und werden bei großen Händen kompakter. Weitere Karten sind horizontal scrollbar, auch per Mausrad, mit sichtbarem Hinweis. Der Kartentisch bleibt bei eingeklappter Lobby spielbar. Ein deutliches Banner meldet eigene und gegnerische Siege sowie Unentschieden. Die Breitenberechnung berücksichtigt geöffnete und geschlossene rechte Seitenleisten.
