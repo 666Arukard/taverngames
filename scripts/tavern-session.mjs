@@ -11,7 +11,7 @@ export class TavernSession{
   project(user={}){return tavernView(this.state,user);}
   updateNpcWait(){
     const s=this.state,move=s&&s.game!=='lottery'?tavernNpcAction(s):null;
-    if(move&&(s.game==='seventeen'||s.game==='ship'&&move.action==='bank'||s.game==='pig'&&move.action==='next'||s.game==='kniffel'&&move.action==='score'))this.npcWait={revision:s.revision,until:this.now()+5000};
+    if(move&&(s.game==='seventeen'||s.game==='ship'&&move.action==='bank'||s.game==='pig'&&move.action==='next'||s.game==='kniffel'&&move.action==='score'))this.npcWait={revision:s.revision,until:this.now()+(s.game==='seventeen'?1200:5000)};
     else this.npcWait=null;
   }
   async handle(data,user){

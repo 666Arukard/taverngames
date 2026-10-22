@@ -2,18 +2,17 @@
   "schemaVersion": 1,
   "blocks": {
     "patchnotes": {
-      "title": "Patchnotes Version 5.0.0",
+      "title": "Patchnotes Version 5.0.1",
       "paragraphs": [
-        "Stabile Kartenbasis mit Mau-Mau und zentralem, anklickbarem Kartentisch. Mau-Mau erlaubt optional freiwilliges Ziehen; die SL kann die nächste Runde direkt am Ergebnisbanner vorbereiten. Neu als Beta: Der Glückstag mit verdeckten Würfeln, optionalen Erhöhungen und interner Bank sowie Schwimmen / Knack mit drei Leben, Schwimmen und optionalem Blitz. Spiel der Könige gehört zu den Würfelspielen. Direkte Bedienung eigener liegender 3D-Würfel, schwebender Würfeln-Button und wählbare Markierungsbedeutung sind ergänzt.",
-        "Stable card foundation with Mau-Mau and a central clickable card table. Mau-Mau optionally allows voluntary draws; the GM can prepare the next round directly from the result banner. New betas: Lucky Day with hidden dice, optional raises and an internal bank, and Schwimmen / Knack with three lives, swimming and optional Blitz. Game of Kings is categorized as a dice game. Direct controls for your own resting 3D dice, a floating Roll button and selectable marker meaning are included."
+        "17 und 4: NPC-Aktionen warten regulär 1,2 statt 5 Sekunden. Die gemeinsame NPC-Abfrage läuft alle 250 ms und verhindert aufgestaute Timer. Der schwebende Würfeln-Button greift nach Neuzeichnungen auf die aktuelle Ansicht zu. Einstiegsbuttons werden lokal verborgen, solange die jeweilige Lobby geöffnet ist, und beim Schließen wieder sichtbar; übrigen Buttons weicht die Würfelsteuerung aus.",
+        "Seventeen and Four: regular NPC actions wait 1.2 instead of 5 seconds. Shared NPC polling runs every 250 ms and prevents queued timer backlogs. The floating Roll button resolves the current control after redraws. Launch buttons hide locally while their game lobby is open and return on close; dice controls avoid remaining launch buttons."
       ],
       "items": [
-        "Mau-Mau und gemeinsame Kartenbasis stabil; zentraler Kartentisch mit eigener Hand und Rundenstart am Banner.",
-        "Mau-Mau: freiwilliges Ziehen als optionale Regel, standardmäßig aus.",
-        "Glückstag als Beta: standardmäßig verdeckte Würfel, eigene Aufdeckung, optionales Erhöhen, abgerundete Auszahlungen und interne Bank.",
-        "Schwimmen / Knack als Beta: drei Leben, 30½, Knack, optionaler Blitz, Passen und einmaliger Einkauf.",
-        "Spiel der Könige als Würfelspiel eingeordnet.",
-        "Eigene liegende 3D-Würfel direkt auswählen, schwebender Würfeln-Button und Markierungsmodus Behalten/Neuwurf."
+        "17 und 4: kürzere NPC-Reaktionszeit; gezielte Ergebnispausezeiten anderer Spiele bleiben erhalten.",
+        "NPC-Zeitprüfung über alle 19 Spiele plus Kniffel Extreme.",
+        "Schwebender Würfeln-Button funktioniert auch nach erneutem Zeichnen der Ansicht.",
+        "Lokale Einstiegsbuttons bei offener Lobby ausblenden, beim Schließen wiederherstellen.",
+        "Mau-Mau stabil; Glückstag und Schwimmen bleiben Beta."
       ]
     },
     "games": {
@@ -240,5 +239,5 @@
       "paragraphs": []
     }
   },
-  "version": "5.0.0"
+  "version": "5.0.1"
 }

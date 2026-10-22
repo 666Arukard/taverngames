@@ -243,10 +243,12 @@
 .taverngames-card-stage .taverngames-card-result button{display:block;margin:12px auto 0;pointer-events:auto}
 .taverngames-card-stage .taverngames-card-result{pointer-events:none}
 
-.taverngames-dice-table-controls{position:fixed;inset:0;pointer-events:none;z-index:68}.taverngames-table-roll{position:absolute;bottom:25px;left:50%;transform:translateX(-50%);padding:10px 24px;background:#30251e;color:#ffe8b0;border:2px solid #c6a96c;border-radius:6px;pointer-events:auto}.taverngames-die-hit{position:fixed;transform:translate(-50%,-50%);width:42px;height:42px;padding:0;border:1px solid transparent;border-radius:12px;background:transparent;pointer-events:auto;cursor:pointer}.taverngames-die-hit.is-marked{border:2px solid #f3c75e;box-shadow:0 0 12px #f3c75e}.taverngames-die-hit:focus-visible,.taverngames-die-hit:hover{outline:2px solid #ffe0a0}.taverngames-die-hit[hidden]{display:none}
+.taverngames-dice-table-controls{position:fixed;inset:0;pointer-events:none;z-index:68}.taverngames-table-roll{position:absolute;bottom:var(--tg-roll-bottom,25px);left:50%;transform:translateX(-50%);padding:10px 24px;background:#30251e;color:#ffe8b0;border:2px solid #c6a96c;border-radius:6px;pointer-events:auto}.taverngames-die-hit{position:fixed;transform:translate(-50%,-50%);width:42px;height:42px;padding:0;border:1px solid transparent;border-radius:12px;background:transparent;pointer-events:auto;cursor:pointer}.taverngames-die-hit.is-marked{border:2px solid #f3c75e;box-shadow:0 0 12px #f3c75e}.taverngames-die-hit:focus-visible,.taverngames-die-hit:hover{outline:2px solid #ffe0a0}.taverngames-die-hit[hidden]{display:none}
 
 .taverngames-card-actions{display:flex;flex-wrap:wrap;gap:6px;flex-basis:100%;pointer-events:auto;justify-content:center}
 
 .taverngames-surface .schocken-dice button.tg-inverted-marker[data-tg-marked="true"]{background:#d8bc75!important;color:#241b12!important;border:2px solid #c6a96c!important;outline:0!important}.taverngames-surface .schocken-dice button.tg-inverted-marker[data-tg-marked="false"]{background:#fff9ef!important;color:#30251e!important;border:1px solid #96764c!important;box-shadow:none!important;outline:0!important}.schocken-dice [data-marker-hint]{display:block;flex-basis:100%}
 
 .taverngames-card-stage .taverngames-card-result button{font:600 16px/1.3 system-ui;padding:8px 14px}
+
+.taverngames-launchers[hidden],.taverngames-launchers button[hidden]{display:none!important}

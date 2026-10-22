@@ -1,3 +1,9 @@
+# TavernGames 5.0.1
+
+17 und 4: NPC-Aktionen warten regulär 1,2 statt 5 Sekunden. Die gemeinsame NPC-Abfrage läuft alle 250 ms und verhindert aufgestaute Timer. Der schwebende Würfeln-Button greift nach Neuzeichnungen auf die aktuelle Ansicht zu. Einstiegsbuttons werden lokal verborgen, solange die jeweilige Lobby geöffnet ist, und beim Schließen wieder sichtbar; übrigen Buttons weicht die Würfelsteuerung aus.
+
+Seventeen and Four: regular NPC actions wait 1.2 instead of 5 seconds. Shared NPC polling runs every 250 ms and prevents queued timer backlogs. The floating Roll button resolves the current control after redraws. Launch buttons hide locally while their game lobby is open and return on close; dice controls avoid remaining launch buttons.
+
 # TavernGames 5.0.0
 
 Stabile Kartenbasis mit Mau-Mau und zentralem, anklickbarem Kartentisch. Mau-Mau erlaubt optional freiwilliges Ziehen; die SL kann die nächste Runde direkt am Ergebnisbanner vorbereiten. Neu als Beta: Der Glückstag mit verdeckten Würfeln, optionalen Erhöhungen und interner Bank sowie Schwimmen / Knack mit drei Leben, Schwimmen und optionalem Blitz. Spiel der Könige gehört zu den Würfelspielen. Direkte Bedienung eigener liegender 3D-Würfel, schwebender Würfeln-Button und wählbare Markierungsbedeutung sind ergänzt.
