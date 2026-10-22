@@ -44,10 +44,12 @@ export class ParticipantDice{
  async reflow(){
   const entries=[...this.renderers.entries()],box=this.game().dice3d?.box,viewport=diceViewport(box),items=[];let diameter=.04;
   // Each group uses a separate band of slots; 64 also accommodates accumulated 17+4 hands.
-  for(const [slot,[,r]]of entries.entries())for(const [i,e]of r.meshes){e.baseScale??=e.mesh.parent.scale?.clone?.();if(e.baseScale)e.mesh.parent.scale.copy(e.baseScale);diameter=Math.max(diameter,diceDiameter(e.mesh,.04));items.push({slot,index:i,entry:e,pose:r.poses.get(i),kept:r.keptIndices?.has(i)??false});}
-  if(items.some(x=>x.kept))diameter*=1.18;
+  for(const [slot,[,r]]of entries.entries())for(const [i,e]of r.meshes){e.baseScale??=e.mesh.parent.scale?.clone?.();if(e.baseScale)e.mesh.parent.scale.copy(e.baseScale);diameter=Math.max(diameter,diceDiameter(e.mesh,.04));items.push({slot,index:i,entry:e,pose:r.poses.get(i),kept:r.keptIndices?.has(i)??false,own:r.owner===this.game().user.id});}
+  // Prefer full-size personal dice; shrink only when the measured layout needs space.
+  const emphasis=x=>(x.own?1.5:1)*(x.kept?1.18:1);
+  diameter*=Math.max(1,...items.map(emphasis));
   const indices=items.map((x,i)=>x.slot*64+x.index),plan=groupedDiceLayout(indices,{...viewport,diameter,groupSize:64}),updates=[];
-  for(const [n,x]of items.entries()){const e=x.entry,pct=plan.positions.get(indices[n]),world=box.fromPositionPct?.(pct)??{x:(pct.x-.5)*viewport.width,z:-(pct.y-.5)*viewport.height};if(e.baseScale)e.mesh.parent.scale.copy(e.baseScale).multiplyScalar(plan.scale*(x.kept?1.18:1));const position={x:world.x,y:(x.pose?.height??.02)*plan.scale*(x.kept?1.18:1),z:world.z};Object.assign(e.mesh.parent.position,position);if(x.pose)x.pose.position=pct;updates.push({id:e.mesh.id,position});}
+  for(const [n,x]of items.entries()){const e=x.entry,pct=plan.positions.get(indices[n]),world=box.fromPositionPct?.(pct)??{x:(pct.x-.5)*viewport.width,z:-(pct.y-.5)*viewport.height};if(e.baseScale)e.mesh.parent.scale.copy(e.baseScale).multiplyScalar(plan.scale*emphasis(x));const position={x:world.x,y:(x.pose?.height??.02)*plan.scale*emphasis(x),z:world.z};Object.assign(e.mesh.parent.position,position);if(x.pose)x.pose.position=pct;updates.push({id:e.mesh.id,position});}
   if(updates.length)await box.physicsWorker.exec('setBodyPositions',{updates});
  }
  async _clear(){for(const r of this.renderers.values())await r.clear();this.renderers.clear();this.gameId=null;this.boundary=null;}

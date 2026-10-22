@@ -659,3 +659,7 @@ Der Übergang von Wurf-Meshes zu permanenten Anzeigestücken kann weiterhin als 
 Versionsfolge nach Nutzerkorrektur: 1.4.3 → 1.4.6 → 1.4.7; die Nummern 1.4.4 und 1.4.5 werden übersprungen. Vorhandene historische Pakete bleiben unverändert.
 
 English: 1.4.7 preserves moderation scrolling and adds held 3D dice for Kniffel and Ship, Captain and Crew. Kniffel supports returning held dice; Ship retains manual crew selection and explicit turn completion. The optional DSN beta uses a two-second minimum reveal delay, animation completion and a bounded multiplayer gate. These two new integrations require live testing. Farkle’s brief transition between animated and persistent meshes remains.
+
+## 5.0.3
+
+Eigene abgelegte 3D-Würfel größer; Verkleinerung nur bei Platzmangel. Tischbedienung besitzt keine bildschirmfüllende Trefferfläche mehr. Glückstag unverändert.
