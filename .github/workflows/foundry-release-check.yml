@@ -19,7 +19,7 @@ concurrency:
 
 jobs:
   publish-release:
-    if: github.repository == '666Arukard/taverngames' && (github.event_name == 'workflow_dispatch' || (github.event.release.draft == false && github.event.release.prerelease == false))
+    if: ${{ false }} # Foundry auf Nutzerwunsch pausiert
     runs-on: ubuntu-24.04
     timeout-minutes: 8
     steps:

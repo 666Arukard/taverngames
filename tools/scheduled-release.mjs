@@ -29,6 +29,7 @@ export function verifyAssets(version, manifest, website, zip) {
   if (website.version && website.version !== version) throw new Error('Website-Version passt nicht.');
 }
 export async function run({ now = Date.now(), dryRun = true, request = fetch, plan,
+  foundryEnabled = process.env.FOUNDRY_RELEASES_ENABLED !== 'false',
   token = process.env.GH_TOKEN, foundryToken = process.env.FOUNDRY_RELEASE_TOKEN } = {}) {
   const notices = [];
   async function api(path, method = 'GET', body) {
@@ -53,7 +54,7 @@ export async function run({ now = Date.now(), dryRun = true, request = fetch, pl
     const release = releases.find(r => r.tag_name === `v${entry.version}`);
     if (release && !release.draft && release.body?.includes(`<!-- scheduled-release:${entry.version} -->`) &&
         !release.body?.includes(`<!-- foundry-published:${entry.version} -->`)) {
-      notices.push(`::warning::${entry.version}: Auf GitHub veroeffentlicht; Foundry-Eintragung weiterhin NICHT bestaetigt. Zeitfenster abgelaufen, keine automatische Wiederholung.`);
+      notices.push(`${foundryEnabled ? '::warning::' : ''}${entry.version}: Auf GitHub veroeffentlicht; Foundry-Eintragung weiterhin NICHT bestaetigt. ${foundryEnabled ? 'Zeitfenster abgelaufen, keine automatische Wiederholung.' : 'Foundry-Veröffentlichungen auf Nutzerwunsch pausiert.'}`);
     }
   }
   if (!entries.length) return [...notices, 'Kein Release faellig; keine Aenderung.'];
@@ -68,6 +69,7 @@ export async function run({ now = Date.now(), dryRun = true, request = fetch, pl
     if (!release.draft && (!release.body?.includes(started) || release.body?.includes(done))) {
       notices.push(`${v}: Bereits veroeffentlicht; keine erneute Freigabe.`); continue;
     }
+    if (!release.draft && !foundryEnabled) { notices.push(`${v}: GitHub bereits veröffentlicht; Foundry pausiert.`); continue; }
     if (!release.draft && release.body?.includes(attempted)) throw new Error(`${v}: Foundry-Versuch bereits erfolgt; Verzeichnis vor weiterem Eingriff manuell pruefen.`);
     const latest = await api('/releases/latest');
     const newer = latest?.tag_name?.replace(/^v/, '').split('.').map(Number);
@@ -90,11 +92,15 @@ export async function run({ now = Date.now(), dryRun = true, request = fetch, pl
     const manifest = JSON.parse(files['module.json']);
     verifyAssets(v, manifest, JSON.parse(files['website.json']), files[`taverngames-${v}.zip`]);
     if (dryRun) { notices.push(`${v}: Geprueft; Dry-run ohne Veroeffentlichung.`); continue; }
-    if (!foundryToken?.startsWith('fvttp_') || /\s/.test(foundryToken)) throw new Error('Foundry-Secret fehlt oder ist ungueltig.');
+    if (foundryEnabled && (!foundryToken?.startsWith('fvttp_') || /\s/.test(foundryToken))) throw new Error('Foundry-Secret fehlt oder ist ungueltig.');
     let body = release.body ?? '';
     if (release.draft) {
       body += `\n\n${started}`;
       await api(`/releases/${release.id}`, 'PATCH', { draft: false, make_latest: 'true', body });
+    }
+    if (!foundryEnabled) {
+      notices.push(`${v}: Auf GitHub veröffentlicht; Foundry-Veröffentlichung auf Nutzerwunsch pausiert.`);
+      continue;
     }
     body += `\n${attempted}`;
     await api(`/releases/${release.id}`, 'PATCH', { body });

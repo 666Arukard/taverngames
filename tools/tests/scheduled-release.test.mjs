@@ -84,6 +84,17 @@ function fixture() {
   const assets = [`taverngames-${v}.zip`, 'module.json', 'website.json'].map((name, id) => ({ name, id, state: 'uploaded', size: data[id].length, digest: `sha256:${sha256(data[id])}` }));
   return { release: { id: 99, tag_name: `v${v}`, draft: true, body: 'Testhinweise', assets }, data };
 }
+test('Foundry-Pause veröffentlicht GitHub ohne Secret und ohne Foundry-Aufruf', async () => {
+  const {release,data}=fixture();const writes=[];
+  const result=await run({plan,now,dryRun:false,foundryEnabled:false,token:'test',foundryToken:undefined,request:async(url,options)=>{
+    assert.ok(url.startsWith('https://api.github.com/'),'Kein Foundry-Aufruf während Pause');
+    if(options.method==='PATCH'){writes.push(JSON.parse(options.body));return reply({});}
+    if(url.includes('/assets/'))return {ok:true,arrayBuffer:async()=>data[Number(url.split('/').at(-1))]};
+    return reply(url.endsWith('/latest')?{tag_name:'v3.4.0'}:[release]);
+  }});
+  assert.equal(writes.length,1);assert.equal(writes[0].draft,false);
+  assert.ok(!writes[0].body.includes('foundry-attempted'));assert.match(result[0],/pausiert/);
+});
 for (const dryRun of [true, false]) test(`Vollstaendige Assets: ${dryRun ? 'Probelauf ohne Schreibzugriff' : 'GitHub und Foundry genau einmal in Reihenfolge'}`, async () => {
   const { release, data } = fixture(); const writes = [];
   const result = await run({ plan, now, dryRun, token: 'test-token', foundryToken: 'fvttp_test', request: async (url, options) => {

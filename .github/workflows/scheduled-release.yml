@@ -32,6 +32,6 @@ jobs:
       - name: Faellige Entwuerfe pruefen und freigeben
         env:
           GH_TOKEN: ${{ github.token }}
-          FOUNDRY_RELEASE_TOKEN: ${{ secrets.FOUNDRY_RELEASE_TOKEN }}
+          FOUNDRY_RELEASES_ENABLED: 'false'
           DRY_RUN: ${{ (github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.dry_run)) && 'true' || 'false' }}
         run: node tools/scheduled-release.mjs
