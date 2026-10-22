@@ -59,9 +59,10 @@ export function actDurak(original,id,action,args={},random=n=>Math.floor(Math.ra
    }else throw Error('Unknown action.');
   }
  }
+ if(['begin','attack','defend','transfer','take','pass'].includes(action)){s.actionNumber=(original.actionNumber??0)+1;s.lastAction={number:s.actionNumber,kind:action,actor:id};}
  s.revision++;return s;
 }
-export function durakView(s,user){if(!s)return null;const v=structuredClone(s),publicIds=new Set([s.trumpCard,...s.table.flatMap(p=>[p.attack,p.defense]),...s.revealed.map(p=>p.card)].filter(Boolean));for(const id of s.players){const own=id===user.id||user.isGM&&s.npcs[id]&&s.npcManual[id];v.hands[id]=s.hands[id]?.map(c=>own?c:null)??[];if(own)for(const c of s.hands[id]??[])publicIds.add(c);}v.remaining=s.drawPile.length;delete v.drawPile;v.cards=Object.fromEntries([...publicIds].map(c=>[c,structuredClone(s.cards[c])]));return v;}
+export function durakView(s,user){if(!s)return null;const v=structuredClone(s),publicIds=new Set([s.trumpCard,...s.table.flatMap(p=>[p.attack,p.defense]),...s.revealed.map(p=>p.card)].filter(Boolean));v.cardBack=Object.values(s.cards).find(c=>c.back)?.back;for(const id of s.players){const own=id===user.id||user.isGM&&s.npcs[id]&&s.npcManual[id];v.hands[id]=s.hands[id]?.map(c=>own?c:null)??[];if(own)for(const c of s.hands[id]??[])publicIds.add(c);}v.remaining=s.drawPile.length;delete v.drawPile;v.cards=Object.fromEntries([...publicIds].map(c=>[c,structuredClone(s.cards[c])]));return v;}
 export function durakNpc(s,now=Date.now()){
  if(!s||s.phase!=='playing'||s.paused)return null;
  const auto=id=>s.npcs[id]&&!s.npcManual[id],sort=ids=>[...ids].sort((a,b)=>(s.cards[a].suit===s.trump)-(s.cards[b].suit===s.trump)||value(s.cards[a])-value(s.cards[b]));

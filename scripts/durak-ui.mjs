@@ -1,12 +1,14 @@
+import {updateCardNotice} from './card-notice.mjs';
+import {gameView} from './game-view.mjs';
 import {MauUI} from './maumau-ui.mjs';
 import {TavernUI,node,control,selectField} from './tavern-ui.mjs';
 import {listCardSets,BACK} from './card-sets.mjs';
 import {DURAK_PROFILE,durakNeighbors,durakCanTransfer,durakCanBeat} from './durak-engine.mjs';
 import {f} from './farkle-text.mjs';
 export class DurakUI extends MauUI{
- constructor(...args){super(...args);const timer=setInterval(()=>this.updateTimers(),100);timer?.unref?.();}
+ constructor(...args){super(...args);const timer=setInterval(()=>{this.updateTimers();this.syncAnnouncements();},100);timer?.unref?.();}
  cardActor(s){const choices=[game.user.id,...(game.user.isGM?Object.keys(s.npcs).filter(id=>s.npcManual[id]):[])];return choices.includes(this.controlled)?this.controlled:choices.includes(s.defender)?s.defender:choices.includes(s.attacker)?s.attacker:game.user.id;}
- updateTimers(){const s=this.getState();if(!s)return;for(const root of [this.windows.get('table')?.root,this.cardTable])if(root){for(const label of root.querySelectorAll('[data-durak-countdown]'))label.textContent=f('Schutzzeit: ','Protection: ')+Math.max(0,Math.ceil((s.deadline-Date.now())/1000))+' s';for(const button of root.querySelectorAll('[data-durak-protected]'))button.disabled=!!s.paused||!game.users.activeGM||Date.now()<s.deadline;}}
+ updateTimers(){const s=this.getState();if(!s)return;for(const root of [this.windows.get('table')?.root,this.cardTable])if(root){for(const label of root.querySelectorAll('[data-durak-countdown]'))label.textContent=f('Schutzzeit: ','Protection: ')+Math.max(0,Math.ceil((s.paused?s.pauseRemaining??0:s.deadline-Date.now())/1000))+' s';for(const button of root.querySelectorAll('[data-durak-protected]'))button.disabled=!!s.paused||!game.users.activeGM||Date.now()<s.deadline;}}
  async open(){if(game.user.isGM)this.sets=await listCardSets(game,DURAK_PROFILE);return TavernUI.prototype.open.call(this);}
  drawModeration(){
   const root=this.windows.get('moderation')?.root;if(!root||!game.user.isGM)return;const drafts=new Map([...root.querySelectorAll('[data-draft]')].map(e=>[e.dataset.draft,e.type==='checkbox'?e.checked:e.value])),s=this.getState();root.replaceChildren();const c=node('div',undefined,'schocken-content');root.append(c);c.append(node('h2','Durak · Beta'));control(c,f('Spieltisch öffnen','Open game table'),()=>{this.window('table');this.drawTable();});control(c,f('Anleitung','Instructions'),()=>this.guide());
@@ -19,24 +21,49 @@ export class DurakUI extends MauUI{
   if(s){control(c,f('Kartenbestände wiederherstellen','Restore card stacks'),()=>this.request('repairCards'));if(!['finished','aborted'].includes(s.phase))control(c,s.paused?f('Fortsetzen','Resume'):f('Pause','Pause'),()=>this.request('pause'));for(const [id,name]of Object.entries(s.npcs))control(c,name+' · '+(s.npcManual[id]?f('SL steuert','GM controls'):f('Automatisch','Automatic')),()=>this.request('npcControl',{id,manual:!s.npcManual[id]}));}
   for(const e of root.querySelectorAll('[data-draft]'))if(drafts.has(e.dataset.draft)){if(e.type==='checkbox')e.checked=drafts.get(e.dataset.draft);else e.value=drafts.get(e.dataset.draft);}
  }
+ syncCardTable(){super.syncCardTable();this.syncAnnouncements();}
+ syncAnnouncements(){
+  const s=this.getState(),root=this.windows.get('table')?.root,active=!!root?.isConnected&&s?.phase==='playing'&&(!gameView.enabled()||gameView.selected==='durak-table'),event=s?.lastAction,actor=event?.actor&&this.name(event.actor),roles=s?this.name(s.attacker)+f(' greift an · ',' attacks · ')+this.name(s.defender)+f(' verteidigt',' defends'):'';
+  const text=event?.kind==='attack'?actor+f(' greift an – ',' attacks – ')+this.name(s.defender)+f(' verteidigt',' defends'):event?.kind==='defend'?actor+f(' wehrt eine Karte ab',' defends a card'):event?.kind==='transfer'?actor+f(' gibt weiter an ',' transfers to ')+this.name(s.defender):event?.kind==='take'?actor+f(' nimmt die Karten auf',' takes the cards'):event?.kind==='pass'?actor+f(' wirft nicht weiter nach',' adds no more attacks'):roles;
+  const remaining=updateCardNotice(this,{key:s?.gameId+':'+(event?.number??s?.round),text,active,duration:1800}),hide=remaining>900;
+  for(const target of [root,this.cardTable])target?.classList.toggle('is-durak-announcing',active&&hide);
+ }
  drawTable(){
-  const root=this.windows.get('table')?.root;if(!root)return;root.replaceChildren();const c=node('div',undefined,'schocken-content');root.append(c);c.append(node('h2','Durak · Beta'));const s=this.getState();if(!s)return;const actor=this.cardActor(s),blocked=s.paused||!game.users.activeGM,can=id=>id===game.user.id||game.user.isGM&&s.npcs[id]&&s.npcManual[id];
-  if(game.user.isGM){const choices=[...s.players.filter(can)];if(choices.length){const select=selectField(c,f('Hand steuern','Control hand'),choices.map(id=>[id,this.name(id)]),actor,'controlled');select.onchange=()=>{this.controlled=select.value;this.ownSelection=undefined;this.drawTable();};}}
-  c.append(node('p',s.phase==='playing'?f('Angreifer: ','Attacker: ')+this.name(s.attacker)+' · '+f('Verteidiger: ','Defender: ')+this.name(s.defender)+' · '+f('Stapel: ','Draw pile: ')+s.remaining:s.phase==='finished'?f('Verloren: ','Loser: ')+s.losers.map(id=>this.name(id)).join(', '):s.phase==='aborted'?f('Partie beendet','Session ended'):f('Lobby · 2–6 Teilnehmer','Lobby · 2–6 participants')));
-  const table=node('div',undefined,'taverngames-card-table');
-  if(s.trumpCard&&s.cards[s.trumpCard]){const trump=node('div',undefined,'taverngames-durak-trump');trump.append(node('p',f('Trumpf','Trump')));this.card(trump,s.cards[s.trumpCard]);table.append(trump);}
-  for(const [index,pair]of s.table.entries()){const stack=node('div',undefined,'taverngames-durak-pair'),legal=can(actor)&&actor===s.defender&&!s.taking&&!pair.defense&&this.ownSelection&&durakCanBeat(s,pair.attack,this.ownSelection);this.card(stack,s.cards[pair.attack],null,legal&&!blocked?()=>this.request('defend',{id:actor,card:this.ownSelection,index}):null);if(pair.defense)this.card(stack,s.cards[pair.defense]);table.append(stack);}
+  const root=this.windows.get('table')?.root;if(!root)return;root.replaceChildren();const c=node('div',undefined,'schocken-content');root.append(c);c.append(node('h2','Durak · Beta'));const s=this.getState();if(!s)return;const actor=this.cardActor(s),blocked=s.paused||!game.users.activeGM,can=id=>id===game.user.id||game.user.isGM&&s.npcs[id]&&s.npcManual[id],defender=actor===s.defender&&can(actor)&&!s.taking;
+  if(!s.hands[actor]?.includes(this.ownSelection))this.ownSelection=undefined;
+  if(s.table[this.tableSelection]?.defense)this.tableSelection=undefined;
+  if(game.user.isGM){const choices=[...s.players.filter(can)];if(choices.length){const select=selectField(c,f('Hand steuern','Control hand'),choices.map(id=>[id,this.name(id)]),actor,'controlled');select.onchange=()=>{this.controlled=select.value;this.ownSelection=this.tableSelection=undefined;this.drawTable();};}}
+  c.append(node('p',s.phase==='playing'?f('Angreifer: ','Attacker: ')+this.name(s.attacker)+' · '+f('Verteidiger: ','Defender: ')+this.name(s.defender):s.phase==='finished'?f('Verloren: ','Loser: ')+s.losers.map(id=>this.name(id)).join(', '):s.phase==='aborted'?f('Partie beendet','Session ended'):f('Lobby · 2–6 Teilnehmer','Lobby · 2–6 participants')));
+  if(s.phase==='playing'){
+   const status=node('p',undefined,'taverngames-game-notice taverngames-durak-turn');status.setAttribute('role','status');status.textContent=!s.table.length?this.name(s.attacker)+f(' greift an',' attacks'):!s.taking&&s.table.some(p=>!p.defense)?this.name(s.defender)+f(' verteidigt – Handkarte und Angriff auswählen',' defends – select your card and an attack'):f('Nachwerfen oder Abschluss bestätigen: ','Add attacks or confirm completion: ')+durakNeighbors(s).filter(id=>!s.passes.includes(id)).map(id=>this.name(id)).join(', ');c.append(status);
+  }
+  const back=s.cardBack??s.cards[s.trumpCard]?.back??BACK,supply=node('aside',undefined,'taverngames-durak-supply');supply.setAttribute('aria-label',f('Nachziehstapel und Trumpf','Draw pile and trump'));supply.append(node('p',f('Stapel: ','Draw pile: ')+(s.remaining??0)));
+  if(s.remaining>0){this.card(supply,null,back);if(s.trumpCard&&s.cards[s.trumpCard]){supply.append(node('p',f('Trumpf','Trump')));this.card(supply,s.cards[s.trumpCard]);}}
+  else if(s.trump)supply.append(node('p',f('Trumpf bleibt: ','Trump remains: ')+({hearts:f('Bierkrug / Herz','Tankard / hearts'),clubs:f('Schwert / Kreuz','Sword / clubs'),spades:f('Schild / Pik','Shield / spades'),diamonds:f('Münze / Karo','Coin / diamonds')})[s.trump]));
+  if(s.phase!=='lobby')c.append(supply);
+  const table=node('div',undefined,'taverngames-card-table taverngames-durak-attacks');table.setAttribute('aria-label',f('Angriffe und Abwehr','Attacks and defenses'));
+  for(const [index,pair]of s.table.entries()){
+   const stack=node('div',undefined,'taverngames-durak-pair'),legal=defender&&!pair.defense&&this.ownSelection&&durakCanBeat(s,pair.attack,this.ownSelection);stack.dataset.durakPair=index;stack.append(node('p',f('Angriff ','Attack ')+(index+1)));
+   const attack=this.card(stack,s.cards[pair.attack],null,defender&&!pair.defense&&!blocked?()=>{const card=this.ownSelection;if(card&&durakCanBeat(s,pair.attack,card))this.request('defend',{id:actor,card,index});else{this.tableSelection=index;this.drawTable();}}:null);attack.dataset.durakAttack=index;attack.classList.toggle('is-beatable',!!legal);attack.classList.toggle('is-target',this.tableSelection===index);
+   if(pair.defense){stack.append(node('p',f('Abgewehrt mit','Beaten by')));this.card(stack,s.cards[pair.defense]);}else stack.append(node('p',legal?f('Diese Karte kannst du schlagen','Your selected card beats this'):f('Noch offen','Not defended')));table.append(stack);
+  }
   c.append(table);if(s.phase==='playing'&&s.table.length){const timer=node('p',undefined,'taverngames-durak-status');timer.dataset.durakCountdown='';table.append(timer);if(s.revealed.length)table.append(node('p',f('Vorgezeigt: ','Shown: ')+s.revealed.map(p=>this.name(p.owner)+' · '+s.cards[p.card].name).join(' · ')));}
-  for(const id of s.players){const row=node('section',undefined,'schocken-player');row.dataset.mauPlayer=id;row.append(node('h3',this.name(id)+(s.out.includes(id)?' · '+f('Fertig','Finished'):'')));const hand=node('div',undefined,'taverngames-card-hand');for(const card of s.hands[id]??[]){const item=this.card(hand,card?s.cards[card]:null,card?null:BACK,id===actor&&can(id)&&s.phase==='playing'&&!s.out.includes(id)&&!blocked?()=>{this.ownSelection=this.ownSelection===card?undefined:card;this.drawTable();}:null);if(card&&this.ownSelection===card)item.classList.add('is-playable');}row.append(hand);c.append(row);}
+  for(const id of s.players){const row=node('section',undefined,'schocken-player');row.dataset.mauPlayer=id;row.classList.toggle('is-durak-defender',id===s.defender);row.classList.toggle('is-durak-attacker',id===s.attacker);row.append(node('h3',this.name(id)+(id===s.defender?' · '+f('Verteidigung','Defense'):id===s.attacker?' · '+f('Angriff','Attack'):'')+(s.out.includes(id)?' · '+f('Fertig','Finished'):'')));const hand=node('div',undefined,'taverngames-card-hand');for(const card of s.hands[id]??[]){const item=this.card(hand,card?s.cards[card]:null,card?null:back,id===actor&&can(id)&&s.phase==='playing'&&!s.out.includes(id)&&!blocked?()=>{this.ownSelection=this.ownSelection===card?undefined:card;this.drawTable();}:null);if(card)item.dataset.durakCard=card;item.classList.toggle('is-selected',!!card&&this.ownSelection===card);if(card&&id===actor&&defender){const pair=s.table[this.tableSelection];item.classList.toggle('is-beatable',!!pair&&!pair.defense&&durakCanBeat(s,pair.attack,card));}}row.append(hand);c.append(row);}
   if(s.phase==='playing'&&can(actor)&&!s.out.includes(actor)){
-   const actions=node('div',undefined,'taverngames-card-actions');table.append(actions);const args={id:actor,card:this.ownSelection},neighbors=durakNeighbors(s);
-   if(!s.table.length&&actor===s.attacker)control(actions,f('Angreifen','Attack'),()=>this.request('attack',args),blocked||!this.ownSelection);
+   const actions=node('div',undefined,'taverngames-card-actions');table.append(actions);const card=this.ownSelection,args={id:actor,card},neighbors=durakNeighbors(s);
+   if(!s.table.length&&actor===s.attacker)control(actions,f('Angreifen','Attack'),()=>this.request('attack',args),blocked||!card);
    if(s.table.length&&neighbors.includes(actor)){
-    const button=control(actions,f('Nachwerfen','Add attack'),()=>this.request('attack',args),blocked||!this.ownSelection||s.table.length>=s.limit||s.taking&&!s.extendedTake);
-    if(this.ownSelection&&s.table.length<s.limit&&(!s.taking||s.extendedTake))button.dataset.durakProtected='';
+    const button=control(actions,f('Nachwerfen','Add attack'),()=>this.request('attack',args),blocked||!card||s.table.length>=s.limit||s.taking&&!s.extendedTake);
+    if(card&&s.table.length<s.limit&&(!s.taking||s.extendedTake))button.dataset.durakProtected='';
     if((s.taking||s.table.every(p=>p.defense))&&!s.passes.includes(actor)){const pass=control(actions,f('Nicht weiter nachwerfen','No more attacks'),()=>this.request('pass',{id:actor}),blocked);pass.dataset.durakProtected='';}
    }
-   if(s.table.length&&actor===s.defender&&!s.taking){control(actions,f('Weitergeben','Transfer'),()=>this.request('transfer',args),blocked||!this.ownSelection||!durakCanTransfer(s,actor,this.ownSelection));control(actions,f('Aufnehmen','Take cards'),()=>this.request('take',{id:actor}),blocked);}
+   if(s.table.length&&defender){
+    const compatible=s.table.flatMap((p,i)=>!p.defense&&card&&durakCanBeat(s,p.attack,card)?[i]:[]),index=compatible.includes(this.tableSelection)?this.tableSelection:compatible[0];
+    control(actions,f('Abwehren','Defend'),()=>this.request('defend',{id:actor,card,index}),blocked||index===undefined);
+    control(actions,f('Weitergeben','Transfer'),()=>this.request('transfer',args),blocked||!card||!durakCanTransfer(s,actor,card));control(actions,f('Aufnehmen','Take cards'),()=>this.request('take',{id:actor}),blocked);
+    actions.append(node('p',f('Zum Abwehren eine Handkarte und danach den passenden Angriff anklicken, oder „Abwehren“ wählen.','To defend, select a hand card then a matching attack, or choose “Defend”.')));
+    if(s.thrown||s.table.some(p=>p.defense))actions.append(node('p',f('Weitergeben gesperrt: Es wurde bereits nachgeworfen oder abgewehrt.','Transfer blocked: an attack has already been added or defended.')));
+   }
   }
   if(s.phase==='lobby'){const joined=s.players.includes(game.user.id);control(c,joined?f('Lobby verlassen','Leave lobby'):f('Beitreten','Join'),()=>this.request(joined?'leave':'join'));}
   if(s.phase==='finished')c.append(node('p',f('Platzierung: ','Ranking: ')+(s.ranking??[]).map((id,i)=>`${i+1}. ${this.name(id)}`).join(' · ')));

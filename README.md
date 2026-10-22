@@ -1,3 +1,9 @@
+# TavernGames 5.1.1
+
+Durak verbessert die Abwehrbedienung mit einem eigenen Abwehren-Button und beidseitigen Kartenhilfen. Gültige Klicks bleiben bei zusätzlichem Nachwerfen im selben Angriff erhalten. Kurze Banner und klare Rollenanzeigen begleiten langsamere NPC-Aktionen (3,5 Sekunden). Verdeckte Karten verwenden die Rückseite des gewählten Decks; Trumpf und Nachziehstapel liegen separat. Schwimmen erlaubt dem aktiven Spieler bei 7, 8 und 9 neue Tischkarten ohne Zugverbrauch und meldet Passen deutlich.
+
+Durak improves defense controls with a dedicated Defend button and two-way card hints. Valid clicks remain usable when another attack is added within the same bout. Short banners and clear role indicators accompany slower NPC actions (3.5 seconds). Hidden cards use the selected deck back; trump and draw pile are separate. Schwimmen lets the active player refresh a 7, 8, 9 table without spending their turn and clearly announces passing.
+
 # TavernGames 5.1.0
 
 TavernGames 5.1.0 übernimmt Schwimmen / Knack in die stabile Version. Durak ist neu als optionale Beta: zwei bis sechs Teilnehmer, private Kartenhände, NPCs, Weitergeben durch Vorzeigen des passenden Trumpfs, einstellbare Schutzzeit (Standard fünf Sekunden), optionale Ausspiel- und Aufnahmevarianten sowie absteigende Spieltoken-Prämien. Die Tischfläche bei Schwimmen bleibt auch im eigenen Zug kompakt; Glückstag zeigt Würfel und Aufdecken nebeneinander.

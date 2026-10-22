@@ -2,18 +2,19 @@
   "schemaVersion": 1,
   "blocks": {
     "patchnotes": {
-      "title": "Patchnotes Version 5.1.0",
+      "title": "Patchnotes Version 5.1.1",
       "paragraphs": [
-        "TavernGames 5.1.0 übernimmt Schwimmen / Knack in die stabile Version. Durak ist neu als optionale Beta: zwei bis sechs Teilnehmer, private Kartenhände, NPCs, Weitergeben durch Vorzeigen des passenden Trumpfs, einstellbare Schutzzeit (Standard fünf Sekunden), optionale Ausspiel- und Aufnahmevarianten sowie absteigende Spieltoken-Prämien. Die Tischfläche bei Schwimmen bleibt auch im eigenen Zug kompakt; Glückstag zeigt Würfel und Aufdecken nebeneinander.",
-        "TavernGames 5.1.0 promotes Schwimmen / Knack to stable. Durak is a new optional beta for two to six participants, with private hands, NPCs, transfer by showing the matching trump, configurable protection (five seconds by default), optional play-to-transfer and extended-taking rules, and descending game-token prizes. Schwimmen keeps a compact shared table on your turn; Lucky Day displays dice and reveal controls side by side."
+        "Durak verbessert die Abwehrbedienung mit einem eigenen Abwehren-Button und beidseitigen Kartenhilfen. Gültige Klicks bleiben bei zusätzlichem Nachwerfen im selben Angriff erhalten. Kurze Banner und klare Rollenanzeigen begleiten langsamere NPC-Aktionen (3,5 Sekunden). Verdeckte Karten verwenden die Rückseite des gewählten Decks; Trumpf und Nachziehstapel liegen separat. Schwimmen erlaubt dem aktiven Spieler bei 7, 8 und 9 neue Tischkarten ohne Zugverbrauch und meldet Passen deutlich.",
+        "Durak improves defense controls with a dedicated Defend button and two-way card hints. Valid clicks remain usable when another attack is added within the same bout. Short banners and clear role indicators accompany slower NPC actions (3.5 seconds). Hidden cards use the selected deck back; trump and draw pile are separate. Schwimmen lets the active player refresh a 7, 8, 9 table without spending their turn and clearly announces passing.",
+        "18 Spiele sind stabil; Der Glückstag und Durak bleiben optionale Betas."
       ],
       "items": [
-        "Schwimmen / Knack stabil.",
-        "Durak als optionale Beta mit NPCs, privaten Händen und wählbarem Kartenset.",
-        "Schutzzeit 0–60 Sekunden, Vorgabe fünf; Vorzeigen reicht zum Weitergeben.",
-        "Optionale Regeln: Trumpf ausspielen und Nachwerfen beim Aufnehmen.",
-        "Absteigende Token-Prämien nach Platzierung; kein echtes Geld.",
-        "Schwimmen-Tisch kompakter, Glückstag-Würfel und Aufdecken nebeneinander."
+        "Durak: Abwehren-Button, passende Karten hervorheben und sichere Klicks bei Nachwerfen.",
+        "Kurze Aktionsbanner und klar erkennbare Rollen.",
+        "NPC-Pause 3,5 Sekunden; Schutzzeit bleibt separat einstellbar.",
+        "Deckrückseite für verdeckte Karten, Trumpf separat neben Nachziehstapel.",
+        "Schwimmen: 7–8–9-Tisch kostenlos im eigenen Zug austauschen.",
+        "Schwimmen: Passen deutlich melden, letzte Züge auch bei eingeklappter Lobby anzeigen."
       ]
     },
     "games": {
@@ -85,7 +86,7 @@
     "plans2": {
       "title": "geplante Funktionen (9)",
       "paragraphs": [
-        "Weitere Kartenregeln und Animationen folgen schrittweise. Die gemeinsame Kartenbasis und Mau-Mau sind ab 4.0.0 als Karten-Beta umgesetzt."
+        "Die gemeinsame Kartenbasis, Mau-Mau und Schwimmen / Knack sind stabil umgesetzt; Durak ist als Beta verfügbar. Die folgenden größeren Erweiterungen sind noch geplant."
       ],
       "items": [
         "Weitere Tags und Filter, etwa nach Spieldauer und Einsätzen.",
@@ -100,56 +101,48 @@
       ]
     },
     "functions": {
-      "title": "aktuelle Funktionen (20)",
+      "title": "aktuelle Funktionen (14)",
       "paragraphs": [
-        "15 stabile Spiele und Spiel der Könige als optionale Beta. Gemeinsame SL-Moderation, interne Spieltoken und optionale 3D-Würfel. Integrierte Spielansicht als separate Beta mit nativem Werkzeugleisten-Zugang; Fenster bleiben Standard."
+        "20 Spiele: 18 stabile Spiele sowie Der Glückstag und Durak als optionale Betas. Gemeinsame SL-Moderation, interne Spieltoken, auswählbare externe Kartendecks und optionale 3D-Würfel. Die Reiteransicht ist Standard; klassische Fenster bleiben wählbar."
       ],
       "items": [
-        "SL-Spielauswahl mit Kategorien, deutsch-englischer Suche, alphabetischer Liste und bis zu fünf Favoriten.",
-        "Freiwilliger Beitritt über SL-freigegebene Buttons, getrennte Spiel-/Moderationsfenster, benannte automatische oder manuell gesteuerte NPCs, Pause und Abbruch.",
-        "Deutsche und englische Anleitungen mit Regelquellen, Hausvarianten, Folgepartien und Ergebnisnachrichten im Chat.",
-        "Verschlüsselte Spielstände und Wiederaufnahme über den ursprünglichen GM-Browser.",
-        "Optionale stabile Dice-So-Nice-Anbindung mit geschützten verdeckten Würfen, ruhenden Spielwürfeln und abgestimmten Aktionen.",
-        "Gemeinsame partiengebundene Spieltoken-Verwaltung: Ohne Einsatz, SL-Zuteilung, spielgerechte Einsatzmodelle, Bankbudget/Schuld und ausdrückliche Übernahme oder Verwerfen nach der Partie.",
-        "Ausgangswetten für Teilnehmer, Zuschauer und NPCs aus demselben Tokenbestand, gleichmäßige Gewinnverteilung unter richtigen Wettern und Chat-Auswertung.",
-        "Straßenlotto mit konfigurierbaren Tippscheinen, SL-Aufdeckung und separater Übergabe eines ausgewählten Gegenstandspreises.",
-        "Kniffel Extreme mit 22 Feldern, W10 und Zusatzwurf-Chips; 17 und 4 mit W12 oder W8+W6 und manueller oder automatischer Bank.",
-        "Gemeinsame Startspielerwahl: Standard nach Spielregel, konkrete Teilnehmer oder Zufall; Bank und gemeinsame Ziehungen bleiben SL-gesteuert.",
-        "Göttliche Hand: mehrere dauerhafte, ausschließlich für die SL sichtbare Glücks-/Pechprofile je Teilnehmer; globale Vorgaben, spielbezogene Ausnahmen und weiche Qualitätsziele. 0 Prozent bleibt unveränderter Zufall, keine garantierte Gewinnquote.",
-        "Fortlaufende Runden bei 17 und 4, Würfelpoker, Chō-Han, Spiel der Könige und Mau-Mau mit erhaltenen Tokenbeständen und SL-Steuerung direkt in der Lobby.",
-        "Klippklapp: öffentliches Klappenbrett, tatsächliche Restsumme, direkter Vorgängervergleich und interne Tokenzahlungen.",
-        "Reguläre integrierte Reiteransicht: klappbares Teilnehmerpanel links, Moderation im TavernGames-Reiter; klassische Fenster optional.",
-        "Karten-Beta: Kartensetauswahl, regelabhängige Rangfilter, private Hände, öffentliche Ablage, verschlüsselte Wiederaufnahme und automatische Verwaltung der nativen Kartenstapel.",
-        "Mau-Mau: optional zwei Strafkarten bei vergessenen Ansagen, Einspruch bis zum Ende des folgenden Spielerzugs, neu gemischte Ablage und Unentschieden bei vollständiger Blockade.",
-        "Mau-Mau in der Reiteransicht mit großem Kartentisch, privater eigener Hand unten und direkt anklickbaren Karten sowie Nachziehstapel.",
-        "Stabile gemeinsame Kartenbasis mit auswählbaren Decks und zentralem Kartentisch.",
-        "Direkte Auswahl eigener liegender 3D-Würfel und schwebender Würfeln-Button.",
-        "Markierte Würfel nach persönlicher Einstellung behalten oder erneut würfeln."
+        "Spielauswahl mit Kategorien, deutsch-englischer Suche und bis zu fünf Favoriten.",
+        "Gemeinsame SL-Moderation mit freiwilligem Beitritt, benannten automatischen oder manuell gesteuerten NPCs, Pause, Abbruch und Startspielerwahl.",
+        "Deutsche und englische Anleitungen mit Regelquellen, Hausvarianten und Chat-Ergebnissen; Englisch ist als Sprach-Beta gekennzeichnet.",
+        "Verschlüsselte Spielstände, Wiederaufnahme im ursprünglichen GM-Browser und Folgepartien mit übernehmbaren Spieltoken.",
+        "Optionale Dice-So-Nice-Anbindung mit privaten und verdeckten Würfen, ruhenden Würfelgruppen, sichtbaren Teilsummen und direkter Bedienung eigener Würfel.",
+        "Schwebende regelgerechte Spielaktionen und persönliche Wahl, ob markierte Würfel behalten oder erneut gewürfelt werden.",
+        "Partiengebundene Spieltoken mit SL-Zuteilung, passenden Einsatzmodellen, Bankbudget und ausdrücklicher Übernahme oder Verwerfen; keine direkten Charakter-Geldbuchungen.",
+        "Ausgangswetten für Teilnehmer, Zuschauer und NPCs aus dem gemeinsamen Tokenbestand mit automatischer Gewinnverteilung.",
+        "Göttliche Hand: private Glücks-/Pechprofile der SL, globale Vorgaben und spielbezogene Ausnahmen; 0 Prozent bleibt unveränderter Zufall, keine garantierte Gewinnquote.",
+        "Reguläre Reiteransicht mit Teilnehmerpanel, eingebetteter Moderation und zentralem Kartentisch; klassische Fenster bleiben optional.",
+        "Kartenverwaltung mit auswählbaren externen Decks, regelabhängigen Kartenteilmengen, privaten Händen und automatisch verwalteten nativen Partiestapeln. Vorlagen bleiben unverändert.",
+        "Mau-Mau, Schwimmen und die Durak-Beta mit anklickbaren Handkarten, NPCs und Spieltoken. Große Hände bleiben scrollbar; Ergebnisse erscheinen direkt am Tisch.",
+        "Besondere Spielvarianten wie Kniffel Extreme, verschiedene Würfelarten bei 17 und 4 und wählbare Klippklapp-Regeln.",
+        "Straßenlotto mit konfigurierbaren Tippscheinen, SL-Ziehung und separater Übergabe eines ausgewählten Gegenstandspreises."
       ]
     },
     "settings": {
       "title": "Einstellungen in Foundry",
       "paragraphs": [
-        "In den Moduleinstellungen Sprache Deutsch oder Englisch wählen; Standard Englisch. Alle 15 Spiele sind stabil verfügbar und benötigen keinen Beta-Test-Schalter.",
-        "Der Taverngames-Reiter ist nur für SL sichtbar. Spiel öffnen, Lobby vorbereiten und unteren Beitrittsbutton über die Moderation freigeben.",
-        "In der Moderation Einsätze & Spieltoken öffnen. Standard ist Ohne Einsatz. Für Spieltoken Zuteilung, Grundeinsatz und passende Banklimits festlegen. Standardvorlage sind 100 Token je Teilnehmer; Beträge sind durch SL anpassbar.",
-        "Ausgangswetten verwenden denselben freien Bestand. SL öffnet die Annahme vor dem Spiel und schließt sie vor dem Start. Am Ende Token ausdrücklich übernehmen oder verwerfen; keine weltweiten Konten.",
-        "Keine direkten Charakter-Geldbuchungen mehr. Alte Abrechnungen und Test-Goldkonten sind historische Nachweise und werden nicht umgewandelt. Gegenstandspreise bleiben erhalten. Für die neue Einsatzverwaltung eine neue Lobby verwenden.",
-        "Dice So Nice ist optional und separat einschaltbar. Nach Installation des Updates die Welt neu laden.",
-        "Vor dem Start Wer beginnt? in der Moderation einstellen. Im Tokenfenster Allen gleichen Bestand zuteilen oder Einzelbestände auswählen; während des Spiels können freie Bestände weiter geändert werden.",
-        "Spielansicht: Die integrierte Reiteransicht ist Standard; je Benutzer kann die klassische Fensteransicht gewählt werden. Gespeicherte Fensterwahl bleibt erhalten. Teilnehmer erhalten das linke Spielmenü nach Beitritt, SL-Vorbereitung wird sofort eingebettet.",
-        "Ab 3.3.0 benötigen Meiern, Klippklapp und Würfelpoker keinen Beta-Schalter. Ab 4.0.0 ist die Reiteransicht regulär; Fenster bleiben ausdrücklich wählbar.",
-        "Die böse Dreizehn ist ab 3.4.0 stabil und braucht keinen Beta-Test-Schalter. Göttliche Hand ist angebunden, ihre Abstufung bei diesem Spiel ist noch ein offener Korrekturpunkt.",
-        "Mau-Mau und Spiel der Könige unter Moduleinstellungen → Beta-Test freischalten. Über das TavernGames-Symbol links die berechtigte Lobby öffnen.",
-        "Aalstechen: Glück senkt die natürliche Eins-Chance pro Würfel, ohne hohe sichere Werte zu bevorzugen. Bei 100 % Glück keine Eins; bei 0 % unveränderter Zufall. Die Anzeige liegender Würfel ist in 3.4.2 unverändert.",
-        "Mau-Mau: Kartenset in der Moderation wählen. Die drei importierten Dragon-Cards-Decks werden anhand ihrer Metadaten erkannt; ein schlichtes Standardset funktioniert ohne Zusatzmodul. Das Spiel verwendet nur 7 bis Ass ohne Joker.",
-        "Mau-Mau: Ansagestrafe standardmäßig aus. Endgültiges Beenden entfernt die automatisch erzeugten Spielstapel. Vorlagendecks bleiben unberührt. Bei fehlenden nativen Spielkarten Kartenbestände wiederherstellen verwenden.",
-        "Mau-Mau: Im integrierten Spielmenü erscheint der große Kartentisch automatisch im freien Bildschirmbereich. Menü einklappen oder Spielansicht schließen blendet ihn aus; in Fensteransicht oder bei sehr wenig Platz bleiben die Karten kompakt."
+        "Nach Installation alle Clients vollständig neu laden. Benötigt wird mindestens Foundry 14.369. In den Moduleinstellungen Deutsch oder English (Beta) wählen; Standard ist Englisch. Die Sprach-Beta ist unabhängig vom Beta-Spieleschalter.",
+        "18 Spiele sind stabil, darunter Mau-Mau, Schwimmen / Knack und Spiel der Könige. Für Der Glückstag und Durak den Beta-Test einschalten.",
+        "Die integrierte Reiteransicht ist Standard. Je Benutzer bleiben klassische Fenster wählbar; eine zuvor ausdrücklich gespeicherte Fensterwahl bleibt erhalten. Das TavernGames-Symbol öffnet die berechtigte Lobby bereits vor dem Beitritt. Spielaktionen erfordern weiterhin Teilnahme und passende Berechtigung.",
+        "Der TavernGames-Reiter und die Moderation sind für die SL. Spiel wählen, Regeln einstellen, Lobby vorbereiten und den Beitrittsbutton freigeben. Vor dem Start gegebenenfalls Startspieler und NPC-Steuerung wählen.",
+        "Für Kartenpartien unter Cards / Card Decks ein geeignetes externes Deck erstellen oder importieren und in der Moderation wählen. Es gibt kein mitgeliefertes Standard-Kartenset mehr. Vorhandene Dragon-Cards-Vorlagen werden unterstützt. Mau-Mau und Schwimmen benötigen 7 bis Ass, Durak Sechs bis Ass, jeweils in vier Farben ohne Joker. Ohne geeignetes Deck kann keine Kartenlobby erstellt werden.",
+        "Kartenhände bleiben privat. Die nativen Spielstapel werden automatisch erzeugt und beim endgültigen Beenden aufgeräumt; Vorlagen werden nicht verändert. Bei beschädigten Spielbeständen kann die SL Kartenbestände wiederherstellen verwenden.",
+        "In der Moderation Einsätze & Spieltoken öffnen. Standard ist Ohne Einsatz. Zuteilung, Grundeinsatz und passende Banklimits festlegen. Die Standardvorlage sind 100 Token je Teilnehmer. Freie Bestände können durch die SL angepasst werden; es erfolgen keine direkten Charakter-Geldbuchungen. Gegenstandspreise im Straßenlotto bleiben separat möglich.",
+        "Ausgangswetten verwenden denselben freien Tokenbestand. Die SL öffnet die Annahme vor dem Spiel und schließt sie vor dem Start. Am Ende Token ausdrücklich übernehmen oder verwerfen.",
+        "Dice So Nice ist optional und separat einzuschalten. Eigene liegende Würfel können direkt bedient werden; den persönlichen Markierungsmodus Behalten oder Neuwurf bewusst wählen. Verdeckte Anteile bleiben in Summen unbekannt.",
+        "Mau-Mau: freiwilliges Ziehen und Ansagestrafen sind optionale Regeln, standardmäßig aus. Handkarten sind bei großen Händen horizontal scrollbar. Das Einklappen der linken Lobby lässt den Kartentisch spielbar; Spielwechsel, Schließen oder Fensteransicht beenden die große Darstellung.",
+        "Schwimmen: drei Leben plus Schwimmen, 30½ und Knack; Blitz ist optional und standardmäßig an. Bei genau 7, 8 und 9 auf dem Tisch kann nur der aktive Spieler neue Tischkarten ohne Zugverbrauch anfordern. Passen startet die angekündigten letzten Züge.",
+        "Durak (Beta): zwei bis sechs Teilnehmer. Schutzzeit vor der Partie festlegen, Standard fünf Sekunden und einstellbar von 0 bis 60. Trumpf vorzeigen reicht standardmäßig zum Weitergeben; Ausspielen und zusätzliches Nachwerfen beim Aufnehmen sind optionale Varianten. Für die Abwehr Handkarte und Angriff wählen oder Abwehren verwenden. NPCs warten 3,5 Sekunden zwischen Aktionen.",
+        "Göttliche Hand ist nur für die SL sichtbar. Globale Profile und Spielausnahmen gezielt einstellen; der globale Ausschalter entfernt alle Glücks-/Pechprofile. Der bekannte Einfluss bei Die böse Dreizehn ist weiterhin ein offener Korrekturpunkt."
       ],
       "items": []
     },
     "sources": {
-      "title": "Regelquellen (40)",
+      "title": "Regelquellen (42)",
       "paragraphs": [
         "Hier findet ihr alle genutzten Regelquellen. Quellen für noch nicht umgesetzte Spiele sind ausdrücklich als geplante Regelreferenzen gekennzeichnet."
       ],
@@ -158,17 +151,17 @@
         "PlayMonster (Regelquelle Farkle) – https://playmonster.com/wp-content/uploads/2018/06/Farkle-Rules.pdf",
         "Awiana (geplante Regelvorlagen) – https://awiana.fandom.com/de/wiki/Liste_an_Kneipen_spielen",
         "Paul Cossmer / DnDDiary (PDF-Regelvorlagen) – https://keeponrolling.de/",
-        "Bicycle Cards (Regelquelle Schiff und Blackjack) – https://bicyclecards.com/how-to-play/ship-captain-and-crew",
+        "Bicycle Cards (Regelquelle Schiff; Blackjack noch geplant) – https://bicyclecards.com/how-to-play/ship-captain-and-crew",
         "moses. Verlag (Regelreferenzen 17+4 und Schwimmen) – https://www.moses-verlag.de/media/20/99/c5/1599117493/81716_Karten-und_Wuerfelspiele_fuer_unterwegs_Regeln_deutsch_web.pdf",
         "John McLeod / Pagat (Regelreferenz Schwimmen) – https://www.pagat.com/commerce/schwimmen.html",
         "TS Spielkarten (ergänzende Regelreferenz Schwimmen) – https://ts-spielkarten.de/spielregeln-kartenspiele/schwimmen-spielregeln/",
         "Schmidt Spiele (Regelquelle Kniffel) – https://www.schmidtspiele.de/files/Produkte/4/49203%20-%20Kniffel%C2%AE/49203_Kniffel_DE.pdf",
         "TZawalich (Regelquelle Lügenwürfel und Drachenhort) – https://github.com/TZawalich/tavern-games-current",
         "Awiana – Aalstechen (Regelquelle): https://awiana.fandom.com/de/wiki/Aalstechen",
-        "Awiana – Elfenlauf (geplante Regelreferenz): https://awiana.fandom.com/de/wiki/Elfenlauf",
+        "Awiana – Elfenlauf (abweichende Referenz zur Würfel-Hausvariante 17 und 4): https://awiana.fandom.com/de/wiki/Elfenlauf",
         "Awiana – Koboldpoker (Vorlage für Würfelpoker): https://awiana.fandom.com/de/wiki/Koboldpoker",
-        "Awiana – Piratenzunge (geplante Regelreferenz): https://awiana.fandom.com/de/wiki/Piratenzunge",
-        "Awiana – Schlangenfangen (geplante Regelreferenz): https://awiana.fandom.com/de/wiki/Schlangenfangen",
+        "Awiana – Piratenzunge (gespeicherte ergänzende Regelreferenz): https://awiana.fandom.com/de/wiki/Piratenzunge",
+        "Awiana – Schlangenfangen (Regelreferenz für Meiern): https://awiana.fandom.com/de/wiki/Schlangenfangen",
         "Bicycle Cards (ergänzende/geplante Regelreferenz) – https://bicyclecards.com/how-to-play/blackjack",
         "Hasbro Classic 00950 (ergänzende/geplante Regelreferenz) – https://instructions.hasbro.com/api/download/00950_en-ca_yahtzee-classic.pdf",
         "Hasbro 40958 (ergänzende/geplante Regelreferenz) – https://www.hasbro.com/common/instruct/40958.pdf",
@@ -193,7 +186,9 @@
         "Daniel Brune – bereitgestellte Klippklapp-Regelvorlage vom 13.10.2026 und bestätigte Bluff-, Zahlungs- und Startspielerregeln; neue Brettspielnamen zunächst nur vorgemerkt.",
         "O’Donnell – Die böse Dreizehn: https://odonnell.de/blogs/news/die-besten-wurfelspiele-fur-drei-wurfel",
         "Mau-Mau: Daniels D&D-Minispiele-Sammlung vom 15.10.2026, bestätigte Randregeln und Spielewiki – https://spielewiki.org/wiki/Mau_Mau",
-        "Dragon Cards – Card Deck: Daniel Brune, optionale KI-generierte bzw. KI-basierte Dracima-Gestaltung; drei Stile, Kartenmetadaten-Schema und Lese-API v1. Kein Bestandteil des Hauptmoduls."
+        "Dragon Cards – Card Deck: Daniel Brune, optionale KI-generierte bzw. KI-basierte Dracima-Gestaltung; drei Stile, Kartenmetadaten-Schema und Lese-API v1. Kein Bestandteil des Hauptmoduls.",
+        "Spiel der Könige und Der Glückstag: Paul Cossmer, Tavernen und Glücksspiele, Seite 4; Ablauf- und Setzergänzungen nach Daniel Brune.",
+        "Durak: Daniels bereitgestellte D&D-Minispiele – Regel- und Spielesammlung, Version 1.0 vom 15.10.2026; bestätigte Weitergabe-, Schutzzeit-, Teilnehmer- und Tokenregeln nach Daniel Brune."
       ]
     },
     "sources1": {
@@ -223,8 +218,11 @@
         "Klippklapp Variante C: 3+5 erlaubt 8 oder 3 und 5 gemeinsam; 2+2 erlaubt 4 oder eine 2. Keine einzelnen ungleichen Würfelwerte.",
         "Daniel Brune: Die böse Dreizehn mit Restzahlung und Ausscheiden, fortlaufenden Töpfen und internen Spieltoken.",
         "Spiel der Könige: Daniels bestätigte Umsetzung mit nacheinander geworfenen W8/W6/W4, drei Setzphasen, All-in/Nebentöpfen und Topfteilung; Regelvorlage Paul Cossmer.",
-        "Mau-Mau: 32 Karten von 7 bis Ass, fünf Startkarten, keine Joker oder Siebener-Stapel. Nur ohne spielbare Karte ziehen.",
-        "Mau-Mau: optionale Ansagestrafe aus; aktiviert zwei Karten nach rechtzeitigem Einspruch bis zum Ende des folgenden Spielerzugs, auch nach letzter Karte. Vollständige Blockade endet unentschieden."
+        "Mau-Mau: 32 Karten von 7 bis Ass, fünf Startkarten, keine Joker oder Siebener-Stapel. Standardmäßig nur ohne spielbare Karte ziehen; freiwilliges Ziehen ist optional.",
+        "Mau-Mau: optionale Ansagestrafe aus; aktiviert zwei Karten nach rechtzeitigem Einspruch bis zum Ende des folgenden Spielerzugs, auch nach letzter Karte. Vollständige Blockade endet unentschieden.",
+        "Der Glückstag: zunächst verdeckte Würfel, eigene Aufdeckung; Erhöhen optional aus, ein Erhöhungsschritt pro Runde zwischen den Würfen und SL-Limits. Auszahlungen 2× beziehungsweise 1,5× abgerundet; interne Bank mit möglicher Schuld.",
+        "Schwimmen / Knack: drei Leben plus Schwimmen; 30½ und Knack, Blitz optional standardmäßig an. Ein Token-Einkauf je Partie. Bei genau 7/8/9 auf dem Tisch kostenlose Erneuerung durch den aktiven Spieler ohne Zugverbrauch.",
+        "Durak: bei sechs Teilnehmern fünf Startkarten; Weitergabe standardmäßig durch Vorzeigen des passenden Trumpfs, Ausspielen optional. Nur aktive Nachbarn werfen nach; Schutzzeit einstellbar, Standard fünf Sekunden, bei Pause eingefroren. Aufnehmen sofort; verlängertes Nachwerfen optional. Tokenprämien mit Gewichten N−1 bis 0, Resttoken in Platzierungsreihenfolge."
       ]
     },
     "milestones": {
@@ -240,5 +238,5 @@
       "paragraphs": []
     }
   },
-  "version": "5.1.0"
+  "version": "5.1.1"
 }

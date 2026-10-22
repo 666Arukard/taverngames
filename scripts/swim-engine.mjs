@@ -8,6 +8,7 @@ function endHand(s,special){const ids=s.order,values=Object.fromEntries(ids.map(
 function special(s){const blitz=s.order.find(id=>s.blitz&&s.hands[id].every(c=>s.cards[c].rank==='ace'));if(blitz){endHand(s,{id:blitz,blitz:true});return true;}if(s.order.some(id=>swimScore(s,id)===31)){endHand(s);return true;}return false;}
 function deal(s,random){s.handNumber++;s.order=startingOrder({...s,players:s.players.filter(id=>!s.out.includes(id)),startSelection:s.handNumber===1?s.startSelection:'rules'});s.turn=(s.handNumber-1)%s.order.length;s.drawPile=shuffle(Object.keys(s.cards),random);s.discard=[];s.hands=Object.fromEntries(s.players.map(id=>[id,[]]));for(const id of s.order)s.hands[id]=s.drawPile.splice(0,3);s.table=s.drawPile.splice(0,3);s.passed=null;s.lastTurns=[];s.shifts=0;s.roundWinners=[];s.roundLosers=[];s.phase='playing';special(s);}
 function refill(s,random){s.discard.push(...s.table);s.table=[];for(let i=0;i<3;i++){if(!s.drawPile.length){s.drawPile=shuffle(s.discard,random);s.discard=[];}check(s.drawPile.length,'No cards available.');s.table.push(s.drawPile.shift());}}
+export const swimCanRefresh=s=>s?.phase==='playing'&&s.table?.length===3&&s.table.map(c=>s.cards[c].rank).sort().join(',')==='7,8,9';
 export function actSwim(original,id,action,a={},random=()=>1,gm=false){const s=structuredClone(original);check(s?.game==='swim','No game exists.');
  if(action==='abort'){check(gm,'GM only.');s.phase='aborted';s.paused=true;}
  else if(action==='pause'){check(gm&&!['finished','aborted'].includes(s.phase),'GM only.');s.paused=!s.paused;}
@@ -17,6 +18,7 @@ export function actSwim(original,id,action,a={},random=()=>1,gm=false){const s=s
  else if(action==='begin'){check(gm&&s.phase==='lobby'&&s.players.length>=2,'Two to nine participants.');s.lives=Object.fromEntries(s.players.map(id=>[id,3]));deal(s,random);}
  else if(action==='nextHand'){check(gm&&s.phase==='roundEnd','GM only.');deal(s,random);}
  else{check(s.phase==='playing'&&s.order[s.turn]===id,'It is not your turn.');
+ if(action==='refreshTable'){check(swimCanRefresh(s),'New table cards require seven, eight and nine.');refill(s,random);s.revision++;return s;}
  if(action==='swap'){check(Number.isInteger(a.own)&&a.own>=0&&a.own<3&&Number.isInteger(a.table)&&a.table>=0&&a.table<3,'Choose two cards.');[s.hands[id][a.own],s.table[a.table]]=[s.table[a.table],s.hands[id][a.own]];s.shifts=0;}
  else if(action==='swapAll'){[s.hands[id],s.table]=[s.table,s.hands[id]];s.shifts=0;}
  else if(action==='shift')s.shifts++;
@@ -26,4 +28,4 @@ export function actSwim(original,id,action,a={},random=()=>1,gm=false){const s=s
  s.revision++;return s;
 }
 export function swimView(state,user={}){if(!state)return null;const s=structuredClone(state);s.drawCount=s.drawPile.length;delete s.drawPile;const reveal=['roundEnd','finished'].includes(s.phase);if(!reveal)delete s.scores;for(const id of s.players)if(!reveal&&id!==user.id&&!(user.isGM&&s.npcs[id]&&s.npcManual[id]))s.hands[id]=(s.hands[id]??[]).map(()=>null);return s;}
-export function swimNpc(s){if(!s||s.paused||s.phase!=='playing')return null;const id=s.order[s.turn];if(!s.npcs[id]||s.npcManual[id])return null;let best=swimScore(s,id),move={id,action:s.passed?'shift':'pass',args:{}};for(let own=0;own<3;own++)for(let table=0;table<3;table++){const copy=structuredClone(s);[copy.hands[id][own],copy.table[table]]=[copy.table[table],copy.hands[id][own]];const score=swimScore(copy,id);if(score>best){best=score;move={id,action:'swap',args:{own,table}};}}const all=structuredClone(s);all.hands[id]=[...s.table];if(swimScore(all,id)>best)move={id,action:'swapAll',args:{}};return move;}
+export function swimNpc(s){if(!s||s.paused||s.phase!=='playing')return null;const id=s.order[s.turn];if(!s.npcs[id]||s.npcManual[id])return null;if(swimCanRefresh(s))return {id,action:'refreshTable',args:{}};let best=swimScore(s,id),move={id,action:s.passed?'shift':'pass',args:{}};for(let own=0;own<3;own++)for(let table=0;table<3;table++){const copy=structuredClone(s);[copy.hands[id][own],copy.table[table]]=[copy.table[table],copy.hands[id][own]];const score=swimScore(copy,id);if(score>best){best=score;move={id,action:'swap',args:{own,table}};}}const all=structuredClone(s);all.hands[id]=[...s.table];if(swimScore(all,id)>best)move={id,action:'swapAll',args:{}};return move;}

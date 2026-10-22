@@ -5,7 +5,7 @@ export class DurakSession{
  constructor(_scope,deps){Object.assign(this,deps);this.state=null;this.now=()=>Date.now();this.wait=0;}
  restore(s){if(s&&(s.version!==1||s.game!=='durak'))throw Error('Invalid game save.');this.state=structuredClone(s);this.updateNpcWait();}
  project(user){return durakView(this.state,user);}
- updateNpcWait(){this.wait=this.now()+1200;}
+ updateNpcWait(){this.wait=this.now()+3500;}
  async repair(force=false){const s=this.state,mirror=s?{...s,discard:[...s.discard,...s.table.flatMap(p=>[p.attack,...(p.defense?[p.defense]:[])])]}:null;try{if(force)await this.stacks.rebuild(mirror);else await this.stacks.sync(mirror);this.nativeError=null;}catch(e){if(this.nativeError!==e.message)globalThis.ui?.notifications?.warn(e.message);this.nativeError=e.message;}}
  async handle(d,user){
   if(!this.enabled()&&!(d.action==='abort'&&user.isGM))throw Error('This game is disabled.');if(d.action==='read')return this.project(user);
