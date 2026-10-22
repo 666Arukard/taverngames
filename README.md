@@ -1,3 +1,9 @@
+# TavernGames 5.0.2
+
+Die schwebende Spielsteuerung enthält passende Zugaktionen wie Punkte sichern, Zug abschließen und Schieben. Schweinchen zeigt aktiven Spieler, Zugpunkte und gesicherte Punkte oben mittig; Würfel des beendeten Zuges werden entfernt. Herausgelegte Würfel werden in der gemeinsamen 3D-Darstellung vergrößert und deutlicher markiert. Schwimmen zeigt am Rundenende alle aufgedeckten Hände mit Punkten und Lebensverlusten. Bei 17 und 4 sind nur Gewinner/Verlierer öffentlich; Bankdetails und Abrechnung erhalten ausschließlich Spielleitungen.
+
+Floating game controls include relevant turn actions such as banking points, ending a turn and checking. Pig shows the active player, turn points and banked points at the top center, and clears dice after a completed turn. Kept dice are enlarged and highlighted in the shared 3D presentation. Swimming reveals every participant’s hand, score and life loss at hand end. Seventeen and Four publishes only winners and losers; bank details and accounting are whispered to GMs only.
+
 # TavernGames 5.0.1
 
 17 und 4: NPC-Aktionen warten regulär 1,2 statt 5 Sekunden. Die gemeinsame NPC-Abfrage läuft alle 250 ms und verhindert aufgestaute Timer. Der schwebende Würfeln-Button greift nach Neuzeichnungen auf die aktuelle Ansicht zu. Einstiegsbuttons werden lokal verborgen, solange die jeweilige Lobby geöffnet ist, und beim Schließen wieder sichtbar; übrigen Buttons weicht die Würfelsteuerung aus.

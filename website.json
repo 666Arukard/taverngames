@@ -2,17 +2,18 @@
   "schemaVersion": 1,
   "blocks": {
     "patchnotes": {
-      "title": "Patchnotes Version 5.0.1",
+      "title": "Patchnotes Version 5.0.2",
       "paragraphs": [
-        "17 und 4: NPC-Aktionen warten regulär 1,2 statt 5 Sekunden. Die gemeinsame NPC-Abfrage läuft alle 250 ms und verhindert aufgestaute Timer. Der schwebende Würfeln-Button greift nach Neuzeichnungen auf die aktuelle Ansicht zu. Einstiegsbuttons werden lokal verborgen, solange die jeweilige Lobby geöffnet ist, und beim Schließen wieder sichtbar; übrigen Buttons weicht die Würfelsteuerung aus.",
-        "Seventeen and Four: regular NPC actions wait 1.2 instead of 5 seconds. Shared NPC polling runs every 250 ms and prevents queued timer backlogs. The floating Roll button resolves the current control after redraws. Launch buttons hide locally while their game lobby is open and return on close; dice controls avoid remaining launch buttons."
+        "Die schwebende Spielsteuerung enthält passende Zugaktionen wie Punkte sichern, Zug abschließen und Schieben. Schweinchen zeigt aktiven Spieler, Zugpunkte und gesicherte Punkte oben mittig; Würfel des beendeten Zuges werden entfernt. Herausgelegte Würfel werden in der gemeinsamen 3D-Darstellung vergrößert und deutlicher markiert. Schwimmen zeigt am Rundenende alle aufgedeckten Hände mit Punkten und Lebensverlusten. Bei 17 und 4 sind nur Gewinner/Verlierer öffentlich; Bankdetails und Abrechnung erhalten ausschließlich Spielleitungen.",
+        "Floating game controls include relevant turn actions such as banking points, ending a turn and checking. Pig shows the active player, turn points and banked points at the top center, and clears dice after a completed turn. Kept dice are enlarged and highlighted in the shared 3D presentation. Swimming reveals every participant’s hand, score and life loss at hand end. Seventeen and Four publishes only winners and losers; bank details and accounting are whispered to GMs only."
       ],
       "items": [
-        "17 und 4: kürzere NPC-Reaktionszeit; gezielte Ergebnispausezeiten anderer Spiele bleiben erhalten.",
-        "NPC-Zeitprüfung über alle 19 Spiele plus Kniffel Extreme.",
-        "Schwebender Würfeln-Button funktioniert auch nach erneutem Zeichnen der Ansicht.",
-        "Lokale Einstiegsbuttons bei offener Lobby ausblenden, beim Schließen wiederherstellen.",
-        "Mau-Mau stabil; Glückstag und Schwimmen bleiben Beta."
+        "17+4: öffentlich nur Ergebnis; Bankdetails und Token-Abrechnung als SL-Flüsternachrichten.",
+        "Passende schwebende Zugaktionen zusätzlich zum Würfeln; bestehende Berechtigungs- und Animationssperren gelten.",
+        "Schweinchen: aktive Zugsumme und gesicherte Punkte oben mittig, kein alter Würfel nach Zugende.",
+        "Größere herausgelegte 3D-Würfel mit deutlicher Markierung, ohne Änderungen an Ergebnissen und Würfelmaterialien.",
+        "Schwimmen: alle aufgedeckten Hände mit Punkten, Lebensverlust und verbliebenen Leben bis zur nächsten Runde.",
+        "Glückstag-Regeln und -Ablauf unverändert; weitere Korrekturen folgen separat."
       ]
     },
     "games": {
@@ -239,5 +240,5 @@
       "paragraphs": []
     }
   },
-  "version": "5.0.1"
+  "version": "5.0.2"
 }
