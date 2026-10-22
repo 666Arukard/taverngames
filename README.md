@@ -663,3 +663,7 @@ English: 1.4.7 preserves moderation scrolling and adds held 3D dice for Kniffel 
 ## 5.0.3
 
 Eigene abgelegte 3D-Würfel größer; Verkleinerung nur bei Platzmangel. Tischbedienung besitzt keine bildschirmfüllende Trefferfläche mehr. Glückstag unverändert.
+
+## 5.0.4
+
+Über abgelegten 3D-Würfelgruppen erscheint die sichtbare Augensumme. Verdeckte Würfel werden ausschließlich als unbekannter Anteil angezeigt, beispielsweise 12 + ?. Vollständig verdeckte Gruppen zeigen ?. Die Anzeige blockiert keine Mausbedienung. Glückstag bleibt unverändert. Keine Veröffentlichung.

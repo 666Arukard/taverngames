@@ -1,10 +1,10 @@
 {
     "id":  "taverngames",
     "title":  "TavernGames",
-    "description":  "\u003ch3\u003eDeutsch\u003c/h3\u003e\u003cp\u003eTavernGames bietet 17 stabile Tavernenspiele und zwei optionale Betas mit SL-Moderation, freiwilligem Beitritt, NPCs, internen Spieltoken und optionalen Dice-So-Nice-Würfeln. Mau-Mau mit auswählbaren Kartensets und zentralem Kartentisch ist stabil. Glückstag und Schwimmen sind Beta. Die Reiteransicht ist Standard; klassische Fenster bleiben wählbar.\u003c/p\u003e\u003ch3\u003eEnglish\u003c/h3\u003e\u003cp\u003eTavernGames provides 17 stable tavern games and two optional betas with GM moderation, voluntary participation, NPCs, internal game tokens and optional Dice So Nice dice. Mau-Mau with selectable card sets and a central card table is stable. Lucky Day and Schwimmen are betas. Sidebar view is the default; classic windows remain available.\u003c/p\u003e\u003ch3\u003e5.0.3 · Versionshinweise / Release notes\u003c/h3\u003e\u003cp\u003eEigene abgelegte 3D-Würfel sind größer und werden erst bei Platzmangel verkleinert. Die Tischbedienung hat keine bildschirmfüllende Trefferfläche mehr; freie Szenenflächen bleiben für die Maus durchlässig. Glückstag bleibt unverändert.\u003c/p\u003e\u003cp\u003eYour resting 3D dice are larger and shrink only when space is needed. Table controls no longer have a screen-sized hit box; free scene areas remain accessible to the mouse. Lucky Day is unchanged.\u003c/p\u003e\u003cp\u003eRegelvorlagen einschließlich Daniels Chō-Han-Regelsammlung, Awiana, O’Donnell, Paul Cossmers PDF-Sammlung und der Kartenregelreferenzen werden in den Anleitungen genannt. / Rule sources, including Daniel’s Cho-Han collection, Awiana, O’Donnell, Paul Cossmer’s PDF collection and card-game references, are credited in the instructions.\u003c/p\u003e",
-    "version":  "5.0.3",
+    "description":  "\u003ch3\u003eDeutsch\u003c/h3\u003e\u003cp\u003eTavernGames bietet 17 stabile Tavernenspiele und zwei optionale Betas mit SL-Moderation, freiwilligem Beitritt, NPCs, internen Spieltoken und optionalen Dice-So-Nice-Würfeln. Mau-Mau mit auswählbaren Kartensets und zentralem Kartentisch ist stabil. Glückstag und Schwimmen sind Beta. Die Reiteransicht ist Standard; klassische Fenster bleiben wählbar.\u003c/p\u003e\u003ch3\u003eEnglish\u003c/h3\u003e\u003cp\u003eTavernGames provides 17 stable tavern games and two optional betas with GM moderation, voluntary participation, NPCs, internal game tokens and optional Dice So Nice dice. Mau-Mau with selectable card sets and a central card table is stable. Lucky Day and Schwimmen are betas. Sidebar view is the default; classic windows remain available.\u003c/p\u003e\u003ch3\u003e5.0.4 · Versionshinweise / Release notes\u003c/h3\u003e\u003cp\u003eÜber abgelegten 3D-Würfelgruppen erscheint die sichtbare Augensumme. Verdeckte Würfel werden ausschließlich als unbekannter Anteil angezeigt, beispielsweise 12 + ?. Vollständig verdeckte Gruppen zeigen ?. Die Anzeige blockiert keine Mausbedienung. Glückstag bleibt unverändert.\u003c/p\u003e\u003cp\u003eResting 3D dice groups display the sum of visible faces. Concealed dice contribute only an unknown remainder, such as 12 + ?. Entirely concealed groups show ?. The labels do not intercept mouse input. Lucky Day is unchanged.\u003c/p\u003e\u003cp\u003eRegelvorlagen einschließlich Daniels Chō-Han-Regelsammlung, Awiana, O’Donnell, Paul Cossmers PDF-Sammlung und der Kartenregelreferenzen werden in den Anleitungen genannt. / Rule sources, including Daniel’s Cho-Han collection, Awiana, O’Donnell, Paul Cossmer’s PDF collection and card-game references, are credited in the instructions.\u003c/p\u003e",
+    "version":  "5.0.4",
     "readme":  "README.md",
-    "changelog":  "https://github.com/666Arukard/taverngames/releases/tag/v5.0.3",
+    "changelog":  "https://github.com/666Arukard/taverngames/releases/tag/v5.0.4",
     "url":  "https://dnd.brunecoaching.de",
     "compatibility":  {
                           "minimum":  "14.369",
@@ -100,7 +100,7 @@
                    "styles/table.css"
                ],
     "manifest":  "https://github.com/666Arukard/taverngames/releases/latest/download/module.json",
-    "download":  "https://github.com/666Arukard/taverngames/releases/download/v5.0.3/taverngames-5.0.3.zip",
+    "download":  "https://github.com/666Arukard/taverngames/releases/download/v5.0.4/taverngames-5.0.4.zip",
     "relationships":  {
                           "recommends":  [
                                              {

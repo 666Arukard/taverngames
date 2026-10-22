@@ -2,15 +2,16 @@
   "schemaVersion": 1,
   "blocks": {
     "patchnotes": {
-      "title": "Patchnotes Version 5.0.3",
+      "title": "Patchnotes Version 5.0.4",
       "paragraphs": [
-        "Eigene abgelegte 3D-Würfel sind größer und werden erst bei Platzmangel verkleinert. Die Tischbedienung hat keine bildschirmfüllende Trefferfläche mehr; freie Szenenflächen bleiben für die Maus durchlässig. Glückstag bleibt unverändert.",
-        "Your resting 3D dice are larger and shrink only when space is needed. Table controls no longer have a screen-sized hit box; free scene areas remain accessible to the mouse. Lucky Day is unchanged."
+        "Über abgelegten 3D-Würfelgruppen erscheint die sichtbare Augensumme. Verdeckte Würfel werden ausschließlich als unbekannter Anteil angezeigt, beispielsweise 12 + ?. Vollständig verdeckte Gruppen zeigen ?. Die Anzeige blockiert keine Mausbedienung. Glückstag bleibt unverändert.",
+        "Resting 3D dice groups display the sum of visible faces. Concealed dice contribute only an unknown remainder, such as 12 + ?. Entirely concealed groups show ?. The labels do not intercept mouse input. Lucky Day is unchanged."
       ],
       "items": [
-        "Eigene abgelegte Würfel bevorzugt 50 % größer, mit platzabhängiger Skalierung.",
-        "Freie Szenenflächen bleiben trotz aktiver Tischsteuerung erreichbar.",
-        "Bestehende Spielregeln und Glückstag unverändert."
+        "Sichtbare Augensumme über abgelegten 3D-Würfeln je Gruppe.",
+        "Verdeckte Werte bleiben unbekannt: sichtbare Summe + ? beziehungsweise ?.",
+        "Aufdecken und Entfernen aktualisieren die Anzeige.",
+        "Glückstag unverändert."
       ]
     },
     "games": {
@@ -237,5 +238,5 @@
       "paragraphs": []
     }
   },
-  "version": "5.0.3"
+  "version": "5.0.4"
 }
