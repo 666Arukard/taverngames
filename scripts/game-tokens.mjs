@@ -123,6 +123,9 @@ function settle(s,scope,e){
  else if(['meiern','klippklapp'].includes(scope)){Object.assign(payouts,e.meiernReceived??{});}
  else if(s.phase==='aborted'){for(const id of ids)payouts[id]=stakes[id]??0;
   if(scope==='chohan'&&s.carry===0)for(const [id,n]of Object.entries(e.carryContrib??{})){e.balances[id]=(e.balances[id]??0)+n;carryRefund[id]=n;}e.carryContrib={};
+ }else if(scope==='durak'){
+  if(s.draw){for(const id of ids)payouts[id]=stakes[id]??0;}
+  else {const ranking=s.ranking,weights=ranking.map((_id,i)=>Math.max(0,ranking.length-1-i)),denom=weights.reduce((n,w)=>n+w,0),pot=total(stakes);let remainder=pot;ranking.forEach((id,i)=>{payouts[id]=Number(BigInt(pot)*BigInt(weights[i])/BigInt(denom));remainder-=payouts[id];});for(let i=0;remainder>0;i++,remainder--)payouts[ranking[i%Math.max(1,ranking.length-1)]]++;}
  }else if(scope==='schocken'){
   for(const id of ids)payouts[id]=(stakes[id]??0)+(id===s.loser?-(ids.length-1)*e.config.stake:e.config.stake);
  }else if(scope==='lucky'){for(const id of ids)payouts[id]=s.settlements[id]?.payout??0;bankDelta=total(stakes)-total(payouts);

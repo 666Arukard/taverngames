@@ -29,7 +29,7 @@ export function gameInteractionKey(scope,s,userId){
  if(!s)return null;
  const turn=s.order?.[s.turn];
  return JSON.stringify([s.gameId,s.phase,s.half,s.round,s.turnNumber??s.turn,turn,s.rollNumber??s.cup?.rolls,
-  scope==='maumau'?[s.turnSerial,s.drawnCard]:scope==='seventeen'?[s.bank?.length,s.hands?.[turn]?.length]:scope==='kings'?[s.stage,s.hands?.[turn]?.length,s.currentBet,s.street?.[turn]]:null,
+  scope==='durak'?[s.round,s.attacker,s.defender,s.table,s.passes,s.hands?.[userId]]:scope==='maumau'?[s.turnSerial,s.drawnCard]:scope==='seventeen'?[s.bank?.length,s.hands?.[turn]?.length]:scope==='kings'?[s.stage,s.hands?.[turn]?.length,s.currentBet,s.street?.[turn]]:null,
   scope==='liars'?s.hands?.[userId]?.length:null]);
 }
 export function sameInteraction(action,key,current){

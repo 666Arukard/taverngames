@@ -1,3 +1,9 @@
+# TavernGames 5.1.0
+
+TavernGames 5.1.0 übernimmt Schwimmen / Knack in die stabile Version. Durak ist neu als optionale Beta: zwei bis sechs Teilnehmer, private Kartenhände, NPCs, Weitergeben durch Vorzeigen des passenden Trumpfs, einstellbare Schutzzeit (Standard fünf Sekunden), optionale Ausspiel- und Aufnahmevarianten sowie absteigende Spieltoken-Prämien. Die Tischfläche bei Schwimmen bleibt auch im eigenen Zug kompakt; Glückstag zeigt Würfel und Aufdecken nebeneinander.
+
+TavernGames 5.1.0 promotes Schwimmen / Knack to stable. Durak is a new optional beta for two to six participants, with private hands, NPCs, transfer by showing the matching trump, configurable protection (five seconds by default), optional play-to-transfer and extended-taking rules, and descending game-token prizes. Schwimmen keeps a compact shared table on your turn; Lucky Day displays dice and reveal controls side by side.
+
 # TavernGames 5.0.2
 
 Die schwebende Spielsteuerung enthält passende Zugaktionen wie Punkte sichern, Zug abschließen und Schieben. Schweinchen zeigt aktiven Spieler, Zugpunkte und gesicherte Punkte oben mittig; Würfel des beendeten Zuges werden entfernt. Herausgelegte Würfel werden in der gemeinsamen 3D-Darstellung vergrößert und deutlicher markiert. Schwimmen zeigt am Rundenende alle aufgedeckten Hände mit Punkten und Lebensverlusten. Bei 17 und 4 sind nur Gewinner/Verlierer öffentlich; Bankdetails und Abrechnung erhalten ausschließlich Spielleitungen.
