@@ -17,6 +17,13 @@ test('Berlin: niemals vor 08:00, zweiter Termin erst 12:00', () => {
 test('Abgelaufene Termine bleiben aus; keine spaetere Ueberraschungsfreigabe', () => {
   assert.deepEqual(dueEntries(plan, Date.parse('2026-10-22T00:00:00Z')), []);
 });
+test('Fehlende Foundry-Bestaetigung bleibt nach Zeitfenster sichtbar, ohne erneuten API-Schreibzugriff', async () => {
+  const result=await run({plan,now:Date.parse('2026-10-22T00:00:00Z'),dryRun:false,request:async(url,options)=>{
+    assert.equal(options.method,'GET');
+    return reply([{tag_name:'v3.4.1',draft:false,body:'<!-- scheduled-release:3.4.1 -->\n<!-- foundry-attempted:3.4.1 -->'}]);
+  }});
+  assert.match(result[0],/warning.*weiterhin NICHT bestaetigt/);
+});
 test('Doppelte und ungueltige Termine werden abgelehnt', () => {
   assert.throws(() => dueEntries({ releases: [plan.releases[0], plan.releases[0]] }, now));
   assert.throws(() => dueEntries({ releases: [{ version: 'x' }] }, now));
@@ -80,7 +87,7 @@ function fixture() {
 for (const dryRun of [true, false]) test(`Vollstaendige Assets: ${dryRun ? 'Probelauf ohne Schreibzugriff' : 'GitHub und Foundry genau einmal in Reihenfolge'}`, async () => {
   const { release, data } = fixture(); const writes = [];
   const result = await run({ plan, now, dryRun, token: 'test-token', foundryToken: 'fvttp_test', request: async (url, options) => {
-    if (options.method === 'PATCH' || options.method === 'POST') { writes.push({ url, body: JSON.parse(options.body) }); return reply({ status: 'success' }); }
+    if (options.method === 'PATCH' || options.method === 'POST') { const body=JSON.parse(options.body); writes.push({ url, body }); return reply({ status: 'success' }); }
     if (url.includes('/assets/')) return { ok: true, arrayBuffer: async () => data[Number(url.split('/').at(-1))] };
     return reply(url.endsWith('/latest') ? { tag_name: 'v3.4.0' } : [release]);
   } });

@@ -41,13 +41,22 @@ export async function run({ now = Date.now(), dryRun = true, request = fetch, pl
     return r.json();
   }
   const entries = dueEntries(plan, now);
-  if (!entries.length) return ['Kein Release faellig; keine Aenderung.'];
+  const expired = plan.releases.filter(e => now >= Date.parse(e.expiresAt));
+  if (!entries.length && !expired.length) return ['Kein Release faellig; keine Aenderung.'];
   const releases = [];
   for (let page = 1; ; page++) {
     const part = await api(`/releases?per_page=100&page=${page}`);
     releases.push(...part);
     if (part.length < 100) break;
   }
+  for (const entry of expired) {
+    const release = releases.find(r => r.tag_name === `v${entry.version}`);
+    if (release && !release.draft && release.body?.includes(`<!-- scheduled-release:${entry.version} -->`) &&
+        !release.body?.includes(`<!-- foundry-published:${entry.version} -->`)) {
+      notices.push(`::warning::${entry.version}: Auf GitHub veroeffentlicht; Foundry-Eintragung weiterhin NICHT bestaetigt. Zeitfenster abgelaufen, keine automatische Wiederholung.`);
+    }
+  }
+  if (!entries.length) return [...notices, 'Kein Release faellig; keine Aenderung.'];
   for (const entry of entries) {
     const v = entry.version;
     const started = `<!-- scheduled-release:${v} -->`;
@@ -91,7 +100,7 @@ export async function run({ now = Date.now(), dryRun = true, request = fetch, pl
     await api(`/releases/${release.id}`, 'PATCH', { body });
     // GITHUB_TOKEN release events do not start another workflow: call Foundry here explicitly.
     const response = await request('https://foundryvtt.com/_api/packages/release_version/', {
-      method: 'POST', headers: { Authorization: foundryToken, 'Content-Type': 'application/json', 'User-Agent': 'TavernGames-Scheduler' },
+      method: 'POST', headers: { Authorization: foundryToken.trim(), 'Content-Type': 'application/json', 'User-Agent': 'TavernGames-Foundry-Release' },
       body: JSON.stringify({ id: 'taverngames', release: { version: v,
         manifest: `https://github.com/${repo}/releases/download/v${v}/module.json`,
         notes: `https://github.com/${repo}/releases/tag/v${v}`,
