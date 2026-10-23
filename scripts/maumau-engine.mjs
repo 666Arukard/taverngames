@@ -4,12 +4,12 @@ const check=(v,m)=>{if(!v)throw Error(m);};
 export function shuffle(cards,random){const a=[...cards];for(let i=a.length-1;i>0;i--){const n=random(i+1)-1;check(Number.isInteger(n)&&n>=0&&n<=i,'Invalid shuffle.');[a[i],a[n]]=[a[n],a[i]];}return a;}
 export function createMau(options={}){
  const cards=selectCards(options.cardSet?.cards??[],MAU_PROFILE),npcs=options.npcs??{};
- return {version:1,game:'maumau',gameId:null,revision:0,phase:'lobby',paused:false,players:Object.keys(npcs),npcs:structuredClone(npcs),npcManual:{},startSelection:options.startSelection??'rules',order:[],turn:0,turnSerial:0,cards:Object.fromEntries(cards.map(c=>[c.id,c])),cardSet:{key:options.cardSet?.key??'custom',label:options.cardSet?.label??'Custom',style:options.cardSet?.style??'custom'},hands:{},drawPile:[],discard:[],activeSuit:null,drawnCard:null,pendingDraw:0,calls:[],candidate:null,blockedTurns:0,nineWild:options.nineWild===true,voluntaryDraw:options.voluntaryDraw===true,penalties:options.penalties===true,winners:[],losers:[],draw:false};
+ return {version:1,game:'maumau',gameId:null,revision:0,phase:'lobby',paused:false,players:Object.keys(npcs),npcs:structuredClone(npcs),npcManual:{},startSelection:options.startSelection??'rules',order:[],turn:0,turnSerial:0,cards:Object.fromEntries(cards.map(c=>[c.id,c])),cardSet:{key:options.cardSet?.key??'custom',label:options.cardSet?.label??'Custom',style:options.cardSet?.style??'custom'},hands:{},drawPile:[],discard:[],activeSuit:null,drawnCard:null,pendingDraw:0,calls:[],candidate:null,blockedTurns:0,nineWild:options.nineWild===true,voluntaryDraw:options.voluntaryDraw===true,penalties:options.penalties===true,stackSeven:options.stackSeven===true,noPlayAfterDraw:options.noPlayAfterDraw===true,playOut:options.playOut===true,ranking:[],winners:[],losers:[],draw:false};
 }
 function matchesDiscard(s,c){if(s.nineWild&&c.rank==='jack')return c.suit===s.activeSuit;if(s.nineWild&&c.rank==='9'||!s.nineWild&&c.rank==='jack')return true;return c.suit===s.activeSuit||c.rank===s.cards[s.discard.at(-1)]?.rank;}
-export const mauLegal=(s,id,cardId)=>s?.phase==='playing'&&!s.pendingDraw&&s.hands[id]?.includes(cardId)&&(!s.drawnCard||s.drawnCard===cardId)&&matchesDiscard(s,s.cards[cardId]);
-function finish(s,id){s.phase='finished';s.winners=id?[id]:[];s.losers=id?s.players.filter(p=>p!==id):[];s.draw=!id;s.calls=[];s.candidate=null;}
-function advance(s,steps=1){s.turnSerial++;if(s.candidate&&s.turnSerial>=s.candidate.expires&&s.hands[s.candidate.id].length===0){finish(s,s.candidate.id);return;}s.calls=s.calls.filter(c=>s.turnSerial<c.expires);s.turn=(s.turn+steps)%s.order.length;for(let i=0;s.candidate&&s.hands[s.order[s.turn]].length===0&&i<s.order.length;i++)s.turn=(s.turn+1)%s.order.length;s.drawnCard=null;if(s.blockedTurns>=s.players.length)finish(s,null);}
+export const mauLegal=(s,id,cardId)=>s?.phase==='playing'&&(!s.pendingDraw||s.stackSeven&&s.cards[cardId]?.rank==='7')&&s.hands[id]?.includes(cardId)&&(!s.drawnCard||s.drawnCard===cardId)&&matchesDiscard(s,s.cards[cardId]);
+function finish(s,id){if(s.playOut&&id){s.ranking??=[];if(!s.ranking.includes(id))s.ranking.push(id);s.calls=s.calls.filter(c=>c.id!==id);s.candidate=null;const left=s.players.filter(p=>!s.ranking.includes(p));if(left.length>1)return;s.ranking.push(...left);s.winners=[s.ranking[0]];s.losers=left;s.phase='finished';return;}s.phase='finished';s.winners=id?[id]:[];s.losers=id?s.players.filter(p=>p!==id):[];s.draw=!id;s.calls=[];s.candidate=null;}
+function advance(s,steps=1){s.turnSerial++;if(s.candidate&&s.turnSerial>=s.candidate.expires&&s.hands[s.candidate.id].length===0){finish(s,s.candidate.id);if(s.phase==='finished')return;}s.calls=s.calls.filter(c=>s.turnSerial<c.expires);for(let step=0;step<steps;step++){s.turn=(s.turn+1)%s.order.length;for(let i=0;((s.playOut&&s.ranking?.includes(s.order[s.turn]))||s.candidate&&s.hands[s.order[s.turn]].length===0)&&i<s.order.length;i++)s.turn=(s.turn+1)%s.order.length;}s.drawnCard=null;if(s.blockedTurns>=s.players.length)finish(s,null);}
 function take(s,id,count,random){let taken=[];for(let i=0;i<count;i++){if(!s.drawPile.length&&s.discard.length>1){const top=s.discard.pop();s.drawPile=shuffle(s.discard,random);s.discard=[top];}if(!s.drawPile.length)break;const card=s.drawPile.shift();s.hands[id].push(card);taken.push(card);}return taken;}
 export function actMau(original,id,action,args={},random=()=>1,gm=false){
  const s=structuredClone(original);check(s?.game==='maumau','No game exists.');
@@ -31,10 +31,10 @@ export function actMau(original,id,action,args={},random=()=>1,gm=false){
     const count=s.hands[id].length,missed=s.penalties&&count<=1&&args.announce!==true;
     if(missed)s.calls.push({id,kind:count===0?'maumau':'mau',expires:s.turnSerial+2});
     if(count===0&&!s.candidate){if(!missed)finish(s,id);else s.candidate={id,expires:s.turnSerial+2};}
-    if(s.phase==='playing'){s.pendingDraw=c.rank==='7'?2:0;advance(s,c.rank==='8'?2:1);}
+    if(s.phase==='playing'){s.pendingDraw=c.rank==='7'?(s.pendingDraw??0)+2:0;advance(s,c.rank==='8'?2:1);}
    }else if(action==='draw'){
     check(!s.drawnCard&&(s.pendingDraw>0||s.voluntaryDraw||!s.hands[id].some(c=>mauLegal(s,id,c))),'Play a matching card first.');const penalty=s.pendingDraw;s.pendingDraw=0;const drawn=take(s,id,penalty||1,random);s.blockedTurns=drawn.length?0:s.blockedTurns+1;
-    if(!penalty&&drawn.length&&mauLegal(s,id,drawn[0]))s.drawnCard=drawn[0];else advance(s);
+    if(!s.noPlayAfterDraw&&!penalty&&drawn.length&&mauLegal(s,id,drawn[0]))s.drawnCard=drawn[0];else advance(s);
    }else if(action==='pass'){check(s.drawnCard,'Draw first.');advance(s);}
    else throw Error('Unknown action.');
   }

@@ -302,3 +302,5 @@
 .taverngames-connect-board,.taverngames-connect-columns{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;max-width:420px;margin:8px auto}.taverngames-connect-board{padding:8px;background:#183a62;border:2px solid #b8995d;border-radius:8px}.taverngames-connect-board span{display:flex;justify-content:center;align-items:center;aspect-ratio:1;border-radius:50%;background:#151515;font-size:clamp(16px,4vw,36px);border:2px solid #777}.taverngames-connect-board .player-0{background:#b32632;color:#fff}.taverngames-connect-board .player-1{background:#e9bb39;color:#222}.taverngames-connect-columns button{min-width:0;width:100%;padding:4px 0}
 
 .taverngames-connect-board span{min-width:0;min-height:0;line-height:1}.taverngames-connect-moderation>label{display:block;margin:8px 0}.taverngames-connect-moderation>label.schocken-choice{display:flex}
+
+.taverngames-suit-dialog{padding:20px;border:1px solid #b8995d;border-radius:8px;background:#30251e;color:#fff2d2}.taverngames-suit-dialog::backdrop{background:#0008}.taverngames-suit-dialog button{display:block;width:100%;margin:8px 0}.taverngames-mau-turn{min-height:2.5em;box-sizing:border-box}

@@ -1,3 +1,9 @@
+# Aktueller Stand 5.2.1
+
+Die böse Dreizehn ersetzt ältere 3D-Würfelgruppen durch den aktuellen Wurf. Kartenspiele nutzen sprachabhängige Ordner und wiederverwendbare Teildecks; temporäre Hände und Ablagen werden nach Partieende bereinigt. Mau-Mau erhält ein Farbwahl-Popup beim Buben, eine Zuganzeige am Tisch und optionale Regeln für 7 auf 7, Zugende nach dem Ziehen und Weiterspielen bis zum letzten Spieler.
+
+Ordner und Kartenbereinigung: siehe docs/release-5.2.1.md im Projekt. 8 auf 8 bleibt vorgemerkt; die Wirkung ist noch offen.
+
 # Aktueller Stand 5.2.0
 
 TavernGames bringt 19 stabile Tavernenspiele in Foundry VTT, darunter Farkle, Kniffel, Schocken, Lügenwürfel, Mau-Mau, Schwimmen und Durak sowie optionale Beta-Spiele. Spiele gemeinsam mit anderen Spielern am virtuellen Spieltisch oder mit benannten NPCs. Die Spielleitung verwaltet Ablauf, interne Spieltoken und optionale Ausgangswetten und kann selbst mitspielen. Enthalten sind deutsche und englische Oberflächen, deutsche Anleitungen mit Quellenangaben, optionale Dice-So-Nice-Anbindung und eine integrierte Reiteransicht mit frei beweglichen Fenstern als Alternative. Kartenspiele verwenden vorhandene Foundry-Kartendecks. Das Modul benötigt kein bestimmtes Spielsystem. Englische Anleitungen sind bis zur Prüfung vorerst nicht verfügbar.

@@ -2,14 +2,15 @@
   "schemaVersion": 1,
   "blocks": {
     "patchnotes": {
-      "title": "Patchnotes Version 5.2.0",
+      "title": "Patchnotes Version 5.2.1",
       "paragraphs": [
-        "Durak ist stabil: einheitliche Rahmen, sichtbare Handkartenanzahl und optionales Weitergeben durch Ausspielen einer gleichwertigen Karte. Vier gewinnt ist neu als optionale Beta mit zwei Teilnehmern, NPCs, Serien und internen Spieltoken. Die Modulbeschreibung nennt echte Mitspieler am Spieltisch ausdrücklich. Glückstag bleibt Beta."
+        "Die böse Dreizehn ersetzt ältere 3D-Würfelgruppen durch den aktuellen Wurf. Kartenspiele nutzen sprachabhängige Ordner und wiederverwendbare Teildecks; temporäre Hände und Ablagen werden nach Partieende bereinigt. Mau-Mau erhält ein Farbwahl-Popup beim Buben, eine Zuganzeige am Tisch und optionale Regeln für 7 auf 7, Zugende nach dem Ziehen und Weiterspielen bis zum letzten Spieler."
       ],
       "items": [
-        "Durak stabil: einheitliche Rahmen, Kartenanzahl und optionale Rangweitergabe.",
-        "Vier gewinnt als neue Beta in der Kategorie Brettspiele.",
-        "Gemeinsames Spiel mit echten Mitspielern ausdrücklich beschrieben.",
+        "Die böse Dreizehn: nur die aktuelle 3D-Würfelgruppe bleibt liegen.",
+        "Kartenordner, wiederverwendbare Teildecks und Bereinigung temporärer Hände/Ablagen.",
+        "Mau-Mau: Buben-Popup und sichtbare Zuganzeige.",
+        "Mau-Mau optional: 7 auf 7, Zugende nach Ziehen, Weiterspielen bis zum letzten Spieler.",
         "19 stabile Spiele; Glückstag und Vier gewinnt bleiben Beta."
       ]
     },
@@ -43,7 +44,7 @@
       ]
     },
     "plans": {
-      "title": "geplante Spiele (29)",
+      "title": "geplante Spiele (31)",
       "paragraphs": [
         "Geplante Spiele und Wettbewerbe mit vorhandenen Referenzen oder neu vorgemerkten Namen. Einzelne Regeln sind noch offen; insbesondere ist beim Streichholzspiel noch keine genaue Variante festgelegt. Vorhandene Spiele werden nicht unter ihren englischen Namen erneut geplant."
       ],
@@ -59,7 +60,9 @@
         "Kartenspiele: Gaigel",
         "Kartenspiele: Kartendomino / Fan Tan",
         "Kartenspiele: König und Bettler / Präsident",
+        "Kartenspiele: Rommé",
         "Kartenspiele: Schummeln (Kartenspiel)",
+        "Kartenspiele: Schwarzer Peter (frei wählbare Karte und Paargruppen)",
         "Kartenspiele: Sechsundsechzig",
         "Kartenspiele: Skat",
         "Sonstige: Armdrücken",
@@ -97,7 +100,7 @@
       ]
     },
     "functions": {
-      "title": "aktuelle Funktionen (28)",
+      "title": "aktuelle Funktionen (31)",
       "paragraphs": [
         "Bereits umgesetzte Kernfunktionen. Die Verfügbarkeit einzelner Aktionen richtet sich nach Spielregeln, Teilnahme und SL-Freigabe."
       ],
@@ -129,7 +132,10 @@
         "Übergabe eines ausgewählten Gegenstandspreises",
         "Anleitungen, Regelquellen und Ergebnisnachrichten",
         "Geprüfte deutsche und englische Oberfläche",
-        "Gemeinsame Partien mit echten Spielern am virtuellen Spieltisch"
+        "Gemeinsame Partien mit echten Spielern am virtuellen Spieltisch",
+        "Sprachabhängige Kartenordner und automatische Bereinigung temporärer Spielobjekte",
+        "Wiederverwendbare Teildecks",
+        "Farbwahl-Popup und hervorgehobene Zuganzeige"
       ]
     },
     "settings": {
@@ -149,7 +155,9 @@
         "Durak: zwei bis sechs Teilnehmer. Schutzzeit vor der Partie festlegen, Standard fünf Sekunden und einstellbar von 0 bis 60. Trumpf vorzeigen reicht standardmäßig zum Weitergeben; Ausspielen und zusätzliches Nachwerfen beim Aufnehmen sind optionale Varianten. Für die Abwehr Handkarte und Angriff wählen oder Abwehren verwenden. NPCs warten 3,5 Sekunden zwischen Aktionen.",
         "Göttliche Hand ist nur für die SL sichtbar. Globale Profile und Spielausnahmen gezielt einstellen; der globale Ausschalter entfernt alle Glücks-/Pechprofile. Der bekannte Einfluss bei Die böse Dreizehn ist weiterhin ein offener Korrekturpunkt.",
         "Vier gewinnt (Beta): Beta-Test einschalten, zwei echte Teilnehmer oder NPCs wählen und eine Partie oder Serie mit bis zu 100 Runden vorbereiten. Der Startspieler wechselt zwischen den Runden; optionalen Token-Einsatz einmal für die Serie festlegen.",
-        "Durak: Rangweitergabe durch Ausspielen einer gleichwertigen Karte ist optional und standardmäßig aus. Die bisherige Trumpf-Vorzeigeregel bleibt verfügbar; Weitergabesperren und Kartenkapazität des nächsten Verteidigers gelten weiterhin."
+        "Durak: Rangweitergabe durch Ausspielen einer gleichwertigen Karte ist optional und standardmäßig aus. Die bisherige Trumpf-Vorzeigeregel bleibt verfügbar; Weitergabesperren und Kartenkapazität des nächsten Verteidigers gelten weiterhin.",
+        "Mau-Mau: 7 auf 7 stapeln, Zugende nach dem Ziehen und Weiterspielen bis zum letzten Spieler sind getrennte optionale Regeln und standardmäßig aus. Vor einer neuen Partie in der Moderation wählen. Beim Buben die gewünschte Farbe im Popup bestätigen; Abbrechen spielt keine Karte aus.",
+        "Die automatisch erstellten Kartenordner enthalten wiederverwendbare Teildecks sowie temporäre Hände und Ablagen. Teildecks bleiben erhalten. Beim endgültigen Beenden werden temporäre Bestände nach Rückruf der Karten bereinigt; externe Vorlagen bleiben unverändert."
       ],
       "items": []
     },
@@ -235,7 +243,9 @@
         "Mau-Mau: optionale Ansagestrafe aus; aktiviert zwei Karten nach rechtzeitigem Einspruch bis zum Ende des folgenden Spielerzugs, auch nach letzter Karte. Vollständige Blockade endet unentschieden.",
         "Der Glückstag: zunächst verdeckte Würfel, eigene Aufdeckung; Erhöhen optional aus, ein Erhöhungsschritt pro Runde zwischen den Würfen und SL-Limits. Auszahlungen 2× beziehungsweise 1,5× abgerundet; interne Bank mit möglicher Schuld.",
         "Schwimmen / Knack: drei Leben plus Schwimmen; 30½ und Knack, Blitz optional standardmäßig an. Ein Token-Einkauf je Partie. Bei genau 7/8/9 auf dem Tisch kostenlose Erneuerung durch den aktiven Spieler ohne Zugverbrauch.",
-        "Durak: bei sechs Teilnehmern fünf Startkarten; Weitergabe standardmäßig durch Vorzeigen des passenden Trumpfs, Ausspielen optional. Nur aktive Nachbarn werfen nach; Schutzzeit einstellbar, Standard fünf Sekunden, bei Pause eingefroren. Aufnehmen sofort; verlängertes Nachwerfen optional. Tokenprämien mit Gewichten N−1 bis 0, Resttoken in Platzierungsreihenfolge."
+        "Durak: bei sechs Teilnehmern fünf Startkarten; Weitergabe standardmäßig durch Vorzeigen des passenden Trumpfs, Ausspielen optional. Nur aktive Nachbarn werfen nach; Schutzzeit einstellbar, Standard fünf Sekunden, bei Pause eingefroren. Aufnehmen sofort; verlängertes Nachwerfen optional. Tokenprämien mit Gewichten N−1 bis 0, Resttoken in Platzierungsreihenfolge.",
+        "Mau-Mau optional: 7 auf 7 (+2 Strafkarten je Sieben), nach Ziehen Zugende, bis zum letzten Spieler weiterspielen.",
+        "Mau-Mau, optional und standardmäßig aus: 7 auf 7 erhöht die Ziehpflicht um zwei; Zugende nach dem Ziehen verhindert anschließendes Ausspielen; Weiterspielen erfasst die Reihenfolge leerer Hände, erster Sieger und letzter Verlierer. 8 auf 8 ist noch nicht umgesetzt."
       ]
     },
     "milestones": {
@@ -252,5 +262,5 @@
       "paragraphs": []
     }
   },
-  "version": "5.2.0"
+  "version": "5.2.1"
 }
