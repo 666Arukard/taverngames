@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { pathToFileURL } from 'node:url';
-import { verifyAssets } from './scheduled-release.mjs';
+import { zipManifest } from './publishing-common.mjs';
+import { isDeepStrictEqual } from 'node:util';
 export function eligible(version,policy,releases){
   if(!policy.enabled||!/^\d+\.\d+\.\d+$/.test(version))return false;
   const confirmed=[policy.baselineVersion,...releases.filter(r=>r.body?.includes(`<!-- foundry-published:${r.tag_name?.replace(/^v/,'')} -->`)).map(r=>r.tag_name.replace(/^v/,''))].filter(Boolean);
@@ -21,11 +22,12 @@ export async function publishFoundry(version,{request=fetch,token=process.env.GH
   if(release.body?.includes(`<!-- foundry-attempted:${version} -->`))throw Error('Foundry-Versuch bereits erfolgt. Vor erneutem Aufruf tatsächlichen Stand prüfen.');
   if(!foundryToken?.trim().startsWith('fvttp_'))throw Error('Foundry-Secret fehlt.');
   const root='https://github.com/666Arukard/taverngames/releases';
-  const files={};for(const name of ['module.json','website.json',`taverngames-${version}.zip`]){
+  const files={};for(const name of ['module.json',`taverngames-${version}.zip`]){
     const r=await request(`${root}/download/v${version}/${name}`);if(!r.ok)throw Error(`Öffentliche Release-Datei nicht erreichbar: ${name}`);
     files[name]=Buffer.from(await r.arrayBuffer());
   }
-  verifyAssets(version,JSON.parse(files['module.json']),JSON.parse(files['website.json']),files[`taverngames-${version}.zip`]);
+  const manifest=JSON.parse(files['module.json']);
+  if(manifest.id!=='taverngames'||manifest.version!==version||manifest.download!==`${root}/download/v${version}/taverngames-${version}.zip`||manifest.compatibility?.minimum!=='14.369'||manifest.compatibility?.verified!=='14.369'||manifest.compatibility?.maximum||!isDeepStrictEqual(manifest,zipManifest(files[`taverngames-${version}.zip`])))throw Error('Foundry: Release-Manifest und ZIP stimmen nicht überein.');
   const body=`${release.body??''}\n\n<!-- foundry-attempted:${version} -->`;
   await api(`/releases/${release.id}`,'PATCH',{body});
   const response=await request('https://foundryvtt.com/_api/packages/release_version/',{method:'POST',headers:{Authorization:foundryToken.trim(),'Content-Type':'application/json','User-Agent':'TavernGames-Foundry-Release'},body:JSON.stringify({id:'taverngames',release:{version,manifest:`${root}/download/v${version}/module.json`,notes:`${root}/tag/v${version}`,compatibility:{minimum:'14.369',verified:'14.369'}}})});
