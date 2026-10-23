@@ -18,7 +18,7 @@ on:
 permissions:
   contents: write
 concurrency:
-  group: taverngames-scheduled-release
+  group: foundry-release-publish
   cancel-in-progress: false
 jobs:
   release:
@@ -32,6 +32,8 @@ jobs:
       - name: Faellige Entwuerfe pruefen und freigeben
         env:
           GH_TOKEN: ${{ github.token }}
-          FOUNDRY_RELEASES_ENABLED: 'false'
+          FOUNDRY_RELEASES_ENABLED: 'true'
+          FOUNDRY_RELEASE_POLICY: 'true'
+          FOUNDRY_RELEASE_TOKEN: ${{ secrets.FOUNDRY_RELEASE_TOKEN }}
           DRY_RUN: ${{ (github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.dry_run)) && 'true' || 'false' }}
         run: node tools/scheduled-release.mjs

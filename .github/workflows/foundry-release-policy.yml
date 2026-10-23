@@ -1,0 +1,30 @@
+name: Foundry - neue Versionslinien
+on:
+  release:
+    types: [published]
+  push:
+    branches: [main]
+    paths: ['.github/workflows/foundry-release-policy.yml']
+permissions:
+  contents: write
+concurrency:
+  group: foundry-release-publish
+  cancel-in-progress: false
+jobs:
+  publish:
+    if: github.repository == '666Arukard/taverngames' && (github.event_name == 'push' || github.event.release.prerelease == false)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          ref: main
+      - run: node --test tools/tests/foundry-policy.test.mjs
+      - name: Foundry nur bei neuer X.Y-Linie oder gezielter Ausnahme
+        env:
+          GH_TOKEN: ${{ github.token }}
+          FOUNDRY_RELEASE_TOKEN: ${{ secrets.FOUNDRY_RELEASE_TOKEN }}
+          RELEASE_VERSION: ${{ github.event_name == 'push' && 'v5.1.3' || github.event.release.tag_name }}
+        run: |
+          export RELEASE_VERSION="${RELEASE_VERSION#v}"
+          node tools/foundry-publish.mjs

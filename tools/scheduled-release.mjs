@@ -30,6 +30,7 @@ export function verifyAssets(version, manifest, website, zip) {
 }
 export async function run({ now = Date.now(), dryRun = true, request = fetch, plan,
   foundryEnabled = process.env.FOUNDRY_RELEASES_ENABLED !== 'false',
+  useFoundryPolicy = process.env.FOUNDRY_RELEASE_POLICY === 'true',
   token = process.env.GH_TOKEN, foundryToken = process.env.FOUNDRY_RELEASE_TOKEN } = {}) {
   const notices = [];
   async function api(path, method = 'GET', body) {
@@ -92,7 +93,7 @@ export async function run({ now = Date.now(), dryRun = true, request = fetch, pl
     const manifest = JSON.parse(files['module.json']);
     verifyAssets(v, manifest, JSON.parse(files['website.json']), files[`taverngames-${v}.zip`]);
     if (dryRun) { notices.push(`${v}: Geprueft; Dry-run ohne Veroeffentlichung.`); continue; }
-    if (foundryEnabled && (!foundryToken?.startsWith('fvttp_') || /\s/.test(foundryToken))) throw new Error('Foundry-Secret fehlt oder ist ungueltig.');
+    if (foundryEnabled && !useFoundryPolicy && (!foundryToken?.startsWith('fvttp_') || /\s/.test(foundryToken))) throw new Error('Foundry-Secret fehlt oder ist ungueltig.');
     let body = release.body ?? '';
     if (release.draft) {
       body += `\n\n${started}`;
@@ -100,6 +101,11 @@ export async function run({ now = Date.now(), dryRun = true, request = fetch, pl
     }
     if (!foundryEnabled) {
       notices.push(`${v}: Auf GitHub veröffentlicht; Foundry-Veröffentlichung auf Nutzerwunsch pausiert.`);
+      continue;
+    }
+    if (useFoundryPolicy) {
+      const {publishFoundry}=await import('./foundry-publish.mjs');
+      notices.push(await publishFoundry(v,{request,token,foundryToken}));
       continue;
     }
     body += `\n${attempted}`;
