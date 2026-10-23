@@ -2,18 +2,16 @@
   "schemaVersion": 1,
   "blocks": {
     "patchnotes": {
-      "title": "Patchnotes Version 5.1.2",
+      "title": "Patchnotes Version 5.1.3",
       "paragraphs": [
-        "Durak erhält eine Sitzliste mit markiertem Verteidiger und nachwerfberechtigten Nachbarn. Meldungen stehen ohne Überlagerung im Statusbereich; der Tisch bleibt sichtbar. Glückstag erklärt Bank und Ablauf, wartet vor Anzeige und Abrechnung auf die 3D-Animation und nutzt längere NPC-Pausen. Ergebnisse ohne Gewinn oder Verlust werden korrekt benannt. Mau-Mau erhält optional die 9 als Allesleger; der Bube erfordert dann die passende Farbe und behält seine Farbwahl.",
-        "Durak adds a seating list highlighting the defender and adjacent attackers. Notices stay in a dedicated status area without hiding the table. Lucky Day explains the bank and flow, waits for 3D animations before showing values and settlement, and spaces NPC actions farther apart. Break-even results are labeled correctly. Mau-Mau optionally makes the 9 wild; the jack then requires the matching suit and still chooses the next suit."
+        "Neues, von Daniel zusammengestelltes Logo und neue Kategoriesymbole mit Flaticon-Quellenangaben. Ungeprüfte englische Anleitungen sind vorübergehend nicht enthalten; die deutsche Anleitung und beide Oberflächensprachen bleiben verfügbar. Durak und Glückstag bleiben Beta."
       ],
       "items": [
-        "Durak: Sitzreihenfolge mit Verteidiger-/Nachbarmarkierung und Schutzzeitstatus.",
-        "Durak: keine Tisch-Ausblendung; Status und Hilfe in eigenen Bereichen.",
-        "Glückstag: Bankrolle und Ablauf erklärt; Werte, Aktionen und Abrechnung warten auf 3D-Animation.",
-        "Glückstag: längere NPC-Pausen und korrekte Null-Gewinn-Ergebnisse.",
-        "Mau-Mau: optionale 9 als Allesleger, Bube dann nur auf passende Farbe mit Farbwahl.",
-        "Durak und Glückstag bleiben Beta; Vier gewinnt bleibt bis zur Stabilisierung vorgemerkt."
+        "Neues TavernGames-Logo und drei Kategoriesymbole.",
+        "Urheberangaben der Flaticon-Grafiken dokumentiert.",
+        "Englische Anleitungen bis zur menschlichen Prüfung nicht enthalten.",
+        "Deutsche Anleitungen und deutsch/englische Oberfläche verfügbar.",
+        "18 stabile Spiele; Durak und Glückstag bleiben Beta."
       ]
     },
     "games": {
@@ -131,13 +129,13 @@
         "Konfigurierbare Tippscheine und manuelle Ziehung",
         "Übergabe eines ausgewählten Gegenstandspreises",
         "Anleitungen, Regelquellen und Ergebnisnachrichten",
-        "Deutsche Oberfläche und Englisch als Sprach-Beta"
+        "Geprüfte deutsche und englische Oberfläche"
       ]
     },
     "settings": {
       "title": "Einstellungen in Foundry",
       "paragraphs": [
-        "Nach Installation alle Clients vollständig neu laden. Benötigt wird mindestens Foundry 14.369. In den Moduleinstellungen Deutsch oder English (Beta) wählen; Standard ist Englisch. Die Sprach-Beta ist unabhängig vom Beta-Spieleschalter.",
+        "Nach Installation alle Clients vollständig neu laden. Benötigt wird mindestens Foundry 14.369. In den Moduleinstellungen Deutsch oder Englisch wählen; Standard ist Englisch. Beide Oberflächen sind geprüft. Anleitungen sind vorerst ausschließlich auf Deutsch verfügbar; englische Anleitungen folgen erst nach menschlicher Prüfung.",
         "18 Spiele sind stabil, darunter Mau-Mau, Schwimmen / Knack und Spiel der Könige. Für Der Glückstag und Durak den Beta-Test einschalten.",
         "Die integrierte Reiteransicht ist Standard. Je Benutzer bleiben klassische Fenster wählbar; eine zuvor ausdrücklich gespeicherte Fensterwahl bleibt erhalten. Das TavernGames-Symbol öffnet die berechtigte Lobby bereits vor dem Beitritt. Spielaktionen erfordern weiterhin Teilnahme und passende Berechtigung.",
         "Der TavernGames-Reiter und die Moderation sind für die SL. Spiel wählen, Regeln einstellen, Lobby vorbereiten und den Beitrittsbutton freigeben. Vor dem Start gegebenenfalls Startspieler und NPC-Steuerung wählen.",

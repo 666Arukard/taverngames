@@ -1,10 +1,10 @@
 {
     "id":  "taverngames",
     "title":  "TavernGames",
-    "description":  "\u003ch3\u003eDeutsch\u003c/h3\u003e\u003cp\u003eTavernGames bietet 18 stabile Tavernenspiele und zwei optionale Betas mit SL-Moderation, freiwilligem Beitritt, NPCs, internen Spieltoken und optionalen Dice-So-Nice-Würfeln. Mau-Mau mit auswählbaren Kartensets und zentralem Kartentisch ist stabil. Glückstag und Durak sind Beta. Die Reiteransicht ist Standard; klassische Fenster bleiben wählbar.\u003c/p\u003e\u003ch3\u003eEnglish\u003c/h3\u003e\u003cp\u003eTavernGames provides 18 stable tavern games and two optional betas with GM moderation, voluntary participation, NPCs, internal game tokens and optional Dice So Nice dice. Mau-Mau with selectable card sets and a central card table is stable. Lucky Day and Durak are betas. Sidebar view is the default; classic windows remain available.\u003c/p\u003e\u003ch3\u003e5.1.2 · Versionshinweise / Release notes\u003c/h3\u003e\u003cp\u003eDurak erhält eine Sitzliste mit markiertem Verteidiger und nachwerfberechtigten Nachbarn. Meldungen stehen ohne Überlagerung im Statusbereich; der Tisch bleibt sichtbar. Glückstag erklärt Bank und Ablauf, wartet vor Anzeige und Abrechnung auf die 3D-Animation und nutzt längere NPC-Pausen. Ergebnisse ohne Gewinn oder Verlust werden korrekt benannt. Mau-Mau erhält optional die 9 als Allesleger; der Bube erfordert dann die passende Farbe und behält seine Farbwahl.\u003c/p\u003e\u003cp\u003eDurak adds a seating list highlighting the defender and adjacent attackers. Notices stay in a dedicated status area without hiding the table. Lucky Day explains the bank and flow, waits for 3D animations before showing values and settlement, and spaces NPC actions farther apart. Break-even results are labeled correctly. Mau-Mau optionally makes the 9 wild; the jack then requires the matching suit and still chooses the next suit.\u003c/p\u003e\u003cp\u003eRegelvorlagen einschließlich Daniels Chō-Han-Regelsammlung, Awiana, O’Donnell, Paul Cossmers PDF-Sammlung und der Kartenregelreferenzen werden in den Anleitungen genannt. / Rule sources, including Daniel’s Cho-Han collection, Awiana, O’Donnell, Paul Cossmer’s PDF collection and card-game references, are credited in the instructions.\u003c/p\u003e",
-    "version":  "5.1.2",
+    "description":  "\u003ch3\u003eDeutsch\u003c/h3\u003e\u003cp\u003eTavernGames bietet 18 stabile Tavernenspiele und zwei optionale Betas mit SL-Moderation, freiwilligem Beitritt, NPCs, internen Spieltoken und optionalen Dice-So-Nice-Würfeln. Mau-Mau mit auswählbaren Kartensets und zentralem Kartentisch ist stabil. Glückstag und Durak sind Beta. Die Reiteransicht ist Standard; klassische Fenster bleiben wählbar.\u003c/p\u003e\u003ch3\u003eEnglish\u003c/h3\u003e\u003cp\u003eTavernGames provides 18 stable tavern games and two optional betas with GM moderation, voluntary participation, NPCs, internal game tokens and optional Dice So Nice dice. Mau-Mau with selectable card sets and a central card table is stable. Lucky Day and Durak are betas. Sidebar view is the default; classic windows remain available.\u003c/p\u003e\u003ch3\u003e5.1.3 · Versionshinweise\u003c/h3\u003e\u003cp\u003eNeues, von Daniel zusammengestelltes Logo und neue Kategoriesymbole mit Flaticon-Quellenangaben. Ungeprüfte englische Anleitungen sind vorübergehend nicht enthalten; die deutsche Anleitung und beide Oberflächensprachen bleiben verfügbar. Durak und Glückstag bleiben Beta.\u003c/p\u003e\u003cp\u003eRegelvorlagen und Daniels Regelsammlung werden in den deutschen Anleitungen mit Quellen genannt.\u003c/p\u003e",
+    "version":  "5.1.3",
     "readme":  "README.md",
-    "changelog":  "https://github.com/666Arukard/taverngames/releases/tag/v5.1.2",
+    "changelog":  "https://github.com/666Arukard/taverngames/releases/tag/v5.1.3",
     "url":  "https://dnd.brunecoaching.de",
     "compatibility":  {
                           "minimum":  "14.369",
@@ -100,7 +100,7 @@
                    "styles/table.css"
                ],
     "manifest":  "https://github.com/666Arukard/taverngames/releases/latest/download/module.json",
-    "download":  "https://github.com/666Arukard/taverngames/releases/download/v5.1.2/taverngames-5.1.2.zip",
+    "download":  "https://github.com/666Arukard/taverngames/releases/download/v5.1.3/taverngames-5.1.3.zip",
     "relationships":  {
                           "recommends":  [
                                              {

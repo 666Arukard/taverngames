@@ -691,3 +691,22 @@ Eigene abgelegte 3D-Würfel größer; Verkleinerung nur bei Platzmangel. Tischbe
 17 und 4 nutzt dichtere Würfelhaufen und mehr Tischfläche. Summen stehen gemeinsam oberhalb aller abgelegten Würfel. Die Reiteransicht öffnet sich bereits vor dem Beitritt. Das mitgelieferte Standard-Kartenset entfällt; vorhandene Decks und externe Kartensets bleiben nutzbar. Englisch ist als Sprach-Beta gekennzeichnet und unabhängig vom Beta-Schalter verfügbar.
 
 Keine Veröffentlichung/Commits. Keine Weltdecks löschen. Fehlendes geeignetes Deck: Cards / Card Decks erstellen oder importieren. Laufende Spielberechtigungen und verdeckte Daten bleiben unverändert. Glückstag-Regeln unverändert.
+
+
+## Grafikquellen ab 5.1.3
+
+
+Die Grafiken wurden von Daniel bereitgestellt; das TavernGames-Logo wurde von Daniel aus Bierglas und Würfeln zusammengestellt. Die Originaldateien bleiben unverändert. Kategorie-Symbole werden nur per CSS eingefärbt.
+
+| Bestandteil | Urheber laut Downloadangabe | Einzelquelle | Attribution |
+|---|---|---|---|
+| Bierglas im Logo | Magnific | https://www.flaticon.com/free-icon/beer_931949 | [Beer icons created by Magnific - Flaticon](https://www.flaticon.com/free-icons/beer) |
+| Würfel im Logo / Würfelspiele | Three musketeers | https://www.flaticon.com/free-icon/dice_16126970 | [Dice icons created by Three musketeers - Flaticon](https://www.flaticon.com/free-icons/dice) |
+| Kartenspiele | Unknown Depths | https://www.flaticon.com/free-icon/cards_8616159 | [Cards icons created by Unknown Depths - Flaticon](https://www.flaticon.com/free-icons/cards) |
+| Glücksspiele | POD Gladiator | https://www.flaticon.com/free-icon/casino-chips_16807396 | [Gambling icons created by POD Gladiator - Flaticon](https://www.flaticon.com/free-icons/gambling) |
+
+Flaticon License mit Urhebernennung; laut Daniels Downloadangaben für privaten und kommerziellen Gebrauch. Maßgeblich bleiben die Bedingungen des jeweiligen Downloads, https://www.flaticon.com/legal . Diese Grafiken werden nicht unter der Softwarelizenz von TavernGames weiterlizenziert. Eine gesonderte Logo-Erlaubnis oder menschliche Herkunft wurde durch diese Dokumentation nicht unabhängig bestätigt.
+
+## Sprachprüfung
+
+Daniel hat deutsche Anleitungen und beide Oberflächensprachen geprüft. Englische Anleitungen werden bis zur individuellen menschlichen Prüfung nicht ausgeliefert. Frühere Übersetzungen liegen ausschließlich außerhalb des Modulpakets unter docs/translation-review/5.1.2. Englische Beschreibungs- und Veröffentlichungstexte benötigen eine separate Freigabe.

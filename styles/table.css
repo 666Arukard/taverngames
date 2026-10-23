@@ -10,7 +10,7 @@
 .schocken-label {display:grid;grid-template-columns:1fr 1fr;gap:8px;align-items:center;margin:6px 0}.taverngames-surface input[type=text],.taverngames-surface textarea {width:100%;background:#fff9ef;color:#30251e;border:1px solid #96764c;border-radius:5px;padding:6px;font:inherit}.taverngames-surface textarea {display:block;resize:vertical;margin:6px 0}
 .schocken-moderation {width:min(360px,calc(100vw - 32px))}.taverngames-surface header {cursor:move;touch-action:none;user-select:none;flex-shrink:0}.taverngames-surface header:focus-visible {outline:2px solid #e9c783;outline-offset:-3px}.taverngames-surface header button {cursor:pointer}.schocken-content {min-height:0}.schocken-npc {display:flex;gap:8px;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid #d8c8ae}
 
-.taverngames-icon{display:inline-block;flex:0 0 auto;box-sizing:border-box;width:32px;height:32px;vertical-align:middle;border:1px solid #74767b;border-radius:3px;background:#45474d url('../assets/tavern-dice.svg') center/24px 24px no-repeat;box-shadow:inset 0 1px 0 #ffffff18}
+.taverngames-icon{display:inline-block;flex:0 0 auto;box-sizing:border-box;width:32px;height:32px;vertical-align:middle;border:1px solid #74767b;border-radius:3px;background:#45474d url('../assets/taverngames-logo.png') center/24px 24px no-repeat;box-shadow:inset 0 1px 0 #ffffff18}
 .taverngames-catalog{box-sizing:border-box;padding:12px;max-height:100%;min-height:0;overflow-y:auto}.taverngames-start-row{display:flex;gap:8px}.taverngames-start-row button{flex:1}
 .taverngames-window{max-width:calc(100vw - 16px);max-height:calc(100dvh - 16px)}
 .taverngames-window .window-content{padding:0;overflow:hidden}.taverngames-surface .schocken-content{flex:1;min-height:0}
@@ -284,3 +284,6 @@
 
 .taverngames-durak-seating{list-style:none;padding:0;margin:0 0 8px;text-align:left;font-size:13px}.taverngames-durak-seating li{padding:4px 6px;border-left:3px solid transparent;border-radius:4px}.taverngames-durak-seating strong,.taverngames-durak-seating small{display:block;overflow-wrap:anywhere}.taverngames-durak-seating .is-defender{border-color:#ffd16a;background:#65532d;color:#fff1c9}.taverngames-durak-seating .is-neighbor{border-color:#86c9a1}.taverngames-durak-seating .is-out{opacity:.5}.taverngames-durak-supply{flex-basis:144px}.taverngames-durak-supply .taverngames-card{width:72px!important}
 .taverngames-lucky-stage{min-height:2.8em;padding:6px 8px;border:1px solid #a58c5e;border-radius:4px}
+
+/* Licensed category artwork; CSS recoloring preserves original assets. */
+.taverngames-category-buttons .taverngames-category-art{display:block;width:24px;height:24px;margin:auto;background:currentColor;mask:var(--category-art) center/contain no-repeat;-webkit-mask:var(--category-art) center/contain no-repeat}
