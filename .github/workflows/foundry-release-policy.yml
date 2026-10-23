@@ -1,4 +1,4 @@
-name: Foundry - neue Versionslinien
+name: Foundry - neue Versionslinien und gezielte Ausnahme
 on:
   release:
     types: [published]
