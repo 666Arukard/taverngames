@@ -2,47 +2,46 @@
   "schemaVersion": 1,
   "blocks": {
     "patchnotes": {
-      "title": "Patchnotes Version 5.1.1",
+      "title": "Patchnotes Version 5.1.2",
       "paragraphs": [
-        "Durak verbessert die Abwehrbedienung mit einem eigenen Abwehren-Button und beidseitigen Kartenhilfen. Gültige Klicks bleiben bei zusätzlichem Nachwerfen im selben Angriff erhalten. Kurze Banner und klare Rollenanzeigen begleiten langsamere NPC-Aktionen (3,5 Sekunden). Verdeckte Karten verwenden die Rückseite des gewählten Decks; Trumpf und Nachziehstapel liegen separat. Schwimmen erlaubt dem aktiven Spieler bei 7, 8 und 9 neue Tischkarten ohne Zugverbrauch und meldet Passen deutlich.",
-        "Durak improves defense controls with a dedicated Defend button and two-way card hints. Valid clicks remain usable when another attack is added within the same bout. Short banners and clear role indicators accompany slower NPC actions (3.5 seconds). Hidden cards use the selected deck back; trump and draw pile are separate. Schwimmen lets the active player refresh a 7, 8, 9 table without spending their turn and clearly announces passing.",
-        "18 Spiele sind stabil; Der Glückstag und Durak bleiben optionale Betas."
+        "Durak erhält eine Sitzliste mit markiertem Verteidiger und nachwerfberechtigten Nachbarn. Meldungen stehen ohne Überlagerung im Statusbereich; der Tisch bleibt sichtbar. Glückstag erklärt Bank und Ablauf, wartet vor Anzeige und Abrechnung auf die 3D-Animation und nutzt längere NPC-Pausen. Ergebnisse ohne Gewinn oder Verlust werden korrekt benannt. Mau-Mau erhält optional die 9 als Allesleger; der Bube erfordert dann die passende Farbe und behält seine Farbwahl.",
+        "Durak adds a seating list highlighting the defender and adjacent attackers. Notices stay in a dedicated status area without hiding the table. Lucky Day explains the bank and flow, waits for 3D animations before showing values and settlement, and spaces NPC actions farther apart. Break-even results are labeled correctly. Mau-Mau optionally makes the 9 wild; the jack then requires the matching suit and still chooses the next suit."
       ],
       "items": [
-        "Durak: Abwehren-Button, passende Karten hervorheben und sichere Klicks bei Nachwerfen.",
-        "Kurze Aktionsbanner und klar erkennbare Rollen.",
-        "NPC-Pause 3,5 Sekunden; Schutzzeit bleibt separat einstellbar.",
-        "Deckrückseite für verdeckte Karten, Trumpf separat neben Nachziehstapel.",
-        "Schwimmen: 7–8–9-Tisch kostenlos im eigenen Zug austauschen.",
-        "Schwimmen: Passen deutlich melden, letzte Züge auch bei eingeklappter Lobby anzeigen."
+        "Durak: Sitzreihenfolge mit Verteidiger-/Nachbarmarkierung und Schutzzeitstatus.",
+        "Durak: keine Tisch-Ausblendung; Status und Hilfe in eigenen Bereichen.",
+        "Glückstag: Bankrolle und Ablauf erklärt; Werte, Aktionen und Abrechnung warten auf 3D-Animation.",
+        "Glückstag: längere NPC-Pausen und korrekte Null-Gewinn-Ergebnisse.",
+        "Mau-Mau: optionale 9 als Allesleger, Bube dann nur auf passende Farbe mit Farbwahl.",
+        "Durak und Glückstag bleiben Beta; Vier gewinnt bleibt bis zur Stabilisierung vorgemerkt."
       ]
     },
     "games": {
       "title": "aktuelle Spiele (20)",
       "paragraphs": [
-        "18 stabile Spiele, darunter Mau-Mau und Schwimmen / Knack. Glückstag und Durak sind optionale Betas. Reiteransicht als Standard; Fenster bleiben wählbar."
+        "20 Spiele: 18 stabil, Der Glückstag und Durak als optionale Betas. Nach den Kategorien des Moduls gruppiert; innerhalb jeder Kategorie stabile Spiele alphabetisch, danach Beta-Spiele."
       ],
       "items": [
-        "17 und 4",
-        "Aalstechen",
-        "Chō-Han",
-        "Die böse Dreizehn",
-        "Drachenhort",
-        "Farkle",
-        "Klippklapp",
-        "Kniffel",
-        "Lügenwürfel",
-        "Mau-Mau",
-        "Meiern",
-        "Schiff–Kapitän–Mannschaft",
-        "Schocken",
-        "Schweinchen",
-        "Schwimmen / Knack",
-        "Spiel der Könige",
-        "Straßenlotto",
-        "Würfelpoker",
-        "Der Glückstag (Beta)",
-        "Durak (Beta)"
+        "Würfelspiele: 17 und 4",
+        "Würfelspiele: Aalstechen",
+        "Würfelspiele: Die böse Dreizehn",
+        "Würfelspiele: Farkle",
+        "Würfelspiele: Klippklapp",
+        "Würfelspiele: Kniffel",
+        "Würfelspiele: Lügenwürfel",
+        "Würfelspiele: Meiern",
+        "Würfelspiele: Schiff–Kapitän–Mannschaft",
+        "Würfelspiele: Schocken",
+        "Würfelspiele: Schweinchen",
+        "Würfelspiele: Spiel der Könige",
+        "Würfelspiele: Würfelpoker",
+        "Würfelspiele: Der Glückstag (Beta)",
+        "Glücksspiele: Chō-Han",
+        "Glücksspiele: Drachenhort",
+        "Glücksspiele: Straßenlotto",
+        "Kartenspiele: Mau-Mau",
+        "Kartenspiele: Schwimmen / Knack",
+        "Kartenspiele: Durak (Beta)"
       ]
     },
     "plans": {
@@ -51,36 +50,36 @@
         "Geplante Spiele und Wettbewerbe mit vorhandenen Referenzen oder neu vorgemerkten Namen. Einzelne Regeln sind noch offen; insbesondere ist beim Streichholzspiel noch keine genaue Variante festgelegt. Vorhandene Spiele werden nicht unter ihren englischen Namen erneut geplant."
       ],
       "items": [
-        "17+4 (Kartenspiel)",
-        "Armdrücken",
-        "Binokel",
-        "Blackjack",
-        "Bogenschießen",
-        "Das Spiel der edlen Dame",
-        "Doppelkopf",
-        "Escalero",
-        "Gaigel",
-        "Gewichteheben",
-        "Hütchenspiel",
-        "Karaoke",
-        "Kartendomino / Fan Tan",
-        "Käsekästchen / Dots and Boxes (Variante noch offen)",
-        "Kneipenquiz",
-        "König und Bettler / Präsident",
-        "Mühle / Nine Men’s Morris",
-        "Offenes Würfelpoker",
-        "Pfeilwurf",
-        "Roulette (PDF-Variante)",
-        "Schach (abstrakter Wettbewerb)",
-        "Schiffe versenken / Battleship (Variante noch offen)",
-        "Schummeln (Kartenspiel)",
-        "Sechsundsechzig",
-        "Skat",
-        "Streichholzspiel / Matchstick Game (Variante noch offen)",
-        "Tic-Tac-Toe / Drei gewinnt",
-        "Vier gewinnt / Four in a Row",
-        "Wettessen",
-        "Wetttrinken"
+        "Würfelspiele: Escalero",
+        "Würfelspiele: Offenes Würfelpoker",
+        "Glücksspiele: Hütchenspiel",
+        "Glücksspiele: Roulette (PDF-Variante)",
+        "Kartenspiele: 17+4 (Kartenspiel)",
+        "Kartenspiele: Binokel",
+        "Kartenspiele: Blackjack",
+        "Kartenspiele: Doppelkopf",
+        "Kartenspiele: Gaigel",
+        "Kartenspiele: Kartendomino / Fan Tan",
+        "Kartenspiele: König und Bettler / Präsident",
+        "Kartenspiele: Schummeln (Kartenspiel)",
+        "Kartenspiele: Sechsundsechzig",
+        "Kartenspiele: Skat",
+        "Sonstige: Armdrücken",
+        "Sonstige: Bogenschießen",
+        "Sonstige: Das Spiel der edlen Dame",
+        "Sonstige: Gewichteheben",
+        "Sonstige: Karaoke",
+        "Sonstige: Käsekästchen / Dots and Boxes (Variante noch offen)",
+        "Sonstige: Kneipenquiz",
+        "Sonstige: Mühle / Nine Men’s Morris",
+        "Sonstige: Pfeilwurf",
+        "Sonstige: Schach (abstrakter Wettbewerb)",
+        "Sonstige: Schiffe versenken / Battleship (Variante noch offen)",
+        "Sonstige: Streichholzspiel / Matchstick Game (Variante noch offen)",
+        "Sonstige: Tic-Tac-Toe / Drei gewinnt",
+        "Sonstige: Vier gewinnt / Four in a Row",
+        "Sonstige: Wettessen",
+        "Sonstige: Wetttrinken"
       ]
     },
     "plans2": {
@@ -101,25 +100,38 @@
       ]
     },
     "functions": {
-      "title": "aktuelle Funktionen (14)",
+      "title": "aktuelle Funktionen (27)",
       "paragraphs": [
-        "20 Spiele: 18 stabile Spiele sowie Der Glückstag und Durak als optionale Betas. Gemeinsame SL-Moderation, interne Spieltoken, auswählbare externe Kartendecks und optionale 3D-Würfel. Die Reiteransicht ist Standard; klassische Fenster bleiben wählbar."
+        "Bereits umgesetzte Kernfunktionen. Die Verfügbarkeit einzelner Aktionen richtet sich nach Spielregeln, Teilnahme und SL-Freigabe."
       ],
       "items": [
-        "Spielauswahl mit Kategorien, deutsch-englischer Suche und bis zu fünf Favoriten.",
-        "Gemeinsame SL-Moderation mit freiwilligem Beitritt, benannten automatischen oder manuell gesteuerten NPCs, Pause, Abbruch und Startspielerwahl.",
-        "Deutsche und englische Anleitungen mit Regelquellen, Hausvarianten und Chat-Ergebnissen; Englisch ist als Sprach-Beta gekennzeichnet.",
-        "Verschlüsselte Spielstände, Wiederaufnahme im ursprünglichen GM-Browser und Folgepartien mit übernehmbaren Spieltoken.",
-        "Optionale Dice-So-Nice-Anbindung mit privaten und verdeckten Würfen, ruhenden Würfelgruppen, sichtbaren Teilsummen und direkter Bedienung eigener Würfel.",
-        "Schwebende regelgerechte Spielaktionen und persönliche Wahl, ob markierte Würfel behalten oder erneut gewürfelt werden.",
-        "Partiengebundene Spieltoken mit SL-Zuteilung, passenden Einsatzmodellen, Bankbudget und ausdrücklicher Übernahme oder Verwerfen; keine direkten Charakter-Geldbuchungen.",
-        "Ausgangswetten für Teilnehmer, Zuschauer und NPCs aus dem gemeinsamen Tokenbestand mit automatischer Gewinnverteilung.",
-        "Göttliche Hand: private Glücks-/Pechprofile der SL, globale Vorgaben und spielbezogene Ausnahmen; 0 Prozent bleibt unveränderter Zufall, keine garantierte Gewinnquote.",
-        "Reguläre Reiteransicht mit Teilnehmerpanel, eingebetteter Moderation und zentralem Kartentisch; klassische Fenster bleiben optional.",
-        "Kartenverwaltung mit auswählbaren externen Decks, regelabhängigen Kartenteilmengen, privaten Händen und automatisch verwalteten nativen Partiestapeln. Vorlagen bleiben unverändert.",
-        "Mau-Mau, Schwimmen und die Durak-Beta mit anklickbaren Handkarten, NPCs und Spieltoken. Große Hände bleiben scrollbar; Ergebnisse erscheinen direkt am Tisch.",
-        "Besondere Spielvarianten wie Kniffel Extreme, verschiedene Würfelarten bei 17 und 4 und wählbare Klippklapp-Regeln.",
-        "Straßenlotto mit konfigurierbaren Tippscheinen, SL-Ziehung und separater Übergabe eines ausgewählten Gegenstandspreises."
+        "Kategorien und deutsch-englische Spielsuche",
+        "Persönliche Favoriten",
+        "Freiwilliger Lobbybeitritt",
+        "SL-Moderation, Pause und Abbruch",
+        "Automatische und manuell steuerbare NPCs",
+        "Wählbarer Startspieler",
+        "Interne Spieltoken mit Zuteilung, Einsätzen und Bankbudget",
+        "Ausgangswetten mit automatischer Gewinnverteilung",
+        "Verschlüsselte Spielstände und Wiederaufnahme",
+        "Folgerunden mit übernehmbaren Tokenbeständen",
+        "Optionale 3D-Würfel mit privaten und verdeckten Ergebnissen",
+        "Direkte Auswahl eigener liegender Würfel",
+        "Persönlicher Markierungsmodus Behalten oder Neuwurf",
+        "Sichtbare Würfelsummen mit geschützten verdeckten Anteilen",
+        "Schwebende regelgerechte Zugaktionen",
+        "Private SL-Glücks- und Pechprofile der Göttlichen Hand",
+        "Integrierte Reiteransicht und optionale Fenster",
+        "Auswählbare externe Kartendecks",
+        "Private Kartenhände und automatisch verwaltete Partiestapel",
+        "Anklickbare Handkarten",
+        "Scrollbare Kartenleiste",
+        "Sichtbare Ergebnisse am Tisch",
+        "Optionale Regelvarianten",
+        "Konfigurierbare Tippscheine und manuelle Ziehung",
+        "Übergabe eines ausgewählten Gegenstandspreises",
+        "Anleitungen, Regelquellen und Ergebnisnachrichten",
+        "Deutsche Oberfläche und Englisch als Sprach-Beta"
       ]
     },
     "settings": {
@@ -238,5 +250,5 @@
       "paragraphs": []
     }
   },
-  "version": "5.1.1"
+  "version": "5.1.2"
 }

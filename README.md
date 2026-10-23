@@ -1,3 +1,9 @@
+# TavernGames 5.1.2
+
+Durak erhält eine Sitzliste mit markiertem Verteidiger und nachwerfberechtigten Nachbarn. Meldungen stehen ohne Überlagerung im Statusbereich; der Tisch bleibt sichtbar. Glückstag erklärt Bank und Ablauf, wartet vor Anzeige und Abrechnung auf die 3D-Animation und nutzt längere NPC-Pausen. Ergebnisse ohne Gewinn oder Verlust werden korrekt benannt. Mau-Mau erhält optional die 9 als Allesleger; der Bube erfordert dann die passende Farbe und behält seine Farbwahl.
+
+Durak adds a seating list highlighting the defender and adjacent attackers. Notices stay in a dedicated status area without hiding the table. Lucky Day explains the bank and flow, waits for 3D animations before showing values and settlement, and spaces NPC actions farther apart. Break-even results are labeled correctly. Mau-Mau optionally makes the 9 wild; the jack then requires the matching suit and still chooses the next suit.
+
 # TavernGames 5.1.1
 
 Durak verbessert die Abwehrbedienung mit einem eigenen Abwehren-Button und beidseitigen Kartenhilfen. Gültige Klicks bleiben bei zusätzlichem Nachwerfen im selben Angriff erhalten. Kurze Banner und klare Rollenanzeigen begleiten langsamere NPC-Aktionen (3,5 Sekunden). Verdeckte Karten verwenden die Rückseite des gewählten Decks; Trumpf und Nachziehstapel liegen separat. Schwimmen erlaubt dem aktiven Spieler bei 7, 8 und 9 neue Tischkarten ohne Zugverbrauch und meldet Passen deutlich.

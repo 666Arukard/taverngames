@@ -25,6 +25,21 @@ export function validateWebsite(website, version) {
     if (!website.blocks.sources.paragraphs.length || !website.blocks.sources1.paragraphs.length) throw new Error('website.json: Quellen-/Hausvarianten-Einleitung fehlt.');
   }
   if(major>=5&&(!website.blocks.milestones.items.length||website.blocks.milestones.paragraphs.length))throw new Error('website.json: Meilensteine ungültig.');
+  const categorized = major > 5 || (major === 5 && (minor > 1 || (minor === 1 && patch >= 2)));
+  if (categorized) {
+    for (const key of ['games', 'plans']) {
+      const list = website.blocks[key].items;
+      const order = ['Würfelspiele', 'Glücksspiele', 'Kartenspiele', 'Sonstige'];
+      const parsed = list.map(value => {
+        const match = /^(Würfelspiele|Glücksspiele|Kartenspiele|Sonstige): (.+)$/.exec(value);
+        if (!match) throw new Error(`website.json: Kategorie in ${key} fehlt.`);
+        return { category: match[1], name: match[2], value };
+      });
+      const sorted = [...parsed].sort((a,b) => order.indexOf(a.category)-order.indexOf(b.category) || Number(a.name.endsWith(' (Beta)'))-Number(b.name.endsWith(' (Beta)')) || a.name.localeCompare(b.name,'de'));
+      if (!list.length || new Set(parsed.map(x=>x.name)).size !== list.length || !isDeepStrictEqual(list,sorted.map(x=>x.value))) throw new Error(`website.json: Kategorien oder Sortierung in ${key} ungültig.`);
+    }
+    return website;
+  }
   const games = website.blocks.games.items;
   const stable = games.filter(name => !name.endsWith(' (Beta)'));
   const beta = games.filter(name => name.endsWith(' (Beta)'));
