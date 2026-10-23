@@ -1,3 +1,9 @@
+# Aktueller Stand 5.2.0
+
+TavernGames bringt 19 stabile Tavernenspiele in Foundry VTT, darunter Farkle, Kniffel, Schocken, Lügenwürfel, Mau-Mau, Schwimmen und Durak sowie optionale Beta-Spiele. Spiele gemeinsam mit anderen Spielern am virtuellen Spieltisch oder mit benannten NPCs. Die Spielleitung verwaltet Ablauf, interne Spieltoken und optionale Ausgangswetten und kann selbst mitspielen. Enthalten sind deutsche und englische Oberflächen, deutsche Anleitungen mit Quellenangaben, optionale Dice-So-Nice-Anbindung und eine integrierte Reiteransicht mit frei beweglichen Fenstern als Alternative. Kartenspiele verwenden vorhandene Foundry-Kartendecks. Das Modul benötigt kein bestimmtes Spielsystem. Englische Anleitungen sind bis zur Prüfung vorerst nicht verfügbar.
+
+TavernGames brings 19 stable tavern games to Foundry VTT, including Farkle, Kniffel, Schocken, Liar’s Dice, Mau-Mau, Thirty-One and Durak, plus optional beta games. Play together with other players at your virtual table or with named NPCs. The GM manages play, internal game tokens and optional outcome betting, and can also take part. Features include English and German interfaces, German instructions with source credits, optional Dice So Nice integration and an integrated sidebar view with floating windows as an alternative. Card games use existing Foundry decks. No specific game system is required. English instructions are currently unavailable pending review.
+
 # TavernGames 5.1.2
 
 Durak erhält eine Sitzliste mit markiertem Verteidiger und nachwerfberechtigten Nachbarn. Meldungen stehen ohne Überlagerung im Statusbereich; der Tisch bleibt sichtbar. Glückstag erklärt Bank und Ablauf, wartet vor Anzeige und Abrechnung auf die 3D-Animation und nutzt längere NPC-Pausen. Ergebnisse ohne Gewinn oder Verlust werden korrekt benannt. Mau-Mau erhält optional die 9 als Allesleger; der Bube erfordert dann die passende Farbe und behält seine Farbwahl.
@@ -704,6 +710,7 @@ Die Grafiken wurden von Daniel bereitgestellt; das TavernGames-Logo wurde von Da
 | Würfel im Logo / Würfelspiele | Three musketeers | https://www.flaticon.com/free-icon/dice_16126970 | [Dice icons created by Three musketeers - Flaticon](https://www.flaticon.com/free-icons/dice) |
 | Kartenspiele | Unknown Depths | https://www.flaticon.com/free-icon/cards_8616159 | [Cards icons created by Unknown Depths - Flaticon](https://www.flaticon.com/free-icons/cards) |
 | Glücksspiele | POD Gladiator | https://www.flaticon.com/free-icon/casino-chips_16807396 | [Gambling icons created by POD Gladiator - Flaticon](https://www.flaticon.com/free-icons/gambling) |
+| Brettspiele | Hamel M | https://www.flaticon.com/free-icon/game_16084821 | [Boardgame icons created by Hamel M - Flaticon](https://www.flaticon.com/free-icons/boardgame) |
 
 Flaticon License mit Urhebernennung; laut Daniels Downloadangaben für privaten und kommerziellen Gebrauch. Maßgeblich bleiben die Bedingungen des jeweiligen Downloads, https://www.flaticon.com/legal . Diese Grafiken werden nicht unter der Softwarelizenz von TavernGames weiterlizenziert. Eine gesonderte Logo-Erlaubnis oder menschliche Herkunft wurde durch diese Dokumentation nicht unabhängig bestätigt.
 

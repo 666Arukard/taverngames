@@ -30,9 +30,9 @@ export function validateWebsite(website, version) {
   if (categorized) {
     for (const key of ['games', 'plans']) {
       const list = website.blocks[key].items;
-      const order = ['Würfelspiele', 'Glücksspiele', 'Kartenspiele', 'Sonstige'];
+      const order = ['Würfelspiele', 'Glücksspiele', 'Kartenspiele', 'Brettspiele', 'Sonstige'];
       const parsed = list.map(value => {
-        const match = /^(Würfelspiele|Glücksspiele|Kartenspiele|Sonstige): (.+)$/.exec(value);
+        const match = /^(Würfelspiele|Glücksspiele|Kartenspiele|Brettspiele|Sonstige): (.+)$/.exec(value);
         if (!match) throw new Error(`website.json: Kategorie in ${key} fehlt.`);
         return { category: match[1], name: match[2], value };
       });

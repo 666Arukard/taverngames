@@ -10,7 +10,7 @@ const nextTo=(s,id)=>{const a=durakActive(s);return a[(a.indexOf(id)+1)%a.length
 export function createDurak(o={}){
  const seconds=Number(o.protectionSeconds??5);check(Number.isInteger(seconds)&&seconds>=0&&seconds<=60,'Protection time must be 0–60 seconds.');
  const cards=selectCards(o.cardSet?.cards??[],DURAK_PROFILE);
- return {version:1,game:'durak',gameId:null,revision:0,phase:'lobby',paused:false,startSelection:o.startSelection??'rules',players:Object.keys(o.npcs??{}),npcs:structuredClone(o.npcs??{}),npcManual:{},order:[],turn:0,playersAtStart:[],cards:Object.fromEntries(cards.map(c=>[c.id,c])),cardSet:{key:o.cardSet?.key,label:o.cardSet?.label,style:o.cardSet?.style},hands:{},drawPile:[],discard:[],table:[],out:[],finishOrder:[],winners:[],losers:[],scores:{},round:0,trump:null,trumpCard:null,attacker:null,defender:null,limit:0,deadline:0,protectionSeconds:seconds,transferPlay:o.transferPlay===true,extendedTake:o.extendedTake===true,taking:false,thrown:false,passes:[],shown:[],revealed:[],draw:false};
+ return {version:1,game:'durak',gameId:null,revision:0,phase:'lobby',paused:false,startSelection:o.startSelection??'rules',players:Object.keys(o.npcs??{}),npcs:structuredClone(o.npcs??{}),npcManual:{},order:[],turn:0,playersAtStart:[],cards:Object.fromEntries(cards.map(c=>[c.id,c])),cardSet:{key:o.cardSet?.key,label:o.cardSet?.label,style:o.cardSet?.style},hands:{},drawPile:[],discard:[],table:[],out:[],finishOrder:[],winners:[],losers:[],scores:{},round:0,trump:null,trumpCard:null,attacker:null,defender:null,limit:0,deadline:0,protectionSeconds:seconds,transferPlay:o.transferPlay===true,transferRank:o.transferRank===true,extendedTake:o.extendedTake===true,taking:false,thrown:false,passes:[],shown:[],revealed:[],draw:false};
 }
 function beginBout(s,attacker,now){s.attacker=attacker;s.defender=nextTo(s,attacker);s.turn=s.order.indexOf(s.defender);s.limit=Math.min(6,s.hands[s.defender].length);s.table=[];s.taking=false;s.thrown=false;s.passes=[];s.shown=[];s.revealed=[];s.deadline=0;s.round++;}
 function finishBout(s,took,random,now){
@@ -27,7 +27,7 @@ function finishBout(s,took,random,now){
  beginBout(s,next,now);
 }
 export function durakCanBeat(s,attack,card){const a=s.cards[attack],c=s.cards[card];return !!a&&!!c&&(c.suit===a.suit&&value(c)>value(a)||c.suit===s.trump&&a.suit!==s.trump);}
-export function durakCanTransfer(s,id,card){const c=s.cards[card],next=nextTo(s,id);return s.phase==='playing'&&id===s.defender&&!s.taking&&!s.thrown&&s.table.length>0&&!s.table.some(p=>p.defense)&&s.hands[id]?.includes(card)&&c?.suit===s.trump&&s.table.every(p=>s.cards[p.attack].rank===c.rank)&&!s.shown.some(p=>p.card===card)&&s.hands[next]?.length>=s.table.length+(s.transferPlay?1:0)&&s.table.length+(s.transferPlay?1:0)<=6;}
+export function durakCanTransfer(s,id,card){const c=s.cards[card],next=nextTo(s,id);return s.phase==='playing'&&id===s.defender&&!s.taking&&!s.thrown&&s.table.length>0&&!s.table.some(p=>p.defense)&&s.hands[id]?.includes(card)&&(c?.suit===s.trump||s.transferRank===true)&&s.table.every(p=>s.cards[p.attack].rank===c.rank)&&!s.shown.some(p=>p.card===card)&&s.hands[next]?.length>=s.table.length+((s.transferPlay||c?.suit!==s.trump)?1:0)&&s.table.length+((s.transferPlay||c?.suit!==s.trump)?1:0)<=6;}
 export function actDurak(original,id,action,args={},random=n=>Math.floor(Math.random()*n)+1,gm=false,now=Date.now()){
  check(original,'Open a lobby first.');const s=structuredClone(original),needGM=()=>check(gm,'GM only.');
  if(action==='pause'){needGM();if(s.paused){s.deadline=s.pauseRemaining?now+s.pauseRemaining:0;s.paused=false;}else{s.pauseRemaining=Math.max(0,s.deadline-now);s.paused=true;}}
@@ -50,7 +50,7 @@ export function actDurak(original,id,action,args={},random=n=>Math.floor(Math.ra
    }else if(action==='defend'){
     check(id===s.defender&&!s.taking,'Only the defender may defend.');const pair=s.table[args.index];check(pair&&!pair.defense&&durakCanBeat(s,pair.attack,args.card),'Card cannot beat this attack.');play(args.card);pair.defense=args.card;s.passes=[];
    }else if(action==='transfer'){
-    check(durakCanTransfer(s,id,args.card),'Cannot transfer this attack.');const next=nextTo(s,id);s.shown.push({owner:id,card:args.card});s.revealed.push({owner:id,card:args.card});if(s.transferPlay){play(args.card);s.table.push({attack:args.card,defense:null});}
+    check(durakCanTransfer(s,id,args.card),'Cannot transfer this attack.');const next=nextTo(s,id);s.shown.push({owner:id,card:args.card});s.revealed.push({owner:id,card:args.card});if(s.transferPlay||s.cards[args.card].suit!==s.trump){play(args.card);s.table.push({attack:args.card,defense:null});}
     s.attacker=id;s.defender=next;s.turn=s.order.indexOf(next);s.limit=Math.min(6,s.hands[next].length);s.deadline=now+s.protectionSeconds*1000;s.passes=[];
    }else if(action==='take'){
     check(id===s.defender&&s.table.length&&!s.taking,'Only the defender may take.');if(s.extendedTake){s.taking=true;s.deadline=0;s.passes=[];}else finishBout(s,true,random,now);

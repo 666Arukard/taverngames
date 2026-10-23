@@ -296,3 +296,9 @@
 #taverngames-durak-stage .taverngames-durak-attacks{min-width:0;box-sizing:border-box;align-content:start}
 #taverngames-durak-stage>.taverngames-card-stage-hand{flex:0 0 auto;max-height:none;min-width:0}
 @container(max-width:620px){#taverngames-durak-stage>.taverngames-card-stage-shared{grid-template-columns:minmax(0,1fr)}.taverngames-durak-supply{justify-self:stretch}}
+
+#taverngames-durak-stage>.taverngames-card-stage-hand,#taverngames-durak-stage .taverngames-durak-attacks{border:1px solid #b8995d;border-radius:8px;background:rgba(24,21,19,.64);box-sizing:border-box}
+.taverngames-category-buttons{grid-template-columns:repeat(auto-fit,minmax(48px,1fr))}
+.taverngames-connect-board,.taverngames-connect-columns{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;max-width:420px;margin:8px auto}.taverngames-connect-board{padding:8px;background:#183a62;border:2px solid #b8995d;border-radius:8px}.taverngames-connect-board span{display:flex;justify-content:center;align-items:center;aspect-ratio:1;border-radius:50%;background:#151515;font-size:clamp(16px,4vw,36px);border:2px solid #777}.taverngames-connect-board .player-0{background:#b32632;color:#fff}.taverngames-connect-board .player-1{background:#e9bb39;color:#222}.taverngames-connect-columns button{min-width:0;width:100%;padding:4px 0}
+
+.taverngames-connect-board span{min-width:0;min-height:0;line-height:1}.taverngames-connect-moderation>label{display:block;margin:8px 0}.taverngames-connect-moderation>label.schocken-choice{display:flex}

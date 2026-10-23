@@ -2,21 +2,21 @@
   "schemaVersion": 1,
   "blocks": {
     "patchnotes": {
-      "title": "Patchnotes Version 5.1.5",
+      "title": "Patchnotes Version 5.2.0",
       "paragraphs": [
-        "Durak zeigt Nachziehstapel und Trumpf nebeneinander neben der Sitzreihenfolge. Handkarten passen sich der verfügbaren Fläche an und bleiben vollständig erreichbar. Das obere Spielfeld scrollt bei Platzmangel unabhängig von der Hand. Spielregeln und Beta-Status bleiben unverändert."
+        "Durak ist stabil: einheitliche Rahmen, sichtbare Handkartenanzahl und optionales Weitergeben durch Ausspielen einer gleichwertigen Karte. Vier gewinnt ist neu als optionale Beta mit zwei Teilnehmern, NPCs, Serien und internen Spieltoken. Die Modulbeschreibung nennt echte Mitspieler am Spieltisch ausdrücklich. Glückstag bleibt Beta."
       ],
       "items": [
-        "Durak: Nachziehstapel und Trumpf neben der Sitzreihenfolge.",
-        "Handkarten passen sich der verfügbaren Breite an.",
-        "Oberes Spielfeld bei Platzmangel separat scrollbar.",
-        "18 stabile Spiele; Durak und Glückstag bleiben Beta."
+        "Durak stabil: einheitliche Rahmen, Kartenanzahl und optionale Rangweitergabe.",
+        "Vier gewinnt als neue Beta in der Kategorie Brettspiele.",
+        "Gemeinsames Spiel mit echten Mitspielern ausdrücklich beschrieben.",
+        "19 stabile Spiele; Glückstag und Vier gewinnt bleiben Beta."
       ]
     },
     "games": {
-      "title": "aktuelle Spiele (20)",
+      "title": "aktuelle Spiele (21)",
       "paragraphs": [
-        "20 Spiele: 18 stabil, Der Glückstag und Durak als optionale Betas. Nach den Kategorien des Moduls gruppiert; innerhalb jeder Kategorie stabile Spiele alphabetisch, danach Beta-Spiele."
+        "21 Spiele: 19 stabil; Glückstag und Vier gewinnt als optionale Betas. Gemeinsame Partien mit echten Spielern und optional NPCs."
       ],
       "items": [
         "Würfelspiele: 17 und 4",
@@ -36,13 +36,14 @@
         "Glücksspiele: Chō-Han",
         "Glücksspiele: Drachenhort",
         "Glücksspiele: Straßenlotto",
+        "Kartenspiele: Durak",
         "Kartenspiele: Mau-Mau",
         "Kartenspiele: Schwimmen / Knack",
-        "Kartenspiele: Durak (Beta)"
+        "Brettspiele: Vier gewinnt (Beta)"
       ]
     },
     "plans": {
-      "title": "geplante Spiele (30)",
+      "title": "geplante Spiele (29)",
       "paragraphs": [
         "Geplante Spiele und Wettbewerbe mit vorhandenen Referenzen oder neu vorgemerkten Namen. Einzelne Regeln sind noch offen; insbesondere ist beim Streichholzspiel noch keine genaue Variante festgelegt. Vorhandene Spiele werden nicht unter ihren englischen Namen erneut geplant."
       ],
@@ -74,7 +75,6 @@
         "Sonstige: Schiffe versenken / Battleship (Variante noch offen)",
         "Sonstige: Streichholzspiel / Matchstick Game (Variante noch offen)",
         "Sonstige: Tic-Tac-Toe / Drei gewinnt",
-        "Sonstige: Vier gewinnt / Four in a Row",
         "Sonstige: Wettessen",
         "Sonstige: Wetttrinken"
       ]
@@ -82,7 +82,7 @@
     "plans2": {
       "title": "geplante Funktionen (9)",
       "paragraphs": [
-        "Die gemeinsame Kartenbasis, Mau-Mau und Schwimmen / Knack sind stabil umgesetzt; Durak ist als Beta verfügbar. Die folgenden größeren Erweiterungen sind noch geplant."
+        "Die gemeinsame Kartenbasis, Mau-Mau, Schwimmen / Knack und Durak sind stabil umgesetzt. Die folgenden größeren Erweiterungen sind noch geplant."
       ],
       "items": [
         "Weitere Tags und Filter, etwa nach Spieldauer und Einsätzen.",
@@ -97,7 +97,7 @@
       ]
     },
     "functions": {
-      "title": "aktuelle Funktionen (27)",
+      "title": "aktuelle Funktionen (28)",
       "paragraphs": [
         "Bereits umgesetzte Kernfunktionen. Die Verfügbarkeit einzelner Aktionen richtet sich nach Spielregeln, Teilnahme und SL-Freigabe."
       ],
@@ -128,14 +128,15 @@
         "Konfigurierbare Tippscheine und manuelle Ziehung",
         "Übergabe eines ausgewählten Gegenstandspreises",
         "Anleitungen, Regelquellen und Ergebnisnachrichten",
-        "Geprüfte deutsche und englische Oberfläche"
+        "Geprüfte deutsche und englische Oberfläche",
+        "Gemeinsame Partien mit echten Spielern am virtuellen Spieltisch"
       ]
     },
     "settings": {
       "title": "Einstellungen in Foundry",
       "paragraphs": [
         "Nach Installation alle Clients vollständig neu laden. Benötigt wird mindestens Foundry 14.369. In den Moduleinstellungen Deutsch oder Englisch wählen; Standard ist Englisch. Beide Oberflächen sind geprüft. Anleitungen sind vorerst ausschließlich auf Deutsch verfügbar; englische Anleitungen folgen erst nach menschlicher Prüfung.",
-        "18 Spiele sind stabil, darunter Mau-Mau, Schwimmen / Knack und Spiel der Könige. Für Der Glückstag und Durak den Beta-Test einschalten.",
+        "19 Spiele sind stabil, darunter Mau-Mau, Schwimmen / Knack und Spiel der Könige. Für Der Glückstag und Vier gewinnt den Beta-Test einschalten.",
         "Die integrierte Reiteransicht ist Standard. Je Benutzer bleiben klassische Fenster wählbar; eine zuvor ausdrücklich gespeicherte Fensterwahl bleibt erhalten. Das TavernGames-Symbol öffnet die berechtigte Lobby bereits vor dem Beitritt. Spielaktionen erfordern weiterhin Teilnahme und passende Berechtigung.",
         "Der TavernGames-Reiter und die Moderation sind für die SL. Spiel wählen, Regeln einstellen, Lobby vorbereiten und den Beitrittsbutton freigeben. Vor dem Start gegebenenfalls Startspieler und NPC-Steuerung wählen.",
         "Für Kartenpartien unter Cards / Card Decks ein geeignetes externes Deck erstellen oder importieren und in der Moderation wählen. Es gibt kein mitgeliefertes Standard-Kartenset mehr. Vorhandene Dragon-Cards-Vorlagen werden unterstützt. Mau-Mau und Schwimmen benötigen 7 bis Ass, Durak Sechs bis Ass, jeweils in vier Farben ohne Joker. Ohne geeignetes Deck kann keine Kartenlobby erstellt werden.",
@@ -145,13 +146,15 @@
         "Dice So Nice ist optional und separat einzuschalten. Eigene liegende Würfel können direkt bedient werden; den persönlichen Markierungsmodus Behalten oder Neuwurf bewusst wählen. Verdeckte Anteile bleiben in Summen unbekannt.",
         "Mau-Mau: freiwilliges Ziehen und Ansagestrafen sind optionale Regeln, standardmäßig aus. Handkarten sind bei großen Händen horizontal scrollbar. Das Einklappen der linken Lobby lässt den Kartentisch spielbar; Spielwechsel, Schließen oder Fensteransicht beenden die große Darstellung.",
         "Schwimmen: drei Leben plus Schwimmen, 30½ und Knack; Blitz ist optional und standardmäßig an. Bei genau 7, 8 und 9 auf dem Tisch kann nur der aktive Spieler neue Tischkarten ohne Zugverbrauch anfordern. Passen startet die angekündigten letzten Züge.",
-        "Durak (Beta): zwei bis sechs Teilnehmer. Schutzzeit vor der Partie festlegen, Standard fünf Sekunden und einstellbar von 0 bis 60. Trumpf vorzeigen reicht standardmäßig zum Weitergeben; Ausspielen und zusätzliches Nachwerfen beim Aufnehmen sind optionale Varianten. Für die Abwehr Handkarte und Angriff wählen oder Abwehren verwenden. NPCs warten 3,5 Sekunden zwischen Aktionen.",
-        "Göttliche Hand ist nur für die SL sichtbar. Globale Profile und Spielausnahmen gezielt einstellen; der globale Ausschalter entfernt alle Glücks-/Pechprofile. Der bekannte Einfluss bei Die böse Dreizehn ist weiterhin ein offener Korrekturpunkt."
+        "Durak: zwei bis sechs Teilnehmer. Schutzzeit vor der Partie festlegen, Standard fünf Sekunden und einstellbar von 0 bis 60. Trumpf vorzeigen reicht standardmäßig zum Weitergeben; Ausspielen und zusätzliches Nachwerfen beim Aufnehmen sind optionale Varianten. Für die Abwehr Handkarte und Angriff wählen oder Abwehren verwenden. NPCs warten 3,5 Sekunden zwischen Aktionen.",
+        "Göttliche Hand ist nur für die SL sichtbar. Globale Profile und Spielausnahmen gezielt einstellen; der globale Ausschalter entfernt alle Glücks-/Pechprofile. Der bekannte Einfluss bei Die böse Dreizehn ist weiterhin ein offener Korrekturpunkt.",
+        "Vier gewinnt (Beta): Beta-Test einschalten, zwei echte Teilnehmer oder NPCs wählen und eine Partie oder Serie mit bis zu 100 Runden vorbereiten. Der Startspieler wechselt zwischen den Runden; optionalen Token-Einsatz einmal für die Serie festlegen.",
+        "Durak: Rangweitergabe durch Ausspielen einer gleichwertigen Karte ist optional und standardmäßig aus. Die bisherige Trumpf-Vorzeigeregel bleibt verfügbar; Weitergabesperren und Kartenkapazität des nächsten Verteidigers gelten weiterhin."
       ],
       "items": []
     },
     "sources": {
-      "title": "Regelquellen (42)",
+      "title": "Regelquellen (43)",
       "paragraphs": [
         "Hier findet ihr alle genutzten Regelquellen. Quellen für noch nicht umgesetzte Spiele sind ausdrücklich als geplante Regelreferenzen gekennzeichnet."
       ],
@@ -197,7 +200,8 @@
         "Mau-Mau: Daniels D&D-Minispiele-Sammlung vom 15.10.2026, bestätigte Randregeln und Spielewiki – https://spielewiki.org/wiki/Mau_Mau",
         "Dragon Cards – Card Deck: Daniel Brune, optionale KI-generierte bzw. KI-basierte Dracima-Gestaltung; drei Stile, Kartenmetadaten-Schema und Lese-API v1. Kein Bestandteil des Hauptmoduls.",
         "Spiel der Könige und Der Glückstag: Paul Cossmer, Tavernen und Glücksspiele, Seite 4; Ablauf- und Setzergänzungen nach Daniel Brune.",
-        "Durak: Daniels bereitgestellte D&D-Minispiele – Regel- und Spielesammlung, Version 1.0 vom 15.10.2026; bestätigte Weitergabe-, Schutzzeit-, Teilnehmer- und Tokenregeln nach Daniel Brune."
+        "Durak: Daniels bereitgestellte D&D-Minispiele – Regel- und Spielesammlung, Version 1.0 vom 15.10.2026; bestätigte Weitergabe-, Schutzzeit-, Teilnehmer- und Tokenregeln nach Daniel Brune.",
+        "Vier gewinnt: klassische Vier-in-einer-Reihe-Regeln auf 7×6 Feldern; Serien und Spieltoken als Modulergänzung."
       ]
     },
     "sources1": {
@@ -242,10 +246,11 @@
         "3.0.0 – Göttliche Hand: ausschließlich für die SL sichtbare Beeinflussung regelkonformer Würfelergebnisse.",
         "2.0.0 – Stabile optionale Dice-So-Nice-Anbindung für 3D-Würfel; neun stabile Spiele.",
         "1.0.0 – Erste Hauptversion mit deutscher und englischer Oberfläche sowie updatefähigen Installationspaketen.",
-        "0.0.1 – Start des Weges: erstes Würfelspiel."
+        "0.0.1 – Start des Weges: erstes Würfelspiel.",
+        "5.2.0: Durak stabil, Vier gewinnt als Brettspiel-Beta."
       ],
       "paragraphs": []
     }
   },
-  "version": "5.1.5"
+  "version": "5.2.0"
 }
