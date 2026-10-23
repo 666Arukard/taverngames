@@ -2,16 +2,14 @@
   "schemaVersion": 1,
   "blocks": {
     "patchnotes": {
-      "title": "Patchnotes Version 5.2.1",
+      "title": "Patchnotes Version 5.2.2",
       "paragraphs": [
-        "Die böse Dreizehn ersetzt ältere 3D-Würfelgruppen durch den aktuellen Wurf. Kartenspiele nutzen sprachabhängige Ordner und wiederverwendbare Teildecks; temporäre Hände und Ablagen werden nach Partieende bereinigt. Mau-Mau erhält ein Farbwahl-Popup beim Buben, eine Zuganzeige am Tisch und optionale Regeln für 7 auf 7, Zugende nach dem Ziehen und Weiterspielen bis zum letzten Spieler."
+        "Durak zeigt seine Spielaktionen in einem eigenen umrandeten Bereich rechts neben dem Kartentisch. Karten, Stapel und Aktionen lassen sich unabhängig scrollen; übereinanderliegende Angriffs- und Abwehrkarten verdrängen die Buttons nicht mehr. Handkarten und Statusmeldung bleiben getrennt."
       ],
       "items": [
-        "Die böse Dreizehn: nur die aktuelle 3D-Würfelgruppe bleibt liegen.",
-        "Kartenordner, wiederverwendbare Teildecks und Bereinigung temporärer Hände/Ablagen.",
-        "Mau-Mau: Buben-Popup und sichtbare Zuganzeige.",
-        "Mau-Mau optional: 7 auf 7, Zugende nach Ziehen, Weiterspielen bis zum letzten Spieler.",
-        "19 stabile Spiele; Glückstag und Vier gewinnt bleiben Beta."
+        "Durak: Aktionsbuttons in einem eigenen umrandeten Bereich rechts vom Kartentisch.",
+        "Unabhängiges Scrollen von Angriffskarten, Stapeln und Spielaktionen.",
+        "Keine Änderungen an Regeln, Berechtigungen oder Beta-Status."
       ]
     },
     "games": {
@@ -262,5 +260,5 @@
       "paragraphs": []
     }
   },
-  "version": "5.2.1"
+  "version": "5.2.2"
 }

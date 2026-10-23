@@ -304,3 +304,13 @@
 .taverngames-connect-board span{min-width:0;min-height:0;line-height:1}.taverngames-connect-moderation>label{display:block;margin:8px 0}.taverngames-connect-moderation>label.schocken-choice{display:flex}
 
 .taverngames-suit-dialog{padding:20px;border:1px solid #b8995d;border-radius:8px;background:#30251e;color:#fff2d2}.taverngames-suit-dialog::backdrop{background:#0008}.taverngames-suit-dialog button{display:block;width:100%;margin:8px 0}.taverngames-mau-turn{min-height:2.5em;box-sizing:border-box}
+
+/* Durak actions occupy an independent framed right column, never a card stack. */
+.taverngames-durak-actions{border:1px solid #b8995d;border-radius:8px;padding:10px;background:rgba(24,21,19,.86);box-sizing:border-box;min-width:0;pointer-events:auto}
+.taverngames-durak-actions button{display:block;width:100%;white-space:normal;margin:0 0 8px}
+.taverngames-durak-actions p{margin:8px 0;font-size:13px;overflow-wrap:anywhere}
+#taverngames-durak-stage>.has-durak-actions{grid-template-columns:minmax(250px,290px) minmax(0,1fr) 170px;grid-template-rows:minmax(0,1fr);align-items:stretch;overflow:hidden}
+#taverngames-durak-stage>.has-durak-actions>.taverngames-durak-supply,#taverngames-durak-stage>.has-durak-actions>.taverngames-durak-attacks,#taverngames-durak-stage>.has-durak-actions>.taverngames-durak-actions{min-height:0;max-height:100%;overflow:auto;align-self:stretch}
+#taverngames-durak-stage>.has-durak-actions>.taverngames-durak-actions{display:block;grid-column:3;grid-row:1}
+@container(max-width:600px){#taverngames-durak-stage>.has-durak-actions{grid-template-columns:minmax(0,1fr) 150px;grid-template-rows:minmax(100px,38%) minmax(0,1fr)}#taverngames-durak-stage>.has-durak-actions>.taverngames-durak-supply{grid-column:1;grid-row:1;width:100%}#taverngames-durak-stage>.has-durak-actions>.taverngames-durak-attacks{grid-column:1;grid-row:2}#taverngames-durak-stage>.has-durak-actions>.taverngames-durak-actions{grid-column:2;grid-row:1/3}}
+@container(max-width:440px){#taverngames-durak-stage>.has-durak-actions{grid-template-columns:minmax(0,1fr) 112px;gap:6px}.taverngames-durak-actions{padding:6px}}
