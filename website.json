@@ -2,15 +2,14 @@
   "schemaVersion": 1,
   "blocks": {
     "patchnotes": {
-      "title": "Patchnotes Version 5.1.3",
+      "title": "Patchnotes Version 5.1.4",
       "paragraphs": [
-        "Neues, von Daniel zusammengestelltes Logo und neue Kategoriesymbole mit Flaticon-Quellenangaben. Ungeprüfte englische Anleitungen sind vorübergehend nicht enthalten; die deutsche Anleitung und beide Oberflächensprachen bleiben verfügbar. Durak und Glückstag bleiben Beta."
+        "Moderationsansichten behalten bei Spielaktionen ihre Scrollposition auch in der Reiteransicht. Die gemeinsame Aktualisierung sichert innere und äußere Scrollbereiche; aktive Eingaben bleiben geschützt. Für Durak in beiden Sprachen geprüft. Spielregeln und Beta-Status unverändert."
       ],
       "items": [
-        "Neues TavernGames-Logo und drei Kategoriesymbole.",
-        "Urheberangaben der Flaticon-Grafiken dokumentiert.",
-        "Englische Anleitungen bis zur menschlichen Prüfung nicht enthalten.",
-        "Deutsche Anleitungen und deutsch/englische Oberfläche verfügbar.",
+        "Gemeinsame Scrollsicherung für Moderationsfenster und Reiteransicht.",
+        "Durak: keine Sprünge nach oben bei Spieltisch-Aktualisierungen.",
+        "Aktive Eingaben und NPC-Entwürfe bleiben erhalten.",
         "18 stabile Spiele; Durak und Glückstag bleiben Beta."
       ]
     },
@@ -248,5 +247,5 @@
       "paragraphs": []
     }
   },
-  "version": "5.1.2"
+  "version": "5.1.4"
 }

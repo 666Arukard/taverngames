@@ -4,6 +4,7 @@ import { pathToFileURL } from 'node:url';
 import { insideRoot, jsonFile, parseArgs, sha256, httpsUrl, zipManifest, responseJson } from './publishing-common.mjs';
 
 export function validateWebsite(website, version) {
+  if (website.version && website.version !== version) throw new Error('website.json: Versionsfeld stimmt nicht mit dem Release überein.');
   const [major, minor, patch] = version.split('.').map(Number);
   const lowercaseTitles = major > 1 || (major === 1 && (minor > 4 || (minor === 4 && patch >= 2)));
   const countedTitles = major > 1 || (major === 1 && (minor > 4 || (minor === 4 && patch > 6)));
