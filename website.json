@@ -2,14 +2,14 @@
   "schemaVersion": 1,
   "blocks": {
     "patchnotes": {
-      "title": "Patchnotes Version 5.1.4",
+      "title": "Patchnotes Version 5.1.5",
       "paragraphs": [
-        "Moderationsansichten behalten bei Spielaktionen ihre Scrollposition auch in der Reiteransicht. Die gemeinsame Aktualisierung sichert innere und äußere Scrollbereiche; aktive Eingaben bleiben geschützt. Für Durak in beiden Sprachen geprüft. Spielregeln und Beta-Status unverändert."
+        "Durak zeigt Nachziehstapel und Trumpf nebeneinander neben der Sitzreihenfolge. Handkarten passen sich der verfügbaren Fläche an und bleiben vollständig erreichbar. Das obere Spielfeld scrollt bei Platzmangel unabhängig von der Hand. Spielregeln und Beta-Status bleiben unverändert."
       ],
       "items": [
-        "Gemeinsame Scrollsicherung für Moderationsfenster und Reiteransicht.",
-        "Durak: keine Sprünge nach oben bei Spieltisch-Aktualisierungen.",
-        "Aktive Eingaben und NPC-Entwürfe bleiben erhalten.",
+        "Durak: Nachziehstapel und Trumpf neben der Sitzreihenfolge.",
+        "Handkarten passen sich der verfügbaren Breite an.",
+        "Oberes Spielfeld bei Platzmangel separat scrollbar.",
         "18 stabile Spiele; Durak und Glückstag bleiben Beta."
       ]
     },
@@ -247,5 +247,5 @@
       "paragraphs": []
     }
   },
-  "version": "5.1.4"
+  "version": "5.1.5"
 }
