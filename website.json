@@ -2,215 +2,499 @@
   "schemaVersion": 1,
   "blocks": {
     "patchnotes": {
-      "title": "Patchnotes Version 5.2.4",
+      "title": "Patchnotes Version 5.3.0",
       "paragraphs": [
-        "Vier gewinnt erhält vorausschauende NPCs mit variierenden Eröffnungen, Angriff und Verteidigung sowie zufälliger Auswahl ähnlich guter Züge. Die gewinnende Reihe wird direkt auf dem Brett golden umrandet; die roten und gelben Steine bleiben erhalten."
+        "Glückstag und Vier gewinnt sind stabil. Neu als Beta: Schwarzer Peter mit wählbaren Kartenpaaren und optionalem Weiterspielen sowie Tic-Tac-Toe mit NPCs und Serien. Göttliche Hand beeinflusst nun auch Kartenverteilung und Nachziehen. Die Spieleübersicht ist durchgehend alphabetisch und zeigt kleine Kategorie-Icons neben den Favoritensternen. Schwimmen erhält den schwebenden Button zum Tausch aller drei Karten; nach einer vollständigen Schieberunde werden nur die Tischkarten erneuert. Vier gewinnt sperrt schnelle Folgeaktionen nach dem Sieg besser ab."
       ],
       "items": [
-        "Vier gewinnt: vorausschauende NPCs mit variabler Eröffnung und taktischer Zugwahl.",
-        "Goldene Gewinnmarkierung auf dem Spielfeld.",
-        "Spielregeln und Einsatzverwaltung unverändert; Vier gewinnt bleibt Beta.",
-        "Seit dem letzten veröffentlichten Stand: Vier-gewinnt-Brett auf der Hauptspielfläche mit reinen roten und gelben Spielsteinen; beim Einklappen der Lobby bleibt es sichtbar."
+        "Glückstag und Vier gewinnt sind nach Praxistest stabil.",
+        "Neue Betas: Schwarzer Peter und Tic-Tac-Toe.",
+        "Göttliche Hand bei allen vier Kartenspielen: Austeilen, Nachziehen und Ungnade.",
+        "Spieleliste alphabetisch, ohne Kategorieüberschriften, mit kleinen Kategorie-Icons neben dem Favoritenstern.",
+        "Schwimmen: Tausch aller drei Karten unten verfügbar, auch ohne Dice So Nice; vollständige Schieberunde erneuert nur die Tischkarten.",
+        "Vier gewinnt: sofortige Eingabesperre und nacheinander verarbeitete Züge.",
+        "Dice-So-Nice-Empfehlung mit deutschem und englischem Hinweis; keine Empfehlung für ein bestimmtes Kartenset."
       ]
     },
     "games": {
-      "title": "aktuelle Spiele (21)",
+      "title": "aktuelle Spiele (23)",
       "paragraphs": [
-        "21 Spiele: 19 stabil; Glückstag und Vier gewinnt als optionale Betas. Gemeinsame Partien mit echten Spielern und optional NPCs."
+        "23 Spiele: 21 stabil; Schwarzer Peter und Tic-Tac-Toe als optionale Betas. Gemeinsame Partien mit echten Spielern und optional NPCs."
       ],
       "items": [
-        "Würfelspiele: 17 und 4",
-        "Würfelspiele: Aalstechen",
-        "Würfelspiele: Die böse Dreizehn",
-        "Würfelspiele: Farkle",
-        "Würfelspiele: Klippklapp",
-        "Würfelspiele: Kniffel",
-        "Würfelspiele: Lügenwürfel",
-        "Würfelspiele: Meiern",
-        "Würfelspiele: Schiff–Kapitän–Mannschaft",
-        "Würfelspiele: Schocken",
-        "Würfelspiele: Schweinchen",
-        "Würfelspiele: Spiel der Könige",
-        "Würfelspiele: Würfelpoker",
-        "Würfelspiele: Der Glückstag (Beta)",
-        "Glücksspiele: Chō-Han",
-        "Glücksspiele: Drachenhort",
-        "Glücksspiele: Straßenlotto",
-        "Kartenspiele: Durak",
-        "Kartenspiele: Mau-Mau",
-        "Kartenspiele: Schwimmen / Knack",
-        "Brettspiele: Vier gewinnt (Beta)"
+        {
+          "title": "Würfelspiele",
+          "items": [
+            "17 und 4",
+            "Aalstechen",
+            "Der Glückstag",
+            "Die böse Dreizehn",
+            "Farkle",
+            "Klippklapp",
+            "Kniffel",
+            "Lügenwürfel",
+            "Meiern",
+            "Schiff–Kapitän–Mannschaft",
+            "Schocken",
+            "Schweinchen",
+            "Spiel der Könige",
+            "Würfelpoker"
+          ]
+        },
+        {
+          "title": "Glücksspiele",
+          "items": [
+            "Chō-Han",
+            "Drachenhort",
+            "Straßenlotto"
+          ]
+        },
+        {
+          "title": "Kartenspiele",
+          "items": [
+            "Durak",
+            "Mau-Mau",
+            "Schwimmen / Knack",
+            "Schwarzer Peter (Beta)"
+          ]
+        },
+        {
+          "title": "Brettspiele",
+          "items": [
+            "Vier gewinnt",
+            "Tic-Tac-Toe (Beta)"
+          ]
+        }
       ]
     },
     "plans": {
-      "title": "geplante Spiele (31)",
+      "title": "geplante Spiele (29)",
       "paragraphs": [
         "Geplante Spiele und Wettbewerbe mit vorhandenen Referenzen oder neu vorgemerkten Namen. Einzelne Regeln sind noch offen; insbesondere ist beim Streichholzspiel noch keine genaue Variante festgelegt. Vorhandene Spiele werden nicht unter ihren englischen Namen erneut geplant."
       ],
       "items": [
-        "Würfelspiele: Escalero",
-        "Würfelspiele: Offenes Würfelpoker",
-        "Glücksspiele: Hütchenspiel",
-        "Glücksspiele: Roulette (PDF-Variante)",
-        "Kartenspiele: 17+4 (Kartenspiel)",
-        "Kartenspiele: Binokel",
-        "Kartenspiele: Blackjack",
-        "Kartenspiele: Doppelkopf",
-        "Kartenspiele: Gaigel",
-        "Kartenspiele: Kartendomino / Fan Tan",
-        "Kartenspiele: König und Bettler / Präsident",
-        "Kartenspiele: Rommé",
-        "Kartenspiele: Schummeln (Kartenspiel)",
-        "Kartenspiele: Schwarzer Peter (frei wählbare Karte und Paargruppen)",
-        "Kartenspiele: Sechsundsechzig",
-        "Kartenspiele: Skat",
-        "Sonstige: Armdrücken",
-        "Sonstige: Bogenschießen",
-        "Sonstige: Das Spiel der edlen Dame",
-        "Sonstige: Gewichteheben",
-        "Sonstige: Karaoke",
-        "Sonstige: Käsekästchen / Dots and Boxes (Variante noch offen)",
-        "Sonstige: Kneipenquiz",
-        "Sonstige: Mühle / Nine Men’s Morris",
-        "Sonstige: Pfeilwurf",
-        "Sonstige: Schach (abstrakter Wettbewerb)",
-        "Sonstige: Schiffe versenken / Battleship (Variante noch offen)",
-        "Sonstige: Streichholzspiel / Matchstick Game (Variante noch offen)",
-        "Sonstige: Tic-Tac-Toe / Drei gewinnt",
-        "Sonstige: Wettessen",
-        "Sonstige: Wetttrinken"
+        {
+          "title": "Würfelspiele",
+          "items": [
+            "Escalero",
+            "Offenes Würfelpoker"
+          ]
+        },
+        {
+          "title": "Glücksspiele",
+          "items": [
+            "Hütchenspiel",
+            "Roulette (PDF-Variante)"
+          ]
+        },
+        {
+          "title": "Kartenspiele",
+          "items": [
+            "17+4 (Kartenspiel)",
+            "Binokel",
+            "Blackjack",
+            "Doppelkopf",
+            "Gaigel",
+            "Kartendomino / Fan Tan",
+            "König und Bettler / Präsident",
+            "Rommé",
+            "Schummeln (Kartenspiel)",
+            "Sechsundsechzig",
+            "Skat"
+          ]
+        },
+        {
+          "title": "Sonstige",
+          "items": [
+            "Armdrücken",
+            "Bogenschießen",
+            "Das Spiel der edlen Dame",
+            "Gewichteheben",
+            "Karaoke",
+            "Käsekästchen / Dots and Boxes (Variante noch offen)",
+            "Kneipenquiz",
+            "Mühle / Nine Men’s Morris",
+            "Pfeilwurf",
+            "Schach (abstrakter Wettbewerb)",
+            "Schiffe versenken / Battleship (Variante noch offen)",
+            "Streichholzspiel / Matchstick Game (Variante noch offen)",
+            "Wettessen",
+            "Wetttrinken"
+          ]
+        }
       ]
     },
     "plans2": {
-      "title": "geplante Funktionen (9)",
+      "title": "geplante Funktionen (16)",
       "paragraphs": [
-        "Die gemeinsame Kartenbasis, Mau-Mau, Schwimmen / Knack und Durak sind stabil umgesetzt. Die folgenden größeren Erweiterungen sind noch geplant."
+        "Größere noch nicht umgesetzte Vorhaben; keine automatische Umsetzungszusage. Die Kartenbasis ist stabil, Schwarzer Peter und Tic-Tac-Toe sind als Betas verfügbar."
       ],
       "items": [
-        "Weitere Tags und Filter, etwa nach Spieldauer und Einsätzen.",
-        "Eigene Spielnamen und ein durch den SL anpassbares Spieleangebot; Titel auch in Anleitungen und Chat übernehmen.",
-        "Kartenanimationen für Mischen, Austeilen, Ziehen, Aufdecken und Ablegen.",
-        "Kniffel-Serien mit addierten Ergebnissen.",
-        "Beschleunigte NPC-Wettpartien.",
-        "Grafisch wachsende Münzstapel auf den Drachenhorten.",
-        "Optionale Accountant-Anbindung für Buchungen über eine versionierte API und Einbettung in die RPG Management Suite; alle Module bleiben unabhängig.",
-        "Lügenwürfel: pokerartige Setzphase alle fünf Runden mit Grundeinsatz, Mitgehen, Erhöhen, Aussteigen und späterer Poker-Topfaufteilung. Noch nicht umgesetzt.",
-        "RP-Schummeln nach SL-Freigabe: spielbezogene Karten-/Würfelwirkung, Arkane Kunde oder Fingerfertigkeit gegen SL-DC, danach immer Heimlichkeit; Bemerken entscheidet die SL je Spieler. Noch nicht umgesetzt."
+        {
+          "title": "Spielauswahl und Anpassung",
+          "items": [
+            "Zusätzliche Tags und Filter nach Spieldauer und Einsätzen",
+            "Eigene Spielnamen und durch die SL anpassbares Spieleangebot",
+            "Kategorie Wettkämpfe aktivieren; Icon ist bereits vorbereitet"
+          ]
+        },
+        {
+          "title": "Karten und Darstellung",
+          "items": [
+            "Kartenanimationen beim Mischen, Austeilen, Ziehen, Aufdecken und Ablegen",
+            "Grafisch wachsende Münzstapel"
+          ]
+        },
+        {
+          "title": "Spielabläufe und Serien",
+          "items": [
+            "Serien mit addierten Ergebnissen",
+            "Beschleunigte NPC-Wettpartien",
+            "Zusätzliche pokerartige Setzphasen"
+          ]
+        },
+        {
+          "title": "Schummeln und Rollenspiel",
+          "items": [
+            "Schummelversuche nach SL-Freigabe",
+            "Spielbezogene Karten- und Würfelmanipulation",
+            "Ausführungs- und Heimlichkeitsproben",
+            "SL-Entscheidung über das Bemerken",
+            "Göttliche Hand bei Brettspielen; konkrete Wirkung noch offen"
+          ]
+        },
+        {
+          "title": "Anbindungen",
+          "items": [
+            "Optionale Accountant-Anbindung",
+            "Optionale Einbettung in die RPG Management Suite"
+          ]
+        },
+        {
+          "title": "Sprache und Hilfe",
+          "items": [
+            "Geprüfte englische Anleitungen"
+          ]
+        }
       ]
     },
     "functions": {
-      "title": "aktuelle Funktionen (33)",
+      "title": "aktuelle Funktionen (37)",
       "paragraphs": [
-        "Bereits umgesetzte Kernfunktionen. Die Verfügbarkeit einzelner Aktionen richtet sich nach Spielregeln, Teilnahme und SL-Freigabe."
+        "Bereits umgesetzte Kernfunktionen. Verfügbarkeit und erlaubte Aktionen richten sich nach Spielregeln, Teilnahme und SL-Freigabe."
       ],
       "items": [
-        "Kategorien und deutsch-englische Spielsuche",
-        "Persönliche Favoriten",
-        "Freiwilliger Lobbybeitritt",
-        "SL-Moderation, Pause und Abbruch",
-        "Automatische und manuell steuerbare NPCs",
-        "Wählbarer Startspieler",
-        "Interne Spieltoken mit Zuteilung, Einsätzen und Bankbudget",
-        "Ausgangswetten mit automatischer Gewinnverteilung",
-        "Verschlüsselte Spielstände und Wiederaufnahme",
-        "Folgerunden mit übernehmbaren Tokenbeständen",
-        "Optionale 3D-Würfel mit privaten und verdeckten Ergebnissen",
-        "Direkte Auswahl eigener liegender Würfel",
-        "Persönlicher Markierungsmodus Behalten oder Neuwurf",
-        "Sichtbare Würfelsummen mit geschützten verdeckten Anteilen",
-        "Schwebende regelgerechte Zugaktionen",
-        "Private SL-Glücks- und Pechprofile der Göttlichen Hand",
-        "Integrierte Reiteransicht und optionale Fenster",
-        "Auswählbare externe Kartendecks",
-        "Private Kartenhände und automatisch verwaltete Partiestapel",
-        "Anklickbare Handkarten",
-        "Scrollbare Kartenleiste",
-        "Sichtbare Ergebnisse am Tisch",
-        "Optionale Regelvarianten",
-        "Konfigurierbare Tippscheine und manuelle Ziehung",
-        "Übergabe eines ausgewählten Gegenstandspreises",
-        "Anleitungen, Regelquellen und Ergebnisnachrichten",
-        "Geprüfte deutsche und englische Oberfläche",
-        "Gemeinsame Partien mit echten Spielern am virtuellen Spieltisch",
-        "Sprachabhängige Kartenordner und automatische Bereinigung temporärer Spielobjekte",
-        "Wiederverwendbare Teildecks",
-        "Farbwahl-Popup und hervorgehobene Zuganzeige",
-        "Zentrales Brettspielfeld mit direkter Spaltenwahl",
-        "Zentrales Brettspielfeld mit sichtbarer Gewinnmarkierung"
+        {
+          "title": "Spielauswahl und Zugang",
+          "items": [
+            "Alphabetische Spielauswahl mit Kategorie-Icons und deutsch-englischer Suche",
+            "Persönliche Favoriten",
+            "Freiwilliger Lobbybeitritt"
+          ]
+        },
+        {
+          "title": "Spielleitung und Teilnehmer",
+          "items": [
+            "SL-Moderation, Pause und Abbruch",
+            "Automatische und manuell steuerbare NPCs",
+            "Wählbarer Startspieler",
+            "Gemeinsame Partien mit echten Mitspielern"
+          ]
+        },
+        {
+          "title": "Einsätze und Gewinne",
+          "items": [
+            "Interne Spieltoken mit Einsatzmodellen und Bankbudget",
+            "Ausgangswetten mit automatischer Gewinnverteilung",
+            "Übergabe ausgewählter Gegenstandspreise"
+          ]
+        },
+        {
+          "title": "Würfel und Einfluss",
+          "items": [
+            "Optionale 3D-Würfel",
+            "Private und verdeckte Würfelergebnisse",
+            "Direkte Auswahl eigener liegender Würfel",
+            "Markierungsmodus Behalten oder Neuwurf",
+            "Sichtbare Würfelsummen mit geschützten verdeckten Anteilen",
+            "Private Glücks- und Pechprofile der Göttlichen Hand",
+            "Beeinflussung von Kartenverteilung und Nachziehen; offene Karten bleiben geschützt"
+          ]
+        },
+        {
+          "title": "Kartenverwaltung",
+          "items": [
+            "Auswählbare externe Kartendecks",
+            "Wiederverwendbare Teildecks",
+            "Private Kartenhände",
+            "Anklickbare Handkarten",
+            "Scrollbare Kartenleiste",
+            "Kartenordner und automatische Bereinigung temporärer Spielobjekte",
+            "Wählbare Kartenteilmengen und Paargruppen"
+          ]
+        },
+        {
+          "title": "Oberfläche und Bedienung",
+          "items": [
+            "Integrierte Reiteransicht und optionale Fenster",
+            "Schwebende Zugaktionen",
+            "Sichtbare Ergebnisse am Tisch",
+            "Zentrales Brettspielfeld mit Gewinnmarkierung",
+            "Farbwahl-Popup und Zuganzeige"
+          ]
+        },
+        {
+          "title": "Spielstände und Regeln",
+          "items": [
+            "Verschlüsselte Spielstände und Wiederaufnahme",
+            "Folgerunden mit übernehmbaren Tokenbeständen",
+            "Optionale Regelvarianten",
+            "Konfigurierbare Tippscheine und manuelle Ziehung"
+          ]
+        },
+        {
+          "title": "Sprache und Hilfe",
+          "items": [
+            "Deutsche und englische Oberfläche",
+            "Deutsche Anleitungen",
+            "Regelquellen und Hausvarianten",
+            "Ergebnisnachrichten im Chat"
+          ]
+        }
       ]
     },
     "settings": {
       "title": "Einstellungen in Foundry",
       "paragraphs": [
-        "Nach Installation alle Clients vollständig neu laden. Benötigt wird mindestens Foundry 14.369. In den Moduleinstellungen Deutsch oder Englisch wählen; Standard ist Englisch. Beide Oberflächen sind geprüft. Anleitungen sind vorerst ausschließlich auf Deutsch verfügbar; englische Anleitungen folgen erst nach menschlicher Prüfung.",
-        "19 Spiele sind stabil, darunter Mau-Mau, Schwimmen / Knack und Spiel der Könige. Für Der Glückstag und Vier gewinnt den Beta-Test einschalten.",
-        "Die integrierte Reiteransicht ist Standard. Je Benutzer bleiben klassische Fenster wählbar; eine zuvor ausdrücklich gespeicherte Fensterwahl bleibt erhalten. Das TavernGames-Symbol öffnet die berechtigte Lobby bereits vor dem Beitritt. Spielaktionen erfordern weiterhin Teilnahme und passende Berechtigung.",
-        "Der TavernGames-Reiter und die Moderation sind für die SL. Spiel wählen, Regeln einstellen, Lobby vorbereiten und den Beitrittsbutton freigeben. Vor dem Start gegebenenfalls Startspieler und NPC-Steuerung wählen.",
-        "Für Kartenpartien unter Cards / Card Decks ein geeignetes externes Deck erstellen oder importieren und in der Moderation wählen. Es gibt kein mitgeliefertes Standard-Kartenset mehr. Vorhandene Dragon-Cards-Vorlagen werden unterstützt. Mau-Mau und Schwimmen benötigen 7 bis Ass, Durak Sechs bis Ass, jeweils in vier Farben ohne Joker. Ohne geeignetes Deck kann keine Kartenlobby erstellt werden.",
-        "Kartenhände bleiben privat. Die nativen Spielstapel werden automatisch erzeugt und beim endgültigen Beenden aufgeräumt; Vorlagen werden nicht verändert. Bei beschädigten Spielbeständen kann die SL Kartenbestände wiederherstellen verwenden.",
-        "In der Moderation Einsätze & Spieltoken öffnen. Standard ist Ohne Einsatz. Zuteilung, Grundeinsatz und passende Banklimits festlegen. Die Standardvorlage sind 100 Token je Teilnehmer. Freie Bestände können durch die SL angepasst werden; es erfolgen keine direkten Charakter-Geldbuchungen. Gegenstandspreise im Straßenlotto bleiben separat möglich.",
-        "Ausgangswetten verwenden denselben freien Tokenbestand. Die SL öffnet die Annahme vor dem Spiel und schließt sie vor dem Start. Am Ende Token ausdrücklich übernehmen oder verwerfen.",
-        "Dice So Nice ist optional und separat einzuschalten. Eigene liegende Würfel können direkt bedient werden; den persönlichen Markierungsmodus Behalten oder Neuwurf bewusst wählen. Verdeckte Anteile bleiben in Summen unbekannt.",
-        "Mau-Mau: freiwilliges Ziehen und Ansagestrafen sind optionale Regeln, standardmäßig aus. Handkarten sind bei großen Händen horizontal scrollbar. Das Einklappen der linken Lobby lässt den Kartentisch spielbar; Spielwechsel, Schließen oder Fensteransicht beenden die große Darstellung.",
-        "Schwimmen: drei Leben plus Schwimmen, 30½ und Knack; Blitz ist optional und standardmäßig an. Bei genau 7, 8 und 9 auf dem Tisch kann nur der aktive Spieler neue Tischkarten ohne Zugverbrauch anfordern. Passen startet die angekündigten letzten Züge.",
-        "Durak: zwei bis sechs Teilnehmer. Schutzzeit vor der Partie festlegen, Standard fünf Sekunden und einstellbar von 0 bis 60. Trumpf vorzeigen reicht standardmäßig zum Weitergeben; Ausspielen und zusätzliches Nachwerfen beim Aufnehmen sind optionale Varianten. Für die Abwehr Handkarte und Angriff wählen oder Abwehren verwenden. NPCs warten 3,5 Sekunden zwischen Aktionen.",
-        "Göttliche Hand ist nur für die SL sichtbar. Globale Profile und Spielausnahmen gezielt einstellen; der globale Ausschalter entfernt alle Glücks-/Pechprofile. Der bekannte Einfluss bei Die böse Dreizehn ist weiterhin ein offener Korrekturpunkt.",
-        "Vier gewinnt (Beta): Beta-Test einschalten, zwei echte Teilnehmer oder NPCs wählen und eine Partie oder Serie mit bis zu 100 Runden vorbereiten. Der Startspieler wechselt zwischen den Runden; optionalen Token-Einsatz einmal für die Serie festlegen.",
-        "Durak: Rangweitergabe durch Ausspielen einer gleichwertigen Karte ist optional und standardmäßig aus. Die bisherige Trumpf-Vorzeigeregel bleibt verfügbar; Weitergabesperren und Kartenkapazität des nächsten Verteidigers gelten weiterhin.",
-        "Mau-Mau: 7 auf 7 stapeln, Zugende nach dem Ziehen und Weiterspielen bis zum letzten Spieler sind getrennte optionale Regeln und standardmäßig aus. Vor einer neuen Partie in der Moderation wählen. Beim Buben die gewünschte Farbe im Popup bestätigen; Abbrechen spielt keine Karte aus.",
-        "Die automatisch erstellten Kartenordner enthalten wiederverwendbare Teildecks sowie temporäre Hände und Ablagen. Teildecks bleiben erhalten. Beim endgültigen Beenden werden temporäre Bestände nach Rückruf der Karten bereinigt; externe Vorlagen bleiben unverändert."
+        "Zuerst die allgemeinen Moduleinstellungen wählen; danach Regeln und Teilnehmer in der Moderation des jeweiligen Spiels festlegen. Nicht jedes Spiel bietet alle Optionen."
       ],
-      "items": []
+      "items": [
+        {
+          "title": "Allgemeine Einstellungen",
+          "items": [
+            "Sprache: Deutsch oder Englisch wählen. Beide Oberflächen sind verfügbar; Anleitungen sind vorerst auf Deutsch enthalten.",
+            "Ansicht: Reiteransicht ist Standard, klassische Fenster bleiben je Benutzer wählbar.",
+            "Beta-Test: Schwarzer Peter und Tic-Tac-Toe einschalten. Die übrigen 21 Spiele sind stabil und ohne Beta-Schalter verfügbar.",
+            "Dice So Nice: optionale 3D-Würfel aktivieren. Ohne das Zusatzmodul bleiben die Spiele bedienbar.",
+            "Markierungsmodus: persönlich wählen, ob markierte eigene Würfel behalten oder erneut gewürfelt werden.",
+            "Kartendecks: geeignete externe Vorlagen unter Cards / Card Decks anlegen oder importieren. Es ist kein Standard-Kartenset enthalten; vorhandene Vorlagen bleiben unverändert.",
+            "Göttliche Hand: nur die SL stellt globale Glücks-/Pechprofile und Spielausnahmen ein. Unterstützt Würfel sowie Austeilen und Nachziehen in Kartenspielen; bei 0 Prozent bleibt der Zufall unverändert. Keine Siegsgarantie; Brettspiele werden noch nicht beeinflusst."
+          ]
+        },
+        {
+          "title": "Einstellungen pro Spiel",
+          "items": [
+            "Spielmodus und Regeln: angebotene Varianten vor einer neuen Partie wählen; die Wirkung steht in der jeweiligen deutschen Anleitung.",
+            "Teilnehmer und NPCs: Teilnehmerliste vorbereiten, Beitrittsbutton freigeben und NPCs automatisch oder einzeln manuell steuern.",
+            "Startspieler: je nach Spiel Regelvorgabe, bestimmten Teilnehmer oder Zufall wählen.",
+            "Einsätze und Spieltoken: Ohne Einsatz oder gewünschtes Einsatzmodell wählen, freie Tokenbestände und gegebenenfalls Bankbudget festlegen. Standardvorlage 100 Token je Teilnehmer; keine direkten Charakter-Geldbuchungen.",
+            "Wetten: Annahme vor Spielbeginn öffnen und rechtzeitig schließen. Gewinne verwenden denselben Tokenbestand; nach Partieende Bestände übernehmen oder verwerfen.",
+            "Runden und Ziel: je nach Spiel feste Rundenzahl, Serie oder Zielpunktzahl einstellen. Die Wahl bestimmt das reguläre Partieende.",
+            "Kartenset: in der Moderation ein passendes Deck wählen. Mau-Mau und Schwimmen verwenden 7 bis Ass, Durak Sechs bis Ass, jeweils vier Farben ohne Joker.",
+            "Mau-Mau: freiwilliges Ziehen, Ansagestrafen, 7 auf 7, Zugende nach Ziehen und Weiterspielen sind getrennte Optionen, standardmäßig aus. Optional ist die 9 der Allesleger; dann erfordert der Bube die passende Farbe und behält seine Farbwahl.",
+            "Schwimmen: drei Leben plus Schwimmen; 30½ und Knack, Blitz optional standardmäßig an. Bei genau 7/8/9 auf dem Tisch darf der aktive Spieler kostenlos erneuern; vollständiges Schieben aller aktiven Teilnehmer erneuert nur die Tischkarten.",
+            "Durak: Schutzzeit 0–60 Sekunden, Standard fünf. Weitergabe durch Trumpfvorzeigen ist vorgesehen; Trumpf ausspielen, Rangweitergabe und verlängertes Nachwerfen beim Aufnehmen sind optionale Regeln. Rangweitergabe ist standardmäßig aus.",
+            "Der Glückstag: Offen-Checkboxen und Erhöhen sind standardmäßig aus. Bei aktiviertem Erhöhen SL-Limits festlegen; die Bank hat keinen eigenen Wurf.",
+            "Vier gewinnt und Tic-Tac-Toe: zwei echte Teilnehmer oder NPCs wählen; eine Partie oder Serie von 1–100 Runden mit wechselndem Startspieler und optionalem gemeinsamen Token-Einsatz.",
+            "Schwarzer Peter (Beta): Deck, ungepaarte Karte, erlaubte Karten und Paargruppen wählen. Standardmäßig beendet das erste leere Blatt die Runde; optional bis zur letzten ungepaarten Karte weiterspielen.",
+            "Bei übrigen Spielen die angebotenen Hausvarianten, Einsätze und gegebenenfalls Bank-, Punkte- oder Serienregeln in der Moderation festlegen; die Anleitung beschreibt die jeweilige Wirkung."
+          ]
+        }
+      ]
     },
     "sources": {
-      "title": "Regelquellen (43)",
+      "title": "Regelquellen (47)",
       "paragraphs": [
         "Hier findet ihr alle genutzten Regelquellen. Quellen für noch nicht umgesetzte Spiele sind ausdrücklich als geplante Regelreferenzen gekennzeichnet."
       ],
       "items": [
-        "Schockfreunde (Regelquelle Schocken) – https://schockfreunde.de/schockregeln",
-        "PlayMonster (Regelquelle Farkle) – https://playmonster.com/wp-content/uploads/2018/06/Farkle-Rules.pdf",
-        "Awiana (geplante Regelvorlagen) – https://awiana.fandom.com/de/wiki/Liste_an_Kneipen_spielen",
-        "Paul Cossmer / DnDDiary (PDF-Regelvorlagen) – https://keeponrolling.de/",
-        "Bicycle Cards (Regelquelle Schiff; Blackjack noch geplant) – https://bicyclecards.com/how-to-play/ship-captain-and-crew",
-        "moses. Verlag (Regelreferenzen 17+4 und Schwimmen) – https://www.moses-verlag.de/media/20/99/c5/1599117493/81716_Karten-und_Wuerfelspiele_fuer_unterwegs_Regeln_deutsch_web.pdf",
-        "John McLeod / Pagat (Regelreferenz Schwimmen) – https://www.pagat.com/commerce/schwimmen.html",
-        "TS Spielkarten (ergänzende Regelreferenz Schwimmen) – https://ts-spielkarten.de/spielregeln-kartenspiele/schwimmen-spielregeln/",
-        "Schmidt Spiele (Regelquelle Kniffel) – https://www.schmidtspiele.de/files/Produkte/4/49203%20-%20Kniffel%C2%AE/49203_Kniffel_DE.pdf",
-        "TZawalich (Regelquelle Lügenwürfel und Drachenhort) – https://github.com/TZawalich/tavern-games-current",
-        "Awiana – Aalstechen (Regelquelle): https://awiana.fandom.com/de/wiki/Aalstechen",
-        "Awiana – Elfenlauf (abweichende Referenz zur Würfel-Hausvariante 17 und 4): https://awiana.fandom.com/de/wiki/Elfenlauf",
-        "Awiana – Koboldpoker (Vorlage für Würfelpoker): https://awiana.fandom.com/de/wiki/Koboldpoker",
-        "Awiana – Piratenzunge (gespeicherte ergänzende Regelreferenz): https://awiana.fandom.com/de/wiki/Piratenzunge",
-        "Awiana – Schlangenfangen (Regelreferenz für Meiern): https://awiana.fandom.com/de/wiki/Schlangenfangen",
-        "Bicycle Cards (ergänzende/geplante Regelreferenz) – https://bicyclecards.com/how-to-play/blackjack",
-        "Hasbro Classic 00950 (ergänzende/geplante Regelreferenz) – https://instructions.hasbro.com/api/download/00950_en-ca_yahtzee-classic.pdf",
-        "Hasbro 40958 (ergänzende/geplante Regelreferenz) – https://www.hasbro.com/common/instruct/40958.pdf",
-        "Dice-Play – Chō-Han (verwendete ergänzende Regelreferenz): https://www.dice-play.com/Games/ChoHanBakuchi.htm",
-        "NetExl – Chō-Han (verwendete ergänzende Regelreferenz): https://www.netexl.com/howtoplay/cho-han/",
-        "Wikipedia – Chō-Han (geplante Regelreferenz): https://en.wikipedia.org/wiki/Ch%C5%8D-han",
-        "Wizard of Odds – Chō-Han (geplante Regelreferenz): https://wizardofodds.com/games/cho-han/",
-        "D&D Beyond – Basic Rules 2024, allgemeine Regel- und Währungsreferenz: https://www.dndbeyond.com/sources/dnd/br-2024/playing-the-game",
-        "D&D Beyond – Charaktererschaffung, Währungsreferenz: https://www.dndbeyond.com/sources/dnd/br-2024/creating-a-character",
-        "Paul Cossmer – Tavernen und Glücksspiele, bereitgestellte PDF-Regelvorlagen für geplante Spiele; Lektorat: Georg Haubner. Kontext DnDDiary: https://keeponrolling.de/",
-        "Chō-Han: Daniels bereitgestellte Regelsammlung, VermittlervarianteB. Traditionelle Grundlage: https://www.dice-play.com/Games/ChoHanBakuchi.htm und https://www.netexl.com/howtoplay/cho-han/",
-        "DSkV / ISPA – Internationale Skatordnung, November 2022 (geplante Regelreferenz) – https://dskv.de/app/uploads/sites/43/2022/11/ISkO-2022.pdf",
-        "Deutscher Doppelkopf-Verband – TSR, 21.02.2026 (geplante Regelreferenz) – https://doko-verband.de/shared-files/11534/?Turnierspielregeln-Stand-2026-02-21.pdf=",
-        "ASS Altenburger – Binokel, Zweierfassung (geplante Regelreferenz) – https://www.spielkarten.com/wp-content/uploads/2019/07/0_Binokel.pdf",
-        "Pagat – Binokel, regionale Dreierfassung (geplante Regelreferenz) – https://www.pagat.com/de/marriage/binokel.html",
-        "Stayandplay – Gaigel-Kurzanleitung (geplante Regelreferenz) – https://stayandplay.cards/wp-content/uploads/2020/03/DE-Gaigel-1.pdf",
-        "Pagat – Gaigel, regionale Partnerschaftsfassung (geplante Regelreferenz) – https://www.pagat.com/marriage/gaigel.html",
-        "Kniffel Extreme: offizielle Schmidt-Spiele-Anleitung (5 W6 + W10 0–9, 22 Felder, drei Chips).",
-        "17 und 4 (Würfel-Hausvariante): Leif und Daniels Festlegungen; Awiana als abweichende Elfenlauf-Regelreferenz.",
-        "Meiern / Schlangenfangen: Awiana (https://awiana.fandom.com/de/wiki/Schlangenfangen?oldid=6670), bereitgestellte D&D-Minispiele v1.0 vom 15.10.2026, bestätigte Hausregeln von Daniel Brune.",
-        "Aalstechen: Awiana (https://awiana.fandom.com/de/wiki/Aalstechen?oldid=5758), sichtbare Fünferblock-/Setzvariante Daniel Brune. All-in-/Nebentopf-Referenz: PokerStars (https://www.pokerstars.com/de/help/articles/poker-rules-master/215804/).",
-        "Daniel Brune – bereitgestellte Klippklapp-Regelvorlage vom 13.10.2026 und bestätigte Bluff-, Zahlungs- und Startspielerregeln; neue Brettspielnamen zunächst nur vorgemerkt.",
-        "O’Donnell – Die böse Dreizehn: https://odonnell.de/blogs/news/die-besten-wurfelspiele-fur-drei-wurfel",
-        "Mau-Mau: Daniels D&D-Minispiele-Sammlung vom 15.10.2026, bestätigte Randregeln und Spielewiki – https://spielewiki.org/wiki/Mau_Mau",
-        "Dragon Cards – Card Deck: Daniel Brune, optionale KI-generierte bzw. KI-basierte Dracima-Gestaltung; drei Stile, Kartenmetadaten-Schema und Lese-API v1. Kein Bestandteil des Hauptmoduls.",
-        "Spiel der Könige und Der Glückstag: Paul Cossmer, Tavernen und Glücksspiele, Seite 4; Ablauf- und Setzergänzungen nach Daniel Brune.",
-        "Durak: Daniels bereitgestellte D&D-Minispiele – Regel- und Spielesammlung, Version 1.0 vom 15.10.2026; bestätigte Weitergabe-, Schutzzeit-, Teilnehmer- und Tokenregeln nach Daniel Brune.",
-        "Vier gewinnt: klassische Vier-in-einer-Reihe-Regeln auf 7×6 Feldern; Serien und Spieltoken als Modulergänzung."
+        {
+          "title": "17 und 4",
+          "items": [
+            "Awiana – Elfenlauf (abweichende Referenz zur Würfel-Hausvariante 17 und 4): https://awiana.fandom.com/de/wiki/Elfenlauf",
+            "17 und 4 (Würfel-Hausvariante): Leif und Daniels Festlegungen; Awiana als abweichende Elfenlauf-Regelreferenz."
+          ]
+        },
+        {
+          "title": "17+4 (Kartenspiel, geplant)",
+          "items": [
+            "moses. Verlag (Regelreferenzen 17+4 und Schwimmen) – https://www.moses-verlag.de/media/20/99/c5/1599117493/81716_Karten-und_Wuerfelspiele_fuer_unterwegs_Regeln_deutsch_web.pdf"
+          ]
+        },
+        {
+          "title": "Aalstechen",
+          "items": [
+            "Awiana – Aalstechen (Regelquelle): https://awiana.fandom.com/de/wiki/Aalstechen",
+            "Aalstechen: Awiana (https://awiana.fandom.com/de/wiki/Aalstechen?oldid=5758), sichtbare Fünferblock-/Setzvariante Daniel Brune. All-in-/Nebentopf-Referenz: PokerStars (https://www.pokerstars.com/de/help/articles/poker-rules-master/215804/)."
+          ]
+        },
+        {
+          "title": "Binokel (geplant)",
+          "items": [
+            "ASS Altenburger – Binokel, Zweierfassung (geplante Regelreferenz) – https://www.spielkarten.com/wp-content/uploads/2019/07/0_Binokel.pdf",
+            "Pagat – Binokel, regionale Dreierfassung (geplante Regelreferenz) – https://www.pagat.com/de/marriage/binokel.html"
+          ]
+        },
+        {
+          "title": "Blackjack (geplant)",
+          "items": [
+            "Bicycle Cards (ergänzende/geplante Regelreferenz) – https://bicyclecards.com/how-to-play/blackjack"
+          ]
+        },
+        {
+          "title": "Chō-Han",
+          "items": [
+            "Dice-Play – Chō-Han (verwendete ergänzende Regelreferenz): https://www.dice-play.com/Games/ChoHanBakuchi.htm",
+            "NetExl – Chō-Han (verwendete ergänzende Regelreferenz): https://www.netexl.com/howtoplay/cho-han/",
+            "Wikipedia – Chō-Han (geplante Regelreferenz): https://en.wikipedia.org/wiki/Ch%C5%8D-han",
+            "Wizard of Odds – Chō-Han (geplante Regelreferenz): https://wizardofodds.com/games/cho-han/",
+            "Chō-Han: Daniels bereitgestellte Regelsammlung, VermittlervarianteB. Traditionelle Grundlage: https://www.dice-play.com/Games/ChoHanBakuchi.htm und https://www.netexl.com/howtoplay/cho-han/"
+          ]
+        },
+        {
+          "title": "Der Glückstag",
+          "items": [
+            "Spiel der Könige und Der Glückstag: Paul Cossmer, Tavernen und Glücksspiele, Seite 4; Ablauf- und Setzergänzungen nach Daniel Brune."
+          ]
+        },
+        {
+          "title": "Die böse Dreizehn",
+          "items": [
+            "O’Donnell – Die böse Dreizehn: https://odonnell.de/blogs/news/die-besten-wurfelspiele-fur-drei-wurfel"
+          ]
+        },
+        {
+          "title": "Doppelkopf (geplant)",
+          "items": [
+            "Deutscher Doppelkopf-Verband – TSR, 21.02.2026 (geplante Regelreferenz) – https://doko-verband.de/shared-files/11534/?Turnierspielregeln-Stand-2026-02-21.pdf="
+          ]
+        },
+        {
+          "title": "Drachenhort",
+          "items": [
+            "TZawalich (Regelquelle Lügenwürfel und Drachenhort) – https://github.com/TZawalich/tavern-games-current"
+          ]
+        },
+        {
+          "title": "Durak",
+          "items": [
+            "Durak: Daniels bereitgestellte D&D-Minispiele – Regel- und Spielesammlung, Version 1.0 vom 15.10.2026; bestätigte Weitergabe-, Schutzzeit-, Teilnehmer- und Tokenregeln nach Daniel Brune."
+          ]
+        },
+        {
+          "title": "Farkle",
+          "items": [
+            "PlayMonster (Regelquelle Farkle) – https://playmonster.com/wp-content/uploads/2018/06/Farkle-Rules.pdf"
+          ]
+        },
+        {
+          "title": "Gaigel (geplant)",
+          "items": [
+            "Stayandplay – Gaigel-Kurzanleitung (geplante Regelreferenz) – https://stayandplay.cards/wp-content/uploads/2020/03/DE-Gaigel-1.pdf",
+            "Pagat – Gaigel, regionale Partnerschaftsfassung (geplante Regelreferenz) – https://www.pagat.com/marriage/gaigel.html"
+          ]
+        },
+        {
+          "title": "Klippklapp",
+          "items": [
+            "Daniel Brune – bereitgestellte Klippklapp-Regelvorlage vom 13.10.2026 und bestätigte Bluff-, Zahlungs- und Startspielerregeln; neue Brettspielnamen zunächst nur vorgemerkt."
+          ]
+        },
+        {
+          "title": "Kniffel",
+          "items": [
+            "Schmidt Spiele (Regelquelle Kniffel) – https://www.schmidtspiele.de/files/Produkte/4/49203%20-%20Kniffel%C2%AE/49203_Kniffel_DE.pdf",
+            "Hasbro Classic 00950 (ergänzende/geplante Regelreferenz) – https://instructions.hasbro.com/api/download/00950_en-ca_yahtzee-classic.pdf",
+            "Hasbro 40958 (ergänzende/geplante Regelreferenz) – https://www.hasbro.com/common/instruct/40958.pdf"
+          ]
+        },
+        {
+          "title": "Kniffel Extreme",
+          "items": [
+            "Kniffel Extreme: offizielle Schmidt-Spiele-Anleitung (5 W6 + W10 0–9, 22 Felder, drei Chips)."
+          ]
+        },
+        {
+          "title": "Lügenwürfel",
+          "items": [
+            "TZawalich (Regelquelle Lügenwürfel und Drachenhort) – https://github.com/TZawalich/tavern-games-current"
+          ]
+        },
+        {
+          "title": "Mau-Mau",
+          "items": [
+            "Mau-Mau: Daniels D&D-Minispiele-Sammlung vom 15.10.2026, bestätigte Randregeln und Spielewiki – https://spielewiki.org/wiki/Mau_Mau"
+          ]
+        },
+        {
+          "title": "Meiern",
+          "items": [
+            "Awiana – Schlangenfangen (Regelreferenz für Meiern): https://awiana.fandom.com/de/wiki/Schlangenfangen",
+            "Meiern / Schlangenfangen: Awiana (https://awiana.fandom.com/de/wiki/Schlangenfangen?oldid=6670), bereitgestellte D&D-Minispiele v1.0 vom 15.10.2026, bestätigte Hausregeln von Daniel Brune."
+          ]
+        },
+        {
+          "title": "Schiff–Kapitän–Mannschaft",
+          "items": [
+            "Bicycle Cards (Regelquelle Schiff; Blackjack noch geplant) – https://bicyclecards.com/how-to-play/ship-captain-and-crew"
+          ]
+        },
+        {
+          "title": "Schocken",
+          "items": [
+            "Schockfreunde (Regelquelle Schocken) – https://schockfreunde.de/schockregeln"
+          ]
+        },
+        {
+          "title": "Schwarzer Peter",
+          "items": [
+            "ASS Altenburger (Regelquelle Schwarzer Peter) – https://www.spielkarten.com/spielregeln/schwarzer-peter/"
+          ]
+        },
+        {
+          "title": "Schwimmen / Knack",
+          "items": [
+            "moses. Verlag (Regelreferenzen 17+4 und Schwimmen) – https://www.moses-verlag.de/media/20/99/c5/1599117493/81716_Karten-und_Wuerfelspiele_fuer_unterwegs_Regeln_deutsch_web.pdf",
+            "John McLeod / Pagat (Regelreferenz Schwimmen) – https://www.pagat.com/commerce/schwimmen.html",
+            "TS Spielkarten (ergänzende Regelreferenz Schwimmen) – https://ts-spielkarten.de/spielregeln-kartenspiele/schwimmen-spielregeln/"
+          ]
+        },
+        {
+          "title": "Skat (geplant)",
+          "items": [
+            "DSkV / ISPA – Internationale Skatordnung, November 2022 (geplante Regelreferenz) – https://dskv.de/app/uploads/sites/43/2022/11/ISkO-2022.pdf"
+          ]
+        },
+        {
+          "title": "Spiel der Könige",
+          "items": [
+            "Spiel der Könige und Der Glückstag: Paul Cossmer, Tavernen und Glücksspiele, Seite 4; Ablauf- und Setzergänzungen nach Daniel Brune."
+          ]
+        },
+        {
+          "title": "Spielübergreifend",
+          "items": [
+            "Awiana (geplante Regelvorlagen) – https://awiana.fandom.com/de/wiki/Liste_an_Kneipen_spielen",
+            "Paul Cossmer / DnDDiary (PDF-Regelvorlagen) – https://keeponrolling.de/",
+            "Awiana – Piratenzunge (gespeicherte ergänzende Regelreferenz): https://awiana.fandom.com/de/wiki/Piratenzunge",
+            "D&D Beyond – Basic Rules 2024, allgemeine Regel- und Währungsreferenz: https://www.dndbeyond.com/sources/dnd/br-2024/playing-the-game",
+            "D&D Beyond – Charaktererschaffung, Währungsreferenz: https://www.dndbeyond.com/sources/dnd/br-2024/creating-a-character",
+            "Paul Cossmer – Tavernen und Glücksspiele, bereitgestellte PDF-Regelvorlagen für geplante Spiele; Lektorat: Georg Haubner. Kontext DnDDiary: https://keeponrolling.de/",
+            "Dragon Cards – Card Deck: Daniel Brune, optionale KI-generierte bzw. KI-basierte Dracima-Gestaltung; drei Stile, Kartenmetadaten-Schema und Lese-API v1. Kein Bestandteil des Hauptmoduls."
+          ]
+        },
+        {
+          "title": "Vier gewinnt",
+          "items": [
+            "Vier gewinnt: klassische Vier-in-einer-Reihe-Regeln auf 7×6 Feldern; Serien und Spieltoken als Modulergänzung."
+          ]
+        },
+        {
+          "title": "Würfelpoker",
+          "items": [
+            "Awiana – Koboldpoker (Vorlage für Würfelpoker): https://awiana.fandom.com/de/wiki/Koboldpoker"
+          ]
+        }
       ]
     },
     "sources1": {
@@ -219,49 +503,207 @@
         "Alle angewandeten Hausregeln von uns. Die folgenden Varianten und Ergänzungen werden in Taverngames nach den gemeinsamen Vorgaben von Daniel und Philipp angeboten; optionale Regeln sind entsprechend gekennzeichnet. Die Zusammenstellung behauptet keine Erfindung der zugrunde liegenden Standardspiele."
       ],
       "items": [
-        "Farkle, optional: kleine Straße aus fünf verschiedenen aufeinanderfolgenden Zahlen in einem Wurf zählt 750 Punkte.",
-        "Farkle, optional: drei/vier/fünf/sechs Einsen in einem Wurf zählen 1000/2000/3000/4000 Punkte.",
-        "Farkle, optional: sofortiges Ende beim Sichern der Zielpunktzahl statt einer Schlussrunde.",
-        "Farkle: Kurzspiel mit genau einem Zug je Teilnehmer oder feste Rundenzahl mit Gesamtpunkten; im Zielmodus bevorzugt ein gleicher Startwurf die frühere Position.",
-        "Schweinchen, optional: sofortiges Ende beim Sichern der Zielpunktzahl; ohne diese Option bleibt die Schlussrunde.",
-        "Schweinchen: volle nominale Prämie je gleichplatziertem Teilnehmer; Finanzierung wahlweise durch Tavernenbank oder sichtbare Neuverteilung des vorhandenen Topfes.",
-        "Schiff–Kapitän–Mannschaft: Einzelspiel sowie feste oder unbegrenzte Serien mit addierten Punkten und regulärem Abschluss nach der laufenden Runde.",
-        "Straßenlotto: durch die Spielleitung wählbare Zahlenzahl je Tippschein, Standard fünf und einstellbar von 1 bis 100; ausgewählter Gegenstand statt pauschalem Goldgewinn.",
-        "Kniffel: nach gestrichenem Kniffelfeld kein Zusatzkniffel-Bonus und keine Joker-Sonderwertung; diese Festlegung klärt die offene Stelle der Regelreferenz.",
-        "Ausgangswetten: der gesamte Topf wird gleichmäßig über alle richtigen Wetter verteilt, unabhängig von ihrer individuellen Einsatzhöhe.",
-        "Drachenhort: vorzeitiger regulärer Abschluss mit gleichmäßiger Hortverteilung und geheimen Resttipps; Gleichstände werden nur unter den gleich nahen Tipps wiederholt.",
-        "Chō-Han: interne Testguthaben, größter-Bruchteil-Rundung und Folgepartien als Modulergänzungen. Provisionsbasis und Kürzung auswählbar; keine Betrugsregeln umgesetzt.",
-        "Kniffel Extreme – Schmidt Spiele: https://www.schmidtspiele.de/files/Produkte/5/51296%20-%20Kniffel%C2%AE%20Extreme/51296_Kniffel_Extreme_DE.pdf",
-        "17 und 4: Leifs Würfeladaption mit Daniels Hausregeln; Awiana Elfenlauf, Revision 6669: https://awiana.fandom.com/de/wiki/Elfenlauf?oldid=6669 . Nicht mit klassischem Karten-Blackjack gleichsetzen.",
-        "Schocken-Einsatzregel von Daniel: Mindestbestand N × Einsatz; der endgültige Verlierer zahlt jedem anderen einmal den Einsatz. Optionale interne Spieltoken statt echter Charakterwährung.",
-        "Würfelpoker: fünf W8 nach Awiana/Koboldpoker, Leifs abweichende Rangfolge und Daniels bestätigte Vergleiche; zwei Setzphasen mit All-in und Nebentöpfen. Full House nach Summe, dann höherem Drilling; zwei Paare nach höherem/niedrigerem Paar und Restwürfel.",
-        "Klippklapp nach Daniels aktueller Festlegung: tatsächliche Restsummen strikt unterbieten, direkter Grundeinsatz an Vorgänger bei Niederlage, bei Klippklapp Grundeinsatz von allen anderen aktiven Teilnehmern.",
-        "Farkle, optional in allen Modi: Einstiegshürde ausschaltbar oder frei bis zur Zielpunktzahl einstellbar; klassische Voreinstellung 500 Punkte.",
-        "Klippklapp Variante C: 3+5 erlaubt 8 oder 3 und 5 gemeinsam; 2+2 erlaubt 4 oder eine 2. Keine einzelnen ungleichen Würfelwerte.",
-        "Daniel Brune: Die böse Dreizehn mit Restzahlung und Ausscheiden, fortlaufenden Töpfen und internen Spieltoken.",
-        "Spiel der Könige: Daniels bestätigte Umsetzung mit nacheinander geworfenen W8/W6/W4, drei Setzphasen, All-in/Nebentöpfen und Topfteilung; Regelvorlage Paul Cossmer.",
-        "Mau-Mau: 32 Karten von 7 bis Ass, fünf Startkarten, keine Joker oder Siebener-Stapel. Standardmäßig nur ohne spielbare Karte ziehen; freiwilliges Ziehen ist optional.",
-        "Mau-Mau: optionale Ansagestrafe aus; aktiviert zwei Karten nach rechtzeitigem Einspruch bis zum Ende des folgenden Spielerzugs, auch nach letzter Karte. Vollständige Blockade endet unentschieden.",
-        "Der Glückstag: zunächst verdeckte Würfel, eigene Aufdeckung; Erhöhen optional aus, ein Erhöhungsschritt pro Runde zwischen den Würfen und SL-Limits. Auszahlungen 2× beziehungsweise 1,5× abgerundet; interne Bank mit möglicher Schuld.",
-        "Schwimmen / Knack: drei Leben plus Schwimmen; 30½ und Knack, Blitz optional standardmäßig an. Ein Token-Einkauf je Partie. Bei genau 7/8/9 auf dem Tisch kostenlose Erneuerung durch den aktiven Spieler ohne Zugverbrauch.",
-        "Durak: bei sechs Teilnehmern fünf Startkarten; Weitergabe standardmäßig durch Vorzeigen des passenden Trumpfs, Ausspielen optional. Nur aktive Nachbarn werfen nach; Schutzzeit einstellbar, Standard fünf Sekunden, bei Pause eingefroren. Aufnehmen sofort; verlängertes Nachwerfen optional. Tokenprämien mit Gewichten N−1 bis 0, Resttoken in Platzierungsreihenfolge.",
-        "Mau-Mau optional: 7 auf 7 (+2 Strafkarten je Sieben), nach Ziehen Zugende, bis zum letzten Spieler weiterspielen.",
-        "Mau-Mau, optional und standardmäßig aus: 7 auf 7 erhöht die Ziehpflicht um zwei; Zugende nach dem Ziehen verhindert anschließendes Ausspielen; Weiterspielen erfasst die Reihenfolge leerer Hände, erster Sieger und letzter Verlierer. 8 auf 8 ist noch nicht umgesetzt."
+        {
+          "title": "17 und 4",
+          "items": [
+            "17 und 4: Leifs Würfeladaption mit Daniels Hausregeln; Awiana Elfenlauf, Revision 6669: https://awiana.fandom.com/de/wiki/Elfenlauf?oldid=6669 . Nicht mit klassischem Karten-Blackjack gleichsetzen."
+          ]
+        },
+        {
+          "title": "Chō-Han",
+          "items": [
+            "Chō-Han: interne Testguthaben, größter-Bruchteil-Rundung und Folgepartien als Modulergänzungen. Provisionsbasis und Kürzung auswählbar; keine Betrugsregeln umgesetzt."
+          ]
+        },
+        {
+          "title": "Der Glückstag",
+          "items": [
+            "Der Glückstag: zunächst verdeckte Würfel, eigene Aufdeckung; Erhöhen optional aus, ein Erhöhungsschritt pro Runde zwischen den Würfen und SL-Limits. Auszahlungen 2× beziehungsweise 1,5× abgerundet; interne Bank mit möglicher Schuld."
+          ]
+        },
+        {
+          "title": "Die böse Dreizehn",
+          "items": [
+            "Daniel Brune: Die böse Dreizehn mit Restzahlung und Ausscheiden, fortlaufenden Töpfen und internen Spieltoken."
+          ]
+        },
+        {
+          "title": "Drachenhort",
+          "items": [
+            "Drachenhort: vorzeitiger regulärer Abschluss mit gleichmäßiger Hortverteilung und geheimen Resttipps; Gleichstände werden nur unter den gleich nahen Tipps wiederholt."
+          ]
+        },
+        {
+          "title": "Durak",
+          "items": [
+            "Durak: bei sechs Teilnehmern fünf Startkarten; Weitergabe standardmäßig durch Vorzeigen des passenden Trumpfs, Ausspielen optional. Nur aktive Nachbarn werfen nach; Schutzzeit einstellbar, Standard fünf Sekunden, bei Pause eingefroren. Aufnehmen sofort; verlängertes Nachwerfen optional. Tokenprämien mit Gewichten N−1 bis 0, Resttoken in Platzierungsreihenfolge."
+          ]
+        },
+        {
+          "title": "Farkle",
+          "items": [
+            "Farkle, optional: kleine Straße aus fünf verschiedenen aufeinanderfolgenden Zahlen in einem Wurf zählt 750 Punkte.",
+            "Farkle, optional: drei/vier/fünf/sechs Einsen in einem Wurf zählen 1000/2000/3000/4000 Punkte.",
+            "Farkle, optional: sofortiges Ende beim Sichern der Zielpunktzahl statt einer Schlussrunde.",
+            "Farkle: Kurzspiel mit genau einem Zug je Teilnehmer oder feste Rundenzahl mit Gesamtpunkten; im Zielmodus bevorzugt ein gleicher Startwurf die frühere Position.",
+            "Farkle, optional in allen Modi: Einstiegshürde ausschaltbar oder frei bis zur Zielpunktzahl einstellbar; klassische Voreinstellung 500 Punkte."
+          ]
+        },
+        {
+          "title": "Klippklapp nach Daniels aktueller Festlegung",
+          "items": [
+            "Klippklapp nach Daniels aktueller Festlegung: tatsächliche Restsummen strikt unterbieten, direkter Grundeinsatz an Vorgänger bei Niederlage, bei Klippklapp Grundeinsatz von allen anderen aktiven Teilnehmern."
+          ]
+        },
+        {
+          "title": "Klippklapp Variante C",
+          "items": [
+            "Klippklapp Variante C: 3+5 erlaubt 8 oder 3 und 5 gemeinsam; 2+2 erlaubt 4 oder eine 2. Keine einzelnen ungleichen Würfelwerte."
+          ]
+        },
+        {
+          "title": "Kniffel",
+          "items": [
+            "Kniffel: nach gestrichenem Kniffelfeld kein Zusatzkniffel-Bonus und keine Joker-Sonderwertung; diese Festlegung klärt die offene Stelle der Regelreferenz."
+          ]
+        },
+        {
+          "title": "Kniffel Extreme",
+          "items": [
+            "Kniffel Extreme – Schmidt Spiele: https://www.schmidtspiele.de/files/Produkte/5/51296%20-%20Kniffel%C2%AE%20Extreme/51296_Kniffel_Extreme_DE.pdf"
+          ]
+        },
+        {
+          "title": "Mau-Mau",
+          "items": [
+            "Mau-Mau: 32 Karten von 7 bis Ass, fünf Startkarten, keine Joker; Siebener-Stapel optional. Standardmäßig nur ohne spielbare Karte ziehen; freiwilliges Ziehen ist optional.",
+            "Mau-Mau: optionale Ansagestrafe aus; aktiviert zwei Karten nach rechtzeitigem Einspruch bis zum Ende des folgenden Spielerzugs, auch nach letzter Karte. Vollständige Blockade endet unentschieden.",
+            "Mau-Mau, optional und standardmäßig aus: 7 auf 7 erhöht die Ziehpflicht um zwei; Zugende nach dem Ziehen verhindert anschließendes Ausspielen; Weiterspielen erfasst die Reihenfolge leerer Hände, erster Sieger und letzter Verlierer. 8 auf 8 ist noch nicht umgesetzt."
+          ]
+        },
+        {
+          "title": "Mau-Mau optional",
+          "items": [
+            "Mau-Mau optional: 7 auf 7 (+2 Strafkarten je Sieben), nach Ziehen Zugende, bis zum letzten Spieler weiterspielen."
+          ]
+        },
+        {
+          "title": "Schiff–Kapitän–Mannschaft",
+          "items": [
+            "Schiff–Kapitän–Mannschaft: Einzelspiel sowie feste oder unbegrenzte Serien mit addierten Punkten und regulärem Abschluss nach der laufenden Runde."
+          ]
+        },
+        {
+          "title": "Schocken-Einsatzregel von Daniel",
+          "items": [
+            "Schocken-Einsatzregel von Daniel: Mindestbestand N × Einsatz; der endgültige Verlierer zahlt jedem anderen einmal den Einsatz. Optionale interne Spieltoken statt echter Charakterwährung."
+          ]
+        },
+        {
+          "title": "Schwarzer Peter",
+          "items": [
+            "Schwarzer Peter: erstes leeres Blatt beendet die Runde; optional bis nur die ungepaarte Karte bleibt. Freie Paargruppen und Kartenauswahl, gemeinsame interne Spieltoken."
+          ]
+        },
+        {
+          "title": "Schweinchen",
+          "items": [
+            "Schweinchen, optional: sofortiges Ende beim Sichern der Zielpunktzahl; ohne diese Option bleibt die Schlussrunde.",
+            "Schweinchen: volle nominale Prämie je gleichplatziertem Teilnehmer; Finanzierung wahlweise durch Tavernenbank oder sichtbare Neuverteilung des vorhandenen Topfes."
+          ]
+        },
+        {
+          "title": "Schwimmen / Knack",
+          "items": [
+            "Schwimmen / Knack: drei Leben plus Schwimmen; 30½ und Knack, Blitz optional standardmäßig an. Ein Token-Einkauf je Partie. Bei genau 7/8/9 auf dem Tisch kostenlose Erneuerung durch den aktiven Spieler ohne Zugverbrauch."
+          ]
+        },
+        {
+          "title": "Spiel der Könige",
+          "items": [
+            "Spiel der Könige: Daniels bestätigte Umsetzung mit nacheinander geworfenen W8/W6/W4, drei Setzphasen, All-in/Nebentöpfen und Topfteilung; Regelvorlage Paul Cossmer."
+          ]
+        },
+        {
+          "title": "Spielübergreifend",
+          "items": [
+            "Ausgangswetten: der gesamte Topf wird gleichmäßig über alle richtigen Wetter verteilt, unabhängig von ihrer individuellen Einsatzhöhe.",
+            "Göttliche Hand bei Karten: Gewichtung hilfreicher vorhandener Karten beim Austeilen und Ziehen; keine Siegsgarantie, keine Änderung offen gewählter Karten."
+          ]
+        },
+        {
+          "title": "Straßenlotto",
+          "items": [
+            "Straßenlotto: durch die Spielleitung wählbare Zahlenzahl je Tippschein, Standard fünf und einstellbar von 1 bis 100; ausgewählter Gegenstand statt pauschalem Goldgewinn."
+          ]
+        },
+        {
+          "title": "Tic-Tac-Toe",
+          "items": [
+            "Tic-Tac-Toe: Serien von 1 bis 100 Runden mit wechselndem Startspieler und optionalem gemeinsamem Token-Einsatz."
+          ]
+        },
+        {
+          "title": "Würfelpoker",
+          "items": [
+            "Würfelpoker: fünf W8 nach Awiana/Koboldpoker, Leifs abweichende Rangfolge und Daniels bestätigte Vergleiche; zwei Setzphasen mit All-in und Nebentöpfen. Full House nach Summe, dann höherem Drilling; zwei Paare nach höherem/niedrigerem Paar und Restwürfel."
+          ]
+        }
       ]
     },
     "milestones": {
       "title": "Meilensteine",
       "items": [
-        "5.0.0 – Stabile Kartenbasis mit Mau-Mau und zentralem Kartentisch; Glückstag und Schwimmen kommen als Beta hinzu.",
-        "4.0.0 – Einstieg in Kartenspiele mit Mau-Mau als Beta; Reiteransicht wird regulärer Standard, Fenster bleiben optional.",
-        "3.0.0 – Göttliche Hand: ausschließlich für die SL sichtbare Beeinflussung regelkonformer Würfelergebnisse.",
-        "2.0.0 – Stabile optionale Dice-So-Nice-Anbindung für 3D-Würfel; neun stabile Spiele.",
-        "1.0.0 – Erste Hauptversion mit deutscher und englischer Oberfläche sowie updatefähigen Installationspaketen.",
-        "0.0.1 – Start des Weges: erstes Würfelspiel.",
-        "5.2.0: Durak stabil, Vier gewinnt als Brettspiel-Beta."
+        {
+          "title": "0.0.1 – Start des Weges: Schocken.",
+          "items": [
+            "0.2.0 – Automatisierte Schocken-Spielleitung mit NPCs und gespeicherten Partien.",
+            "0.3.0 – Eigenständiger Modulreiter und native Foundry-Fenster."
+          ]
+        },
+        {
+          "title": "1.0.0 – Erste Hauptversion mit deutscher und englischer Oberfläche und Updatepaketen.",
+          "items": [
+            "1.1.0 – Farkle stabil.",
+            "1.2.0 – Schweinchen, Schiff–Kapitän–Mannschaft und Straßenlotto stabil.",
+            "1.3.0 – Kniffel stabil.",
+            "1.4.0 – Lügenwürfel und Drachenhort stabil; erste 3D-Würfel-Beta.",
+            "1.5.0 – Chō-Han stabil."
+          ]
+        },
+        {
+          "title": "2.0.0 – Stabile optionale 3D-Würfelanbindung mit Dice So Nice.",
+          "items": [
+            "2.1.0 – Kniffel Extreme stabil.",
+            "2.2.0 – 17 und 4 stabil; gemeinsame partiengebundene Spieltoken."
+          ]
+        },
+        {
+          "title": "3.0.0 – Göttliche Hand zur SL-gesteuerten Würfelbeeinflussung.",
+          "items": [
+            "3.1.0 – Negative Göttliche Hand und Würfelpoker-Beta.",
+            "3.2.0 – Aalstechen stabil; modulweiter Klickschutz.",
+            "3.3.0 – Klippklapp, Meiern und Würfelpoker stabil.",
+            "3.4.0 – Die böse Dreizehn stabil."
+          ]
+        },
+        {
+          "title": "4.0.0 – Erste Karten-Beta Mau-Mau; Reiteransicht wird Standard.",
+          "items": [
+            "4.1.0 – Spiel der Könige stabil; überarbeiteter Mau-Mau-Kartentisch."
+          ]
+        },
+        {
+          "title": "5.0.0 – Stabile Kartenbasis und Mau-Mau.",
+          "items": [
+            "5.1.0 – Schwimmen stabil; Durak als neue Karten-Beta.",
+            "5.2.0 – Durak stabil; erste Brettspiel-Beta Vier gewinnt.",
+            "5.3.0 – Glückstag und Vier gewinnt stabil; Schwarzer Peter und Tic-Tac-Toe als neue Betas."
+          ]
+        }
       ],
       "paragraphs": []
     }
   },
-  "version": "5.2.4"
+  "version": "5.3.0"
 }

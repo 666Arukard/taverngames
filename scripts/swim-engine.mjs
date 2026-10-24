@@ -1,3 +1,4 @@
+import {takeGameCard} from './card-draw.mjs';
 import {startingOrder} from './start-choice.mjs';
 import {shuffle} from './maumau-engine.mjs';
 import {MAU_PROFILE,selectCards,SUITS} from './card-sets.mjs';
@@ -6,17 +7,17 @@ export function swimScore(s,id){const hand=s.hands[id].map(c=>s.cards[c]);if(new
 export function createSwim(o={}){const cards=selectCards(o.cardSet?.cards??[],MAU_PROFILE);return {version:1,game:'swim',gameId:null,revision:0,phase:'lobby',paused:false,players:Object.keys(o.npcs??{}),npcs:structuredClone(o.npcs??{}),npcManual:{},startSelection:o.startSelection??'rules',order:[],turn:0,handNumber:0,blitz:o.blitz!==false,lives:{},out:[],hands:{},table:[],discard:[],drawPile:[],cards:Object.fromEntries(cards.map(c=>[c.id,c])),cardSet:{key:o.cardSet?.key??'custom',label:o.cardSet?.label??'Custom',style:o.cardSet?.style??'custom'},passed:null,lastTurns:[],shifts:0,winners:[],losers:[],scores:{},roundWinners:[],roundLosers:[]};}
 function endHand(s,special){const ids=s.order,values=Object.fromEntries(ids.map(id=>[id,swimScore(s,id)])),low=Math.min(...Object.values(values));s.scores=values;s.roundLosers=special?.blitz?ids.filter(id=>id!==special.id):ids.every(id=>values[id]===low)?[]:ids.filter(id=>values[id]===low);s.roundWinners=ids.filter(id=>!s.roundLosers.includes(id));for(const id of s.roundLosers){s.lives[id]--;if(s.lives[id]<0)s.out.push(id);}const active=s.players.filter(id=>!s.out.includes(id));s.phase=active.length===1?'finished':'roundEnd';if(s.phase==='finished'){s.winners=active;s.losers=s.players.filter(id=>id!==active[0]);}}
 function special(s){const blitz=s.order.find(id=>s.blitz&&s.hands[id].every(c=>s.cards[c].rank==='ace'));if(blitz){endHand(s,{id:blitz,blitz:true});return true;}if(s.order.some(id=>swimScore(s,id)===31)){endHand(s);return true;}return false;}
-function deal(s,random){s.handNumber++;s.order=startingOrder({...s,players:s.players.filter(id=>!s.out.includes(id)),startSelection:s.handNumber===1?s.startSelection:'rules'});s.turn=(s.handNumber-1)%s.order.length;s.drawPile=shuffle(Object.keys(s.cards),random);s.discard=[];s.hands=Object.fromEntries(s.players.map(id=>[id,[]]));for(const id of s.order)s.hands[id]=s.drawPile.splice(0,3);s.table=s.drawPile.splice(0,3);s.passed=null;s.lastTurns=[];s.shifts=0;s.roundWinners=[];s.roundLosers=[];s.phase='playing';special(s);}
+function deal(s,random,pick){s.handNumber++;s.order=startingOrder({...s,players:s.players.filter(id=>!s.out.includes(id)),startSelection:s.handNumber===1?s.startSelection:'rules'});s.turn=(s.handNumber-1)%s.order.length;s.drawPile=shuffle(Object.keys(s.cards),random);s.discard=[];s.hands=Object.fromEntries(s.players.map(id=>[id,[]]));for(const id of s.order)for(let i=0;i<3;i++)s.hands[id].push(takeGameCard(s,id,s.drawPile,pick,'deal'));s.table=s.drawPile.splice(0,3);s.passed=null;s.lastTurns=[];s.shifts=0;s.roundWinners=[];s.roundLosers=[];s.phase='playing';special(s);}
 function refill(s,random){s.discard.push(...s.table);s.table=[];for(let i=0;i<3;i++){if(!s.drawPile.length){s.drawPile=shuffle(s.discard,random);s.discard=[];}check(s.drawPile.length,'No cards available.');s.table.push(s.drawPile.shift());}}
 export const swimCanRefresh=s=>s?.phase==='playing'&&s.table?.length===3&&s.table.map(c=>s.cards[c].rank).sort().join(',')==='7,8,9';
-export function actSwim(original,id,action,a={},random=()=>1,gm=false){const s=structuredClone(original);check(s?.game==='swim','No game exists.');
+export function actSwim(original,id,action,a={},random=()=>1,gm=false,pick=null){const s=structuredClone(original);check(s?.game==='swim','No game exists.');
  if(action==='abort'){check(gm,'GM only.');s.phase='aborted';s.paused=true;}
  else if(action==='pause'){check(gm&&!['finished','aborted'].includes(s.phase),'GM only.');s.paused=!s.paused;}
  else if(action==='npcControl'){check(gm&&Object.hasOwn(s.npcs,a.id)&&typeof a.manual==='boolean','GM only.');s.npcManual[a.id]=a.manual;}
  else{check(!s.paused&&!['finished','aborted'].includes(s.phase),'The game has ended or is paused.');
  if(['join','leave'].includes(action)){check(s.phase==='lobby','Join in the lobby.');if(action==='join'){check(!s.players.includes(id)&&s.players.length<9&&!id.startsWith('npc-'),'Two to nine participants.');s.players.push(id);}else s.players=s.players.filter(p=>p!==id);}
- else if(action==='begin'){check(gm&&s.phase==='lobby'&&s.players.length>=2,'Two to nine participants.');s.lives=Object.fromEntries(s.players.map(id=>[id,3]));deal(s,random);}
- else if(action==='nextHand'){check(gm&&s.phase==='roundEnd','GM only.');deal(s,random);}
+ else if(action==='begin'){check(gm&&s.phase==='lobby'&&s.players.length>=2,'Two to nine participants.');s.lives=Object.fromEntries(s.players.map(id=>[id,3]));deal(s,random,pick);}
+ else if(action==='nextHand'){check(gm&&s.phase==='roundEnd','GM only.');deal(s,random,pick);}
  else{check(s.phase==='playing'&&s.order[s.turn]===id,'It is not your turn.');
  if(action==='refreshTable'){check(swimCanRefresh(s),'New table cards require seven, eight and nine.');refill(s,random);s.revision++;return s;}
  if(action==='swap'){check(Number.isInteger(a.own)&&a.own>=0&&a.own<3&&Number.isInteger(a.table)&&a.table>=0&&a.table<3,'Choose two cards.');[s.hands[id][a.own],s.table[a.table]]=[s.table[a.table],s.hands[id][a.own]];s.shifts=0;}

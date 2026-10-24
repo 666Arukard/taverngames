@@ -4,6 +4,7 @@ import {createNativeWindow} from './native-ui.mjs';
 import {node,control,selectField} from './tavern-ui.mjs';
 import {f} from './farkle-text.mjs';
 import {gameTitle} from './tavern-text.mjs';
+import {DIVINE_CARD_SCOPES} from './divine-cards.mjs';
 import {DIVINE_SCOPES} from './divine-hand.mjs';
 
 export class DivineUI{
@@ -30,6 +31,7 @@ export class DivineUI{
   const label=node('label',f('Eingriffsstärke (0–100 %)','Intervention strength (0–100%)')),range=node('input'),output=node('output',p.strength+' %');range.type='range';range.min=0;range.max=100;range.step=1;range.value=p.strength;range.style.width='55%';range.style.margin='0 0.5rem';range.dataset.divineStrength='';range.oninput=()=>{output.textContent=range.value+' %';};label.append(range,output);c.append(label);target.onchange=()=>{const entry=p.entries.find(x=>x.id===target.value)??p.inherited?.find(x=>x.id===target.value)??p.effective.find(x=>x.target===target.value);range.value=entry?.strength??0;effect.value=entry?.mode??'favor';output.textContent=range.value+' %';describe(p.entries.some(x=>x.id===target.value)?'scope':entry?'all':'none',Number(range.value));};
   c.append(node('p',f('0 %: unveränderter Zufall. Mittlere Werte: sanfter Einfluss mit viel Zufall. 100 %: maximale Wirkung in der gewählten Richtung. Der Prozentwert ist keine Gewinnwahrscheinlichkeit. Behaltene Würfel, Entscheidungen und Spielregeln bleiben maßgeblich.','0%: unchanged randomness. Medium values: gentle influence with plenty of randomness. 100%: maximum effect in the selected direction. This percentage is not a win probability. Held dice, decisions and game rules still apply.')));
   c.append(node('p',f('Gilt über Runden und Partien hinweg bis zum Ausschalten. Spielbezogene Werte haben Vorrang vor Alle Spiele, auch 0 %. Vorhandene Würfel werden nicht verändert. Bei gemeinsamen Ziehungen wird der Tipp des Teilnehmers je nach Richtung begünstigt oder benachteiligt.','Persists across rounds and sessions until switched off. Game-specific settings override All games, including 0%. Existing dice are unchanged. Shared draws favor or disfavor the participant’s ticket or bet.')));
+  if(DIVINE_CARD_SCOPES.includes(this.scope))c.append(node('p',f('Karten: beeinflusst auch die erste Verteilung und spätere Ziehaktionen. Hilfreich richtet sich nach Spiel und eigener Hand. Nur vorhandene verdeckte Karten sind verfügbar; offene Karten und Entscheidungen werden nicht verändert. Schwimmen: Einfluss beim Austeilen, nicht beim offenen Tauschen. Auch 100 % garantiert keinen Sieg.','Cards: also affects the initial deal and later draws. Usefulness depends on the game and your hand. Only existing hidden cards are available; face-up cards and decisions are unchanged. Schwimmen: influences dealing, not open swaps. Even 100% does not guarantee a win.')));
   const inactive=false;effect.disabled=target.disabled=range.disabled=inactive;
   const actions=node('div',undefined,'schocken-actions');c.append(actions);
   const save=control(actions,f('Einfluss speichern','Save influence'),()=>this.send('divineSet',{target:target.value,strength:Number(range.value),mode:effect.value}),inactive||!target.value);

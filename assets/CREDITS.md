@@ -10,4 +10,6 @@ Die Grafiken wurden von Daniel bereitgestellt; das TavernGames-Logo wurde von Da
 | Glücksspiele | POD Gladiator | https://www.flaticon.com/free-icon/casino-chips_16807396 | [Gambling icons created by POD Gladiator - Flaticon](https://www.flaticon.com/free-icons/gambling) |
 | Brettspiele | Hamel M | https://www.flaticon.com/free-icon/game_16084821 | [Boardgame icons created by Hamel M - Flaticon](https://www.flaticon.com/free-icons/boardgame) |
 
+| Wettkämpfe (künftig) | Magnific | https://www.flaticon.com/free-icon/ranking_4430560 | [Sports and competition icons created by Magnific - Flaticon](https://www.flaticon.com/free-icons/sports-and-competition) |
+
 Flaticon License mit Urhebernennung; laut Daniels Downloadangaben für privaten und kommerziellen Gebrauch. Maßgeblich bleiben die Bedingungen des jeweiligen Downloads, https://www.flaticon.com/legal . Diese Grafiken werden nicht unter der Softwarelizenz von TavernGames weiterlizenziert. Eine gesonderte Logo-Erlaubnis oder menschliche Herkunft wurde durch diese Dokumentation nicht unabhängig bestätigt.

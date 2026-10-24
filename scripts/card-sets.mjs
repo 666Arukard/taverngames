@@ -5,6 +5,8 @@ export const MAU_PROFILE={id:'maumau-32',ranks:RANKS.slice(5),jokers:false,count
 export const BACK='icons/svg/card-joker.svg';
 const clone=v=>structuredClone(v);
 export function selectCards(cards,profile){
+ if(profile.all){if(cards.length<3||cards.length>200||new Set(cards.map(c=>c.id)).size!==cards.length||cards.some(c=>typeof c.id!=='string'||!c.id))throw Error('The selected deck does not contain the required cards.');return clone(cards);}
+
  const chosen=cards.filter(c=>profile.ranks.includes(c.rank)&&SUITS.includes(c.suit));
  if(chosen.length!==profile.count||new Set(chosen.map(c=>c.id)).size!==profile.count||SUITS.some(suit=>profile.ranks.some(rank=>chosen.filter(c=>c.suit===suit&&c.rank===rank).length!==1)))throw Error('The selected deck does not contain the required cards.');
  return clone(chosen);

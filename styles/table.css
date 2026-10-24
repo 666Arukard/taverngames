@@ -221,23 +221,23 @@
 @media(prefers-reduced-motion:reduce){.taverngames-card-stage .taverngames-card-hand>.taverngames-card{transition:none}}
 
 /* Isolate the card overlay from native sidebar sizing and intrinsic image sizes. */
-:is(#taverngames-card-stage,#taverngames-swim-stage,#taverngames-durak-stage){box-sizing:border-box;margin:0;padding:0;min-width:0;max-width:none;contain:layout style size;isolation:isolate}
-:is(#taverngames-card-stage,#taverngames-swim-stage,#taverngames-durak-stage)>.taverngames-card-stage-shared,:is(#taverngames-card-stage,#taverngames-swim-stage,#taverngames-durak-stage)>.taverngames-card-stage-hand{box-sizing:border-box;min-width:0;max-width:100%;flex-shrink:0}
-:is(#taverngames-card-stage,#taverngames-swim-stage,#taverngames-durak-stage)>.taverngames-card-stage-hand{width:100%;max-height:none}
-:is(#taverngames-card-stage,#taverngames-swim-stage,#taverngames-durak-stage) .taverngames-card-hand{height:clamp(150px,27dvh,276px);box-sizing:content-box;min-width:0}
-:is(#taverngames-card-stage,#taverngames-swim-stage,#taverngames-durak-stage) .taverngames-card-hand>.taverngames-card{height:100%;width:auto;flex:0 0 auto;min-height:0;aspect-ratio:2/3}
+:is(#taverngames-card-stage,#taverngames-swim-stage,#taverngames-durak-stage,#taverngames-oldmaid-stage){box-sizing:border-box;margin:0;padding:0;min-width:0;max-width:none;contain:layout style size;isolation:isolate}
+:is(#taverngames-card-stage,#taverngames-swim-stage,#taverngames-durak-stage,#taverngames-oldmaid-stage)>.taverngames-card-stage-shared,:is(#taverngames-card-stage,#taverngames-swim-stage,#taverngames-durak-stage,#taverngames-oldmaid-stage)>.taverngames-card-stage-hand{box-sizing:border-box;min-width:0;max-width:100%;flex-shrink:0}
+:is(#taverngames-card-stage,#taverngames-swim-stage,#taverngames-durak-stage,#taverngames-oldmaid-stage)>.taverngames-card-stage-hand{width:100%;max-height:none}
+:is(#taverngames-card-stage,#taverngames-swim-stage,#taverngames-durak-stage,#taverngames-oldmaid-stage) .taverngames-card-hand{height:clamp(150px,27dvh,276px);box-sizing:content-box;min-width:0}
+:is(#taverngames-card-stage,#taverngames-swim-stage,#taverngames-durak-stage,#taverngames-oldmaid-stage) .taverngames-card-hand>.taverngames-card{height:100%;width:auto;flex:0 0 auto;min-height:0;aspect-ratio:2/3}
 
 /* Keep the table playable with a collapsed lobby and fit the current free width. */
-:is(#taverngames-card-stage,#taverngames-swim-stage,#taverngames-durak-stage)>.taverngames-card-stage-hand{background:transparent;border:0;padding:4px 10px 6px}
-:is(#taverngames-card-stage,#taverngames-swim-stage,#taverngames-durak-stage) .taverngames-card-hand{height:auto;min-height:0;max-width:100%;box-sizing:border-box;overflow-x:auto;overflow-y:hidden;scrollbar-gutter:auto;padding:12px 3px 10px}
-:is(#taverngames-card-stage,#taverngames-swim-stage,#taverngames-durak-stage) .taverngames-card-hand>.taverngames-card{width:var(--tg-card-width,176px);height:auto;flex:0 0 var(--tg-card-width,176px);aspect-ratio:2/3}
+:is(#taverngames-card-stage,#taverngames-swim-stage,#taverngames-durak-stage,#taverngames-oldmaid-stage)>.taverngames-card-stage-hand{background:transparent;border:0;padding:4px 10px 6px}
+:is(#taverngames-card-stage,#taverngames-swim-stage,#taverngames-durak-stage,#taverngames-oldmaid-stage) .taverngames-card-hand{height:auto;min-height:0;max-width:100%;box-sizing:border-box;overflow-x:auto;overflow-y:hidden;scrollbar-gutter:auto;padding:12px 3px 10px}
+:is(#taverngames-card-stage,#taverngames-swim-stage,#taverngames-durak-stage,#taverngames-oldmaid-stage) .taverngames-card-hand>.taverngames-card{width:var(--tg-card-width,176px);height:auto;flex:0 0 var(--tg-card-width,176px);aspect-ratio:2/3}
 
 /* Large hands remain readable; excess cards are reachable without a second row. */
-:is(#taverngames-card-stage,#taverngames-swim-stage,#taverngames-durak-stage) .taverngames-card-hand{scrollbar-width:auto;scrollbar-color:#c6a96c #252321;scroll-snap-type:x proximity}
-:is(#taverngames-card-stage,#taverngames-swim-stage,#taverngames-durak-stage) .taverngames-card-hand>.taverngames-card{scroll-snap-align:start}
-:is(#taverngames-card-stage,#taverngames-swim-stage,#taverngames-durak-stage) .taverngames-card-scroll-hint{font-size:13px;color:#ffe4a7;margin:3px 0;text-align:center}
-:is(#taverngames-card-stage,#taverngames-swim-stage,#taverngames-durak-stage) .taverngames-card-scroll-hint[hidden]{display:none}
-:is(#taverngames-card-stage,#taverngames-swim-stage,#taverngames-durak-stage) .taverngames-card-result{position:absolute;left:4%;right:4%;top:43%;transform:translateY(-50%);z-index:2;padding:16px 20px;box-sizing:border-box;text-align:center;font-size:clamp(20px,2.4vw,36px);line-height:1.25;font-weight:700;color:#fff2c7;background:rgba(36,28,17,.96);border:2px solid #d9b35e;border-radius:8px;box-shadow:0 5px 24px #0009;overflow-wrap:anywhere;pointer-events:none}
+:is(#taverngames-card-stage,#taverngames-swim-stage,#taverngames-durak-stage,#taverngames-oldmaid-stage) .taverngames-card-hand{scrollbar-width:auto;scrollbar-color:#c6a96c #252321;scroll-snap-type:x proximity}
+:is(#taverngames-card-stage,#taverngames-swim-stage,#taverngames-durak-stage,#taverngames-oldmaid-stage) .taverngames-card-hand>.taverngames-card{scroll-snap-align:start}
+:is(#taverngames-card-stage,#taverngames-swim-stage,#taverngames-durak-stage,#taverngames-oldmaid-stage) .taverngames-card-scroll-hint{font-size:13px;color:#ffe4a7;margin:3px 0;text-align:center}
+:is(#taverngames-card-stage,#taverngames-swim-stage,#taverngames-durak-stage,#taverngames-oldmaid-stage) .taverngames-card-scroll-hint[hidden]{display:none}
+:is(#taverngames-card-stage,#taverngames-swim-stage,#taverngames-durak-stage,#taverngames-oldmaid-stage) .taverngames-card-result{position:absolute;left:4%;right:4%;top:43%;transform:translateY(-50%);z-index:2;padding:16px 20px;box-sizing:border-box;text-align:center;font-size:clamp(20px,2.4vw,36px);line-height:1.25;font-weight:700;color:#fff2c7;background:rgba(36,28,17,.96);border:2px solid #d9b35e;border-radius:8px;box-shadow:0 5px 24px #0009;overflow-wrap:anywhere;pointer-events:none}
 
 .taverngames-card-stage .taverngames-card-hand{justify-content:safe center}
 .taverngames-card-stage .taverngames-card-result button{display:block;margin:12px auto 0;pointer-events:auto}
@@ -258,7 +258,7 @@
 .taverngames-turn-score{position:fixed;top:24px;left:50%;transform:translateX(-50%);max-width:70vw;padding:10px 20px;border:1px solid #c6a96c;border-radius:8px;background:rgba(30,25,19,.92);color:#ffe8b0;text-align:center;font:600 19px/1.4 system-ui;pointer-events:none}
 .taverngames-die-hit.is-kept.is-marked{border:3px solid #ffd361;box-shadow:0 0 15px #f3c75e,inset 0 0 8px #f3c75e55}
 .taverngames-swim-results{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;padding:8px}.taverngames-swim-result{padding:12px;border:1px solid #b89b66;border-radius:8px;background:rgba(25,22,19,.92);color:#fff0d4;text-align:center}.taverngames-swim-result h3{margin:0 0 8px!important;color:inherit!important}.taverngames-swim-result p{margin:6px 0}.taverngames-swim-result-cards{display:flex;gap:6px;justify-content:center}.taverngames-surface .taverngames-swim-result-cards>.taverngames-card{width:clamp(58px,6vw,105px);height:auto;aspect-ratio:2/3;flex:0 1 auto}
-.taverngames-card-stage.is-swim-result{gap:12px}:is(#taverngames-card-stage,#taverngames-swim-stage,#taverngames-durak-stage).is-swim-result>.taverngames-card-result{position:static;transform:none;order:0;flex-shrink:0}.taverngames-card-stage.is-swim-result>.taverngames-card-stage-shared,.taverngames-card-stage.is-swim-result>.taverngames-card-stage-hand{display:none}.taverngames-card-stage.is-swim-result>.taverngames-swim-results{order:1;flex:1;min-height:0;overflow:auto;pointer-events:auto;align-content:start}
+.taverngames-card-stage.is-swim-result{gap:12px}:is(#taverngames-card-stage,#taverngames-swim-stage,#taverngames-durak-stage,#taverngames-oldmaid-stage).is-swim-result>.taverngames-card-result{position:static;transform:none;order:0;flex-shrink:0}.taverngames-card-stage.is-swim-result>.taverngames-card-stage-shared,.taverngames-card-stage.is-swim-result>.taverngames-card-stage-hand{display:none}.taverngames-card-stage.is-swim-result>.taverngames-swim-results{order:1;flex:1;min-height:0;overflow:auto;pointer-events:auto;align-content:start}
 
 /* The overlay has no screen-sized hit box; only actual buttons receive input. */
 .taverngames-dice-table-controls{inset:auto;top:0;left:0;width:0;height:0;overflow:visible;pointer-events:none!important}
@@ -326,3 +326,20 @@
 .taverngames-connect-play .taverngames-connect-columns button:disabled{opacity:.5;cursor:default}
 
 .taverngames-connect-play .taverngames-connect-board span.is-winning{outline:3px solid #ffe29a;outline-offset:-3px;box-shadow:0 0 12px #ffdb6888,inset 0 0 0 2px #8c651e}
+
+/* Compact category marker beside each favorite star. */
+.taverngames-game-category-icon{display:block;flex:0 0 18px;width:18px;height:18px;background:currentColor;opacity:.8;mask:var(--category-art) center/contain no-repeat;-webkit-mask:var(--category-art) center/contain no-repeat}
+.taverngames-tic-board{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;width:min(100%,420px);margin:12px auto}
+.taverngames-tic-board button{aspect-ratio:1;min-width:0;height:auto;background:#30251e;color:#fff1d5;border:2px solid #b8995d;border-radius:6px;font:700 clamp(32px,8vw,80px)/1 system-ui;cursor:pointer}
+.taverngames-tic-board button:disabled{opacity:1;cursor:default}
+.taverngames-tic-board button.is-winning{background:#6b572b;outline:3px solid #ffe29a;outline-offset:-5px}
+.taverngames-peter-config{display:grid;gap:6px;max-height:360px;overflow:auto}
+.taverngames-peter-config>label{display:grid;grid-template-columns:20px minmax(0,1fr) minmax(70px,1fr);gap:6px;align-items:center}
+.taverngames-peter-config input[type=text]{min-width:0;width:100%}
+.taverngames-peter-source{display:flex;flex-direction:column;min-width:0;max-width:100%;box-sizing:border-box}
+.taverngames-peter-source>.taverngames-card-hand{display:flex;max-width:100%;overflow:auto;gap:8px}
+.taverngames-peter-source .taverngames-card{width:clamp(46px,7vw,100px);flex:0 0 auto}
+
+#taverngames-oldmaid-stage>.taverngames-card-stage-shared:empty{display:none}
+#taverngames-oldmaid-stage>.taverngames-card-stage-hand:not(:has(.taverngames-card)){display:none}
+#taverngames-oldmaid-stage .taverngames-peter-source .taverngames-card{width:clamp(46px,7vw,100px);flex:0 0 clamp(46px,7vw,100px)}

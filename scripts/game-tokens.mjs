@@ -91,7 +91,7 @@ export function prepareTokenState(s,old,scope){
   if(scope==='chohan'&&!same){s.carry=0;s.carryContrib={};}
   return s;
  }
- if(!e.started&&old?.phase==='lobby'&&s.phase!=='lobby'&&(!ended(s)||scope==='swim'&&s.phase==='finished')||!same&&s.phase!=='lobby'&&!ended(s)){
+ if(!e.started&&old?.phase==='lobby'&&s.phase!=='lobby'&&(!ended(s)||['swim','oldmaid'].includes(scope)&&s.phase==='finished')||!same&&s.phase!=='lobby'&&!ended(s)){
   check(e.bets?.status!=='open','Close betting before starting the game.');e.playersAtStart=[...s.players];e.started=true;e.status='playing';
   for(const id of s.players){let amount=e.config.stake;
    if(scope==='schocken')amount=s.players.length*e.config.stake;

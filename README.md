@@ -1,3 +1,15 @@
+# Aktueller Stand 5.3.0
+
+Glückstag und Vier gewinnt sind stabil. Neu als Beta: Schwarzer Peter mit wählbaren Kartenpaaren und optionalem Weiterspielen sowie Tic-Tac-Toe mit NPCs und Serien. Göttliche Hand beeinflusst nun auch Kartenverteilung und Nachziehen. Die Spieleübersicht ist durchgehend alphabetisch und zeigt kleine Kategorie-Icons neben den Favoritensternen. Schwimmen erhält den schwebenden Button zum Tausch aller drei Karten; nach einer vollständigen Schieberunde werden nur die Tischkarten erneuert. Vier gewinnt sperrt schnelle Folgeaktionen nach dem Sieg besser ab.
+
+23 Spiele insgesamt: **21 stabil**, Schwarzer Peter und Tic-Tac-Toe als optionale Betas. Beta-Test in den Moduleinstellungen einschalten. Keine zusätzliche Modulabhängigkeit; Kartenspiele benötigen ein geeignetes importiertes Foundry-Deck.
+
+Göttliche Hand bei Karten: einschließlich Austeilen; 0 % unveränderter Zufall, höhere Werte steigern die Bevorzugung hilfreicher vorhandener Karten. Ungnade wirkt umgekehrt. Keine garantierten Siege. Brettspiele erhalten noch keinen Einfluss.
+
+Regelquelle Schwarzer Peter: ASS Altenburger, https://www.spielkarten.com/spielregeln/schwarzer-peter/ .
+
+Details und Testplan: docs/release-5.3.0.md. Historische Abschnitte darunter beschreiben frühere Versionen.
+
 # Aktueller Stand 5.2.3
 
 Vier gewinnt zeigt sein Spielfeld auf der freien Hauptspielfläche statt in der Lobby. Spielsteine sind schlicht rot und gelb ohne zusätzliche Zeichen. Das Feld passt sich der verfügbaren Breite an, bleibt bei eingeklappter Lobby sichtbar und wird beim Spielwechsel oder Schließen entfernt.
@@ -12,9 +24,9 @@ Ordner und Kartenbereinigung: siehe docs/release-5.2.1.md im Projekt. 8 auf 8 bl
 
 # Aktueller Stand 5.2.0
 
-TavernGames bringt 19 stabile Tavernenspiele in Foundry VTT, darunter Farkle, Kniffel, Schocken, Lügenwürfel, Mau-Mau, Schwimmen und Durak sowie optionale Beta-Spiele. Spiele gemeinsam mit anderen Spielern am virtuellen Spieltisch oder mit benannten NPCs. Die Spielleitung verwaltet Ablauf, interne Spieltoken und optionale Ausgangswetten und kann selbst mitspielen. Enthalten sind deutsche und englische Oberflächen, deutsche Anleitungen mit Quellenangaben, optionale Dice-So-Nice-Anbindung und eine integrierte Reiteransicht mit frei beweglichen Fenstern als Alternative. Kartenspiele verwenden vorhandene Foundry-Kartendecks. Das Modul benötigt kein bestimmtes Spielsystem. Englische Anleitungen sind bis zur Prüfung vorerst nicht verfügbar.
+TavernGames bringt 21 stabile Tavernenspiele in Foundry VTT, darunter Farkle, Kniffel, Schocken, Lügenwürfel, Mau-Mau, Schwimmen und Durak sowie optionale Beta-Spiele. Spiele gemeinsam mit anderen Spielern am virtuellen Spieltisch oder mit benannten NPCs. Die Spielleitung verwaltet Ablauf, interne Spieltoken und optionale Ausgangswetten und kann selbst mitspielen. Enthalten sind deutsche und englische Oberflächen, deutsche Anleitungen mit Quellenangaben, optionale Dice-So-Nice-Anbindung und eine integrierte Reiteransicht mit frei beweglichen Fenstern als Alternative. Kartenspiele verwenden vorhandene Foundry-Kartendecks. Das Modul benötigt kein bestimmtes Spielsystem. Englische Anleitungen sind bis zur Prüfung vorerst nicht verfügbar.
 
-TavernGames brings 19 stable tavern games to Foundry VTT, including Farkle, Kniffel, Schocken, Liar’s Dice, Mau-Mau, Thirty-One and Durak, plus optional beta games. Play together with other players at your virtual table or with named NPCs. The GM manages play, internal game tokens and optional outcome betting, and can also take part. Features include English and German interfaces, German instructions with source credits, optional Dice So Nice integration and an integrated sidebar view with floating windows as an alternative. Card games use existing Foundry decks. No specific game system is required. English instructions are currently unavailable pending review.
+TavernGames brings 21 stable tavern games to Foundry VTT, including Farkle, Kniffel, Schocken, Liar’s Dice, Mau-Mau, Thirty-One and Durak, plus optional beta games. Play together with other players at your virtual table or with named NPCs. The GM manages play, internal game tokens and optional outcome betting, and can also take part. Features include English and German interfaces, German instructions with source credits, optional Dice So Nice integration and an integrated sidebar view with floating windows as an alternative. Card games use existing Foundry decks. No specific game system is required. English instructions are currently unavailable pending review.
 
 # TavernGames 5.1.2
 

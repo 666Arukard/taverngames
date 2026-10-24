@@ -20,12 +20,12 @@ export class MauSession{
     next=createMau({cardSet:await this.resolveSet(data.args?.set??null),stackSeven:data.args?.stackSeven===true,noPlayAfterDraw:data.args?.noPlayAfterDraw===true,playOut:data.args?.playOut===true,nineWild:data.args?.nineWild===true,voluntaryDraw:data.args?.voluntaryDraw===true,penalties:data.args?.penalties===true,npcs:Object.fromEntries(names.map(n=>['npc-'+crypto.randomUUID(),n.trim()]))});
    }else{if(!old)throw Error('No game exists.');next=createMau({...old,cardSet:{...old.cardSet,cards:Object.values(old.cards)}});next.players=[...old.players];next.npcManual=structuredClone(old.npcManual);}
    next.gameId=crypto.randomUUID();next.revision=(old?.revision??0)+1;
-  }else{const id=user.isGM&&old?.npcs[data.args?.id]&&old.npcManual[data.args.id]?data.args.id:user.id;next=actMau(old,id,data.action,data.args,this.random,user.isGM);}
+  }else{const id=user.isGM&&old?.npcs[data.args?.id]&&old.npcManual[data.args.id]?data.args.id:user.id;next=actMau(old,id,data.action,data.args,this.random,user.isGM,this.pickCard);}
   seriesMetadata(next,old,data.action);await this.commit(next);return this.project(user);
  }
  async commit(next){const old=this.state;seriesMetadata(next,old);await this.save(next);this.state=next;this.updateNpcWait();await this.repair();if(next.phase==='finished'&&old?.phase!=='finished'&&!this.hasAnnouncement(next.gameId)){
   const names=ids=>ids.map(id=>escapeHTML(next.npcs[id]??this.getName(id))).join(', ');
   try{await this.announce({content:`<h2>Mau-Mau</h2><p>${next.draw?f('Unentschieden','Draw'):f('Gewonnen','Winner')+': '+names(next.winners)}</p>${next.draw?'':`<p>${f('Verloren','Losers')}: ${names(next.losers)}</p>`}`,flags:{taverngames:{game:'maumau',gameId:next.gameId}}});}catch(e){globalThis.ui?.notifications?.warn(e.message);}
  }}
- async npcStep(){if(!this.enabled()||!this.state||this.now()<this.wait?.until)return false;const move=mauNpcAction(this.state);if(!move)return false;await this.commit(actMau(this.state,move.id,move.action,move.args,this.random));return true;}
+ async npcStep(){if(!this.enabled()||!this.state||this.now()<this.wait?.until)return false;const move=mauNpcAction(this.state);if(!move)return false;await this.commit(actMau(this.state,move.id,move.action,move.args,this.random,false,this.pickCard));return true;}
 }

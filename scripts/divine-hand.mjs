@@ -1,3 +1,4 @@
+import {DIVINE_CARD_SCOPES} from './divine-cards.mjs';
 import {actKings,kingsTotal} from './kings-engine.mjs';
 import {actThirteen} from './thirteen-engine.mjs';
 import {actKlippklapp,klippChoices} from './klippklapp-engine.mjs';
@@ -10,7 +11,8 @@ import {actMeiern,meiernRank,meiernValue} from './meiern-engine.mjs';
 import {actAalstechen} from './aalstechen-engine.mjs';
 import {kniffelFavorScore,kniffelGoalDraws} from './kniffel-favor.mjs';
 
-export const DIVINE_SCOPES=['schocken','farkle','pig','ship','lottery','kniffel','liars','hoard','chohan','seventeen','meiern','aalstechen','poker','klippklapp','thirteen','kings'];
+export const DIVINE_DICE_SCOPES=['schocken','farkle','pig','ship','lottery','kniffel','liars','hoard','chohan','seventeen','meiern','aalstechen','poker','klippklapp','thirteen','kings'];
+export const DIVINE_SCOPES=[...DIVINE_DICE_SCOPES,...DIVINE_CARD_SCOPES];
 const check=(v,m)=>{if(!v)throw Error(m);};
 const percent=n=>Number.isInteger(n)&&n>=0&&n<=100;
 export const divineBook=()=>({version:1,revision:0,defaultStrength:0,games:{},profiles:{},selection:{}});

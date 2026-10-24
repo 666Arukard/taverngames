@@ -13,6 +13,36 @@ export function validateWebsite(website, version) {
   if(major>=5)keys.push('milestones');
   if (website.schemaVersion !== 1 || !website.blocks || !isDeepStrictEqual(Object.keys(website.blocks).sort(), [...keys].sort())) throw new Error('website.json: Schema oder Blocknamen ungültig.');
   const titles = { milestones:'Meilensteine', patchnotes: `Patchnotes Version ${version}`, games: lowercaseTitles ? 'aktuelle Spiele' : 'Aktuelle Spiele', plans: expanded ? 'geplante Spiele' : 'Geplante Spiele', plans2: 'geplante Funktionen', functions: 'aktuelle Funktionen', settings: 'Einstellungen in Foundry', sources: 'Regelquellen', sources1: 'Hausvarianten' };
+  if (major > 5 || (major === 5 && minor >= 3)) {
+    const grouped=['games','plans','functions','plans2','settings','sources','sources1','milestones'];
+    const counted=['games','plans','functions','plans2','sources'];
+    const text=v=>typeof v==='string'&&v.trim().length>0;
+    for(const key of keys){
+      const block=website.blocks[key];
+      if(!Array.isArray(block.items)||!Array.isArray(block.paragraphs)||!block.paragraphs.every(text))throw Error(`website.json: Block ${key} ungültig.`);
+      let count=block.items.length;
+      if(grouped.includes(key)){
+        if(!count||block.items.some(g=>!g||!text(g.title)||!Array.isArray(g.items)||!g.items.length||!g.items.every(text)))throw Error(`website.json: Gruppen in ${key} ungültig.`);
+        if(new Set(block.items.map(g=>g.title)).size!==count)throw Error(`website.json: Doppelte Gruppen in ${key}.`);
+        count=block.items.reduce((n,g)=>n+g.items.length,0);
+      }else if(!block.items.every(text))throw Error(`website.json: Inhalte in ${key} ungültig.`);
+      if(block.title!==(counted.includes(key)?`${titles[key]} (${count})`:titles[key]))throw Error(`website.json: Titel/Anzahl in ${key} ungültig.`);
+    }
+    const sort=(a,b)=>Number(a.endsWith(' (Beta)'))-Number(b.endsWith(' (Beta)'))||a.localeCompare(b,'de');
+    for(const key of ['games','plans']){
+      const groups=website.blocks[key].items;
+      const all=groups.flatMap(g=>g.items);
+      if(new Set(all).size!==all.length||groups.some(g=>!isDeepStrictEqual(g.items,[...g.items].sort(sort))))throw Error(`website.json: Spielsortierung in ${key} ungültig.`);
+    }
+    const settings=website.blocks.settings.items.map(g=>g.title);
+    if(!isDeepStrictEqual(settings,['Allgemeine Einstellungen','Einstellungen pro Spiel']))throw Error('website.json: Einstellungen falsch gegliedert.');
+    const history=website.blocks.milestones.items;
+    const number=s=>{const m=/^(\d+)\.(\d+)\.(\d+)\s*[–-]/.exec(s);if(!m)throw Error('website.json: Meilenstein ohne Version.');return m.slice(1).map(Number);};
+    let last=-1;
+    for(const group of history){const [x,y,z]=number(group.title);if(x<=last||y!==0||(x===0?z!==1:z!==0))throw Error('website.json: Meilensteine nicht chronologisch.');last=x;let minor=0;for(const item of group.items){const [a,b,c]=number(item);if(a!==x||b<=minor||c!==0)throw Error('website.json: Minor-Meilensteine ungültig.');minor=b;}}
+    if(!website.blocks.patchnotes.paragraphs.length||!website.blocks.patchnotes.items.length||!website.blocks.sources.paragraphs.length||!website.blocks.sources1.paragraphs.length||website.blocks.milestones.paragraphs.length)throw Error('website.json: Einleitung oder Versionshinweise fehlen.');
+    return website;
+  }
   for (const key of keys) {
     const block = website.blocks[key];
     const expectedTitle = countedTitles && ['games','functions','plans','plans2','sources'].includes(key) ? `${titles[key]} (${block.items?.length})` : titles[key];

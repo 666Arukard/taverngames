@@ -1,3 +1,4 @@
+import {takeGameCard} from './card-draw.mjs';
 import {startingOrder} from './start-choice.mjs';
 import {SUITS,MAU_PROFILE,selectCards} from './card-sets.mjs';
 const check=(v,m)=>{if(!v)throw Error(m);};
@@ -10,8 +11,8 @@ function matchesDiscard(s,c){if(s.nineWild&&c.rank==='jack')return c.suit===s.ac
 export const mauLegal=(s,id,cardId)=>s?.phase==='playing'&&(!s.pendingDraw||s.stackSeven&&s.cards[cardId]?.rank==='7')&&s.hands[id]?.includes(cardId)&&(!s.drawnCard||s.drawnCard===cardId)&&matchesDiscard(s,s.cards[cardId]);
 function finish(s,id){if(s.playOut&&id){s.ranking??=[];if(!s.ranking.includes(id))s.ranking.push(id);s.calls=s.calls.filter(c=>c.id!==id);s.candidate=null;const left=s.players.filter(p=>!s.ranking.includes(p));if(left.length>1)return;s.ranking.push(...left);s.winners=[s.ranking[0]];s.losers=left;s.phase='finished';return;}s.phase='finished';s.winners=id?[id]:[];s.losers=id?s.players.filter(p=>p!==id):[];s.draw=!id;s.calls=[];s.candidate=null;}
 function advance(s,steps=1){s.turnSerial++;if(s.candidate&&s.turnSerial>=s.candidate.expires&&s.hands[s.candidate.id].length===0){finish(s,s.candidate.id);if(s.phase==='finished')return;}s.calls=s.calls.filter(c=>s.turnSerial<c.expires);for(let step=0;step<steps;step++){s.turn=(s.turn+1)%s.order.length;for(let i=0;((s.playOut&&s.ranking?.includes(s.order[s.turn]))||s.candidate&&s.hands[s.order[s.turn]].length===0)&&i<s.order.length;i++)s.turn=(s.turn+1)%s.order.length;}s.drawnCard=null;if(s.blockedTurns>=s.players.length)finish(s,null);}
-function take(s,id,count,random){let taken=[];for(let i=0;i<count;i++){if(!s.drawPile.length&&s.discard.length>1){const top=s.discard.pop();s.drawPile=shuffle(s.discard,random);s.discard=[top];}if(!s.drawPile.length)break;const card=s.drawPile.shift();s.hands[id].push(card);taken.push(card);}return taken;}
-export function actMau(original,id,action,args={},random=()=>1,gm=false){
+function take(s,id,count,random,pick,context='draw'){let taken=[];for(let i=0;i<count;i++){if(!s.drawPile.length&&s.discard.length>1){const top=s.discard.pop();s.drawPile=shuffle(s.discard,random);s.discard=[top];}if(!s.drawPile.length)break;const card=takeGameCard(s,id,s.drawPile,pick,context);s.hands[id].push(card);taken.push(card);}return taken;}
+export function actMau(original,id,action,args={},random=()=>1,gm=false,pick=null){
  const s=structuredClone(original);check(s?.game==='maumau','No game exists.');
  if(action==='abort'){check(gm,'GM only.');s.phase='aborted';s.paused=true;s.calls=[];s.candidate=null;}
  else if(action==='pause'){check(gm&&!['finished','aborted'].includes(s.phase),'GM only.');s.paused=!s.paused;}
@@ -19,11 +20,11 @@ export function actMau(original,id,action,args={},random=()=>1,gm=false){
  else{check(!s.paused&&!['finished','aborted'].includes(s.phase),'The game has ended or is paused.');
   if(['join','leave'].includes(action)){check(s.phase==='lobby'&&typeof id==='string'&&!id.startsWith('npc-'),'Join in the lobby.');if(action==='join'){check(!s.players.includes(id)&&s.players.length<5,'Two to five players.');s.players.push(id);}else{check(s.players.includes(id),'Invalid participant.');s.players=s.players.filter(p=>p!==id);}}
   else if(action==='begin'){
-   check(gm&&s.phase==='lobby'&&s.players.length>=2&&s.players.length<=5,'Two to five players.');s.order=startingOrder(s);s.hands=Object.fromEntries(s.players.map(p=>[p,[]]));s.drawPile=shuffle(Object.keys(s.cards),random);for(let i=0;i<5;i++)for(const p of s.order)take(s,p,1,random);s.discard=[s.drawPile.shift()];s.activeSuit=s.cards[s.discard[0]].suit;s.phase='playing';
+   check(gm&&s.phase==='lobby'&&s.players.length>=2&&s.players.length<=5,'Two to five players.');s.order=startingOrder(s);s.hands=Object.fromEntries(s.players.map(p=>[p,[]]));s.drawPile=shuffle(Object.keys(s.cards),random);for(let i=0;i<5;i++)for(const p of s.order)take(s,p,1,random,pick,'deal');s.discard=[s.drawPile.shift()];s.activeSuit=s.cards[s.discard[0]].suit;s.phase='playing';
   }else if(action==='call'){
    check(s.calls.some(c=>c.id===id),'No missed call.');s.calls=s.calls.filter(c=>c.id!==id);if(s.candidate?.id===id)finish(s,id);
   }else if(action==='challenge'){
-   check(s.players.includes(id)&&id!==args.target&&s.calls.some(c=>c.id===args.target&&s.turnSerial<c.expires),'No missed call.');take(s,args.target,2,random);s.calls=s.calls.filter(c=>c.id!==args.target);if(s.candidate?.id===args.target){if(s.hands[args.target].length===0)finish(s,args.target);else s.candidate=null;}
+   check(s.players.includes(id)&&id!==args.target&&s.calls.some(c=>c.id===args.target&&s.turnSerial<c.expires),'No missed call.');take(s,args.target,2,random,pick);s.calls=s.calls.filter(c=>c.id!==args.target);if(s.candidate?.id===args.target){if(s.hands[args.target].length===0)finish(s,args.target);else s.candidate=null;}
   }else{
    check(s.phase==='playing'&&s.order[s.turn]===id,'It is not your turn.');
    if(action==='play'){
@@ -33,7 +34,7 @@ export function actMau(original,id,action,args={},random=()=>1,gm=false){
     if(count===0&&!s.candidate){if(!missed)finish(s,id);else s.candidate={id,expires:s.turnSerial+2};}
     if(s.phase==='playing'){s.pendingDraw=c.rank==='7'?(s.pendingDraw??0)+2:0;advance(s,c.rank==='8'?2:1);}
    }else if(action==='draw'){
-    check(!s.drawnCard&&(s.pendingDraw>0||s.voluntaryDraw||!s.hands[id].some(c=>mauLegal(s,id,c))),'Play a matching card first.');const penalty=s.pendingDraw;s.pendingDraw=0;const drawn=take(s,id,penalty||1,random);s.blockedTurns=drawn.length?0:s.blockedTurns+1;
+    check(!s.drawnCard&&(s.pendingDraw>0||s.voluntaryDraw||!s.hands[id].some(c=>mauLegal(s,id,c))),'Play a matching card first.');const penalty=s.pendingDraw;s.pendingDraw=0;const drawn=take(s,id,penalty||1,random,pick);s.blockedTurns=drawn.length?0:s.blockedTurns+1;
     if(!s.noPlayAfterDraw&&!penalty&&drawn.length&&mauLegal(s,id,drawn[0]))s.drawnCard=drawn[0];else advance(s);
    }else if(action==='pass'){check(s.drawnCard,'Draw first.');advance(s);}
    else throw Error('Unknown action.');
