@@ -1,3 +1,9 @@
+# Aktueller Stand 5.2.3
+
+Vier gewinnt zeigt sein Spielfeld auf der freien Hauptspielfläche statt in der Lobby. Spielsteine sind schlicht rot und gelb ohne zusätzliche Zeichen. Das Feld passt sich der verfügbaren Breite an, bleibt bei eingeklappter Lobby sichtbar und wird beim Spielwechsel oder Schließen entfernt.
+
+19 stabile Spiele, Glückstag und Vier gewinnt als optionale Betas.
+
 # Aktueller Stand 5.2.1
 
 Die böse Dreizehn ersetzt ältere 3D-Würfelgruppen durch den aktuellen Wurf. Kartenspiele nutzen sprachabhängige Ordner und wiederverwendbare Teildecks; temporäre Hände und Ablagen werden nach Partieende bereinigt. Mau-Mau erhält ein Farbwahl-Popup beim Buben, eine Zuganzeige am Tisch und optionale Regeln für 7 auf 7, Zugende nach dem Ziehen und Weiterspielen bis zum letzten Spieler.

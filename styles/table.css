@@ -314,3 +314,15 @@
 #taverngames-durak-stage>.has-durak-actions>.taverngames-durak-actions{display:block;grid-column:3;grid-row:1}
 @container(max-width:600px){#taverngames-durak-stage>.has-durak-actions{grid-template-columns:minmax(0,1fr) 150px;grid-template-rows:minmax(100px,38%) minmax(0,1fr)}#taverngames-durak-stage>.has-durak-actions>.taverngames-durak-supply{grid-column:1;grid-row:1;width:100%}#taverngames-durak-stage>.has-durak-actions>.taverngames-durak-attacks{grid-column:1;grid-row:2}#taverngames-durak-stage>.has-durak-actions>.taverngames-durak-actions{grid-column:2;grid-row:1/3}}
 @container(max-width:440px){#taverngames-durak-stage>.has-durak-actions{grid-template-columns:minmax(0,1fr) 112px;gap:6px}.taverngames-durak-actions{padding:6px}}
+
+/* The board lives in the free canvas area; transparent surroundings keep panning available. */
+.taverngames-connect-stage{position:fixed;top:56px;bottom:66px;z-index:65;display:flex;align-items:center;justify-content:center;overflow:hidden;pointer-events:none}
+.taverngames-connect-play{width:100%;max-width:660px;max-height:100%;box-sizing:border-box;padding:12px;border:1px solid #b8995d;border-radius:8px;background:rgba(24,21,19,.82);color:#fff1d5;pointer-events:auto;overflow:auto;container-type:inline-size}
+.taverngames-connect-stage .taverngames-connect-play{width:min(100%,calc((100dvh - 250px)*7/6))}
+.taverngames-connect-play .taverngames-connect-board,.taverngames-connect-play .taverngames-connect-columns{max-width:none;width:100%;box-sizing:border-box}
+.taverngames-connect-play .taverngames-connect-board span{border:0;box-shadow:inset 0 1px 3px #0006}
+.taverngames-connect-status{margin:0 0 8px;text-align:center;font-weight:600}
+.taverngames-connect-play .taverngames-connect-columns button{background:#30251e;color:#fff1d5;border:1px solid #b8995d;border-radius:4px;min-height:32px;cursor:pointer}
+.taverngames-connect-play .taverngames-connect-columns button:disabled{opacity:.5;cursor:default}
+
+.taverngames-connect-play .taverngames-connect-board span.is-winning{outline:3px solid #ffe29a;outline-offset:-3px;box-shadow:0 0 12px #ffdb6888,inset 0 0 0 2px #8c651e}
