@@ -30,7 +30,7 @@ export class MorrisUI extends ConnectUI{
   const key=s.gameId+':'+s.revision;if(this.selection?.key!==key)this.selection=null;const moves=morrisLegal(s),mills=new Set(s.millCells??[]),allMills=new Set(s.order.flatMap(id=>morrisMills(s.board,id).flat()));
   for(const [index,id]of s.board.entries()){
    const from=this.selection?.from,choose=moves.some(m=>m.action==='move'&&m.args.from===index),move=moves.find(m=>m.args.index===index&&(m.action!=='move'||m.args.from===from));
-   const b=control(board,id?(s.order.indexOf(id)===0?'●':'○'):'',async()=>{
+   const b=control(board,'',async()=>{
     if(choose){this.selection={key,from:from===index?null:index};this.drawTable();return;}
     const live=this.getState();if(!move||live?.revision!==s.revision||live.phase!=='playing')return;for(const button of board.querySelectorAll('button'))button.disabled=true;try{await this.request(move.action,move.args);}finally{this.selection=null;this.drawTable();}
    },!mine||s.paused||!choose&&!move);

@@ -1,3 +1,11 @@
+# Aktueller Stand 5.4.1
+
+Neu als Beta: 17 und 4 als Kartenspiel mit wählbarem Deck, zwei verdeckten Startkarten für alle, offenen weiteren Karten, Banksteuerung und fortlaufenden Runden. Alternative Kartenwerte und zusätzliche Sechsen sind optional. Drachenhort erhält einen Spieltisch mit neun Münzfeldern; Würfel und Summe verschwinden drei Sekunden nach dem Ausrollen. Schwarzer-Peter-Paare liegen stärker überlappend in der Tischmitte. Mühle bleibt Beta, ohne Innenzeichen auf den Steinen; ihre geprüfte englische Anleitung ist freigeschaltet.
+
+26 Katalogeinträge: 23 stabile Spiele, ein stabiles Turnier und zwei optionale Beta-Spiele (Mühle, 17 und 4 als Kartenspiel). Sechs englische Anleitungen sind nach ausdrücklichem Review freigegeben. Für Karten ist ein vorhandenes geeignetes Foundry-Deck nötig. Keine eigenen Kartengrafiken werden mitgeliefert.
+
+Prüfung und Testplan: docs/release-5.4.1.md. Kein eigener neuer Foundry-Live-Nachweis. Historische Archive unverändert; lokaler Build ohne Veröffentlichung.
+
 # Aktueller Stand 5.4.0
 
 Tic-Tac-Toe einschließlich Extreme, das Tic-Tac-Toe-Turnier und Schwarzer Peter sind nach Praxistest stabil. Neu als Beta: Mühle mit Setzen, Ziehen, optionalem Springen, NPC-Stärken und Serien. Die nächste Runde lässt sich unten am Spieltisch starten. Spielezähler, Verbindungsbutton unter der Liste und das neue Pokal-Icon für Turniere sind enthalten. Bei Aalstechen entfällt die Augensumme. Fünf geprüfte englische Spielanleitungen sind verfügbar.

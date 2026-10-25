@@ -2,24 +2,22 @@
   "schemaVersion": 1,
   "blocks": {
     "patchnotes": {
-      "title": "Patchnotes Version 5.4.0",
+      "title": "Patchnotes Version 5.4.1",
       "paragraphs": [
-        "Tic-Tac-Toe einschließlich Extreme, das Tic-Tac-Toe-Turnier und Schwarzer Peter sind nach Praxistest stabil. Neu als Beta: Mühle mit Setzen, Ziehen, optionalem Springen, NPC-Stärken und Serien. Die nächste Runde lässt sich unten am Spieltisch starten. Spielezähler, Verbindungsbutton unter der Liste und das neue Pokal-Icon für Turniere sind enthalten. Bei Aalstechen entfällt die Augensumme. Fünf geprüfte englische Spielanleitungen sind verfügbar."
+        "Neu als Beta: 17 und 4 als Kartenspiel mit wählbarem Deck, zwei verdeckten Startkarten für alle, offenen weiteren Karten, Banksteuerung und fortlaufenden Runden. Alternative Kartenwerte und zusätzliche Sechsen sind optional. Drachenhort erhält einen Spieltisch mit neun Münzfeldern; Würfel und Summe verschwinden drei Sekunden nach dem Ausrollen. Schwarzer-Peter-Paare liegen stärker überlappend in der Tischmitte. Mühle bleibt Beta, ohne Innenzeichen auf den Steinen; ihre geprüfte englische Anleitung ist freigeschaltet."
       ],
       "items": [
-        "Tic-Tac-Toe einschließlich Extreme, Schwarzer Peter und Tic-Tac-Toe-Turnier nach Nutzerabnahme stabil.",
-        "Mühle als neue Beta: 24-Punkte-Brett, neun Steine, Mühlen und Schlagen, Springen optional, Remis und Serien.",
-        "Nächste Runde und Folgepartie unten am Brettspieltisch verfügbar, auch ohne Dice So Nice.",
-        "Spielezähler berücksichtigt Filter, Suche und Favoriten. Verbindungen erneuern steht unter der Liste.",
-        "Turniere mit neuem Pokal-Icon von fjstudio/Flaticon.",
-        "Aalstechen ohne Augensumme; Regeln auf Deutsch und Englisch freigegeben.",
-        "Englische Anleitungen für Schwarzer Peter, das Turnier und Vier gewinnt nach Review freigeschaltet."
+        "17 und 4 als Karten-Beta: Standard mit 32 Karten, alternative Bildwerte und zusätzliche Sechsen optional.",
+        "Zwei verdeckte Startkarten für Bank und alle Spieler, weitere Karten offen; auswählbares Deck und fortlaufende Runden mit internen Spieltoken.",
+        "Drachenhort-Spielbrett mit neun Horten und Münzsymbolen; Würfel und Summe nur drei Sekunden nach dem Ausrollen sichtbar.",
+        "Schwarzer-Peter-Paare mittig und stark überlappend, auch bei mehreren Reihen.",
+        "Mühle bleibt Beta: schlichte Spielsteine ohne Innenzeichen, geprüfte deutsche und englische Anleitung."
       ]
     },
     "games": {
-      "title": "aktuelle Spiele (25)",
+      "title": "aktuelle Spiele (26)",
       "paragraphs": [
-        "23 stabile Spiele, ein stabiles Tic-Tac-Toe-Turnier und Mühle als optionale Beta. Gemeinsame Partien mit echten Spielern und optional NPCs."
+        "23 stabile Spiele, ein stabiles Tic-Tac-Toe-Turnier und zwei optionale Betas: Mühle und 17 und 4 als Kartenspiel. Gemeinsame Partien mit echten Spielern und optional NPCs."
       ],
       "items": [
         {
@@ -55,7 +53,8 @@
             "Durak",
             "Mau-Mau",
             "Schwarzer Peter",
-            "Schwimmen / Knack"
+            "Schwimmen / Knack",
+            "17 und 4 (Karten) (Beta)"
           ]
         },
         {
@@ -75,7 +74,7 @@
       ]
     },
     "plans": {
-      "title": "geplante Spiele (29)",
+      "title": "geplante Spiele (28)",
       "paragraphs": [
         "Geplante Spiele und Wettbewerbe mit vorhandenen Referenzen oder neu vorgemerkten Namen. Einzelne Regeln sind noch offen; insbesondere ist beim Streichholzspiel noch keine genaue Variante festgelegt. Vorhandene Spiele werden nicht unter ihren englischen Namen erneut geplant."
       ],
@@ -97,7 +96,6 @@
         {
           "title": "Kartenspiele",
           "items": [
-            "17+4 (Kartenspiel)",
             "Binokel",
             "Blackjack",
             "Doppelkopf",
@@ -288,9 +286,9 @@
         {
           "title": "Allgemeine Einstellungen",
           "items": [
-            "Sprache: Deutsch oder Englisch wählen. Beide Oberflächen sind verfügbar. Deutsche Anleitungen sind enthalten; englische Anleitungen für Tic-Tac-Toe einschließlich Extreme, das Tic-Tac-Toe-Turnier, Schwarzer Peter, Vier gewinnt und Aalstechen sind freigegeben. Weitere englische Anleitungen einschließlich Mühle bleiben bis zur Prüfung gesperrt.",
+            "Sprache: Deutsch oder Englisch wählen. Beide Oberflächen sind verfügbar. Deutsche Anleitungen und sechs geprüfte englische Anleitungen sind enthalten: Tic-Tac-Toe einschließlich Extreme, dessen Turnier, Schwarzer Peter, Vier gewinnt, Aalstechen und Mühle. Die englische Anleitung der neuen Karten-Beta bleibt bis zur Prüfung gesperrt.",
             "Ansicht: Reiteransicht ist Standard, klassische Fenster bleiben je Benutzer wählbar.",
-            "Beta-Test: Mühle einschalten. Alle anderen Spiele sowie das Tic-Tac-Toe-Turnier sind stabil und ohne Beta-Schalter verfügbar.",
+            "Beta-Test: Mühle und 17 und 4 als Kartenspiel einschalten. 23 andere Spiele und das Tic-Tac-Toe-Turnier sind stabil und ohne Beta-Schalter verfügbar.",
             "Dice So Nice: optionale 3D-Würfel aktivieren. Ohne das Zusatzmodul bleiben die Spiele bedienbar.",
             "Markierungsmodus: persönlich wählen, ob markierte eigene Würfel behalten oder erneut gewürfelt werden.",
             "Kartendecks: geeignete externe Vorlagen unter Cards / Card Decks anlegen oder importieren. Es ist kein Standard-Kartenset enthalten; vorhandene Vorlagen bleiben unverändert.",
@@ -309,7 +307,7 @@
             "Kartenset: in der Moderation ein passendes Deck wählen. Mau-Mau und Schwimmen verwenden 7 bis Ass, Durak Sechs bis Ass, jeweils vier Farben ohne Joker.",
             "Mau-Mau: freiwilliges Ziehen, Ansagestrafen, 7 auf 7, Zugende nach Ziehen und Weiterspielen sind getrennte Optionen, standardmäßig aus. Optional ist die 9 der Allesleger; dann erfordert der Bube die passende Farbe und behält seine Farbwahl.",
             "Schwimmen: drei Leben plus Schwimmen; 30½ und Knack, Blitz optional standardmäßig an. Bei genau 7/8/9 auf dem Tisch darf der aktive Spieler kostenlos erneuern; vollständiges Schieben aller aktiven Teilnehmer erneuert nur die Tischkarten.",
-            "Durak: Schutzzeit 0–60 Sekunden, Standard fünf. Weitergabe durch Trumpfvorzeigen ist vorgesehen; Trumpf ausspielen, Rangweitergabe und verlängertes Nachwerfen beim Aufnehmen sind optionale Regeln. Rangweitergabe ist standardmäßig aus.",
+            "Durak: Schutzzeit 0–60 Sekunden, Standard sechs. Weitergabe durch Trumpfvorzeigen ist vorgesehen; Trumpf ausspielen, Rangweitergabe und verlängertes Nachwerfen beim Aufnehmen sind optionale Regeln. Rangweitergabe ist standardmäßig aus.",
             "Der Glückstag: Offen-Checkboxen und Erhöhen sind standardmäßig aus. Bei aktiviertem Erhöhen SL-Limits festlegen; die Bank hat keinen eigenen Wurf.",
             "Vier gewinnt und Tic-Tac-Toe: zwei echte Teilnehmer oder NPCs wählen; eine Partie oder Serie von 1–100 Runden mit wechselndem Startspieler und optionalem gemeinsamen Token-Einsatz.",
             "Schwarzer Peter: Deck, ungepaarte Karte, erlaubte Karten und Paargruppen wählen. Standardmäßig beendet das erste leere Blatt die Runde; optional bis zur letzten ungepaarten Karte weiterspielen.",
@@ -318,13 +316,14 @@
             "Tic-Tac-Toe-Turnier: 2–16 Teilnehmer, ausgeloster K.-o.-Plan und Freilose; nach drei Unentschieden entscheidet die SL zwischen Los und weiterer Runde. Spieltoken gelten einmalig für das Turnier.",
             "NPC-Stärke: Bei Tic-Tac-Toe und Vier gewinnt pro NPC Leicht, Normal oder Schwer wählen. Neue NPCs starten mit Normal; ältere Spielstände ohne Einstellung behalten ihre bisherige starke Strategie.",
             "Mühle (Beta): 1–100 Runden, optionale Sprungregel, NPC-Stärken und manuelle NPC-Steuerung. Einmaliger Token-Einsatz pro Serie. Remis nach dreifacher Stellung oder 50 Zugpaaren ohne Schlag nach dem Setzen.",
-            "Mühle (Beta): zwei echte Teilnehmer oder NPCs wählen. Springen mit genau drei Steinen ist optional und standardmäßig ein. Eine Partie oder Serie von 1–100 Runden mit optionalem gemeinsamem Token-Einsatz vorbereiten. Pro neu geschlossener Mühle wird ein Stein geschlagen; auch eine Doppelmühle erlaubt nur einen Schlag."
+            "Mühle (Beta): zwei echte Teilnehmer oder NPCs wählen. Springen mit genau drei Steinen ist optional und standardmäßig ein. Eine Partie oder Serie von 1–100 Runden mit optionalem gemeinsamem Token-Einsatz vorbereiten. Pro neu geschlossener Mühle wird ein Stein geschlagen; auch eine Doppelmühle erlaubt nur einen Schlag.",
+            "17 und 4 als Kartenspiel (Beta): externes Deck wählen. Standard sind 32 Karten von 7 bis Ass mit Bube 2, Dame 3, König 4 und Ass 1 oder 11. Alternative Bild-/Asswerte und die zusätzlichen Sechsen sind optional; Sechsen nur bei alternativer Wertung. Bank automatisch oder durch SL steuern, Einsatz und interne Banklimits vor der Partie festlegen."
           ]
         }
       ]
     },
     "sources": {
-      "title": "Regelquellen (49)",
+      "title": "Regelquellen (50)",
       "paragraphs": [
         "Hier findet ihr alle genutzten Regelquellen. Quellen für noch nicht umgesetzte Spiele sind ausdrücklich als geplante Regelreferenzen gekennzeichnet."
       ],
@@ -522,6 +521,12 @@
           "items": [
             "Awiana – Koboldpoker (Vorlage für Würfelpoker): https://awiana.fandom.com/de/wiki/Koboldpoker"
           ]
+        },
+        {
+          "title": "17 und 4 (Karten)",
+          "items": [
+            "Schmidt Spiele – Die große Spielesammlung Premium-Edition, Siebzehn und Vier, gedruckte Seite 19: 32 Karten und Standardwerte – https://www.schmidtspiele.de/files/Produkte/4/49125%20-%20Die%20gro%C3%9Fe%20Spielesammlung/49125_Die_grosse_Spielesammlung_Premium-Edition-D.pdf"
+          ]
         }
       ]
     },
@@ -684,6 +689,12 @@
           "items": [
             "Würfelpoker: fünf W8 nach Awiana/Koboldpoker, Leifs abweichende Rangfolge und Daniels bestätigte Vergleiche; zwei Setzphasen mit All-in und Nebentöpfen. Full House nach Summe, dann höherem Drilling; zwei Paare nach höherem/niedrigerem Paar und Restwürfel."
           ]
+        },
+        {
+          "title": "17 und 4 (Karten)",
+          "items": [
+            "Zwei verdeckte Startkarten für alle, offene weitere Karten und Schlussaufdeckung; weitere Bank-/Auszahlungsregeln aus der Würfelversion als TavernGames-Hausregeln. Alternative B3/D4/K5/A2oder11 und optionale Sechsen. Sieg 2x Einsatz, Sieg mit 21 2,5x auf volle Spieltoken aufgerundet."
+          ]
         }
       ]
     },
@@ -742,5 +753,5 @@
       "paragraphs": []
     }
   },
-  "version": "5.4.0"
+  "version": "5.4.1"
 }

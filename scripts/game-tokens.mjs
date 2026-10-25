@@ -10,7 +10,7 @@ export function tokenBook(){return {version:1,mode:'none',config:{stake:1,min:1,
 const betsHeld=(e,id)=>['open','closed'].includes(e.bets?.status)?e.bets.bets.filter(b=>b.id===id).reduce((n,b)=>n+b.amount,0):0;
 export const availableTokens=(e,id)=>(e.balances[id]??0)-(e.reserved[id]??0)-betsHeld(e,id);
 const setReserve=(e,id,n)=>{check(whole(n,1000000000),'Invalid token amount.');e.reserved[id]=n;check(availableTokens(e,id)>=0,'Not enough game tokens.');};
-export function bankShortfall(scope,s){const e=s?.economy;if(e?.mode!=='tokens'||ended(s))return 0;if(scope==='lucky')return Math.max(0,s.players.reduce((n,id)=>n+(s.stakes[id]??0),0)-e.bank);if(scope==='seventeen')return seventeenBankShortfall(s);if(scope==='chohan')return choBankShortfall(s);if(scope==='pig'&&e.config.funding==='bank'){const state={...s,scores:Object.fromEntries(s.players.map(id=>[id,0]))};return Math.max(0,total(prizeShares(state,e.config.stake,'bank'))-s.players.length*e.config.stake-e.bank);}return 0;}
+export function bankShortfall(scope,s){if(scope==='card21')scope='seventeen';const e=s?.economy;if(e?.mode!=='tokens'||ended(s))return 0;if(scope==='lucky')return Math.max(0,s.players.reduce((n,id)=>n+(s.stakes[id]??0),0)-e.bank);if(scope==='seventeen')return seventeenBankShortfall(s);if(scope==='chohan')return choBankShortfall(s);if(scope==='pig'&&e.config.funding==='bank'){const state={...s,scores:Object.fromEntries(s.players.map(id=>[id,0]))};return Math.max(0,total(prizeShares(state,e.config.stake,'bank'))-s.players.length*e.config.stake-e.bank);}return 0;}
 export function tokenSnapshot(scope,s){if(!s)return {scope,game:null,economy:null};return {scope,game:{gameId:s.gameId,revision:s.revision,phase:s.phase,players:[...s.players],npcs:structuredClone(s.npcs??{}),variant:s.variant,seriesId:s.seriesId,seriesRound:s.seriesRound,seriesClosed:s.seriesClosed},economy:structuredClone(s.economy??tokenBook()),bankShortfall:bankShortfall(scope,s)};}
 function nativeSetup(s,scope,e){
  if(scope==='seventeen'){
@@ -26,6 +26,7 @@ function nativeSetup(s,scope,e){
  if(['pig','ship','lottery'].includes(scope)){s.currency='token';s.stake=e.mode==='tokens'?e.config.stake:0;s.funding=e.config.funding;}
 }
 export function tokenAction(scope,original,action,args,user,{users=[]}={}){
+ if(scope==='card21')scope='seventeen';
  check(original?.gameId,'Open a lobby first.');check(args.gameId===original.gameId&&args.revision===original.revision,'The game state changed. Please try again.');
  const s=structuredClone(original),e=s.economy??=tokenBook();
  const gm=()=>check(user.isGM,'GM only.');const lobby=()=>check(s.phase==='lobby'&&!e.started&&!s.paused&&!total(e.reserved)&&!e.bets?.bets.length&&!s.tickets?.length,'Configure before committing stakes.');
@@ -74,6 +75,7 @@ export function tokenGuard(scope,s,action){const e=s?.economy;if(!e)return;
 }
 // Called before the existing encrypted game save: game and money commit together.
 export function prepareTokenState(s,old,scope){
+ if(scope==='card21')scope='seventeen';
  const same=old?.gameId===s.gameId&&!!s.gameId,prior=old?.economy;
  if(!same){
   if(prior&&!ended(old)&&(prior.started||total(prior.reserved)||prior.bets?.bets.length))throw Error('Finish or end the current game first.');

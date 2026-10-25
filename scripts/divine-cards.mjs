@@ -1,10 +1,12 @@
+import {card21Total} from './card21-engine.mjs';
 import {secureIndex} from './start-choice.mjs';
-export const DIVINE_CARD_SCOPES=['maumau','swim','durak','oldmaid'];
+export const DIVINE_CARD_SCOPES=['maumau','swim','durak','oldmaid','card21'];
 const rankValue=c=>({jack:11,queen:12,king:13,ace:14})[c.rank]??Number(c.rank);
 const swimValue=c=>c.rank==='ace'?11:['jack','queen','king'].includes(c.rank)?10:Number(c.rank);
 function swimQuality(s,hand){if(hand.length===3&&new Set(hand.map(c=>c.rank)).size===1)return hand[0].rank==='ace'&&s.blitz?32:30.5;return Math.max(0,...[...new Set(hand.map(c=>c.suit))].map(suit=>hand.filter(c=>c.suit===suit).reduce((n,c)=>n+swimValue(c),0)));}
 export function cardUsefulness(s,actor,cardId,{context='draw'}={}){
  const card=s.cards[cardId],hand=(s.hands[actor]??[]).map(id=>s.cards[id]);if(!card)return 0;
+ if(s.game==='card21'){const ids=actor==='@bank'?s.bank:s.hands[actor]??[];const total=card21Total(s,[...ids,cardId]);return total<=21?total:-100-(total-21);}
  if(s.game==='maumau'){
   const wild=s.nineWild?card.rank==='9':card.rank==='jack',top=s.cards[s.discard.at(-1)];
   const playable=wild||(s.nineWild&&card.rank==='jack'?card.suit===s.activeSuit:card.suit===s.activeSuit||card.rank===top?.rank);
