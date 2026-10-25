@@ -15,7 +15,7 @@ export function installDiceTableSums({game,view,renderers}){
   if(!globalThis.document)return;
   const entry=view.entries.get(view.selected),g=game(),renderer=entry&&renderers(entry.scope);
   const box=g.dice3d?.box,canvas=box?.renderer?.domElement??g.dice3d?.canvas,rect=canvas?.getBoundingClientRect?.();
-  if(!view.enabled()||!entry||!renderer||!rect||!g.settings.get('taverngames','diceSoNiceBeta')){root?.remove();root=null;return;}
+  if(!view.enabled()||!entry||entry.scope==='aalstechen'||!renderer||!rect||!g.settings.get('taverngames','diceSoNiceBeta')){root?.remove();root=null;return;}
   root??=Object.assign(document.createElement('div'),{className:'taverngames-dice-sums'});
   if(!root.isConnected)document.body.append(root);
   const groups=renderer.renderers??new Map([['',renderer]]),active=new Set(),labels=[];

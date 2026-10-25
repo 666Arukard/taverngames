@@ -12,7 +12,7 @@ Die Grafiken wurden von Daniel bereitgestellt; das TavernGames-Logo wurde von Da
 
 | Beta-Spiele | Magnific | https://www.flaticon.com/free-icon/beta_4753110 | [Beta icons created by Magnific - Flaticon](https://www.flaticon.com/free-icons/beta) |
 
-| Turniere | Magnific | https://www.flaticon.com/free-icon/ranking_4430560 | [Sports and competition icons created by Magnific - Flaticon](https://www.flaticon.com/free-icons/sports-and-competition) |
+| Turniere | fjstudio | https://www.flaticon.com/free-icon/trophy_2639922 | [Prize icons created by fjstudio - Flaticon](https://www.flaticon.com/free-icons/prize) |
 
 | Wettkämpfe (künftig) | Iconjam | https://www.flaticon.com/free-icon/duel_18292580 | [Duel icons created by Iconjam - Flaticon](https://www.flaticon.com/free-icons/duel) |
 

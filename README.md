@@ -1,3 +1,11 @@
+# Aktueller Stand 5.4.0
+
+Tic-Tac-Toe einschließlich Extreme, das Tic-Tac-Toe-Turnier und Schwarzer Peter sind nach Praxistest stabil. Neu als Beta: Mühle mit Setzen, Ziehen, optionalem Springen, NPC-Stärken und Serien. Die nächste Runde lässt sich unten am Spieltisch starten. Spielezähler, Verbindungsbutton unter der Liste und das neue Pokal-Icon für Turniere sind enthalten. Bei Aalstechen entfällt die Augensumme. Fünf geprüfte englische Spielanleitungen sind verfügbar.
+
+25 Katalogeinträge: 23 stabile Spiele, ein stabiles Turnier, Mühle als einzige Beta. Bestehende Freigaben gelten unabhängig vom Beta-Schalter. Mühle erfordert den Beta-Schalter, benötigt keine Grafiken oder Zusatzmodule und unterstützt zwei Menschen, Mensch/NPC oder zwei NPCs.
+
+Prüfung und vollständiger Testplan: docs/release-5.4.0.md. Kein eigener neuer Foundry-Live-Nachweis. Historische Archive unverändert; der lokale Build veröffentlicht nichts.
+
 # Aktueller Stand 5.3.1
 
 Neu als Beta: Tic-Tac-Toe-Turnier für 2–16 Teilnehmer mit K.-o.-Plan, Freilosen und SL-Entscheidung nach wiederholten Unentschieden. Tic-Tac-Toe erhält zwei Drei-Steine-Varianten und Extreme. Die NPC-Stärke bei Tic-Tac-Toe und Vier gewinnt ist je NPC wählbar. Beta-Filter mit eigenem Icon und zweireihige Kategorieauswahl ergänzt. Schwarzer Peter zeigt abgelegte Paare offen am Tisch und wartet bei NPC-Zügen etwas länger. Unentschieden werden korrekt angekündigt. Die geprüfte deutsche und englische Tic-Tac-Toe-Anleitung ist verfügbar.

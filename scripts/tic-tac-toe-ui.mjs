@@ -7,7 +7,7 @@ const modeName=mode=>mode==='vanishing'?f('Drei Steine – ältesten versetzen',
 export class TicUI extends ConnectUI{
  drawModeration(){
   const root=this.windows.get('moderation')?.root;if(!root||!game.user.isGM)return;
-  const drafts=new Map([...root.querySelectorAll('[data-draft]')].map(e=>[e.dataset.draft,e.type==='checkbox'?e.checked:e.value])),s=this.getState();root.replaceChildren();const c=node('div',undefined,'schocken-content taverngames-connect-moderation');root.append(c);c.append(node('h2',gameTitle(this.scope)+' · Beta'));
+  const drafts=new Map([...root.querySelectorAll('[data-draft]')].map(e=>[e.dataset.draft,e.type==='checkbox'?e.checked:e.value])),s=this.getState();root.replaceChildren();const c=node('div',undefined,'schocken-content taverngames-connect-moderation');root.append(c);c.append(node('h2',gameTitle(this.scope)));
   control(c,f('Spieltisch öffnen','Open game table'),()=>{this.window('table');this.drawTable();});control(c,f('Anleitung','Instructions'),()=>this.guide());
   const label=node('label',undefined,'schocken-choice'),show=node('input');show.type='checkbox';show.checked=game.settings.get('taverngames','show'+this.scope+'Launcher')===true;show.onchange=()=>game.settings.set('taverngames','show'+this.scope+'Launcher',show.checked);label.append(show,document.createTextNode(f('Unteren Spielbutton einblenden','Show bottom game button')));c.append(label);
   const variant=selectField(c,f('Spielmodus','Game mode'),['classic','vanishing','moving'].map(v=>[v,modeName(v)]),drafts.get('variant')??s?.variant??'classic','variant');
@@ -20,7 +20,7 @@ export class TicUI extends ConnectUI{
   if(s){renderNpcDifficulty(c,s,this.request);control(c,s.paused?f('Fortsetzen','Resume'):f('Pause','Pause'),()=>this.request('pause'));for(const id of Object.keys(s.npcs))control(c,this.name(id)+' · '+(s.npcManual[id]?f('SL steuert','GM controls'):f('Automatisch','Automatic')),()=>this.request('npcControl',{id,manual:!s.npcManual[id]}));}
  }
  drawTable(){
-  const root=this.windows.get('table')?.root;if(!root)return;root.replaceChildren();const c=node('div',undefined,'schocken-content'),s=this.getState();root.append(c);c.append(node('h2',gameTitle(this.scope)+' · Beta'));if(!s)return;
+  const root=this.windows.get('table')?.root;if(!root)return;root.replaceChildren();const c=node('div',undefined,'schocken-content'),s=this.getState();root.append(c);c.append(node('h2',gameTitle(this.scope)));if(!s)return;
   for(const id of s.players)c.append(node('p',this.name(id)+' · '+(s.scores[id]??0)+' '+f('Punkte','points')));
   c.append(node('p',(s.extreme?'Extreme · ':'')+modeName(s.variant)));
   if(s.phase==='lobby'){const joined=s.players.includes(game.user.id);control(c,joined?f('Lobby verlassen','Leave lobby'):f('Beitreten','Join'),()=>this.request(joined?'leave':'join'),s.paused||!joined&&s.players.length>=(this.scope==='tictournament'?16:2));return;}

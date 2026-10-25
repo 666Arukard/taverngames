@@ -1,9 +1,10 @@
 // Names and categories are data so future tags can extend the catalog without
 // coupling navigation to gameplay. No duration or betting claims are invented.
 export const GAME_CATALOG=Object.freeze([
- {id:'tictournament',category:'tournament',beta:true,names:['Tic-Tac-Toe-Turnier','Tic-Tac-Toe Tournament']},
- {id:'oldmaid',category:'cards',beta:true,names:['Schwarzer Peter','Old Maid']},
- {id:'tictactoe',category:'board',beta:true,names:['Tic-Tac-Toe','Tic Tac Toe','Drei gewinnt','Noughts and Crosses']},
+ {id:'morris',category:'board',beta:true,names:['Mühle','Muehle',"Nine Men's Morris",'Nine Mens Morris']},
+ {id:'tictournament',category:'tournament',names:['Tic-Tac-Toe-Turnier','Tic-Tac-Toe Tournament']},
+ {id:'oldmaid',category:'cards',names:['Schwarzer Peter','Old Maid']},
+ {id:'tictactoe',category:'board',names:['Tic-Tac-Toe','Tic Tac Toe','Drei gewinnt','Noughts and Crosses']},
  {id:'connectfour',category:'board',names:['Vier gewinnt','Four in a Row','Connect Four']},
  {id:'lucky',category:'dice',names:['Der Glückstag','Glückstag','Lucky Day']},
  {id:'swim',category:'cards',names:['Schwimmen','Knack','Thirty-one']},

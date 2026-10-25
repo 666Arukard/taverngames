@@ -2,23 +2,24 @@
   "schemaVersion": 1,
   "blocks": {
     "patchnotes": {
-      "title": "Patchnotes Version 5.3.1",
+      "title": "Patchnotes Version 5.4.0",
       "paragraphs": [
-        "Neu als Beta: Tic-Tac-Toe-Turnier für 2–16 Teilnehmer mit K.-o.-Plan, Freilosen und SL-Entscheidung nach wiederholten Unentschieden. Tic-Tac-Toe erhält zwei Drei-Steine-Varianten und Extreme. Die NPC-Stärke bei Tic-Tac-Toe und Vier gewinnt ist je NPC wählbar. Beta-Filter mit eigenem Icon und zweireihige Kategorieauswahl ergänzt. Schwarzer Peter zeigt abgelegte Paare offen am Tisch und wartet bei NPC-Zügen etwas länger. Unentschieden werden korrekt angekündigt. Die geprüfte deutsche und englische Tic-Tac-Toe-Anleitung ist verfügbar."
+        "Tic-Tac-Toe einschließlich Extreme, das Tic-Tac-Toe-Turnier und Schwarzer Peter sind nach Praxistest stabil. Neu als Beta: Mühle mit Setzen, Ziehen, optionalem Springen, NPC-Stärken und Serien. Die nächste Runde lässt sich unten am Spieltisch starten. Spielezähler, Verbindungsbutton unter der Liste und das neue Pokal-Icon für Turniere sind enthalten. Bei Aalstechen entfällt die Augensumme. Fünf geprüfte englische Spielanleitungen sind verfügbar."
       ],
       "items": [
-        "Tic-Tac-Toe-Turnier als Beta: K.-o.-System für 2–16 Teilnehmer; SL wählt nach drei Unentschieden Losentscheid oder Weiterspielen.",
-        "Tic-Tac-Toe: ältesten Stein versetzen, frei verschieben und Extreme mit drei Steinen je Teilbrett.",
-        "Tic-Tac-Toe und Vier gewinnt: NPC-Stärke Leicht, Normal oder Schwer pro NPC.",
-        "Beta-Filter, zweireihige Kategorieauswahl und Kategorie Turniere.",
-        "Schwarzer Peter: offene Paarablage einschließlich Startpaaren; NPC-Wartezeit mindestens 1,8 Sekunden.",
-        "Tic-Tac-Toe: Feldabstände und Unentschieden-Ankündigung korrigiert; freigegebene Anleitung auf Deutsch und Englisch."
+        "Tic-Tac-Toe einschließlich Extreme, Schwarzer Peter und Tic-Tac-Toe-Turnier nach Nutzerabnahme stabil.",
+        "Mühle als neue Beta: 24-Punkte-Brett, neun Steine, Mühlen und Schlagen, Springen optional, Remis und Serien.",
+        "Nächste Runde und Folgepartie unten am Brettspieltisch verfügbar, auch ohne Dice So Nice.",
+        "Spielezähler berücksichtigt Filter, Suche und Favoriten. Verbindungen erneuern steht unter der Liste.",
+        "Turniere mit neuem Pokal-Icon von fjstudio/Flaticon.",
+        "Aalstechen ohne Augensumme; Regeln auf Deutsch und Englisch freigegeben.",
+        "Englische Anleitungen für Schwarzer Peter, das Turnier und Vier gewinnt nach Review freigeschaltet."
       ]
     },
     "games": {
-      "title": "aktuelle Spiele (24)",
+      "title": "aktuelle Spiele (25)",
       "paragraphs": [
-        "21 stabile Spiele, zwei Beta-Spiele und eine optionale Tic-Tac-Toe-Turnier-Beta. Gemeinsame Partien mit echten Spielern und optional NPCs."
+        "23 stabile Spiele, ein stabiles Tic-Tac-Toe-Turnier und Mühle als optionale Beta. Gemeinsame Partien mit echten Spielern und optional NPCs."
       ],
       "items": [
         {
@@ -53,21 +54,22 @@
           "items": [
             "Durak",
             "Mau-Mau",
-            "Schwimmen / Knack",
-            "Schwarzer Peter (Beta)"
+            "Schwarzer Peter",
+            "Schwimmen / Knack"
           ]
         },
         {
           "title": "Brettspiele",
           "items": [
+            "Tic-Tac-Toe",
             "Vier gewinnt",
-            "Tic-Tac-Toe (Beta)"
+            "Mühle (Beta)"
           ]
         },
         {
           "title": "Turniere",
           "items": [
-            "Tic-Tac-Toe-Turnier (Beta)"
+            "Tic-Tac-Toe-Turnier"
           ]
         }
       ]
@@ -118,11 +120,11 @@
             "Karaoke",
             "Käsekästchen / Dots and Boxes (Variante noch offen)",
             "Kneipenquiz",
-            "Mühle / Nine Men’s Morris",
             "Pfeilwurf",
             "Schach (abstrakter Wettbewerb)",
             "Schiffe versenken / Battleship (Variante noch offen)",
             "Streichholzspiel / Matchstick Game (Variante noch offen)",
+            "WallRush (Regelvariante noch offen)",
             "Wettessen",
             "Wetttrinken"
           ]
@@ -132,7 +134,7 @@
     "plans2": {
       "title": "geplante Funktionen (17)",
       "paragraphs": [
-        "Größere noch nicht umgesetzte Vorhaben; keine automatische Umsetzungszusage. Schwarzer Peter, Tic-Tac-Toe und das erste Tic-Tac-Toe-Turnier sind als Betas verfügbar."
+        "Größere noch nicht umgesetzte Vorhaben; keine automatische Umsetzungszusage. Mühle ist als Beta verfügbar; Tic-Tac-Toe einschließlich Extreme, Schwarzer Peter und das erste Turnier sind stabil."
       ],
       "items": [
         {
@@ -179,7 +181,7 @@
         {
           "title": "Sprache und Hilfe",
           "items": [
-            "Weitere geprüfte englische Anleitungen; Tic-Tac-Toe bereits freigegeben"
+            "Weitere geprüfte englische Anleitungen; fünf Anleitungen bereits freigegeben"
           ]
         }
       ]
@@ -206,7 +208,7 @@
             "Automatische und manuell steuerbare NPCs",
             "Wählbarer Startspieler",
             "Gemeinsame Partien mit echten Mitspielern",
-            "Wählbare NPC-Stärke bei Tic-Tac-Toe und Vier gewinnt"
+            "Wählbare NPC-Stärke bei Tic-Tac-Toe, Vier gewinnt und Mühle"
           ]
         },
         {
@@ -272,7 +274,7 @@
         {
           "title": "Turniere",
           "items": [
-            "Tic-Tac-Toe-K.-o.-Turnier mit Spielern, NPCs und Freilosen (Beta)"
+            "Tic-Tac-Toe-K.-o.-Turnier mit Spielern, NPCs und Freilosen"
           ]
         }
       ]
@@ -286,9 +288,9 @@
         {
           "title": "Allgemeine Einstellungen",
           "items": [
-            "Sprache: Deutsch oder Englisch wählen. Beide Oberflächen sind verfügbar; Deutsche Anleitungen sind enthalten; die englische Tic-Tac-Toe-Anleitung einschließlich Extreme ist freigegeben. Andere englische Anleitungen bleiben bis zur Prüfung gesperrt.",
+            "Sprache: Deutsch oder Englisch wählen. Beide Oberflächen sind verfügbar. Deutsche Anleitungen sind enthalten; englische Anleitungen für Tic-Tac-Toe einschließlich Extreme, das Tic-Tac-Toe-Turnier, Schwarzer Peter, Vier gewinnt und Aalstechen sind freigegeben. Weitere englische Anleitungen einschließlich Mühle bleiben bis zur Prüfung gesperrt.",
             "Ansicht: Reiteransicht ist Standard, klassische Fenster bleiben je Benutzer wählbar.",
-            "Beta-Test: Schwarzer Peter, Tic-Tac-Toe und das Tic-Tac-Toe-Turnier einschalten. Die übrigen 21 Spiele sind stabil und ohne Beta-Schalter verfügbar.",
+            "Beta-Test: Mühle einschalten. Alle anderen Spiele sowie das Tic-Tac-Toe-Turnier sind stabil und ohne Beta-Schalter verfügbar.",
             "Dice So Nice: optionale 3D-Würfel aktivieren. Ohne das Zusatzmodul bleiben die Spiele bedienbar.",
             "Markierungsmodus: persönlich wählen, ob markierte eigene Würfel behalten oder erneut gewürfelt werden.",
             "Kartendecks: geeignete externe Vorlagen unter Cards / Card Decks anlegen oder importieren. Es ist kein Standard-Kartenset enthalten; vorhandene Vorlagen bleiben unverändert.",
@@ -310,17 +312,19 @@
             "Durak: Schutzzeit 0–60 Sekunden, Standard fünf. Weitergabe durch Trumpfvorzeigen ist vorgesehen; Trumpf ausspielen, Rangweitergabe und verlängertes Nachwerfen beim Aufnehmen sind optionale Regeln. Rangweitergabe ist standardmäßig aus.",
             "Der Glückstag: Offen-Checkboxen und Erhöhen sind standardmäßig aus. Bei aktiviertem Erhöhen SL-Limits festlegen; die Bank hat keinen eigenen Wurf.",
             "Vier gewinnt und Tic-Tac-Toe: zwei echte Teilnehmer oder NPCs wählen; eine Partie oder Serie von 1–100 Runden mit wechselndem Startspieler und optionalem gemeinsamen Token-Einsatz.",
-            "Schwarzer Peter (Beta): Deck, ungepaarte Karte, erlaubte Karten und Paargruppen wählen. Standardmäßig beendet das erste leere Blatt die Runde; optional bis zur letzten ungepaarten Karte weiterspielen.",
+            "Schwarzer Peter: Deck, ungepaarte Karte, erlaubte Karten und Paargruppen wählen. Standardmäßig beendet das erste leere Blatt die Runde; optional bis zur letzten ungepaarten Karte weiterspielen.",
             "Bei übrigen Spielen die angebotenen Hausvarianten, Einsätze und gegebenenfalls Bank-, Punkte- oder Serienregeln in der Moderation festlegen; die Anleitung beschreibt die jeweilige Wirkung.",
             "Tic-Tac-Toe: klassisch, ältesten Stein versetzen oder frei verschieben; Extreme nur mit den Drei-Steine-Varianten. NPC-Stärke pro NPC wählbar, neue NPCs standardmäßig Normal.",
-            "Tic-Tac-Toe-Turnier (Beta): 2–16 Teilnehmer, ausgeloster K.-o.-Plan und Freilose; nach drei Unentschieden entscheidet die SL zwischen Los und weiterer Runde. Spieltoken gelten einmalig für das Turnier.",
-            "NPC-Stärke: Bei Tic-Tac-Toe und Vier gewinnt pro NPC Leicht, Normal oder Schwer wählen. Neue NPCs starten mit Normal; ältere Spielstände ohne Einstellung behalten ihre bisherige starke Strategie."
+            "Tic-Tac-Toe-Turnier: 2–16 Teilnehmer, ausgeloster K.-o.-Plan und Freilose; nach drei Unentschieden entscheidet die SL zwischen Los und weiterer Runde. Spieltoken gelten einmalig für das Turnier.",
+            "NPC-Stärke: Bei Tic-Tac-Toe und Vier gewinnt pro NPC Leicht, Normal oder Schwer wählen. Neue NPCs starten mit Normal; ältere Spielstände ohne Einstellung behalten ihre bisherige starke Strategie.",
+            "Mühle (Beta): 1–100 Runden, optionale Sprungregel, NPC-Stärken und manuelle NPC-Steuerung. Einmaliger Token-Einsatz pro Serie. Remis nach dreifacher Stellung oder 50 Zugpaaren ohne Schlag nach dem Setzen.",
+            "Mühle (Beta): zwei echte Teilnehmer oder NPCs wählen. Springen mit genau drei Steinen ist optional und standardmäßig ein. Eine Partie oder Serie von 1–100 Runden mit optionalem gemeinsamem Token-Einsatz vorbereiten. Pro neu geschlossener Mühle wird ein Stein geschlagen; auch eine Doppelmühle erlaubt nur einen Schlag."
           ]
         }
       ]
     },
     "sources": {
-      "title": "Regelquellen (47)",
+      "title": "Regelquellen (49)",
       "paragraphs": [
         "Hier findet ihr alle genutzten Regelquellen. Quellen für noch nicht umgesetzte Spiele sind ausdrücklich als geplante Regelreferenzen gekennzeichnet."
       ],
@@ -448,6 +452,13 @@
           "items": [
             "Awiana – Schlangenfangen (Regelreferenz für Meiern): https://awiana.fandom.com/de/wiki/Schlangenfangen",
             "Meiern / Schlangenfangen: Awiana (https://awiana.fandom.com/de/wiki/Schlangenfangen?oldid=6670), bereitgestellte D&D-Minispiele v1.0 vom 15.10.2026, bestätigte Hausregeln von Daniel Brune."
+          ]
+        },
+        {
+          "title": "Mühle",
+          "items": [
+            "Schmidt Spiele – 150er Spielesammlung, Mühle – https://www.schmidtspiele.de/files/Retail/300dpi_JPG/49188_150er_Kompakt_Spielesammlung_D.pdf",
+            "JMMG – Mühle-Spielregeln – https://www.jmmgc.com/muehle/spielregeln_muehle.php"
           ]
         },
         {
@@ -605,6 +616,12 @@
           ]
         },
         {
+          "title": "Mühle",
+          "items": [
+            "Dreifache identische Stellung und 50 Zugpaare ohne Schlag nach dem Setzen als Remisregeln. Ein Schlag pro Zug auch bei zwei geschlossenen Mühlen; optionale Sprungregel, Serien und interne Spieltoken als TavernGames-Ergänzungen."
+          ]
+        },
+        {
           "title": "Schiff–Kapitän–Mannschaft",
           "items": [
             "Schiff–Kapitän–Mannschaft: Einzelspiel sowie feste oder unbegrenzte Serien mit addierten Punkten und regulärem Abschluss nach der laufenden Runde."
@@ -717,12 +734,13 @@
           "items": [
             "5.1.0 – Schwimmen stabil; Durak als neue Karten-Beta.",
             "5.2.0 – Durak stabil; erste Brettspiel-Beta Vier gewinnt.",
-            "5.3.0 – Glückstag und Vier gewinnt stabil; Schwarzer Peter und Tic-Tac-Toe als neue Betas."
+            "5.3.0 – Glückstag und Vier gewinnt stabil; Schwarzer Peter und Tic-Tac-Toe als neue Betas.",
+            "5.4.0 – Schwarzer Peter, Tic-Tac-Toe einschließlich Extreme und das erste Turnier stabil; Mühle als neue Beta."
           ]
         }
       ],
       "paragraphs": []
     }
   },
-  "version": "5.3.1"
+  "version": "5.4.0"
 }

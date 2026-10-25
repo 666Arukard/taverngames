@@ -386,3 +386,23 @@
 
 .taverngames-tournament-bracket {border:1px solid #8b754e;border-radius:6px;padding:8px;margin:8px 0;}
 .taverngames-tournament-bracket p {font-size:.9em;margin:5px 0;}
+
+.taverngames-search-heading {display:flex;justify-content:space-between;align-items:baseline;gap:8px;width:100%;}
+[data-catalog-count] {margin-inline-start:auto;font-variant-numeric:tabular-nums;}
+.taverngames-catalog-footer {padding:12px 0 4px;}
+.taverngames-catalog-footer button {width:100%;}
+.taverngames-catalog-moderating>.taverngames-catalog-footer {display:none;}
+
+#taverngames-morris-stage>.taverngames-morris-play {width:min(100%,calc(100dvh - 220px));max-width:650px;padding:18px;box-sizing:border-box;}
+.taverngames-morris-board {position:relative;aspect-ratio:1;width:100%;max-width:550px;margin:14px auto;background:#30251e;border:1px solid #aa8d56;border-radius:10px;box-sizing:border-box;}
+.taverngames-morris-board svg {position:absolute;inset:0;width:100%;height:100%;pointer-events:none;}
+.taverngames-morris-board line {stroke:#ba9a61;stroke-width:.8;}
+.taverngames-morris-board .taverngames-morris-point {position:absolute;transform:translate(-50%,-50%);display:flex;align-items:center;justify-content:center;width:6.5%;height:auto;min-height:0;min-width:0;aspect-ratio:1;padding:0;margin:0;border:2px solid #9e865e;border-radius:50%;background:#493d2d;color:#fff;box-sizing:border-box;font-size:clamp(10px,2vw,24px);line-height:1;opacity:1;}
+.taverngames-morris-board .player-0 {background:#e4c478;color:#382d20;}
+.taverngames-morris-board .player-1 {background:#42739a;color:#e9f6ff;}
+.taverngames-morris-board .is-target:enabled {outline:2px solid #d2be8b;outline-offset:2px;}
+.taverngames-morris-board .is-source {outline:3px solid #fff1c1;outline-offset:3px;}
+.taverngames-morris-board .is-mill {box-shadow:0 0 9px #ffe29a;}
+.taverngames-morris-board button:disabled {opacity:1;}
+.taverngames-morris-board button:enabled:hover {border-color:#fff1c1;box-shadow:0 0 8px #ffe29a;}
+.taverngames-morris-play .taverngames-connect-status {margin:0;color:inherit;text-align:center;}
