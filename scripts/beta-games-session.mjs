@@ -5,7 +5,7 @@ export class BetaGameSession{
  constructor(game,deps){this.game=game;this.state=null;this.now=()=>Date.now();this.enabled=()=>true;Object.assign(this,deps);this.wait=null;}
  project(user){return betaView(this.state,user);}
  restore(s){if(s!==null&&(s.version!==1||s.game!==this.game))throw Error('Invalid game save.');this.state=structuredClone(s);this.updateNpcWait();}
- updateNpcWait(){this.wait=this.state?{revision:this.state.revision,until:this.now()+5000}:null;}
+ updateNpcWait(){this.wait=this.state?{revision:this.state.revision,until:this.now()+(this.game==='hoard'?2000:5000)}:null;}
  async handle(data,user){
   if(!this.enabled()&&!(data.action==='abort'&&user.isGM))throw Error('Beta testing is disabled.');
   if(data.action==='read')return this.project(user);const old=this.state;if(this.game==='hoard'&&old?.hoardResultUntil>this.now()&&['roll','resolveGuess','allocate','finish'].includes(data.action))throw Error('Please wait for the result display.');
@@ -30,7 +30,7 @@ export class BetaGameSession{
  async npcStep(){
   if(!this.enabled())return false;
   if(!this.state)return false;
-  if(this.wait?.revision!==this.state.revision){this.updateNpcWait();return false;}if(this.now()<this.wait.until)return false;
+  if(this.wait?.revision!==this.state.revision){this.updateNpcWait();return false;}if(this.now()<this.wait.until||this.game==='hoard'&&this.now()<(this.state.hoardResultUntil??0))return false;
   const move=betaNpcAction(this.state,this.random);if(!move)return false;
   await this.commit(actBetaGame(this.state,move.id,move.action,move.args,this.random),move.action);return true;
  }

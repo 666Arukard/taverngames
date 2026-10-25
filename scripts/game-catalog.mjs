@@ -1,8 +1,9 @@
 // Names and categories are data so future tags can extend the catalog without
 // coupling navigation to gameplay. No duration or betting claims are invented.
 export const GAME_CATALOG=Object.freeze([
- {id:'card21',category:'cards',beta:true,names:['17 und 4 (Karten)','Siebzehn und Vier Karten','Seventeen and Four Cards']},
- {id:'morris',category:'board',beta:true,names:['Mühle','Muehle',"Nine Men's Morris",'Nine Mens Morris']},
+ {id:'dots',category:'board',beta:true,names:['Käsekästchen','Kaesekaestchen','Dots and Boxes']},
+ {id:'card21',category:'cards',names:['17 und 4 (Karten)','Siebzehn und Vier Karten','Seventeen and Four Cards']},
+ {id:'morris',category:'board',names:['Mühle','Muehle',"Nine Men's Morris",'Nine Mens Morris']},
  {id:'tictournament',category:'tournament',names:['Tic-Tac-Toe-Turnier','Tic-Tac-Toe Tournament']},
  {id:'oldmaid',category:'cards',names:['Schwarzer Peter','Old Maid']},
  {id:'tictactoe',category:'board',names:['Tic-Tac-Toe','Tic Tac Toe','Drei gewinnt','Noughts and Crosses']},

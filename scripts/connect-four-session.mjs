@@ -1,3 +1,4 @@
+import {createDots,actDots,dotsNpc} from './dots-engine.mjs';
 import {createMorris,actMorris,morrisNpc} from './morris-engine.mjs';
 import {createTournament,actTournament,tournamentNpc} from './tic-tournament-engine.mjs';
 import {createTic,actTic,ticNpc} from './tic-tac-toe-engine.mjs';
@@ -6,7 +7,7 @@ import {createConnect,actConnect,connectNpc} from './connect-four-engine.mjs';
 import {escapeHTML} from './tavern-text.mjs';
 import {f} from './farkle-text.mjs';
 export class ConnectSession{
- constructor(scope,deps){Object.assign(this,deps);this.scope=scope;this.create=scope==='morris'?createMorris:scope==='tictournament'?createTournament:scope==='tictactoe'?createTic:createConnect;this.act=scope==='morris'?actMorris:scope==='tictournament'?actTournament:scope==='tictactoe'?actTic:actConnect;this.npc=scope==='morris'?morrisNpc:scope==='tictournament'?tournamentNpc:scope==='tictactoe'?ticNpc:connectNpc;this.state=null;this.wait=0;this.pending=Promise.resolve();this.now=()=>Date.now();}
+ constructor(scope,deps){Object.assign(this,deps);this.scope=scope;this.create=scope==='dots'?createDots:scope==='morris'?createMorris:scope==='tictournament'?createTournament:scope==='tictactoe'?createTic:createConnect;this.act=scope==='dots'?actDots:scope==='morris'?actMorris:scope==='tictournament'?actTournament:scope==='tictactoe'?actTic:actConnect;this.npc=scope==='dots'?dotsNpc:scope==='morris'?morrisNpc:scope==='tictournament'?tournamentNpc:scope==='tictactoe'?ticNpc:connectNpc;this.state=null;this.wait=0;this.pending=Promise.resolve();this.now=()=>Date.now();}
  restore(s){if(s&&(s.version!==1||s.game!==this.scope))throw Error('Invalid game save.');this.state=structuredClone(s);this.wait=this.now()+1200;}
  project(){return structuredClone(this.state);}
  enqueue(task){const result=this.pending.then(task);this.pending=result.catch(()=>{});return result;}

@@ -6,7 +6,7 @@ import {MORRIS_POINTS,MORRIS_EDGES,morrisLegal,morrisMills} from './morris-engin
 export class MorrisUI extends ConnectUI{
  drawModeration(){
   const root=this.windows.get('moderation')?.root;if(!root||!game.user.isGM)return;
-  const drafts=new Map([...root.querySelectorAll('[data-draft]')].map(e=>[e.dataset.draft,e.type==='checkbox'?e.checked:e.value])),s=this.getState();root.replaceChildren();const c=node('div',undefined,'schocken-content');root.append(c);c.append(node('h2',f('Mühle · Beta',"Nine Men's Morris · Beta")));
+  const drafts=new Map([...root.querySelectorAll('[data-draft]')].map(e=>[e.dataset.draft,e.type==='checkbox'?e.checked:e.value])),s=this.getState();root.replaceChildren();const c=node('div',undefined,'schocken-content');root.append(c);c.append(node('h2',f('Mühle',"Nine Men's Morris")));
   control(c,f('Spieltisch öffnen','Open game table'),()=>{this.window('table');this.drawTable();});control(c,f('Anleitung','Instructions'),()=>this.guide());
   const label=node('label',undefined,'schocken-choice'),show=node('input');show.type='checkbox';show.checked=game.settings.get('taverngames','showmorrisLauncher')===true;show.onchange=()=>game.settings.set('taverngames','showmorrisLauncher',show.checked);label.append(show,document.createTextNode(f('Unteren Spielbutton einblenden','Show bottom game button')));c.append(label);
   const namesLabel=node('label',f('NPCs – höchstens zwei, ein Name pro Zeile','NPCs – up to two, one name per line')),names=node('textarea');names.dataset.draft='npcs';names.value=drafts.get('npcs')??Object.values(s?.npcs??{}).join('\n');namesLabel.append(names);c.append(namesLabel);
@@ -17,7 +17,7 @@ export class MorrisUI extends ConnectUI{
   if(s){renderNpcDifficulty(c,s,this.request);control(c,s.paused?f('Fortsetzen','Resume'):f('Pause','Pause'),()=>this.request('pause'));for(const id of Object.keys(s.npcs))control(c,this.name(id)+' · '+(s.npcManual[id]?f('SL steuert','GM controls'):f('Automatisch','Automatic')),()=>this.request('npcControl',{id,manual:!s.npcManual[id]}));}
  }
  drawTable(){
-  const root=this.windows.get('table')?.root;if(!root)return;root.replaceChildren();const c=node('div',undefined,'schocken-content'),s=this.getState();root.append(c);c.append(node('h2',f('Mühle · Beta',"Nine Men's Morris · Beta")));if(!s)return;
+  const root=this.windows.get('table')?.root;if(!root)return;root.replaceChildren();const c=node('div',undefined,'schocken-content'),s=this.getState();root.append(c);c.append(node('h2',f('Mühle',"Nine Men's Morris")));if(!s)return;
   for(const id of s.players)c.append(node('p',this.name(id)+' · '+(s.scores[id]??0)+' '+f('Punkte','points')+' · '+f('Vorrat','Reserve')+': '+(s.reserve[id]??9)+' · '+f('auf dem Brett','on board')+': '+s.board.filter(v=>v===id).length));
   if(s.phase==='lobby'){const joined=s.players.includes(game.user.id);control(c,joined?f('Lobby verlassen','Leave lobby'):f('Beitreten','Join'),()=>this.request(joined?'leave':'join'),s.paused||!joined&&s.players.length>=2);return;}
   const play=node('section',undefined,'taverngames-connect-play taverngames-morris-play');c.append(play);const active=s.order[s.turn],mine=active===game.user.id||game.user.isGM&&s.npcs[active]&&s.npcManual[active];

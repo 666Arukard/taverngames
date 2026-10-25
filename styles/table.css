@@ -438,3 +438,35 @@
 .taverngames-hoard-help {font-size:12px;text-align:center;margin:8px 0;}
 .taverngames-hoard-allocation {display:flex;align-items:center;justify-content:center;gap:5px;}
 .taverngames-hoard-allocation button {padding:2px 8px;}
+
+/* Kniffel: one stable, compact score sheet on the field, independent of polling. */
+.taverngames-kniffel-stage{position:fixed;width:auto;height:auto;top:64px;bottom:160px;z-index:90;display:flex;flex-direction:column;align-items:center;pointer-events:none;background:transparent;color:#fff3d2;min-width:0;}
+.taverngames-kniffel-stage>h3{color:#fff3d2;margin:0;padding:3px 12px;background:#241c17;border:1px solid #a58a5d;border-bottom:0;border-radius:6px 6px 0 0;font-size:16px;line-height:24px;}
+.taverngames-kniffel-stage .kniffel-sheet-scroll{pointer-events:auto;width:100%;max-width:1100px;min-height:0;box-sizing:border-box;overflow:visible;border:1px solid #a58a5d;border-radius:6px;background:#e5d1ae;color:#241b12;}
+.taverngames-kniffel-stage .kniffel-sheet{width:100%;min-width:0;table-layout:fixed;border-collapse:collapse;margin:0;font-size:var(--tg-sheet-font,12px);line-height:1.1;}
+.taverngames-kniffel-stage .kniffel-sheet tr{height:var(--tg-sheet-row,24px);}
+.taverngames-kniffel-stage .kniffel-sheet th,.taverngames-kniffel-stage .kniffel-sheet td{min-width:0;padding:0 3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;height:var(--tg-sheet-row,24px);font-size:inherit;line-height:1.1;box-sizing:border-box;}
+.taverngames-kniffel-stage .kniffel-sheet th:first-child{width:26%;min-width:0;}
+.taverngames-kniffel-stage .kniffel-sheet button{display:block;width:100%;min-width:0;min-height:0;height:calc(var(--tg-sheet-row,24px) - 2px);padding:0 2px;margin:0;border:0;border-radius:2px;font-size:inherit;line-height:1.1;}
+.taverngames-kniffel-stage .kniffel-sheet thead th{position:static;}
+.taverngames-kniffel-stage .kniffel-sheet .kniffel-upper,.taverngames-kniffel-stage .kniffel-sheet .kniffel-special{background:#f0e5cf;color:#241b12;}
+
+/* Compact, centered opponent hand and upper-aligned public Peter pairs. */
+#taverngames-oldmaid-stage>.taverngames-card-stage-shared{width:max-content;justify-self:center;max-width:100%;padding:6px 10px;}
+#taverngames-oldmaid-stage .taverngames-peter-source{width:max-content;max-width:100%;align-items:center;}
+#taverngames-oldmaid-stage .taverngames-peter-source>.taverngames-card-hand{width:max-content;max-width:100%;align-self:center;justify-content:safe center;}
+#taverngames-oldmaid-stage>.taverngames-peter-discard-zone{align-items:flex-start;}
+#taverngames-oldmaid-stage .taverngames-peter-pair-list{grid-auto-rows:calc(var(--tg-pair-card-width)*.55);padding-bottom:calc(var(--tg-pair-card-width)*.95 + 8px);}
+
+#taverngames-oldmaid-stage .taverngames-peter-source{gap:6px;}
+#taverngames-oldmaid-stage .taverngames-peter-source>.taverngames-card-hand{height:clamp(66px,12dvh,112px);padding:6px 3px;}
+#taverngames-oldmaid-stage>.taverngames-card-stage-hand .taverngames-card{width:min(var(--tg-card-width,176px),16dvh);flex-basis:min(var(--tg-card-width,176px),16dvh);}
+#taverngames-oldmaid-stage .taverngames-peter-pairs{--tg-pair-card-width:clamp(52px,min(7vw,11dvh),90px);}
+
+.taverngames-dots-editor{max-height:320px;overflow:auto;background:#29251f;border:1px solid #a58a5d;min-width:0;}
+.taverngames-dots-editor svg{display:block;max-width:none;touch-action:none;}
+#taverngames-dots-stage>.taverngames-dots-play{width:min(100%,1000px);min-width:0;padding:10px;box-sizing:border-box;}
+.taverngames-dots-viewport{width:100%;max-height:60dvh;overflow:auto;min-width:0;scrollbar-gutter:stable;background:#241e18;border:1px solid #a58a5d;border-radius:6px;}
+.taverngames-dots-viewport svg{display:block;max-width:none;margin:auto;touch-action:manipulation;cursor:crosshair;}
+.taverngames-dots-play .schocken-actions{display:flex;justify-content:center;gap:8px;margin:4px 0;}
+.taverngames-dots-play .schocken-help{color:#f1e7d4;text-align:center;min-height:18px;margin:4px 0;}
