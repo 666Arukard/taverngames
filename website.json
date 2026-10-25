@@ -2,24 +2,23 @@
   "schemaVersion": 1,
   "blocks": {
     "patchnotes": {
-      "title": "Patchnotes Version 5.3.0",
+      "title": "Patchnotes Version 5.3.1",
       "paragraphs": [
-        "Glückstag und Vier gewinnt sind stabil. Neu als Beta: Schwarzer Peter mit wählbaren Kartenpaaren und optionalem Weiterspielen sowie Tic-Tac-Toe mit NPCs und Serien. Göttliche Hand beeinflusst nun auch Kartenverteilung und Nachziehen. Die Spieleübersicht ist durchgehend alphabetisch und zeigt kleine Kategorie-Icons neben den Favoritensternen. Schwimmen erhält den schwebenden Button zum Tausch aller drei Karten; nach einer vollständigen Schieberunde werden nur die Tischkarten erneuert. Vier gewinnt sperrt schnelle Folgeaktionen nach dem Sieg besser ab."
+        "Neu als Beta: Tic-Tac-Toe-Turnier für 2–16 Teilnehmer mit K.-o.-Plan, Freilosen und SL-Entscheidung nach wiederholten Unentschieden. Tic-Tac-Toe erhält zwei Drei-Steine-Varianten und Extreme. Die NPC-Stärke bei Tic-Tac-Toe und Vier gewinnt ist je NPC wählbar. Beta-Filter mit eigenem Icon und zweireihige Kategorieauswahl ergänzt. Schwarzer Peter zeigt abgelegte Paare offen am Tisch und wartet bei NPC-Zügen etwas länger. Unentschieden werden korrekt angekündigt. Die geprüfte deutsche und englische Tic-Tac-Toe-Anleitung ist verfügbar."
       ],
       "items": [
-        "Glückstag und Vier gewinnt sind nach Praxistest stabil.",
-        "Neue Betas: Schwarzer Peter und Tic-Tac-Toe.",
-        "Göttliche Hand bei allen vier Kartenspielen: Austeilen, Nachziehen und Ungnade.",
-        "Spieleliste alphabetisch, ohne Kategorieüberschriften, mit kleinen Kategorie-Icons neben dem Favoritenstern.",
-        "Schwimmen: Tausch aller drei Karten unten verfügbar, auch ohne Dice So Nice; vollständige Schieberunde erneuert nur die Tischkarten.",
-        "Vier gewinnt: sofortige Eingabesperre und nacheinander verarbeitete Züge.",
-        "Dice-So-Nice-Empfehlung mit deutschem und englischem Hinweis; keine Empfehlung für ein bestimmtes Kartenset."
+        "Tic-Tac-Toe-Turnier als Beta: K.-o.-System für 2–16 Teilnehmer; SL wählt nach drei Unentschieden Losentscheid oder Weiterspielen.",
+        "Tic-Tac-Toe: ältesten Stein versetzen, frei verschieben und Extreme mit drei Steinen je Teilbrett.",
+        "Tic-Tac-Toe und Vier gewinnt: NPC-Stärke Leicht, Normal oder Schwer pro NPC.",
+        "Beta-Filter, zweireihige Kategorieauswahl und Kategorie Turniere.",
+        "Schwarzer Peter: offene Paarablage einschließlich Startpaaren; NPC-Wartezeit mindestens 1,8 Sekunden.",
+        "Tic-Tac-Toe: Feldabstände und Unentschieden-Ankündigung korrigiert; freigegebene Anleitung auf Deutsch und Englisch."
       ]
     },
     "games": {
-      "title": "aktuelle Spiele (23)",
+      "title": "aktuelle Spiele (24)",
       "paragraphs": [
-        "23 Spiele: 21 stabil; Schwarzer Peter und Tic-Tac-Toe als optionale Betas. Gemeinsame Partien mit echten Spielern und optional NPCs."
+        "21 stabile Spiele, zwei Beta-Spiele und eine optionale Tic-Tac-Toe-Turnier-Beta. Gemeinsame Partien mit echten Spielern und optional NPCs."
       ],
       "items": [
         {
@@ -63,6 +62,12 @@
           "items": [
             "Vier gewinnt",
             "Tic-Tac-Toe (Beta)"
+          ]
+        },
+        {
+          "title": "Turniere",
+          "items": [
+            "Tic-Tac-Toe-Turnier (Beta)"
           ]
         }
       ]
@@ -125,9 +130,9 @@
       ]
     },
     "plans2": {
-      "title": "geplante Funktionen (16)",
+      "title": "geplante Funktionen (17)",
       "paragraphs": [
-        "Größere noch nicht umgesetzte Vorhaben; keine automatische Umsetzungszusage. Die Kartenbasis ist stabil, Schwarzer Peter und Tic-Tac-Toe sind als Betas verfügbar."
+        "Größere noch nicht umgesetzte Vorhaben; keine automatische Umsetzungszusage. Schwarzer Peter, Tic-Tac-Toe und das erste Tic-Tac-Toe-Turnier sind als Betas verfügbar."
       ],
       "items": [
         {
@@ -135,7 +140,7 @@
           "items": [
             "Zusätzliche Tags und Filter nach Spieldauer und Einsätzen",
             "Eigene Spielnamen und durch die SL anpassbares Spieleangebot",
-            "Kategorie Wettkämpfe aktivieren; Icon ist bereits vorbereitet"
+            "Wettessen, Wetttrinken und Armdrücken als Wettkämpfe; eigenes Icon hinterlegt"
           ]
         },
         {
@@ -150,7 +155,8 @@
           "items": [
             "Serien mit addierten Ergebnissen",
             "Beschleunigte NPC-Wettpartien",
-            "Zusätzliche pokerartige Setzphasen"
+            "Zusätzliche pokerartige Setzphasen",
+            "Turniere für weitere Spiele"
           ]
         },
         {
@@ -173,13 +179,13 @@
         {
           "title": "Sprache und Hilfe",
           "items": [
-            "Geprüfte englische Anleitungen"
+            "Weitere geprüfte englische Anleitungen; Tic-Tac-Toe bereits freigegeben"
           ]
         }
       ]
     },
     "functions": {
-      "title": "aktuelle Funktionen (37)",
+      "title": "aktuelle Funktionen (40)",
       "paragraphs": [
         "Bereits umgesetzte Kernfunktionen. Verfügbarkeit und erlaubte Aktionen richten sich nach Spielregeln, Teilnahme und SL-Freigabe."
       ],
@@ -189,7 +195,8 @@
           "items": [
             "Alphabetische Spielauswahl mit Kategorie-Icons und deutsch-englischer Suche",
             "Persönliche Favoriten",
-            "Freiwilliger Lobbybeitritt"
+            "Freiwilliger Lobbybeitritt",
+            "Eigener Beta-Filter und Kategorie Turniere"
           ]
         },
         {
@@ -198,7 +205,8 @@
             "SL-Moderation, Pause und Abbruch",
             "Automatische und manuell steuerbare NPCs",
             "Wählbarer Startspieler",
-            "Gemeinsame Partien mit echten Mitspielern"
+            "Gemeinsame Partien mit echten Mitspielern",
+            "Wählbare NPC-Stärke bei Tic-Tac-Toe und Vier gewinnt"
           ]
         },
         {
@@ -260,6 +268,12 @@
             "Regelquellen und Hausvarianten",
             "Ergebnisnachrichten im Chat"
           ]
+        },
+        {
+          "title": "Turniere",
+          "items": [
+            "Tic-Tac-Toe-K.-o.-Turnier mit Spielern, NPCs und Freilosen (Beta)"
+          ]
         }
       ]
     },
@@ -272,9 +286,9 @@
         {
           "title": "Allgemeine Einstellungen",
           "items": [
-            "Sprache: Deutsch oder Englisch wählen. Beide Oberflächen sind verfügbar; Anleitungen sind vorerst auf Deutsch enthalten.",
+            "Sprache: Deutsch oder Englisch wählen. Beide Oberflächen sind verfügbar; Deutsche Anleitungen sind enthalten; die englische Tic-Tac-Toe-Anleitung einschließlich Extreme ist freigegeben. Andere englische Anleitungen bleiben bis zur Prüfung gesperrt.",
             "Ansicht: Reiteransicht ist Standard, klassische Fenster bleiben je Benutzer wählbar.",
-            "Beta-Test: Schwarzer Peter und Tic-Tac-Toe einschalten. Die übrigen 21 Spiele sind stabil und ohne Beta-Schalter verfügbar.",
+            "Beta-Test: Schwarzer Peter, Tic-Tac-Toe und das Tic-Tac-Toe-Turnier einschalten. Die übrigen 21 Spiele sind stabil und ohne Beta-Schalter verfügbar.",
             "Dice So Nice: optionale 3D-Würfel aktivieren. Ohne das Zusatzmodul bleiben die Spiele bedienbar.",
             "Markierungsmodus: persönlich wählen, ob markierte eigene Würfel behalten oder erneut gewürfelt werden.",
             "Kartendecks: geeignete externe Vorlagen unter Cards / Card Decks anlegen oder importieren. Es ist kein Standard-Kartenset enthalten; vorhandene Vorlagen bleiben unverändert.",
@@ -297,7 +311,10 @@
             "Der Glückstag: Offen-Checkboxen und Erhöhen sind standardmäßig aus. Bei aktiviertem Erhöhen SL-Limits festlegen; die Bank hat keinen eigenen Wurf.",
             "Vier gewinnt und Tic-Tac-Toe: zwei echte Teilnehmer oder NPCs wählen; eine Partie oder Serie von 1–100 Runden mit wechselndem Startspieler und optionalem gemeinsamen Token-Einsatz.",
             "Schwarzer Peter (Beta): Deck, ungepaarte Karte, erlaubte Karten und Paargruppen wählen. Standardmäßig beendet das erste leere Blatt die Runde; optional bis zur letzten ungepaarten Karte weiterspielen.",
-            "Bei übrigen Spielen die angebotenen Hausvarianten, Einsätze und gegebenenfalls Bank-, Punkte- oder Serienregeln in der Moderation festlegen; die Anleitung beschreibt die jeweilige Wirkung."
+            "Bei übrigen Spielen die angebotenen Hausvarianten, Einsätze und gegebenenfalls Bank-, Punkte- oder Serienregeln in der Moderation festlegen; die Anleitung beschreibt die jeweilige Wirkung.",
+            "Tic-Tac-Toe: klassisch, ältesten Stein versetzen oder frei verschieben; Extreme nur mit den Drei-Steine-Varianten. NPC-Stärke pro NPC wählbar, neue NPCs standardmäßig Normal.",
+            "Tic-Tac-Toe-Turnier (Beta): 2–16 Teilnehmer, ausgeloster K.-o.-Plan und Freilose; nach drei Unentschieden entscheidet die SL zwischen Los und weiterer Runde. Spieltoken gelten einmalig für das Turnier.",
+            "NPC-Stärke: Bei Tic-Tac-Toe und Vier gewinnt pro NPC Leicht, Normal oder Schwer wählen. Neue NPCs starten mit Normal; ältere Spielstände ohne Einstellung behalten ihre bisherige starke Strategie."
           ]
         }
       ]
@@ -640,7 +657,9 @@
         {
           "title": "Tic-Tac-Toe",
           "items": [
-            "Tic-Tac-Toe: Serien von 1 bis 100 Runden mit wechselndem Startspieler und optionalem gemeinsamem Token-Einsatz."
+            "Tic-Tac-Toe: Serien von 1 bis 100 Runden mit wechselndem Startspieler und optionalem gemeinsamem Token-Einsatz.",
+            "Drei Steine je Spieler: ältesten Stein versetzen oder einen eigenen frei verschieben; dreifache Stellungswiederholung ist Remis. Extreme mit neun Teilbrettern und drei Steinen je Spieler und Teilbrett.",
+            "K.-o.-Turnier für 2–16 Teilnehmer mit Freilosen und SL-Entscheidung nach wiederholten Unentschieden (Beta)."
           ]
         },
         {
@@ -705,5 +724,5 @@
       "paragraphs": []
     }
   },
-  "version": "5.3.0"
+  "version": "5.3.1"
 }

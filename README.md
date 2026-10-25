@@ -1,3 +1,15 @@
+# Aktueller Stand 5.3.1
+
+Neu als Beta: Tic-Tac-Toe-Turnier für 2–16 Teilnehmer mit K.-o.-Plan, Freilosen und SL-Entscheidung nach wiederholten Unentschieden. Tic-Tac-Toe erhält zwei Drei-Steine-Varianten und Extreme. Die NPC-Stärke bei Tic-Tac-Toe und Vier gewinnt ist je NPC wählbar. Beta-Filter mit eigenem Icon und zweireihige Kategorieauswahl ergänzt. Schwarzer Peter zeigt abgelegte Paare offen am Tisch und wartet bei NPC-Zügen etwas länger. Unentschieden werden korrekt angekündigt. Die geprüfte deutsche und englische Tic-Tac-Toe-Anleitung ist verfügbar.
+
+21 stabile Spiele, zwei Beta-Spiele und eine Tic-Tac-Toe-Turnier-Beta. Alle Betas benötigen den Beta-Schalter. Turniere sind eine eigene Kategorie; Wettkämpfe wie Armdrücken bleiben geplant. Das bereitgestellte Icon für Wettkämpfe ist hinterlegt. Keine neuen stabilen Spiele.
+
+Neue NPCs bei den beiden Brettspielen starten mit Normal; Leicht und Schwer sind pro NPC wählbar. Alte Spielstände ohne Schwierigkeit behalten ihr bisheriges starkes Verhalten. Die Einstellung beeinflusst nur NPC-Entscheidungen, keine Ergebnisse oder Würfel.
+
+Tic-Tac-Toe-Anleitung in Deutsch und Englisch einschließlich Extreme am 25.10.2026 durch Daniel freigegeben. Andere englische Anleitungen einschließlich des neuen Turniertexts bleiben bis zum Review gesperrt.
+
+Details und Testplan: docs/release-5.3.1.md. Keine automatische Veröffentlichung durch den lokalen Build.
+
 # Aktueller Stand 5.3.0
 
 Glückstag und Vier gewinnt sind stabil. Neu als Beta: Schwarzer Peter mit wählbaren Kartenpaaren und optionalem Weiterspielen sowie Tic-Tac-Toe mit NPCs und Serien. Göttliche Hand beeinflusst nun auch Kartenverteilung und Nachziehen. Die Spieleübersicht ist durchgehend alphabetisch und zeigt kleine Kategorie-Icons neben den Favoritensternen. Schwimmen erhält den schwebenden Button zum Tausch aller drei Karten; nach einer vollständigen Schieberunde werden nur die Tischkarten erneuert. Vier gewinnt sperrt schnelle Folgeaktionen nach dem Sieg besser ab.

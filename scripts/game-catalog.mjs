@@ -1,6 +1,7 @@
 // Names and categories are data so future tags can extend the catalog without
 // coupling navigation to gameplay. No duration or betting claims are invented.
 export const GAME_CATALOG=Object.freeze([
+ {id:'tictournament',category:'tournament',beta:true,names:['Tic-Tac-Toe-Turnier','Tic-Tac-Toe Tournament']},
  {id:'oldmaid',category:'cards',beta:true,names:['Schwarzer Peter','Old Maid']},
  {id:'tictactoe',category:'board',beta:true,names:['Tic-Tac-Toe','Tic Tac Toe','Drei gewinnt','Noughts and Crosses']},
  {id:'connectfour',category:'board',names:['Vier gewinnt','Four in a Row','Connect Four']},
@@ -28,7 +29,7 @@ export const GAME_CATALOG=Object.freeze([
 const normalize=value=>String(value??'').toLocaleLowerCase().replace(/ß/g,'ss').normalize('NFD').replace(/\p{M}/gu,'').replace(/[^\p{L}\p{N}]+/gu,' ').trim();
 export function filterCatalog(entries,{category='all',query='',beta=false}={}){
  const words=normalize(query).split(' ').filter(Boolean);
- return entries.filter(entry=>(!entry.beta||beta)&&(category==='all'||entry.category===category)&&words.every(word=>normalize([entry.id,...entry.names].join(' ')).includes(word)));
+ return entries.filter(entry=>(!entry.beta||beta)&&(category==='all'||category==='beta'&&entry.beta===true||entry.category===category)&&words.every(word=>normalize([entry.id,...entry.names].join(' ')).includes(word)));
 }
 
 export function toggleFavorite(current,id){

@@ -330,7 +330,7 @@
 /* Compact category marker beside each favorite star. */
 .taverngames-game-category-icon{display:block;flex:0 0 18px;width:18px;height:18px;background:currentColor;opacity:.8;mask:var(--category-art) center/contain no-repeat;-webkit-mask:var(--category-art) center/contain no-repeat}
 .taverngames-tic-board{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;width:min(100%,420px);margin:12px auto}
-.taverngames-tic-board button{aspect-ratio:1;min-width:0;height:auto;background:#30251e;color:#fff1d5;border:2px solid #b8995d;border-radius:6px;font:700 clamp(32px,8vw,80px)/1 system-ui;cursor:pointer}
+.taverngames-tic-board button{box-sizing:border-box;display:flex;align-items:center;justify-content:center;width:100%;max-width:100%;min-width:0;min-height:0;padding:0;margin:0;aspect-ratio:1;height:auto;background:#30251e;color:#fff1d5;border:2px solid #b8995d;border-radius:6px;font:700 clamp(32px,8vw,80px)/1 system-ui;cursor:pointer}
 .taverngames-tic-board button:disabled{opacity:1;cursor:default}
 .taverngames-tic-board button.is-winning{background:#6b572b;outline:3px solid #ffe29a;outline-offset:-5px}
 .taverngames-peter-config{display:grid;gap:6px;max-height:360px;overflow:auto}
@@ -343,3 +343,46 @@
 #taverngames-oldmaid-stage>.taverngames-card-stage-shared:empty{display:none}
 #taverngames-oldmaid-stage>.taverngames-card-stage-hand:not(:has(.taverngames-card)){display:none}
 #taverngames-oldmaid-stage .taverngames-peter-source .taverngames-card{width:clamp(46px,7vw,100px);flex:0 0 clamp(46px,7vw,100px)}
+
+/* Tic-Tac-Toe keeps square cells, consistent symbols and explicit legal areas. */
+:is(#taverngames-tictactoe-stage,#taverngames-tictournament-stage)>.taverngames-tic-play{width:min(100%,calc(100dvh - 210px));max-width:720px}
+.taverngames-tic-play{padding:12px;box-sizing:border-box}
+.taverngames-tic-play .taverngames-connect-status{margin:0 0 8px;text-align:center;font-weight:700}
+.taverngames-tic-hint{margin:0 0 10px;text-align:center;font-size:.9em;line-height:1.35}
+.taverngames-tic-play .taverngames-tic-board{width:min(100%,420px);gap:8px;margin:0 auto;container-type:inline-size}
+.taverngames-tic-play .taverngames-tic-board button{display:flex;align-items:center;justify-content:center;position:relative;width:100%;padding:0;margin:0;box-sizing:border-box;aspect-ratio:1;min-height:0;border:2px solid #a58a5d;background:#30251e;font:700 clamp(12px,19cqw,84px)/1 system-ui}
+.taverngames-tic-play .taverngames-tic-board button.player-0{color:#a9d8ff}
+.taverngames-tic-play .taverngames-tic-board button.player-1{color:#ffd58c}
+.taverngames-tic-play .taverngames-tic-board button:enabled:hover{background:#4c3c2a;outline:2px solid #ffe29a;outline-offset:-3px}
+.taverngames-tic-play .taverngames-tic-board button.is-move-source{outline:3px solid #9cd7ff;outline-offset:-4px;background:#344654}
+.taverngames-tic-play button[data-oldest=true]::after{content:'1';position:absolute;top:3px;left:5px;font:700 11px/1.2 system-ui;color:#ffe29a}
+.taverngames-tic-extreme{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(5px,1.5cqw,12px);width:100%;max-width:680px;margin:0 auto}
+.taverngames-tic-subboard{position:relative;padding:20px 5px 5px;border:2px solid #665d50;border-radius:6px;background:#211c18;box-sizing:border-box;min-width:0;container-type:inline-size}
+.taverngames-tic-subboard.is-allowed{border-color:#e4bd6a;box-shadow:0 0 0 1px #e4bd6a66}
+.taverngames-tic-subboard.is-macro-winning{outline:3px solid #ffe29a;outline-offset:0}
+.taverngames-tic-board-number{position:absolute;top:2px;left:6px;font:700 12px/1.2 system-ui;color:#ddd2bf}
+.taverngames-tic-play .taverngames-tic-subboard .taverngames-tic-board{width:100%;gap:3px}
+.taverngames-tic-play .taverngames-tic-subboard button{border-width:1px;border-radius:3px}
+.taverngames-tic-subboard.is-closed .taverngames-tic-board{opacity:.22}
+.taverngames-tic-subresult{position:absolute;inset:16px 0 0;display:flex;align-items:center;justify-content:center;pointer-events:none;font:700 clamp(28px,70cqw,140px)/1 system-ui;color:#ffe29a;text-shadow:0 2px 8px #000}
+
+:is(#taverngames-tictactoe-stage,#taverngames-tictournament-stage)>.taverngames-tic-play.is-extreme{width:min(100%,calc(100dvh - 270px))}
+
+/* Old Maid: public discarded pairs remain visible, including initial pairs. */
+.taverngames-peter-pairs {max-width:100%;padding:8px;border:1px solid #a88b50;border-radius:8px;background:rgba(25,20,15,.82);color:#f2e4c8;}
+.taverngames-peter-pairs h3 {font-size:14px;margin:0 0 8px;}
+.taverngames-peter-pair-list {display:flex;flex-wrap:wrap;gap:10px;max-height:28vh;overflow:auto;padding:8px;}
+.taverngames-peter-pair {display:flex;flex:none;align-items:center;}
+.taverngames-peter-pair > * {width:58px!important;min-width:0!important;height:auto!important;aspect-ratio:2/3;}
+.taverngames-peter-pair > * + * {margin-left:-14px;}
+.taverngames-peter-pair.is-new {animation:tg-peter-pair-highlight 3s ease-out;}
+@keyframes tg-peter-pair-highlight {0%,40% {filter:drop-shadow(0 0 8px #f5cc69);transform:translateY(-4px);}100% {filter:none;transform:none;}}
+@media(prefers-reduced-motion:reduce) {.taverngames-peter-pair.is-new {animation:none;outline:1px solid #d8b764;}}
+
+/* Two category rows; All anchors both rows, with room for future categories. */
+.taverngames-category-buttons {grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:repeat(2,minmax(38px,auto));grid-auto-flow:column;gap:6px;}
+.taverngames-category-buttons button {min-width:0;min-height:38px;}
+.taverngames-category-buttons button[data-catalog-category=all] {grid-row:1 / span 2;align-self:stretch;height:100%;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;}
+
+.taverngames-tournament-bracket {border:1px solid #8b754e;border-radius:6px;padding:8px;margin:8px 0;}
+.taverngames-tournament-bracket p {font-size:.9em;margin:5px 0;}
