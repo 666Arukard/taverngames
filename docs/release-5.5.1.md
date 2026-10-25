@@ -1,0 +1,32 @@
+# TavernGames 5.5.1 – 25.10.2026
+
+## Deutsch
+
+**Benötigt Foundry 14.369 oder neuer. Alle Clients nach Installation vollständig neu laden.**
+
+25 stabile Spiele und ein stabiles Tic-Tac-Toe-Turnier bleiben erhalten. Neu als Beta: Vier-gewinnt-, Mühle- und Käsekästchen-Turniere sowie Armdrücken. Käsekästchen bleibt ausdrücklich Beta. Insgesamt 31 Katalogeinträge; keine Stable-Hochstufung.
+
+Die drei zusätzlichen K.-o.-Turniere erlauben 2–16 Menschen und benannte NPCs, Freilose und NPC-Stärken. Nach drei Unentschieden entscheidet die SL zwischen Los und Weiterspielen; bei jedem weiteren Remis erneut. Einmalige Token gelten für das gesamte Turnier; Champion erhält den Topf, Abbruch erstattet. Käsekästchen-Turniere verwenden ein gemeinsames Rechteck, eigene Umrisse bleiben im Einzelspiel verfügbar. Alle vier Turniere besitzen einen einblendbaren grafischen Turnierplan auf dem Spieltisch: Ausgeschiedene sind durchgestrichen, Weiterkommen ist golden verbunden, Freilose und noch offene Begegnungen sind erkennbar. Der Plan ist scrollbar und ausblendbar.
+
+Armdrücken ist eine eigene TavernGames-Hausregel: Technik (Geschick), Druck (Stärke), Durchhalten (Konstitution) wechseln sich ab. Jeder Vergleich verschiebt die Position um einen Schritt zum Gewinner, Gleichstand bewegt nichts. Drei Schritte von der Mitte gewinnen; sonst folgt der nächste Vergleich mit fortbestehender Position. NPC-Attribute starten bei 10 (+0). D&D-5e-Charakterwerte werden ausschließlich gelesen; andere Systeme und NPCs nutzen manuelle Werte. Die SL kann je Teilnehmer Vorteil oder Nachteil vergeben. Göttliche Hand addiert je 10 Prozent einen Punkt, Ungnade zieht entsprechend ab; Restprozente bestimmen die zusätzliche Aufrundung zufällig. 13 Prozent ergeben 70 Prozent +1 und 30 Prozent +2. Natürliche Würfel, Modifikator und Einfluss werden getrennt gerechnet. Spielerprojektionen enthalten kein Einflussprofil oder ausdrückliches Bonusfeld. Ergebnisse dürfen daraus trotzdem nicht als grundsätzlich unerschließbar bezeichnet werden. Mit Dice So Nice werden Ergebnis, Folgeaktionen und Siegerverkündung bis zum Animationsabschluss zurückgehalten.
+
+17 und 4 als Kartenspiel: Standard Bube 2, Dame 3, König 4, Ass 1/11; optional alle Bildkarten 10. Frühere Hauswerte und zusätzliche Sechsen entfallen. Laufende Altrunden behalten ihre Wertung bis zum Ende; noch nicht gestartete alte Lobbys werden vor dem Austeilen aktualisiert. Die sichtbare Bezeichnung lautet 17 und 4 ohne Karten-Zusatz. Automatisch ein 32er-Deck je vier Plätze einschließlich Bank, alternativ ein bis acht Deckkopien. Alle Kopien sind getrennte Karten, Originaldeck bleibt unverändert, Startkarten bleiben privat. Bei ausgeschöpftem Stapel werden keine laufenden Hände neu gemischt. Mehrere Decks senken dieses Risiko, garantieren aber bei beliebig vielen Kaufversuchen keinen unendlichen Vorrat.
+
+Beta steht als kombinierbarer Filter neben Favoriten; die Tags-Beschriftung entfällt. Die freigegebenen englischen Anleitungen für Käsekästchen und Karten-17-und-4 sind verfügbar: jetzt acht einzeln geprüfte englische Anleitungen. Neue Armdrücken- und zusätzliche Turnieranleitungen bleiben bis Review nur Deutsch. Dame (Checkers) ist für spätere Entwicklung vorgemerkt, ohne neue Regeln oder Implementierung.
+
+## English
+
+**Requires Foundry 14.369 or later. Fully reload all clients after updating.**
+
+The existing 25 stable games and stable Tic-Tac-Toe tournament remain available. New optional betas: Four in a Row, Morris and Dots and Boxes tournaments, plus Arm Wrestling. Dots and Boxes itself remains beta. There are 31 catalog entries; no game is promoted to stable in this release.
+
+The additional knockout tournaments support 2–16 people or named NPCs, byes and NPC difficulty. After three draws the GM chooses lots or replay, choosing again after each further draw. Token entry applies once to the entire tournament; the champion receives the pot, while aborting refunds stakes. Dots tournaments use a common rectangle; custom outlines remain available in individual games. All four tournaments now have a collapsible graphical bracket on the playing field, with crossed-out eliminated participants, golden advancement paths, byes and pending matches. Large brackets can be scrolled.
+
+Arm Wrestling is a TavernGames house rule. Technique (Dexterity), Pressure (Strength) and Endurance (Constitution) repeat. Winning a comparison moves the marker one step toward that participant, a tie does not move it, and three steps from the center win. Otherwise comparisons continue without resetting the position. NPC attributes default to 10 (+0). D&D 5e character attributes are read only; manual attributes support NPCs and other systems. The GM can assign advantage/disadvantage independently of Divine Hand. Every 10 percent adds one point, or subtracts it for disfavor; the remaining percentage probabilistically rounds up. At 13 percent this means 70 percent +1 and 30 percent +2. Natural dice, modifiers and influence are calculated separately. Player projections omit explicit influence profiles and bonuses, without claiming results cannot be inferred. With Dice So Nice, results, subsequent actions and winner announcements wait for animation completion.
+
+Seventeen and Four cards retain jack 2, queen 3, king 4 and ace 1/11 by default. Optionally face cards count as 10. The former alternative values and sixes are removed. Active legacy rounds retain their scoring until finished; old unstarted lobbies upgrade before dealing. The displayed name no longer includes a Cards suffix. Deck count is automatic at one 32-card deck per four seats including the bank, or manually set to one through eight copies. Copies have distinct card identities and do not change the imported original. Starting cards remain private. Current hands are never recycled when the deck runs out; multiple decks reduce this risk without promising an unlimited supply.
+
+Beta is a combinable filter beside Favorites without the Tags caption. Approved English instructions for Dots and Boxes and Seventeen and Four cards are enabled, bringing the individually approved English guides to eight. New Arm Wrestling and additional tournament guides remain German-only until review. Checkers is recorded for future planning, without rules or implementation yet.
+
+
+Prüfungen mit Foundry-/DSN-Doubles ersetzen keinen Live-Mehrspielertest. / Checks using Foundry/DSN doubles do not replace live multiplayer testing.

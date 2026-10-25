@@ -470,3 +470,26 @@
 .taverngames-dots-viewport svg{display:block;max-width:none;margin:auto;touch-action:manipulation;cursor:crosshair;}
 .taverngames-dots-play .schocken-actions{display:flex;justify-content:center;gap:8px;margin:4px 0;}
 .taverngames-dots-play .schocken-help{color:#f1e7d4;text-align:center;min-height:18px;margin:4px 0;}
+
+.taverngames-tags>button{display:inline-flex;align-items:center;justify-content:center;gap:5px;flex:1;min-width:0;}
+.taverngames-tags .taverngames-category-art{display:inline-block;width:18px;height:18px;flex:0 0 18px;background:currentColor;mask:var(--category-art) center/contain no-repeat;-webkit-mask:var(--category-art) center/contain no-repeat;}
+
+.taverngames-dots-play{width:min(100%,1000px);min-width:0;padding:10px;box-sizing:border-box;}
+.taverngames-arm-play{width:min(100%,760px);box-sizing:border-box;padding:16px;}
+.taverngames-arm-track{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px;margin:14px 0;}
+.taverngames-arm-track>div{padding:12px 2px;border:1px solid #a58a5d;border-radius:5px;text-align:center;background:#352b24;}
+.taverngames-arm-track .is-current{background:#b79340;color:#1f1710;outline:2px solid #ffe1a0;font-weight:bold;}
+.taverngames-arm-play p{text-align:center;color:#f3ead9;}
+.taverngames-arm-results{border-top:1px solid #a58a5d;margin-top:12px;padding-top:8px;}
+.taverngames-arm-results h3{color:#ffe0a0;}
+
+.taverngames-bracket-scroll{overflow:auto;max-height:65vh;max-width:100%;margin:8px 0;background:#211b17;border-radius:6px}
+.taverngames-bracket-scroll svg{display:block;max-width:none!important;font:13px sans-serif}
+.taverngames-bracket-scroll .bracket-heading{fill:#f8e8c2;font-weight:bold}
+.taverngames-bracket-scroll .bracket-seat{fill:#332a23;stroke:#8b7750;stroke-width:1}
+.taverngames-bracket-scroll .bracket-seat.is-winner{fill:#554422;stroke:#e8c374}
+.taverngames-bracket-scroll .bracket-name{fill:#fff0d0}
+.taverngames-bracket-scroll .is-eliminated{fill:#c49b95;text-decoration:line-through}
+.taverngames-bracket-scroll .bracket-path{fill:none;stroke:#756b61;stroke-width:2}
+.taverngames-bracket-scroll .bracket-path.is-advanced{stroke:#e8c374;stroke-width:3}
+.taverngames-connect-play:has(> .taverngames-tournament-bracket[open]) > :not(.taverngames-tournament-bracket):not(.taverngames-connect-status){display:none!important}

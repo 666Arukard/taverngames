@@ -14,7 +14,7 @@ Die Grafiken wurden von Daniel bereitgestellt; das TavernGames-Logo wurde von Da
 
 | Turniere | fjstudio | https://www.flaticon.com/free-icon/trophy_2639922 | [Prize icons created by fjstudio - Flaticon](https://www.flaticon.com/free-icons/prize) |
 
-| Wettkämpfe (künftig) | Iconjam | https://www.flaticon.com/free-icon/duel_18292580 | [Duel icons created by Iconjam - Flaticon](https://www.flaticon.com/free-icons/duel) |
+| Wettkämpfe | Iconjam | https://www.flaticon.com/free-icon/duel_18292580 | [Duel icons created by Iconjam - Flaticon](https://www.flaticon.com/free-icons/duel) |
 
 | Münzstapel Drachenhort | Smashicons | https://www.flaticon.com/free-icon/coins_134597 | [Coins icons created by Smashicons - Flaticon](https://www.flaticon.com/free-icons/coins) |
 

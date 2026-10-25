@@ -1,4 +1,4 @@
-import {createCard21,actCard21,card21Npc,card21View,card21Profile} from './card21-engine.mjs';
+import {createCard21,actCard21,card21Npc,card21View,card21Profile,card21BaseCards} from './card21-engine.mjs';
 import {seriesMetadata} from './continuous-play.mjs';
 import {prepareSeventeenRisk} from './seventeen-engine.mjs';
 import {escapeHTML,gameTitle} from './tavern-text.mjs';
@@ -18,8 +18,8 @@ export class Card21Session{
   let next;
   if(['lobby','restart','nextRound'].includes(d.action)){
    if(!user.isGM)throw Error('GM only.');if(old&&!['lobby','finished','aborted'].includes(old.phase))throw Error('Finish or end the current game first.');
-   if(d.action==='lobby'){const o=d.args??{},names=o.npcs??[];if(!Array.isArray(names)||names.length>10||names.some(n=>typeof n!=='string'||!n.trim()||n.length>60))throw Error('Invalid NPCs.');next=createCard21({...o,cardSet:await this.resolveSet(o.set??null,card21Profile(o.alternative===true,o.sixes===true)),npcs:Object.fromEntries(names.map(n=>['npc-'+crypto.randomUUID(),n.trim()]))});}
-   else{if(!old)throw Error('No game exists.');next=createCard21({...old,cardSet:{...old.cardSet,cards:Object.values(old.cards)}});next.players=[...old.players];next.npcManual=structuredClone(old.npcManual);next.npcRisk=structuredClone(old.npcRisk);}
+   if(d.action==='lobby'){const o=d.args??{},names=o.npcs??[];if(!Array.isArray(names)||names.length>10||names.some(n=>typeof n!=='string'||!n.trim()||n.length>60))throw Error('Invalid NPCs.');next=createCard21({...o,cardSet:await this.resolveSet(o.set??null,card21Profile()),npcs:Object.fromEntries(names.map(n=>['npc-'+crypto.randomUUID(),n.trim()]))});}
+   else{if(!old)throw Error('No game exists.');next=createCard21({...old,cardSet:{...old.cardSet,cards:card21BaseCards(old)}});next.players=[...old.players];next.npcManual=structuredClone(old.npcManual);next.npcRisk=structuredClone(old.npcRisk);}
    next.gameId=crypto.randomUUID();next.revision=(old?.revision??0)+1;
   }else{const id=user.isGM&&old?.npcs[d.args?.id]&&(d.action==='stake'||old.npcManual[d.args.id])?d.args.id:user.id;next=actCard21(old,id,d.action,d.args,this.random,user.isGM,this.pickCard);}
   seriesMetadata(next,old,d.action);if(['lobby','restart','nextRound'].includes(d.action))next=prepareSeventeenRisk(next,this.random);await this.commit(next);return this.project(user);

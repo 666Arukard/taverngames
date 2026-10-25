@@ -1,3 +1,4 @@
+import {renderTournamentBracket} from './tournament-bracket-ui.mjs';
 import {renderNpcDifficulty} from './board-npc.mjs';
 import {gameTitle} from './tavern-text.mjs';
 import {ConnectUI} from './connect-four-ui.mjs';
@@ -24,7 +25,7 @@ export class TicUI extends ConnectUI{
   for(const id of s.players)c.append(node('p',this.name(id)+' · '+(s.scores[id]??0)+' '+f('Punkte','points')));
   c.append(node('p',(s.extreme?'Extreme · ':'')+modeName(s.variant)));
   if(s.phase==='lobby'){const joined=s.players.includes(game.user.id);control(c,joined?f('Lobby verlassen','Leave lobby'):f('Beitreten','Join'),()=>this.request(joined?'leave':'join'),s.paused||!joined&&s.players.length>=(this.scope==='tictournament'?16:2));return;}
-  if(this.scope==='tictournament'){const bracket=node('section',undefined,'taverngames-tournament-bracket');bracket.append(node('h3',f('Turnierplan','Tournament bracket')));for(const m of s.matches){const row=node('p',f('Stufe ','Stage ')+m.stage+' · '+this.name(m.a)+' / '+(m.b?this.name(m.b):f('Freilos','Bye'))+(m.winner?' → '+this.name(m.winner)+(m.byLot?' · '+f('Losentscheid','Drawn by lot'):''):' · '+f('offen','pending')));bracket.append(row);}c.append(bracket);}
+
   const active=s.order[s.turn],allowed=active===game.user.id||game.user.isGM&&s.npcs[active]&&s.npcManual[active],key=s.gameId+':'+s.revision;if(this.selection?.key!==key)this.selection=null;
   const play=node('section',undefined,'taverngames-connect-play taverngames-tic-play');play.classList.toggle('is-extreme',!!s.extreme);
   let text=s.phase==='playing'?this.name(active)+f(' ist am Zug',' is taking a turn'):s.phase==='roundEnd'?(s.roundWinner?this.name(s.roundWinner)+f(' gewinnt die Runde',' wins the round'):f('Runde unentschieden','Round drawn')):s.phase==='finished'?(s.draw?f('Unentschieden','Draw'):s.winners.map(id=>this.name(id)).join(', ')+f(' gewinnt',' wins')):f('Partie beendet','Session ended');
@@ -45,7 +46,7 @@ export class TicUI extends ConnectUI{
   };
   if(s.extreme){for(let b=0;b<9;b++){const tile=node('section',undefined,'taverngames-tic-subboard');tile.dataset.ticBoard=b;const closed=s.closedBoards[b],winner=s.subWinners[b];tile.classList.toggle('is-allowed',s.phase==='playing'&&!closed&&(s.forcedBoard===null||s.forcedBoard===b));tile.classList.toggle('is-closed',closed);tile.classList.toggle('is-won',!!winner);if(s.winningBoards.includes(b))tile.classList.add('is-macro-winning');tile.append(node('span',String(b+1),'taverngames-tic-board-number'));const grid=node('div',undefined,'taverngames-tic-board');addCells(grid,b);tile.append(grid);if(closed){const result=node('span',winner?(s.order.indexOf(winner)===0?'✕':'○'):'–','taverngames-tic-subresult');result.setAttribute('aria-label',winner?this.name(winner)+f(' gewinnt dieses Teilbrett',' wins this sub-board'):f('Teilbrett unentschieden','Sub-board drawn'));tile.append(result);}outer.append(tile);}}
   else addCells(outer,0);
-  play.append(outer);if(s.phase==='roundEnd'&&game.user.isGM){if(s.tieDecision){c.append(node('p',f('Erneut unentschieden: Losentscheid oder weiterspielen?','Draw again: decide by lot or play another round?')));control(c,f('Losentscheid','Decide by lot'),()=>this.request('tieLot'));}control(c,this.scope==='tictournament'?(s.matches[s.matchIndex]?.winner?f('Nächste Begegnung','Next match'):f('Weiterspielen','Play again')):f('Nächste Runde','Next round'),()=>this.request('nextRound'));}
+  play.append(outer);if(this.scope==='tictournament')renderTournamentBracket(play,s,this);if(s.phase==='roundEnd'&&game.user.isGM){if(s.tieDecision){c.append(node('p',f('Erneut unentschieden: Losentscheid oder weiterspielen?','Draw again: decide by lot or play another round?')));control(c,f('Losentscheid','Decide by lot'),()=>this.request('tieLot'));}control(c,this.scope==='tictournament'?(s.matches[s.matchIndex]?.winner?f('Nächste Begegnung','Next match'):f('Weiterspielen','Play again')):f('Nächste Runde','Next round'),()=>this.request('nextRound'));}
  }
 }
 

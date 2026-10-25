@@ -1,3 +1,13 @@
+# Aktueller Stand 5.5.1
+
+Neue Betas: Vier-gewinnt-, Mühle- und Käsekästchen-Turniere mit K.-o.-Plan, Freilosen und SL-Remisentscheid sowie Armdrücken mit Technik, Druck und Durchhalten. NPC-Attribute starten bei 10; D&D-Charakterwerte werden gelesen, andere Werte sind manuell einstellbar. Vorteil/Nachteil und direkte Boni/Abzüge der Göttlichen Hand sind getrennt. 17 und 4 verwendet optional Bildkartenwert 10 statt der früheren Hauswertung; zusätzliche Sechsen entfallen. Beta steht neben Favoriten, ohne Tags-Beschriftung. Die freigegebene englische Käsekästchen-Anleitung ist verfügbar. Käsekästchen bleibt Beta.
+
+31 Katalogeinträge: 25 stabile Spiele, ein stabiles Tic-Tac-Toe-Turnier, zwei Beta-Spiele (Käsekästchen/Armdrücken) und drei neue Beta-Turniere. Acht freigegebene englische Anleitungen. Kein bestimmtes Spielsystem nötig; Armdrücken liest D&D-5e-Attribute oder nutzt manuelle Werte. Keine Charakter-Geldbuchungen.
+
+Alle vier Turniere bieten einen einblendbaren grafischen Turnierbaum mit durchgestrichenen Ausgeschiedenen und goldenen Siegerwegen. 17 und 4 unterstützt automatisch ein Deck je vier Plätze einschließlich Bank oder ein bis acht Deckkopien nach SL-Auswahl. Die freigegebene englische Anleitung für das Kartenspiel ist verfügbar.
+
+Testplan: docs/release-5.5.1.md. Lokaler Build ohne Veröffentlichung, kein eigener neuer Live-Foundry-Nachweis.
+
 # Aktueller Stand 5.5.0
 
 Mühle und 17 und 4 als Kartenspiel sind nach Nutzerabnahme stabil. Neu als Beta: Käsekästchen mit NPC-Stärken, Serien, Spieltoken und einem SL-Editor für eigene geschlossene Spielflächen auf bis zu 50 × 50 Kästchen. Kniffel und Extreme zeigen den Wertungsblock wahlweise auf dem Spielfeld oder in der Lobby; abgeschlossene Zugwürfel und Augensummen entfallen. Die eigene Kartensumme bei 17 und 4 steht am Spieltisch. Drachenhort-NPCs reagieren schneller, Schwarzer-Peter-Gegenhand und Paarablage sind kompakter und zentriert.

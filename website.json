@@ -2,23 +2,27 @@
   "schemaVersion": 1,
   "blocks": {
     "patchnotes": {
-      "title": "Patchnotes Version 5.5.0",
+      "title": "Patchnotes Version 5.5.1",
       "paragraphs": [
-        "Mühle und 17 und 4 als Kartenspiel sind nach Nutzerabnahme stabil. Neu als Beta: Käsekästchen mit NPC-Stärken, Serien, Spieltoken und einem SL-Editor für eigene geschlossene Spielflächen auf bis zu 50 × 50 Kästchen. Kniffel und Extreme zeigen den Wertungsblock wahlweise auf dem Spielfeld oder in der Lobby; abgeschlossene Zugwürfel und Augensummen entfallen. Die eigene Kartensumme bei 17 und 4 steht am Spieltisch. Drachenhort-NPCs reagieren schneller, Schwarzer-Peter-Gegenhand und Paarablage sind kompakter und zentriert."
+        "Neue Betas: Vier-gewinnt-, Mühle- und Käsekästchen-Turniere mit K.-o.-Plan, Freilosen und SL-Remisentscheid sowie Armdrücken mit Technik, Druck und Durchhalten. NPC-Attribute starten bei 10; D&D-Charakterwerte werden gelesen, andere Werte sind manuell einstellbar. Vorteil/Nachteil und direkte Boni/Abzüge der Göttlichen Hand sind getrennt. 17 und 4 verwendet optional Bildkartenwert 10 statt der früheren Hauswertung; zusätzliche Sechsen entfallen. Beta steht neben Favoriten, ohne Tags-Beschriftung. Die freigegebene englische Käsekästchen-Anleitung ist verfügbar. Käsekästchen bleibt Beta.",
+        "Alle vier Turniere bieten einen einblendbaren grafischen Turnierbaum mit durchgestrichenen Ausgeschiedenen und goldenen Siegerwegen. 17 und 4 unterstützt automatisch ein Deck je vier Plätze einschließlich Bank oder ein bis acht Deckkopien nach SL-Auswahl. Die freigegebene englische Anleitung für das Kartenspiel ist verfügbar."
       ],
       "items": [
-        "Mühle und 17 und 4 als Kartenspiel nach Praxistest stabil, unabhängig vom Beta-Schalter.",
-        "Käsekästchen als neue Beta: zwei Spieler oder NPCs, Schwierigkeitswahl, Serien und optionale interne Spieltoken.",
-        "SL-Editor für geschlossene Außenlinien bis50×50 Kästchen; eigene Formen, getrennte Bereiche und Löcher. Spielen per Klick oder Tastatur, Zoom und Einpassen.",
-        "Kniffel-Wertungsblock auf Spielfeld oder in Lobby wählbar, ohne Springen bei unveränderten Aktualisierungen; keine abgeschlossenen Würfelhände oder Augensummen.",
-        "17 und 4 Karten zeigt die eigene Summe über der Hand. Drachenhort-NPCs warten zwei statt fünf Sekunden; Ergebnisanzeige bleibt geschützt.",
-        "Schwarzer-Peter-Gegenhand zentriert, Paarablage weiter oben und dichter; große Handkarten verdrängen die Ablage nicht."
+        "Neue Beta-Turniere: Vier gewinnt, Mühle und Käsekästchen; 2–16 Teilnehmer, Freilose, Los oder Weiterspielen nach drei Remis.",
+        "Armdrücken-Beta: wiederkehrende Geschicklichkeits-, Stärke- und Konstitutionsproben; drei Schritte von der Mitte gewinnen.",
+        "NPC-Attribute 10 (+0), lesbare D&D-5e-Charakterwerte oder manuelle Attribute; Vorteil/Nachteil je Teilnehmer durch die SL.",
+        "Göttliche Hand bei Armdrücken als direkter Zusatz: je 10 Prozent ein Punkt, Zwischenwerte zufällig aufgerundet, Ungnade spiegelbildlich.",
+        "17 und 4: neue optionale Bildkartenwertung 10, keine zusätzlichen Sechsen; frühere optionale Werte entfallen. Sichtbarer Name ohne Karten-Zusatz.",
+        "Beta als kombinierbarer Filter neben Favoriten; Tags-Beschriftung entfällt.",
+        "Geprüfte englische Käsekästchen-Anleitung freigeschaltet. Keine Stable-Hochstufung in diesem Update.",
+        "Alle vier Turniere bieten einen einblendbaren grafischen Turnierbaum mit durchgestrichenen Ausgeschiedenen und goldenen Siegerwegen. 17 und 4 unterstützt automatisch ein Deck je vier Plätze einschließlich Bank oder ein bis acht Deckkopien nach SL-Auswahl. Die freigegebene englische Anleitung für das Kartenspiel ist verfügbar.",
+        "Dame (Checkers) für spätere Entwicklung vorgemerkt; noch nicht spielbar."
       ]
     },
     "games": {
-      "title": "aktuelle Spiele (27)",
+      "title": "aktuelle Spiele (31)",
       "paragraphs": [
-        "25 stabile Spiele, ein stabiles Turnier und Käsekästchen als optionale Beta. Gemeinsame Partien mit echten Spielern und optional NPCs."
+        "25 stabile Spiele, ein stabiles Turnier; Käsekästchen und Armdrücken sowie drei zusätzliche Turniere als optionale Betas."
       ],
       "items": [
         {
@@ -51,7 +55,7 @@
         {
           "title": "Kartenspiele",
           "items": [
-            "17 und 4 (Karten)",
+            "17 und 4 – Kartenspiel",
             "Durak",
             "Mau-Mau",
             "Schwarzer Peter",
@@ -70,7 +74,16 @@
         {
           "title": "Turniere",
           "items": [
-            "Tic-Tac-Toe-Turnier"
+            "Tic-Tac-Toe-Turnier",
+            "Käsekästchen-Turnier (Beta)",
+            "Mühle-Turnier (Beta)",
+            "Vier-gewinnt-Turnier (Beta)"
+          ]
+        },
+        {
+          "title": "Wettkämpfe",
+          "items": [
+            "Armdrücken (Beta)"
           ]
         }
       ]
@@ -113,8 +126,8 @@
         {
           "title": "Sonstige",
           "items": [
-            "Armdrücken",
             "Bogenschießen",
+            "Dame",
             "Das Spiel der edlen Dame",
             "Gewichteheben",
             "Karaoke",
@@ -186,7 +199,7 @@
       ]
     },
     "functions": {
-      "title": "aktuelle Funktionen (41)",
+      "title": "aktuelle Funktionen (42)",
       "paragraphs": [
         "Bereits umgesetzte Kernfunktionen. Verfügbarkeit und erlaubte Aktionen richten sich nach Spielregeln, Teilnahme und SL-Freigabe."
       ],
@@ -281,6 +294,12 @@
           "items": [
             "Rechtecke oder geschlossene Außenlinien auf einem Raster bis50×50; zentrale Spielfläche, Zoom, Serien und NPC-Stärken."
           ]
+        },
+        {
+          "title": "Wettkämpfe und weitere Turniere (Beta)",
+          "items": [
+            "Armdrücken mit Attributen, Vorteil/Nachteil, optionaler Göttlicher Hand und Spieltoken; weitere K.-o.-Turniere auf vorhandenen Brettspielregeln."
+          ]
         }
       ]
     },
@@ -293,9 +312,9 @@
         {
           "title": "Allgemeine Einstellungen",
           "items": [
-            "Sprache: Deutsch oder Englisch wählen. Beide Oberflächen sind verfügbar. Deutsche Anleitungen und sechs geprüfte englische Anleitungen sind enthalten: Tic-Tac-Toe einschließlich Extreme, dessen Turnier, Schwarzer Peter, Vier gewinnt, Aalstechen und Mühle. Die englische Anleitung der Kartenversion von 17 und 4 bleibt bis zur Prüfung gesperrt.",
+            "Sprache: Deutsch oder Englisch wählen. Beide Oberflächen sind verfügbar. Deutsche Anleitungen und acht geprüfte englische Anleitungen: Tic-Tac-Toe einschließlich Extreme, dessen Turnier, Schwarzer Peter, Vier gewinnt, Aalstechen, Mühle, Käsekästchen und 17 und 4 als Kartenspiel. Weitere englische Anleitungen bleiben bis Review gesperrt.",
             "Ansicht: Reiteransicht ist Standard, klassische Fenster bleiben je Benutzer wählbar.",
-            "Beta-Test: Käsekästchen einschalten. 25 Spiele und das Tic-Tac-Toe-Turnier sind stabil und ohne Beta-Schalter verfügbar.",
+            "Beta-Test: Käsekästchen, Armdrücken und drei zusätzliche Turniere einschalten. 25 Spiele und das Tic-Tac-Toe-Turnier sind stabil und ohne Beta-Schalter verfügbar.",
             "Dice So Nice: optionale 3D-Würfel aktivieren. Ohne das Zusatzmodul bleiben die Spiele bedienbar.",
             "Markierungsmodus: persönlich wählen, ob markierte eigene Würfel behalten oder erneut gewürfelt werden.",
             "Kartendecks: geeignete externe Vorlagen unter Cards / Card Decks anlegen oder importieren. Es ist kein Standard-Kartenset enthalten; vorhandene Vorlagen bleiben unverändert.",
@@ -323,9 +342,11 @@
             "Tic-Tac-Toe-Turnier: 2–16 Teilnehmer, ausgeloster K.-o.-Plan und Freilose; nach drei Unentschieden entscheidet die SL zwischen Los und weiterer Runde. Spieltoken gelten einmalig für das Turnier.",
             "NPC-Stärke: Bei Tic-Tac-Toe und Vier gewinnt pro NPC Leicht, Normal oder Schwer wählen. Neue NPCs starten mit Normal; ältere Spielstände ohne Einstellung behalten ihre bisherige starke Strategie.",
             "Mühle: zwei echte Teilnehmer oder NPCs wählen. Springen mit genau drei Steinen ist optional und standardmäßig ein. Eine Partie oder Serie von 1–100 Runden mit optionalem gemeinsamem Token-Einsatz vorbereiten. Pro neu geschlossener Mühle wird ein Stein geschlagen; auch eine Doppelmühle erlaubt nur einen Schlag.",
-            "17 und 4 als Kartenspiel: externes Deck wählen. Standard sind 32 Karten von 7 bis Ass mit Bube 2, Dame 3, König 4 und Ass 1 oder 11. Alternative Bild-/Asswerte und die zusätzlichen Sechsen sind optional; Sechsen nur bei alternativer Wertung. Bank automatisch oder durch SL steuern, Einsatz und interne Banklimits vor der Partie festlegen.",
+            "17 und 4 als Kartenspiel: externes Deck wählen, 32 Karten von 7 bis Ass; Standard Bube 2, Dame 3, König 4, Ass 1/11. Optional Bildkarten je 10. Automatische Deckanzahl oder ein bis acht Kopien. Bank automatisch oder durch SL, interne Token und Banklimits.",
             "Kniffel/Extreme: gemeinsamer SL-Schalter Wertungsblock auf Spielfeld oder in Lobby.",
-            "Käsekästchen (Beta): Rechteck mit 1–50 Kästchen je Richtung oder eigene geschlossene Form im Zeicheneditor wählen. Serien mit 1–100 Runden addieren Kästchenpunkte; der Starter wechselt, die SL startet die Folgerunde. NPC-Stärke und optionalen einmaligen Token-Einsatz für die Serie festlegen."
+            "Käsekästchen (Beta): Rechteck mit 1–50 Kästchen je Richtung oder eigene geschlossene Form im Zeicheneditor wählen. Serien mit 1–100 Runden addieren Kästchenpunkte; der Starter wechselt, die SL startet die Folgerunde. NPC-Stärke und optionalen einmaligen Token-Einsatz für die Serie festlegen.",
+            "Armdrücken: NPC-/manuelle Attribute, Charakterwerte erneut einlesen, Vorteil/Normal/Nachteil und manuelle NPC-Steuerung.",
+            "Zusätzliche Turniere: Teilnehmer, NPC-Stärken, bei Mühle Springen, bei Käsekästchen rechteckige Brettgröße."
           ]
         }
       ]
@@ -708,13 +729,20 @@
         {
           "title": "17 und 4 (Karten)",
           "items": [
-            "Zwei verdeckte Startkarten für alle, offene weitere Karten und Schlussaufdeckung; weitere Bank-/Auszahlungsregeln aus der Würfelversion als TavernGames-Hausregeln. Alternative B3/D4/K5/A2oder11 und optionale Sechsen. Sieg 2x Einsatz, Sieg mit 21 2,5x auf volle Spieltoken aufgerundet."
+            "Zwei verdeckte Startkarten für alle, offene weitere Karten und Schlussaufdeckung; Bank- und Auszahlungsregeln aus der Würfelversion als TavernGames-Hausregeln. Standard Bube 2, Dame 3, König 4, Ass 1/11; optional Bildkarten je 10. Beide Profile mit 32 Karten von 7 bis Ass, keine zusätzlichen Sechsen. Sieg 2× Einsatz, Sieg mit 21 2,5× auf volle Spieltoken aufgerundet. Automatisch ein Deck je vier Plätze einschließlich Bank oder ein bis acht Deckkopien nach SL-Auswahl."
           ]
         },
         {
           "title": "Käsekästchen",
           "items": [
             "Eigener Regeltext; frei gezeichnete Flächen, Löcher und getrennte Bereiche, NPC-Stärken, Serien und Spieltoken als TavernGames-Ergänzungen. Außenlinien sind Begrenzung, keine vorab gespielten Linien."
+          ]
+        },
+        {
+          "title": "Armdrücken und zusätzliche Turniere",
+          "items": [
+            "Eigene TavernGames-Hausregeln nach Daniel Brune; keine offizielle D&D-Armdrückregel. K.-o.-Ablauf nach vorhandenem Tic-Tac-Toe-Turnier.",
+            "Armdrücken: drei wechselnde Attribute, drei Schritte Vorsprung, direkte Einflussboni statt Ergebnis-Neuwürfeln."
           ]
         }
       ]
@@ -775,5 +803,5 @@
       "paragraphs": []
     }
   },
-  "version": "5.5.0"
+  "version": "5.5.1"
 }

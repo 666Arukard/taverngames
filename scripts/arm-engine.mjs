@@ -1,0 +1,26 @@
+import {startingOrder,secureIndex} from './start-choice.mjs';
+const check=(v,m)=>{if(!v)throw Error(m);};
+export const ARM_ABILITIES=['dex','str','con'];
+const stats=()=>({dex:10,str:10,con:10});
+export function influenceBonus(strength=0,mode='favor',random=secureIndex){const n=Math.max(0,Math.min(100,strength)),whole=Math.floor(n/10),extra=n%10;return (whole+(extra>0&&random(10)<extra?1:0))*(mode==='disfavor'?-1:1);}
+export function createArm(o={}){check(Object.keys(o.npcs??{}).length<=2,'Two players required.');const players=Object.keys(o.npcs??{});return {version:1,game:'arm',gameId:null,revision:0,phase:'lobby',players,npcs:structuredClone(o.npcs??{}),npcManual:{},attributes:{...Object.fromEntries(players.map(id=>[id,stats()])),...structuredClone(o.attributes??{})},modifiers:structuredClone(o.modifiers??{}),statSource:structuredClone(o.statSource??{}),advantages:{...Object.fromEntries(players.map(id=>[id,'normal'])),...structuredClone(o.advantages??{})},order:[],turn:0,phaseIndex:0,exchange:1,position:0,pending:{},history:[],scores:{},winners:[],losers:[],paused:false,startSelection:o.startSelection??'rules'};}
+export function actArm(old,id,action,args={},gm=false,random=n=>secureIndex(n)+1,profiles=[],bonusRandom=secureIndex){
+ check(old?.game==='arm','No game exists.');const s=structuredClone(old);s.revision++;const admin=()=>check(gm,'GM only.');
+ if(action==='abort'){admin();s.phase='aborted';s.winners=[];s.losers=[];s.pending={};return s;}if(action==='pause'){admin();s.paused=!s.paused;return s;}
+ if(action==='npcControl'){admin();check(s.npcs[args.id],'Invalid NPC.');s.npcManual[args.id]=args.manual===true;return s;}
+ if(action==='advantage'){admin();check(s.players.includes(args.id)&&['normal','advantage','disadvantage'].includes(args.mode),'Invalid roll mode.');s.advantages[args.id]=args.mode;return s;}
+ if(action==='attributes'){admin();check(s.players.includes(args.id)&&ARM_ABILITIES.every(a=>Number.isInteger(args.values?.[a])&&args.values[a]>=1&&args.values[a]<=30),'Attributes must be between 1 and 30.');s.attributes[args.id]={...args.values};delete s.modifiers[args.id];s.statSource[args.id]='manual';return s;}
+ check(!s.paused,'Game is paused.');
+ if(action==='join'){check(s.phase==='lobby'&&!s.players.includes(id)&&s.players.length<2,'Two players required.');s.players.push(id);s.attributes[id]=stats();s.advantages[id]='normal';}
+ else if(action==='leave'){check(s.phase==='lobby','Leave in the lobby.');s.players=s.players.filter(p=>p!==id);delete s.attributes[id];delete s.modifiers[id];delete s.advantages[id];}
+ else if(action==='begin'){admin();check(s.phase==='lobby'&&s.players.length===2,'Two players required.');s.order=startingOrder(s);s.phase='playing';s.scores=Object.fromEntries(s.players.map(p=>[p,0]));}
+ else if(action==='roll'){
+  check(s.phase==='playing'&&s.players.includes(id)&&!s.pending[id]&&(args.exchange===undefined||args.exchange===s.exchange),'Roll once per phase.');const ability=ARM_ABILITIES[s.phaseIndex],mode=s.advantages[id]??'normal',dice=Array.from({length:mode==='normal'?1:2},()=>{const n=random(20);check(Number.isInteger(n)&&n>=1&&n<=20,'Invalid random value.');return n;}),die=mode==='disadvantage'?Math.min(...dice):Math.max(...dice),modifier=s.modifiers[id]?.[ability]??Math.floor(((s.attributes[id]?.[ability]??10)-10)/2),profile=profiles.find(p=>p.target===id),bonus=influenceBonus(profile?.strength??0,profile?.mode??'favor',bonusRandom);s.pending[id]={id,ability,mode,dice,die,modifier,bonus,total:die+modifier+bonus};
+  if(s.order.every(p=>s.pending[p])){const [a,b]=s.order,delta=Math.sign(s.pending[a].total-s.pending[b].total),winner=delta>0?a:delta<0?b:null;s.position+=delta;s.history.push({exchange:s.exchange,phaseIndex:s.phaseIndex,ability,position:s.position,winner,rolls:structuredClone(s.pending)});s.history=s.history.slice(-20);s.pending={};s.exchange++;s.phaseIndex=(s.phaseIndex+1)%3;s.turn=0;if(Math.abs(s.position)===3){s.phase='finished';s.winners=[s.position>0?a:b];s.losers=s.order.filter(p=>!s.winners.includes(p));s.scores=Object.fromEntries(s.players.map(p=>[p,s.winners.includes(p)?1:0]));s.draw=false;}}
+  else s.turn=s.order.findIndex(p=>!s.pending[p]);
+ }else throw Error('Unknown action.');return s;
+}
+export function armNpc(s){if(s?.phase!=='playing'||s.paused)return null;const id=s.order.find(id=>s.npcs[id]&&!s.npcManual[id]&&!s.pending[id]);return id?{id,action:'roll'}:null;}
+export function armView(s,user={}){if(!s)return s;const v=structuredClone(s);if(!user.isGM){for(const row of [...Object.values(v.pending),...v.history.flatMap(h=>Object.values(h.rolls))]){delete row.bonus;delete row.modifier;} }return v;}
+// Read-only dnd5e adapter. Other systems use editable values rather than guessing their schema.
+export function armActorStats(actor,system){if(system!=='dnd5e'||!actor)return null;const abilities=actor.system?.abilities;if(!ARM_ABILITIES.every(a=>Number.isInteger(abilities?.[a]?.value)&&abilities[a].value>=1&&abilities[a].value<=30))return null;return {attributes:Object.fromEntries(ARM_ABILITIES.map(a=>[a,abilities[a].value])),modifiers:Object.fromEntries(ARM_ABILITIES.map(a=>[a,Number.isFinite(abilities[a].mod)?abilities[a].mod:Math.floor((abilities[a].value-10)/2)]))};}
