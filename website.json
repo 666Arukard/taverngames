@@ -2,27 +2,25 @@
   "schemaVersion": 1,
   "blocks": {
     "patchnotes": {
-      "title": "Patchnotes Version 5.5.1",
+      "title": "Patchnotes Version 5.6.0",
       "paragraphs": [
-        "Neue Betas: Vier-gewinnt-, Mühle- und Käsekästchen-Turniere mit K.-o.-Plan, Freilosen und SL-Remisentscheid sowie Armdrücken mit Technik, Druck und Durchhalten. NPC-Attribute starten bei 10; D&D-Charakterwerte werden gelesen, andere Werte sind manuell einstellbar. Vorteil/Nachteil und direkte Boni/Abzüge der Göttlichen Hand sind getrennt. 17 und 4 verwendet optional Bildkartenwert 10 statt der früheren Hauswertung; zusätzliche Sechsen entfallen. Beta steht neben Favoriten, ohne Tags-Beschriftung. Die freigegebene englische Käsekästchen-Anleitung ist verfügbar. Käsekästchen bleibt Beta.",
-        "Alle vier Turniere bieten einen einblendbaren grafischen Turnierbaum mit durchgestrichenen Ausgeschiedenen und goldenen Siegerwegen. 17 und 4 unterstützt automatisch ein Deck je vier Plätze einschließlich Bank oder ein bis acht Deckkopien nach SL-Auswahl. Die freigegebene englische Anleitung für das Kartenspiel ist verfügbar."
+        "Käsekästchen, Armdrücken und die Turniere für Vier gewinnt, Mühle und Käsekästchen sind nach Nutzerabnahme stabil. Neu als optionale Betas: Wetttrinken und Wettessen mit einstellbarem Start-SG, standardmäßig +1 je Runde, optionalen Doppelproben, internen Mali und geteilten Siegen sowie Dame auf einem 8×8-Brett mit langen Damen und konfigurierbaren Schlagregeln. Armdrücken kann die Bewegungsrichtung umschalten und blendet Wurfwürfel nach der Animation aus. Der Turnierplan zeigt Halbfinale, Finale und Sieger ohne überflüssige Freilos-Einführungsstufen. Insgesamt 27 stabile Spiele, vier stabile Turniere und drei neue Betas."
       ],
       "items": [
-        "Neue Beta-Turniere: Vier gewinnt, Mühle und Käsekästchen; 2–16 Teilnehmer, Freilose, Los oder Weiterspielen nach drei Remis.",
-        "Armdrücken-Beta: wiederkehrende Geschicklichkeits-, Stärke- und Konstitutionsproben; drei Schritte von der Mitte gewinnen.",
-        "NPC-Attribute 10 (+0), lesbare D&D-5e-Charakterwerte oder manuelle Attribute; Vorteil/Nachteil je Teilnehmer durch die SL.",
-        "Göttliche Hand bei Armdrücken als direkter Zusatz: je 10 Prozent ein Punkt, Zwischenwerte zufällig aufgerundet, Ungnade spiegelbildlich.",
-        "17 und 4: neue optionale Bildkartenwertung 10, keine zusätzlichen Sechsen; frühere optionale Werte entfallen. Sichtbarer Name ohne Karten-Zusatz.",
-        "Beta als kombinierbarer Filter neben Favoriten; Tags-Beschriftung entfällt.",
-        "Geprüfte englische Käsekästchen-Anleitung freigeschaltet. Keine Stable-Hochstufung in diesem Update.",
-        "Alle vier Turniere bieten einen einblendbaren grafischen Turnierbaum mit durchgestrichenen Ausgeschiedenen und goldenen Siegerwegen. 17 und 4 unterstützt automatisch ein Deck je vier Plätze einschließlich Bank oder ein bis acht Deckkopien nach SL-Auswahl. Die freigegebene englische Anleitung für das Kartenspiel ist verfügbar.",
-        "Dame (Checkers) für spätere Entwicklung vorgemerkt; noch nicht spielbar."
+        "27 stabile Spiele und vier stabile Turniere nach Abnahme; Wetttrinken, Wettessen und Dame als neue optionale Betas.",
+        "Wetttrinken: Konstitution für Portion und optional Verträglichkeit; zwei Hauptfehlschläge bedeuten Ausscheiden, Verträglichkeitsfehlschläge geben kumulative interne Mali.",
+        "Wettessen: Konstitution für Portion und optional Geschicklichkeit; Misslingen der Zusatzprobe gibt −1 auf die nächste Hauptprobe.",
+        "Start-SG 10 und Steigerung +1 pro Runde sind einstellbar. Freiwilliges Aufgeben und NPC-Aufgeben bei unabhängiger W20-1. Geteilte Sieger teilen den einmaligen Spieltoken-Topf.",
+        "Dame: 8×8, zwölf Steine, lange Damen, optionale Rückwärtsschläge; erzwungene Schlagpflicht, optionale Zurücksetzstrafe oder freie Schlagwahl. Einstellbare Remisgrenze, Serien und NPC-Stärken.",
+        "Armdrücken: umschaltbare Bewegungsrichtung; Wurfwürfel nach Animation ausblenden.",
+        "Turnierplan: überflüssige Freilos-Einführungsstufen ausblenden und Halbfinale/Finale/Sieger klar benennen.",
+        "Keine neuen englischen Anleitungen freigeschaltet. Kniffel7 und Karten-Kniffel weiter als spätere Spiele vorgemerkt."
       ]
     },
     "games": {
-      "title": "aktuelle Spiele (31)",
+      "title": "aktuelle Spiele (34)",
       "paragraphs": [
-        "25 stabile Spiele, ein stabiles Turnier; Käsekästchen und Armdrücken sowie drei zusätzliche Turniere als optionale Betas."
+        "27 stabile Spiele und vier stabile Turniere; Wetttrinken, Wettessen und Dame als optionale Betas."
       ],
       "items": [
         {
@@ -65,31 +63,34 @@
         {
           "title": "Brettspiele",
           "items": [
+            "Käsekästchen",
             "Mühle",
             "Tic-Tac-Toe",
             "Vier gewinnt",
-            "Käsekästchen (Beta)"
+            "Dame (Beta)"
           ]
         },
         {
           "title": "Turniere",
           "items": [
+            "Käsekästchen-Turnier",
+            "Mühle-Turnier",
             "Tic-Tac-Toe-Turnier",
-            "Käsekästchen-Turnier (Beta)",
-            "Mühle-Turnier (Beta)",
-            "Vier-gewinnt-Turnier (Beta)"
+            "Vier-gewinnt-Turnier"
           ]
         },
         {
           "title": "Wettkämpfe",
           "items": [
-            "Armdrücken (Beta)"
+            "Armdrücken",
+            "Wettessen (Beta)",
+            "Wetttrinken (Beta)"
           ]
         }
       ]
     },
     "plans": {
-      "title": "geplante Spiele (27)",
+      "title": "geplante Spiele (26)",
       "paragraphs": [
         "Geplante Spiele und Wettbewerbe mit vorhandenen Referenzen oder neu vorgemerkten Namen. Einzelne Regeln sind noch offen; insbesondere ist beim Streichholzspiel noch keine genaue Variante festgelegt. Vorhandene Spiele werden nicht unter ihren englischen Namen erneut geplant."
       ],
@@ -98,6 +99,7 @@
           "title": "Würfelspiele",
           "items": [
             "Escalero",
+            "Kniffel7",
             "Offenes Würfelpoker"
           ]
         },
@@ -115,6 +117,7 @@
             "Blackjack",
             "Doppelkopf",
             "Gaigel",
+            "Karten-Kniffel",
             "Kartendomino / Fan Tan",
             "König und Bettler / Präsident",
             "Rommé",
@@ -127,7 +130,6 @@
           "title": "Sonstige",
           "items": [
             "Bogenschießen",
-            "Dame",
             "Das Spiel der edlen Dame",
             "Gewichteheben",
             "Karaoke",
@@ -136,9 +138,7 @@
             "Schach (abstrakter Wettbewerb)",
             "Schiffe versenken / Battleship (Variante noch offen)",
             "Streichholzspiel / Matchstick Game (Variante noch offen)",
-            "WallRush (Regelvariante noch offen)",
-            "Wettessen",
-            "Wetttrinken"
+            "WallRush (Regelvariante noch offen)"
           ]
         }
       ]
@@ -199,7 +199,7 @@
       ]
     },
     "functions": {
-      "title": "aktuelle Funktionen (42)",
+      "title": "aktuelle Funktionen (45)",
       "paragraphs": [
         "Bereits umgesetzte Kernfunktionen. Verfügbarkeit und erlaubte Aktionen richten sich nach Spielregeln, Teilnahme und SL-Freigabe."
       ],
@@ -262,7 +262,8 @@
             "Schwebende Zugaktionen",
             "Sichtbare Ergebnisse am Tisch",
             "Zentrales Brettspielfeld mit Gewinnmarkierung",
-            "Farbwahl-Popup und Zuganzeige"
+            "Farbwahl-Popup und Zuganzeige",
+            "Umschaltbare Bewegungsrichtung der Wettkampfmarkierung"
           ]
         },
         {
@@ -271,7 +272,9 @@
             "Verschlüsselte Spielstände und Wiederaufnahme",
             "Folgerunden mit übernehmbaren Tokenbeständen",
             "Optionale Regelvarianten",
-            "Konfigurierbare Tippscheine und manuelle Ziehung"
+            "Konfigurierbare Tippscheine und manuelle Ziehung",
+            "Konfigurierbare Doppelproben und interne Wettkampfmali",
+            "Konfigurierbare Schlagpflicht und Remisgrenzen"
           ]
         },
         {
@@ -314,7 +317,7 @@
           "items": [
             "Sprache: Deutsch oder Englisch wählen. Beide Oberflächen sind verfügbar. Deutsche Anleitungen und acht geprüfte englische Anleitungen: Tic-Tac-Toe einschließlich Extreme, dessen Turnier, Schwarzer Peter, Vier gewinnt, Aalstechen, Mühle, Käsekästchen und 17 und 4 als Kartenspiel. Weitere englische Anleitungen bleiben bis Review gesperrt.",
             "Ansicht: Reiteransicht ist Standard, klassische Fenster bleiben je Benutzer wählbar.",
-            "Beta-Test: Käsekästchen, Armdrücken und drei zusätzliche Turniere einschalten. 25 Spiele und das Tic-Tac-Toe-Turnier sind stabil und ohne Beta-Schalter verfügbar.",
+            "Beta-Test: Wetttrinken, Wettessen und Dame einschalten. 27 Spiele und vier Turniere bleiben ohne Beta verfügbar.",
             "Dice So Nice: optionale 3D-Würfel aktivieren. Ohne das Zusatzmodul bleiben die Spiele bedienbar.",
             "Markierungsmodus: persönlich wählen, ob markierte eigene Würfel behalten oder erneut gewürfelt werden.",
             "Kartendecks: geeignete externe Vorlagen unter Cards / Card Decks anlegen oder importieren. Es ist kein Standard-Kartenset enthalten; vorhandene Vorlagen bleiben unverändert.",
@@ -344,15 +347,18 @@
             "Mühle: zwei echte Teilnehmer oder NPCs wählen. Springen mit genau drei Steinen ist optional und standardmäßig ein. Eine Partie oder Serie von 1–100 Runden mit optionalem gemeinsamem Token-Einsatz vorbereiten. Pro neu geschlossener Mühle wird ein Stein geschlagen; auch eine Doppelmühle erlaubt nur einen Schlag.",
             "17 und 4 als Kartenspiel: externes Deck wählen, 32 Karten von 7 bis Ass; Standard Bube 2, Dame 3, König 4, Ass 1/11. Optional Bildkarten je 10. Automatische Deckanzahl oder ein bis acht Kopien. Bank automatisch oder durch SL, interne Token und Banklimits.",
             "Kniffel/Extreme: gemeinsamer SL-Schalter Wertungsblock auf Spielfeld oder in Lobby.",
-            "Käsekästchen (Beta): Rechteck mit 1–50 Kästchen je Richtung oder eigene geschlossene Form im Zeicheneditor wählen. Serien mit 1–100 Runden addieren Kästchenpunkte; der Starter wechselt, die SL startet die Folgerunde. NPC-Stärke und optionalen einmaligen Token-Einsatz für die Serie festlegen.",
+            "Käsekästchen: Rechteck mit 1–50 Kästchen je Richtung oder eigene geschlossene Form im Zeicheneditor wählen. Serien mit 1–100 Runden addieren Kästchenpunkte; der Starter wechselt, die SL startet die Folgerunde. NPC-Stärke und optionalen einmaligen Token-Einsatz für die Serie festlegen.",
             "Armdrücken: NPC-/manuelle Attribute, Charakterwerte erneut einlesen, Vorteil/Normal/Nachteil und manuelle NPC-Steuerung.",
-            "Zusätzliche Turniere: Teilnehmer, NPC-Stärken, bei Mühle Springen, bei Käsekästchen rechteckige Brettgröße."
+            "Zusätzliche Turniere: Teilnehmer, NPC-Stärken, bei Mühle Springen, bei Käsekästchen rechteckige Brettgröße.",
+            "Wetttrinken/Wettessen (Beta): Start-SG 1–100, Steigerung 0–20, standardmäßig 10 und +1. Optionale Doppelprobe zunächst an. Manuelle Attribute, D&D-Werte einlesen, Vorteil/Nachteil, manuelle NPCs und Spieltoken.",
+            "Dame (Beta): 1–100 Runden, Remisgrenze 1–500 Zugpaare (Standard 50), optionale Rückwärtsschläge aus. Schlagpflicht erzwingen, Zurücksetzstrafe oder keine allgemeine Schlagpflicht. NPC-Stärken Leicht/Normal/Schwer.",
+            "Armdrücken: Bewegungsrichtung zum Gegner oder zum Gewinner auswählen."
           ]
         }
       ]
     },
     "sources": {
-      "title": "Regelquellen (52)",
+      "title": "Regelquellen (57)",
       "paragraphs": [
         "Hier findet ihr alle genutzten Regelquellen. Quellen für noch nicht umgesetzte Spiele sind ausdrücklich als geplante Regelreferenzen gekennzeichnet."
       ],
@@ -362,6 +368,12 @@
           "items": [
             "Awiana – Elfenlauf (abweichende Referenz zur Würfel-Hausvariante 17 und 4): https://awiana.fandom.com/de/wiki/Elfenlauf",
             "17 und 4 (Würfel-Hausvariante): Leif und Daniels Festlegungen; Awiana als abweichende Elfenlauf-Regelreferenz."
+          ]
+        },
+        {
+          "title": "17 und 4 (Karten)",
+          "items": [
+            "Schmidt Spiele – Die große Spielesammlung Premium-Edition, Siebzehn und Vier, gedruckte Seite 19: 32 Karten und Standardwerte – https://www.schmidtspiele.de/files/Produkte/4/49125%20-%20Die%20gro%C3%9Fe%20Spielesammlung/49125_Die_grosse_Spielesammlung_Premium-Edition-D.pdf"
           ]
         },
         {
@@ -398,6 +410,12 @@
             "Wikipedia – Chō-Han (geplante Regelreferenz): https://en.wikipedia.org/wiki/Ch%C5%8D-han",
             "Wizard of Odds – Chō-Han (geplante Regelreferenz): https://wizardofodds.com/games/cho-han/",
             "Chō-Han: Daniels bereitgestellte Regelsammlung, VermittlervarianteB. Traditionelle Grundlage: https://www.dice-play.com/Games/ChoHanBakuchi.htm und https://www.netexl.com/howtoplay/cho-han/"
+          ]
+        },
+        {
+          "title": "Dame",
+          "items": [
+            "Schmidt Spiele – Spielesammlung, Dame: https://www.schmidtspiele.de/files/Retail/300dpi_JPG/49188_150er_Kompakt_Spielesammlung_D.pdf"
           ]
         },
         {
@@ -444,6 +462,12 @@
           ]
         },
         {
+          "title": "Karten-Kniffel (geplant)",
+          "items": [
+            "Schmidt Spiele, Michael Feldkötter: https://www.schmidtspiele.de/details/produkt/karten-kniffel-r-.html"
+          ]
+        },
+        {
           "title": "Klippklapp",
           "items": [
             "Daniel Brune – bereitgestellte Klippklapp-Regelvorlage vom 13.10.2026 und bestätigte Bluff-, Zahlungs- und Startspielerregeln; neue Brettspielnamen zunächst nur vorgemerkt."
@@ -461,6 +485,19 @@
           "title": "Kniffel Extreme",
           "items": [
             "Kniffel Extreme: offizielle Schmidt-Spiele-Anleitung (5 W6 + W10 0–9, 22 Felder, drei Chips)."
+          ]
+        },
+        {
+          "title": "Kniffel7 (geplant)",
+          "items": [
+            "Schmidt Spiele, Reiner Knizia: https://www.schmidtspiele.de/details/produkt/kniffel-7.html"
+          ]
+        },
+        {
+          "title": "Käsekästchen",
+          "items": [
+            "kinder – Käsekästchen: https://www.kinder.com/de/de/kinder-spiel-und-spass/spiele/kaesekaestchen",
+            "BrettspielNetz – Käsekästchen / Dots and Boxes: https://www.brettspielnetz.de/spielregeln/kaesekaestchen.php"
           ]
         },
         {
@@ -546,22 +583,21 @@
           ]
         },
         {
+          "title": "Wettessen",
+          "items": [
+            "Eigene TavernGames-Hausregeln nach Daniel Brune; keine offizielle D&D-Wettkampfregel."
+          ]
+        },
+        {
+          "title": "Wetttrinken",
+          "items": [
+            "Eigene TavernGames-Hausregeln nach Daniel Brune; keine offizielle D&D-Wettkampfregel."
+          ]
+        },
+        {
           "title": "Würfelpoker",
           "items": [
             "Awiana – Koboldpoker (Vorlage für Würfelpoker): https://awiana.fandom.com/de/wiki/Koboldpoker"
-          ]
-        },
-        {
-          "title": "17 und 4 (Karten)",
-          "items": [
-            "Schmidt Spiele – Die große Spielesammlung Premium-Edition, Siebzehn und Vier, gedruckte Seite 19: 32 Karten und Standardwerte – https://www.schmidtspiele.de/files/Produkte/4/49125%20-%20Die%20gro%C3%9Fe%20Spielesammlung/49125_Die_grosse_Spielesammlung_Premium-Edition-D.pdf"
-          ]
-        },
-        {
-          "title": "Käsekästchen",
-          "items": [
-            "kinder – Käsekästchen: https://www.kinder.com/de/de/kinder-spiel-und-spass/spiele/kaesekaestchen",
-            "BrettspielNetz – Käsekästchen / Dots and Boxes: https://www.brettspielnetz.de/spielregeln/kaesekaestchen.php"
           ]
         }
       ]
@@ -579,9 +615,28 @@
           ]
         },
         {
+          "title": "17 und 4 (Karten)",
+          "items": [
+            "Zwei verdeckte Startkarten für alle, offene weitere Karten und Schlussaufdeckung; Bank- und Auszahlungsregeln aus der Würfelversion als TavernGames-Hausregeln. Standard Bube 2, Dame 3, König 4, Ass 1/11; optional Bildkarten je 10. Beide Profile mit 32 Karten von 7 bis Ass, keine zusätzlichen Sechsen. Sieg 2× Einsatz, Sieg mit 21 2,5× auf volle Spieltoken aufgerundet. Automatisch ein Deck je vier Plätze einschließlich Bank oder ein bis acht Deckkopien nach SL-Auswahl."
+          ]
+        },
+        {
+          "title": "Armdrücken und zusätzliche Turniere",
+          "items": [
+            "Eigene TavernGames-Hausregeln nach Daniel Brune; keine offizielle D&D-Armdrückregel. K.-o.-Ablauf nach vorhandenem Tic-Tac-Toe-Turnier.",
+            "Armdrücken: drei wechselnde Attribute, drei Schritte Vorsprung, direkte Einflussboni statt Ergebnis-Neuwürfeln."
+          ]
+        },
+        {
           "title": "Chō-Han",
           "items": [
             "Chō-Han: interne Testguthaben, größter-Bruchteil-Rundung und Folgepartien als Modulergänzungen. Provisionsbasis und Kürzung auswählbar; keine Betrugsregeln umgesetzt."
+          ]
+        },
+        {
+          "title": "Dame",
+          "items": [
+            "Konfigurierbare Rückwärtsschläge, automatisierte Schlagpflicht beziehungsweise Zurücksetzstrafe, Umwandlung beendet Zug, Remisgrenzen und Serien nach Daniel Brune."
           ]
         },
         {
@@ -640,6 +695,12 @@
           "title": "Kniffel Extreme",
           "items": [
             "Kniffel Extreme – Schmidt Spiele: https://www.schmidtspiele.de/files/Produkte/5/51296%20-%20Kniffel%C2%AE%20Extreme/51296_Kniffel_Extreme_DE.pdf"
+          ]
+        },
+        {
+          "title": "Käsekästchen",
+          "items": [
+            "Eigener Regeltext; frei gezeichnete Flächen, Löcher und getrennte Bereiche, NPC-Stärken, Serien und Spieltoken als TavernGames-Ergänzungen. Außenlinien sind Begrenzung, keine vorab gespielten Linien."
           ]
         },
         {
@@ -721,28 +782,21 @@
           ]
         },
         {
+          "title": "Wettessen",
+          "items": [
+            "Eigene TavernGames-Hausregeln nach Daniel Brune; keine offizielle D&D-Wettkampfregel."
+          ]
+        },
+        {
+          "title": "Wetttrinken",
+          "items": [
+            "Eigene TavernGames-Hausregeln nach Daniel Brune; keine offizielle D&D-Wettkampfregel."
+          ]
+        },
+        {
           "title": "Würfelpoker",
           "items": [
             "Würfelpoker: fünf W8 nach Awiana/Koboldpoker, Leifs abweichende Rangfolge und Daniels bestätigte Vergleiche; zwei Setzphasen mit All-in und Nebentöpfen. Full House nach Summe, dann höherem Drilling; zwei Paare nach höherem/niedrigerem Paar und Restwürfel."
-          ]
-        },
-        {
-          "title": "17 und 4 (Karten)",
-          "items": [
-            "Zwei verdeckte Startkarten für alle, offene weitere Karten und Schlussaufdeckung; Bank- und Auszahlungsregeln aus der Würfelversion als TavernGames-Hausregeln. Standard Bube 2, Dame 3, König 4, Ass 1/11; optional Bildkarten je 10. Beide Profile mit 32 Karten von 7 bis Ass, keine zusätzlichen Sechsen. Sieg 2× Einsatz, Sieg mit 21 2,5× auf volle Spieltoken aufgerundet. Automatisch ein Deck je vier Plätze einschließlich Bank oder ein bis acht Deckkopien nach SL-Auswahl."
-          ]
-        },
-        {
-          "title": "Käsekästchen",
-          "items": [
-            "Eigener Regeltext; frei gezeichnete Flächen, Löcher und getrennte Bereiche, NPC-Stärken, Serien und Spieltoken als TavernGames-Ergänzungen. Außenlinien sind Begrenzung, keine vorab gespielten Linien."
-          ]
-        },
-        {
-          "title": "Armdrücken und zusätzliche Turniere",
-          "items": [
-            "Eigene TavernGames-Hausregeln nach Daniel Brune; keine offizielle D&D-Armdrückregel. K.-o.-Ablauf nach vorhandenem Tic-Tac-Toe-Turnier.",
-            "Armdrücken: drei wechselnde Attribute, drei Schritte Vorsprung, direkte Einflussboni statt Ergebnis-Neuwürfeln."
           ]
         }
       ]
@@ -796,12 +850,13 @@
             "5.2.0 – Durak stabil; erste Brettspiel-Beta Vier gewinnt.",
             "5.3.0 – Glückstag und Vier gewinnt stabil; Schwarzer Peter und Tic-Tac-Toe als neue Betas.",
             "5.4.0 – Schwarzer Peter, Tic-Tac-Toe einschließlich Extreme und das erste Turnier stabil; Mühle als neue Beta.",
-            "5.5.0 – Mühle und 17 und 4 Karten stabil; Käsekästchen-Beta mit eigenem Spielfeldeditor."
+            "5.5.0 – Mühle und 17 und 4 Karten stabil; Käsekästchen-Beta mit eigenem Spielfeldeditor.",
+            "5.6.0 – Käsekästchen, Armdrücken und drei weitere Turniere stabil; Wetttrinken, Wettessen und Dame als Betas."
           ]
         }
       ],
       "paragraphs": []
     }
   },
-  "version": "5.5.1"
+  "version": "5.6.0"
 }

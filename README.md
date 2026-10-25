@@ -1,3 +1,9 @@
+# Aktueller Stand 5.6.0
+
+Käsekästchen, Armdrücken und die Turniere für Vier gewinnt, Mühle und Käsekästchen sind nach Nutzerabnahme stabil. Neu als optionale Betas: Wetttrinken und Wettessen mit einstellbarem Start-SG, standardmäßig +1 je Runde, optionalen Doppelproben, internen Mali und geteilten Siegen sowie Dame auf einem 8×8-Brett mit langen Damen und konfigurierbaren Schlagregeln. Armdrücken kann die Bewegungsrichtung umschalten und blendet Wurfwürfel nach der Animation aus. Der Turnierplan zeigt Halbfinale, Finale und Sieger ohne überflüssige Freilos-Einführungsstufen. Insgesamt 27 stabile Spiele, vier stabile Turniere und drei neue Betas.
+
+34 Katalogeinträge. Neue Wettkampf- und Dame-Anleitungen zunächst Deutsch; acht bisher geprüfte englische Anleitungen bleiben verfügbar. Ausschließlich interne Spieltoken, keine Charakterbuchungen. Neue Wettkämpfe sind TavernGames-Hausregeln. Testplan: docs/release-5.6.0.md. Lokal gebaut, noch nicht veröffentlicht; kein eigener neuer Foundry-Live-Nachweis.
+
 # Aktueller Stand 5.5.1
 
 Neue Betas: Vier-gewinnt-, Mühle- und Käsekästchen-Turniere mit K.-o.-Plan, Freilosen und SL-Remisentscheid sowie Armdrücken mit Technik, Druck und Durchhalten. NPC-Attribute starten bei 10; D&D-Charakterwerte werden gelesen, andere Werte sind manuell einstellbar. Vorteil/Nachteil und direkte Boni/Abzüge der Göttlichen Hand sind getrennt. 17 und 4 verwendet optional Bildkartenwert 10 statt der früheren Hauswertung; zusätzliche Sechsen entfallen. Beta steht neben Favoriten, ohne Tags-Beschriftung. Die freigegebene englische Käsekästchen-Anleitung ist verfügbar. Käsekästchen bleibt Beta.

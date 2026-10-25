@@ -493,3 +493,11 @@
 .taverngames-bracket-scroll .bracket-path{fill:none;stroke:#756b61;stroke-width:2}
 .taverngames-bracket-scroll .bracket-path.is-advanced{stroke:#e8c374;stroke-width:3}
 .taverngames-connect-play:has(> .taverngames-tournament-bracket[open]) > :not(.taverngames-tournament-bracket):not(.taverngames-connect-status){display:none!important}
+
+.taverngames-checkers-play{max-width:650px}.taverngames-checkers-board{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));width:min(100%,calc(100dvh - 300px));aspect-ratio:1;margin:10px auto;gap:0;border:2px solid #b8995d}
+.taverngames-checkers-board button{aspect-ratio:1;min-width:0!important;min-height:0!important;width:100%;height:auto;margin:0!important;padding:5%!important;border:0!important;border-radius:0!important;display:flex;align-items:center;justify-content:center;opacity:1!important}
+.taverngames-checkers-board .is-dark{background:#44342b!important}.taverngames-checkers-board .is-light{background:#d4bc92!important}
+.taverngames-checkers-piece{display:flex;justify-content:center;align-items:center;width:84%;height:84%;border-radius:50%;box-shadow:0 2px 3px #0009;font-size:clamp(14px,2.2vw,28px);color:#161616}
+.taverngames-checkers-piece.player-0{background:#70a5d5}.taverngames-checkers-piece.player-1{background:#e3b965}
+.taverngames-checkers-board .is-selected{box-shadow:inset 0 0 0 3px #ffe89a!important}.taverngames-checkers-board .is-target{box-shadow:inset 0 0 0 3px #8aca8a!important;cursor:pointer}
+.taverngames-endurance-seat{padding:8px;margin:8px 0;border:1px solid #77654b;border-radius:5px}.taverngames-endurance-seat.is-active{border-color:#e5c17c;background:#c8a25a18}.taverngames-endurance-seat.is-out{opacity:.65}.taverngames-endurance-seat p{margin:5px 0}

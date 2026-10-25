@@ -1,11 +1,14 @@
 // Names and categories are data so future tags can extend the catalog without
 // coupling navigation to gameplay. No duration or betting claims are invented.
 export const GAME_CATALOG=Object.freeze([
- {id:'connecttournament',category:'tournament',beta:true,names:['Vier-gewinnt-Turnier','Four in a Row Tournament']},
- {id:'morristournament',category:'tournament',beta:true,names:['Mühle-Turnier','Morris Tournament']},
- {id:'dotstournament',category:'tournament',beta:true,names:['Käsekästchen-Turnier','Dots and Boxes Tournament']},
- {id:'arm',category:'competition',beta:true,names:['Armdrücken','Arm Wrestling']},
- {id:'dots',category:'board',beta:true,names:['Käsekästchen','Kaesekaestchen','Dots and Boxes']},
+ {id:'drink',category:'competition',beta:true,names:['Wetttrinken','Drinking Contest']},
+ {id:'eat',category:'competition',beta:true,names:['Wettessen','Eating Contest']},
+ {id:'checkers',category:'board',beta:true,names:['Dame','Checkers','Draughts']},
+ {id:'connecttournament',category:'tournament',names:['Vier-gewinnt-Turnier','Four in a Row Tournament']},
+ {id:'morristournament',category:'tournament',names:['Mühle-Turnier','Morris Tournament']},
+ {id:'dotstournament',category:'tournament',names:['Käsekästchen-Turnier','Dots and Boxes Tournament']},
+ {id:'arm',category:'competition',names:['Armdrücken','Arm Wrestling']},
+ {id:'dots',category:'board',names:['Käsekästchen','Kaesekaestchen','Dots and Boxes']},
  {id:'card21',category:'cards',names:['17 und 4','Siebzehn und Vier','Seventeen and Four','17 und 4 Karten','Seventeen and Four Cards']},
  {id:'morris',category:'board',names:['Mühle','Muehle',"Nine Men's Morris",'Nine Mens Morris']},
  {id:'tictournament',category:'tournament',names:['Tic-Tac-Toe-Turnier','Tic-Tac-Toe Tournament']},
