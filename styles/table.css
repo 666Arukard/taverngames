@@ -501,3 +501,20 @@
 .taverngames-checkers-piece.player-0{background:#70a5d5}.taverngames-checkers-piece.player-1{background:#e3b965}
 .taverngames-checkers-board .is-selected{box-shadow:inset 0 0 0 3px #ffe89a!important}.taverngames-checkers-board .is-target{box-shadow:inset 0 0 0 3px #8aca8a!important;cursor:pointer}
 .taverngames-endurance-seat{padding:8px;margin:8px 0;border:1px solid #77654b;border-radius:5px}.taverngames-endurance-seat.is-active{border-color:#e5c17c;background:#c8a25a18}.taverngames-endurance-seat.is-out{opacity:.65}.taverngames-endurance-seat p{margin:5px 0}
+
+/* RPS: text symbols only; custom matrices scroll inside their editor. */
+.taverngames-rps-play{max-width:760px;max-height:calc(100dvh - 170px);overflow:auto;color:#fff1d5}
+.taverngames-rps-options{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:16px 0}
+.taverngames-rps-options button{flex:1 1 130px;min-height:68px;background:#30251e;color:#fff1d5;border:1px solid #b8995d;border-radius:6px;font-size:1.05em}
+.taverngames-rps-options button:hover:enabled{outline:2px solid #e4c476;background:#493a26;color:#fff1d5}
+.taverngames-rps-options button:disabled{opacity:.5}
+.taverngames-rps-result{display:flex;justify-content:space-between;gap:12px;padding:12px;border:1px solid #b8995d;border-radius:5px;margin:8px 0;text-align:left}
+.taverngames-rps-editor-row{display:flex;gap:5px;margin:5px 0;align-items:center}
+.taverngames-rps-editor-row input:first-child{width:50px;flex:0 0 50px}
+.taverngames-rps-editor-row input:nth-child(2){min-width:60px;flex:1}
+.taverngames-rps-editor-row button{flex:0 0 auto;width:auto}
+.taverngames-rps-matrix-scroll{max-height:400px;overflow:auto;max-width:100%}
+.taverngames-rps-matrix{width:max-content;min-width:100%;border-collapse:collapse}
+.taverngames-rps-matrix th,.taverngames-rps-matrix td{min-width:110px;max-width:180px;padding:6px;border:1px solid #8b754b;white-space:normal;overflow-wrap:anywhere}
+.taverngames-rps-matrix select{width:130px}
+.taverngames-rps-matrix th{background:#30251e;color:#fff1d5}

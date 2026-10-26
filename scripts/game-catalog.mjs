@@ -1,6 +1,7 @@
 // Names and categories are data so future tags can extend the catalog without
 // coupling navigation to gameplay. No duration or betting claims are invented.
 export const GAME_CATALOG=Object.freeze([
+ {id:'rps',category:'board',beta:true,names:['Schere, Stein, Papier','Schere Stein Papier','Rock, Paper, Scissors','Echse','Spock']},
  {id:'drink',category:'competition',beta:true,names:['Wetttrinken','Drinking Contest']},
  {id:'eat',category:'competition',beta:true,names:['Wettessen','Eating Contest']},
  {id:'checkers',category:'board',beta:true,names:['Dame','Checkers','Draughts']},

@@ -2,22 +2,22 @@
   "schemaVersion": 1,
   "blocks": {
     "patchnotes": {
-      "title": "Patchnotes Version 5.6.1",
+      "title": "Patchnotes Version 5.6.2",
       "paragraphs": [
-        "Korrekturupdate: Wettkampfergebnisse und die Armdrücken-Markierung bleiben bereits vor Erzeugung des Animationsevents geschützt. Die untere Würfelsteuerung erhält laufende Klicks trotz Aktualisierung und unterscheidet Haupt- und Zusatzprobe. Göttliche Hand beeinflusst bei Armdrücken, Wetttrinken und Wettessen jetzt die tatsächliche W20-Zahl statt eines zusätzlichen Bonus/Malus. Kniffel und Extreme legen ihre ruhenden 3D-Würfel bei Spielfeld-Wertungsblock in einen freien Bereich darunter; direkt anklicken zum Behalten oder Zurücknehmen, einschließlich W10. Keine neuen Spiele oder Stable-Hochstufungen."
+        "Neue Beta: Schere, Stein, Papier mit klassischem Set, Echse/Spock und eigenen Regelsets. Beide Teilnehmer wählen unabhängig und verdeckt; erst nach beiden verbindlichen Entscheidungen wird aufgedeckt. Eigene Sets mit 3–25 frei benannten Figuren, optionalen Textsymbolen, vollständiger Beziehungstabelle und Balancehinweis; bis zu 20 Sets pro Welt speichern, kopieren und löschen. Einstellbares Siegziel, zufällig wählende oder manuell gesteuerte NPCs, gemeinsame Spieltoken und Ausgangswetten. Alle Korrekturen aus 5.6.1 enthalten. Keine Stable-Hochstufungen; die neue englische Anleitung wartet auf Review."
       ],
       "items": [
-        "Vorzeitige Wettkampfergebnisse und Armdrücken-Markierung auch zwischen Speichern und Animationsstart abgesichert.",
-        "Untere Würfelbuttons gegen Aktualisierungen während des Klicks geschützt; Haupt- und Zusatzprobe getrennt.",
-        "Wettkampf-Göttliche-Hand verändert tatsächliche W20-Zahlen, keine zusätzliche feste Ergebniskorrektur. Attribute und interne Mali bleiben normal wirksam, NPC-Aufgabewurf unbeeinflusst.",
-        "Kniffel/Extreme: ruhende eigene 3D-Würfel direkt auswählen und zurücknehmen; freier Bereich unter dem Spielfeld-Wertungsblock, W10 und Markierungsmodus berücksichtigt.",
-        "Regelplanung für Skat, Rommé, Doppelkopf, Halma, Canasta, Bridge und Backgammon ergänzt/abgeglichen; Schere, Stein, Papier vorgemerkt. Keine neuen spielbaren Einträge."
+        "Klassisch, Echse/Spock und frei gestaltbare Figuren-/Beziehungsmasken als neue optionale Beta.",
+        "Verdeckte gleichzeitige Entscheidungen, verbindliche Auswahl und gemeinsames Aufdecken; Siegziel 1–100.",
+        "Eigene Regelsets pro Welt speichern, kopieren und löschen; fehlende Beziehungen blockieren, Ungleichgewicht erzeugt einen Hinweis.",
+        "NPCs automatisch zufällig oder manuell; interne Spieltoken einmal pro Partie und gemeinsame Ausgangswetten.",
+        "Enthält die Wettkampf-/Kniffel-Korrekturen aus 5.6.1. Keine weiteren Stable-Freigaben oder englischen Anleitungsfreigaben."
       ]
     },
     "games": {
-      "title": "aktuelle Spiele (34)",
+      "title": "aktuelle Spiele (35)",
       "paragraphs": [
-        "27 stabile Spiele und vier stabile Turniere; Wetttrinken, Wettessen und Dame als optionale Betas."
+        "27 stabile Spiele und vier stabile Turniere; Wetttrinken, Wettessen, Dame und Schere, Stein, Papier als optionale Betas."
       ],
       "items": [
         {
@@ -64,7 +64,8 @@
             "Mühle",
             "Tic-Tac-Toe",
             "Vier gewinnt",
-            "Dame (Beta)"
+            "Dame (Beta)",
+            "Schere, Stein, Papier (Beta)"
           ]
         },
         {
@@ -87,7 +88,7 @@
       ]
     },
     "plans": {
-      "title": "geplante Spiele (31)",
+      "title": "geplante Spiele (30)",
       "paragraphs": [
         "Geplante Spiele und Wettbewerbe mit vorhandenen Referenzen oder neu vorgemerkten Namen. Einzelne Regeln sind noch offen; insbesondere ist beim Streichholzspiel noch keine genaue Variante festgelegt. Vorhandene Spiele werden nicht unter ihren englischen Namen erneut geplant."
       ],
@@ -137,7 +138,6 @@
             "Kneipenquiz",
             "Pfeilwurf",
             "Schach (abstrakter Wettbewerb)",
-            "Schere, Stein, Papier",
             "Schiffe versenken / Battleship (Variante noch offen)",
             "Streichholzspiel / Matchstick Game (Variante noch offen)",
             "WallRush (Regelvariante noch offen)"
@@ -199,7 +199,7 @@
       ]
     },
     "functions": {
-      "title": "aktuelle Funktionen (46)",
+      "title": "aktuelle Funktionen (48)",
       "paragraphs": [
         "Bereits umgesetzte Kernfunktionen. Verfügbarkeit und erlaubte Aktionen richten sich nach Spielregeln, Teilnahme und SL-Freigabe."
       ],
@@ -278,7 +278,9 @@
             "Konfigurierbare Schlagpflicht und Remisgrenzen",
             "Serien mit addierten Ergebnissen",
             "K.-o.-Turniere mit Freilosen und gemeinsamer Gewinnverteilung",
-            "Attributsproben mit Vorteil und Nachteil"
+            "Attributsproben mit Vorteil und Nachteil",
+            "Verdeckte gleichzeitige Entscheidungen mit gemeinsamer Aufdeckung",
+            "Eigene Figuren- und Beziehungssets mit Vorlagenverwaltung"
           ]
         },
         {
@@ -303,7 +305,7 @@
           "items": [
             "Sprache: Deutsch oder Englisch wählen. Beide Oberflächen sind verfügbar. Deutsche Anleitungen und acht geprüfte englische Anleitungen: Tic-Tac-Toe einschließlich Extreme, dessen Turnier, Schwarzer Peter, Vier gewinnt, Aalstechen, Mühle, Käsekästchen und 17 und 4 als Kartenspiel. Weitere englische Anleitungen bleiben bis Review gesperrt.",
             "Ansicht: Reiteransicht ist Standard, klassische Fenster bleiben je Benutzer wählbar.",
-            "Beta-Test: Wetttrinken, Wettessen und Dame einschalten. 27 Spiele und vier Turniere bleiben ohne Beta verfügbar.",
+            "Beta-Test: Wetttrinken, Wettessen, Dame und Schere, Stein, Papier einschalten. 27 Spiele und vier Turniere bleiben ohne Beta verfügbar.",
             "Dice So Nice: optionale 3D-Würfel aktivieren. Ohne das Zusatzmodul bleiben die Spiele bedienbar.",
             "Markierungsmodus: persönlich wählen, ob markierte eigene Würfel behalten oder erneut gewürfelt werden.",
             "Kartendecks: geeignete externe Vorlagen unter Cards / Card Decks anlegen oder importieren. Es ist kein Standard-Kartenset enthalten; vorhandene Vorlagen bleiben unverändert.",
@@ -340,13 +342,14 @@
             "Dame (Beta): 1–100 Runden, Remisgrenze 1–500 Zugpaare (Standard 50), optionale Rückwärtsschläge aus. Schlagpflicht erzwingen, Zurücksetzstrafe oder keine allgemeine Schlagpflicht. NPC-Stärken Leicht/Normal/Schwer.",
             "Armdrücken: Bewegungsrichtung zum Gegner oder zum Gewinner auswählen.",
             "Wettkampf-Göttliche-Hand: 0 Prozent unverändert, stärkere Begünstigung/Benachteiligung verändert den Bereich der W20-Zahlen, 100 Prozent ergibt 20 beziehungsweise 1. Kein zusätzlicher Bonus; kein Einfluss auf NPC-Aufgabe.",
-            "Kniffel/Extreme: bei Wertungsblock auf Spielfeld direkte Auswahl der eigenen ruhenden 3D-Würfel darunter. Bestehende Einstellung Behalten/Neu würfeln bestimmt die Markierung."
+            "Kniffel/Extreme: bei Wertungsblock auf Spielfeld direkte Auswahl der eigenen ruhenden 3D-Würfel darunter. Bestehende Einstellung Behalten/Neu würfeln bestimmt die Markierung.",
+            "Schere, Stein, Papier: Vorlagen und eigene Regelsets, Siegziel, NPCs, Launcher und gemeinsame Token-/Wetteinstellungen."
           ]
         }
       ]
     },
     "sources": {
-      "title": "Regelquellen (62)",
+      "title": "Regelquellen (63)",
       "paragraphs": [
         "Hier findet ihr alle genutzten Regelquellen. Quellen für noch nicht umgesetzte Spiele sind ausdrücklich als geplante Regelreferenzen gekennzeichnet."
       ],
@@ -617,6 +620,12 @@
           "items": [
             "Awiana – Koboldpoker (Vorlage für Würfelpoker): https://awiana.fandom.com/de/wiki/Koboldpoker"
           ]
+        },
+        {
+          "title": "Schere, Stein, Papier / Echse, Spock",
+          "items": [
+            "Sam Kass und Karen Bryla – Rock Paper Scissors Spock Lizard: https://www.samkass.com/theories/RPSSL.html (nur Regelreferenz; keine fremde Grafik, Software oder Textpassage mitgeliefert)."
+          ]
         }
       ]
     },
@@ -818,6 +827,12 @@
           "items": [
             "Würfelpoker: fünf W8 nach Awiana/Koboldpoker, Leifs abweichende Rangfolge und Daniels bestätigte Vergleiche; zwei Setzphasen mit All-in und Nebentöpfen. Full House nach Summe, dann höherem Drilling; zwei Paare nach höherem/niedrigerem Paar und Restwürfel."
           ]
+        },
+        {
+          "title": "Schere, Stein, Papier",
+          "items": [
+            "TavernGames-Siegziel, gemeinsame verdeckte Auswahl, NPCs, Token und eigene Figuren-/Beziehungssets nach Daniel Brune."
+          ]
         }
       ]
     },
@@ -878,5 +893,5 @@
       "paragraphs": []
     }
   },
-  "version": "5.6.1"
+  "version": "5.6.2"
 }

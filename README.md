@@ -1,3 +1,9 @@
+# TavernGames 5.6.2
+
+Neue Beta: Schere, Stein, Papier mit klassischem Set, Echse/Spock und eigenen Regelsets. Beide Teilnehmer wählen unabhängig und verdeckt; erst nach beiden verbindlichen Entscheidungen wird aufgedeckt. Eigene Sets mit 3–25 frei benannten Figuren, optionalen Textsymbolen, vollständiger Beziehungstabelle und Balancehinweis; bis zu 20 Sets pro Welt speichern, kopieren und löschen. Einstellbares Siegziel, zufällig wählende oder manuell gesteuerte NPCs, gemeinsame Spieltoken und Ausgangswetten. Alle Korrekturen aus 5.6.1 enthalten. Keine Stable-Hochstufungen; die neue englische Anleitung wartet auf Review.
+
+[Testplan 5.6.1 und 5.6.2](docs/release-5.6.2.md) · Lokales Paket, nicht veröffentlicht. 27 stabile Spiele, vier stabile Turniere, vier Beta-Spiele.
+
 # Aktueller Stand 5.6.1
 
 Korrekturupdate: Wettkampfergebnisse und die Armdrücken-Markierung bleiben bereits vor Erzeugung des Animationsevents geschützt. Die untere Würfelsteuerung erhält laufende Klicks trotz Aktualisierung und unterscheidet Haupt- und Zusatzprobe. Göttliche Hand beeinflusst bei Armdrücken, Wetttrinken und Wettessen jetzt die tatsächliche W20-Zahl statt eines zusätzlichen Bonus/Malus. Kniffel und Extreme legen ihre ruhenden 3D-Würfel bei Spielfeld-Wertungsblock in einen freien Bereich darunter; direkt anklicken zum Behalten oder Zurücknehmen, einschließlich W10. Keine neuen Spiele oder Stable-Hochstufungen.
