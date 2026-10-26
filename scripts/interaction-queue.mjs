@@ -26,6 +26,7 @@ export function keepTableClicks(panel,kind){
 
 
 export function gameInteractionKey(scope,s,userId){
+ if(['drink','eat'].includes(scope))return s?JSON.stringify([s.gameId,s.phase,s.round,s.turn,s.order?.[s.turn],s.results?.[s.order?.[s.turn]]?.primary?'secondary':'primary']):null;
  if(scope==='arm')return s?JSON.stringify([s.gameId,s.phase,s.exchange]):null;
  if(scope==='farkle')return farkleInteractionKey(s);
  if(!s)return null;

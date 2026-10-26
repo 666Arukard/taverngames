@@ -1,3 +1,4 @@
+import {kniffelFieldPlan} from './kniffel-dice-field.mjs';
 import {boundedSpawn,persistentLimit} from './persistent-budget.mjs';
 import {SchockenPersistentDice,registerSchockenBlank,blankDiceType,hiddenDiceAppearance} from './schocken-presentation.mjs';
 import {participantOptions,diceOwner} from './participant-appearance.mjs';
@@ -48,8 +49,8 @@ export class ParticipantDice{
   // Prefer full-size personal dice; shrink only when the measured layout needs space.
   const emphasis=x=>(x.own?1.5:1)*(x.kept?1.18:1);
   diameter*=Math.max(1,...items.map(emphasis));
-  const indices=items.map((x,i)=>x.slot*64+x.index),plan=groupedDiceLayout(indices,{...viewport,diameter,groupSize:64,compact:this.scope==='seventeen'}),updates=[];
-  for(const [n,x]of items.entries()){const e=x.entry,pct=plan.positions.get(indices[n]),world=box.fromPositionPct?.(pct)??{x:(pct.x-.5)*viewport.width,z:-(pct.y-.5)*viewport.height};if(e.baseScale)e.mesh.parent.scale.copy(e.baseScale).multiplyScalar(plan.scale*emphasis(x));const position={x:world.x,y:(x.pose?.height??.02)*plan.scale*emphasis(x),z:world.z};Object.assign(e.mesh.parent.position,position);if(x.pose)x.pose.position=pct;updates.push({id:e.mesh.id,position});}
+  const indices=items.map((x,i)=>x.slot*64+x.index),plan=groupedDiceLayout(indices,{...viewport,diameter,groupSize:64,compact:this.scope==='seventeen'}),field=this.scope==='kniffel'?kniffelFieldPlan({box,items,diameter}):null,updates=[];
+  for(const [n,x]of items.entries()){const e=x.entry,pct=plan.positions.get(indices[n]),world=box.fromPositionPct?.(pct)??{x:(pct.x-.5)*viewport.width,z:-(pct.y-.5)*viewport.height};if(e.baseScale)e.mesh.parent.scale.copy(e.baseScale).multiplyScalar((field?.scale??plan.scale)*emphasis(x));const position=field?{...field.positions[n],y:(x.pose?.height??.02)*field.scale*emphasis(x)}:{x:world.x,y:(x.pose?.height??.02)*plan.scale*emphasis(x),z:world.z};Object.assign(e.mesh.parent.position,position);if(x.pose)x.pose.position=pct;updates.push({id:e.mesh.id,position});}
   if(updates.length)await box.physicsWorker.exec('setBodyPositions',{updates});
  }
  async _clear(){for(const r of this.renderers.values())await r.clear();this.renderers.clear();this.gameId=null;this.boundary=null;}

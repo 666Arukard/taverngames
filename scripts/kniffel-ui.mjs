@@ -16,7 +16,7 @@ export class KniffelUI extends TavernUI{
   restoreSheet(){if(!this.sheetSlot)return;const {anchor,element}=this.sheetSlot;if(anchor.isConnected)anchor.replaceWith(element);else element.remove();this.sheetSlot=null;}
   syncSheet(){
     const root=this.windows.get('table')?.root,s=this.getState(),visible=game.settings.get('taverngames','kniffelSheetLocation')!=='lobby'&&gameView.enabled()&&gameView.selected==='kniffel-table'&&root?.parentElement===gameView.playerContent&&s&&s.phase!=='aborted'&&s.players.length;
-    if(!visible){this.restoreSheet();this.sheetStage?.remove();return;}
+    if(!visible){this.restoreSheet();this.sheetStage?.remove();if(this.diceLayoutKey!==null){this.diceLayoutKey=null;this.onDiceLayout?.();}return;}
     const left=Math.max(0,gameView.left?.getBoundingClientRect().right??0)+46;let right=innerWidth-12;
     for(const sidebar of document.querySelectorAll('#sidebar,#sidebar-tabs,.taverngames-sidebar')){const r=sidebar.getBoundingClientRect();if(r.height>40&&r.width>0&&r.left>=0&&r.left<innerWidth&&getComputedStyle(sidebar).visibility!=='hidden')right=Math.min(right,r.left-12);}
     if(!this.sheetStage||right-left<180){this.restoreSheet();this.sheetStage?.remove();return;}
@@ -24,7 +24,7 @@ export class KniffelUI extends TavernUI{
     if(!this.sheetSlot){const element=root.querySelector('.kniffel-sheet-scroll');if(!element)return;const anchor=document.createComment('Kniffel sheet position');element.before(anchor);const title=node('h3',s.variant==='extreme'?'Kniffel Extreme':'Kniffel');this.sheetStage.replaceChildren(title,element);this.sheetSlot={anchor,element};}
     const rows=this.sheetSlot.element.querySelectorAll('tr').length,height=Math.max(200,innerHeight-224),row=Math.min(28,Math.floor((height-40)/Math.max(1,rows)));
     for(const [key,value]of [['--tg-sheet-row',row+'px'],['--tg-sheet-font',Math.max(9,Math.min(14,row-5))+'px']])if(this.sheetStage.style.getPropertyValue(key)!==value)this.sheetStage.style.setProperty(key,value);
-    if(!this.sheetStage.isConnected)document.body.append(this.sheetStage);
+    if(!this.sheetStage.isConnected)document.body.append(this.sheetStage);const bounds=this.sheetSlot.element.getBoundingClientRect(),layoutKey=JSON.stringify([innerWidth,innerHeight,left,right,bounds.bottom]);if(this.diceLayoutKey!==layoutKey){this.diceLayoutKey=layoutKey;this.onDiceLayout?.();}
   }
 
   drawModeration(){

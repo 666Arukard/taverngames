@@ -1,3 +1,9 @@
+# Aktueller Stand 5.6.1
+
+Korrekturupdate: Wettkampfergebnisse und die Armdrücken-Markierung bleiben bereits vor Erzeugung des Animationsevents geschützt. Die untere Würfelsteuerung erhält laufende Klicks trotz Aktualisierung und unterscheidet Haupt- und Zusatzprobe. Göttliche Hand beeinflusst bei Armdrücken, Wetttrinken und Wettessen jetzt die tatsächliche W20-Zahl statt eines zusätzlichen Bonus/Malus. Kniffel und Extreme legen ihre ruhenden 3D-Würfel bei Spielfeld-Wertungsblock in einen freien Bereich darunter; direkt anklicken zum Behalten oder Zurücknehmen, einschließlich W10. Keine neuen Spiele oder Stable-Hochstufungen.
+
+Weiterhin 27 stabile Spiele, vier stabile Turniere und drei Betas (Wetttrinken, Wettessen, Dame). Acht geprüfte englische Anleitungen. Regelplanung ergänzt, noch keine Umsetzung der neuen Planeinträge. Testplan: docs/release-5.6.1.md. Lokal gebaut, keine Veröffentlichung und kein eigener neuer Foundry-Live-Nachweis.
+
 # Aktueller Stand 5.6.0
 
 Käsekästchen, Armdrücken und die Turniere für Vier gewinnt, Mühle und Käsekästchen sind nach Nutzerabnahme stabil. Neu als optionale Betas: Wetttrinken und Wettessen mit einstellbarem Start-SG, standardmäßig +1 je Runde, optionalen Doppelproben, internen Mali und geteilten Siegen sowie Dame auf einem 8×8-Brett mit langen Damen und konfigurierbaren Schlagregeln. Armdrücken kann die Bewegungsrichtung umschalten und blendet Wurfwürfel nach der Animation aus. Der Turnierplan zeigt Halbfinale, Finale und Sieger ohne überflüssige Freilos-Einführungsstufen. Insgesamt 27 stabile Spiele, vier stabile Turniere und drei neue Betas.

@@ -2,19 +2,16 @@
   "schemaVersion": 1,
   "blocks": {
     "patchnotes": {
-      "title": "Patchnotes Version 5.6.0",
+      "title": "Patchnotes Version 5.6.1",
       "paragraphs": [
-        "Käsekästchen, Armdrücken und die Turniere für Vier gewinnt, Mühle und Käsekästchen sind nach Nutzerabnahme stabil. Neu als optionale Betas: Wetttrinken und Wettessen mit einstellbarem Start-SG, standardmäßig +1 je Runde, optionalen Doppelproben, internen Mali und geteilten Siegen sowie Dame auf einem 8×8-Brett mit langen Damen und konfigurierbaren Schlagregeln. Armdrücken kann die Bewegungsrichtung umschalten und blendet Wurfwürfel nach der Animation aus. Der Turnierplan zeigt Halbfinale, Finale und Sieger ohne überflüssige Freilos-Einführungsstufen. Insgesamt 27 stabile Spiele, vier stabile Turniere und drei neue Betas."
+        "Korrekturupdate: Wettkampfergebnisse und die Armdrücken-Markierung bleiben bereits vor Erzeugung des Animationsevents geschützt. Die untere Würfelsteuerung erhält laufende Klicks trotz Aktualisierung und unterscheidet Haupt- und Zusatzprobe. Göttliche Hand beeinflusst bei Armdrücken, Wetttrinken und Wettessen jetzt die tatsächliche W20-Zahl statt eines zusätzlichen Bonus/Malus. Kniffel und Extreme legen ihre ruhenden 3D-Würfel bei Spielfeld-Wertungsblock in einen freien Bereich darunter; direkt anklicken zum Behalten oder Zurücknehmen, einschließlich W10. Keine neuen Spiele oder Stable-Hochstufungen."
       ],
       "items": [
-        "27 stabile Spiele und vier stabile Turniere nach Abnahme; Wetttrinken, Wettessen und Dame als neue optionale Betas.",
-        "Wetttrinken: Konstitution für Portion und optional Verträglichkeit; zwei Hauptfehlschläge bedeuten Ausscheiden, Verträglichkeitsfehlschläge geben kumulative interne Mali.",
-        "Wettessen: Konstitution für Portion und optional Geschicklichkeit; Misslingen der Zusatzprobe gibt −1 auf die nächste Hauptprobe.",
-        "Start-SG 10 und Steigerung +1 pro Runde sind einstellbar. Freiwilliges Aufgeben und NPC-Aufgeben bei unabhängiger W20-1. Geteilte Sieger teilen den einmaligen Spieltoken-Topf.",
-        "Dame: 8×8, zwölf Steine, lange Damen, optionale Rückwärtsschläge; erzwungene Schlagpflicht, optionale Zurücksetzstrafe oder freie Schlagwahl. Einstellbare Remisgrenze, Serien und NPC-Stärken.",
-        "Armdrücken: umschaltbare Bewegungsrichtung; Wurfwürfel nach Animation ausblenden.",
-        "Turnierplan: überflüssige Freilos-Einführungsstufen ausblenden und Halbfinale/Finale/Sieger klar benennen.",
-        "Keine neuen englischen Anleitungen freigeschaltet. Kniffel7 und Karten-Kniffel weiter als spätere Spiele vorgemerkt."
+        "Vorzeitige Wettkampfergebnisse und Armdrücken-Markierung auch zwischen Speichern und Animationsstart abgesichert.",
+        "Untere Würfelbuttons gegen Aktualisierungen während des Klicks geschützt; Haupt- und Zusatzprobe getrennt.",
+        "Wettkampf-Göttliche-Hand verändert tatsächliche W20-Zahlen, keine zusätzliche feste Ergebniskorrektur. Attribute und interne Mali bleiben normal wirksam, NPC-Aufgabewurf unbeeinflusst.",
+        "Kniffel/Extreme: ruhende eigene 3D-Würfel direkt auswählen und zurücknehmen; freier Bereich unter dem Spielfeld-Wertungsblock, W10 und Markierungsmodus berücksichtigt.",
+        "Regelplanung für Skat, Rommé, Doppelkopf, Halma, Canasta, Bridge und Backgammon ergänzt/abgeglichen; Schere, Stein, Papier vorgemerkt. Keine neuen spielbaren Einträge."
       ]
     },
     "games": {
@@ -90,7 +87,7 @@
       ]
     },
     "plans": {
-      "title": "geplante Spiele (26)",
+      "title": "geplante Spiele (31)",
       "paragraphs": [
         "Geplante Spiele und Wettbewerbe mit vorhandenen Referenzen oder neu vorgemerkten Namen. Einzelne Regeln sind noch offen; insbesondere ist beim Streichholzspiel noch keine genaue Variante festgelegt. Vorhandene Spiele werden nicht unter ihren englischen Namen erneut geplant."
       ],
@@ -115,6 +112,8 @@
           "items": [
             "Binokel",
             "Blackjack",
+            "Bridge",
+            "Canasta",
             "Doppelkopf",
             "Gaigel",
             "Karten-Kniffel",
@@ -129,13 +128,16 @@
         {
           "title": "Sonstige",
           "items": [
+            "Backgammon",
             "Bogenschießen",
             "Das Spiel der edlen Dame",
             "Gewichteheben",
+            "Halma",
             "Karaoke",
             "Kneipenquiz",
             "Pfeilwurf",
             "Schach (abstrakter Wettbewerb)",
+            "Schere, Stein, Papier",
             "Schiffe versenken / Battleship (Variante noch offen)",
             "Streichholzspiel / Matchstick Game (Variante noch offen)",
             "WallRush (Regelvariante noch offen)"
@@ -144,17 +146,16 @@
       ]
     },
     "plans2": {
-      "title": "geplante Funktionen (17)",
+      "title": "geplante Funktionen (15)",
       "paragraphs": [
-        "Größere noch nicht umgesetzte Vorhaben; keine automatische Umsetzungszusage. Käsekästchen ist als Beta verfügbar; Mühle und 17 und 4 Karten sind stabil."
+        "Größere noch nicht umgesetzte Vorhaben; Verfügbarkeit bereits umgesetzter Spiele und Betas siehe aktuelle Spiele."
       ],
       "items": [
         {
           "title": "Spielauswahl und Anpassung",
           "items": [
             "Zusätzliche Tags und Filter nach Spieldauer und Einsätzen",
-            "Eigene Spielnamen und durch die SL anpassbares Spieleangebot",
-            "Wettessen, Wetttrinken und Armdrücken als Wettkämpfe; eigenes Icon hinterlegt"
+            "Eigene Spielnamen und durch die SL anpassbares Spieleangebot"
           ]
         },
         {
@@ -167,7 +168,6 @@
         {
           "title": "Spielabläufe und Serien",
           "items": [
-            "Serien mit addierten Ergebnissen",
             "Beschleunigte NPC-Wettpartien",
             "Zusätzliche pokerartige Setzphasen",
             "Turniere für weitere Spiele"
@@ -193,13 +193,13 @@
         {
           "title": "Sprache und Hilfe",
           "items": [
-            "Weitere geprüfte englische Anleitungen; fünf Anleitungen bereits freigegeben"
+            "Weitere geprüfte englische Anleitungen; acht Anleitungen bereits freigegeben"
           ]
         }
       ]
     },
     "functions": {
-      "title": "aktuelle Funktionen (45)",
+      "title": "aktuelle Funktionen (46)",
       "paragraphs": [
         "Bereits umgesetzte Kernfunktionen. Verfügbarkeit und erlaubte Aktionen richten sich nach Spielregeln, Teilnahme und SL-Freigabe."
       ],
@@ -220,7 +220,7 @@
             "Automatische und manuell steuerbare NPCs",
             "Wählbarer Startspieler",
             "Gemeinsame Partien mit echten Mitspielern",
-            "Wählbare NPC-Stärke bei Tic-Tac-Toe, Vier gewinnt und Mühle"
+            "Wählbare NPC-Stärken"
           ]
         },
         {
@@ -263,7 +263,8 @@
             "Sichtbare Ergebnisse am Tisch",
             "Zentrales Brettspielfeld mit Gewinnmarkierung",
             "Farbwahl-Popup und Zuganzeige",
-            "Umschaltbare Bewegungsrichtung der Wettkampfmarkierung"
+            "Umschaltbare Bewegungsrichtung der Wettkampfmarkierung",
+            "Eigener Spielfeldeditor mit Zoom und anpassbaren Flächen"
           ]
         },
         {
@@ -274,7 +275,10 @@
             "Optionale Regelvarianten",
             "Konfigurierbare Tippscheine und manuelle Ziehung",
             "Konfigurierbare Doppelproben und interne Wettkampfmali",
-            "Konfigurierbare Schlagpflicht und Remisgrenzen"
+            "Konfigurierbare Schlagpflicht und Remisgrenzen",
+            "Serien mit addierten Ergebnissen",
+            "K.-o.-Turniere mit Freilosen und gemeinsamer Gewinnverteilung",
+            "Attributsproben mit Vorteil und Nachteil"
           ]
         },
         {
@@ -284,24 +288,6 @@
             "Deutsche Anleitungen",
             "Regelquellen und Hausvarianten",
             "Ergebnisnachrichten im Chat"
-          ]
-        },
-        {
-          "title": "Turniere",
-          "items": [
-            "Tic-Tac-Toe-K.-o.-Turnier mit Spielern, NPCs und Freilosen"
-          ]
-        },
-        {
-          "title": "Eigene Käsekästchen-Spielfelder (Beta)",
-          "items": [
-            "Rechtecke oder geschlossene Außenlinien auf einem Raster bis50×50; zentrale Spielfläche, Zoom, Serien und NPC-Stärken."
-          ]
-        },
-        {
-          "title": "Wettkämpfe und weitere Turniere (Beta)",
-          "items": [
-            "Armdrücken mit Attributen, Vorteil/Nachteil, optionaler Göttlicher Hand und Spieltoken; weitere K.-o.-Turniere auf vorhandenen Brettspielregeln."
           ]
         }
       ]
@@ -352,13 +338,15 @@
             "Zusätzliche Turniere: Teilnehmer, NPC-Stärken, bei Mühle Springen, bei Käsekästchen rechteckige Brettgröße.",
             "Wetttrinken/Wettessen (Beta): Start-SG 1–100, Steigerung 0–20, standardmäßig 10 und +1. Optionale Doppelprobe zunächst an. Manuelle Attribute, D&D-Werte einlesen, Vorteil/Nachteil, manuelle NPCs und Spieltoken.",
             "Dame (Beta): 1–100 Runden, Remisgrenze 1–500 Zugpaare (Standard 50), optionale Rückwärtsschläge aus. Schlagpflicht erzwingen, Zurücksetzstrafe oder keine allgemeine Schlagpflicht. NPC-Stärken Leicht/Normal/Schwer.",
-            "Armdrücken: Bewegungsrichtung zum Gegner oder zum Gewinner auswählen."
+            "Armdrücken: Bewegungsrichtung zum Gegner oder zum Gewinner auswählen.",
+            "Wettkampf-Göttliche-Hand: 0 Prozent unverändert, stärkere Begünstigung/Benachteiligung verändert den Bereich der W20-Zahlen, 100 Prozent ergibt 20 beziehungsweise 1. Kein zusätzlicher Bonus; kein Einfluss auf NPC-Aufgabe.",
+            "Kniffel/Extreme: bei Wertungsblock auf Spielfeld direkte Auswahl der eigenen ruhenden 3D-Würfel darunter. Bestehende Einstellung Behalten/Neu würfeln bestimmt die Markierung."
           ]
         }
       ]
     },
     "sources": {
-      "title": "Regelquellen (57)",
+      "title": "Regelquellen (62)",
       "paragraphs": [
         "Hier findet ihr alle genutzten Regelquellen. Quellen für noch nicht umgesetzte Spiele sind ausdrücklich als geplante Regelreferenzen gekennzeichnet."
       ],
@@ -390,6 +378,12 @@
           ]
         },
         {
+          "title": "Backgammon (geplant)",
+          "items": [
+            "U.S. Backgammon Federation: https://usbgf.org/backgammon-basics-how-to-play/"
+          ]
+        },
+        {
           "title": "Binokel (geplant)",
           "items": [
             "ASS Altenburger – Binokel, Zweierfassung (geplante Regelreferenz) – https://www.spielkarten.com/wp-content/uploads/2019/07/0_Binokel.pdf",
@@ -400,6 +394,18 @@
           "title": "Blackjack (geplant)",
           "items": [
             "Bicycle Cards (ergänzende/geplante Regelreferenz) – https://bicyclecards.com/how-to-play/blackjack"
+          ]
+        },
+        {
+          "title": "Bridge (geplant)",
+          "items": [
+            "Deutscher Bridge-Verband: https://www.bridge-verband.de/bridge-kennenlernen/wie-geht-bridge"
+          ]
+        },
+        {
+          "title": "Canasta (geplant)",
+          "items": [
+            "ASS Altenburger: https://www.spielkarten.com/spielregeln/canasta/"
           ]
         },
         {
@@ -459,6 +465,12 @@
           "items": [
             "Stayandplay – Gaigel-Kurzanleitung (geplante Regelreferenz) – https://stayandplay.cards/wp-content/uploads/2020/03/DE-Gaigel-1.pdf",
             "Pagat – Gaigel, regionale Partnerschaftsfassung (geplante Regelreferenz) – https://www.pagat.com/marriage/gaigel.html"
+          ]
+        },
+        {
+          "title": "Halma (geplant)",
+          "items": [
+            "Schmidt Spiele, Halma Classic: https://www.schmidtspiele.de/files/Produkte/4/49217%20-%20Halma/49217_Halma_DE-FR-IT-NL-ES.pdf"
           ]
         },
         {
@@ -524,6 +536,12 @@
           "items": [
             "Schmidt Spiele – 150er Spielesammlung, Mühle – https://www.schmidtspiele.de/files/Retail/300dpi_JPG/49188_150er_Kompakt_Spielesammlung_D.pdf",
             "JMMG – Mühle-Spielregeln – https://www.jmmgc.com/muehle/spielregeln_muehle.php"
+          ]
+        },
+        {
+          "title": "Rommé (geplant)",
+          "items": [
+            "ASS Altenburger: https://www.spielkarten.com/spielregeln/romme-2/"
           ]
         },
         {
@@ -778,19 +796,21 @@
           "items": [
             "Tic-Tac-Toe: Serien von 1 bis 100 Runden mit wechselndem Startspieler und optionalem gemeinsamem Token-Einsatz.",
             "Drei Steine je Spieler: ältesten Stein versetzen oder einen eigenen frei verschieben; dreifache Stellungswiederholung ist Remis. Extreme mit neun Teilbrettern und drei Steinen je Spieler und Teilbrett.",
-            "K.-o.-Turnier für 2–16 Teilnehmer mit Freilosen und SL-Entscheidung nach wiederholten Unentschieden (Beta)."
+            "K.-o.-Turnier für 2–16 Teilnehmer mit Freilosen und SL-Entscheidung nach wiederholten Unentschieden."
           ]
         },
         {
           "title": "Wettessen",
           "items": [
-            "Eigene TavernGames-Hausregeln nach Daniel Brune; keine offizielle D&D-Wettkampfregel."
+            "Eigene TavernGames-Hausregeln nach Daniel Brune; keine offizielle D&D-Wettkampfregel.",
+            "Ab 5.6.1 beeinflusst Göttliche Hand die tatsächliche W20-Zahl ohne zusätzlichen festen Bonus/Malus; Attributswerte und Wettkampfmali bleiben wirksam."
           ]
         },
         {
           "title": "Wetttrinken",
           "items": [
-            "Eigene TavernGames-Hausregeln nach Daniel Brune; keine offizielle D&D-Wettkampfregel."
+            "Eigene TavernGames-Hausregeln nach Daniel Brune; keine offizielle D&D-Wettkampfregel.",
+            "Ab 5.6.1 beeinflusst Göttliche Hand die tatsächliche W20-Zahl ohne zusätzlichen festen Bonus/Malus; Attributswerte und Wettkampfmali bleiben wirksam."
           ]
         },
         {
@@ -858,5 +878,5 @@
       "paragraphs": []
     }
   },
-  "version": "5.6.0"
+  "version": "5.6.1"
 }
