@@ -22,7 +22,7 @@ export class KniffelUI extends TavernUI{
     if(!this.sheetStage||right-left<180){this.restoreSheet();this.sheetStage?.remove();return;}
     if(this.sheetStage.style.left!==left+'px')this.sheetStage.style.left=left+'px';if(this.sheetStage.style.right!==(innerWidth-right)+'px')this.sheetStage.style.right=(innerWidth-right)+'px';
     if(!this.sheetSlot){const element=root.querySelector('.kniffel-sheet-scroll');if(!element)return;const anchor=document.createComment('Kniffel sheet position');element.before(anchor);const title=node('h3',s.variant==='extreme'?'Kniffel Extreme':'Kniffel');this.sheetStage.replaceChildren(title,element);this.sheetSlot={anchor,element};}
-    const rows=this.sheetSlot.element.querySelectorAll('tr').length,height=Math.max(200,innerHeight-224),row=Math.min(28,Math.floor((height-40)/Math.max(1,rows)));
+    const rows=this.sheetSlot.element.querySelectorAll('tr').length,height=Math.max(200,innerHeight-(s.variant==='extreme'?264:224)),row=Math.min(28,Math.floor((height-40)/Math.max(1,rows)));
     for(const [key,value]of [['--tg-sheet-row',row+'px'],['--tg-sheet-font',Math.max(9,Math.min(14,row-5))+'px']])if(this.sheetStage.style.getPropertyValue(key)!==value)this.sheetStage.style.setProperty(key,value);
     if(!this.sheetStage.isConnected)document.body.append(this.sheetStage);const bounds=this.sheetSlot.element.getBoundingClientRect(),layoutKey=JSON.stringify([innerWidth,innerHeight,left,right,bounds.bottom]);if(this.diceLayoutKey!==layoutKey){this.diceLayoutKey=layoutKey;this.onDiceLayout?.();}
   }

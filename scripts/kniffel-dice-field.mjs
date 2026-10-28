@@ -4,7 +4,7 @@ export function kniffelDiceStrip({sheet,stage,canvas,hudTop,count,width,height})
  if(!sheet||!stage||!canvas||!count||canvas.width<=0||canvas.height<=0)return null;
  const left=Math.max(12,stage.left,canvas.left)+8,right=Math.min(width-12,stage.right,canvas.right)-8,top=Math.max(sheet.bottom+12,canvas.top+12),bottom=Math.min(height-85,hudTop-12,canvas.bottom-12),space=bottom-top;
  if(right-left<120||space<24)return null;
- const diameter=Math.min(72,space-4,(right-left)/(count*1.22)),gap=diameter*1.22,center=(left+right)/2,y=(top+bottom)/2;
+ const diameter=Math.min(count===6?100:72,space-4,(right-left)/(count*1.22)),gap=diameter*1.22,center=(left+right)/2,y=(top+bottom)/2;
  return {diameter,positions:Array.from({length:count},(_,i)=>({x:center+(i-(count-1)/2)*gap,y}))};
 }
 export function screenToDiceWorld(point,height,box,vector){
@@ -13,7 +13,7 @@ export function screenToDiceWorld(point,height,box,vector){
 export function kniffelFieldPlan({box,items,diameter}){
  const doc=globalThis.document,stage=doc?.querySelector('#taverngames-kniffel-stage'),sheet=stage?.querySelector('.kniffel-sheet-scroll'),canvas=(box?.renderer?.domElement??box?.canvas)?.getBoundingClientRect?.();if(!stage?.isConnected||!sheet||!canvas||!items.length)return null;
  const sr=stage.getBoundingClientRect(),sheetRect=sheet.getBoundingClientRect(),hud=doc.querySelector('.taverngames-table-actions')?.getBoundingClientRect(),strip=kniffelDiceStrip({sheet:sheetRect,stage:sr,canvas,hudTop:hud?.height?hud.top:innerHeight-65,count:items.length,width:innerWidth,height:innerHeight});if(!strip)return null;
- const vector=items[0].entry.mesh.position,point=strip.positions[0],a=screenToDiceWorld({x:point.x-strip.diameter/2,y:point.y},0,box,vector),b=screenToDiceWorld({x:point.x+strip.diameter/2,y:point.y},0,box,vector);if(!a||!b)return null;const scale=Math.min(1,Math.hypot(b.x-a.x,b.z-a.z)/diameter);if(!Number.isFinite(scale)||scale<=0)return null;
+ const vector=items[0].entry.mesh.position,point=strip.positions[0],a=screenToDiceWorld({x:point.x-strip.diameter/2,y:point.y},0,box,vector),b=screenToDiceWorld({x:point.x+strip.diameter/2,y:point.y},0,box,vector);if(!a||!b)return null;const scale=Math.min(items.length===6?1.7:1,Math.hypot(b.x-a.x,b.z-a.z)/diameter);if(!Number.isFinite(scale)||scale<=0)return null;
  const positions=items.map((item,i)=>screenToDiceWorld(strip.positions[i],(item.pose?.height??.02)*scale,box,vector));if(positions.some(p=>!p))return null;return {scale,positions};
 }
 

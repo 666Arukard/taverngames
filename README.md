@@ -1,3 +1,9 @@
+# TavernGames 5.6.3
+
+Schwimmen erhält zwei Regeloptionen: Im ersten eigenen Zug jeder neuen Spielrunde darf standardmäßig nicht gepasst werden; optional gilt der Dreiertausch automatisch als Passen. Während des gesperrten ersten Zugs bleibt der Dreiertausch ohne Rundenschluss erlaubt. Schocken und Schweinchen zeigen keine zusätzliche Augensumme über den 3D-Würfeln; die obere Schweinchen-Anzeige bleibt erhalten. Kniffel-Extreme-Würfel erhalten mehr Platz und werden größer dargestellt. Die Beziehungstabelle für Schere, Stein, Papier öffnet sich in einem separaten, verschiebbaren und vergrößerbaren Fenster. Keine neuen Spiele oder Stable-Hochstufungen.
+
+[Testplan](docs/release-5.6.3.md) · Lokales Update, nicht veröffentlicht.
+
 # TavernGames 5.6.2
 
 Neue Beta: Schere, Stein, Papier mit klassischem Set, Echse/Spock und eigenen Regelsets. Beide Teilnehmer wählen unabhängig und verdeckt; erst nach beiden verbindlichen Entscheidungen wird aufgedeckt. Eigene Sets mit 3–25 frei benannten Figuren, optionalen Textsymbolen, vollständiger Beziehungstabelle und Balancehinweis; bis zu 20 Sets pro Welt speichern, kopieren und löschen. Einstellbares Siegziel, zufällig wählende oder manuell gesteuerte NPCs, gemeinsame Spieltoken und Ausgangswetten. Alle Korrekturen aus 5.6.1 enthalten. Keine Stable-Hochstufungen; die neue englische Anleitung wartet auf Review.

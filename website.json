@@ -2,16 +2,16 @@
   "schemaVersion": 1,
   "blocks": {
     "patchnotes": {
-      "title": "Patchnotes Version 5.6.2",
+      "title": "Patchnotes Version 5.6.3",
       "paragraphs": [
-        "Neue Beta: Schere, Stein, Papier mit klassischem Set, Echse/Spock und eigenen Regelsets. Beide Teilnehmer wählen unabhängig und verdeckt; erst nach beiden verbindlichen Entscheidungen wird aufgedeckt. Eigene Sets mit 3–25 frei benannten Figuren, optionalen Textsymbolen, vollständiger Beziehungstabelle und Balancehinweis; bis zu 20 Sets pro Welt speichern, kopieren und löschen. Einstellbares Siegziel, zufällig wählende oder manuell gesteuerte NPCs, gemeinsame Spieltoken und Ausgangswetten. Alle Korrekturen aus 5.6.1 enthalten. Keine Stable-Hochstufungen; die neue englische Anleitung wartet auf Review."
+        "Schwimmen erhält zwei Regeloptionen: Im ersten eigenen Zug jeder neuen Spielrunde darf standardmäßig nicht gepasst werden; optional gilt der Dreiertausch automatisch als Passen. Während des gesperrten ersten Zugs bleibt der Dreiertausch ohne Rundenschluss erlaubt. Schocken und Schweinchen zeigen keine zusätzliche Augensumme über den 3D-Würfeln; die obere Schweinchen-Anzeige bleibt erhalten. Kniffel-Extreme-Würfel erhalten mehr Platz und werden größer dargestellt. Die Beziehungstabelle für Schere, Stein, Papier öffnet sich in einem separaten, verschiebbaren und vergrößerbaren Fenster. Keine neuen Spiele oder Stable-Hochstufungen."
       ],
       "items": [
-        "Klassisch, Echse/Spock und frei gestaltbare Figuren-/Beziehungsmasken als neue optionale Beta.",
-        "Verdeckte gleichzeitige Entscheidungen, verbindliche Auswahl und gemeinsames Aufdecken; Siegziel 1–100.",
-        "Eigene Regelsets pro Welt speichern, kopieren und löschen; fehlende Beziehungen blockieren, Ungleichgewicht erzeugt einen Hinweis.",
-        "NPCs automatisch zufällig oder manuell; interne Spieltoken einmal pro Partie und gemeinsame Ausgangswetten.",
-        "Enthält die Wettkampf-/Kniffel-Korrekturen aus 5.6.1. Keine weiteren Stable-Freigaben oder englischen Anleitungsfreigaben."
+        "Schwimmen: erste eigene Aktion jeder neuen Spielrunde ohne Passen (Standard an); Dreiertausch als Passen optional aus. Letzte Züge und Knack/Blitz bleiben erhalten.",
+        "Keine Augensumme über Schocken-/Schweinchen-Würfeln; obere Schweinchen-Punkteanzeige unverändert.",
+        "Kniffel Extreme: größerer freier Würfelbereich und größere ruhende Würfel, weiterhin innerhalb des verfügbaren Platzes.",
+        "Schere, Stein, Papier: eigene breite Beziehungstabelle mit geschützter Bearbeitung in separatem Foundry-Fenster; gespeichert wird die Vorlage weiterhin in der Moderation.",
+        "Unverändert 27 stabile Spiele, vier stabile Turniere und vier Beta-Spiele; keine neue englische Anleitungsfreigabe."
       ]
     },
     "games": {
@@ -343,7 +343,8 @@
             "Armdrücken: Bewegungsrichtung zum Gegner oder zum Gewinner auswählen.",
             "Wettkampf-Göttliche-Hand: 0 Prozent unverändert, stärkere Begünstigung/Benachteiligung verändert den Bereich der W20-Zahlen, 100 Prozent ergibt 20 beziehungsweise 1. Kein zusätzlicher Bonus; kein Einfluss auf NPC-Aufgabe.",
             "Kniffel/Extreme: bei Wertungsblock auf Spielfeld direkte Auswahl der eigenen ruhenden 3D-Würfel darunter. Bestehende Einstellung Behalten/Neu würfeln bestimmt die Markierung.",
-            "Schere, Stein, Papier: Vorlagen und eigene Regelsets, Siegziel, NPCs, Launcher und gemeinsame Token-/Wetteinstellungen."
+            "Schere, Stein, Papier: klassisches, Echse/Spock oder eigenes Regelset wählen; Siegziel 1–100 und NPC-Steuerung festlegen. Beziehungstabelle über den gleichnamigen Button im separaten, verschiebbaren und vergrößerbaren Fenster bearbeiten; dauerhaft über Regelset speichern in der Moderation sichern. Laufende Partien behalten ihren Regelschnappschuss.",
+            "Schwimmen: Passen im ersten eigenen Zug pro Spielrunde verbieten (Standard an); Dreiertausch schließt automatisch wie Passen (Standard aus, erste-Zug-Sperre hat Vorrang)."
           ]
         }
       ]
@@ -483,6 +484,13 @@
           ]
         },
         {
+          "title": "Käsekästchen",
+          "items": [
+            "kinder – Käsekästchen: https://www.kinder.com/de/de/kinder-spiel-und-spass/spiele/kaesekaestchen",
+            "BrettspielNetz – Käsekästchen / Dots and Boxes: https://www.brettspielnetz.de/spielregeln/kaesekaestchen.php"
+          ]
+        },
+        {
           "title": "Klippklapp",
           "items": [
             "Daniel Brune – bereitgestellte Klippklapp-Regelvorlage vom 13.10.2026 und bestätigte Bluff-, Zahlungs- und Startspielerregeln; neue Brettspielnamen zunächst nur vorgemerkt."
@@ -506,13 +514,6 @@
           "title": "Kniffel7 (geplant)",
           "items": [
             "Schmidt Spiele, Reiner Knizia: https://www.schmidtspiele.de/details/produkt/kniffel-7.html"
-          ]
-        },
-        {
-          "title": "Käsekästchen",
-          "items": [
-            "kinder – Käsekästchen: https://www.kinder.com/de/de/kinder-spiel-und-spass/spiele/kaesekaestchen",
-            "BrettspielNetz – Käsekästchen / Dots and Boxes: https://www.brettspielnetz.de/spielregeln/kaesekaestchen.php"
           ]
         },
         {
@@ -545,6 +546,12 @@
           "title": "Rommé (geplant)",
           "items": [
             "ASS Altenburger: https://www.spielkarten.com/spielregeln/romme-2/"
+          ]
+        },
+        {
+          "title": "Schere, Stein, Papier / Echse, Spock",
+          "items": [
+            "Sam Kass und Karen Bryla – Rock Paper Scissors Spock Lizard: https://www.samkass.com/theories/RPSSL.html (nur Regelreferenz; keine fremde Grafik, Software oder Textpassage mitgeliefert)."
           ]
         },
         {
@@ -619,12 +626,6 @@
           "title": "Würfelpoker",
           "items": [
             "Awiana – Koboldpoker (Vorlage für Würfelpoker): https://awiana.fandom.com/de/wiki/Koboldpoker"
-          ]
-        },
-        {
-          "title": "Schere, Stein, Papier / Echse, Spock",
-          "items": [
-            "Sam Kass und Karen Bryla – Rock Paper Scissors Spock Lizard: https://www.samkass.com/theories/RPSSL.html (nur Regelreferenz; keine fremde Grafik, Software oder Textpassage mitgeliefert)."
           ]
         }
       ]
@@ -701,6 +702,12 @@
           ]
         },
         {
+          "title": "Käsekästchen",
+          "items": [
+            "Eigener Regeltext; frei gezeichnete Flächen, Löcher und getrennte Bereiche, NPC-Stärken, Serien und Spieltoken als TavernGames-Ergänzungen. Außenlinien sind Begrenzung, keine vorab gespielten Linien."
+          ]
+        },
+        {
           "title": "Klippklapp nach Daniels aktueller Festlegung",
           "items": [
             "Klippklapp nach Daniels aktueller Festlegung: tatsächliche Restsummen strikt unterbieten, direkter Grundeinsatz an Vorgänger bei Niederlage, bei Klippklapp Grundeinsatz von allen anderen aktiven Teilnehmern."
@@ -725,12 +732,6 @@
           ]
         },
         {
-          "title": "Käsekästchen",
-          "items": [
-            "Eigener Regeltext; frei gezeichnete Flächen, Löcher und getrennte Bereiche, NPC-Stärken, Serien und Spieltoken als TavernGames-Ergänzungen. Außenlinien sind Begrenzung, keine vorab gespielten Linien."
-          ]
-        },
-        {
           "title": "Mau-Mau",
           "items": [
             "Mau-Mau: 32 Karten von 7 bis Ass, fünf Startkarten, keine Joker; Siebener-Stapel optional. Standardmäßig nur ohne spielbare Karte ziehen; freiwilliges Ziehen ist optional.",
@@ -748,6 +749,12 @@
           "title": "Mühle",
           "items": [
             "Dreifache identische Stellung und 50 Zugpaare ohne Schlag nach dem Setzen als Remisregeln. Ein Schlag pro Zug auch bei zwei geschlossenen Mühlen; optionale Sprungregel, Serien und interne Spieltoken als TavernGames-Ergänzungen."
+          ]
+        },
+        {
+          "title": "Schere, Stein, Papier",
+          "items": [
+            "TavernGames-Siegziel, gemeinsame verdeckte Auswahl, NPCs, Token und eigene Figuren-/Beziehungssets nach Daniel Brune."
           ]
         },
         {
@@ -778,7 +785,8 @@
         {
           "title": "Schwimmen / Knack",
           "items": [
-            "Schwimmen / Knack: drei Leben plus Schwimmen; 30½ und Knack, Blitz optional standardmäßig an. Ein Token-Einkauf je Partie. Bei genau 7/8/9 auf dem Tisch kostenlose Erneuerung durch den aktiven Spieler ohne Zugverbrauch."
+            "Schwimmen / Knack: drei Leben plus Schwimmen; 30½ und Knack, Blitz optional standardmäßig an. Ein Token-Einkauf je Partie. Bei genau 7/8/9 auf dem Tisch kostenlose Erneuerung durch den aktiven Spieler ohne Zugverbrauch.",
+            "Hausregeln nach Daniel Brune: erste eigene Aktion pro neuer Kartenrunde ohne Passen; optional Dreiertausch als Passen. Neue Zugumläufe setzen die Sperre nicht zurück."
           ]
         },
         {
@@ -826,12 +834,6 @@
           "title": "Würfelpoker",
           "items": [
             "Würfelpoker: fünf W8 nach Awiana/Koboldpoker, Leifs abweichende Rangfolge und Daniels bestätigte Vergleiche; zwei Setzphasen mit All-in und Nebentöpfen. Full House nach Summe, dann höherem Drilling; zwei Paare nach höherem/niedrigerem Paar und Restwürfel."
-          ]
-        },
-        {
-          "title": "Schere, Stein, Papier",
-          "items": [
-            "TavernGames-Siegziel, gemeinsame verdeckte Auswahl, NPCs, Token und eigene Figuren-/Beziehungssets nach Daniel Brune."
           ]
         }
       ]
@@ -893,5 +895,5 @@
       "paragraphs": []
     }
   },
-  "version": "5.6.2"
+  "version": "5.6.3"
 }

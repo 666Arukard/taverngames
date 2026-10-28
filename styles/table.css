@@ -518,3 +518,8 @@
 .taverngames-rps-matrix th,.taverngames-rps-matrix td{min-width:110px;max-width:180px;padding:6px;border:1px solid #8b754b;white-space:normal;overflow-wrap:anywhere}
 .taverngames-rps-matrix select{width:130px}
 .taverngames-rps-matrix th{background:#30251e;color:#fff1d5}
+
+#taverngames-rps-relations .taverngames-rps-matrix-scroll{max-height:calc(100dvh - 220px)}
+#taverngames-rps-relations .window-content{min-width:0;overflow:auto}
+
+#taverngames-rps-relations{z-index:100}
