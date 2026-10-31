@@ -523,3 +523,11 @@
 #taverngames-rps-relations .window-content{min-width:0;overflow:auto}
 
 #taverngames-rps-relations{z-index:100}
+
+.taverngames-matches-play{max-width:740px}
+.taverngames-match-pile{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;padding:16px;margin:10px 0;max-height:38vh;overflow:auto;border:1px solid #987d46;border-radius:5px}
+.taverngames-match{position:relative;display:inline-block;width:6px;height:65px;flex:0 0 6px;background:#dcb37e;border-radius:3px;box-shadow:1px 1px 2px #0006}
+.taverngames-match::before{content:"";position:absolute;left:-1px;top:-2px;width:8px;height:13px;border-radius:5px;background:#ae3b2f}
+.taverngames-match.is-taken{opacity:.12}
+.taverngames-matches-play button{color:#fff1d5;background:#30251e;border:1px solid #b8995d;border-radius:5px;min-height:36px}
+.taverngames-matches-play button:hover:enabled{outline:2px solid #dfbd72;color:#fff1d5;background:#493b28}

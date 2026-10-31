@@ -1,3 +1,9 @@
+# TavernGames 5.6.4
+
+Neue optionale Beta: Streichholzspiel mit zwei Spielern oder benannten NPCs. Standard: 21 Hölzer, pro Zug eins bis drei nehmen, wer das letzte nimmt verliert. Startmenge, Entnahmegrenze und die alternative Regel „Letztes nehmen gewinnt“ sind durch die SL einstellbar. Serien mit wechselndem Startspieler, NPC-Stärken und manuelle NPC-Steuerung, gemeinsame Spieltoken und Ausgangswetten. Darstellung direkt auf dem Spieltisch ohne zusätzliche Bilddateien. Alle Korrekturen aus 5.6.3 enthalten; keine Stable-Hochstufungen oder neuen englischen Anleitungsfreigaben.
+
+[Testplan](docs/release-5.6.4.md) · Lokales Update, nicht veröffentlicht.
+
 # TavernGames 5.6.3
 
 Schwimmen erhält zwei Regeloptionen: Im ersten eigenen Zug jeder neuen Spielrunde darf standardmäßig nicht gepasst werden; optional gilt der Dreiertausch automatisch als Passen. Während des gesperrten ersten Zugs bleibt der Dreiertausch ohne Rundenschluss erlaubt. Schocken und Schweinchen zeigen keine zusätzliche Augensumme über den 3D-Würfeln; die obere Schweinchen-Anzeige bleibt erhalten. Kniffel-Extreme-Würfel erhalten mehr Platz und werden größer dargestellt. Die Beziehungstabelle für Schere, Stein, Papier öffnet sich in einem separaten, verschiebbaren und vergrößerbaren Fenster. Keine neuen Spiele oder Stable-Hochstufungen.

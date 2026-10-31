@@ -1,3 +1,4 @@
+import {createMatches,actMatches,matchesNpc} from './matches-engine.mjs';
 import {createCheckers,actCheckers,checkersNpc} from './checkers-engine.mjs';
 import {BOARD_TOURNAMENTS,createBoardTournament,actBoardTournament,boardTournamentNpc} from './board-tournament.mjs';
 import {createDots,actDots,dotsNpc} from './dots-engine.mjs';
@@ -9,7 +10,7 @@ import {createConnect,actConnect,connectNpc} from './connect-four-engine.mjs';
 import {escapeHTML} from './tavern-text.mjs';
 import {f} from './farkle-text.mjs';
 export class ConnectSession{
- constructor(scope,deps){Object.assign(this,deps);this.scope=scope;this.create=BOARD_TOURNAMENTS[scope]?(o=>createBoardTournament(scope,o)):scope==='checkers'?createCheckers:scope==='dots'?createDots:scope==='morris'?createMorris:scope==='tictournament'?createTournament:scope==='tictactoe'?createTic:createConnect;this.act=BOARD_TOURNAMENTS[scope]?actBoardTournament:scope==='checkers'?actCheckers:scope==='dots'?actDots:scope==='morris'?actMorris:scope==='tictournament'?actTournament:scope==='tictactoe'?actTic:actConnect;this.npc=BOARD_TOURNAMENTS[scope]?boardTournamentNpc:scope==='checkers'?checkersNpc:scope==='dots'?dotsNpc:scope==='morris'?morrisNpc:scope==='tictournament'?tournamentNpc:scope==='tictactoe'?ticNpc:connectNpc;this.state=null;this.wait=0;this.pending=Promise.resolve();this.now=()=>Date.now();}
+ constructor(scope,deps){Object.assign(this,deps);this.scope=scope;this.create=BOARD_TOURNAMENTS[scope]?(o=>createBoardTournament(scope,o)):scope==='matches'?createMatches:scope==='checkers'?createCheckers:scope==='dots'?createDots:scope==='morris'?createMorris:scope==='tictournament'?createTournament:scope==='tictactoe'?createTic:createConnect;this.act=BOARD_TOURNAMENTS[scope]?actBoardTournament:scope==='matches'?actMatches:scope==='checkers'?actCheckers:scope==='dots'?actDots:scope==='morris'?actMorris:scope==='tictournament'?actTournament:scope==='tictactoe'?actTic:actConnect;this.npc=BOARD_TOURNAMENTS[scope]?boardTournamentNpc:scope==='matches'?matchesNpc:scope==='checkers'?checkersNpc:scope==='dots'?dotsNpc:scope==='morris'?morrisNpc:scope==='tictournament'?tournamentNpc:scope==='tictactoe'?ticNpc:connectNpc;this.state=null;this.wait=0;this.pending=Promise.resolve();this.now=()=>Date.now();}
  restore(s){if(s&&(s.version!==1||s.game!==this.scope))throw Error('Invalid game save.');this.state=structuredClone(s);this.wait=this.now()+1200;}
  project(){return structuredClone(this.state);}
  enqueue(task){const result=this.pending.then(task);this.pending=result.catch(()=>{});return result;}

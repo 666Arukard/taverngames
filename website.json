@@ -2,22 +2,22 @@
   "schemaVersion": 1,
   "blocks": {
     "patchnotes": {
-      "title": "Patchnotes Version 5.6.3",
+      "title": "Patchnotes Version 5.6.4",
       "paragraphs": [
-        "Schwimmen erhält zwei Regeloptionen: Im ersten eigenen Zug jeder neuen Spielrunde darf standardmäßig nicht gepasst werden; optional gilt der Dreiertausch automatisch als Passen. Während des gesperrten ersten Zugs bleibt der Dreiertausch ohne Rundenschluss erlaubt. Schocken und Schweinchen zeigen keine zusätzliche Augensumme über den 3D-Würfeln; die obere Schweinchen-Anzeige bleibt erhalten. Kniffel-Extreme-Würfel erhalten mehr Platz und werden größer dargestellt. Die Beziehungstabelle für Schere, Stein, Papier öffnet sich in einem separaten, verschiebbaren und vergrößerbaren Fenster. Keine neuen Spiele oder Stable-Hochstufungen."
+        "Neue optionale Beta: Streichholzspiel mit zwei Spielern oder benannten NPCs. Standard: 21 Hölzer, pro Zug eins bis drei nehmen, wer das letzte nimmt verliert. Startmenge, Entnahmegrenze und die alternative Regel „Letztes nehmen gewinnt“ sind durch die SL einstellbar. Serien mit wechselndem Startspieler, NPC-Stärken und manuelle NPC-Steuerung, gemeinsame Spieltoken und Ausgangswetten. Darstellung direkt auf dem Spieltisch ohne zusätzliche Bilddateien. Alle Korrekturen aus 5.6.3 enthalten; keine Stable-Hochstufungen oder neuen englischen Anleitungsfreigaben."
       ],
       "items": [
-        "Schwimmen: erste eigene Aktion jeder neuen Spielrunde ohne Passen (Standard an); Dreiertausch als Passen optional aus. Letzte Züge und Knack/Blitz bleiben erhalten.",
-        "Keine Augensumme über Schocken-/Schweinchen-Würfeln; obere Schweinchen-Punkteanzeige unverändert.",
-        "Kniffel Extreme: größerer freier Würfelbereich und größere ruhende Würfel, weiterhin innerhalb des verfügbaren Platzes.",
-        "Schere, Stein, Papier: eigene breite Beziehungstabelle mit geschützter Bearbeitung in separatem Foundry-Fenster; gespeichert wird die Vorlage weiterhin in der Moderation.",
-        "Unverändert 27 stabile Spiele, vier stabile Turniere und vier Beta-Spiele; keine neue englische Anleitungsfreigabe."
+        "Streichholzspiel als neue Beta hinter dem allgemeinen Beta-Schalter.",
+        "21 Hölzer / eins bis drei nehmen / letztes verliert als Standard; Regeln in Moderation einstellbar.",
+        "Zwei Teilnehmer, NPC-Stärken und manuelle Steuerung, Serien mit wechselndem Starter.",
+        "Interne Spieltoken einmal pro Partie, Gleichstand/Abbruch erstattet; gemeinsame Ausgangswetten.",
+        "Kein neues Stable-Spiel und keine neue englische Anleitungsfreigabe; vorherige Korrekturen bleiben enthalten."
       ]
     },
     "games": {
-      "title": "aktuelle Spiele (35)",
+      "title": "aktuelle Spiele (36)",
       "paragraphs": [
-        "27 stabile Spiele und vier stabile Turniere; Wetttrinken, Wettessen, Dame und Schere, Stein, Papier als optionale Betas."
+        "27 stabile Spiele, vier stabile Turniere und fünf optionale Beta-Spiele."
       ],
       "items": [
         {
@@ -65,7 +65,8 @@
             "Tic-Tac-Toe",
             "Vier gewinnt",
             "Dame (Beta)",
-            "Schere, Stein, Papier (Beta)"
+            "Schere, Stein, Papier (Beta)",
+            "Streichholzspiel (Beta)"
           ]
         },
         {
@@ -88,7 +89,7 @@
       ]
     },
     "plans": {
-      "title": "geplante Spiele (30)",
+      "title": "geplante Spiele (29)",
       "paragraphs": [
         "Geplante Spiele und Wettbewerbe mit vorhandenen Referenzen oder neu vorgemerkten Namen. Einzelne Regeln sind noch offen; insbesondere ist beim Streichholzspiel noch keine genaue Variante festgelegt. Vorhandene Spiele werden nicht unter ihren englischen Namen erneut geplant."
       ],
@@ -139,7 +140,6 @@
             "Pfeilwurf",
             "Schach (abstrakter Wettbewerb)",
             "Schiffe versenken / Battleship (Variante noch offen)",
-            "Streichholzspiel / Matchstick Game (Variante noch offen)",
             "WallRush (Regelvariante noch offen)"
           ]
         }
@@ -305,7 +305,7 @@
           "items": [
             "Sprache: Deutsch oder Englisch wählen. Beide Oberflächen sind verfügbar. Deutsche Anleitungen und acht geprüfte englische Anleitungen: Tic-Tac-Toe einschließlich Extreme, dessen Turnier, Schwarzer Peter, Vier gewinnt, Aalstechen, Mühle, Käsekästchen und 17 und 4 als Kartenspiel. Weitere englische Anleitungen bleiben bis Review gesperrt.",
             "Ansicht: Reiteransicht ist Standard, klassische Fenster bleiben je Benutzer wählbar.",
-            "Beta-Test: Wetttrinken, Wettessen, Dame und Schere, Stein, Papier einschalten. 27 Spiele und vier Turniere bleiben ohne Beta verfügbar.",
+            "Beta-Test: Wetttrinken, Wettessen, Dame, Schere, Stein, Papier und Streichholzspiel einschalten. 27 Spiele und vier Turniere bleiben ohne Beta verfügbar.",
             "Dice So Nice: optionale 3D-Würfel aktivieren. Ohne das Zusatzmodul bleiben die Spiele bedienbar.",
             "Markierungsmodus: persönlich wählen, ob markierte eigene Würfel behalten oder erneut gewürfelt werden.",
             "Kartendecks: geeignete externe Vorlagen unter Cards / Card Decks anlegen oder importieren. Es ist kein Standard-Kartenset enthalten; vorhandene Vorlagen bleiben unverändert.",
@@ -344,13 +344,14 @@
             "Wettkampf-Göttliche-Hand: 0 Prozent unverändert, stärkere Begünstigung/Benachteiligung verändert den Bereich der W20-Zahlen, 100 Prozent ergibt 20 beziehungsweise 1. Kein zusätzlicher Bonus; kein Einfluss auf NPC-Aufgabe.",
             "Kniffel/Extreme: bei Wertungsblock auf Spielfeld direkte Auswahl der eigenen ruhenden 3D-Würfel darunter. Bestehende Einstellung Behalten/Neu würfeln bestimmt die Markierung.",
             "Schere, Stein, Papier: klassisches, Echse/Spock oder eigenes Regelset wählen; Siegziel 1–100 und NPC-Steuerung festlegen. Beziehungstabelle über den gleichnamigen Button im separaten, verschiebbaren und vergrößerbaren Fenster bearbeiten; dauerhaft über Regelset speichern in der Moderation sichern. Laufende Partien behalten ihren Regelschnappschuss.",
-            "Schwimmen: Passen im ersten eigenen Zug pro Spielrunde verbieten (Standard an); Dreiertausch schließt automatisch wie Passen (Standard aus, erste-Zug-Sperre hat Vorrang)."
+            "Schwimmen: Passen im ersten eigenen Zug pro Spielrunde verbieten (Standard an); Dreiertausch schließt automatisch wie Passen (Standard aus, erste-Zug-Sperre hat Vorrang).",
+            "Streichholzspiel: 1–200 Start-Hölzer, maximale Entnahme 1–20, Endregel, 1–100 Runden, NPCs und Spielbutton."
           ]
         }
       ]
     },
     "sources": {
-      "title": "Regelquellen (63)",
+      "title": "Regelquellen (64)",
       "paragraphs": [
         "Hier findet ihr alle genutzten Regelquellen. Quellen für noch nicht umgesetzte Spiele sind ausdrücklich als geplante Regelreferenzen gekennzeichnet."
       ],
@@ -605,6 +606,12 @@
           ]
         },
         {
+          "title": "Streichholzspiel",
+          "items": [
+            "Überliefertes Wegnehmspiel; eigene abgestimmte Ein-Haufen-Hausvariante nach Daniel Brune. Eigene Darstellung ohne Fremdgrafiken."
+          ]
+        },
+        {
           "title": "Vier gewinnt",
           "items": [
             "Vier gewinnt: klassische Vier-in-einer-Reihe-Regeln auf 7×6 Feldern; Serien und Spieltoken als Modulergänzung."
@@ -809,6 +816,12 @@
           ]
         },
         {
+          "title": "Streichholzspiel",
+          "items": [
+            "TavernGames-Ein-Haufen-Variante: letztes verliert als Standard, Siegregel alternativ, begrenzte Entnahme und Serien/Token/NPCs. Keine Mehrhaufen-Nim-Regeln."
+          ]
+        },
+        {
           "title": "Tic-Tac-Toe",
           "items": [
             "Tic-Tac-Toe: Serien von 1 bis 100 Runden mit wechselndem Startspieler und optionalem gemeinsamem Token-Einsatz.",
@@ -895,5 +908,5 @@
       "paragraphs": []
     }
   },
-  "version": "5.6.3"
+  "version": "5.6.4"
 }
