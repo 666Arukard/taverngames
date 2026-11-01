@@ -1,3 +1,9 @@
+# TavernGames 6.0.1
+
+Schiffe versenken erhält korrigierte Rastergrenzen, eine Pfeilvorschau beim Platzieren und Flottenübersichten mit durchgestrichenen versenkten Schiffen. Jeder Spieler kann das Zielgebiet optional über der eigenen Aufstellung anzeigen. Die SL kann Brettgrößen von 2–30 Feldern je Seite, 1–20 Schiffe mit eigenen Längen und erlaubte Berührungen festlegen. Klassisches Spiel stellt die bisherigen Standardregeln wieder her. Spieler platzieren weiterhin manuell; automatische Platzierung bleibt der SL und automatischen NPCs vorbehalten.
+
+[Testplan](docs/release-6.0.1.md) · Lokales Testpaket, nicht veröffentlicht. 32 stabile Spiele, vier stabile Turniere und Schiffe versenken als Beta.
+
 # TavernGames 6.0.0
 
 Freie Spielnamen sind jetzt regulär verfügbar. Die Namensverwaltung bietet eine Spielauswahl mit Kategorieicon und eine zweispaltige Sammelbearbeitung. Dame, Schere Stein Papier, Streichholzspiel, Wettessen und Wetttrinken sind stabil. Die Restanzahl beim Streichholzspiel ist optional. Neue Beta: Schiffe versenken auf einem 10×10-Feld mit verdeckten Flotten, manueller Spielerplatzierung und automatischer Platzierung ausschließlich durch die SL beziehungsweise für automatische NPCs.

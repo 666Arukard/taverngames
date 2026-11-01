@@ -2,17 +2,18 @@
   "schemaVersion": 1,
   "blocks": {
     "patchnotes": {
-      "title": "Patchnotes Version 6.0.0",
+      "title": "Patchnotes Version 6.0.1",
       "paragraphs": [
-        "Freie Spielnamen sind jetzt regulär verfügbar. Die Namensverwaltung bietet eine Spielauswahl mit Kategorieicon und eine zweispaltige Sammelbearbeitung. Dame, Schere Stein Papier, Streichholzspiel, Wettessen und Wetttrinken sind stabil. Die Restanzahl beim Streichholzspiel ist optional. Neue Beta: Schiffe versenken auf einem 10×10-Feld mit verdeckten Flotten, manueller Spielerplatzierung und automatischer Platzierung ausschließlich durch die SL beziehungsweise für automatische NPCs."
+        "Schiffe versenken erhält korrigierte Rastergrenzen, eine Pfeilvorschau beim Platzieren und Flottenübersichten mit durchgestrichenen versenkten Schiffen. Jeder Spieler kann das Zielgebiet optional über der eigenen Aufstellung anzeigen. Die SL kann Brettgrößen von 2–30 Feldern je Seite, 1–20 Schiffe mit eigenen Längen und erlaubte Berührungen festlegen. Klassisches Spiel stellt die bisherigen Standardregeln wieder her. Spieler platzieren weiterhin manuell; automatische Platzierung bleibt der SL und automatischen NPCs vorbehalten."
       ],
       "items": [
-        "32 stabile Spiele und vier stabile Turniere; nur Schiffe versenken benötigt den Beta-Schalter.",
-        "Spielnamen ohne Beta-Schalter; Einzelansicht mit Dropdown und Kategorieicon, Sammelbearbeitung mit zwei Spalten.",
-        "Schiffe versenken: fünf Schiffe, kein Berühren, Treffer-Zusatzzug optional, Serien und interne Spieltoken.",
-        "Spieler platzieren manuell und bestätigen selbst. Nur SL kann automatisch platzieren; automatische NPCs stellen selbst auf.",
-        "SL-Einsicht optional und nur für die SL; NPCs verwenden keine verdeckten gegnerischen Positionen.",
-        "Streichholz-Restanzahl standardmäßig sichtbar, durch SL abschaltbar."
+        "Raster bleibt innerhalb des Rahmens; Richtungspfeil und Schiffsvorschau beim Platzieren.",
+        "Persönliche Rasteranordnung: nebeneinander oder Zielgebiet oberhalb der eigenen Flotte.",
+        "Flottenübersichten zeigen verbleibende und versenkte Schiffe, ohne verdeckte Positionen preiszugeben.",
+        "Eigene Breite und Höhe (2–30), eigene Schiffslängen und Anzahl (1–20 Schiffe); unmögliche oder zu aufwendig prüfbare Flotten werden mit Hinweis abgelehnt.",
+        "Berührung optional an Kanten und Ecken, standardmäßig aus; Überlappen bleibt verboten.",
+        "Klassisches Spiel stellt 10×10, Flotte 5/4/3/3/2, keine Berührung und Treffer-Zusatzzug wieder her.",
+        "Keine Stable-Übergänge und keine neue englische Anleitungsfreigabe."
       ]
     },
     "games": {
@@ -351,7 +352,7 @@
             "Schwimmen: Passen im ersten eigenen Zug pro Spielrunde verbieten (Standard an); Dreiertausch schließt automatisch wie Passen (Standard aus, erste-Zug-Sperre hat Vorrang).",
             "Streichholzspiel: 1–200 Start-Hölzer, maximale Entnahme 1–20, Endregel, 1–100 Runden, NPCs und Spielbutton.",
             "Moderation: Name dieser Partie überschreibt den gespeicherten Namen für dieselbe Partie einschließlich ihrer Runden. Gespeicherten Namen verwenden entfernt die Überschreibung; eine neue Lobby setzt sie zurück. Maximal 80 druckbare Zeichen; nur die SL kann Namen ändern.",
-            "Schiffe versenken (Beta): fünf Schiffe manuell auf dem 10×10-Feld platzieren und selbst bestätigen. Automatische Platzierung ist der SL und automatischen NPCs vorbehalten. Treffer-Zusatzzug, Serien und optionale SL-Einsicht vor Spielbeginn festlegen; Gegnerflotten bleiben für Spieler verdeckt."
+            "Schiffe versenken (Beta): Klassisches Spiel verwendet 10×10, Schiffslängen 5/4/3/3/2, keine Berührungen und Treffer-Zusatzzug. Für eigene Regeln Klassisches Spiel ausschalten: Brettseiten 2–30, 1–20 Schiffe mit eigenen Längen und Berührungen optional. Spieler platzieren manuell und bestätigen selbst; automatisch platzieren nur SL und automatische NPCs. Jeder Spieler kann sein Zielgebiet oberhalb der eigenen Flotte anzeigen. Serien und optionale SL-Einsicht vor Spielbeginn wählen; Gegnerpositionen bleiben verborgen."
           ]
         }
       ]
@@ -924,5 +925,5 @@
       "paragraphs": []
     }
   },
-  "version": "6.0.0"
+  "version": "6.0.1"
 }
