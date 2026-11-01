@@ -3,7 +3,8 @@ import {continuesRound} from './continuous-play.mjs';
 let readState=()=>null;
 export const setNameStateReader=fn=>{readState=fn;};
 const setting=key=>{try{return globalThis.game?.settings?.get('taverngames',key);}catch{return null;}};
-export const namesEnabled=()=>setting('customNamesBeta')===true;
+// Stable since 6.0: the legacy beta switch is retained only as hidden migration data.
+export const namesEnabled=()=>true;
 export function validateGameName(value){if(typeof value!=='string'||value.trim().length>80||/[\u0000-\u001f\u007f]/u.test(value))throw Error('Game names must contain at most 80 printable characters.');return value.trim();}
 export function validateGameAliases(value){if(!value||typeof value!=='object'||Array.isArray(value))throw Error('Invalid game names.');const result={};for(const [id,name]of Object.entries(value)){if(!GAME_CATALOG.some(g=>g.id===id))throw Error('Unknown game.');const text=validateGameName(name);if(text)result[id]=text;}return result;}
 export function gameAlias(scope,state){if(!namesEnabled())return '';let s=state;if(s===undefined)try{s=readState(scope);}catch{s=null;}const local=s?.gameAlias,persistent=setting('gameAliases')?.[scope];for(const value of [local,persistent])try{if(value&&validateGameName(value))return value.trim();}catch{}return '';}

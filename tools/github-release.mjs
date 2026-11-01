@@ -22,7 +22,7 @@ export function validateWebsite(website, version) {
       if(!Array.isArray(block.items)||!Array.isArray(block.paragraphs)||!block.paragraphs.every(text))throw Error(`website.json: Block ${key} ungültig.`);
       let count=block.items.length;
       if(grouped.includes(key)){
-        if(!count||block.items.some(g=>!g||!text(g.title)||!Array.isArray(g.items)||!g.items.length||!g.items.every(text)))throw Error(`website.json: Gruppen in ${key} ungültig.`);
+        if(!count||block.items.some(g=>!g||!text(g.title)||!Array.isArray(g.items)||(!g.items.length&&key!=='milestones')||!g.items.every(text)))throw Error(`website.json: Gruppen in ${key} ungültig.`);
         if(new Set(block.items.map(g=>g.title)).size!==count)throw Error(`website.json: Doppelte Gruppen in ${key}.`);
         count=block.items.reduce((n,g)=>n+g.items.length,0);
       }else if(!block.items.every(text))throw Error(`website.json: Inhalte in ${key} ungültig.`);
@@ -39,7 +39,7 @@ export function validateWebsite(website, version) {
     const history=website.blocks.milestones.items;
     const number=s=>{const m=/^(\d+)\.(\d+)\.(\d+)\s*[–-]/.exec(s);if(!m)throw Error('website.json: Meilenstein ohne Version.');return m.slice(1).map(Number);};
     let last=-1;
-    for(const group of history){const [x,y,z]=number(group.title);if(x<=last||y!==0||(x===0?z!==1:z!==0))throw Error('website.json: Meilensteine nicht chronologisch.');last=x;let minor=0;for(const item of group.items){const [a,b,c]=number(item);if(a!==x||b<=minor||c!==0)throw Error('website.json: Minor-Meilensteine ungültig.');minor=b;}}
+    for(const group of history){const [x,y,z]=number(group.title);if(x<=last||y!==0||(x===0?z!==1:z!==0))throw Error('website.json: Meilensteine nicht chronologisch.');if(!group.items.length&&x!==major)throw Error('website.json: Leere historische Meilensteine.');last=x;let minor=0;for(const item of group.items){const [a,b,c]=number(item);if(a!==x||b<=minor||c!==0)throw Error('website.json: Minor-Meilensteine ungültig.');minor=b;}}
     if(!website.blocks.patchnotes.paragraphs.length||!website.blocks.patchnotes.items.length||!website.blocks.sources.paragraphs.length||!website.blocks.sources1.paragraphs.length||website.blocks.milestones.paragraphs.length)throw Error('website.json: Einleitung oder Versionshinweise fehlen.');
     return website;
   }

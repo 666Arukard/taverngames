@@ -10,7 +10,7 @@ export class RpsUI extends ConnectUI{
  sets(){const value=game.settings.get('taverngames','rpsRuleSets');return Array.isArray(value)?value:[];}
  drawModeration(){
   const root=this.windows.get('moderation')?.root;if(!root||!game.user.isGM)return;const s=this.getState();this.editor??=structuredClone(s?.rules??rpsPreset('classic',f('de','en')==='en'));const r=this.editor;
-  const old=new Map([...root.querySelectorAll('[data-draft]')].map(e=>[e.dataset.draft,e.value]));root.replaceChildren();const c=node('div',undefined,'schocken-content');root.append(c);c.append(node('h2',f('Schere, Stein, Papier · Beta','Rock, Paper, Scissors · Beta')));
+  const old=new Map([...root.querySelectorAll('[data-draft]')].map(e=>[e.dataset.draft,e.value]));root.replaceChildren();const c=node('div',undefined,'schocken-content');root.append(c);c.append(node('h2',f('Schere, Stein, Papier','Rock, Paper, Scissors')));
   control(c,f('Spieltisch öffnen','Open game table'),()=>{this.window('table');this.drawTable();});control(c,f('Anleitung','Instructions'),()=>this.guide());
   const showLabel=node('label',undefined,'schocken-choice'),show=node('input');show.type='checkbox';show.checked=game.settings.get('taverngames','showrpsLauncher')===true;show.onchange=()=>game.settings.set('taverngames','showrpsLauncher',show.checked);showLabel.append(show,document.createTextNode(f('Unteren Spielbutton einblenden','Show bottom game button')));c.append(showLabel);
   const active=s&&!['lobby','finished','aborted'].includes(s.phase),setup=node('section');setup.dataset.rpsEditor='';c.append(setup);
@@ -40,7 +40,7 @@ export class RpsUI extends ConnectUI{
 
 control(c,f('Zur Moderation zurück','Back to moderation'),()=>{this.drawModeration();void this.windows.get('relations')?.app.close();});});}
  drawTable(){
-  const root=this.windows.get('table')?.root;if(!root)return;root.replaceChildren();const c=node('div',undefined,'schocken-content'),s=this.getState();root.append(c);c.append(node('h2',f('Schere, Stein, Papier · Beta','Rock, Paper, Scissors · Beta')));if(!s){c.append(node('p',f('Die SL öffnet eine Lobby.','The GM opens a lobby.')));return;}
+  const root=this.windows.get('table')?.root;if(!root)return;root.replaceChildren();const c=node('div',undefined,'schocken-content'),s=this.getState();root.append(c);c.append(node('h2',f('Schere, Stein, Papier','Rock, Paper, Scissors')));if(!s){c.append(node('p',f('Die SL öffnet eine Lobby.','The GM opens a lobby.')));return;}
   for(const id of s.players)c.append(node('div',this.name(id)+' · '+(s.scores[id]??0)+' '+f('Punkte','points'),'schocken-player'));
   if(s.phase==='lobby'){const joined=s.players.includes(game.user.id);control(c,joined?f('Lobby verlassen','Leave lobby'):f('Beitreten','Join'),()=>this.request(joined?'leave':'join'),s.paused||!joined&&s.players.length>=2);}
   const play=node('section',undefined,'taverngames-connect-play taverngames-rps-play');c.append(play);play.append(node('h3',s.rules.title));const status=node('p',undefined,'taverngames-connect-status');status.setAttribute('role','status');play.append(status);

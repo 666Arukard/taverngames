@@ -1,11 +1,12 @@
 // Names and categories are data so future tags can extend the catalog without
 // coupling navigation to gameplay. No duration or betting claims are invented.
 export const GAME_CATALOG=Object.freeze([
- {id:'matches',category:'board',beta:true,names:['Streichholzspiel','Streichhölzer','Matchstick Game','Nim']},
- {id:'rps',category:'board',beta:true,names:['Schere, Stein, Papier','Schere Stein Papier','Rock, Paper, Scissors','Echse','Spock']},
- {id:'drink',category:'competition',beta:true,names:['Wetttrinken','Drinking Contest']},
- {id:'eat',category:'competition',beta:true,names:['Wettessen','Eating Contest']},
- {id:'checkers',category:'board',beta:true,names:['Dame','Checkers','Draughts']},
+ {id:'battleship',category:'board',beta:true,names:['Schiffe versenken','Schiffeversenken','Battleship','Sea Battle']},
+ {id:'matches',category:'board',names:['Streichholzspiel','Streichhölzer','Matchstick Game','Nim']},
+ {id:'rps',category:'board',names:['Schere, Stein, Papier','Schere Stein Papier','Rock, Paper, Scissors','Echse','Spock']},
+ {id:'drink',category:'competition',names:['Wetttrinken','Drinking Contest']},
+ {id:'eat',category:'competition',names:['Wettessen','Eating Contest']},
+ {id:'checkers',category:'board',names:['Dame','Checkers','Draughts']},
  {id:'connecttournament',category:'tournament',names:['Vier-gewinnt-Turnier','Four in a Row Tournament']},
  {id:'morristournament',category:'tournament',names:['Mühle-Turnier','Morris Tournament']},
  {id:'dotstournament',category:'tournament',names:['Käsekästchen-Turnier','Dots and Boxes Tournament']},

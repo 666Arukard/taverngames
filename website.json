@@ -2,23 +2,23 @@
   "schemaVersion": 1,
   "blocks": {
     "patchnotes": {
-      "title": "Patchnotes Version 5.6.5",
+      "title": "Patchnotes Version 6.0.0",
       "paragraphs": [
-        "Neue Beta-Funktion für freie Spielnamen: dauerhafte Weltnamen in den Moduleinstellungen und temporäre Namen in der Moderation für eine Partie einschließlich ihrer Runden. Original- und Wunschnamen bleiben suchbar; die SL sieht den Originalnamen in Klammern. Neue Anzeigen, Anleitungsüberschriften und Chatmeldungen verwenden den gültigen Namen, bestehende Nachrichten bleiben unverändert. Die Namensfunktion hat einen eigenen standardmäßig ausgeschalteten Beta-Schalter. Schere, Stein, Papier kann ausgewogene Beziehungen automatisch erzeugen und manuell veränderte Verhältnisse anzeigen. Streichhölzer liegen in Fünferblöcken. Keine Stable-Hochstufungen und kein Schiffe versenken; beides bleibt für 6.0 vorgesehen."
+        "Freie Spielnamen sind jetzt regulär verfügbar. Die Namensverwaltung bietet eine Spielauswahl mit Kategorieicon und eine zweispaltige Sammelbearbeitung. Dame, Schere Stein Papier, Streichholzspiel, Wettessen und Wetttrinken sind stabil. Die Restanzahl beim Streichholzspiel ist optional. Neue Beta: Schiffe versenken auf einem 10×10-Feld mit verdeckten Flotten, manueller Spielerplatzierung und automatischer Platzierung ausschließlich durch die SL beziehungsweise für automatische NPCs."
       ],
       "items": [
-        "Freie Spielnamen als eigene Beta-Funktion, standardmäßig aus und unabhängig vom Beta-Spiele-Schalter.",
-        "Moduleinstellungen: Weltnamen setzen, einzeln oder komplett auf Standard zurücksetzen. Moderation: temporärer Name nur für die Partie, inklusive Folge-Runden.",
-        "Suche über Original-, gespeicherten und aktuellen Namen; Originalname in der SL-Übersicht in Klammern.",
-        "Gültige Titel für Anzeigen, neue Anleitungsüberschriften und Chatmeldungen; stabile IDs, Regeln, Quellen und historische Nachrichten bleiben erhalten.",
-        "RPS-Beziehungen automatisch gleichmäßig beziehungsweise bestmöglich ausgeglichen erzeugen, danach manuell bearbeiten; Live-Hinweise pro Figur.",
-        "Streichhölzer in Fünferblöcken; alle fünf Beta-Spiele bleiben Beta. Schiffe versenken und Stable-Übergang für 6.0 zurückgestellt."
+        "32 stabile Spiele und vier stabile Turniere; nur Schiffe versenken benötigt den Beta-Schalter.",
+        "Spielnamen ohne Beta-Schalter; Einzelansicht mit Dropdown und Kategorieicon, Sammelbearbeitung mit zwei Spalten.",
+        "Schiffe versenken: fünf Schiffe, kein Berühren, Treffer-Zusatzzug optional, Serien und interne Spieltoken.",
+        "Spieler platzieren manuell und bestätigen selbst. Nur SL kann automatisch platzieren; automatische NPCs stellen selbst auf.",
+        "SL-Einsicht optional und nur für die SL; NPCs verwenden keine verdeckten gegnerischen Positionen.",
+        "Streichholz-Restanzahl standardmäßig sichtbar, durch SL abschaltbar."
       ]
     },
     "games": {
-      "title": "aktuelle Spiele (36)",
+      "title": "aktuelle Spiele (37)",
       "paragraphs": [
-        "27 stabile Spiele, vier stabile Turniere und fünf optionale Beta-Spiele."
+        "32 stabile Spiele, vier stabile Turniere und Schiffe versenken als optionale Beta."
       ],
       "items": [
         {
@@ -61,13 +61,14 @@
         {
           "title": "Brettspiele",
           "items": [
+            "Dame",
             "Käsekästchen",
             "Mühle",
+            "Schere, Stein, Papier",
+            "Streichholzspiel",
             "Tic-Tac-Toe",
             "Vier gewinnt",
-            "Dame (Beta)",
-            "Schere, Stein, Papier (Beta)",
-            "Streichholzspiel (Beta)"
+            "Schiffe versenken (Beta)"
           ]
         },
         {
@@ -83,16 +84,16 @@
           "title": "Wettkämpfe",
           "items": [
             "Armdrücken",
-            "Wettessen (Beta)",
-            "Wetttrinken (Beta)"
+            "Wettessen",
+            "Wetttrinken"
           ]
         }
       ]
     },
     "plans": {
-      "title": "geplante Spiele (29)",
+      "title": "geplante Spiele (28)",
       "paragraphs": [
-        "Geplante Spiele und Wettbewerbe mit vorhandenen Referenzen oder neu vorgemerkten Namen. Einzelne Regeln sind noch offen; insbesondere ist beim Streichholzspiel noch keine genaue Variante festgelegt. Vorhandene Spiele werden nicht unter ihren englischen Namen erneut geplant."
+        "Geplante Spiele mit vorhandenen Referenzen oder vorgemerkten Namen. Einzelne Regeln sind noch offen; vorhandene Spiele werden nicht unter englischen Namen erneut geplant."
       ],
       "items": [
         {
@@ -140,7 +141,6 @@
             "Kneipenquiz",
             "Pfeilwurf",
             "Schach (abstrakter Wettbewerb)",
-            "Schiffe versenken / Battleship (10×10-Beta für Version 6.0 vorgemerkt)",
             "WallRush (Regelvariante noch offen)"
           ]
         }
@@ -156,7 +156,7 @@
           "title": "Spielauswahl und Anpassung",
           "items": [
             "Zusätzliche Tags und Filter nach Spieldauer und Einsätzen",
-            "Durch die SL anpassbares Spieleangebot (freie Spielnamen bereits als Beta vorhanden)"
+            "Durch die SL anpassbares Spieleangebot (freie Spielnamen bereits vorhanden)"
           ]
         },
         {
@@ -200,7 +200,7 @@
       ]
     },
     "functions": {
-      "title": "aktuelle Funktionen (49)",
+      "title": "aktuelle Funktionen (50)",
       "paragraphs": [
         "Bereits umgesetzte Kernfunktionen. Verfügbarkeit und erlaubte Aktionen richten sich nach Spielregeln, Teilnahme und SL-Freigabe."
       ],
@@ -212,7 +212,7 @@
             "Persönliche Favoriten",
             "Freiwilliger Lobbybeitritt",
             "Eigener Beta-Filter und Kategorie Turniere",
-            "Dauerhafte Weltnamen und temporäre Partienamen (Beta)"
+            "Dauerhafte Weltnamen und temporäre Partienamen"
           ]
         },
         {
@@ -282,7 +282,8 @@
             "K.-o.-Turniere mit Freilosen und gemeinsamer Gewinnverteilung",
             "Attributsproben mit Vorteil und Nachteil",
             "Verdeckte gleichzeitige Entscheidungen mit gemeinsamer Aufdeckung",
-            "Eigene Figuren- und Beziehungssets mit Vorlagenverwaltung"
+            "Eigene Figuren- und Beziehungssets mit Vorlagenverwaltung",
+            "Verdeckte Spielfelder mit manueller Aufstellung und getrennter SL-Einsicht"
           ]
         },
         {
@@ -307,12 +308,12 @@
           "items": [
             "Sprache: Deutsch oder Englisch wählen. Beide Oberflächen sind verfügbar. Deutsche Anleitungen und acht geprüfte englische Anleitungen: Tic-Tac-Toe einschließlich Extreme, dessen Turnier, Schwarzer Peter, Vier gewinnt, Aalstechen, Mühle, Käsekästchen und 17 und 4 als Kartenspiel. Weitere englische Anleitungen bleiben bis Review gesperrt.",
             "Ansicht: Reiteransicht ist Standard, klassische Fenster bleiben je Benutzer wählbar.",
-            "Beta-Test: Wetttrinken, Wettessen, Dame, Schere, Stein, Papier und Streichholzspiel einschalten. 27 Spiele und vier Turniere bleiben ohne Beta verfügbar.",
+            "Beta-Test: Schiffe versenken einschalten. 32 Spiele und vier Turniere bleiben ohne Beta verfügbar.",
             "Dice So Nice: optionale 3D-Würfel aktivieren. Ohne das Zusatzmodul bleiben die Spiele bedienbar.",
             "Markierungsmodus: persönlich wählen, ob markierte eigene Würfel behalten oder erneut gewürfelt werden.",
             "Kartendecks: geeignete externe Vorlagen unter Cards / Card Decks anlegen oder importieren. Es ist kein Standard-Kartenset enthalten; vorhandene Vorlagen bleiben unverändert.",
             "Göttliche Hand: nur die SL stellt globale Glücks-/Pechprofile und Spielausnahmen ein. Unterstützt Würfel sowie Austeilen und Nachziehen in Kartenspielen; bei 0 Prozent bleibt der Zufall unverändert. Keine Siegsgarantie; Brettspiele werden noch nicht beeinflusst.",
-            "Freie Spielnamen · Beta separat aktivieren und im Menü Spielnamen dauerhafte Weltnamen bearbeiten/zurücksetzen."
+            "Spielnamen: Spiel per Dropdown wählen oder mehrere Namen zweispaltig bearbeiten; Kategorieicons helfen bei der Auswahl. Einzel- und Gesamtreset sind verfügbar."
           ]
         },
         {
@@ -341,15 +342,16 @@
             "Käsekästchen: Rechteck mit 1–50 Kästchen je Richtung oder eigene geschlossene Form im Zeicheneditor wählen. Serien mit 1–100 Runden addieren Kästchenpunkte; der Starter wechselt, die SL startet die Folgerunde. NPC-Stärke und optionalen einmaligen Token-Einsatz für die Serie festlegen.",
             "Armdrücken: NPC-/manuelle Attribute, Charakterwerte erneut einlesen, Vorteil/Normal/Nachteil und manuelle NPC-Steuerung.",
             "Zusätzliche Turniere: Teilnehmer, NPC-Stärken, bei Mühle Springen, bei Käsekästchen rechteckige Brettgröße.",
-            "Wetttrinken/Wettessen (Beta): Start-SG 1–100, Steigerung 0–20, standardmäßig 10 und +1. Optionale Doppelprobe zunächst an. Manuelle Attribute, D&D-Werte einlesen, Vorteil/Nachteil, manuelle NPCs und Spieltoken.",
-            "Dame (Beta): 1–100 Runden, Remisgrenze 1–500 Zugpaare (Standard 50), optionale Rückwärtsschläge aus. Schlagpflicht erzwingen, Zurücksetzstrafe oder keine allgemeine Schlagpflicht. NPC-Stärken Leicht/Normal/Schwer.",
+            "Wetttrinken/Wettessen: Start-SG 1–100, Steigerung 0–20, standardmäßig 10 und +1. Optionale Doppelprobe zunächst an. Manuelle Attribute, D&D-Werte einlesen, Vorteil/Nachteil, manuelle NPCs und Spieltoken.",
+            "Dame: 1–100 Runden, Remisgrenze 1–500 Zugpaare (Standard 50), optionale Rückwärtsschläge aus. Schlagpflicht erzwingen, Zurücksetzstrafe oder keine allgemeine Schlagpflicht. NPC-Stärken Leicht/Normal/Schwer.",
             "Armdrücken: Bewegungsrichtung zum Gegner oder zum Gewinner auswählen.",
             "Wettkampf-Göttliche-Hand: 0 Prozent unverändert, stärkere Begünstigung/Benachteiligung verändert den Bereich der W20-Zahlen, 100 Prozent ergibt 20 beziehungsweise 1. Kein zusätzlicher Bonus; kein Einfluss auf NPC-Aufgabe.",
             "Kniffel/Extreme: bei Wertungsblock auf Spielfeld direkte Auswahl der eigenen ruhenden 3D-Würfel darunter. Bestehende Einstellung Behalten/Neu würfeln bestimmt die Markierung.",
             "Schere, Stein, Papier: klassisches, Echse/Spock oder eigenes Regelset wählen; Siegziel 1–100 und NPC-Steuerung festlegen. Beziehungstabelle über den gleichnamigen Button im separaten, verschiebbaren und vergrößerbaren Fenster bearbeiten; dauerhaft über Regelset speichern in der Moderation sichern. Laufende Partien behalten ihren Regelschnappschuss.",
             "Schwimmen: Passen im ersten eigenen Zug pro Spielrunde verbieten (Standard an); Dreiertausch schließt automatisch wie Passen (Standard aus, erste-Zug-Sperre hat Vorrang).",
             "Streichholzspiel: 1–200 Start-Hölzer, maximale Entnahme 1–20, Endregel, 1–100 Runden, NPCs und Spielbutton.",
-            "Moderation: Name dieser Partie überschreibt den gespeicherten Namen für dieselbe Partie einschließlich ihrer Runden. Gespeicherten Namen verwenden entfernt die Überschreibung; eine neue Lobby setzt sie zurück. Maximal 80 druckbare Zeichen; nur die SL kann Namen ändern."
+            "Moderation: Name dieser Partie überschreibt den gespeicherten Namen für dieselbe Partie einschließlich ihrer Runden. Gespeicherten Namen verwenden entfernt die Überschreibung; eine neue Lobby setzt sie zurück. Maximal 80 druckbare Zeichen; nur die SL kann Namen ändern.",
+            "Schiffe versenken (Beta): fünf Schiffe manuell auf dem 10×10-Feld platzieren und selbst bestätigen. Automatische Platzierung ist der SL und automatischen NPCs vorbehalten. Treffer-Zusatzzug, Serien und optionale SL-Einsicht vor Spielbeginn festlegen; Gegnerflotten bleiben für Spieler verdeckt."
           ]
         }
       ]
@@ -775,6 +777,12 @@
           ]
         },
         {
+          "title": "Schiffe versenken",
+          "items": [
+            "TavernGames-Hausfassung nach Abstimmung mit Daniel Brune; keine fremden Grafiken oder übernommenen Anleitungstexte."
+          ]
+        },
+        {
           "title": "Schocken-Einsatzregel von Daniel",
           "items": [
             "Schocken-Einsatzregel von Daniel: Mindestbestand N × Einsatz; der endgültige Verlierer zahlt jedem anderen einmal den Einsatz. Optionale interne Spieltoken statt echter Charakterwährung."
@@ -907,10 +915,14 @@
             "5.5.0 – Mühle und 17 und 4 Karten stabil; Käsekästchen-Beta mit eigenem Spielfeldeditor.",
             "5.6.0 – Käsekästchen, Armdrücken und drei weitere Turniere stabil; Wetttrinken, Wettessen und Dame als Betas."
           ]
+        },
+        {
+          "title": "6.0.0 – Freie Spielnamen stabil; fünf Stable-Übergänge und Schiffe-versenken-Beta.",
+          "items": []
         }
       ],
       "paragraphs": []
     }
   },
-  "version": "5.6.5"
+  "version": "6.0.0"
 }

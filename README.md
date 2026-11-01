@@ -1,3 +1,11 @@
+# TavernGames 6.0.0
+
+Freie Spielnamen sind jetzt regulär verfügbar. Die Namensverwaltung bietet eine Spielauswahl mit Kategorieicon und eine zweispaltige Sammelbearbeitung. Dame, Schere Stein Papier, Streichholzspiel, Wettessen und Wetttrinken sind stabil. Die Restanzahl beim Streichholzspiel ist optional. Neue Beta: Schiffe versenken auf einem 10×10-Feld mit verdeckten Flotten, manueller Spielerplatzierung und automatischer Platzierung ausschließlich durch die SL beziehungsweise für automatische NPCs.
+
+32 stabile Spiele, vier stabile Turniere und eine optionale Beta.
+
+[Testplan](docs/release-6.0.0.md) · Lokales Update, nicht veröffentlicht.
+
 # TavernGames 5.6.5
 
 Neue Beta-Funktion für freie Spielnamen: dauerhafte Weltnamen in den Moduleinstellungen und temporäre Namen in der Moderation für eine Partie einschließlich ihrer Runden. Original- und Wunschnamen bleiben suchbar; die SL sieht den Originalnamen in Klammern. Neue Anzeigen, Anleitungsüberschriften und Chatmeldungen verwenden den gültigen Namen, bestehende Nachrichten bleiben unverändert. Die Namensfunktion hat einen eigenen standardmäßig ausgeschalteten Beta-Schalter. Schere, Stein, Papier kann ausgewogene Beziehungen automatisch erzeugen und manuell veränderte Verhältnisse anzeigen. Streichhölzer liegen in Fünferblöcken. Keine Stable-Hochstufungen und kein Schiffe versenken; beides bleibt für 6.0 vorgesehen.

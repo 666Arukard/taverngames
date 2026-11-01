@@ -4,12 +4,12 @@ import {secureIndex} from './start-choice.mjs';
 const check=(v,m)=>{if(!v)throw Error(m);};
 export function createMatches(o={}){
  const initial=o.initial??21,maxTake=o.maxTake??3;check(Number.isInteger(initial)&&initial>=1&&initial<=200,'Matches: choose 1–200 starting sticks.');check(Number.isInteger(maxTake)&&maxTake>=1&&maxTake<=20,'Matches: choose a maximum take of 1–20.');
- return {...createConnect(o),game:'matches',initial,maxTake,lastLoses:o.lastLoses!==false,remaining:initial,lastTake:null,roundWinner:null,board:[]};
+ return {...createConnect(o),game:'matches',initial,maxTake,lastLoses:o.lastLoses!==false,showRemaining:o.showRemaining!==false,remaining:initial,lastTake:null,roundWinner:null,board:[]};
 }
 export function actMatches(old,id,action,args={},gm=false){
  check(old?.game==='matches','No game exists.');
  if(['abort','pause','npcControl','npcDifficulty','join','leave','begin'].includes(action))return actConnect(old,id,action,args,gm);
- const s=structuredClone(old);s.revision++;check(!s.paused,'Game is paused.');
+ const s=structuredClone(old);s.revision++;if(action==='remainingDisplay'){check(gm,'GM only.');s.showRemaining=args.enabled===true;return s;}check(!s.paused,'Game is paused.');
  if(action==='nextRound'){check(gm,'GM only.');check(s.phase==='roundEnd','Round is not finished.');s.round++;s.remaining=s.initial;s.lastTake=null;s.roundWinner=null;s.order.reverse();s.turn=0;s.phase='playing';return s;}
  check(action==='take','Unknown action.');check(s.phase==='playing'&&s.order[s.turn]===id,'Not your turn.');check(Number.isInteger(args.count)&&args.count>=1&&args.count<=Math.min(s.maxTake,s.remaining),'Matches: invalid number of sticks.');
  s.remaining-=args.count;s.lastTake={id,count:args.count};
