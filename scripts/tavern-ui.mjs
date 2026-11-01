@@ -1,3 +1,4 @@
+import {namedHtml} from './game-names.mjs';
 import {keepModerationScroll,withScroll} from './scroll-state.mjs';
 import {createNativeWindow} from './native-ui.mjs';
 import {f} from './farkle-text.mjs';
@@ -15,7 +16,7 @@ export class TavernUI{
   window(kind){if(this.windows.has(kind)){this.windows.get(kind).app.bringToFront();return this.windows.get(kind).root;}const root=node('section',undefined,'taverngames-surface'),app=createNativeWindow(foundry,`${this.scope}-${kind}`,root,()=>this.windows.delete(kind));this.windows.set(kind,{root,app});return root;}
   open(){this.window('table');if(game.user.isGM)this.window('moderation');this.draw();void this.request('read');}
   async close(){await Promise.all([...this.windows.values()].map(({app})=>app.close()));}
-  guide(){if(!game.user.isGM)return;const root=this.window('guide');root.replaceChildren();const content=node('div',undefined,'schocken-content');content.innerHTML=tavernGuide(this.scope);root.append(content);control(content,f('Anleitung in den Chat posten','Post instructions to chat'),async()=>{try{await ChatMessage.create({content:tavernGuide(this.scope)});}catch(e){ui.notifications.warn(e.message);}});}
+  guide(){if(!game.user.isGM)return;const root=this.window('guide');root.replaceChildren();const content=node('div',undefined,'schocken-content');content.innerHTML=namedHtml(tavernGuide(this.scope),this.scope);root.append(content);control(content,f('Anleitung in den Chat posten','Post instructions to chat'),async()=>{try{await ChatMessage.create({content:namedHtml(tavernGuide(this.scope),this.scope)});}catch(e){ui.notifications.warn(e.message);}});}
   draw(){this.drawModeration();this.drawTable();}
   drawModeration(){
     const root=this.windows.get('moderation')?.root;if(!root||!game.user.isGM)return;

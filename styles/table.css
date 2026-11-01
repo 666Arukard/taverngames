@@ -531,3 +531,8 @@
 .taverngames-match.is-taken{opacity:.12}
 .taverngames-matches-play button{color:#fff1d5;background:#30251e;border:1px solid #b8995d;border-radius:5px;min-height:36px}
 .taverngames-matches-play button:hover:enabled{outline:2px solid #dfbd72;color:#fff1d5;background:#493b28}
+
+.taverngames-match-pile{gap:24px 26px}.taverngames-match-group{display:flex;gap:9px;padding:4px 6px;border-bottom:1px solid #b8995d55;align-items:flex-start}
+.taverngames-name-row{padding:8px 0;border-bottom:1px solid #b8995d55}.taverngames-name-row input{width:100%}
+
+#taverngames-game-names{z-index:100}

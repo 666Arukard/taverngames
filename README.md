@@ -1,3 +1,9 @@
+# TavernGames 5.6.5
+
+Neue Beta-Funktion für freie Spielnamen: dauerhafte Weltnamen in den Moduleinstellungen und temporäre Namen in der Moderation für eine Partie einschließlich ihrer Runden. Original- und Wunschnamen bleiben suchbar; die SL sieht den Originalnamen in Klammern. Neue Anzeigen, Anleitungsüberschriften und Chatmeldungen verwenden den gültigen Namen, bestehende Nachrichten bleiben unverändert. Die Namensfunktion hat einen eigenen standardmäßig ausgeschalteten Beta-Schalter. Schere, Stein, Papier kann ausgewogene Beziehungen automatisch erzeugen und manuell veränderte Verhältnisse anzeigen. Streichhölzer liegen in Fünferblöcken. Keine Stable-Hochstufungen und kein Schiffe versenken; beides bleibt für 6.0 vorgesehen.
+
+[Testplan](docs/release-5.6.5.md) · Lokales Update, nicht veröffentlicht.
+
 # TavernGames 5.6.4
 
 Neue optionale Beta: Streichholzspiel mit zwei Spielern oder benannten NPCs. Standard: 21 Hölzer, pro Zug eins bis drei nehmen, wer das letzte nimmt verliert. Startmenge, Entnahmegrenze und die alternative Regel „Letztes nehmen gewinnt“ sind durch die SL einstellbar. Serien mit wechselndem Startspieler, NPC-Stärken und manuelle NPC-Steuerung, gemeinsame Spieltoken und Ausgangswetten. Darstellung direkt auf dem Spieltisch ohne zusätzliche Bilddateien. Alle Korrekturen aus 5.6.3 enthalten; keine Stable-Hochstufungen oder neuen englischen Anleitungsfreigaben.

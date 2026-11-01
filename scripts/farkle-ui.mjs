@@ -1,3 +1,4 @@
+import {namedHtml} from './game-names.mjs';
 import {farkleInteractionKey} from './interaction-queue.mjs';
 import {tokenGuide} from './token-guide.mjs';
 import {keepModerationScroll} from './scroll-state.mjs';
@@ -18,8 +19,8 @@ export class FarkleUI{
   async close(){await Promise.all([...this.windows.values()].map(({app})=>app.close()));}
   guide(){
     if(!game.user.isGM)return;
-    const root=this.window('farkle-guide');root.replaceChildren();const content=el('div',undefined,'schocken-content');content.innerHTML=(farkleGuide(this.getState()?.rules)+tokenGuide('farkle'));root.append(content);
-    button(content,f('Anleitung in den Chat posten','Post instructions to chat'),async()=>{if(!game.user.isGM)return;try{await ChatMessage.create({content:(farkleGuide(this.getState()?.rules)+tokenGuide('farkle'))});}catch(error){ui.notifications.warn(error.message);}});
+    const root=this.window('farkle-guide');root.replaceChildren();const content=el('div',undefined,'schocken-content');content.innerHTML=namedHtml(farkleGuide(this.getState()?.rules)+tokenGuide('farkle'),'farkle');root.append(content);
+    button(content,f('Anleitung in den Chat posten','Post instructions to chat'),async()=>{if(!game.user.isGM)return;try{await ChatMessage.create({content:namedHtml(farkleGuide(this.getState()?.rules)+tokenGuide('farkle'),'farkle')});}catch(error){ui.notifications.warn(error.message);}});
   }
   draw(){this.drawModeration();this.drawTable();}
   drawModeration(){

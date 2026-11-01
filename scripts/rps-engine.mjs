@@ -17,7 +17,7 @@ export function validateRpsRules(value){
  const seen=new Set(),wins=[];for(const pair of value.wins){check(Array.isArray(pair)&&pair.length===2&&ids.has(pair[0])&&ids.has(pair[1])&&pair[0]!==pair[1],'RPS: invalid relationship.');const key=[...pair].sort().join('|');check(!seen.has(key),'RPS: conflicting or duplicate relationship.');seen.add(key);wins.push([...pair]);}
  return {title:value.title.trim(),figures,wins};
 }
-export function rpsBalance(rules){const counts=Object.fromEntries(rules.figures.map(f=>[f.id,0]));for(const [id]of rules.wins)counts[id]++;return {counts,balanced:new Set(Object.values(counts)).size===1};}
+export function rpsBalance(rules){const counts=Object.fromEntries(rules.figures.map(f=>[f.id,0]));for(const [id]of rules.wins)counts[id]++;const values=Object.values(counts),balanced=new Set(values).size===1,bestPossible=Math.max(...values)-Math.min(...values)<=1;return {counts,balanced,bestPossible};}
 export function rpsWinner(rules,a,b){if(a===b)return null;const win=rules.wins.find(([x,y])=>x===a&&y===b||x===b&&y===a);check(win,'RPS: missing relationship.');return win[0];}
 export function createRps(o={}){const target=o.targetWins??3;check(Number.isInteger(target)&&target>=1&&target<=100,'RPS: target wins must be 1–100.');return {...createConnect(o),game:'rps',rules:validateRpsRules(o.rules??rpsPreset()),targetWins:target,choices:{},ready:[],reveal:null};}
 export function actRps(old,id,action,args={},gm=false){
@@ -34,3 +34,13 @@ export function actRps(old,id,action,args={},gm=false){
 }
 export function rpsView(s,user){if(!s)return null;const v=structuredClone(s);if(v.phase==='playing'||v.phase==='lobby'){v.choices=Object.fromEntries(Object.entries(v.choices).filter(([id])=>id===user?.id||user?.isGM&&v.npcs[id]&&v.npcManual[id]));v.reveal=null;}return v;}
 export function rpsNpc(s,random=secureIndex){if(s?.phase!=='playing'||s.paused)return null;const id=s.order.find(id=>s.npcs[id]&&!s.npcManual[id]&&!Object.hasOwn(s.choices,id));if(!id)return null;return {id,action:'choose',args:{gameId:s.gameId,round:s.round,figure:s.rules.figures[random(s.rules.figures.length)].id}};}
+
+// An odd cyclic tournament is regular. For even n, remove one vertex from a
+// regular n+1 tournament: the surviving win counts differ by exactly one.
+export function balanceRpsRules(input,random=secureIndex){
+ const r={title:input.title,figures:structuredClone(input.figures),wins:[]},ids=r.figures.map(f=>f.id);
+ for(let i=ids.length-1;i>0;i--){const j=random(i+1);[ids[i],ids[j]]=[ids[j],ids[i]];}
+ const n=ids.length%2?ids.length:ids.length+1,half=(n-1)/2;
+ for(let i=0;i<ids.length;i++)for(let j=i+1;j<ids.length;j++)r.wins.push(j-i<=half?[ids[i],ids[j]]:[ids[j],ids[i]]);
+ return validateRpsRules(r);
+}

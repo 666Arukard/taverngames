@@ -1,3 +1,4 @@
+import {namedHtml} from './game-names.mjs';
 import {createFarkle,actFarkle,farkleNpcAction,bestSelection} from './farkle-engine.mjs';
 import {language} from './i18n.mjs';
 const escape=text=>String(text).replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
@@ -7,7 +8,7 @@ export function farkleAnnouncement(state,getName){
   const title=state.draw?(de?'Unentschieden':'Draw'):(de?'Spiel beendet':'Game over');
   const result=state.draw?`<p>${names(state.players)}</p>`:`<p><strong>${de?'Gewonnen':'Winners'}:</strong> ${names(state.winners)}</p>${state.losers.length?`<p><strong>${de?'Verloren':'Losers'}:</strong> ${names(state.losers)}</p>`:''}`;
   const rows=state.players.map(id=>`<li>${escape(getName(id))}: ${state.scores[id]}</li>`).join('');
-  return {content:`<h2>Farkle – ${title}</h2>${result}<ul>${rows}</ul>`,flags:{taverngames:{gameId:state.gameId,game:'farkle'}}};
+  return {content:namedHtml(`<h2>Farkle – ${title}</h2>${result}<ul>${rows}</ul>`,'farkle',undefined,state),flags:{taverngames:{gameId:state.gameId,game:'farkle'}}};
 }
 // Calls must be serialized by the authenticated GM query queue.
 export class FarkleSession{

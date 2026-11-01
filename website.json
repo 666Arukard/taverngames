@@ -2,16 +2,17 @@
   "schemaVersion": 1,
   "blocks": {
     "patchnotes": {
-      "title": "Patchnotes Version 5.6.4",
+      "title": "Patchnotes Version 5.6.5",
       "paragraphs": [
-        "Neue optionale Beta: Streichholzspiel mit zwei Spielern oder benannten NPCs. Standard: 21 Hölzer, pro Zug eins bis drei nehmen, wer das letzte nimmt verliert. Startmenge, Entnahmegrenze und die alternative Regel „Letztes nehmen gewinnt“ sind durch die SL einstellbar. Serien mit wechselndem Startspieler, NPC-Stärken und manuelle NPC-Steuerung, gemeinsame Spieltoken und Ausgangswetten. Darstellung direkt auf dem Spieltisch ohne zusätzliche Bilddateien. Alle Korrekturen aus 5.6.3 enthalten; keine Stable-Hochstufungen oder neuen englischen Anleitungsfreigaben."
+        "Neue Beta-Funktion für freie Spielnamen: dauerhafte Weltnamen in den Moduleinstellungen und temporäre Namen in der Moderation für eine Partie einschließlich ihrer Runden. Original- und Wunschnamen bleiben suchbar; die SL sieht den Originalnamen in Klammern. Neue Anzeigen, Anleitungsüberschriften und Chatmeldungen verwenden den gültigen Namen, bestehende Nachrichten bleiben unverändert. Die Namensfunktion hat einen eigenen standardmäßig ausgeschalteten Beta-Schalter. Schere, Stein, Papier kann ausgewogene Beziehungen automatisch erzeugen und manuell veränderte Verhältnisse anzeigen. Streichhölzer liegen in Fünferblöcken. Keine Stable-Hochstufungen und kein Schiffe versenken; beides bleibt für 6.0 vorgesehen."
       ],
       "items": [
-        "Streichholzspiel als neue Beta hinter dem allgemeinen Beta-Schalter.",
-        "21 Hölzer / eins bis drei nehmen / letztes verliert als Standard; Regeln in Moderation einstellbar.",
-        "Zwei Teilnehmer, NPC-Stärken und manuelle Steuerung, Serien mit wechselndem Starter.",
-        "Interne Spieltoken einmal pro Partie, Gleichstand/Abbruch erstattet; gemeinsame Ausgangswetten.",
-        "Kein neues Stable-Spiel und keine neue englische Anleitungsfreigabe; vorherige Korrekturen bleiben enthalten."
+        "Freie Spielnamen als eigene Beta-Funktion, standardmäßig aus und unabhängig vom Beta-Spiele-Schalter.",
+        "Moduleinstellungen: Weltnamen setzen, einzeln oder komplett auf Standard zurücksetzen. Moderation: temporärer Name nur für die Partie, inklusive Folge-Runden.",
+        "Suche über Original-, gespeicherten und aktuellen Namen; Originalname in der SL-Übersicht in Klammern.",
+        "Gültige Titel für Anzeigen, neue Anleitungsüberschriften und Chatmeldungen; stabile IDs, Regeln, Quellen und historische Nachrichten bleiben erhalten.",
+        "RPS-Beziehungen automatisch gleichmäßig beziehungsweise bestmöglich ausgeglichen erzeugen, danach manuell bearbeiten; Live-Hinweise pro Figur.",
+        "Streichhölzer in Fünferblöcken; alle fünf Beta-Spiele bleiben Beta. Schiffe versenken und Stable-Übergang für 6.0 zurückgestellt."
       ]
     },
     "games": {
@@ -139,7 +140,7 @@
             "Kneipenquiz",
             "Pfeilwurf",
             "Schach (abstrakter Wettbewerb)",
-            "Schiffe versenken / Battleship (Variante noch offen)",
+            "Schiffe versenken / Battleship (10×10-Beta für Version 6.0 vorgemerkt)",
             "WallRush (Regelvariante noch offen)"
           ]
         }
@@ -155,7 +156,7 @@
           "title": "Spielauswahl und Anpassung",
           "items": [
             "Zusätzliche Tags und Filter nach Spieldauer und Einsätzen",
-            "Eigene Spielnamen und durch die SL anpassbares Spieleangebot"
+            "Durch die SL anpassbares Spieleangebot (freie Spielnamen bereits als Beta vorhanden)"
           ]
         },
         {
@@ -199,7 +200,7 @@
       ]
     },
     "functions": {
-      "title": "aktuelle Funktionen (48)",
+      "title": "aktuelle Funktionen (49)",
       "paragraphs": [
         "Bereits umgesetzte Kernfunktionen. Verfügbarkeit und erlaubte Aktionen richten sich nach Spielregeln, Teilnahme und SL-Freigabe."
       ],
@@ -210,7 +211,8 @@
             "Alphabetische Spielauswahl mit Kategorie-Icons und deutsch-englischer Suche",
             "Persönliche Favoriten",
             "Freiwilliger Lobbybeitritt",
-            "Eigener Beta-Filter und Kategorie Turniere"
+            "Eigener Beta-Filter und Kategorie Turniere",
+            "Dauerhafte Weltnamen und temporäre Partienamen (Beta)"
           ]
         },
         {
@@ -309,7 +311,8 @@
             "Dice So Nice: optionale 3D-Würfel aktivieren. Ohne das Zusatzmodul bleiben die Spiele bedienbar.",
             "Markierungsmodus: persönlich wählen, ob markierte eigene Würfel behalten oder erneut gewürfelt werden.",
             "Kartendecks: geeignete externe Vorlagen unter Cards / Card Decks anlegen oder importieren. Es ist kein Standard-Kartenset enthalten; vorhandene Vorlagen bleiben unverändert.",
-            "Göttliche Hand: nur die SL stellt globale Glücks-/Pechprofile und Spielausnahmen ein. Unterstützt Würfel sowie Austeilen und Nachziehen in Kartenspielen; bei 0 Prozent bleibt der Zufall unverändert. Keine Siegsgarantie; Brettspiele werden noch nicht beeinflusst."
+            "Göttliche Hand: nur die SL stellt globale Glücks-/Pechprofile und Spielausnahmen ein. Unterstützt Würfel sowie Austeilen und Nachziehen in Kartenspielen; bei 0 Prozent bleibt der Zufall unverändert. Keine Siegsgarantie; Brettspiele werden noch nicht beeinflusst.",
+            "Freie Spielnamen · Beta separat aktivieren und im Menü Spielnamen dauerhafte Weltnamen bearbeiten/zurücksetzen."
           ]
         },
         {
@@ -345,7 +348,8 @@
             "Kniffel/Extreme: bei Wertungsblock auf Spielfeld direkte Auswahl der eigenen ruhenden 3D-Würfel darunter. Bestehende Einstellung Behalten/Neu würfeln bestimmt die Markierung.",
             "Schere, Stein, Papier: klassisches, Echse/Spock oder eigenes Regelset wählen; Siegziel 1–100 und NPC-Steuerung festlegen. Beziehungstabelle über den gleichnamigen Button im separaten, verschiebbaren und vergrößerbaren Fenster bearbeiten; dauerhaft über Regelset speichern in der Moderation sichern. Laufende Partien behalten ihren Regelschnappschuss.",
             "Schwimmen: Passen im ersten eigenen Zug pro Spielrunde verbieten (Standard an); Dreiertausch schließt automatisch wie Passen (Standard aus, erste-Zug-Sperre hat Vorrang).",
-            "Streichholzspiel: 1–200 Start-Hölzer, maximale Entnahme 1–20, Endregel, 1–100 Runden, NPCs und Spielbutton."
+            "Streichholzspiel: 1–200 Start-Hölzer, maximale Entnahme 1–20, Endregel, 1–100 Runden, NPCs und Spielbutton.",
+            "Moderation: Name dieser Partie überschreibt den gespeicherten Namen für dieselbe Partie einschließlich ihrer Runden. Gespeicherten Namen verwenden entfernt die Überschreibung; eine neue Lobby setzt sie zurück. Maximal 80 druckbare Zeichen; nur die SL kann Namen ändern."
           ]
         }
       ]
@@ -908,5 +912,5 @@
       "paragraphs": []
     }
   },
-  "version": "5.6.4"
+  "version": "5.6.5"
 }
