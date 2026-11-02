@@ -1,3 +1,9 @@
+# TavernGames 6.0.3
+
+Schiffe versenken hebt nach dem letzten platzierten Schiff die aktive Auswahl auf. Freie Felder können dann nicht versehentlich das letzte Schiff versetzen. Vor Bestätigung lässt sich jedes gesetzte Schiff direkt im Raster erneut auswählen und anschließend auf ein freies Startfeld versetzen. Dabei wird seine bisherige Ausrichtung übernommen. Automatische Auswahl weiterer freier Schiffe und Drehen per Rechtsklick bleiben erhalten. Schiffe versenken bleibt Beta; Kartendomino ist für 6.1.0 nach Stable-Freigabe von Schiffe versenken vorgesehen und noch nicht enthalten.
+
+[Testplan](docs/release-6.0.3.md) · Lokales Testpaket, nicht veröffentlicht.
+
 # TavernGames 6.0.2
 
 Schiffe versenken wählt nach erfolgreicher Platzierung automatisch das nächste noch nicht platzierte Schiff. Sind alle Schiffe gesetzt, bleibt die Auswahl bestehen; Spieler bestätigen weiterhin selbst. Rechtsklick im eigenen Platzierungsraster wechselt zwischen waagerecht und senkrecht und aktualisiert Pfeil und Vorschau. Die bisherige Schaltfläche bleibt verfügbar. Alle Verbesserungen aus 6.0.1 sind enthalten; Schiffe versenken bleibt Beta.
