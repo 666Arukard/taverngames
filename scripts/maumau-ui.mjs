@@ -13,7 +13,7 @@ export class MauUI extends TavernUI{
  restoreCardNodes(){const hand=this.cardTable?.querySelector('.taverngames-card-hand');if(hand)this.handScrollLeft=hand.scrollLeft;for(const slot of this.cardSlots){if(slot.anchor.isConnected)slot.anchor.replaceWith(slot.node);else slot.node.remove();}this.cardSlots=[];this.cardTable?.replaceChildren();}
  syncCardTable(){
   if(!this.cardTable)return;
-  const root=this.windows.get('table')?.root,s=this.getState(),visible=gameView.enabled()&&gameView.selected===this.scope+'-table'&&root?.parentElement===gameView.playerContent&&(s?.game==='card21'&&['playing','bank','finished'].includes(s.phase)||s?.discard?.length||s?.table?.length||['durak','oldmaid'].includes(s?.game)&&s.phase==='playing')&&!s.seriesClosed&&!['lobby','aborted'].includes(s.phase);
+  const root=this.windows.get('table')?.root,s=this.getState(),visible=gameView.enabled()&&gameView.selected===this.scope+'-table'&&root?.parentElement===gameView.playerContent&&(s?.game==='card21'&&['playing','bank','finished'].includes(s.phase)||s?.discard?.length||s?.table?.length||['durak','oldmaid','domino'].includes(s?.game)&&s.phase==='playing')&&!s.seriesClosed&&!['lobby','aborted'].includes(s.phase);
   if(!visible){this.restoreCardNodes();this.cardTable.hidden=true;this.cardTable.remove();return;}
   const left=Math.max(0,gameView.left?.getBoundingClientRect().right??0)+50;let right=innerWidth-12;
   for(const sidebar of document.querySelectorAll('#sidebar,#sidebar-tabs,.taverngames-sidebar')){const r=sidebar.getBoundingClientRect();if(r.height>40&&r.width>0&&r.left>=0&&r.left<innerWidth&&getComputedStyle(sidebar).visibility!=='hidden')right=Math.min(right,r.left-12);}

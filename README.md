@@ -1,3 +1,9 @@
+# TavernGames 6.1.0
+
+Schiffe versenken ist nach erfolgreichem Praxistest stabil. Neue Beta: Kartendomino / Fan Tan für 2–8 Spieler und NPCs mit vorhandenen 52-Karten-Decks. Siebener eröffnen die Reihen; Ass hoch ist Standard, Ass niedrig und freiwilliges Passen sind optional. Feste Rundenzahl oder unbegrenzte Partie mit Siegpunkten und Folgerunden. Nach zwei vollständigen Passumläufen ohne Karte geht der Topf an die interne Tavernenbank. Optionale Gebühren: 1 Spieltoken je Passen und je verbliebener Handkarte; fehlende Deckung wird als interne Spielerschuld geführt. Verdeckte Hände, Kartentisch, NPC-Steuerung, Token und Ausgangswetten sind eingebunden. Keine Charaktergeldbuchungen.
+
+[Testplan](docs/release-6.1.0.md) · Lokales Paket, nicht veröffentlicht. 33 stabile Spiele, vier stabile Turniere und Kartendomino als Beta.
+
 # TavernGames 6.0.3
 
 Schiffe versenken hebt nach dem letzten platzierten Schiff die aktive Auswahl auf. Freie Felder können dann nicht versehentlich das letzte Schiff versetzen. Vor Bestätigung lässt sich jedes gesetzte Schiff direkt im Raster erneut auswählen und anschließend auf ein freies Startfeld versetzen. Dabei wird seine bisherige Ausrichtung übernommen. Automatische Auswahl weiterer freier Schiffe und Drehen per Rechtsklick bleiben erhalten. Schiffe versenken bleibt Beta; Kartendomino ist für 6.1.0 nach Stable-Freigabe von Schiffe versenken vorgesehen und noch nicht enthalten.

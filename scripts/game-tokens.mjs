@@ -115,6 +115,13 @@ export function prepareTokenState(s,old,scope){
   }
   if(!ended(s)&&s.phase!=='reveal')for(const id of s.players)setReserve(e,id,s.out.includes(id)?0:(scope==='klippklapp'?1:2)*e.config.stake);
  }
+ // Fan Tan fees may exceed the wallet: internal signed balances, never Actor currency. Aborts refund all.
+ if(scope==='domino'&&e.started&&!e.summary){
+  e.dominoFees??={};e.dominoPasses??={};
+  const charge=(id,wanted)=>{const reserved=(e.reserved[id]??0)+wanted;check(whole(reserved,1000000000),'Invalid token amount.');e.reserved[id]=reserved;e.dominoFees[id]=(e.dominoFees[id]??0)+wanted;};
+  for(const id of s.players){const count=s.passCounts[id]??0,delta=Math.max(0,count-(e.dominoPasses[id]??0));if(s.passFee&&delta)charge(id,delta);e.dominoPasses[id]=count;}
+  if(s.phase==='finished'&&s.remainingFee&&!e.dominoRemainingCharged){for(const id of s.players)charge(id,s.hands[id]?.length??0);e.dominoRemainingCharged=true;}
+ }
  if(ended(s)&&(!e.summary||s.phase==='aborted'&&old?.phase==='finished'&&old.carry))settle(s,scope,e);
  if(scope==='chohan'&&!ended(s))for(const id of s.players)s.balances[id]=availableTokens(e,id);
  return s;
@@ -125,6 +132,8 @@ function settle(s,scope,e){
  else if(['meiern','klippklapp'].includes(scope)){Object.assign(payouts,e.meiernReceived??{});}
  else if(s.phase==='aborted'){for(const id of ids)payouts[id]=stakes[id]??0;
   if(scope==='chohan'&&s.carry===0)for(const [id,n]of Object.entries(e.carryContrib??{})){e.balances[id]=(e.balances[id]??0)+n;carryRefund[id]=n;}e.carryContrib={};
+ }else if(scope==='domino'){
+  if(s.bankWins)bankDelta=total(stakes);else if(s.winners.length===1)payouts[s.winners[0]]=total(stakes);else for(const id of ids)payouts[id]=stakes[id]??0;
  }else if(scope==='durak'){
   if(s.draw){for(const id of ids)payouts[id]=stakes[id]??0;}
   else {const ranking=s.ranking,weights=ranking.map((_id,i)=>Math.max(0,ranking.length-1-i)),denom=weights.reduce((n,w)=>n+w,0),pot=total(stakes);let remainder=pot;ranking.forEach((id,i)=>{payouts[id]=Number(BigInt(pot)*BigInt(weights[i])/BigInt(denom));remainder-=payouts[id];});for(let i=0;remainder>0;i++,remainder--)payouts[ranking[i%Math.max(1,ranking.length-1)]]++;}
@@ -146,7 +155,8 @@ function settle(s,scope,e){
  }else if(['aalstechen','poker','kings'].includes(scope)){Object.assign(payouts,s.payouts);}
  else if(scope==='lottery'){bankDelta=total(stakes);}
  else{Object.assign(payouts,prizeShares(s,e.config.stake,scope==='pig'?e.config.funding:'redistribute'));bankDelta=total(stakes)-total(payouts);}
- for(const id of ids){const delta=(payouts[id]??0)-(stakes[id]??0);if(!['meiern','klippklapp','thirteen'].includes(scope))e.balances[id]=(e.balances[id]??0)+delta;check(whole(e.balances[id],1000000000),'Invalid token settlement.');}
+ for(const id of ids){const delta=(payouts[id]??0)-(stakes[id]??0);if(!['meiern','klippklapp','thirteen'].includes(scope))e.balances[id]=(e.balances[id]??0)+delta;check(scope==='domino'?Number.isSafeInteger(e.balances[id])&&Math.abs(e.balances[id])<=1000000000:whole(e.balances[id],1000000000),'Invalid token settlement.');}
+ if(scope==='domino')e.dominoDebts=Object.fromEntries(ids.map(id=>[id,Math.max(0,-(e.balances[id]??0))]));
  e.bank+=bankDelta;check(Number.isSafeInteger(e.bank),'Invalid token settlement.');e.reserved={};e.status=s.phase==='aborted'?'refunded':'settled';
  e.summary={status:e.status,stakes,payouts,net:Object.fromEntries(ids.map(id=>[id,(payouts[id]??0)-(stakes[id]??0)])),bankDelta,carryRefund};
  const b=e.bets;if(b&&['open','closed'].includes(b.status)){
@@ -154,6 +164,7 @@ function settle(s,scope,e){
   b.payouts={};for(const [i,row]of b.bets.entries()){const index=correct.indexOf(row),paid=refund?row.amount:index<0?0:Math.floor(pot/correct.length)+(index<pot%correct.length?1:0);b.payouts[row.id]=paid;e.balances[row.id]=(e.balances[row.id]??0)-row.amount+paid;check(whole(e.balances[row.id],1000000000),'Invalid token settlement.');}
   b.status=refund?'refunded':'settled';b.plan={pot,correct:correct.map(row=>row.id),refund};
  }
+ if(scope==='domino')e.dominoDebts=Object.fromEntries(ids.map(id=>[id,Math.max(0,-(e.balances[id]??0))]));
  if(scope==='seventeen'){s.bankBalance=e.bank;s.bankDebt=Math.max(0,-e.bank);}
  if(scope==='chohan'){s.bank=e.bank;s.bankDebt=Math.max(0,-e.bank);for(const id of s.players)s.balances[id]=e.balances[id]??0;}
 }

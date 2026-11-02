@@ -2,21 +2,25 @@
   "schemaVersion": 1,
   "blocks": {
     "patchnotes": {
-      "title": "Patchnotes Version 6.0.3",
+      "title": "Patchnotes Version 6.1.0",
       "paragraphs": [
-        "Schiffe versenken hebt nach dem letzten platzierten Schiff die aktive Auswahl auf. Freie Felder können dann nicht versehentlich das letzte Schiff versetzen. Vor Bestätigung lässt sich jedes gesetzte Schiff direkt im Raster erneut auswählen und anschließend auf ein freies Startfeld versetzen. Dabei wird seine bisherige Ausrichtung übernommen. Automatische Auswahl weiterer freier Schiffe und Drehen per Rechtsklick bleiben erhalten. Schiffe versenken bleibt Beta; Kartendomino ist für 6.1.0 nach Stable-Freigabe von Schiffe versenken vorgesehen und noch nicht enthalten."
+        "Schiffe versenken ist nach erfolgreichem Praxistest stabil. Neue Beta: Kartendomino / Fan Tan für 2–8 Spieler und NPCs mit vorhandenen 52-Karten-Decks. Siebener eröffnen die Reihen; Ass hoch ist Standard, Ass niedrig und freiwilliges Passen sind optional. Feste Rundenzahl oder unbegrenzte Partie mit Siegpunkten und Folgerunden. Nach zwei vollständigen Passumläufen ohne Karte geht der Topf an die interne Tavernenbank. Optionale Gebühren: 1 Spieltoken je Passen und je verbliebener Handkarte; fehlende Deckung wird als interne Spielerschuld geführt. Verdeckte Hände, Kartentisch, NPC-Steuerung, Token und Ausgangswetten sind eingebunden. Keine Charaktergeldbuchungen."
       ],
       "items": [
-        "Volle Flotte: aktive Auswahl aufgehoben, freie Felder zunächst ohne Platzierungsaktion.",
-        "Gesetztes Schiff im eigenen Raster anklicken, Ausrichtung übernehmen und vor Bestätigung neu platzieren.",
-        "Manuelle Bestätigung, automatische Auswahl noch freier Schiffe und Rechtsklick-Drehung bleiben erhalten.",
-        "Keine weiteren Spiele oder Stable-Übergänge. Kartendomino erst für 6.1.0 nach Stable-Abnahme von Schiffe versenken vorgesehen."
+        "Schiffe versenken stabil, unabhängig vom Beta-Schalter.",
+        "Kartendomino / Fan Tan als neue Karten-Beta mit 52 Karten, alle ausgeteilt, 2–8 Teilnehmer einschließlich benannter NPCs.",
+        "Von Siebenern lückenlos abwärts und aufwärts auslegen; Ass hoch standardmäßig, Ass niedrig optional; kein Kreislauf.",
+        "Freiwilliges Passen optional; zwei vollständige Passumläufe ohne Karte beenden die Runde mit Bankgewinn.",
+        "Feste Runden oder unbegrenzte Partie, Siegpunkt pro gewonnenem Durchgang, gleiche Siegpunktzahl als geteilter Platz.",
+        "Gleicher Grundeinsatz pro Runde. Optionale feste Gebühren 1 Token pro Passen beziehungsweise verbliebener Karte; interne Schulden bei fehlender Deckung.",
+        "Bestehende Foundry-Decks, private Hände, Native-Stacks-Cleanup, manuelle NPCs und Göttliche Hand beim Austeilen; keine neuen Bildassets.",
+        "Englische Oberfläche vorhanden, neue englische Anleitung bis Review gesperrt."
       ]
     },
     "games": {
-      "title": "aktuelle Spiele (37)",
+      "title": "aktuelle Spiele (38)",
       "paragraphs": [
-        "32 stabile Spiele, vier stabile Turniere und Schiffe versenken als optionale Beta."
+        "33 stabile Spiele, vier stabile Turniere und Kartendomino / Fan Tan als optionale Beta."
       ],
       "items": [
         {
@@ -53,7 +57,8 @@
             "Durak",
             "Mau-Mau",
             "Schwarzer Peter",
-            "Schwimmen / Knack"
+            "Schwimmen / Knack",
+            "Kartendomino / Fan Tan (Beta)"
           ]
         },
         {
@@ -63,10 +68,10 @@
             "Käsekästchen",
             "Mühle",
             "Schere, Stein, Papier",
+            "Schiffe versenken",
             "Streichholzspiel",
             "Tic-Tac-Toe",
-            "Vier gewinnt",
-            "Schiffe versenken (Beta)"
+            "Vier gewinnt"
           ]
         },
         {
@@ -89,7 +94,7 @@
       ]
     },
     "plans": {
-      "title": "geplante Spiele (28)",
+      "title": "geplante Spiele (27)",
       "paragraphs": [
         "Geplante Spiele mit vorhandenen Referenzen oder vorgemerkten Namen. Einzelne Regeln sind noch offen; vorhandene Spiele werden nicht unter englischen Namen erneut geplant."
       ],
@@ -119,7 +124,6 @@
             "Doppelkopf",
             "Gaigel",
             "Karten-Kniffel",
-            "Kartendomino / Fan Tan",
             "König und Bettler / Präsident",
             "Rommé",
             "Schummeln (Kartenspiel)",
@@ -198,7 +202,7 @@
       ]
     },
     "functions": {
-      "title": "aktuelle Funktionen (50)",
+      "title": "aktuelle Funktionen (51)",
       "paragraphs": [
         "Bereits umgesetzte Kernfunktionen. Verfügbarkeit und erlaubte Aktionen richten sich nach Spielregeln, Teilnahme und SL-Freigabe."
       ],
@@ -228,7 +232,8 @@
           "items": [
             "Interne Spieltoken mit Einsatzmodellen und Bankbudget",
             "Ausgangswetten mit automatischer Gewinnverteilung",
-            "Übergabe ausgewählter Gegenstandspreise"
+            "Übergabe ausgewählter Gegenstandspreise",
+            "Optionale feste Spielgebühren und interne Spielerschulden"
           ]
         },
         {
@@ -306,7 +311,7 @@
           "items": [
             "Sprache: Deutsch oder Englisch wählen. Beide Oberflächen sind verfügbar. Deutsche Anleitungen und acht geprüfte englische Anleitungen: Tic-Tac-Toe einschließlich Extreme, dessen Turnier, Schwarzer Peter, Vier gewinnt, Aalstechen, Mühle, Käsekästchen und 17 und 4 als Kartenspiel. Weitere englische Anleitungen bleiben bis Review gesperrt.",
             "Ansicht: Reiteransicht ist Standard, klassische Fenster bleiben je Benutzer wählbar.",
-            "Beta-Test: Schiffe versenken einschalten. 32 Spiele und vier Turniere bleiben ohne Beta verfügbar.",
+            "Beta-Test: Kartendomino einschalten. 33 Spiele und vier Turniere bleiben ohne Beta verfügbar.",
             "Dice So Nice: optionale 3D-Würfel aktivieren. Ohne das Zusatzmodul bleiben die Spiele bedienbar.",
             "Markierungsmodus: persönlich wählen, ob markierte eigene Würfel behalten oder erneut gewürfelt werden.",
             "Kartendecks: geeignete externe Vorlagen unter Cards / Card Decks anlegen oder importieren. Es ist kein Standard-Kartenset enthalten; vorhandene Vorlagen bleiben unverändert.",
@@ -349,13 +354,14 @@
             "Schwimmen: Passen im ersten eigenen Zug pro Spielrunde verbieten (Standard an); Dreiertausch schließt automatisch wie Passen (Standard aus, erste-Zug-Sperre hat Vorrang).",
             "Streichholzspiel: 1–200 Start-Hölzer, maximale Entnahme 1–20, Endregel, 1–100 Runden, NPCs und Spielbutton.",
             "Moderation: Name dieser Partie überschreibt den gespeicherten Namen für dieselbe Partie einschließlich ihrer Runden. Gespeicherten Namen verwenden entfernt die Überschreibung; eine neue Lobby setzt sie zurück. Maximal 80 druckbare Zeichen; nur die SL kann Namen ändern.",
-            "Schiffe versenken (Beta): Klassisches Spiel verwendet 10×10, Schiffslängen 5/4/3/3/2, keine Berührungen und Treffer-Zusatzzug. Für eigene Regeln Klassisches Spiel ausschalten: Brettseiten 2–30, 1–20 Schiffe mit eigenen Längen und Berührungen optional. Spieler platzieren manuell und bestätigen selbst; automatisch platzieren nur SL und automatische NPCs. Jeder Spieler kann sein Zielgebiet oberhalb der eigenen Flotte anzeigen. Serien und optionale SL-Einsicht vor Spielbeginn wählen; Gegnerpositionen bleiben verborgen. Nach dem Platzieren wird das nächste freie Schiff gewählt; die volle Aufstellung selbst bestätigen. Rechtsklick im eigenen bearbeitbaren Raster oder die Schaltfläche wechselt die Ausrichtung. Bei voller Flotte wird die Auswahl aufgehoben. Vor Bestätigung ein gesetztes Schiff im Raster anklicken und auf ein freies Startfeld versetzen; seine Ausrichtung bleibt erhalten."
+            "Schiffe versenken: Klassisches Spiel verwendet 10×10, Schiffslängen 5/4/3/3/2, keine Berührungen und Treffer-Zusatzzug. Für eigene Regeln Klassisches Spiel ausschalten: Brettseiten 2–30, 1–20 Schiffe mit eigenen Längen und Berührungen optional. Spieler platzieren manuell und bestätigen selbst; automatisch platzieren nur SL und automatische NPCs. Jeder Spieler kann sein Zielgebiet oberhalb der eigenen Flotte anzeigen. Serien und optionale SL-Einsicht vor Spielbeginn wählen; Gegnerpositionen bleiben verborgen. Nach dem Platzieren wird das nächste freie Schiff gewählt; die volle Aufstellung selbst bestätigen. Rechtsklick im eigenen bearbeitbaren Raster oder die Schaltfläche wechselt die Ausrichtung. Bei voller Flotte wird die Auswahl aufgehoben. Vor Bestätigung ein gesetztes Schiff im Raster anklicken und auf ein freies Startfeld versetzen; seine Ausrichtung bleibt erhalten.",
+            "Kartendomino (Beta): vollständiges 52-Karten-Deck ohne Joker wählen; 2–8 Teilnehmer. Ass niedrig, freiwilliges Passen, 1-Token-Passgebühr und 1-Token-Restkartengebühr getrennt aktivieren; alle standardmäßig aus. Rundenanzahl 0 bedeutet unbegrenzt, sonst 1–100. Jede Runde eigener Grundeinsatz; Gebühren dürfen interne Schulden erzeugen."
           ]
         }
       ]
     },
     "sources": {
-      "title": "Regelquellen (64)",
+      "title": "Regelquellen (66)",
       "paragraphs": [
         "Hier findet ihr alle genutzten Regelquellen. Quellen für noch nicht umgesetzte Spiele sind ausdrücklich als geplante Regelreferenzen gekennzeichnet."
       ],
@@ -486,6 +492,13 @@
           "title": "Karten-Kniffel (geplant)",
           "items": [
             "Schmidt Spiele, Michael Feldkötter: https://www.schmidtspiele.de/details/produkt/karten-kniffel-r-.html"
+          ]
+        },
+        {
+          "title": "Kartendomino / Fan Tan",
+          "items": [
+            "John McLeod / Pagat: https://www.pagat.com/layout/sevens.html",
+            "Bicycle Cards: https://bicyclecards.com/how-to-play/fan-tan"
           ]
         },
         {
@@ -713,6 +726,12 @@
           ]
         },
         {
+          "title": "Kartendomino / Fan Tan",
+          "items": [
+            "Daniel Brune: Zweispielerunterstützung, Ass-Option, freiwilliges Passen, Bankgewinn nach zwei vollständigen Passumläufen, Serien mit Siegpunkten sowie optionale feste Gebühren und interne Schulden."
+          ]
+        },
+        {
           "title": "Käsekästchen",
           "items": [
             "Eigener Regeltext; frei gezeichnete Flächen, Löcher und getrennte Bereiche, NPC-Stärken, Serien und Spieltoken als TavernGames-Ergänzungen. Außenlinien sind Begrenzung, keine vorab gespielten Linien."
@@ -916,11 +935,13 @@
         },
         {
           "title": "6.0.0 – Freie Spielnamen stabil; fünf Stable-Übergänge und Schiffe-versenken-Beta.",
-          "items": []
+          "items": [
+            "6.1.0 – Schiffe versenken stabil; Kartendomino / Fan Tan als neue Beta."
+          ]
         }
       ],
       "paragraphs": []
     }
   },
-  "version": "6.0.3"
+  "version": "6.1.0"
 }
