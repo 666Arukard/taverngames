@@ -1,3 +1,9 @@
+# TavernGames 6.0.2
+
+Schiffe versenken wählt nach erfolgreicher Platzierung automatisch das nächste noch nicht platzierte Schiff. Sind alle Schiffe gesetzt, bleibt die Auswahl bestehen; Spieler bestätigen weiterhin selbst. Rechtsklick im eigenen Platzierungsraster wechselt zwischen waagerecht und senkrecht und aktualisiert Pfeil und Vorschau. Die bisherige Schaltfläche bleibt verfügbar. Alle Verbesserungen aus 6.0.1 sind enthalten; Schiffe versenken bleibt Beta.
+
+[Testplan](docs/release-6.0.2.md) · Lokales Testpaket, nicht veröffentlicht.
+
 # TavernGames 6.0.1
 
 Schiffe versenken erhält korrigierte Rastergrenzen, eine Pfeilvorschau beim Platzieren und Flottenübersichten mit durchgestrichenen versenkten Schiffen. Jeder Spieler kann das Zielgebiet optional über der eigenen Aufstellung anzeigen. Die SL kann Brettgrößen von 2–30 Feldern je Seite, 1–20 Schiffe mit eigenen Längen und erlaubte Berührungen festlegen. Klassisches Spiel stellt die bisherigen Standardregeln wieder her. Spieler platzieren weiterhin manuell; automatische Platzierung bleibt der SL und automatischen NPCs vorbehalten.

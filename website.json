@@ -2,18 +2,16 @@
   "schemaVersion": 1,
   "blocks": {
     "patchnotes": {
-      "title": "Patchnotes Version 6.0.1",
+      "title": "Patchnotes Version 6.0.2",
       "paragraphs": [
-        "Schiffe versenken erhält korrigierte Rastergrenzen, eine Pfeilvorschau beim Platzieren und Flottenübersichten mit durchgestrichenen versenkten Schiffen. Jeder Spieler kann das Zielgebiet optional über der eigenen Aufstellung anzeigen. Die SL kann Brettgrößen von 2–30 Feldern je Seite, 1–20 Schiffe mit eigenen Längen und erlaubte Berührungen festlegen. Klassisches Spiel stellt die bisherigen Standardregeln wieder her. Spieler platzieren weiterhin manuell; automatische Platzierung bleibt der SL und automatischen NPCs vorbehalten."
+        "Schiffe versenken wählt nach erfolgreicher Platzierung automatisch das nächste noch nicht platzierte Schiff. Sind alle Schiffe gesetzt, bleibt die Auswahl bestehen; Spieler bestätigen weiterhin selbst. Rechtsklick im eigenen Platzierungsraster wechselt zwischen waagerecht und senkrecht und aktualisiert Pfeil und Vorschau. Die bisherige Schaltfläche bleibt verfügbar. Alle Verbesserungen aus 6.0.1 sind enthalten; Schiffe versenken bleibt Beta."
       ],
       "items": [
-        "Raster bleibt innerhalb des Rahmens; Richtungspfeil und Schiffsvorschau beim Platzieren.",
-        "Persönliche Rasteranordnung: nebeneinander oder Zielgebiet oberhalb der eigenen Flotte.",
-        "Flottenübersichten zeigen verbleibende und versenkte Schiffe, ohne verdeckte Positionen preiszugeben.",
-        "Eigene Breite und Höhe (2–30), eigene Schiffslängen und Anzahl (1–20 Schiffe); unmögliche oder zu aufwendig prüfbare Flotten werden mit Hinweis abgelehnt.",
-        "Berührung optional an Kanten und Ecken, standardmäßig aus; Überlappen bleibt verboten.",
-        "Klassisches Spiel stellt 10×10, Flotte 5/4/3/3/2, keine Berührung und Treffer-Zusatzzug wieder her.",
-        "Keine Stable-Übergänge und keine neue englische Anleitungsfreigabe."
+        "Nach erfolgreichem Platzieren wird automatisch das nächste freie Schiff ausgewählt; gesetzte Schiffe bleiben zum Versetzen auswählbar.",
+        "Sind alle Schiffe platziert, bleibt die Auswahl bestehen. Aufstellung weiterhin manuell bestätigen.",
+        "Rechtsklick im eigenen Platzierungsraster dreht die Ausrichtung samt Pfeil und Vorschau. Schaltfläche bleibt zusätzlich erhalten.",
+        "Fehlgeschlagene Platzierung verändert die Auswahl nicht; Rechtsklick auf dem Zielraster löst keine Drehung aus.",
+        "Daniels Testfreigabe für Flottenübersicht und übrige 6.0.1-Funktionen dokumentiert; kein Stable-Übergang."
       ]
     },
     "games": {
@@ -352,7 +350,7 @@
             "Schwimmen: Passen im ersten eigenen Zug pro Spielrunde verbieten (Standard an); Dreiertausch schließt automatisch wie Passen (Standard aus, erste-Zug-Sperre hat Vorrang).",
             "Streichholzspiel: 1–200 Start-Hölzer, maximale Entnahme 1–20, Endregel, 1–100 Runden, NPCs und Spielbutton.",
             "Moderation: Name dieser Partie überschreibt den gespeicherten Namen für dieselbe Partie einschließlich ihrer Runden. Gespeicherten Namen verwenden entfernt die Überschreibung; eine neue Lobby setzt sie zurück. Maximal 80 druckbare Zeichen; nur die SL kann Namen ändern.",
-            "Schiffe versenken (Beta): Klassisches Spiel verwendet 10×10, Schiffslängen 5/4/3/3/2, keine Berührungen und Treffer-Zusatzzug. Für eigene Regeln Klassisches Spiel ausschalten: Brettseiten 2–30, 1–20 Schiffe mit eigenen Längen und Berührungen optional. Spieler platzieren manuell und bestätigen selbst; automatisch platzieren nur SL und automatische NPCs. Jeder Spieler kann sein Zielgebiet oberhalb der eigenen Flotte anzeigen. Serien und optionale SL-Einsicht vor Spielbeginn wählen; Gegnerpositionen bleiben verborgen."
+            "Schiffe versenken (Beta): Klassisches Spiel verwendet 10×10, Schiffslängen 5/4/3/3/2, keine Berührungen und Treffer-Zusatzzug. Für eigene Regeln Klassisches Spiel ausschalten: Brettseiten 2–30, 1–20 Schiffe mit eigenen Längen und Berührungen optional. Spieler platzieren manuell und bestätigen selbst; automatisch platzieren nur SL und automatische NPCs. Jeder Spieler kann sein Zielgebiet oberhalb der eigenen Flotte anzeigen. Serien und optionale SL-Einsicht vor Spielbeginn wählen; Gegnerpositionen bleiben verborgen. Nach dem Platzieren wird das nächste freie Schiff gewählt; die volle Aufstellung selbst bestätigen. Rechtsklick im eigenen bearbeitbaren Raster oder die Schaltfläche wechselt die Ausrichtung."
           ]
         }
       ]
@@ -925,5 +923,5 @@
       "paragraphs": []
     }
   },
-  "version": "6.0.1"
+  "version": "6.0.2"
 }
