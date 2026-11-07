@@ -569,11 +569,32 @@
 
 .taverngames-domino-table{border:1px solid #b8995d;border-radius:6px}.taverngames-domino-row h3{color:#f7dfad}.taverngames-card.is-playable{outline:2px solid #e2bb59;outline-offset:-2px}
 
-.taverngames-mahjong-table { display: block; width: min(100%, 68rem); max-height: 56vh; overflow: auto; padding: .65rem; }
+.taverngames-mahjong-table { display: block; width: min(100%, 68rem); max-height: 56vh; box-sizing: border-box; overflow: auto; pointer-events: auto; padding: .65rem; }
 .taverngames-mahjong-seats { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr)); gap: .6rem; }
 .taverngames-mahjong-seats > section { border: 1px solid #b8995d; border-radius: 6px; padding: .45rem; }
 .taverngames-mahjong-seats h3 { color: #f7dfad; font-size: .9rem; }
 .taverngames-mahjong-tiles { display: flex; flex-wrap: wrap; gap: 3px; }
 .taverngames-mahjong-tiles .taverngames-card { width: 2rem !important; min-width: 0 !important; margin: 0 !important; padding: 0 !important; }
 
-.taverngames-mahjong-hand .is-drawn { margin-inline-start: .6rem; outline: 1px solid #b8995d; }
+.taverngames-mahjong-hand .is-drawn { margin-inline-start: .6rem; }
+
+#taverngames-mahjong-stage > .taverngames-card-stage-hand { flex-shrink: 0; width: 100%; box-sizing: border-box; }
+#taverngames-mahjong-stage > .taverngames-card-stage-shared { flex: 0 1 auto; min-height: 0; overflow: auto; pointer-events: auto; box-sizing: border-box; }
+
+.taverngames-solitaire-board { position:relative; width:100%; aspect-ratio:1; isolation:isolate; }
+.taverngames-solitaire-board button { position:absolute; width:8%; height:9.7%; padding:0; margin:0; color:#f4ead7; }
+.taverngames-solitaire-board button:disabled { opacity:.85; pointer-events:none; }
+.taverngames-solitaire-board button[aria-pressed="true"] { outline:3px solid #f2bd49; outline-offset:-3px; }
+.taverngames-solitaire-board img { width:100%; height:100%; display:block; object-fit:contain; border:0; }
+#taverngames-mahjongsolitaire-puzzle, #taverngames-mahjongsolitaire-guide { z-index: 95; }
+
+.taverngames-surface :is(.taverngames-mahjong-hand, .taverngames-mahjong-tiles) .taverngames-card,
+.taverngames-surface .taverngames-solitaire-board button {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+.taverngames-surface .taverngames-mahjong-hand .taverngames-card.is-playable {
+  outline: 2px solid #c6a96c;
+  outline-offset: -2px;
+}

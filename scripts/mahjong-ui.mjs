@@ -6,7 +6,7 @@ import {f} from './farkle-text.mjs';
 
 const windName = index => [f('Ost', 'East'), f('Süd', 'South'), f('West', 'West'), f('Nord', 'North')][index];
 const actionName = kind => ({riichi: 'Riichi', ron: 'Ron', tsumo: 'Tsumo', chi: 'Chi', pon: 'Pon', kan: 'Kan',
-  pass: f('Passen', 'Pass'), draw: f('Hand wegen neun verschiedener Rand- und Ehrensteine abbrechen', 'Abort hand with nine distinct terminals and honors')})[kind];
+  pass: f('Passen – Abwurf nicht nehmen', 'Pass – decline discard'), draw: f('Hand wegen neun verschiedener Rand- und Ehrensteine abbrechen', 'Abort hand with nine distinct terminals and honors')})[kind];
 const meldTiles = value => [...value.slice(1).matchAll(/\d/g)].map(match => value[0] + match[0]);
 
 export class MahjongUI extends MauUI {
@@ -124,13 +124,29 @@ export class MahjongUI extends MauUI {
     }
     const seat = s.seats.find(seat => seat.id === actor);
     if (!seat) return;
+    const choices = s.paused ? [] : seat.choices;
+    const mayDiscard = choices.some(move => move.kind === 'discard');
+    const mayClaim = choices.some(move => move.kind === 'pass');
+    const drawnDiscard = choices.find(move => move.kind === 'discard' && move.value === seat.drawn + '_');
+    if (!s.result && !s.paused && s.phase === 'playing') {
+      const prompt = mayDiscard
+        ? seat.riichi
+          ? f('Nach Riichi kannst du nur den gerade gezogenen Stein abwerfen.', 'After Riichi, you can only discard the tile you just drew.')
+          : f('Du bist am Zug. Klicke auf einen gold umrandeten Stein deiner Hand, um ihn abzuwerfen.', 'Your turn. Click a gold-outlined tile in your hand to discard it.')
+        : mayClaim
+          ? f('Du kannst den fremden Abwurf nehmen oder passen.', 'You can claim the discard or pass.')
+          : ['dapai', 'gang'].includes(s.stage)
+            ? f('Warte, bis die Reaktionen auf den letzten Zug abgeschlossen sind.', 'Wait for responses to the last move.')
+            : f('Du musst gerade nichts tun. Warte auf den nächsten Zug.', 'You have no action right now. Wait for the next turn.');
+      table.insertBefore(node('p', prompt), seats);
+    }
     const handSection = node('section', undefined, 'schocken-player');
+    handSection.dataset.cardCaption = mayDiscard ? f('Deine Hand · Stein zum Abwerfen anklicken', 'Your hand · click a tile to discard') : this.name(actor);
     handSection.dataset.mauPlayer = actor;
     handSection.append(node('h3', this.name(actor)));
     const hand = node('div', undefined, 'taverngames-card-hand taverngames-mahjong-hand');
     handSection.append(hand);
     content.append(handSection);
-    const choices = s.paused ? [] : seat.choices;
     const send = move => this.request('move', {move: move.id, player: actor, step: s.turnNumber, gameId: s.gameId});
     const tiles = [...s.hands[actor]];
     if (seat.drawn && tiles.includes(seat.drawn)) tiles.push(...tiles.splice(tiles.lastIndexOf(seat.drawn), 1));
@@ -139,13 +155,18 @@ export class MahjongUI extends MauUI {
       const move = choices.find(move => move.kind === 'discard' && move.value === tile + (drawn ? '_' : ''));
       if (!s.cards[tile]) continue;
       const card = this.card(hand, s.cards[tile], null, move ? () => send(move) : null);
+      if (move) {
+        card.classList.add('is-playable');
+        card.setAttribute('aria-label', f('Abwerfen: ', 'Discard: ') + s.cards[tile].name);
+      }
       if (drawn) {
         card.classList.add('is-drawn');
         card.title += ' · ' + f('Gezogen', 'Drawn');
       }
     }
     const actions = node('div', undefined, 'schocken-actions');
-    table.append(actions);
+    table.insertBefore(actions, seats);
+    if (drawnDiscard) control(actions, f('Gezogenen Stein abwerfen', 'Discard drawn tile'), () => send(drawnDiscard));
     for (const move of choices.filter(move => move.kind !== 'discard')) {
       const tiles = move.kind === 'riichi' ? [move.value.slice(0, 2)] : move.value ? meldTiles(move.value) : [];
       const details = tiles.map(tile => s.cards[tile]?.name ?? tile).join(', ');

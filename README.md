@@ -1,3 +1,9 @@
+# TavernGames 6.1.3
+
+Mahjong-Solitaire ist als Beta unter Brettspiele verfügbar. Wähle ein importiertes Dracima-Deck mit 144 Steinen. Mahjong zu viert erhält eine verständlichere Anleitung, eine besser bedienbare Tischansicht und deutlichere Hinweise zum Abwerfen und Passen. Beide Spiele zeigen die Steine ohne zusätzlichen hellen Hintergrund. Die Kompatibilitätsanzeige im Spiel erkennt Foundry 14.370 als getestet.
+
+[Testplan](docs/release-6.1.3.md) · Lokales Testpaket.
+
 # TavernGames 6.1.2
 
 Mahjong ist als optionale Beta unter Brettspiele verfügbar. Vier Plätze können mit Spielern und NSCs besetzt werden. In der Moderation lassen sich das importierte Dracima-Deck und der Modus auswählen: Einsteiger oder japanisches Riichi.
