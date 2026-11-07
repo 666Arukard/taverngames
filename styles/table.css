@@ -568,3 +568,12 @@
 #taverngames-domino-stage .taverngames-card-stage-shared{max-height:54vh;overflow:auto}
 
 .taverngames-domino-table{border:1px solid #b8995d;border-radius:6px}.taverngames-domino-row h3{color:#f7dfad}.taverngames-card.is-playable{outline:2px solid #e2bb59;outline-offset:-2px}
+
+.taverngames-mahjong-table { display: block; width: min(100%, 68rem); max-height: 56vh; overflow: auto; padding: .65rem; }
+.taverngames-mahjong-seats { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr)); gap: .6rem; }
+.taverngames-mahjong-seats > section { border: 1px solid #b8995d; border-radius: 6px; padding: .45rem; }
+.taverngames-mahjong-seats h3 { color: #f7dfad; font-size: .9rem; }
+.taverngames-mahjong-tiles { display: flex; flex-wrap: wrap; gap: 3px; }
+.taverngames-mahjong-tiles .taverngames-card { width: 2rem !important; min-width: 0 !important; margin: 0 !important; padding: 0 !important; }
+
+.taverngames-mahjong-hand .is-drawn { margin-inline-start: .6rem; outline: 1px solid #b8995d; }

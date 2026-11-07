@@ -5,6 +5,7 @@ export const MAU_PROFILE={id:'maumau-32',ranks:RANKS.slice(5),jokers:false,count
 export const BACK='icons/svg/card-joker.svg';
 const clone=v=>structuredClone(v);
 export function selectCards(cards,profile){
+ if(profile.select)return profile.select(cards);
  if(profile.all){if(cards.length<3||cards.length>200||new Set(cards.map(c=>c.id)).size!==cards.length||cards.some(c=>typeof c.id!=='string'||!c.id))throw Error('The selected deck does not contain the required cards.');return clone(cards);}
 
  const chosen=cards.filter(c=>profile.ranks.includes(c.rank)&&SUITS.includes(c.suit));
@@ -16,12 +17,13 @@ function worldSet(doc,profile){
  const raw=doc.toObject(),flag=raw.flags?.['dragon-cards-card-deck'];
  if(raw.type!=='deck'||raw.flags?.taverngames?.cards)return null;
  const nativeRank=value=>({1:'ace',11:'jack',12:'queen',13:'king',14:'ace'})[value]??(Number.isInteger(value)&&value>=2&&value<=10?String(value):null);
- const cards=raw.cards.map(c=>{const f=c.flags?.['dragon-cards-card-deck'],suit=f?.standardSuit??String(c.suit??'').toLowerCase(),rank=f?.standardRank??nativeRank(c.value);return {id:f?.cardId??c._id,suit,rank,name:c.name,front:safeImage(c.faces?.[0]?.img),back:safeImage(c.back?.img)??BACK};});
+ const cards=raw.cards.map(c=>{if(profile.readCard)return profile.readCard(c,safeImage);const f=c.flags?.['dragon-cards-card-deck'],suit=f?.standardSuit??String(c.suit??'').toLowerCase(),rank=f?.standardRank??nativeRank(c.value);return {id:f?.cardId??c._id,suit,rank,name:c.name,front:safeImage(c.faces?.[0]?.img),back:safeImage(c.back?.img)??BACK};});
  selectCards(cards,profile);return {key:'world:'+doc.id,label:raw.name,style:flag?.styleId??'world:'+doc.id,cards};
 }
 export async function listCardSets(game,profile=MAU_PROFILE){
  const sets=[];
  for(const doc of game.cards?.contents??[]){try{const set=worldSet(doc,profile);if(set)sets.push(set);}catch{/* Invalid templates cannot become game decks. */}}
+ if(profile.readCard)return sets;
  const api=game.modules?.get('dragon-cards-card-deck');
  if(api?.active&&api.api?.apiVersion===1){try{const catalog=await api.api.getCatalog();for(const variant of catalog.variants){if(sets.some(s=>s.style===variant.id))continue;const cards=catalog.cards.map(c=>({id:c.id,suit:c.standardSuit,rank:c.standardRank,name:c.displayName,front:safeImage('modules/dragon-cards-card-deck/'+variant.fronts[c.id]),back:safeImage('modules/dragon-cards-card-deck/'+variant.back)??BACK}));selectCards(cards,profile);sets.push({key:'dragon:'+variant.id,label:variant.name??variant.label??variant.id,style:variant.id,cards});}}catch{/* Imported world decks remain usable offline. */}}
  return sets;

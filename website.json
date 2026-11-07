@@ -2,18 +2,19 @@
   "schemaVersion": 1,
   "blocks": {
     "patchnotes": {
-      "title": "Patchnotes Version 6.1.1",
+      "title": "Patchnotes Version 6.1.2",
       "paragraphs": [
-        "Für Foundry VTT V14 Build 370 verifiziert."
+        "Mahjong ist als optionale Beta unter Brettspiele verfügbar. Vier Plätze können mit Spielern und NSCs besetzt werden. In der Moderation lassen sich das importierte Dracima-Deck und der Modus auswählen: Einsteiger oder japanisches Riichi."
       ],
       "items": [
-        "Verifizierter Build auf 14.370 aktualisiert."
+        "Vier Plätze für Spieler und NSCs.",
+        "Einsteigerregeln und japanisches Riichi."
       ]
     },
     "games": {
-      "title": "aktuelle Spiele (38)",
+      "title": "aktuelle Spiele (39)",
       "paragraphs": [
-        "33 stabile Spiele, vier stabile Turniere und Kartendomino / Fan Tan als optionale Beta."
+        "33 stabile Spiele, vier stabile Turniere und zwei optionale Betas: Kartendomino und Mahjong."
       ],
       "items": [
         {
@@ -64,7 +65,8 @@
             "Schiffe versenken",
             "Streichholzspiel",
             "Tic-Tac-Toe",
-            "Vier gewinnt"
+            "Vier gewinnt",
+            "Mahjong (Beta)"
           ]
         },
         {
@@ -195,7 +197,7 @@
       ]
     },
     "functions": {
-      "title": "aktuelle Funktionen (54)",
+      "title": "aktuelle Funktionen (51)",
       "paragraphs": [
         "Bereits umgesetzte Kernfunktionen. Verfügbarkeit und erlaubte Aktionen richten sich nach Spielregeln, Teilnahme und SL-Freigabe."
       ],
@@ -225,7 +227,8 @@
           "items": [
             "Interne Spieltoken mit Einsatzmodellen und Bankbudget",
             "Ausgangswetten mit automatischer Gewinnverteilung",
-            "Übergabe ausgewählter Gegenstandspreise"
+            "Übergabe ausgewählter Gegenstandspreise",
+            "Optionale feste Spielgebühren und interne Spielerschulden"
           ]
         },
         {
@@ -289,15 +292,6 @@
             "Regelquellen und Hausvarianten",
             "Ergebnisnachrichten im Chat"
           ]
-        },
-        {
-          "title": "Kartendomino / Fan Tan",
-          "items": [
-            "Vier Farbreihen von Sieben aus, verdeckte Handkarten und direkt anklickbare Karten auf dem Tisch",
-            "Ass hoch/niedrig, freiwilliges Passen und Bankgewinn nach zwei Passumläufen",
-            "Serien mit Siegpunkten, NPCs und unveränderte Foundry-Deckvorlagen",
-            "Grundeinsatz pro Runde und zwei optionale feste Gebühren; interne Spielerschulden erlaubt"
-          ]
         }
       ]
     },
@@ -312,7 +306,7 @@
           "items": [
             "Sprache: Deutsch oder Englisch wählen. Beide Oberflächen sind verfügbar. Deutsche Anleitungen und acht geprüfte englische Anleitungen: Tic-Tac-Toe einschließlich Extreme, dessen Turnier, Schwarzer Peter, Vier gewinnt, Aalstechen, Mühle, Käsekästchen und 17 und 4 als Kartenspiel. Weitere englische Anleitungen bleiben bis Review gesperrt.",
             "Ansicht: Reiteransicht ist Standard, klassische Fenster bleiben je Benutzer wählbar.",
-            "Beta-Test: Kartendomino einschalten. 33 Spiele und vier Turniere bleiben ohne Beta verfügbar.",
+            "Beta-Test für Mahjong und Kartendomino einschalten. 33 Spiele und vier Turniere sind regulär verfügbar.",
             "Dice So Nice: optionale 3D-Würfel aktivieren. Ohne das Zusatzmodul bleiben die Spiele bedienbar.",
             "Markierungsmodus: persönlich wählen, ob markierte eigene Würfel behalten oder erneut gewürfelt werden.",
             "Kartendecks: geeignete externe Vorlagen unter Cards / Card Decks anlegen oder importieren. Es ist kein Standard-Kartenset enthalten; vorhandene Vorlagen bleiben unverändert.",
@@ -356,7 +350,8 @@
             "Streichholzspiel: 1–200 Start-Hölzer, maximale Entnahme 1–20, Endregel, 1–100 Runden, NPCs und Spielbutton.",
             "Moderation: Name dieser Partie überschreibt den gespeicherten Namen für dieselbe Partie einschließlich ihrer Runden. Gespeicherten Namen verwenden entfernt die Überschreibung; eine neue Lobby setzt sie zurück. Maximal 80 druckbare Zeichen; nur die SL kann Namen ändern.",
             "Schiffe versenken: Klassisches Spiel verwendet 10×10, Schiffslängen 5/4/3/3/2, keine Berührungen und Treffer-Zusatzzug. Für eigene Regeln Klassisches Spiel ausschalten: Brettseiten 2–30, 1–20 Schiffe mit eigenen Längen und Berührungen optional. Spieler platzieren manuell und bestätigen selbst; automatisch platzieren nur SL und automatische NPCs. Jeder Spieler kann sein Zielgebiet oberhalb der eigenen Flotte anzeigen. Serien und optionale SL-Einsicht vor Spielbeginn wählen; Gegnerpositionen bleiben verborgen. Nach dem Platzieren wird das nächste freie Schiff gewählt; die volle Aufstellung selbst bestätigen. Rechtsklick im eigenen bearbeitbaren Raster oder die Schaltfläche wechselt die Ausrichtung. Bei voller Flotte wird die Auswahl aufgehoben. Vor Bestätigung ein gesetztes Schiff im Raster anklicken und auf ein freies Startfeld versetzen; seine Ausrichtung bleibt erhalten.",
-            "Kartendomino (Beta): vollständiges 52-Karten-Deck ohne Joker wählen; 2–8 Teilnehmer. Ass niedrig, freiwilliges Passen, 1-Token-Passgebühr und 1-Token-Restkartengebühr getrennt aktivieren; alle standardmäßig aus. Rundenanzahl 0 bedeutet unbegrenzt, sonst 1–100. Jede Runde eigener Grundeinsatz; Gebühren dürfen interne Schulden erzeugen."
+            "Kartendomino (Beta): vollständiges 52-Karten-Deck ohne Joker wählen; 2–8 Teilnehmer. Ass niedrig, freiwilliges Passen, 1-Token-Passgebühr und 1-Token-Restkartengebühr getrennt aktivieren; alle standardmäßig aus. Rundenanzahl 0 bedeutet unbegrenzt, sonst 1–100. Jede Runde eigener Grundeinsatz; Gebühren dürfen interne Schulden erzeugen.",
+            "Mahjong (Beta): Dracima-Mahjong-Deck in die Welt importieren. In der Moderation Deck, Bildstil und Einsteigerregeln oder japanisches Riichi wählen. Vier Plätze mit Spielern und NSCs besetzen."
           ]
         }
       ]
@@ -493,6 +488,13 @@
           "title": "Karten-Kniffel (geplant)",
           "items": [
             "Schmidt Spiele, Michael Feldkötter: https://www.schmidtspiele.de/details/produkt/karten-kniffel-r-.html"
+          ]
+        },
+        {
+          "title": "Kartendomino / Fan Tan",
+          "items": [
+            "John McLeod / Pagat: https://www.pagat.com/layout/sevens.html",
+            "Bicycle Cards: https://bicyclecards.com/how-to-play/fan-tan"
           ]
         },
         {
@@ -645,13 +647,6 @@
           "items": [
             "Awiana – Koboldpoker (Vorlage für Würfelpoker): https://awiana.fandom.com/de/wiki/Koboldpoker"
           ]
-        },
-        {
-          "title": "Kartendomino / Fan Tan",
-          "items": [
-            "John McLeod / Pagat: https://www.pagat.com/layout/sevens.html",
-            "Bicycle Cards: https://bicyclecards.com/how-to-play/fan-tan"
-          ]
         }
       ]
     },
@@ -724,6 +719,12 @@
             "Farkle, optional: sofortiges Ende beim Sichern der Zielpunktzahl statt einer Schlussrunde.",
             "Farkle: Kurzspiel mit genau einem Zug je Teilnehmer oder feste Rundenzahl mit Gesamtpunkten; im Zielmodus bevorzugt ein gleicher Startwurf die frühere Position.",
             "Farkle, optional in allen Modi: Einstiegshürde ausschaltbar oder frei bis zur Zielpunktzahl einstellbar; klassische Voreinstellung 500 Punkte."
+          ]
+        },
+        {
+          "title": "Kartendomino / Fan Tan",
+          "items": [
+            "Daniel Brune: Zweispielerunterstützung, Ass-Option, freiwilliges Passen, Bankgewinn nach zwei vollständigen Passumläufen, Serien mit Siegpunkten sowie optionale feste Gebühren und interne Schulden."
           ]
         },
         {
@@ -872,12 +873,6 @@
           "items": [
             "Würfelpoker: fünf W8 nach Awiana/Koboldpoker, Leifs abweichende Rangfolge und Daniels bestätigte Vergleiche; zwei Setzphasen mit All-in und Nebentöpfen. Full House nach Summe, dann höherem Drilling; zwei Paare nach höherem/niedrigerem Paar und Restwürfel."
           ]
-        },
-        {
-          "title": "Kartendomino / Fan Tan",
-          "items": [
-            "Daniel Brune: Zweispielerunterstützung, Ass-Option, freiwilliges Passen, Bankgewinn nach zwei vollständigen Passumläufen, Serien mit Siegpunkten sowie optionale feste Gebühren und interne Schulden."
-          ]
         }
       ]
     },
@@ -944,5 +939,5 @@
       "paragraphs": []
     }
   },
-  "version": "6.1.1"
+  "version": "6.1.2"
 }

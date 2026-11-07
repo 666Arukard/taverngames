@@ -1,3 +1,9 @@
+# TavernGames 6.1.2
+
+Mahjong ist als optionale Beta unter Brettspiele verfügbar. Vier Plätze können mit Spielern und NSCs besetzt werden. In der Moderation lassen sich das importierte Dracima-Deck und der Modus auswählen: Einsteiger oder japanisches Riichi.
+
+[Testplan](docs/release-6.1.2.md) · Lokales Testpaket.
+
 # TavernGames 6.1.1
 
 TavernGames ist für Foundry VTT 14.370 (Stable 12) verifiziert. Grundlage ist Daniels erfolgreicher Test im Spiel. Dice So Nice 6.4.5 wird von seinem Anbieter für Foundry 14.370 geführt.
