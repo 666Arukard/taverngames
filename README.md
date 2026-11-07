@@ -1,3 +1,7 @@
+# TavernGames 6.1.1
+
+TavernGames ist für Foundry VTT 14.370 (Stable 12) verifiziert. Grundlage ist Daniels erfolgreicher Test im Spiel. Dice So Nice 6.4.5 wird von seinem Anbieter für Foundry 14.370 geführt.
+
 # TavernGames 6.1.0
 
 Schiffe versenken ist nach erfolgreichem Praxistest stabil. Neue Beta: Kartendomino / Fan Tan für 2–8 Spieler und NPCs mit vorhandenen 52-Karten-Decks. Siebener eröffnen die Reihen; Ass hoch ist Standard, Ass niedrig und freiwilliges Passen sind optional. Feste Rundenzahl oder unbegrenzte Partie mit Siegpunkten und Folgerunden. Nach zwei vollständigen Passumläufen ohne Karte geht der Topf an die interne Tavernenbank. Optionale Gebühren: 1 Spieltoken je Passen und je verbliebener Handkarte; fehlende Deckung wird als interne Spielerschuld geführt. Verdeckte Hände, Kartentisch, NPC-Steuerung, Token und Ausgangswetten sind eingebunden. Keine Charaktergeldbuchungen.

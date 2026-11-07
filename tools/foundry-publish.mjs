@@ -27,10 +27,10 @@ export async function publishFoundry(version,{request=fetch,token=process.env.GH
     files[name]=Buffer.from(await r.arrayBuffer());
   }
   const manifest=JSON.parse(files['module.json']);
-  if(manifest.id!=='taverngames'||manifest.version!==version||manifest.download!==`${root}/download/v${version}/taverngames-${version}.zip`||manifest.compatibility?.minimum!=='14.369'||manifest.compatibility?.verified!=='14.369'||manifest.compatibility?.maximum||!isDeepStrictEqual(manifest,zipManifest(files[`taverngames-${version}.zip`])))throw Error('Foundry: Release-Manifest und ZIP stimmen nicht überein.');
+  if(manifest.id!=='taverngames'||manifest.version!==version||manifest.download!==`${root}/download/v${version}/taverngames-${version}.zip`||manifest.compatibility?.minimum!=='14.369'||!['14.369','14.370'].includes(manifest.compatibility?.verified)||manifest.compatibility?.maximum||!isDeepStrictEqual(manifest,zipManifest(files[`taverngames-${version}.zip`])))throw Error('Foundry: Release-Manifest und ZIP stimmen nicht überein.');
   const body=`${release.body??''}\n\n<!-- foundry-attempted:${version} -->`;
   await api(`/releases/${release.id}`,'PATCH',{body});
-  const response=await request('https://foundryvtt.com/_api/packages/release_version/',{method:'POST',headers:{Authorization:foundryToken.trim(),'Content-Type':'application/json','User-Agent':'TavernGames-Foundry-Release'},body:JSON.stringify({id:'taverngames',release:{version,manifest:`${root}/download/v${version}/module.json`,notes:`${root}/tag/v${version}`,compatibility:{minimum:'14.369',verified:'14.369'}}})});
+  const response=await request('https://foundryvtt.com/_api/packages/release_version/',{method:'POST',headers:{Authorization:foundryToken.trim(),'Content-Type':'application/json','User-Agent':'TavernGames-Foundry-Release'},body:JSON.stringify({id:'taverngames',release:{version,manifest:`${root}/download/v${version}/module.json`,notes:`${root}/tag/v${version}`,compatibility:{minimum:manifest.compatibility.minimum,verified:manifest.compatibility.verified}}})});
   if(!response.ok)throw Error(`Foundry HTTP ${response.status}. Kein Erfolg bestätigt; vor erneutem Aufruf Paketstand prüfen.`);
   const result=await response.json();if(result.status!=='success'||result.message?.startsWith('Dry run'))throw Error('Foundry bestätigt Veröffentlichung nicht.');
   await api(`/releases/${release.id}`,'PATCH',{body:`${body}\n<!-- foundry-published:${version} -->`});

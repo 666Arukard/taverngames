@@ -2,19 +2,12 @@
   "schemaVersion": 1,
   "blocks": {
     "patchnotes": {
-      "title": "Patchnotes Version 6.1.0",
+      "title": "Patchnotes Version 6.1.1",
       "paragraphs": [
-        "Schiffe versenken ist nach erfolgreichem Praxistest stabil. Neue Beta: Kartendomino / Fan Tan für 2–8 Spieler und NPCs mit vorhandenen 52-Karten-Decks. Siebener eröffnen die Reihen; Ass hoch ist Standard, Ass niedrig und freiwilliges Passen sind optional. Feste Rundenzahl oder unbegrenzte Partie mit Siegpunkten und Folgerunden. Nach zwei vollständigen Passumläufen ohne Karte geht der Topf an die interne Tavernenbank. Optionale Gebühren: 1 Spieltoken je Passen und je verbliebener Handkarte; fehlende Deckung wird als interne Spielerschuld geführt. Verdeckte Hände, Kartentisch, NPC-Steuerung, Token und Ausgangswetten sind eingebunden. Keine Charaktergeldbuchungen."
+        "Für Foundry VTT V14 Build 370 verifiziert."
       ],
       "items": [
-        "Schiffe versenken stabil, unabhängig vom Beta-Schalter.",
-        "Kartendomino / Fan Tan als neue Karten-Beta mit 52 Karten, alle ausgeteilt, 2–8 Teilnehmer einschließlich benannter NPCs.",
-        "Von Siebenern lückenlos abwärts und aufwärts auslegen; Ass hoch standardmäßig, Ass niedrig optional; kein Kreislauf.",
-        "Freiwilliges Passen optional; zwei vollständige Passumläufe ohne Karte beenden die Runde mit Bankgewinn.",
-        "Feste Runden oder unbegrenzte Partie, Siegpunkt pro gewonnenem Durchgang, gleiche Siegpunktzahl als geteilter Platz.",
-        "Gleicher Grundeinsatz pro Runde. Optionale feste Gebühren 1 Token pro Passen beziehungsweise verbliebener Karte; interne Schulden bei fehlender Deckung.",
-        "Bestehende Foundry-Decks, private Hände, Native-Stacks-Cleanup, manuelle NPCs und Göttliche Hand beim Austeilen; keine neuen Bildassets.",
-        "Englische Oberfläche vorhanden, neue englische Anleitung bis Review gesperrt."
+        "Verifizierter Build auf 14.370 aktualisiert."
       ]
     },
     "games": {
@@ -202,7 +195,7 @@
       ]
     },
     "functions": {
-      "title": "aktuelle Funktionen (51)",
+      "title": "aktuelle Funktionen (54)",
       "paragraphs": [
         "Bereits umgesetzte Kernfunktionen. Verfügbarkeit und erlaubte Aktionen richten sich nach Spielregeln, Teilnahme und SL-Freigabe."
       ],
@@ -232,8 +225,7 @@
           "items": [
             "Interne Spieltoken mit Einsatzmodellen und Bankbudget",
             "Ausgangswetten mit automatischer Gewinnverteilung",
-            "Übergabe ausgewählter Gegenstandspreise",
-            "Optionale feste Spielgebühren und interne Spielerschulden"
+            "Übergabe ausgewählter Gegenstandspreise"
           ]
         },
         {
@@ -296,6 +288,15 @@
             "Deutsche Anleitungen",
             "Regelquellen und Hausvarianten",
             "Ergebnisnachrichten im Chat"
+          ]
+        },
+        {
+          "title": "Kartendomino / Fan Tan",
+          "items": [
+            "Vier Farbreihen von Sieben aus, verdeckte Handkarten und direkt anklickbare Karten auf dem Tisch",
+            "Ass hoch/niedrig, freiwilliges Passen und Bankgewinn nach zwei Passumläufen",
+            "Serien mit Siegpunkten, NPCs und unveränderte Foundry-Deckvorlagen",
+            "Grundeinsatz pro Runde und zwei optionale feste Gebühren; interne Spielerschulden erlaubt"
           ]
         }
       ]
@@ -495,13 +496,6 @@
           ]
         },
         {
-          "title": "Kartendomino / Fan Tan",
-          "items": [
-            "John McLeod / Pagat: https://www.pagat.com/layout/sevens.html",
-            "Bicycle Cards: https://bicyclecards.com/how-to-play/fan-tan"
-          ]
-        },
-        {
           "title": "Käsekästchen",
           "items": [
             "kinder – Käsekästchen: https://www.kinder.com/de/de/kinder-spiel-und-spass/spiele/kaesekaestchen",
@@ -651,6 +645,13 @@
           "items": [
             "Awiana – Koboldpoker (Vorlage für Würfelpoker): https://awiana.fandom.com/de/wiki/Koboldpoker"
           ]
+        },
+        {
+          "title": "Kartendomino / Fan Tan",
+          "items": [
+            "John McLeod / Pagat: https://www.pagat.com/layout/sevens.html",
+            "Bicycle Cards: https://bicyclecards.com/how-to-play/fan-tan"
+          ]
         }
       ]
     },
@@ -723,12 +724,6 @@
             "Farkle, optional: sofortiges Ende beim Sichern der Zielpunktzahl statt einer Schlussrunde.",
             "Farkle: Kurzspiel mit genau einem Zug je Teilnehmer oder feste Rundenzahl mit Gesamtpunkten; im Zielmodus bevorzugt ein gleicher Startwurf die frühere Position.",
             "Farkle, optional in allen Modi: Einstiegshürde ausschaltbar oder frei bis zur Zielpunktzahl einstellbar; klassische Voreinstellung 500 Punkte."
-          ]
-        },
-        {
-          "title": "Kartendomino / Fan Tan",
-          "items": [
-            "Daniel Brune: Zweispielerunterstützung, Ass-Option, freiwilliges Passen, Bankgewinn nach zwei vollständigen Passumläufen, Serien mit Siegpunkten sowie optionale feste Gebühren und interne Schulden."
           ]
         },
         {
@@ -877,6 +872,12 @@
           "items": [
             "Würfelpoker: fünf W8 nach Awiana/Koboldpoker, Leifs abweichende Rangfolge und Daniels bestätigte Vergleiche; zwei Setzphasen mit All-in und Nebentöpfen. Full House nach Summe, dann höherem Drilling; zwei Paare nach höherem/niedrigerem Paar und Restwürfel."
           ]
+        },
+        {
+          "title": "Kartendomino / Fan Tan",
+          "items": [
+            "Daniel Brune: Zweispielerunterstützung, Ass-Option, freiwilliges Passen, Bankgewinn nach zwei vollständigen Passumläufen, Serien mit Siegpunkten sowie optionale feste Gebühren und interne Schulden."
+          ]
         }
       ]
     },
@@ -943,5 +944,5 @@
       "paragraphs": []
     }
   },
-  "version": "6.1.0"
+  "version": "6.1.1"
 }
