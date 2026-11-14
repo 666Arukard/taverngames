@@ -7,6 +7,15 @@ import {f} from './farkle-text.mjs';
 const windName = index => [f('Ost', 'East'), f('Süd', 'South'), f('West', 'West'), f('Nord', 'North')][index];
 const actionName = kind => ({riichi: 'Riichi', ron: 'Ron', tsumo: 'Tsumo', chi: 'Chi', pon: 'Pon', kan: 'Kan',
   pass: f('Passen – Abwurf nicht nehmen', 'Pass – decline discard'), draw: f('Hand wegen neun verschiedener Rand- und Ehrensteine abbrechen', 'Abort hand with nine distinct terminals and honors')})[kind];
+const resultName = name => ({
+  '荒牌平局': f('Mauer leer · kein Gewinn', 'Wall exhausted · no winner'),
+  '流し満貫': f('Nagashi Mangan', 'Nagashi Mangan'),
+  '九種九牌': f('Abbruch wegen neun verschiedener Rand- und Ehrensteine', 'Aborted with nine distinct terminals and honors'),
+  '三家和': f('Abbruch wegen dreier gleichzeitiger Ron-Ansagen', 'Aborted after three simultaneous ron claims'),
+  '四家立直': f('Abbruch nach vier Riichi-Ansagen', 'Aborted after four riichi declarations'),
+  '四風連打': f('Abbruch nach vier gleichen Windabwürfen zu Beginn', 'Aborted after four matching wind discards at the start'),
+  '四開槓': f('Abbruch nach vier Kan', 'Aborted after four kans'),
+})[name] ?? name;
 const meldTiles = value => [...value.slice(1).matchAll(/\d/g)].map(match => value[0] + match[0]);
 
 export class MahjongUI extends MauUI {
@@ -100,7 +109,7 @@ export class MahjongUI extends MauUI {
     if (s.result) {
       const result = s.result;
       table.append(node('p', result.l == null ? f('Hand beendet', 'Hand ended') : this.name(s.seats[result.l].id) + (result.baojia == null ? ' · Tsumo' : ' · Ron')));
-      if (result.name) table.append(node('p', result.name));
+      if (result.name) table.append(node('p', resultName(result.name)));
       if (result.defen != null) table.append(node('p', `${result.defen} ${f('Punkte', 'points')} · ${result.fanshu ?? 0} Han · ${result.fu ?? 0} Fu`));
       if (result.hupai?.length) table.append(node('p', result.hupai.map(yaku => `${yaku.name} (${yaku.fanshu})`).join(' · ')));
       if (result.fubaopai?.length) { table.append(node('p', 'Ura-Dora')); addTiles(table, result.fubaopai); }

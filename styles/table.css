@@ -586,7 +586,7 @@
 .taverngames-solitaire-board button:disabled { opacity:.85; pointer-events:none; }
 .taverngames-solitaire-board button[aria-pressed="true"] { outline:3px solid #f2bd49; outline-offset:-3px; }
 .taverngames-solitaire-board img { width:100%; height:100%; display:block; object-fit:contain; border:0; }
-#taverngames-mahjongsolitaire-puzzle, #taverngames-mahjongsolitaire-guide { z-index: 95; }
+#taverngames-mahjongsolitaire-guide { z-index: 95; }
 
 .taverngames-surface :is(.taverngames-mahjong-hand, .taverngames-mahjong-tiles) .taverngames-card,
 .taverngames-surface .taverngames-solitaire-board button {
@@ -618,3 +618,7 @@
   height: auto;
   aspect-ratio: 2 / 3;
 }
+
+.taverngames-solitaire-stage .taverngames-connect-play { width: min(100%, 75dvh); padding: 8px; }
+.taverngames-solitaire-board button { filter: drop-shadow(2px 3px 1px #000b); }
+.taverngames-solitaire-board button:disabled { opacity: .65; }

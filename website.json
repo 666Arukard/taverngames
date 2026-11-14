@@ -2,14 +2,14 @@
   "schemaVersion": 1,
   "blocks": {
     "patchnotes": {
-      "title": "Patchnotes Version 6.1.4",
+      "title": "Patchnotes Version 6.1.5",
       "paragraphs": [
-        "Mahjong zu viert zeigt eine kleinere eigene Hand und vier kompakte Sitzfelder. Der aktive Sitz ist gold markiert. Die letzten sechs Abwürfe je Sitz sind direkt zu sehen. Ältere Abwürfe lassen sich aufklappen."
+        "Mahjong-Solitaire nutzt in der Reiteransicht die Foundry-Spielfläche. Die 144 Steine liegen auf vier Ebenen und passende Steine sind über Reihen und Ebenen verteilt. Mahjong zu viert zeigt Gründe für das Handende auf Deutsch und Englisch."
       ],
       "items": [
-        "Kleinere eigene Hand und vier kompakte Sitzfelder.",
-        "Der aktive Sitz ist gold markiert.",
-        "Die letzten sechs Abwürfe je Sitz sind sichtbar. Ältere Abwürfe lassen sich aufklappen."
+        "Solitaire-Spielfeld mittig auf der Foundry-Spielfläche.",
+        "144 Steine auf vier Ebenen mit verteilt liegenden Paaren.",
+        "Gründe für das Handende bei Mahjong zu viert auf Deutsch und Englisch."
       ]
     },
     "games": {
@@ -354,7 +354,7 @@
             "Schiffe versenken: Klassisches Spiel verwendet 10×10, Schiffslängen 5/4/3/3/2, keine Berührungen und Treffer-Zusatzzug. Für eigene Regeln Klassisches Spiel ausschalten: Brettseiten 2–30, 1–20 Schiffe mit eigenen Längen und Berührungen optional. Spieler platzieren manuell und bestätigen selbst; automatisch platzieren nur SL und automatische NPCs. Jeder Spieler kann sein Zielgebiet oberhalb der eigenen Flotte anzeigen. Serien und optionale SL-Einsicht vor Spielbeginn wählen; Gegnerpositionen bleiben verborgen. Nach dem Platzieren wird das nächste freie Schiff gewählt; die volle Aufstellung selbst bestätigen. Rechtsklick im eigenen bearbeitbaren Raster oder die Schaltfläche wechselt die Ausrichtung. Bei voller Flotte wird die Auswahl aufgehoben. Vor Bestätigung ein gesetztes Schiff im Raster anklicken und auf ein freies Startfeld versetzen; seine Ausrichtung bleibt erhalten.",
             "Kartendomino (Beta): vollständiges 52-Karten-Deck ohne Joker wählen; 2–8 Teilnehmer. Ass niedrig, freiwilliges Passen, 1-Token-Passgebühr und 1-Token-Restkartengebühr getrennt aktivieren; alle standardmäßig aus. Rundenanzahl 0 bedeutet unbegrenzt, sonst 1–100. Jede Runde eigener Grundeinsatz; Gebühren dürfen interne Schulden erzeugen.",
             "Mahjong (Beta): Dracima-Mahjong-Deck in die Welt importieren. In der Moderation Deck, Bildstil und Einsteigerregeln oder japanisches Riichi wählen. Vier Plätze mit Spielern und NSCs besetzen.",
-            "Mahjong-Solitaire (Beta): Ein importiertes Dracima-Deck mit 144 Steinen wählen und ein Rätsel starten. Freie Paare anklicken. Überdeckte oder seitlich blockierte Steine sind gesperrt."
+            "Mahjong-Solitaire (Beta): Ein importiertes Dracima-Deck mit 144 Steinen wählen und ein Rätsel starten. Freie Paare anklicken. Überdeckte oder seitlich blockierte Steine sind gesperrt. In der Reiteransicht findest du Deckauswahl und „Neues Rätsel“ links. Das Brett erscheint auf der Foundry-Spielfläche."
           ]
         }
       ]
@@ -942,5 +942,5 @@
       "paragraphs": []
     }
   },
-  "version": "6.1.4"
+  "version": "6.1.5"
 }

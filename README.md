@@ -1,3 +1,9 @@
+# TavernGames 6.1.5
+
+Mahjong-Solitaire nutzt in der Reiteransicht die Foundry-Spielfläche. Die 144 Steine liegen auf vier Ebenen und passende Steine sind über Reihen und Ebenen verteilt. Mahjong zu viert zeigt Gründe für das Handende auf Deutsch und Englisch.
+
+[Testanleitung](docs/release-6.1.5.md)
+
 # TavernGames 6.1.4
 
 Mahjong zu viert zeigt eine kleinere eigene Hand und vier kompakte Sitzfelder. Der aktive Sitz ist gold markiert. Die letzten sechs Abwürfe je Sitz sind direkt zu sehen. Ältere Abwürfe lassen sich aufklappen.
