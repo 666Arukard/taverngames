@@ -72,6 +72,7 @@ export class MahjongUI extends MauUI {
   drawTable() {
     const root = this.windows.get('table')?.root;
     if (!root) return;
+    const openHistory = new Set([...root.querySelectorAll('details[data-mahjong-history][open]')].map(el => el.dataset.mahjongHistory));
     root.replaceChildren();
     const content = node('div', undefined, 'schocken-content');
     root.append(content);
@@ -118,7 +119,17 @@ export class MahjongUI extends MauUI {
       const section = node('section');
       seats.append(section);
       section.append(node('h3', `${windName(seat.seat)} · ${this.name(seat.id)} · ${seat.points}${seat.riichi ? ' · Riichi' : ''}`));
-      addTiles(section, seat.discards.filter(tile => !/[+=-]$/.test(tile)).map(tile => tile.slice(0, 2)));
+      if (seat.id === s.active && s.phase === 'playing' && !s.result) section.classList.add('is-active');
+      const discards = seat.discards.filter(tile => !/[+=-]$/.test(tile)).map(tile => tile.slice(0, 2));
+      addTiles(section, discards.slice(-6));
+      if (discards.length > 6) {
+        const history = node('details');
+        history.dataset.mahjongHistory = seat.id;
+        history.open = openHistory.has(seat.id);
+        history.append(node('summary', f('Ältere Abwürfe', 'Earlier discards') + ' (' + (discards.length - 6) + ')'));
+        addTiles(history, discards.slice(0, -6));
+        section.append(history);
+      }
       for (const meld of seat.melds) addTiles(section, meldTiles(meld));
       if (s.revealed?.[seat.id]) addTiles(section, s.revealed[seat.id]);
     }

@@ -1,3 +1,9 @@
+# TavernGames 6.1.4
+
+Mahjong zu viert zeigt eine kleinere eigene Hand und vier kompakte Sitzfelder. Der aktive Sitz ist gold markiert. Die letzten sechs Abwürfe je Sitz sind direkt zu sehen. Ältere Abwürfe lassen sich aufklappen.
+
+[Testanleitung](docs/release-6.1.4.md)
+
 # TavernGames 6.1.3
 
 Mahjong-Solitaire ist als Beta unter Brettspiele verfügbar. Wähle ein importiertes Dracima-Deck mit 144 Steinen. Mahjong zu viert erhält eine verständlichere Anleitung, eine besser bedienbare Tischansicht und deutlichere Hinweise zum Abwerfen und Passen. Beide Spiele zeigen die Steine ohne zusätzlichen hellen Hintergrund. Die Kompatibilitätsanzeige im Spiel erkennt Foundry 14.370 als getestet.
