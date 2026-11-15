@@ -1,7 +1,8 @@
 // Names and categories are data so future tags can extend the catalog without
 // coupling navigation to gameplay. No duration or betting claims are invented.
 export const GAME_CATALOG=Object.freeze([
- {id:'mahjongsolitaire',category:'board',beta:true,names:['Mahjong-Solitaire','Mahjong Solitaire','Mahjong Paare']},
+ {id:'mahjongsolitaire',category:'board',names:['Mahjong-Solitaire','Mahjong Solitaire','Mahjong Paare']},
+ {id:'doppelkopf',category:'cards',beta:true,names:['Doppelkopf','Doko']},
  {id:'mahjong',category:'board',beta:true,names:['Mahjong','Mah Jong','Riichi']},
  {id:'domino',category:'cards',beta:true,names:['Kartendomino','Fan Tan','Fan-Tan','Card Dominoes','Sevens','Siebenerlegen']},
  {id:'battleship',category:'board',names:['Schiffe versenken','Schiffeversenken','Battleship','Sea Battle']},

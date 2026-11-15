@@ -570,7 +570,7 @@
 .taverngames-domino-table{border:1px solid #b8995d;border-radius:6px}.taverngames-domino-row h3{color:#f7dfad}.taverngames-card.is-playable{outline:2px solid #e2bb59;outline-offset:-2px}
 
 .taverngames-mahjong-table { display: block; width: min(100%, 68rem); max-height: 56vh; box-sizing: border-box; overflow: auto; pointer-events: auto; padding: .65rem; }
-.taverngames-mahjong-seats { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 9rem), 1fr)); gap: .35rem; }
+.taverngames-mahjong-seats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .35rem; }
 .taverngames-mahjong-seats > section { border: 1px solid #b8995d; border-radius: 6px; padding: .3rem; min-width: 0; }
 .taverngames-mahjong-seats h3 { color: #f7dfad; font-size: .9rem; }
 .taverngames-mahjong-tiles { display: flex; flex-wrap: wrap; gap: 3px; }
@@ -579,7 +579,7 @@
 .taverngames-mahjong-hand .is-drawn { margin-inline-start: .6rem; }
 
 #taverngames-mahjong-stage > .taverngames-card-stage-hand { flex-shrink: 0; width: 100%; box-sizing: border-box; }
-#taverngames-mahjong-stage > .taverngames-card-stage-shared { flex: 0 1 auto; min-height: 0; overflow: auto; pointer-events: auto; box-sizing: border-box; }
+#taverngames-mahjong-stage > .taverngames-card-stage-shared { flex: 0 1 auto; width: min(100%, 52rem); min-height: 0; overflow: auto; pointer-events: auto; box-sizing: border-box; }
 
 .taverngames-solitaire-board { position:relative; width:100%; aspect-ratio:1; isolation:isolate; }
 .taverngames-solitaire-board button { position:absolute; width:8%; height:9.7%; padding:0; margin:0; color:#f4ead7; }
@@ -622,3 +622,31 @@
 .taverngames-solitaire-stage .taverngames-connect-play { width: min(100%, 75dvh); padding: 8px; }
 .taverngames-solitaire-board button { filter: drop-shadow(2px 3px 1px #000b); }
 .taverngames-solitaire-board button:disabled { opacity: .65; }
+
+.taverngames-mahjong-table { container-type: inline-size; }
+@container (min-width: 34rem) {
+  .taverngames-mahjong-seats { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+.taverngames-mahjong-dora {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: .5rem;
+  margin-block: .25rem;
+}
+.taverngames-surface .taverngames-mahjong-table .taverngames-mahjong-tiles > .taverngames-card {
+  flex: 0 0 1.25rem;
+  width: 1.25rem;
+  height: 1.875rem;
+  max-width: 1.25rem;
+  max-height: 1.875rem;
+}
+
+.taverngames-doppelkopf-table { display: block; padding: .5rem; }
+.taverngames-doppelkopf-table .taverngames-card-hand { justify-content: center; }
+.taverngames-surface .taverngames-doppelkopf-hand > .taverngames-card {
+  flex: 0 0 clamp(1.7rem, 3.5vw, 3.25rem);
+  width: clamp(1.7rem, 3.5vw, 3.25rem);
+  height: auto;
+  aspect-ratio: 2 / 3;
+}

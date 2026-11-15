@@ -1,3 +1,9 @@
+# TavernGames 6.2.0
+
+Mahjong-Solitaire ist stabil und bietet Klassischen Stapel, Pyramide und Turm. Mahjong zu viert bleibt Beta. Die Tischansicht zeigt den Dora-Anzeiger kompakter. Doppelkopf ist als neue Kartenspiel-Beta mit Normalspiel, Hochzeit und stiller Hochzeit verfügbar.
+
+[Testanleitung](docs/release-6.2.0.md)
+
 # TavernGames 6.1.5
 
 Mahjong-Solitaire nutzt in der Reiteransicht die Foundry-Spielfläche. Die 144 Steine liegen auf vier Ebenen und passende Steine sind über Reihen und Ebenen verteilt. Mahjong zu viert zeigt Gründe für das Handende auf Deutsch und Englisch.

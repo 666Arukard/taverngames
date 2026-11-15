@@ -2,20 +2,20 @@
   "schemaVersion": 1,
   "blocks": {
     "patchnotes": {
-      "title": "Patchnotes Version 6.1.5",
+      "title": "Patchnotes Version 6.2.0",
       "paragraphs": [
-        "Mahjong-Solitaire nutzt in der Reiteransicht die Foundry-Spielfläche. Die 144 Steine liegen auf vier Ebenen und passende Steine sind über Reihen und Ebenen verteilt. Mahjong zu viert zeigt Gründe für das Handende auf Deutsch und Englisch."
+        "Mahjong-Solitaire ist stabil und bietet Klassischen Stapel, Pyramide und Turm. Mahjong zu viert bleibt Beta. Die Tischansicht zeigt den Dora-Anzeiger kompakter. Doppelkopf ist als neue Kartenspiel-Beta mit Normalspiel, Hochzeit und stiller Hochzeit verfügbar."
       ],
       "items": [
-        "Solitaire-Spielfeld mittig auf der Foundry-Spielfläche.",
-        "144 Steine auf vier Ebenen mit verteilt liegenden Paaren.",
-        "Gründe für das Handende bei Mahjong zu viert auf Deutsch und Englisch."
+        "Mahjong-Solitaire stabil mit Klassischem Stapel, Pyramide und Turm.",
+        "Kompakter Dora-Anzeiger in Mahjong zu viert (Beta).",
+        "Doppelkopf als Beta mit Normalspiel, Hochzeit und stiller Hochzeit."
       ]
     },
     "games": {
-      "title": "aktuelle Spiele (40)",
+      "title": "aktuelle Spiele (41)",
       "paragraphs": [
-        "33 stabile Spiele, vier stabile Turniere und drei optionale Betas: Kartendomino, Mahjong und Mahjong-Solitaire."
+        "34 stabile Spiele, vier stabile Turniere und drei optionale Betas: Doppelkopf, Kartendomino und Mahjong zu viert."
       ],
       "items": [
         {
@@ -53,6 +53,7 @@
             "Mau-Mau",
             "Schwarzer Peter",
             "Schwimmen / Knack",
+            "Doppelkopf (Beta)",
             "Kartendomino / Fan Tan (Beta)"
           ]
         },
@@ -61,14 +62,14 @@
           "items": [
             "Dame",
             "Käsekästchen",
+            "Mahjong-Solitaire",
             "Mühle",
             "Schere, Stein, Papier",
             "Schiffe versenken",
             "Streichholzspiel",
             "Tic-Tac-Toe",
             "Vier gewinnt",
-            "Mahjong (Beta)",
-            "Mahjong-Solitaire (Beta)"
+            "Mahjong (Beta)"
           ]
         },
         {
@@ -118,9 +119,9 @@
             "Blackjack",
             "Bridge",
             "Canasta",
-            "Doppelkopf",
             "Gaigel",
             "Karten-Kniffel",
+            "Karten-Solitaire (Klondike)",
             "König und Bettler / Präsident",
             "Rommé",
             "Schummeln (Kartenspiel)",
@@ -308,7 +309,7 @@
           "items": [
             "Sprache: Deutsch oder Englisch wählen. Beide Oberflächen sind verfügbar. Deutsche Anleitungen und acht geprüfte englische Anleitungen: Tic-Tac-Toe einschließlich Extreme, dessen Turnier, Schwarzer Peter, Vier gewinnt, Aalstechen, Mühle, Käsekästchen und 17 und 4 als Kartenspiel. Weitere englische Anleitungen bleiben bis Review gesperrt.",
             "Ansicht: Reiteransicht ist Standard, klassische Fenster bleiben je Benutzer wählbar.",
-            "Beta-Test für Kartendomino, Mahjong und Mahjong-Solitaire einschalten. 33 Spiele und vier Turniere sind regulär verfügbar.",
+            "Beta-Test für Doppelkopf, Kartendomino und Mahjong zu viert einschalten. 34 Spiele und vier Turniere sind regulär verfügbar.",
             "Dice So Nice: optionale 3D-Würfel aktivieren. Ohne das Zusatzmodul bleiben die Spiele bedienbar.",
             "Markierungsmodus: persönlich wählen, ob markierte eigene Würfel behalten oder erneut gewürfelt werden.",
             "Kartendecks: geeignete externe Vorlagen unter Cards / Card Decks anlegen oder importieren. Es ist kein Standard-Kartenset enthalten; vorhandene Vorlagen bleiben unverändert.",
@@ -354,7 +355,8 @@
             "Schiffe versenken: Klassisches Spiel verwendet 10×10, Schiffslängen 5/4/3/3/2, keine Berührungen und Treffer-Zusatzzug. Für eigene Regeln Klassisches Spiel ausschalten: Brettseiten 2–30, 1–20 Schiffe mit eigenen Längen und Berührungen optional. Spieler platzieren manuell und bestätigen selbst; automatisch platzieren nur SL und automatische NPCs. Jeder Spieler kann sein Zielgebiet oberhalb der eigenen Flotte anzeigen. Serien und optionale SL-Einsicht vor Spielbeginn wählen; Gegnerpositionen bleiben verborgen. Nach dem Platzieren wird das nächste freie Schiff gewählt; die volle Aufstellung selbst bestätigen. Rechtsklick im eigenen bearbeitbaren Raster oder die Schaltfläche wechselt die Ausrichtung. Bei voller Flotte wird die Auswahl aufgehoben. Vor Bestätigung ein gesetztes Schiff im Raster anklicken und auf ein freies Startfeld versetzen; seine Ausrichtung bleibt erhalten.",
             "Kartendomino (Beta): vollständiges 52-Karten-Deck ohne Joker wählen; 2–8 Teilnehmer. Ass niedrig, freiwilliges Passen, 1-Token-Passgebühr und 1-Token-Restkartengebühr getrennt aktivieren; alle standardmäßig aus. Rundenanzahl 0 bedeutet unbegrenzt, sonst 1–100. Jede Runde eigener Grundeinsatz; Gebühren dürfen interne Schulden erzeugen.",
             "Mahjong (Beta): Dracima-Mahjong-Deck in die Welt importieren. In der Moderation Deck, Bildstil und Einsteigerregeln oder japanisches Riichi wählen. Vier Plätze mit Spielern und NSCs besetzen.",
-            "Mahjong-Solitaire (Beta): Ein importiertes Dracima-Deck mit 144 Steinen wählen und ein Rätsel starten. Freie Paare anklicken. Überdeckte oder seitlich blockierte Steine sind gesperrt. In der Reiteransicht findest du Deckauswahl und „Neues Rätsel“ links. Das Brett erscheint auf der Foundry-Spielfläche."
+            "Mahjong-Solitaire: Ein importiertes Dracima-Deck mit 144 Steinen wählen und ein Rätsel starten. Freie Paare anklicken. Überdeckte oder seitlich blockierte Steine sind gesperrt. In der Reiteransicht findest du Deckauswahl und „Neues Rätsel“ links. Das Brett erscheint auf der Foundry-Spielfläche. Klassischen Stapel, Pyramide oder Turm wählen und ein neues Rätsel starten.",
+            "Doppelkopf (Beta): französisches oder Dracima-Deck wählen und vier Plätze besetzen. Die erste Beta umfasst Normalspiel, Hochzeit und stille Hochzeit."
           ]
         }
       ]
@@ -451,9 +453,9 @@
           ]
         },
         {
-          "title": "Doppelkopf (geplant)",
+          "title": "Doppelkopf",
           "items": [
-            "Deutscher Doppelkopf-Verband – TSR, 21.02.2026 (geplante Regelreferenz) – https://doko-verband.de/shared-files/11534/?Turnierspielregeln-Stand-2026-02-21.pdf="
+            "Deutscher Doppelkopf-Verband – TSR, 21.02.2026 – https://doko-verband.de/shared-files/11534/?Turnierspielregeln-Stand-2026-02-21.pdf="
           ]
         },
         {
@@ -935,12 +937,13 @@
         {
           "title": "6.0.0 – Freie Spielnamen stabil; fünf Stable-Übergänge und Schiffe-versenken-Beta.",
           "items": [
-            "6.1.0 – Schiffe versenken stabil; Kartendomino / Fan Tan als neue Beta."
+            "6.1.0 – Schiffe versenken stabil; Kartendomino / Fan Tan als neue Beta.",
+            "6.2.0 – Mahjong-Solitaire stabil mit drei Stapelformen. Doppelkopf startet als Beta."
           ]
         }
       ],
       "paragraphs": []
     }
   },
-  "version": "6.1.5"
+  "version": "6.2.0"
 }

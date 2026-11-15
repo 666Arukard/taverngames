@@ -105,7 +105,12 @@ export class MahjongUI extends MauUI {
     };
     if (s.mode === 'riichi') table.append(node('p', `${windName(s.roundWind % 4)} ${(s.roundIndex % 4) + 1} · Honba ${s.honba} · Riichi ${s.riichiSticks}`));
     table.append(node('p', `${f('Steine in der Mauer', 'Tiles in the wall')} · ${s.remaining}`));
-    if (s.dora.length) { table.append(node('p', f('Dora-Anzeiger', 'Dora indicators'))); addTiles(table, s.dora); }
+    if (s.dora.length) {
+      const dora = node('div', undefined, 'taverngames-mahjong-dora');
+      dora.append(node('span', f('Dora-Anzeiger', 'Dora indicators')));
+      addTiles(dora, s.dora);
+      table.append(dora);
+    }
     if (s.result) {
       const result = s.result;
       table.append(node('p', result.l == null ? f('Hand beendet', 'Hand ended') : this.name(s.seats[result.l].id) + (result.baojia == null ? ' · Tsumo' : ' · Ron')));

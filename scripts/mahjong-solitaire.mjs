@@ -29,7 +29,13 @@ export function isFree(tile, board) {
     other.layer === tile.layer && other.y === tile.y && other.x === tile.x + side));
 }
 
-export function makeSolitaire(tiles, random = Math.random) {
+const layouts = {
+  classic: {label: ['Klassischer Stapel', 'Classic stack'], layers: [[0, 9, 12, 0, 0], [1, 4, 6, 3, 2], [2, 2, 4, 4, 3], [3, 2, 2, 5, 3]]},
+  pyramid: {label: ['Pyramide', 'Pyramid'], layers: [[0, 8, 12, 0, 0], [1, 4, 8, 2, 2], [2, 2, 6, 3, 3], [3, 2, 2, 5, 3]]},
+  tower: {label: ['Turm', 'Tower'], layers: [[0, 9, 12, 0, 0], [1, 3, 6, 3, 3], [2, 3, 4, 4, 3], [3, 3, 2, 5, 3]]},
+};
+
+export function makeSolitaire(tiles, random = Math.random, layout = 'classic') {
   const byCode = Map.groupBy(profile.select(tiles), tile => tile.code);
   const pairs = [...byCode.values()].flatMap(group => [group.slice(0, 2), group.slice(2)]);
   for (let i = pairs.length - 1; i > 0; i--) {
@@ -37,7 +43,7 @@ export function makeSolitaire(tiles, random = Math.random) {
     [pairs[i], pairs[j]] = [pairs[j], pairs[i]];
   }
   const positions = [];
-  for (const [layer, rows, width, x, y] of [[0, 9, 12, 0, 0], [1, 4, 6, 3, 2], [2, 2, 4, 4, 3], [3, 2, 2, 5, 3]]) {
+  for (const [layer, rows, width, x, y] of (Object.hasOwn(layouts, layout) ? layouts[layout] : layouts.classic).layers) {
     for (let row = 0; row < rows; row++) {
       for (let column = 0; column < width; column++) positions.push({x: x + column, y: y + row, layer});
     }
@@ -72,13 +78,12 @@ const instructions = () => f(
   'Remove all tiles in pairs. A tile is free if nothing covers it and either its left or right side is open. Match two identical tiles, any two flowers, or any two seasons.',
 );
 
-let windowApp, guideApp, board, selected, deckKey;
+let windowApp, guideApp, board, selected, deckKey, layoutKey = 'classic';
 export const mahjongSolitaire = {
   async open() {
-    if (game.settings.get('taverngames', 'betaTest') !== true) return;
     if (windowApp) { windowApp.bringToFront(); return; }
     const decks = await listCardSets(game, profile);
-    if (windowApp || game.settings.get('taverngames', 'betaTest') !== true) return;
+    if (windowApp) return;
     const root = node('section', undefined, 'taverngames-surface schocken-content');
     let closeBoard;
     windowApp = createNativeWindow(foundry, 'mahjongsolitaire-table', root, () => { closeBoard?.(); windowApp = null; });
@@ -88,6 +93,8 @@ export const mahjongSolitaire = {
       return;
     }
     const deck = selectField(root, f('Mahjong-Deck', 'Mahjong deck'), decks.map(set => [set.key, set.label]), deckKey ?? decks[0].key, 'solitaireDeck');
+    const layout = selectField(root, f('Stapelmuster', 'Stack layout'),
+      Object.entries(layouts).map(([key, {label}]) => [key, f(...label)]), layoutKey, 'solitaireLayout');
     control(root, f('Neues Rätsel', 'New puzzle'), () => start());
     const status = node('p');
     status.setAttribute('role', 'status');
@@ -120,7 +127,8 @@ export const mahjongSolitaire = {
     function start() {
       const set = decks.find(item => item.key === deck.value) ?? decks[0];
       deckKey = set.key;
-      board = makeSolitaire(set.cards);
+      layoutKey = layout.value;
+      board = makeSolitaire(set.cards, Math.random, layoutKey);
       selected = null;
       draw();
     }
@@ -160,7 +168,6 @@ export const mahjongSolitaire = {
   },
 
   guide() {
-    if (game.settings.get('taverngames', 'betaTest') !== true) return;
     if (guideApp) { guideApp.bringToFront(); return; }
     const root = node('section', undefined, 'taverngames-surface schocken-content');
     root.append(node('p', f(instructions(), 'The English instructions are awaiting review. Select German for the German rules.')));
