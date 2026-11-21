@@ -565,7 +565,22 @@
 .taverngames-domino-slot{min-width:0;aspect-ratio:2/3;border:1px solid #b8995d55;background:#241e1699;display:grid;place-items:center;color:#cdbd98;overflow:hidden}
 .taverngames-domino-slot>.taverngames-card{width:100%!important;min-width:0!important;height:100%;padding:0!important;margin:0!important;box-sizing:border-box}
 .taverngames-domino-slot .taverngames-card img{width:100%;height:100%;object-fit:contain}
-#taverngames-domino-stage .taverngames-card-stage-shared{max-height:54vh;overflow:auto}
+#taverngames-domino-stage > .taverngames-card-stage-shared {
+  width: min(100%, 58rem, 84dvh);
+  min-height: 0;
+  max-height: 58dvh;
+  box-sizing: border-box;
+  overflow: auto;
+  pointer-events: auto;
+}
+#taverngames-domino-stage .taverngames-domino-table {
+  width: 100%;
+  max-height: none;
+}
+#taverngames-domino-stage .taverngames-domino-layout {
+  min-width: 0;
+  grid-template-columns: repeat(13, minmax(0, 1fr));
+}
 
 .taverngames-domino-table{border:1px solid #b8995d;border-radius:6px}.taverngames-domino-row h3{color:#f7dfad}.taverngames-card.is-playable{outline:2px solid #e2bb59;outline-offset:-2px}
 

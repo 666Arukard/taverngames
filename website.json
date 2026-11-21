@@ -2,20 +2,21 @@
   "schemaVersion": 1,
   "blocks": {
     "patchnotes": {
-      "title": "Patchnotes Version 6.2.0",
+      "title": "Patchnotes Version 6.2.1",
       "paragraphs": [
-        "Mahjong-Solitaire ist stabil und bietet Klassischen Stapel, Pyramide und Turm. Mahjong zu viert bleibt Beta. Die Tischansicht zeigt den Dora-Anzeiger kompakter. Doppelkopf ist als neue Kartenspiel-Beta mit Normalspiel, Hochzeit und stiller Hochzeit verfügbar."
+        "Aalstechen erhält eine untere Aktionsleiste in der Reiteransicht mit Würfel- und Setzaktionen sowie dem Wechsel zur nächsten Würfelrunde. Kartendomino bietet ein größeres Spielfeld und eine persönliche Sortierung der Handkarten nach Wert. Der Passen-Knopf ist auf dem Spielfeld erreichbar; eine gesperrte Aktion wird erklärt. Hinweise auf nicht entschlüsselbare Spielstände werden beim Start zusammengefasst."
       ],
       "items": [
-        "Mahjong-Solitaire stabil mit Klassischem Stapel, Pyramide und Turm.",
-        "Kompakter Dora-Anzeiger in Mahjong zu viert (Beta).",
-        "Doppelkopf als Beta mit Normalspiel, Hochzeit und stiller Hochzeit."
+        "Untere Aktionsleiste für Aalstechen mit Würfel- und Setzaktionen.",
+        "Größeres Kartendomino-Spielfeld und persönliche Sortierung der Handkarten nach Wert.",
+        "Passen direkt auf dem Kartendomino-Spielfeld mit Erklärung bei gesperrter Aktion.",
+        "Zusammengefasste Hinweise zu nicht entschlüsselbaren Spielständen beim Start."
       ]
     },
     "games": {
       "title": "aktuelle Spiele (41)",
       "paragraphs": [
-        "34 stabile Spiele, vier stabile Turniere und drei optionale Betas: Doppelkopf, Kartendomino und Mahjong zu viert."
+        "34 stabile Spiele, vier stabile Turniere und drei optionale Betas: Doppelkopf, Kartendomino und Mahjong."
       ],
       "items": [
         {
@@ -92,7 +93,7 @@
       ]
     },
     "plans": {
-      "title": "geplante Spiele (27)",
+      "title": "geplante Spiele (26)",
       "paragraphs": [
         "Geplante Spiele mit vorhandenen Referenzen oder vorgemerkten Namen. Einzelne Regeln sind noch offen; vorhandene Spiele werden nicht unter englischen Namen erneut geplant."
       ],
@@ -121,7 +122,6 @@
             "Canasta",
             "Gaigel",
             "Karten-Kniffel",
-            "Karten-Solitaire (Klondike)",
             "König und Bettler / Präsident",
             "Rommé",
             "Schummeln (Kartenspiel)",
@@ -356,7 +356,8 @@
             "Kartendomino (Beta): vollständiges 52-Karten-Deck ohne Joker wählen; 2–8 Teilnehmer. Ass niedrig, freiwilliges Passen, 1-Token-Passgebühr und 1-Token-Restkartengebühr getrennt aktivieren; alle standardmäßig aus. Rundenanzahl 0 bedeutet unbegrenzt, sonst 1–100. Jede Runde eigener Grundeinsatz; Gebühren dürfen interne Schulden erzeugen.",
             "Mahjong (Beta): Dracima-Mahjong-Deck in die Welt importieren. In der Moderation Deck, Bildstil und Einsteigerregeln oder japanisches Riichi wählen. Vier Plätze mit Spielern und NSCs besetzen.",
             "Mahjong-Solitaire: Ein importiertes Dracima-Deck mit 144 Steinen wählen und ein Rätsel starten. Freie Paare anklicken. Überdeckte oder seitlich blockierte Steine sind gesperrt. In der Reiteransicht findest du Deckauswahl und „Neues Rätsel“ links. Das Brett erscheint auf der Foundry-Spielfläche. Klassischen Stapel, Pyramide oder Turm wählen und ein neues Rätsel starten.",
-            "Doppelkopf (Beta): französisches oder Dracima-Deck wählen und vier Plätze besetzen. Die erste Beta umfasst Normalspiel, Hochzeit und stille Hochzeit."
+            "Doppelkopf (Beta): französisches oder Dracima-Deck wählen und vier Plätze besetzen. Die erste Beta umfasst Normalspiel, Hochzeit und stille Hochzeit.",
+            "Kartendomino (Beta): Handkarten nach Wert sortieren persönlich ein- oder ausschalten. Ass steht bei Ass niedrig vorne, sonst hinten. Ausschalten stellt die ursprüngliche Reihenfolge wieder her."
           ]
         }
       ]
@@ -945,5 +946,5 @@
       "paragraphs": []
     }
   },
-  "version": "6.2.0"
+  "version": "6.2.1"
 }

@@ -1,3 +1,9 @@
+# TavernGames 6.2.1
+
+Aalstechen erhält eine untere Aktionsleiste in der Reiteransicht mit Würfel- und Setzaktionen sowie dem Wechsel zur nächsten Würfelrunde. Kartendomino bietet ein größeres Spielfeld und eine persönliche Sortierung der Handkarten nach Wert. Der Passen-Knopf ist auf dem Spielfeld erreichbar; eine gesperrte Aktion wird erklärt. Hinweise auf nicht entschlüsselbare Spielstände werden beim Start zusammengefasst.
+
+[Testanleitung](docs/release-6.2.1.md)
+
 # TavernGames 6.2.0
 
 Mahjong-Solitaire ist stabil und bietet Klassischen Stapel, Pyramide und Turm. Mahjong zu viert bleibt Beta. Die Tischansicht zeigt den Dora-Anzeiger kompakter. Doppelkopf ist als neue Kartenspiel-Beta mit Normalspiel, Hochzeit und stiller Hochzeit verfügbar.
