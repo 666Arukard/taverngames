@@ -1,3 +1,9 @@
+# TavernGames 6.2.2
+
+Die Moduleinstellungen verwenden durchgehend die gespeicherte TavernGames-Sprache. Deutsch und Englisch sind im Manifest als Localization registriert. Die Package URL verweist auf die Foundry-Paketseite.
+
+[Testanleitung](docs/release-6.2.2.md)
+
 # TavernGames 6.2.1
 
 Aalstechen erhält eine untere Aktionsleiste in der Reiteransicht mit Würfel- und Setzaktionen sowie dem Wechsel zur nächsten Würfelrunde. Kartendomino bietet ein größeres Spielfeld und eine persönliche Sortierung der Handkarten nach Wert. Der Passen-Knopf ist auf dem Spielfeld erreichbar; eine gesperrte Aktion wird erklärt. Hinweise auf nicht entschlüsselbare Spielstände werden beim Start zusammengefasst.

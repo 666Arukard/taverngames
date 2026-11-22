@@ -2,15 +2,14 @@
   "schemaVersion": 1,
   "blocks": {
     "patchnotes": {
-      "title": "Patchnotes Version 6.2.1",
+      "title": "Patchnotes Version 6.2.2",
       "paragraphs": [
-        "Aalstechen erhält eine untere Aktionsleiste in der Reiteransicht mit Würfel- und Setzaktionen sowie dem Wechsel zur nächsten Würfelrunde. Kartendomino bietet ein größeres Spielfeld und eine persönliche Sortierung der Handkarten nach Wert. Der Passen-Knopf ist auf dem Spielfeld erreichbar; eine gesperrte Aktion wird erklärt. Hinweise auf nicht entschlüsselbare Spielstände werden beim Start zusammengefasst."
+        "Die Moduleinstellungen verwenden durchgehend die gespeicherte TavernGames-Sprache. Deutsch und Englisch sind im Manifest als Localization registriert. Die Package URL verweist auf die Foundry-Paketseite."
       ],
       "items": [
-        "Untere Aktionsleiste für Aalstechen mit Würfel- und Setzaktionen.",
-        "Größeres Kartendomino-Spielfeld und persönliche Sortierung der Handkarten nach Wert.",
-        "Passen direkt auf dem Kartendomino-Spielfeld mit Erklärung bei gesperrter Aktion.",
-        "Zusammengefasste Hinweise zu nicht entschlüsselbaren Spielständen beim Start."
+        "Moduleinstellungen verwenden durchgehend die gespeicherte TavernGames-Sprache.",
+        "Deutsch und Englisch im Manifest als Localization registriert.",
+        "Package URL führt zur Foundry-Paketseite."
       ]
     },
     "games": {
@@ -307,7 +306,7 @@
         {
           "title": "Allgemeine Einstellungen",
           "items": [
-            "Sprache: Deutsch oder Englisch wählen. Beide Oberflächen sind verfügbar. Deutsche Anleitungen und acht geprüfte englische Anleitungen: Tic-Tac-Toe einschließlich Extreme, dessen Turnier, Schwarzer Peter, Vier gewinnt, Aalstechen, Mühle, Käsekästchen und 17 und 4 als Kartenspiel. Weitere englische Anleitungen bleiben bis Review gesperrt.",
+            "Sprache: Deutsch oder Englisch wählen. Beide Oberflächen sind verfügbar. Deutsche Anleitungen und acht geprüfte englische Anleitungen: Tic-Tac-Toe einschließlich Extreme, dessen Turnier, Schwarzer Peter, Vier gewinnt, Aalstechen, Mühle, Käsekästchen und 17 und 4 als Kartenspiel. Weitere englische Anleitungen bleiben bis Review gesperrt. Die Moduleinstellungen verwenden die gespeicherte TavernGames-Sprache. Nach dem Sprachwechsel die Welt neu laden.",
             "Ansicht: Reiteransicht ist Standard, klassische Fenster bleiben je Benutzer wählbar.",
             "Beta-Test für Doppelkopf, Kartendomino und Mahjong zu viert einschalten. 34 Spiele und vier Turniere sind regulär verfügbar.",
             "Dice So Nice: optionale 3D-Würfel aktivieren. Ohne das Zusatzmodul bleiben die Spiele bedienbar.",
@@ -946,5 +945,5 @@
       "paragraphs": []
     }
   },
-  "version": "6.2.1"
+  "version": "6.2.2"
 }
