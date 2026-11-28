@@ -1,3 +1,9 @@
+# TavernGames 6.2.3
+
+TavernGames ist nach Daniels erfolgreichem Praxistest für Foundry 14.371 verifiziert. Die Testumgebung verwendet D&D-5e 6.1.2. Die Aalstechen-Aktionsleiste liegt oberhalb der Foundry-Toolbar und passt ihre Position bei veränderter Toolbarhöhe an.
+
+[Testanleitung](docs/release-6.2.3.md)
+
 # TavernGames 6.2.2
 
 Die Moduleinstellungen verwenden durchgehend die gespeicherte TavernGames-Sprache. Deutsch und Englisch sind im Manifest als Localization registriert. Die Package URL verweist auf die Foundry-Paketseite.

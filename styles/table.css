@@ -665,3 +665,8 @@
   height: auto;
   aspect-ratio: 2 / 3;
 }
+
+.taverngames-aal-actions { z-index: 68; }
+.taverngames-aal-actions label,
+.taverngames-aal-actions input { pointer-events: auto; }
+.taverngames-aal-actions label { color: #ffe8b0; background: #30251e; padding: 4px 8px; border-radius: 6px; }

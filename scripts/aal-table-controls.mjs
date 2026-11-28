@@ -29,14 +29,20 @@ export function installAalTableControls({game,view,getState}) {
       state.phase!=='roundEnd'||button.textContent===f('Nächste Würfelrunde','Next dice round'));
     const next=JSON.stringify([state.gameId,state.phase,state.revision,owner,state.paused,state.animationActors,
       buttons.map(button=>[button.textContent,button.disabled])]);
-    if (signature===next) return;
-    signature=next;
     root??=document.createElement('nav');
     root.className='taverngames-table-actions taverngames-aal-actions';
     root.setAttribute('aria-label',f('Aalstechen · Spielaktionen','Aalstechen · Game actions'));
+    let bottom=25;
+    for (const toolbar of document.querySelectorAll('#hotbar,.taverngames-launchers:not([hidden])')) {
+      const bounds=toolbar.getBoundingClientRect();
+      if (bounds.width>0&&bounds.height>0&&bounds.top>=0&&bounds.top<innerHeight&&
+          getComputedStyle(toolbar).visibility!=='hidden'&&
+          getComputedStyle(toolbar).display!=='none') bottom=Math.max(bottom,innerHeight-bounds.top+12);
+    }
+    root.style.setProperty('--tg-roll-bottom',bottom+'px');
+    if (signature===next) return;
+    signature=next;
     root.replaceChildren();
-    const launch=document.querySelector('.taverngames-launchers:not([hidden])')?.getBoundingClientRect();
-    root.style.setProperty('--tg-roll-bottom',(launch?.height?Math.max(25,innerHeight-launch.top+12):25)+'px');
     const original=source?.querySelector('[data-aal-raise]');
     let amount;
     if (original) {

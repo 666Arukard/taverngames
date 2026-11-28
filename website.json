@@ -2,14 +2,13 @@
   "schemaVersion": 1,
   "blocks": {
     "patchnotes": {
-      "title": "Patchnotes Version 6.2.2",
+      "title": "Patchnotes Version 6.2.3",
       "paragraphs": [
-        "Die Moduleinstellungen verwenden durchgehend die gespeicherte TavernGames-Sprache. Deutsch und Englisch sind im Manifest als Localization registriert. Die Package URL verweist auf die Foundry-Paketseite."
+        "TavernGames ist nach Daniels erfolgreichem Praxistest für Foundry 14.371 verifiziert. Die Testumgebung verwendet D&D-5e 6.1.2. Die Aalstechen-Aktionsleiste liegt oberhalb der Foundry-Toolbar und passt ihre Position bei veränderter Toolbarhöhe an."
       ],
       "items": [
-        "Moduleinstellungen verwenden durchgehend die gespeicherte TavernGames-Sprache.",
-        "Deutsch und Englisch im Manifest als Localization registriert.",
-        "Package URL führt zur Foundry-Paketseite."
+        "Foundry VTT 14.371 nach erfolgreichem Praxistest als verifiziert eingetragen.",
+        "Aalstechen-Aktionsleiste oberhalb der Foundry-Toolbar mit Anpassung an deren Höhe."
       ]
     },
     "games": {
@@ -945,5 +944,5 @@
       "paragraphs": []
     }
   },
-  "version": "6.2.2"
+  "version": "6.2.3"
 }
